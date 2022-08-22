@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18-Ago-2022 às 21:34
+-- Tempo de geração: 23-Ago-2022 às 01:54
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -60,14 +60,13 @@ CREATE TABLE `tbcomentario` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbcomentariopublicacao`
+-- Estrutura da tabela `tbcurtidapublicacao`
 --
 
-CREATE TABLE `tbcomentariopublicacao` (
-  `idComentarioPublicacao` int(11) NOT NULL,
-  `dataComentarioPublicacao` date NOT NULL,
-  `idComentario` int(11) NOT NULL,
-  `idPublicacao` int(11) NOT NULL
+CREATE TABLE `tbcurtidapublicacao` (
+  `idCurtidaPublicacao` int(11) NOT NULL,
+  `idUsuarioCurtida` int(11) NOT NULL,
+  `idPublicacaoCurtida` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -159,10 +158,10 @@ CREATE TABLE `tbfotousuario` (
 
 CREATE TABLE `tbmensagem` (
   `idMensagem` int(11) NOT NULL,
-  `textoMensagem` varchar(200) NOT NULL,
-  `dataMensagem` date NOT NULL,
   `idUsuarioOrigem` int(11) NOT NULL,
-  `idUsuarioDestino` int(11) NOT NULL
+  `idUsuarioDestino` int(11) NOT NULL,
+  `textoMensagem` varchar(2500) NOT NULL,
+  `dataMensagem` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -205,16 +204,6 @@ CREATE TABLE `tbtipousuario` (
   `tipoUsuario` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Extraindo dados da tabela `tbtipousuario`
---
-
-INSERT INTO `tbtipousuario` (`idTipoUsuario`, `tipoUsuario`) VALUES
-(5, 'Pet Shop'),
-(6, 'Banho e tosa'),
-(7, 'Tutor de Pet'),
-(8, 'Casa de Ração');
-
 -- --------------------------------------------------------
 
 --
@@ -229,36 +218,6 @@ CREATE TABLE `tbusuario` (
   `verificadoUsuario` tinyint(1) NOT NULL,
   `emailUsuario` varchar(100) NOT NULL,
   `idTipoUsuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `tbusuario`
---
-
-INSERT INTO `tbusuario` (`idUsuario`, `nomeUsuario`, `senhaUsuario`, `loginUsuario`, `verificadoUsuario`, `emailUsuario`, `idTipoUsuario`) VALUES
-(1, 'Cauã', '123', 'cwai', 0, 'cwai@gmail.com', 7),
-(2, 'Pet Family', '123', 'petfamily', 0, 'petfamily@petfamily.com', 5);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `tbusuariodenuncia`
---
-
-CREATE TABLE `tbusuariodenuncia` (
-  `idUsuarioDenuncia` int(11) NOT NULL,
-  `idUsuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `tbusuariodestino`
---
-
-CREATE TABLE `tbusuariodestino` (
-  `idUsuarioDestino` int(11) NOT NULL,
-  `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -282,11 +241,12 @@ CREATE TABLE `tbusuarioendereco` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tbusuarioorigem`
+-- Estrutura da tabela `tbusuarioseguidor`
 --
 
-CREATE TABLE `tbusuarioorigem` (
-  `idUsuarioOrigem` int(11) NOT NULL,
+CREATE TABLE `tbusuarioseguidor` (
+  `idUsuarioSeguidor` int(11) NOT NULL,
+  `idSeguidor` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -316,12 +276,12 @@ ALTER TABLE `tbcomentario`
   ADD KEY `idUsuario` (`idUsuario`);
 
 --
--- Índices para tabela `tbcomentariopublicacao`
+-- Índices para tabela `tbcurtidapublicacao`
 --
-ALTER TABLE `tbcomentariopublicacao`
-  ADD PRIMARY KEY (`idComentarioPublicacao`),
-  ADD KEY `idComentario` (`idComentario`),
-  ADD KEY `idPublicacao` (`idPublicacao`);
+ALTER TABLE `tbcurtidapublicacao`
+  ADD PRIMARY KEY (`idCurtidaPublicacao`),
+  ADD KEY `idUsuarioCurtida` (`idUsuarioCurtida`),
+  ADD KEY `idPublicacaoCurtida` (`idPublicacaoCurtida`);
 
 --
 -- Índices para tabela `tbdenunciacomentario`
@@ -373,8 +333,8 @@ ALTER TABLE `tbfotousuario`
 --
 ALTER TABLE `tbmensagem`
   ADD PRIMARY KEY (`idMensagem`),
-  ADD KEY `idUsuarioOrigem` (`idUsuarioOrigem`),
-  ADD KEY `idUsuarioDestino` (`idUsuarioDestino`);
+  ADD KEY `idUsuarioDestino` (`idUsuarioDestino`),
+  ADD KEY `idUsuarioOrigem` (`idUsuarioOrigem`);
 
 --
 -- Índices para tabela `tbpet`
@@ -404,20 +364,6 @@ ALTER TABLE `tbusuario`
   ADD KEY `tipoUsuario` (`idTipoUsuario`);
 
 --
--- Índices para tabela `tbusuariodenuncia`
---
-ALTER TABLE `tbusuariodenuncia`
-  ADD PRIMARY KEY (`idUsuarioDenuncia`),
-  ADD KEY `idUsuario` (`idUsuario`);
-
---
--- Índices para tabela `tbusuariodestino`
---
-ALTER TABLE `tbusuariodestino`
-  ADD PRIMARY KEY (`idUsuarioDestino`),
-  ADD KEY `idUsuario` (`idUsuario`);
-
---
 -- Índices para tabela `tbusuarioendereco`
 --
 ALTER TABLE `tbusuarioendereco`
@@ -425,10 +371,11 @@ ALTER TABLE `tbusuarioendereco`
   ADD KEY `idUsuario` (`idUsuario`);
 
 --
--- Índices para tabela `tbusuarioorigem`
+-- Índices para tabela `tbusuarioseguidor`
 --
-ALTER TABLE `tbusuarioorigem`
-  ADD PRIMARY KEY (`idUsuarioOrigem`),
+ALTER TABLE `tbusuarioseguidor`
+  ADD PRIMARY KEY (`idUsuarioSeguidor`),
+  ADD KEY `idSeguidor` (`idSeguidor`),
   ADD KEY `idUsuario` (`idUsuario`);
 
 --
@@ -454,10 +401,10 @@ ALTER TABLE `tbcomentario`
   MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `tbcomentariopublicacao`
+-- AUTO_INCREMENT de tabela `tbcurtidapublicacao`
 --
-ALTER TABLE `tbcomentariopublicacao`
-  MODIFY `idComentarioPublicacao` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbcurtidapublicacao`
+  MODIFY `idCurtidaPublicacao` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tbdenunciacomentario`
@@ -517,25 +464,13 @@ ALTER TABLE `tbpublicacao`
 -- AUTO_INCREMENT de tabela `tbtipousuario`
 --
 ALTER TABLE `tbtipousuario`
-  MODIFY `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuario`
 --
 ALTER TABLE `tbusuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de tabela `tbusuariodenuncia`
---
-ALTER TABLE `tbusuariodenuncia`
-  MODIFY `idUsuarioDenuncia` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `tbusuariodestino`
---
-ALTER TABLE `tbusuariodestino`
-  MODIFY `idUsuarioDestino` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuarioendereco`
@@ -544,10 +479,10 @@ ALTER TABLE `tbusuarioendereco`
   MODIFY `idUsuarioEndereco` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `tbusuarioorigem`
+-- AUTO_INCREMENT de tabela `tbusuarioseguidor`
 --
-ALTER TABLE `tbusuarioorigem`
-  MODIFY `idUsuarioOrigem` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tbusuarioseguidor`
+  MODIFY `idUsuarioSeguidor` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para despejos de tabelas
@@ -567,11 +502,11 @@ ALTER TABLE `tbcomentario`
   ADD CONSTRAINT `tbcomentario_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`);
 
 --
--- Limitadores para a tabela `tbcomentariopublicacao`
+-- Limitadores para a tabela `tbcurtidapublicacao`
 --
-ALTER TABLE `tbcomentariopublicacao`
-  ADD CONSTRAINT `tbcomentariopublicacao_ibfk_1` FOREIGN KEY (`idComentario`) REFERENCES `tbcomentario` (`idComentario`),
-  ADD CONSTRAINT `tbcomentariopublicacao_ibfk_2` FOREIGN KEY (`idPublicacao`) REFERENCES `tbpublicacao` (`idPublicacao`);
+ALTER TABLE `tbcurtidapublicacao`
+  ADD CONSTRAINT `tbcurtidapublicacao_ibfk_1` FOREIGN KEY (`idPublicacaoCurtida`) REFERENCES `tbpublicacao` (`idPublicacao`),
+  ADD CONSTRAINT `tbcurtidapublicacao_ibfk_2` FOREIGN KEY (`idUsuarioCurtida`) REFERENCES `tbusuario` (`idUsuario`);
 
 --
 -- Limitadores para a tabela `tbdenunciacomentario`
@@ -616,8 +551,8 @@ ALTER TABLE `tbfotousuario`
 -- Limitadores para a tabela `tbmensagem`
 --
 ALTER TABLE `tbmensagem`
-  ADD CONSTRAINT `tbmensagem_ibfk_1` FOREIGN KEY (`idUsuarioDestino`) REFERENCES `tbusuariodestino` (`idUsuarioDestino`),
-  ADD CONSTRAINT `tbmensagem_ibfk_2` FOREIGN KEY (`idUsuarioOrigem`) REFERENCES `tbusuarioorigem` (`idUsuarioOrigem`);
+  ADD CONSTRAINT `tbmensagem_ibfk_1` FOREIGN KEY (`idUsuarioOrigem`) REFERENCES `tbusuario` (`idUsuario`),
+  ADD CONSTRAINT `tbmensagem_ibfk_2` FOREIGN KEY (`idUsuarioDestino`) REFERENCES `tbusuario` (`idUsuario`);
 
 --
 -- Limitadores para a tabela `tbpet`
@@ -638,28 +573,17 @@ ALTER TABLE `tbusuario`
   ADD CONSTRAINT `tbusuario_ibfk_1` FOREIGN KEY (`idTipoUsuario`) REFERENCES `tbtipousuario` (`idTipoUsuario`);
 
 --
--- Limitadores para a tabela `tbusuariodenuncia`
---
-ALTER TABLE `tbusuariodenuncia`
-  ADD CONSTRAINT `tbusuariodenuncia_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`);
-
---
--- Limitadores para a tabela `tbusuariodestino`
---
-ALTER TABLE `tbusuariodestino`
-  ADD CONSTRAINT `tbusuariodestino_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`);
-
---
 -- Limitadores para a tabela `tbusuarioendereco`
 --
 ALTER TABLE `tbusuarioendereco`
   ADD CONSTRAINT `tbusuarioendereco_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`);
 
 --
--- Limitadores para a tabela `tbusuarioorigem`
+-- Limitadores para a tabela `tbusuarioseguidor`
 --
-ALTER TABLE `tbusuarioorigem`
-  ADD CONSTRAINT `tbusuarioorigem_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`);
+ALTER TABLE `tbusuarioseguidor`
+  ADD CONSTRAINT `tbusuarioseguidor_ibfk_1` FOREIGN KEY (`idSeguidor`) REFERENCES `tbusuario` (`idUsuario`),
+  ADD CONSTRAINT `tbusuarioseguidor_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
