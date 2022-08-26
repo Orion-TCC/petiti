@@ -1,0 +1,106 @@
+/* FONTES */
+@font-face {
+    font-family: "Raleway Bold";
+    src: url("../fonts/Raleway-Bold.ttf");
+  }
+  @font-face {
+    font-family: "Raleway Medium";
+    src: url("../fonts/Raleway-Medium.ttf");
+  }
+  @font-face {
+    font-family: "Raleway Regular";
+    src: url("../fonts/Raleway-Regular.ttf");
+  }
+  @font-face {
+    font-family: "Raleway Thin";
+    src: url("../fonts/Raleway-Thin.ttf");
+  }
+  @font-face {
+    font-family: "Raleway Extra Bold";
+    src: url("../fonts/Raleway-ExtraBold.ttf");
+  }
+
+/* GERAL */
+* {
+  margin: 0;
+  padding: 0;
+  
+}
+
+/* NAV */
+#navbar {
+  position: fixed;
+  top: 0;
+  display: flex;
+  width: 1345px;
+  height: 75px;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 4%;
+  transition: top 1s;
+}
+
+.navbarElement{
+  font-family: "Raleway Extra Bold", sans-serif;
+  color: #000000;
+  font-size: 21px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.navbarElementBotao{
+margin-left: 20px;
+background-color: #FCF892;
+border-radius:28px;
+cursor:pointer;
+color:#000000;
+font-family: "Raleway Extra Bold", sans-serif;
+font-size:21px;
+padding:14px 29px;
+text-decoration:none;
+box-shadow: 0px 9px 12px -7px #696969;
+}
+
+.logoNavbar{
+width: 270px;
+}
+
+
+
+/* ELEMENTOS PAGE */
+.background{
+  width: 100%;
+  height: 1000px;
+  position: absolute;
+}
+
+.descEilus{
+  position: relative;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding-top: 170px;
+padding-left: 20px;
+}
+
+.desc{
+  color:#000000;
+	font-family: "Raleway Extra Bold", sans-serif;
+	font-size:50px;
+}
+
+.desc2{
+  color:#696969;
+	font-family: "Raleway Bold", sans-serif;
+	font-size:25.6px;
+  padding-top: 10px;
+}
+
+.descHolder{
+  width: 600px;
+  padding-left: 100px;
+}
