@@ -110,8 +110,36 @@
     </section>
 
     <section id="QuartaPartePage">
+    <img class="fundoQuartaParte" src="images/fundo.svg" alt="">
+    
+    <div id="SeguraTudo4">
+       
+        <img class="leandro" src="images/leandro.svg" alt="">
 
 
+        <div class="funcionalidadesHolder">
+            <div class="baloesFuncionalidades">
+              
+                <div class="balaoFuncionalidade">
+                <img class="iconeFuncionalidade" src="images/coração quebrado.svg" alt="">
+                <span class="textoFuncionalidade">Animais perdidos</span>
+                </div>
+
+                <div class="balaoFuncionalidade">
+                <img class="iconeFuncionalidade" src="images/caixa.svg" alt="">
+                <span class="textoFuncionalidade">animais em adoção</span>
+                </div>
+
+            </div>
+
+            <div class="textosFuncionalidades">
+                <span class="funcionalidadesTitulo">Funcionalidades especiais </span>
+                <span class="funcionalidadesSubTitulo">Feeds exclusivos</span>
+                <span class="funcionalidadesTextos">Muitas vezes posts sobre animais perdidos e animas em adoção são ignorados, então, resolvemos fazer feeds exclusivos para esses tópicos, para que eles tenham o engajamento que precisam e merecem.</span>
+            </div>
+        </div>
+ 
+    </div>
     </section>
 
 </body>
