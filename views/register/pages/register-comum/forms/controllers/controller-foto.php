@@ -35,10 +35,10 @@ if ($foto['size'] == 0) {
 
    
     $caminhoBanco = "private-user/fotos-perfil/".$nomeRandom.".".$tipo;
-
+    $nomeTipo = $nomeRandom.".".$tipo;
     $usuario->setIdUsuario($_COOKIE['retorno-id']);
     $fotoUsuario->setUsuario($usuario);
-    $fotoUsuario->setNomeFoto($nomeRandom.$tipo);
+    $fotoUsuario->setNomeFoto($nomeTipo);
     $fotoUsuario->setCaminhoFoto($caminhoBanco);
     $fotoUsuario->cadastrar($fotoUsuario);
     header('location: controller-teste.php');
