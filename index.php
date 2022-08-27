@@ -15,7 +15,7 @@
             <header id="home">
                               <nav id="navbar">
                                  <div>
-                                   <img class="logoNavbar" src="images/logo_principal.svg">
+                                <a href="#"> <img class="logoNavbar" src="images/logo_principal.svg"></a>
                                  </div>
 
                                    <div>
@@ -37,7 +37,7 @@
         <div class="holderPrimeiraPage">
             <div class="descEilus">
                 <div class="descHolder">
-                    <span class="desc"> O melhor lugar para petlovers que nem você!</span>
+                    <span class="desc"> O MELHOR LUGAR PARA PETLOVERS QUE NEM VOCÊ! </span>
                     <span class="desc2">Uma rede social capaz de ampliar o networking entre petlovers e empresas voltadas para animais.</span>
                 </div>
 
@@ -124,7 +124,7 @@
 
                 <div class="balaoFuncionalidade">
                 <img class="iconeFuncionalidade" src="images/caixa.svg" alt="">
-                <span class="textoFuncionalidade">animais em adoção</span>
+                <span class="textoFuncionalidade">Animais em adoção</span>
                 </div>
 
             </div>

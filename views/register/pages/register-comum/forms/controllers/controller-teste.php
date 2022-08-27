@@ -7,8 +7,9 @@ $usuario = new Usuario();
 $fotoUsuario = new FotoUsuario();
 $cookie = new Cookies();
 
-$usuario->login("liandro", "123");
-
+$usuario->login("penis", "123");
+// $fotoUsuario->setIdFotoUsuario(15);
+// print_r($fotoUsuario->delete($fotoUsuario));
 @session_start();
 
 echo '<pre>';
@@ -16,4 +17,4 @@ var_dump($_SESSION);
 echo '</pre>';
 
 ?>
-<img width="300px" src=<?php echo $_SESSION['foto'] ?> alt="">
+<img width="300px" src="../../../../../../<?php echo $_SESSION['foto'] ?>" alt="">
