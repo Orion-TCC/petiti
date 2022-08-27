@@ -10,29 +10,31 @@
     <script src="js/script.js" async></script>
 </head>
 
+
 <body>
-    <section id="PrimeiraPartePage">
-        <div id="SeguraTudo1">
-            <img class="background" src="images/background.svg" alt="">
+            <header id="home">
+                              <nav id="navbar">
+                                 <div>
+                                   <img class="logoNavbar" src="images/logo_principal.svg">
+                                 </div>
 
-            <nav id="navbar">
-                <div>
-                    <img class="logoNavbar" src="images/logo_principal.svg">
-                </div>
+                                   <div>
+                                 <a href="#postagens" class="navbarElement">Postagens</a>
+                                     <a href="#networking" class="navbarElement">Networking</a>
+                                     <a href="#parcerias" class="navbarElement">Parcerias</a>
+                                 </div>
 
-                <div>
-                    <a href="teste.php" class="navbarElement">Postagens</a>
-                    <a href="teste.php" class="navbarElement">Networking</a>
-                    <a href="teste.php" class="navbarElement">Parcerias</a>
-                </div>
-
-                <div>
-                    <a href="teste.php" class="navbarElement">Entrar</a>
-                    <a href="views/register/pages/escolha-tipo-usuario.php" class="navbarElementBotao">Cadastre-se</a>
-                </div>
-            </nav>
+                                 <div>
+                                    <a href="teste.php" class="navbarElement">Entrar</a>
+                                     <a href="views/register/pages/escolha-tipo-usuario.php" class="navbarElementBotao">Cadastre-se</a>
+                                 </div>
+                            </nav>
+            </header>
 
 
+<main class="container-content">
+    <section id="primeiraPartePage">
+        <div class="holderPrimeiraPage">
             <div class="descEilus">
                 <div class="descHolder">
                     <span class="desc"> O melhor lugar para petlovers que nem você!</span>
@@ -40,15 +42,14 @@
                 </div>
 
                 <div>
-                    <img src="images/ilustração - pc.svg" alt="">
+                    <img  src="images/ilustração - pc.svg" alt="">
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="SegundaPartePage">
-        <div id="SeguraTudo2">
-
+    <section id="postagens">
+    <div class="holderSegundaPage">
             <div class="textinhoHolder">
                 <div class="textinho">
                     <span class="textin">Poste fotos dos momentos mais fofos dos seus pets!</span>
@@ -71,22 +72,20 @@
         </div>
     </section>
 
-    <section id="TerceiraPartePage">
-
-        <img class="faixaNetworking" src="images/conteudo - 2.svg" alt="">
-
-        <div class="faixaTextoHolder">
+    <section id="networking">
+        <div class="holderTerceiraPage">
+            <div class="faixaNetworking">
             <div class="networkingTextoHolder">
                 <span class="networkingTitulo">Networking</span>
                 <span class="networkingTexto">Além de postar fotos, interaja com novas pessoas e compartilhe conhecimento.</span>
             </div>
+            </div>
         </div>
-
     </section>
 
 
-    <section id="TerceiraPartePage">
-
+    <section id="parcerias">
+    <div class="holderQuartaPage">
         <div class="lojinhaHolder">
             <div class="lojinhaTextTituloHolder">
                 <div>
@@ -106,14 +105,12 @@
                 <img class="lojinhaImg" src="images/lojinha - petshop.svg" alt="">
             </div>
         </div>
-
+    </div>
     </section>
 
-    <section id="QuartaPartePage">
-    <img class="fundoQuartaParte" src="images/fundo.svg" alt="">
-    
-    <div id="SeguraTudo4">
-       
+    <section id="QuintaPartePage">
+
+    <div class="holderQuintaPage">
         <img class="leandro" src="images/leandro.svg" alt="">
 
 
@@ -141,6 +138,30 @@
  
     </div>
     </section>
+</main>
+
+<footer class="container-footer"> 
+   
+    <a href="#">
+        <img style="position: absolute; margin-left: 700px; margin-top: 50px;" src="images/setinha - topo.svg" alt="">
+    </a>
+
+        <div class="FooterHolder">
+        <a href="#postagens" class="FooterElement">Postagens</a>
+        <a href="#networking" class="FooterElement">Networking</a>
+        <a href="#parcerias" class="FooterElement">Parcerias</a>
+        <a href="#" class="FooterElement">Sobre a empresa</a>
+        </div>
+
+        <div class="FooterHolder2">
+        <a href="#" class="FooterElement">Entrar</a>
+        <a href="#" class="FooterElement">Cadastre-se</a>
+        </div>
+        <div class="FooterHolder3"> 
+        <span class="FooterElement">Copyright © Orion - 2022. Todos os direitos reservados.</span>
+        </div>
+</footer>
+
 
 </body>
 
