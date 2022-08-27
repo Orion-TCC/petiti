@@ -184,9 +184,11 @@ class Usuario
         $contagemLogin = count($listaArray);
         $msg = "";
         if ($contagemEmail > 0) {
-            return $msg = "Email já cadastrado.";
+            $array = array("msg" => "Email já cadastrado.");
+            return $array;
         } elseif ($contagemLogin > 0) {
-            return $msg = "Login já cadastrado.";
+            $array = array("msg" => "Login já cadastrado.");
+            return $array;
         } else {
             $stmt = $con->prepare(
                 "
@@ -263,7 +265,7 @@ class Usuario
                         $_SESSION['tipo'] = $linha[6];
                         $_SESSION['foto'] = $foto;
                     }
-
+                    
                     return $msg = "Bem vindo.";
                 } else {
                     return $msg = "Credenciais Inválidas.";

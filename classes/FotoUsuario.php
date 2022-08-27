@@ -98,7 +98,9 @@ class FotoUsuario
         public function exibirFotoUsuario($id)
         {
                 $con = Conexao::conexao();
-                $query = "SELECT caminhoFoto FROM tbFotoUsuario WHERE idUsuario = $id";
+                $query = "SELECT caminhoFoto FROM `tbfotousuario` 
+                WHERE idUsuario = $id AND idFotoUsuario = (SELECT MAX(idFotoUsuario) FROM tbfotousuario WHERE idUsuario = $id)";
+                
                 $resultado = $con->query($query);
                 $lista = $resultado->fetchAll();
                 foreach ($lista as $linha) {
