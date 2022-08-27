@@ -8,7 +8,7 @@ $fotoUsuario = new FotoUsuario();
 $cookie = new Cookies();
 
 $caminho = "/xampp/htdocs/projeto-petiti/private-user/fotos-perfil/";
-
+$caminhoBanco = "";
 $foto = $_FILES['flFoto'];
 $nomeFoto = $foto['name'];
 
@@ -32,12 +32,14 @@ if ($foto['size'] == 0) {
     $nomeRandom = uniqid();
     $caminhoCompleto = $caminho . $nomeRandom . "." . $tipo;
     move_uploaded_file($foto['tmp_name'], $caminhoCompleto);
-    echo $foto['error'];
-    print_r($foto);
+
+   
+    $caminhoBanco = "private-user/fotos-perfil/".$nomeRandom.".".$tipo;
+    $nomeTipo = $nomeRandom.".".$tipo;
     $usuario->setIdUsuario($_COOKIE['retorno-id']);
     $fotoUsuario->setUsuario($usuario);
-    $fotoUsuario->setNomeFoto($nomeRandom);
-    $fotoUsuario->setCaminhoFoto($caminhoCompleto);
+    $fotoUsuario->setNomeFoto($nomeTipo);
+    $fotoUsuario->setCaminhoFoto($caminhoBanco);
     $fotoUsuario->cadastrar($fotoUsuario);
     header('location: controller-teste.php');
    

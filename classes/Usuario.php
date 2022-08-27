@@ -282,7 +282,6 @@ class Usuario
                     $id = $usuario->procuraId2($login_ou_email);
                     $lista = $usuario->listarUsuario($id);
                     $foto = $fotoUsuario->exibirFotoUsuario($id);
-
                     foreach ($lista as $linha) {
                         $_SESSION['id'] = $linha[0];
                         $_SESSION['nome'] = $linha[1];

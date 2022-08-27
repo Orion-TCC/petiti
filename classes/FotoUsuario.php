@@ -69,6 +69,18 @@ class FotoUsuario
                 $stmt->execute();
         }
 
+
+        public function listarInfoFoto($id){
+                $con = Conexao::conexao();
+                $query = "SELECT nomeFoto, caminhoFoto from tbfotousuario WHERE idFotoUsuario = $id";
+                $resultado = $con->query($query);
+
+                $lista =  $resultado->fetchAll();
+               
+                return $lista;
+
+        }
+
         public function update($update)
         {
                 $con = Conexao::conexao();
@@ -91,6 +103,13 @@ class FotoUsuario
                 $stmt = $con->prepare("
                 DELETE FROM tbFotoUsuario WHERE idFotoUsuario = ?");
                 $stmt->bindValue(1, $delete->getIdFotoUsuario());
+                $id = $delete->getIdFotoUsuario();
+                $infos = $delete->listarInfoFoto($id);
+                foreach ($infos as $linhas ) {
+                        $caminho = $linhas['caminhoFoto'];
+                }
+                $caminhoDelete = "/xampp/htdocs/projeto-petiti/".$caminho;
+                unlink($caminhoDelete);
 
                 $stmt->execute();
         }
@@ -98,8 +117,7 @@ class FotoUsuario
         public function exibirFotoUsuario($id)
         {
                 $con = Conexao::conexao();
-                $query = "SELECT caminhoFoto FROM `tbfotousuario` 
-                WHERE idUsuario = $id AND idFotoUsuario = (SELECT MAX(idFotoUsuario) FROM tbfotousuario WHERE idUsuario = $id)";
+                $query = "SELECT caminhoFoto FROM `tbfotousuario` WHERE idFotoUsuario = (SELECT MAX(idFotoUsuario) FROM tbfotousuario WHERE idUsuario = $id)";
                 
                 $resultado = $con->query($query);
                 $lista = $resultado->fetchAll();
