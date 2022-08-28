@@ -14,20 +14,20 @@
     <main class="container-content">
         <section id="ETU">
             <div class="fundo1">
-            <div class="holderETU">
-                <div class="logoHolder">
-                    <img class="logo" src="../../img/logo_principal.svg" alt="">
-                </div>
+                <div class="holderETU">
+                    <div class="logoHolder">
+                        <img class="logo" src="../../img/logo_principal.svg" alt="">
+                    </div>
 
-                <div class="textHolder">
-                    <span class="text">Você é... ?</span>
-                </div>
+                    <div class="textHolder">
+                        <span class="text">Você é... ?</span>
+                    </div>
 
-                <div class="opcoesHolder">
-                    <a href="register-comum/forms/formulario-usuario.php"><img src="../../img/tutor.svg" alt=""></a>
-                    <a href=""><img src="../../img/empresa.svg" alt=""></a>
+                    <div class="opcoesHolder">
+                        <a href="register-comum/forms/formulario-usuario.php"><img src="../../img/tutor.svg" alt=""></a>
+                        <a href="register-empresa/forms/formulario-usuario-empresa.php"><img src="../../img/empresa.svg" alt=""></a>
+                    </div>
                 </div>
-                </div>  
             </div>
         </section>
     </main>
