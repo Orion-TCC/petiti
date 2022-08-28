@@ -11,13 +11,13 @@ $caminho = "/xampp/htdocs/projeto-petiti/private-user/fotos-pet/";
 $caminhoBanco = "";
 $foto = $_FILES['flFotoPet'];
 $nomeFoto = $foto['name'];
-
+$pet = new Pet();
 
 $tipo = strtolower(pathinfo($nomeFoto, PATHINFO_EXTENSION));
 
 
 if ($foto['size'] == 0) {
-    $pet->setIdPet($_COOKIE['retorno-id']);
+    $pet->setIdPet($_COOKIE['retorno-id-pet']);
     $fotoPet->setPet($pet);
     $fotoPet->setNomeFotoPet("padrao.png");
     $fotoPet->setCaminhoFotoPet("private-user/fotos-pet/padrao.png");
@@ -36,7 +36,7 @@ if ($foto['size'] == 0) {
 
     $caminhoBanco = "private-user/fotos-pet/" . $nomeRandom . "." . $tipo;
     $nomeTipo = $nomeRandom . "." . $tipo;
-    $pet->setIdPet($_COOKIE['retorno-id']);
+    $pet->setIdPet($_COOKIE['retorno-id-pet']);
     $fotoPet->setPet($pet);
     $fotoPet->setNomeFotoPet($nomeTipo);
     $fotoPet->setCaminhoFotoPet($caminhoBanco);

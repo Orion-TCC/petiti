@@ -6,6 +6,7 @@ require_once("/xampp/htdocs/projeto-petiti/classes/Cookies.php");
 
 $usuario = new Usuario();
 $pet = new Pet();
+$cookie = new Cookies();
 
 @session_start();
 
@@ -19,5 +20,6 @@ $pet->setUsuario($usuario);
 $return = $pet->cadastrar($pet);
 $id = $return['id'];
 
+$cookie->criarCookie('retorno-id-pet', $id, 2000);
 
 header('location: ../formulario-foto-pet.php');
