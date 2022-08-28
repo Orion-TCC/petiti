@@ -8,6 +8,7 @@ $fotoUsuario = new FotoUsuario();
 $cookie = new Cookies();
 
 $caminho = "/xampp/htdocs/projeto-petiti/private-user/fotos-perfil/";
+$caminhoPadrao = "private-user/fotos-perfil/padrao.png";
 $caminhoBanco = "";
 $foto = $_FILES['flFoto'];
 $nomeFoto = $foto['name'];
@@ -20,7 +21,7 @@ if ($foto['size'] == 0) {
     $usuario->setIdUsuario($_COOKIE['retorno-id']);
     $fotoUsuario->setUsuario($usuario);
     $fotoUsuario->setNomeFoto("padrao.png");
-    $fotoUsuario->setCaminhoFoto($caminho."padrao.png");
+    $fotoUsuario->setCaminhoFoto($caminhoPadrao);
     $fotoUsuario->cadastrar($fotoUsuario);
 }elseif ($foto['error'] <> 0) {
     $cookie->criarCookie("erro-foto", "Erro ao subir imagem, tente novamente.", 1);
