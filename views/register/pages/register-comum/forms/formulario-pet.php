@@ -3,8 +3,5 @@
     <input type="text" name="txtRacaPet" placeholder="Raça do pet">
     <input type="text" name="txtEspeciePet" placeholder="Espécie do pet">
     <input type="text" name="txtIdadePet" placeholder="Idade do pet">
-    <input type="file" name="filePet" id="filePet">
     <input type="submit" value="Cadastrar">
-
-
 </form>

@@ -41,7 +41,7 @@ if ($foto['size'] == 0) {
     $fotoUsuario->setNomeFoto($nomeTipo);
     $fotoUsuario->setCaminhoFoto($caminhoBanco);
     $fotoUsuario->cadastrar($fotoUsuario);
-    header('location: controller-teste.php');
+    header('location: ../formulario-pet.php');
    
 }
 

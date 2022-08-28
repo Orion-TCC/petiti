@@ -71,7 +71,14 @@ require_once('/xampp/htdocs/projeto-Petiti/database/conexao.php');
 
                 $stmt = $con->prepare("DELETE FROM tbfotopet WHERE idFotoPet = ?");
                 $stmt->bindValue(1, $delete->getIdFotoPet());
-                
+                $id = $delete->getIdFotoPet();
+                $infos = $delete->listarInfoFoto($id);
+                foreach ($infos as $linhas) {
+                        $caminho = $linhas['caminhoFoto'];
+                }
+                $caminhoDelete = "/xampp/htdocs/projeto-petiti/" . $caminho;
+                unlink($caminhoDelete);
+
                 $stmt->execute();
         }
 
@@ -90,4 +97,14 @@ require_once('/xampp/htdocs/projeto-Petiti/database/conexao.php');
                 $stmt->execute();
 
             }
+        public function listarInfoFoto($id)
+        {
+                $con = Conexao::conexao();
+                $query = "SELECT nomeFotoPet, caminhoFotoPet from tbfotopet WHERE idFotoPet = $id";
+                $resultado = $con->query($query);
+
+                $lista =  $resultado->fetchAll();
+
+                return $lista;
+        }
     }
