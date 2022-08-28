@@ -260,7 +260,7 @@ width: 100%;
     height: 53px;
     background: #9998D3;
     border-radius: 20px;
-    font-family: 'Raleway';
+    font-family: 'Raleway Bold';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -274,7 +274,7 @@ width: 100%;
 }
 
 .formTextFotoInput{
-    font-family: 'Raleway';
+    font-family: 'Raleway Bold';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -302,7 +302,7 @@ width: 100%;
     width: 470px;
     height: 151px;
     margin-top: 50px;
-    font-family: 'Raleway';
+    font-family: 'Raleway Bold';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -321,8 +321,8 @@ width: 100%;
         margin-top: 40px;
         border: none;
 
-        padding-left: 40%;
-        font-family: 'Raleway';
+        padding-left: 200px;
+        font-family: 'Raleway Bold';
         font-style: normal;
         font-weight: 700;
         font-size: 20px;
