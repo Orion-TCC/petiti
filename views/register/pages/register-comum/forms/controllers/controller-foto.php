@@ -20,7 +20,7 @@ if ($foto['size'] == 0) {
     $usuario->setIdUsuario($_COOKIE['retorno-id']);
     $fotoUsuario->setUsuario($usuario);
     $fotoUsuario->setNomeFoto("padrao.png");
-    $fotoUsuario->setCaminhoFoto($caminho."padrao.png");
+    $fotoUsuario->setCaminhoFoto("private-user/fotos-perfil/padrao.png");
     $fotoUsuario->cadastrar($fotoUsuario);
 }elseif ($foto['error'] <> 0) {
     $cookie->criarCookie("erro-foto", "Erro ao subir imagem, tente novamente.", 1);
