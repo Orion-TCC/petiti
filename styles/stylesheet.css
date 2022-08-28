@@ -389,7 +389,7 @@ border-radius: 30px;
   height: fit-content;
   justify-content: center;
   align-items: center;
-  overflow-x: hidden;
+
 }
 
 .container-footer{
@@ -446,4 +446,10 @@ border-radius: 30px;
   margin-top: 15px;
   padding-top: 25px;
   border-top: 1px solid #FFFFFF;
+}
+
+.imgSetaTopo{
+  position: absolute; 
+  margin-left: 700px; 
+  margin-top: 50px;
 }

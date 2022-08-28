@@ -1,10 +1,6 @@
-<a href="register-comum/forms/formulario-usuario.php">Usuário</a>
-<a href="register">Empresa</a>
-
-
-
-<!DOCTYPE html>
+<!DOCTYPE php>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +9,28 @@
     <script src="js/script.js" async></script>
     <link rel="stylesheet" href="../../css/style.css">
 </head>
+
 <body>
-    
+    <main class="container-content">
+        <section id="ETU">
+            <div class="fundo1">
+            <div class="holderETU">
+                <div class="logoHolder">
+                    <img class="logo" src="../../img/logo_principal.svg" alt="">
+                </div>
+
+                <div class="textHolder">
+                    <span class="text">Você é... ?</span>
+                </div>
+
+                <div class="opcoesHolder">
+                    <a href="register-comum/forms/formulario-usuario.php"><img src="../../img/tutor.svg" alt=""></a>
+                    <a href=""><img src="../../img/empresa.svg" alt=""></a>
+                </div>
+                </div>  
+            </div>
+        </section>
+    </main>
 </body>
+
 </html>

@@ -1,0 +1,207 @@
+@font-face {
+    font-family: "Raleway Bold";
+    src: url("../fonts/Raleway-Bold.ttf");
+  }
+  @font-face {
+    font-family: "Raleway Medium";
+    src: url("../fonts/Raleway-Medium.ttf");
+  }
+  @font-face {
+    font-family: "Raleway Regular";
+    src: url("../fonts/Raleway-Regular.ttf");
+  }
+  @font-face {
+    font-family: "Raleway Thin";
+    src: url("../fonts/Raleway-Thin.ttf");
+  }
+  @font-face {
+    font-family: "Raleway Extra Bold";
+    src: url("../fonts/Raleway-ExtraBold.ttf");
+  }
+
+/* PAGE ESCOLHA TIPO USUARIO */
+.container-content{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .holderETU{
+    height: 911px;
+    width: 1680px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-image: url("../img/fundo-escolha.svg");
+    background-size: cover;
+  }
+
+.logo{
+    width: 200px;
+}
+
+.text{
+    font-family: "Raleway Bold", sans-serif;
+    color: #000000;
+    font-size: 65px;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+
+
+.logoHolder{
+    margin-bottom: 20px;
+}
+
+.textHolder{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.opcoesHolder{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40%;
+    margin-top: 20px;
+}
+
+
+/* PAGE CADASTRO USUARIO */
+.holderFormularioUsuario{
+    height: 911px;
+    width: 1680px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../img//fundo-cadastro.svg");
+  }
+
+  .formulario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 800px;
+    background-color: #BAD5DB;
+    border-radius: 20px;
+    margin: 20px;
+  }
+
+
+  .imgSetaVoltarHolder{
+    position: absolute;
+    margin-right: 500px;
+    margin-top: 25px;
+  }
+
+
+.formElementsHolder{
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px ;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.tituloFormHolder{
+    font-family: "Raleway Bold", sans-serif;
+    color: #000000;
+    font-size: 50px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    padding-top: 70px;
+}
+
+.subTituloFormHolder{
+    font-family: "Raleway Bold", sans-serif;
+    color: #3837A1;
+    font-size: 20px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    padding-top: 30px;
+    padding-left: 100px;
+    width: 100%;
+}
+
+.formularioHolder{
+width: 100%;
+}
+
+.formText{
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    padding-top: 20px;
+}
+
+.formInput{
+    background: #FFFFFF;
+mix-blend-mode: normal;
+border: 1px solid #C1C1C1;
+backdrop-filter: blur(40px);
+border-radius: 20px;
+height: 50px;
+padding-inline: 20px;
+font-family: "Raleway Bold", sans-serif;
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+}
+
+.formInput::placeholder{
+    font-family: "Raleway Bold", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #C1C1C1;
+}
+
+.formSubmit{
+    background: #FCF892;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    width: 495px;
+    height: 44px;
+    margin-top: 45px;
+    cursor: pointer;
+
+    font-family: "Raleway Bold", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 19px;
+    color: #000000;
+    border: none;
+}
+
+.cookieCadastro{
+    position: absolute;
+    margin-top: 685px;
+    display: flex;
+    align-items: center;
+
+    font-family: "Raleway Bold", sans-serif;
+    color: #DB310C;
+  
+}
