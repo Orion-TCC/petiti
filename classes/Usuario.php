@@ -278,7 +278,7 @@ class Usuario
                 $contagemValidacao = count($lista_Array);
 
                 if ($contagemValidacao > 0) {
-                    session_start();
+                    @session_start();
                     $id = $usuario->procuraId2($login_ou_email);
                     $lista = $usuario->listarUsuario($id);
                     $foto = $fotoUsuario->exibirFotoUsuario($id);
