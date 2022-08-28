@@ -318,7 +318,7 @@ class Usuario
         $stmt->bindValue(3, $update->getLoginUsuario());
         $stmt->bindValue(4, $update->getVerificadoUsuario());
         $stmt->bindValue(5, $update->getEmailUsuario());
-        $stmt->bindValue(6, $update->getTipoUsuario());
+        $stmt->bindValue(6, $update->getTipoUsuario()->getIdTipoUsuario());
         $stmt->bindValue(7, $update->getIdUsuario());
 
         $stmt->execute();

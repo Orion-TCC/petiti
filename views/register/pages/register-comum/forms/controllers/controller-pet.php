@@ -14,7 +14,7 @@ $pet->setNomePet($_POST['txtNomePet']);
 $pet->setRacaPet($_POST['txtRacaPet']);
 $pet->setEspeciePet($_POST['txtEspeciePet']);
 $pet->setIdadePet($_POST['txtIdadePet']);
-$usuario->setIdUsuario($_SESSION['id']);
+$usuario->setIdUsuario($_COOKIE['retorno-id']);
 $pet->setUsuario($usuario); 
 
 $return = $pet->cadastrar($pet);

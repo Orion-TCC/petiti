@@ -1,0 +1,1 @@
+<form action="controllers/controller-foto.php" method="post"></form>

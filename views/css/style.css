@@ -1,522 +1,570 @@
 @font-face {
-    font-family: "Raleway Bold";
-    src: url("../fonts/Raleway-Bold.ttf");
-  }
-  @font-face {
-    font-family: "Raleway Medium";
-    src: url("../fonts/Raleway-Medium.ttf");
-  }
-  @font-face {
-    font-family: "Raleway Regular";
-    src: url("../fonts/Raleway-Regular.ttf");
-  }
-  @font-face {
-    font-family: "Raleway Thin";
-    src: url("../fonts/Raleway-Thin.ttf");
-  }
-  @font-face {
-    font-family: "Raleway Extra Bold";
-    src: url("../fonts/Raleway-ExtraBold.ttf");
-  }
+  font-family: "Raleway Bold";
+  src: url("../fonts/Raleway-Bold.ttf");
+}
+@font-face {
+  font-family: "Raleway Medium";
+  src: url("../fonts/Raleway-Medium.ttf");
+}
+@font-face {
+  font-family: "Raleway Regular";
+  src: url("../fonts/Raleway-Regular.ttf");
+}
+@font-face {
+  font-family: "Raleway Thin";
+  src: url("../fonts/Raleway-Thin.ttf");
+}
+@font-face {
+  font-family: "Raleway Extra Bold";
+  src: url("../fonts/Raleway-ExtraBold.ttf");
+}
 
 /* PAGE ESCOLHA TIPO USUARIO */
-.container-content{
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-  }
-  * {
-    margin: 0;
-    padding: 0;
-  }
-
-  html, body {
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-  }
-
-  .holderETU{
-    height: 911px;
-    width: 1680px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-image: url("../img/fundo-escolha.svg");
-    background-size: cover;
-  }
-
-.logo{
-    width: 200px;
+.container-content {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.text{
-    font-family: "Raleway Bold", sans-serif;
-    color: #000000;
-    font-size: 65px;
-    text-decoration: none;
-    letter-spacing: 1px;
+html,
+body {
+  max-width: 100%;
+  max-height: 100%;
+  overflow-x: hidden;
 }
 
-
-
-.logoHolder{
-    margin-bottom: 20px;
+.holderETU {
+  height: 911px;
+  width: 1680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-image: url("../img/fundo-escolha.svg");
+  background-size: cover;
 }
 
-.textHolder{
-    margin-top: 20px;
-    margin-bottom: 20px;
+.logo {
+  width: 200px;
 }
 
-.opcoesHolder{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 40%;
-    margin-top: 20px;
+.text {
+  font-family: "Raleway Bold", sans-serif;
+  color: #000000;
+  font-size: 65px;
+  text-decoration: none;
+  letter-spacing: 1px;
 }
 
+.logoHolder {
+  margin-bottom: 20px;
+}
+
+.textHolder {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.opcoesHolder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 40%;
+  margin-top: 20px;
+}
 
 /* PAGE CADASTRO USUARIO */
-.holderFormularioUsuario{
-    height: 911px;
-    width: 1680px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("../img//fundo-cadastro.svg");
-  }
-
-  .formulario{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 600px;
-    height: 800px;
-    background-color: #BAD5DB;
-    border-radius: 20px;
-    margin: 20px;
-  }
-
-
-  .imgSetaVoltarHolder{
-    position: absolute;
-    margin-right: 500px;
-    margin-top: 25px;
-  }
-
-
-.formElementsHolder{
-    display: flex;
-    flex-direction: column;
-    padding-left: 50px ;
-    padding-right: 50px;
-    padding-top: 20px;
-    padding-bottom: 30px;
+.holderFormularioUsuario {
+  height: 911px;
+  width: 1680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img//fundo-cadastro.svg");
 }
 
-.tituloFormHolder{
-    font-family: "Raleway Bold", sans-serif;
-    color: #000000;
-    font-size: 50px;
-    text-decoration: none;
-    padding-top: 70px;
-    width: 450px;
-    
-    text-align: center;
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  height: fit-content;
+  background-color: #bad5db;
+  border-radius: 20px;
+  margin: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
 }
 
-.tituloFormHolder2{
-    font-family: "Raleway Bold", sans-serif;
-    color: #000000;
-    font-size: 50px;
-    text-decoration: none;
-    padding-top: 70px;
-    width: 500px;
-    
-    text-align: center;
+.imgSetaVoltarHolder {
+  position: fixed;
+  margin-right: 500px;
+  margin-top: 35px;
 }
 
-.subTituloFormHolder{
-    font-family: "Raleway Bold", sans-serif;
-    color: #3837A1;
-    font-size: 20px;
-    text-decoration: none;
-    letter-spacing: 1px;
-    padding-top: 30px;
-    padding-left: 50px;
-    width: 100%;
+.formElementsHolder {
+  display: flex;
+  flex-direction: column;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-bottom: 30px;
 }
 
-.formularioHolder{
-width: 100%;
+.tituloFormHolder {
+  font-family: "Raleway Bold", sans-serif;
+  color: #000000;
+  font-size: 50px;
+  text-decoration: none;
+  padding-top: 70px;
+  width: 450px;
+
+  text-align: center;
 }
 
-.formText{
-    font-family: 'Raleway Bold', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 23px;
-    padding-top: 20px;
+.tituloFormHolder2 {
+  font-family: "Raleway Bold", sans-serif;
+  color: #000000;
+  font-size: 50px;
+  text-decoration: none;
+  padding-top: 70px;
+  width: 500px;
+
+  text-align: center;
 }
 
-.formInput{
-    background: #FFFFFF;
-    mix-blend-mode: normal;
-    border: 1px solid #C1C1C1;
-    backdrop-filter: blur(40px);
-    border-radius: 20px;
-    height: 50px;
-    padding-inline: 20px;
-    font-family: "Raleway Bold", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
+.subTituloFormHolderUsuario {
+  font-family: "Raleway Bold", sans-serif;
+  color: #3837a1;
+  font-size: 20px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  padding-top: 30px;
+  padding-left: 104px;
+  width: 100%;
 }
 
-.formInput::placeholder{
-    font-family: "Raleway Bold", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    color: #C1C1C1;
+.formularioHolder {
+  width: 100%;
 }
 
-.formSubmit{
-    background: #FCF892;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    width: 495px;
-    height: 44px;
-    margin-top: 45px;
-    cursor: pointer;
-
-    font-family: "Raleway Bold", sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 19px;
-    color: #000000;
-    border: none;
+.formText {
+  font-family: "Raleway Bold", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  padding-top: 20px;
 }
 
-.cookieCadastro{
-    position: absolute;
-    margin-top: 685px;
-    display: flex;
-    align-items: center;
+.formInput {
+  background: #ffffff;
+  mix-blend-mode: normal;
+  border: 1px solid #c1c1c1;
+  backdrop-filter: blur(40px);
+  border-radius: 20px;
+  height: 50px;
+  width: 100%;
+  padding-inline: 20px;
+  font-family: "Raleway Bold", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
 
-    font-family: "Raleway Bold", sans-serif;
-    color: #DB310C;
+.formInput::placeholder {
+  font-family: "Raleway Bold", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #c1c1c1;
+}
+
+.formSubmit {
+  background: #fcf892;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  width: 495px;
+  height: 44px;
+  margin-top: 45px;
+  cursor: pointer;
+
+  font-family: "Raleway Bold", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 19px;
+  color: #000000;
+  border: none;
+}
+
+.cookieCadastro {
+  position: absolute;
+  margin-top: 685px;
+  display: flex;
+  align-items: center;
+  font-family: "Raleway Bold", sans-serif;
+  color: #db310c;
+}
+
+.cookieCadastroEmpresa {
+  position: absolute;
+  margin-top: 591px;
+  display: flex;
+  align-items: center;
+  font-family: "Raleway Bold", sans-serif;
+  color: #db310c;
 }
 
 /* PAGE CADASTRO DE FOTO */
 
-.holderFormularioFoto{
-    height: 911px;
-    width: 1680px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("../img//fundo-cadastro.svg");
-  }
-
-  .line{
-    width: 221px;
-    height: 0px;
-    border: 1px solid #9A9A9A;
-  }
-
-
-  .subTituloFormFoto{
-    font-family: "Raleway Bold", sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
-    padding-top: 20px;
-  }
-
-.formLabelFoto{
-    padding-top: 13px;
-    padding-left: 65px;
-    margin-top: 20px;
-    width: 440px;
-    height: 40px;
-    background: #9998D3;
-    border-radius: 20px;
-    font-family: 'Raleway Bold';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
-    color: #FFFFFF;
-    cursor: pointer;
+.holderFormularioFoto {
+  height: 911px;
+  width: 1680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img//fundo-cadastro.svg");
 }
 
-.inputFormFoto{
-    display: none;
+.line {
+  width: 221px;
+  height: 0px;
+  border: 1px solid #9a9a9a;
 }
 
-.formTextFotoInput{
-    font-family: 'Raleway Bold';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    color: #686868;
-    padding-top: 20px;
+.subTituloFormFoto {
+  font-family: "Raleway Bold", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  padding-top: 20px;
 }
 
-.EHolder{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding-top: 40px;
-    font-family: 'Raleway';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 21px;
-    color: #686868;
+.formLabelFoto {
+  padding-top: 13px;
+  padding-left: 65px;
+  margin-top: 20px;
+  width: 440px;
+  height: 40px;
+  background: #9998d3;
+  border-radius: 20px;
+  font-family: "Raleway Bold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #ffffff;
+  cursor: pointer;
 }
 
-.formTextFoto{
-    padding-left: 25px;
-    width: 470px;
-    height: 151px;
-    margin-block: 50px;
-    font-family: 'Raleway Bold';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
-    text-align: center;
-    text-justify: auto;
-    color: #000000;
+.inputFormFoto {
+  display: none;
 }
 
-.formInputFoto{ 
-        width: 495px;
-        height: 44px;
-        background: #FCF892;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-        border-radius: 20px;
-        margin-top: 70px;
-        margin-left: 5px;
-        border: none;
-
-        font-family: "Raleway Bold", sans-serif;
-        text-decoration: none;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 45px;
-        align-items: center;
-        text-align: center;
-        color: #000000;
-        margin-block: 20px;
-        cursor: pointer;
-        }
-
-        /* PAGE FORMULARIO PET 1 */
-.holderFormularioPet1{
-    height: 911px;
-    width: 1680px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("../img//fundo-cadastro.svg");
-}
-.subTituloForm{
-    font-family: "Raleway Bold", sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
-    width: 449px;
-    height: 30px;
-    color: #000000;
-    margin-top: 90px;
+.formTextFotoInput {
+  font-family: "Raleway Bold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #686868;
+  padding-top: 20px;
 }
 
-.escolhasHolder{
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
+.EHolder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 40px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  color: #686868;
 }
 
-.escolha1{
-    width: 495px;
-    height: 44px;
-    background: #FCF892;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-
-    font-family: "Raleway Bold", sans-serif;
-    text-decoration: none;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 45px;
-    align-items: center;
-    text-align: center;
-    color: #000000;
-    margin-top: 20px;
+.formTextFoto {
+  padding-left: 25px;
+  width: 470px;
+  height: 151px;
+  margin-block: 50px;
+  font-family: "Raleway Bold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  text-justify: auto;
+  color: #000000;
 }
 
-.escolha2{
-    width: 495px;
-    height: 44px;
-    background: #9998D3;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
+.formInputFoto {
+  width: 495px;
+  height: 44px;
+  background: #fcf892;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  margin-top: 70px;
+  margin-left: 5px;
+  border: none;
 
-    font-family: "Raleway Bold", sans-serif;
-    text-decoration: none;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 45px;
-    align-items: center;
-    text-align: center;
-    color: #000000;
-    margin-top: 20px;
+  font-family: "Raleway Bold", sans-serif;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 45px;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  margin-block: 20px;
+  cursor: pointer;
 }
-.infoFormHolder{
-    width: 457px;
-    height: 151px;
-    font-family: "Raleway Bold", sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 23px;
-    text-align: center;
-    
-    color: #000000;
-    
-    margin-top: 50px;
+
+/* PAGE FORMULARIO PET 1 */
+.holderFormularioPet1 {
+  height: 911px;
+  width: 1680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img//fundo-cadastro.svg");
+}
+.subTituloForm {
+  font-family: "Raleway Bold", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  width: 449px;
+  padding-right: 35px;
+  height: 30px;
+  color: #000000;
+  margin-top: 90px;
+}
+
+.escolhasHolder {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.escolha1 {
+  width: 495px;
+  height: 44px;
+  background: #fcf892;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+
+  font-family: "Raleway Bold", sans-serif;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 45px;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  margin-top: 20px;
+}
+
+.escolha2 {
+  width: 495px;
+  height: 44px;
+  background: #9998d3;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+
+  font-family: "Raleway Bold", sans-serif;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 45px;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  margin-top: 20px;
+}
+.infoFormHolder {
+  width: 457px;
+  height: 151px;
+  font-family: "Raleway Bold", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+
+  color: #000000;
+
+  margin-top: 50px;
 }
 
 /* PAGE FORMULARIO PET 2 TA USANDO O CSS DO FORMULARIO DO USUARIO */
-.holderFormularioPet{
-    height: 911px;
-    width: 1680px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("../img//fundo-cadastro.svg");
-  }
-
+.holderFormularioPet {
+  height: 911px;
+  width: 1680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img//fundo-cadastro.svg");
+}
 
 /* PAGE FORMULARIO FOTO PET */
-.holderFormularioFotoPet{
-    height: 911px;
-    width: 1680px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("../img//fundo-cadastro.svg");
+.holderFormularioFotoPet {
+  height: 911px;
+  width: 1680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img//fundo-cadastro.svg");
 }
 
-.inputFormFotoPet{
-    display: none;
+.inputFormFotoPet {
+  display: none;
 }
 
-.formLabelFotoPet{
-    padding-top: 13px;
-    padding-left: 65px;
-    margin-top: 20px;
-    width: 440px;
-    height: 40px;
-    background: #9998D3;
-    border-radius: 20px;
-    font-family: 'Raleway Bold';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
-    color: #FFFFFF;
-    cursor: pointer;
+.formLabelFotoPet {
+  padding-top: 13px;
+  padding-left: 65px;
+  margin-top: 20px;
+  width: 440px;
+  height: 40px;
+  background: #9998d3;
+  border-radius: 20px;
+  font-family: "Raleway Bold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #ffffff;
+  cursor: pointer;
 }
-.formTextFotoPetInput{
-    font-family: 'Raleway Bold';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    color: #686868;
-    padding-top: 20px;
+.formTextFotoPetInput {
+  font-family: "Raleway Bold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #686868;
+  padding-top: 20px;
 }
 
 /* PAGE FINALIZAR FORM */
 
-.formTextFinalizarForms{
-    padding-left: 25px;
-    width: 470px;
-    height: 151px;
-    margin-top: 50px;
-    font-family: 'Raleway Bold';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
-    text-align: center;
-    text-justify: auto;
-    color: #000000;
+.formTextFinalizarForms {
+  padding-left: 25px;
+  width: 470px;
+  height: 151px;
+  margin-top: 50px;
+  font-family: "Raleway Bold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  text-justify: auto;
+  color: #000000;
 }
 
-.botaoFinalizar{
-    width: 495px;
-    height: 44px;
-    background: #FCF892;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-   
-    border-radius: 20px;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000000;
-    font-family: "Raleway Bold", sans-serif;
-    text-decoration: none;
-    line-height: 45px;
+.botaoFinalizar {
+  width: 495px;
+  height: 44px;
+  background: #fcf892;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
 
+  border-radius: 20px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  font-family: "Raleway Bold", sans-serif;
+  text-decoration: none;
+  line-height: 45px;
 }
 
-.logoPrincipalFinalizarForm{
-    margin-top: 50px;
+.logoPrincipalFinalizarForm {
+  margin-top: 50px;
+}
+
+/* PAGE FORMULARIO INFO EMPRESA */
+
+.holderFormularioUsuarioEmpresa {
+  height: 911px;
+  width: 1680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img//fundo-cadastro.svg");
+}
+
+.subTituloFormHolderUsuarioEmpresa {
+  font-family: "Raleway Bold", sans-serif;
+  color: #3837a1;
+  font-size: 20px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  padding-top: 30px;
+  padding-left: 104;
+  width: 100%;
+}
+
+.textoAviso {
+  font-family: "Raleway Bold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  color: #626262;
+
+  padding-left: 5px;
+}
+
+.CidadeEUFHolder{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
 }

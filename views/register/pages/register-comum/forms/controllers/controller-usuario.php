@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once("/xampp/htdocs/projeto-petiti/classes/Usuario.php");
 require_once("/xampp/htdocs/projeto-petiti/classes/TipoUsuario.php");
 require_once("/xampp/htdocs/projeto-petiti/classes/Cookies.php");
@@ -19,31 +19,28 @@ $validacaoEmail = $usuario->validarEmail($email);
 if ($validacaoEmail == false) {
     $cookie->criarCookie("erro-cadastro", "Email Inválido", 1);
     header('location: ../formulario-usuario.php');
-}
-elseif ($senha <> $senhaConfirmacao) {
+} elseif ($senha <> $senhaConfirmacao) {
     $cookie->criarCookie("erro-cadastro", "Senhas não coincindem", 1);
     header('location: ../formulario-usuario.php');
-}else{
-$usuario->setNomeUsuario($_POST['txtNomeUsuario']);
-$usuario->setLoginUsuario($_POST['txtLoginUsuario']);
-$usuario->setEmailUsuario($_POST['txtEmailUsuario']);
-$usuario->setSenhaUsuario($_POST['txtPw']);
-$usuario->setVerificadoUsuario(0);
-$tipoUsuario->setIdTipoUsuario(1);
-$usuario->setTipoUsuario($tipoUsuario);
+} else {
+    $usuario->setNomeUsuario($_POST['txtNomeUsuario']);
+    $usuario->setLoginUsuario($_POST['txtLoginUsuario']);
+    $usuario->setEmailUsuario($_POST['txtEmailUsuario']);
+    $usuario->setSenhaUsuario($_POST['txtPw']);
+    $usuario->setVerificadoUsuario(0);
+    $tipoUsuario->setIdTipoUsuario(1);
+    $usuario->setTipoUsuario($tipoUsuario);
 
 
-// Cadastro
-$retorno = $usuario->cadastrar($usuario);
-$msg = $retorno["msg"];
-if ($msg == "Cadastro realizado com sucesso") {
-    $id = $retorno["id"];
-    $cookie->criarCookie('retorno-id', $id, 2000);
-    header('location: ../formulario-foto.php');
-}else {
-    $cookie->criarCookie("erro-cadastro", $msg, 1);
-    header('location: ../formulario-usuario.php');
-}
-
-
+    // Cadastro
+    $retorno = $usuario->cadastrar($usuario);
+    $msg = $retorno["msg"];
+    if ($msg == "Cadastro realizado com sucesso") {
+        $id = $retorno["id"];
+        $cookie->criarCookie('retorno-id', $id, 50000);
+        header('location: ../formulario-foto.php');
+    } else {
+        $cookie->criarCookie("erro-cadastro", $msg, 1);
+        header('location: ../formulario-usuario.php');
+    }
 }

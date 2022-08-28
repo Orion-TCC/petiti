@@ -18,9 +18,7 @@
 
                 <div class="formulario">
 
-                    <div class="imgSetaVoltarHolder">
-                        <a href="../../escolha-tipo-usuario.php"> <img class="imgSetaVoltar" src="../../../../img/seta - voltar.svg" alt=""></a>
-                    </div>
+
 
                     <div class="tituloFormHolder">
                         <span>
@@ -28,7 +26,7 @@
                         </span>
                     </div>
 
-                    <div class="subTituloFormHolder">
+                    <div class="subTituloFormHolderUsuario">
                         <span>
                             Insira seus dados de acesso abaixo:
                         </span>
@@ -36,13 +34,13 @@
 
 
                     <div class="formularioHolder ">
-                        <form class="formElementsHolder" action="controllers/controller-usuario.php" method="post">
+                        <form class="formElementsHolder" action="controllers/controller-usuario-empresa.php" method="post">
 
                             <label class="formText">Email</label>
-                            <input class="formInput" placeholder="Insira seu email" type="email" name="txtEmailUsuario" id="txtEmailUsuario">
+                            <input class="formInput" placeholder="Insira seu email" type="email" name="txtEmailUsuarioEmpresa" id="txtEmailUsuarioEmpresa">
 
                             <label class="formText">Nome de usuário</label>
-                            <input class="formInput" placeholder="Insira seu username" type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4">
+                            <input class="formInput" placeholder="Insira seu username" type=" text" name="txtLoginUsuarioEmpresa" id="txtLoginUsuarioEmpresa" required minlength="4">
 
                             <label class="formText">Senha</label>
                             <input class="formInput" placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
@@ -54,7 +52,7 @@
                         </form>
                     </div>
 
-                    <div class="cookieCadastro animate__bounce">
+                    <div class="cookieCadastroEmpresa animate__bounce">
                         <p class="animate__animated animate__tada "><?php echo @$_COOKIE['erro-cadastro'] ?></p>
                     </div>
 

@@ -25,10 +25,6 @@
                     <div class="holderFormularioPet1">
                          <div class="formulario">
 
-                            <div class="imgSetaVoltarHolder">
-                            <a href="../forms/formulario-foto.php"> <img class="imgSetaVoltar" src="../../../../img/seta - voltar.svg" alt=""></a>
-                            </div>
-
                             <div class="tituloFormHolder">
                                 <span>Agora, vamos ao que interessa...</span>
                             </div>

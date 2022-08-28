@@ -9,7 +9,6 @@
     <meta name="description" content="A Orion é uma empresa especializada em softwares para empresas de pequeno e médio porte.">
 
     <!-- styles -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="../../../../css/style.css">
 
@@ -20,6 +19,7 @@
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
     <script src="../../../../js/script.js" async></script>
+    </head>
 <body>
     <main class="container-content">
         <section id="formularioUsuario">
@@ -27,9 +27,7 @@
               
             <div class="formulario">
 
-                <div class="imgSetaVoltarHolder">
-                   <a href="../../escolha-tipo-usuario.php"> <img class="imgSetaVoltar" src="../../../../img/seta - voltar.svg" alt=""></a>
-                </div>
+
 
                 <div class="tituloFormHolder">
                     <span>
@@ -37,7 +35,7 @@
                     </span>
                 </div>
 
-                <div class="subTituloFormHolder">
+                <div class="subTituloFormHolderUsuario">
                     <span>
                         Insira seus dados de acesso abaixo:
                     </span>
@@ -48,7 +46,7 @@
                     <form class="formElementsHolder" action="controllers/controller-usuario.php" method="post">
 
                         <label class="formText">Email</label>
-                    <input class="formInput" placeholder="Insira seu email"type="email" name="txtEmailUsuario" id="txtEmailUsuario" >
+                    <input class="formInput" placeholder="Insira seu email"type="email" name="txtEmailUsuario" id="txtEmailUsuario" required autofocus >
 
                         <label class="formText">Seu nome</label>
                     <input class="formInput" placeholder="Insira seu nome ou apelido"type="text" name="txtNomeUsuario" id="txtNomeUsuario" required minlength="2" >

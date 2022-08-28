@@ -11,23 +11,23 @@ $cookie = new Cookies();
 
 
 // Verficação 
-$email = $_POST['txtEmailUsuario'];
+$email = $_POST['txtEmailUsuarioEmpresa'];
 $senha = $_POST['txtPw'];
 $senhaConfirmacao = $_POST['txtPwConfirm'];
 
 $validacaoEmail = $usuario->validarEmail($email);
 if ($validacaoEmail == false) {
     $cookie->criarCookie("erro-cadastro", "Email Inválido", 1);
-    header('location: ../formulario-usuario.php');
+    header('location: ../formulario-usuario-empresa.php');
 } elseif ($senha <> $senhaConfirmacao) {
     $cookie->criarCookie("erro-cadastro", "Senhas não coincindem", 1);
-    header('location: ../formulario-usuario.php');
+    header('location: ../formulario-usuario-empresa.php');
 } else {
-    $usuario->setNomeUsuario($_POST['txtNomeUsuario']);
-    $usuario->setLoginUsuario($_POST['txtLoginUsuario']);
-    $usuario->setEmailUsuario($_POST['txtEmailUsuario']);
+    $usuario->setNomeUsuario(" ");
+    $usuario->setLoginUsuario($_POST['txtLoginUsuarioEmpresa']);
+    $usuario->setEmailUsuario($_POST['txtEmailUsuarioEmpresa']);
     $usuario->setSenhaUsuario($_POST['txtPw']);
-    $usuario->setVerificadoUsuario(0);
+    $usuario->setVerificadoUsuario(2);
     $tipoUsuario->setIdTipoUsuario(1);
     $usuario->setTipoUsuario($tipoUsuario);
 
@@ -37,10 +37,10 @@ if ($validacaoEmail == false) {
     $msg = $retorno["msg"];
     if ($msg == "Cadastro realizado com sucesso") {
         $id = $retorno["id"];
-        $cookie->criarCookie('retorno-id', $id, 2000);
-        header('location: ../formulario-foto.php');
+        $cookie->criarCookie('retorno-id', $id, 5000);
+        header('location: ../formulario-info-empresa.php');
     } else {
         $cookie->criarCookie("erro-cadastro", $msg, 1);
-        header('location: ../formulario-usuario.php');
+        header('location: ../formulario-usuario-empresa.php');
     }
 }

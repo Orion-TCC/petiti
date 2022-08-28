@@ -26,9 +26,7 @@
         <section id="formularioFoto">
             <div class="holderFormularioFotoPet">
                 <div class="formulario">
-                    <div class="imgSetaVoltarHolder">
-                    <a href="formulario-pet2.php"> <img class="imgSetaVoltar" src="../../../../img/seta - voltar.svg" alt=""></a>
-                    </div>
+
 
                     <div class="tituloFormHolder2">
                         <span>
@@ -53,7 +51,7 @@
 
                             <div class="EHolder">
                                     <div class="line"></div>
-                                    <span>E</span>
+                                    <span style="font-family:'Raleway Bold' ;">E</span>
                                     <div class="line"></div>
                             </div>
 
