@@ -1,6 +1,7 @@
 <?php
 require_once("/xampp/htdocs/projeto-Petiti/classes/Pet.php");
 require_once("/xampp/htdocs/projeto-Petiti/classes/FotoPet.php");
+require_once("/xampp/htdocs/projeto-petiti/classes/Cookies.php");
 
 // Objetos
 
@@ -35,10 +36,10 @@ if ($foto['size'] == 0) {
 
     $caminhoBanco = "private-user/fotos-pet/" . $nomeRandom . "." . $tipo;
     $nomeTipo = $nomeRandom . "." . $tipo;
-    $Pet->setIdPet($_COOKIE['retorno-id']);
+    $pet->setIdPet($_COOKIE['retorno-id']);
     $fotoPet->setPet($pet);
     $fotoPet->setNomeFotoPet($nomeTipo);
     $fotoPet->setCaminhoFotoPet($caminhoBanco);
     $fotoPet->cadastrar($fotoPet);
-    header('location: controller-teste.php');
+    header('location: ../finalizar-forms.php');
 }

@@ -9,7 +9,6 @@
     <meta name="description" content="A Orion é uma empresa especializada em softwares para empresas de pequeno e médio porte.">
 
     <!-- styles -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="../../../../css/style.css">
 
@@ -31,8 +30,10 @@
                     <a href="../forms/formulario-usuario.php"> <img class="imgSetaVoltar" src="../../../../img/seta - voltar.svg" alt=""></a>
                     </div>
 
-                    <div class="tituloFormFoto">
-                        <span>Deixe seu pefil mais a sua cara!</span>
+                    <div class="tituloFormHolder">
+                        <span>
+                            Deixe seu pefil mais a sua cara!
+                        </span>
                     </div>
                    
                     <form enctype="multipart/form-data" action="controllers/controller-foto.php" method="POST" class="formElementsHolder">

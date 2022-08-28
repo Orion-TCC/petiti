@@ -18,6 +18,6 @@ $pet->setUsuario($usuario);
 
 $return = $pet->cadastrar($pet);
 $id = $return['id'];
-$cookie->criarCookie('retorno-id-pet', $id, 2000);
+
 
 header('location: ../formulario-foto-pet.php');

@@ -131,8 +131,21 @@
     color: #000000;
     font-size: 50px;
     text-decoration: none;
-    letter-spacing: 1px;
     padding-top: 70px;
+    width: 450px;
+    
+    text-align: center;
+}
+
+.tituloFormHolder2{
+    font-family: "Raleway Bold", sans-serif;
+    color: #000000;
+    font-size: 50px;
+    text-decoration: none;
+    padding-top: 70px;
+    width: 500px;
+    
+    text-align: center;
 }
 
 .subTituloFormHolder{
@@ -142,7 +155,7 @@
     text-decoration: none;
     letter-spacing: 1px;
     padding-top: 30px;
-    padding-left: 100px;
+    padding-left: 50px;
     width: 100%;
 }
 
@@ -232,16 +245,6 @@ width: 100%;
     border: 1px solid #9A9A9A;
   }
 
-  .tituloFormFoto{
-    font-family: "Raleway Bold", sans-serif;
-    color: #000000;
-    font-size: 50px;
-    text-decoration: none;
-    letter-spacing: 1px;
-    padding-top: 70px;
-    width: 400px;
-    text-align: center;
-  }
 
   .subTituloFormFoto{
     font-family: "Raleway Bold", sans-serif;
@@ -256,8 +259,8 @@ width: 100%;
     padding-top: 13px;
     padding-left: 65px;
     margin-top: 20px;
-    width: 482px;
-    height: 53px;
+    width: 440px;
+    height: 40px;
     background: #9998D3;
     border-radius: 20px;
     font-family: 'Raleway Bold';
@@ -301,7 +304,7 @@ width: 100%;
     padding-left: 25px;
     width: 470px;
     height: 151px;
-    margin-top: 50px;
+    margin-block: 50px;
     font-family: 'Raleway Bold';
     font-style: normal;
     font-weight: 700;
@@ -318,18 +321,202 @@ width: 100%;
         background: #FCF892;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
-        margin-top: 40px;
+        margin-top: 70px;
+        margin-left: 5px;
         border: none;
 
-        padding-left: 200px;
-        font-family: 'Raleway Bold';
+        font-family: "Raleway Bold", sans-serif;
+        text-decoration: none;
         font-style: normal;
         font-weight: 700;
         font-size: 20px;
-        line-height: 23px;
-        display: flex;
+        line-height: 45px;
         align-items: center;
         text-align: center;
-
         color: #000000;
+        margin-block: 20px;
+        cursor: pointer;
         }
+
+        /* PAGE FORMULARIO PET 1 */
+.holderFormularioPet1{
+    height: 911px;
+    width: 1680px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../img//fundo-cadastro.svg");
+}
+.subTituloForm{
+    font-family: "Raleway Bold", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    width: 449px;
+    height: 30px;
+    color: #000000;
+    margin-top: 90px;
+}
+
+.escolhasHolder{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.escolha1{
+    width: 495px;
+    height: 44px;
+    background: #FCF892;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    font-family: "Raleway Bold", sans-serif;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 45px;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    margin-top: 20px;
+}
+
+.escolha2{
+    width: 495px;
+    height: 44px;
+    background: #9998D3;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+
+    font-family: "Raleway Bold", sans-serif;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 45px;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    margin-top: 20px;
+}
+.infoFormHolder{
+    width: 457px;
+    height: 151px;
+    font-family: "Raleway Bold", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    
+    color: #000000;
+    
+    margin-top: 50px;
+}
+
+/* PAGE FORMULARIO PET 2 TA USANDO O CSS DO FORMULARIO DO USUARIO */
+.holderFormularioPet{
+    height: 911px;
+    width: 1680px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../img//fundo-cadastro.svg");
+  }
+
+
+/* PAGE FORMULARIO FOTO PET */
+.holderFormularioFotoPet{
+    height: 911px;
+    width: 1680px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../img//fundo-cadastro.svg");
+}
+
+.inputFormFotoPet{
+    display: none;
+}
+
+.formLabelFotoPet{
+    padding-top: 13px;
+    padding-left: 65px;
+    margin-top: 20px;
+    width: 440px;
+    height: 40px;
+    background: #9998D3;
+    border-radius: 20px;
+    font-family: 'Raleway Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+.formTextFotoPetInput{
+    font-family: 'Raleway Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #686868;
+    padding-top: 20px;
+}
+
+/* PAGE FINALIZAR FORM */
+
+.formTextFinalizarForms{
+    padding-left: 25px;
+    width: 470px;
+    height: 151px;
+    margin-top: 50px;
+    font-family: 'Raleway Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    text-justify: auto;
+    color: #000000;
+}
+
+.botaoFinalizar{
+    width: 495px;
+    height: 44px;
+    background: #FCF892;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+   
+    border-radius: 20px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    font-family: "Raleway Bold", sans-serif;
+    text-decoration: none;
+    line-height: 45px;
+
+}
+
+.logoPrincipalFinalizarForm{
+    margin-top: 50px;
+}
