@@ -69,17 +69,27 @@ include_once("sentinela.php");
 
                         <img class="imagemUser" src="<?php
                         echo $_SESSION['foto'];?>" alt="">
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="display: flex; flex-direction: column; margin-left: 10px;">
+                            
+                            <span class="textNomeUsuario"><?php
+                            echo $_SESSION['nome'];
+                            ?></span>
 
-                        <div style="display: flex; flex-direction: column; margin-left: 10px;">
-                         
-                         <span class="textNomeUsuario"><?php
-                        echo $_SESSION['nome'];
-                        ?></span>
+                            <span class="textLoginUsuario"> <?php
+                            echo "@".$_SESSION['login'];
+                            ?>
+                            </span>
 
-                        <span class="textLoginUsuario"> <?php
-                        echo "@".$_SESSION['login'];
-                        ?>
-                        </div></span>
+                        
+                            
+                            </div>
+                            <div class="exit" style="display: flex; margin: 13px">
+                                <span class="textLoginUsuario">
+                               <a href="sair.php"> <img width="20px" src="images/exit-login.svg" alt="" srcset=""> </a>
+                            </span>
+                            </div>
+                        </div>
                     </div>
             </div>
         </div>
