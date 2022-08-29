@@ -15,8 +15,8 @@ $senha = $_POST['pw'];
 $msg = $usuario->login($login_email, $senha);
 
 echo $msg;
-if ($msg == "Bem vindo") {
-    header('location: logado.php');
+if ($msg == "Bem vindo.") {
+    header('location:/projeto-petiti/feed.php');
     $cookie->criarCookie('retorno-login', $msg, 2);
 }else {
     header('location: login.php');

@@ -27,13 +27,13 @@
                 <div class="formulario">
     
                 <div class="tituloFormHolder2">
-                    <span>Uau! Finalmente. Aproveite!</span>
+                    <span>Tudo pronto! Comece a organizar seu perfil</span>
                 </div>
                 <div class="formTextFinalizarForms">
-                    <span>Pelo visto está tudo completo agora, finalize seu cadastro e explore a <span style="color: #3837A1;">pet iti</span> e tudo que nós temos a oferecer! Interaja com petlovers igual a você</span>
+                    <span>Pelo visto tudo foi preenchido. Finalize seu cadastro e explore a <span style="color: #3837A1;">pet iti</span>. Insira seus produtos/serviços e interaja com petlovers (clientes)!</span>
                 </div>
-                <div>
-                    <img src="../../../../img/calopsita.svg" alt="">
+                <div style="margin-bottom: 20px;">
+                    <img src="../../../../img/ilustração-sacolinhas.svg" alt="">
                 </div>
                 <div>
                     <a class="botaoFinalizar" href="../../../../login/pages/forms/login.php">Finalizar</a>

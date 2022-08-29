@@ -33,8 +33,7 @@
   padding: 0;
 }
 
-html,
-body {
+html, body {
   max-width: 100%;
   max-height: 100%;
   overflow-x: hidden;
@@ -523,7 +522,8 @@ body {
 }
 
 .logoPrincipalFinalizarForm {
-  margin-top: 50px;
+  margin-top: 30px;
+  padding-bottom: 25px;
 }
 
 /* PAGE FORMULARIO INFO EMPRESA */
@@ -567,4 +567,218 @@ body {
   display: flex;
   flex-direction: row;
   margin-top: 20px;
+}
+
+
+/* PAGE FORMULARIO FOTO EMPRES */
+
+.holderFormularioFotoEmpresa{
+  height: 911px;
+  width: 1680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img//fundo-cadastro.svg");
+}
+
+.formTextFotoEmpresa{
+  padding-left: 25px;
+  width: 470px;
+  height: 100px;
+  margin-top: 50px;
+  font-family: "Raleway Bold";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: left;
+  color: #656565;
+}
+
+/* PAGE FORMULARIO RAMO */
+
+.holderFormularioRamoEmpresa{
+  height: 911px;
+  width: 1680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img//fundo-cadastro.svg");
+}
+.formTextRamo{
+  width: 427px;
+  height: 107px;
+
+  padding-left: 40px;
+  font-family: 'Raleway Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  color: #000000;
+}
+
+.formInputRamo{
+  width: 495px;
+  height: 44px;
+  background: #fcf892;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  margin-top: 70px;
+  margin-left: 5px;
+  border: none;
+
+  font-family: "Raleway Bold", sans-serif;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 45px;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
+.SelectRamo{
+  width: 495px;
+  height: 49px;
+  background: #FFFFFF;
+  border-radius: 20px;
+
+  border: none;
+  font-family: 'Raleway Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: left;
+  margin-top: 20px;
+  padding-left: 20px;
+}
+
+
+
+/* PAGE LOGIN */
+.holderLogin{
+  width: 1680px;
+  height: 990px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img/Login-BG.svg");
+}
+
+.login{
+  height: 100%;
+  width: 35%;
+  background: #BAD5DB;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.loginLogo{
+  width: 250px; 
+  margin-bottom: 30px;
+}
+
+.formTextLogin{
+  font-family: 'Raleway Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 6px;
+  padding-left: 5px;
+  color: #000000; 
+}
+
+.formInputLogin{
+  background: #ffffff;
+  mix-blend-mode: normal;
+  border: 1px solid #C1C1C1;
+  backdrop-filter: blur(40px);
+  border-radius: 20px;
+  height: 50px;
+  width: 400px;
+  font-family: "Raleway Bold", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  padding-left: 20px;
+}
+
+.loginInputHolder{
+  margin-top: 35px;
+}
+
+.formSubmitLogin {
+  background: #fcf892;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  width: 400px;
+  height: 44px;
+  margin-top: 45px;
+  cursor: pointer;
+
+  font-family: "Raleway Bold", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 19px;
+  color: #000000;
+  border: none;
+}
+
+.textoLogin{
+  font-family: 'Raleway Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 30px;
+
+  color: #000000;
+}
+
+.textoLoginAhref{
+  font-family: 'Raleway Bold';
+  text-decoration: none;
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 21px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #3837A2;
 }

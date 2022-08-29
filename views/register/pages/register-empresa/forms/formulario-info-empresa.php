@@ -1,15 +1,3 @@
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="../../../../js/cep.js"></script>
-<form action="controllers/controller-info-empresa.php" method="post">
-    <input placeholder="Nome empresa" type="text" name="txtNomeEmpresa" id="txtNomeEmpresa">
-    <input placeholder="CEP" type="text" onblur="pesquisacep(this.value)" name="txtCep" id="cep">
-    <input placeholder="Rua" type="text" name="txtEnderecoEmpresa" id="rua">
-    <input placeholder="Número" type="text" name="txtNumeroEmpresa" id="txtNumeroEmpresa">
-    <input placeholder="Cidade" type="text" name="txtCidadeEmpresa" id="cidade">
-    <input placeholder="UF" type="text" name="txtUfEmpresa" id="uf">
-    <input type="submit" value="Confirmar" />
-</form> -->
-
 <!DOCTYPE php>
 <html lang="pt-br">
 
@@ -30,8 +18,10 @@
     <link rel="icon" href="../../../../img/logo-icon.svg">
 
     <!--script-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
     <script src="../../../../js/script.js" async></script>
+    <script src="../../../../js/cep.js" async></script>
 </head>
 
 <body>
@@ -56,7 +46,7 @@
                     </div>
 
                     <div class="formularioHolder">
-                        <form class="formElementsHolder" action="controllers/controller-usuario.php" method="post">
+                        <form class="formElementsHolder" action="controllers/controller-info-empresa.php" method="post">
 
                             <label class="formText">Nome da empresa</label>
                             <input class="formInput" placeholder="Insira um nome" type="text" name="txtNomeEmpresa" id="txtNomeEmpresa" required autofocus>
@@ -70,17 +60,17 @@
 
 
                             <label class="formText">Número</label>
-                            <input class="formInput" placeholder="Exemplo: 290" type="text" name="txtNumeroEmpresa" id="txtNumeroEmpresa" required minlength="6">
+                            <input class="formInput" placeholder="Exemplo: 290" type="text" name="txtNumeroEmpresa" id="txtNumeroEmpresa" required minlength="1">
 
                             <div class="CidadeEUFHolder">
-                                <div>
+                                <div style="width: 380px;">
                                 <label class="formText">Cidade</label>
-                                <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
+                                <input class="formInput" type="text" name="txtCidadeEmpresa" id="cidade" required minlength="6">
                                 </div>
                                 
-                                <div style="margin-left: ;">
+                                <div style="width: 160px; margin-left: 20px;">
                                 <label class="formText">UF</label>
-                                <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
+                                <input class="formInput" type="text" name="txtUfEmpresa" id="uf" required minlength="6">
                                 </div>
                             </div>
                             <button class="formSubmit" type="submit">Continuar</button>

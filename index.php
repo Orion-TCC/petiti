@@ -36,7 +36,7 @@
             </div>
 
             <div>
-                <a href="teste.php" class="navbarElement">Entrar</a>
+                <a href="views/login/pages/forms/login.php" class="navbarElement">Entrar</a>
                 <a href="views/register/pages/escolha-tipo-usuario.php" class="navbarElementBotao">Cadastre-se</a>
             </div>
         </nav>

@@ -25,3 +25,4 @@ $usuario->setTipoUsuario($tipoUsuario);
 echo $usuario->getNomeUsuario();
 
 $usuario->update($usuario);
+header('location: ../finalizar-cadastro-empresa.php');

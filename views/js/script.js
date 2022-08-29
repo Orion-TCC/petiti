@@ -1,4 +1,3 @@
-
 let input = document.getElementById("inputTag");
 let imageName = document.getElementById("imageName")
 

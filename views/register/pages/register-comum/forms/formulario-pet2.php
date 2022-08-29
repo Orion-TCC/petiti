@@ -34,7 +34,7 @@
                     </span>
                 </div>
 
-                <div class="subTituloFormHolder">
+                <div class="subTituloFormHolderUsuario">
                     <span>
                         Insira os dados dele abaixo:
                     </span>

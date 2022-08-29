@@ -24,3 +24,5 @@ $usuario->setTipoUsuario($tipoUsuario);
 echo $usuario->getNomeUsuario();
 
 $usuario->update($usuario);
+
+header('location: ../formulario-foto-empresa.php');
