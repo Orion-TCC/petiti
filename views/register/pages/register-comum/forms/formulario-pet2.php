@@ -48,7 +48,13 @@
                     <input class="formInput" placeholder="Insira o nome"type="text" name="txtNomePet" required>
 
                         <label class="formText">Espécie</label>
-                    <input class="formInput" placeholder="Insira a espécie"type="text" name="txtEspeciePet" required>
+                    <select name="slEspecie" id="slEspecie" required class="SelectRamo" >
+                        <option style="color: #000000;" value="1">Cachorro</option>
+                        <option style="color: #000000;" value="2">Gato</option>
+                        <option style="color: #000000;" value="3">Roedor</option>
+                        <option style="color: #000000;" value="4">Ave</option>
+                        <option style="color: #000000;" value="5">Exótico</option>
+                    </select>
 
                         <label class="formText">Raça</label>
                     <input class="formInput" placeholder="Insira a raça"type=" text" name="txtRacaPet"  required>
