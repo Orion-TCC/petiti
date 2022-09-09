@@ -1,6 +1,9 @@
 <!DOCTYPE php>
 <html lang="pt-br">
-    
+    <?php
+    @session_start();
+        unset($_SESSION['id-cadastro']);
+    ?>
 <head>
     <!-- HTML base -->
     <meta charset="UTF-8">

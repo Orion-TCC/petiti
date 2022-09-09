@@ -441,6 +441,62 @@ html, body {
   background-image: url("../img//fundo-cadastro.svg");
 }
 
+.SelectEspecie{
+  width: 495px;
+  height: 49px;
+  background: #FFFFFF;
+  border-radius: 20px;
+
+  border: none;
+  font-family: 'Raleway Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: left;
+  margin-top: 20px;
+  padding-left: 20px;
+}
+
+.idadePet{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.NumberIdade{
+  width: 495px;
+  height: 49px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  margin-right: 15px;
+  border: none;
+  font-family: 'Raleway Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: left;
+  margin-top: 20px;
+  padding-left: 20px;
+}
+
+.SelectDiaMesAno{
+  width: 495px;
+  height: 49px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  margin-left: 5px;
+  border: none;
+  font-family: 'Raleway Bold'!important;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: left;
+  padding-left: 20px;
+}
+
 /* PAGE FORMULARIO FOTO PET */
 .holderFormularioFotoPet {
   height: 911px;
@@ -456,7 +512,7 @@ html, body {
 }
 
 .inputFormFotoPet {
-  display: none;
+  display: none; 
 }
 
 .formLabelFotoPet {
@@ -669,6 +725,7 @@ html, body {
   margin-top: 20px;
   padding-left: 20px;
 }
+
 
 
 

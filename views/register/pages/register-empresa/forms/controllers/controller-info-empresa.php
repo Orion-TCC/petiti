@@ -5,7 +5,7 @@ require_once("/xampp/htdocs/projeto-petiti/classes/TipoUsuario.php");
 
 $usuario = new Usuario();
 $tipoUsuario = new TipoUsuario();
-$lista = $usuario->listarUsuario($_COOKIE['retorno-id']);
+$lista = $usuario->listarUsuario($_SESSION['id-cadastro']);
 foreach ($lista as $linha) {
     $id = $linha['idUsuario'];
     $senha = $linha['senhaUsuario'];

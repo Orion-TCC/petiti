@@ -14,7 +14,23 @@ $arrayEspecies = array(
     4=>"Ave",
     5=>"Exótico"
 );
-
+$idade = $_POST['txtIdadePet'];
+$slDiaMesAno = $_POST['slIdade'];
+if ($idade > 1) {
+    $arrayData = array(
+        "d" => "dias",
+        "m" => "meses",
+        "y" => "anos",
+    );
+    $idadeCompleta = $idade." ".$arrayData[$slDiaMesAno];
+}else {
+    $arrayData = array(
+        "d" => "dia",
+        "m" => "mês",
+        "y" => "ano",
+    );
+    $idadeCompleta = $idade . " " . $arrayData[$slDiaMesAno];
+}
 @session_start();
 if ($_POST['slEspecie'] == 0) {
     $cookie->criarCookie('retorno-erro-especie', "Selecione uma espécie", 1);
@@ -25,13 +41,13 @@ $especie = $arrayEspecies[$_POST['slEspecie']];
 $pet->setNomePet($_POST['txtNomePet']);
 $pet->setRacaPet($_POST['txtRacaPet']);
 $pet->setEspeciePet($especie);
-$pet->setIdadePet($_POST['txtIdadePet']);
-$usuario->setIdUsuario($_COOKIE['retorno-id']);
+$pet->setIdadePet($idadeCompleta);
+$usuario->setIdUsuario($_SESSION['id-cadastro']);
 $pet->setUsuario($usuario); 
 
 $return = $pet->cadastrar($pet);
 $id = $return['id'];
+$_SESSION['id-cadastro-pet'] = $id;
 
-$cookie->criarCookie('retorno-id-pet', $id, 2000);
 
 header('location: ../formulario-foto-pet.php');

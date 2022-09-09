@@ -48,19 +48,26 @@
                     <input class="formInput" placeholder="Insira o nome"type="text" name="txtNomePet" required>
 
                         <label class="formText">Espécie</label>
-                    <select name="slEspecie" id="slEspecie" required class="SelectRamo" >
-                        <option style="color: #000000;" value="1">Cachorro</option>
-                        <option style="color: #000000;" value="2">Gato</option>
-                        <option style="color: #000000;" value="3">Roedor</option>
-                        <option style="color: #000000;" value="4">Ave</option>
-                        <option style="color: #000000;" value="5">Exótico</option>
+                    <select name="slEspecie" id="slEspecie" required class="SelectEspecie" >
+                        <option style="color: #000000; font-family: 'Raleway Bold';" value="1">Cachorro</option>
+                        <option style="color: #000000; font-family: 'Raleway Bold';" value="2">Gato</option>
+                        <option style="color: #000000; font-family: 'Raleway Bold';" value="3">Roedor</option>
+                        <option style="color: #000000; font-family: 'Raleway Bold';" value="4">Ave</option>
+                        <option style="color: #000000; font-family: 'Raleway Bold';" value="5">Exótico</option>
                     </select>
 
                         <label class="formText">Raça</label>
                     <input class="formInput" placeholder="Insira a raça"type=" text" name="txtRacaPet"  required>
 
                         <label class="formText">Idade</label>
-                    <input class="formInput" placeholder="Insira a idade"type="text" name="txtIdadePet"  required>
+                        <div class="idadePet">
+                            <input class="formInput" placeholder="Insira a idade" min="1" type="number" name="txtIdadePet" required>
+                            <select class="SelectDiaMesAno" name="slIdade" id="slIdade" required>
+                                <option value="d">Dia (Dias)</option>
+                                <option value="m">Mês (Meses)</option>
+                                <option value="y">Ano(s)</option>
+                            </select>
+                        </div>
 
                          <button class="formSubmit" type="submit">Continuar</button>
                            

@@ -15,13 +15,14 @@ $nomeFoto = $foto['name'];
 
 $tipo = strtolower(pathinfo($nomeFoto, PATHINFO_EXTENSION));
 
-
+@session_start();
 if ($foto['size'] == 0) {
-    $usuario->setIdUsuario($_COOKIE['retorno-id']);
+    $usuario->setIdUsuario($_SESSION['id-cadastro']);
     $fotoUsuario->setUsuario($usuario);
     $fotoUsuario->setNomeFoto("padrao.png");
     $fotoUsuario->setCaminhoFoto("private-user/fotos-perfil/padrao.png");
     $fotoUsuario->cadastrar($fotoUsuario);
+    header('location: ../formulario-pet1.php');
 }elseif ($foto['error'] <> 0) {
     $cookie->criarCookie("erro-foto", "Erro ao subir imagem, tente novamente.", 1);
     header('location: ../formulario-foto.php');
@@ -36,7 +37,7 @@ if ($foto['size'] == 0) {
    
     $caminhoBanco = "private-user/fotos-perfil/".$nomeRandom.".".$tipo;
     $nomeTipo = $nomeRandom.".".$tipo;
-    $usuario->setIdUsuario($_COOKIE['retorno-id']);
+    $usuario->setIdUsuario($_SESSION['id-cadastro']);
     $fotoUsuario->setUsuario($usuario);
     $fotoUsuario->setNomeFoto($nomeTipo);
     $fotoUsuario->setCaminhoFoto($caminhoBanco);
