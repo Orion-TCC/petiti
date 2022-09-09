@@ -37,7 +37,8 @@ if ($validacaoEmail == false) {
     $msg = $retorno["msg"];
     if ($msg == "Cadastro realizado com sucesso") {
         $id = $retorno["id"];
-        $cookie->criarCookie('retorno-id', $id, 5000);
+        @session_start();
+        $_SESSION['id-cadastro'] = $id;
         header('location: ../formulario-info-empresa.php');
     } else {
         $cookie->criarCookie("erro-cadastro", $msg, 1);
