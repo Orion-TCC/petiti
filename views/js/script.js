@@ -6,3 +6,6 @@ input.addEventListener("change", ()=>{
 
     imageName.innerText = inputImage.name;
 })
+function preview() {
+    frame.src=URL.createObjectURL(event.target.files[0]);
+}

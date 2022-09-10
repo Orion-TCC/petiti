@@ -40,8 +40,12 @@
                         </label>
 
                         <label class="formLabelFoto" id="inputTag">
-                            <input class="inputFormFoto" type="file" name="flFoto">
+                            <input class="inputFormFoto" type="file" name="flFoto" onchange="preview()">
                             Anexar foto dos meus arquivos
+                        </label>
+
+                        <label class="previewFormFoto" id="imagePreview">
+                            <img class="previewFoto" id="frame" src="../../../../../private-user/fotos-perfil/padrao.png" width="150px" height="150px" />
                         </label>
 
                         <label class="formTextFotoInput" id="imageName">

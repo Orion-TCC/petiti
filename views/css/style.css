@@ -33,7 +33,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   max-width: 100%;
   max-height: 100%;
   overflow-x: hidden;
@@ -276,6 +277,18 @@ html, body {
   color: #ffffff;
   cursor: pointer;
 }
+.previewFormFoto {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+}
+
+.previewFoto {
+  border-radius: 100px;
+  background-color: white;
+}
 
 .inputFormFoto {
   display: none;
@@ -441,14 +454,14 @@ html, body {
   background-image: url("../img//fundo-cadastro.svg");
 }
 
-.SelectEspecie{
+.SelectEspecie {
   width: 495px;
   height: 49px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 20px;
 
   border: none;
-  font-family: 'Raleway Bold';
+  font-family: "Raleway Bold";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -458,20 +471,20 @@ html, body {
   padding-left: 20px;
 }
 
-.idadePet{
+.idadePet {
   display: flex;
   flex-direction: row;
   justify-content: start;
 }
 
-.NumberIdade{
+.NumberIdade {
   width: 495px;
   height: 49px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 20px;
   margin-right: 15px;
   border: none;
-  font-family: 'Raleway Bold';
+  font-family: "Raleway Bold";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -481,14 +494,14 @@ html, body {
   padding-left: 20px;
 }
 
-.SelectDiaMesAno{
+.SelectDiaMesAno {
   width: 495px;
   height: 49px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 20px;
   margin-left: 5px;
   border: none;
-  font-family: 'Raleway Bold'!important;
+  font-family: "Raleway Bold" !important;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -512,7 +525,7 @@ html, body {
 }
 
 .inputFormFotoPet {
-  display: none; 
+  display: none;
 }
 
 .formLabelFotoPet {
@@ -619,16 +632,15 @@ html, body {
   padding-left: 5px;
 }
 
-.CidadeEUFHolder{
+.CidadeEUFHolder {
   display: flex;
   flex-direction: row;
   margin-top: 20px;
 }
 
-
 /* PAGE FORMULARIO FOTO EMPRES */
 
-.holderFormularioFotoEmpresa{
+.holderFormularioFotoEmpresa {
   height: 911px;
   width: 1680px;
   display: flex;
@@ -641,7 +653,7 @@ html, body {
   background-image: url("../img//fundo-cadastro.svg");
 }
 
-.formTextFotoEmpresa{
+.formTextFotoEmpresa {
   padding-left: 25px;
   width: 470px;
   height: 100px;
@@ -657,7 +669,7 @@ html, body {
 
 /* PAGE FORMULARIO RAMO */
 
-.holderFormularioRamoEmpresa{
+.holderFormularioRamoEmpresa {
   height: 911px;
   width: 1680px;
   display: flex;
@@ -669,12 +681,12 @@ html, body {
   background-size: cover;
   background-image: url("../img//fundo-cadastro.svg");
 }
-.formTextRamo{
+.formTextRamo {
   width: 427px;
   height: 107px;
 
   padding-left: 40px;
-  font-family: 'Raleway Bold';
+  font-family: "Raleway Bold";
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -685,7 +697,7 @@ html, body {
   color: #000000;
 }
 
-.formInputRamo{
+.formInputRamo {
   width: 495px;
   height: 44px;
   background: #fcf892;
@@ -709,14 +721,14 @@ html, body {
   cursor: pointer;
 }
 
-.SelectRamo{
+.SelectRamo {
   width: 495px;
   height: 49px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 20px;
 
   border: none;
-  font-family: 'Raleway Bold';
+  font-family: "Raleway Bold";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -726,11 +738,8 @@ html, body {
   padding-left: 20px;
 }
 
-
-
-
 /* PAGE LOGIN */
-.holderLogin{
+.holderLogin {
   width: 1680px;
   height: 990px;
   display: flex;
@@ -743,25 +752,24 @@ html, body {
   background-image: url("../img/Login-BG.svg");
 }
 
-.login{
+.login {
   height: 100%;
   width: 35%;
-  background: #BAD5DB;
+  background: #bad5db;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
 }
 
-.loginLogo{
-  width: 250px; 
+.loginLogo {
+  width: 250px;
   margin-bottom: 30px;
 }
 
-.formTextLogin{
-  font-family: 'Raleway Bold';
+.formTextLogin {
+  font-family: "Raleway Bold";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -771,13 +779,13 @@ html, body {
   text-align: center;
   margin-bottom: 6px;
   padding-left: 5px;
-  color: #000000; 
+  color: #000000;
 }
 
-.formInputLogin{
+.formInputLogin {
   background: #ffffff;
   mix-blend-mode: normal;
-  border: 1px solid #C1C1C1;
+  border: 1px solid #c1c1c1;
   backdrop-filter: blur(40px);
   border-radius: 20px;
   height: 50px;
@@ -790,7 +798,7 @@ html, body {
   padding-left: 20px;
 }
 
-.loginInputHolder{
+.loginInputHolder {
   margin-top: 35px;
 }
 
@@ -812,8 +820,8 @@ html, body {
   border: none;
 }
 
-.textoLogin{
-  font-family: 'Raleway Bold';
+.textoLogin {
+  font-family: "Raleway Bold";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -826,18 +834,16 @@ html, body {
   color: #000000;
 }
 
-.textoLoginAhref{
-  font-family: 'Raleway Bold';
+.textoLoginAhref {
+  font-family: "Raleway Bold";
   text-decoration: none;
-font-style: normal;
-font-weight: 700;
-font-size: 18px;
-line-height: 21px;
-display: flex;
-align-items: center;
-text-align: center;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
 
-color: #3837A2;
+  color: #3837a2;
 }
-
-
