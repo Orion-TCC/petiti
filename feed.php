@@ -15,7 +15,7 @@ include_once("sentinela.php");
 
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="styles/stylesheet.css">
+    <link rel="stylesheet" href="assets/styles/stylesheet.css">
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
@@ -23,7 +23,7 @@ include_once("sentinela.php");
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </head>
 <body class="bodyFeed">  
 <main class="holderFeed">
@@ -31,31 +31,31 @@ include_once("sentinela.php");
    <section id="hud" class="hudHolder" >
         <div class="hud">
             <div class="elementsHud"> 
-            <img style="width:200px; padding-left: 27%; padding-top:20px;" src="images/logo_principal.svg" alt="">
+            <img style="width:200px; padding-left: 27%; padding-top:20px;" src="assets/images/logo_principal.svg" alt="">
 
             <div class="elementos">
                 <div id="elementsHolder">
-                    <img src="images/icon-home.svg" alt="">
+                    <img src="assets/images/icon-home.svg" alt="">
                     <span class="elementHudText" style="padding-left: 6px;">Home</span>
                 </div>
                 <div class="elementsHolder">
-                    <img src="images/animaisPerdidos-icon.svg" alt="">
+                    <img src="assets/images/animaisPerdidos-icon.svg" alt="">
                     <span class="elementHudText" style="padding-left: 5px;">Animais perdidos</span>
                 </div>
                 <div class="elementsHolder">
-                    <img src="images/animaisEmDoacao-icon.svg" alt="">
+                    <img src="assets/images/animaisEmDoacao-icon.svg" alt="">
                     <span class="elementHudText" style="padding-left: -1px;">Animais em doação</span>
                 </div>
                 <div class="elementsHolder">
-                    <img src="images/notificacoes.svg" alt="">
+                    <img src="assets/images/notificacoes.svg" alt="">
                     <span class="elementHudText" style="padding-left: 8px;">Notificações</span>
                 </div>
                 <div class="elementsHolder">
-                    <img src="images/mensagens.svg" alt="">
+                    <img src="assets/images/mensagens.svg" alt="">
                     <span class="elementHudText" style="padding-left: 9px;">Mensagens</span>
                 </div>
                 <div class="elementsHolder">
-                    <img src="images/produtos-icon.svg" alt="">
+                    <img src="assets/images/produtos-icon.svg" alt="">
                     <span class="elementHudText" style="padding-left: 5px;">Produtos e Serviços</span>
                 </div>
             </div>
@@ -86,7 +86,7 @@ include_once("sentinela.php");
                             </div>
                             <div class="exit" style="display: flex; margin: 13px">
                                 <span class="textLoginUsuario">
-                               <a href="sair.php"> <img width="20px" src="images/exit-login.svg" alt="" srcset=""> </a>
+                               <a href="sair.php"> <img width="20px" src="assets/images/exit-login.svg" alt="" srcset=""> </a>
                             </span>
                             </div>
                         </div>
@@ -115,18 +115,18 @@ include_once("sentinela.php");
             </div>
 
             <div class="placeholderPost">
-                <img src="images/reações-post.svg" style="width: 130px; margin-top: 102%; margin-left: 20px;" alt="">
-                <img src="images/curtida, desc.svg" style="width: 500px; margin-left: 20px;" alt="">
+                <img src="assets/images/reações-post.svg" style="width: 130px; margin-top: 102%; margin-left: 20px;" alt="">
+                <img src="assets/images/curtida, desc.svg" style="width: 500px; margin-left: 20px;" alt="">
             </div>
 
             <div class="placeholderPost">
-                <img src="images/reações-post.svg" style="width: 130px; margin-top: 102%; margin-left: 20px;" alt="">
-                <img src="images/curtida, desc.svg" style="width: 500px; margin-left: 20px;" alt="">
+                <img src="assets/images/reações-post.svg" style="width: 130px; margin-top: 102%; margin-left: 20px;" alt="">
+                <img src="assets/images/curtida, desc.svg" style="width: 500px; margin-left: 20px;" alt="">
             </div>
 
             <div class="placeholderPost">
-                <img src="images/reações-post.svg" style="width: 130px; margin-top: 102%; margin-left: 20px;" alt="">
-                <img src="images/curtida, desc.svg" style="width: 500px; margin-left: 20px;" alt="">
+                <img src="assets/images/reações-post.svg" style="width: 130px; margin-top: 102%; margin-left: 20px;" alt="">
+                <img src="assets/images/curtida, desc.svg" style="width: 500px; margin-left: 20px;" alt="">
             </div>
 
             </div>
@@ -136,15 +136,15 @@ include_once("sentinela.php");
     <section id="function" class="functionHolder">
             <div class="function">
                 <div class="placeholderFeedAnimalPerdido">
-                    <img src="images/feed animal perdido.svg" alt="">
+                    <img src="assets/images/feed animal perdido.svg" alt="">
                 </div>
 
                 <div class="placeholderCategorias">
-                    <img src="images/categorias.svg" alt="">
+                    <img src="assets/images/categorias.svg" alt="">
                 </div>
 
                 <div class="placeholderCopyright">
-                    <img src="images/copyright.svg" alt="">
+                    <img src="assets/images/copyright.svg" alt="">
                 </div>
             </div>
     </section>

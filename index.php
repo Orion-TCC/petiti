@@ -5,7 +5,7 @@ session_destroy();
 
 <!DOCTYPE php>
 <html lang="pt-br">
-    
+
 <head>
     <!-- HTML base -->
     <meta charset="UTF-8">
@@ -14,12 +14,12 @@ session_destroy();
     <meta name="description" content="A Orion é uma empresa especializada em softwares para empresas de pequeno e médio porte.">
 
     <!-- styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="styles/stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="assets/styles/stylesheet.css">
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
-    <link rel="icon" href="images/logo-icon.svg">
+    <link rel="icon" href="assets/images/logo-icon.svg">
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
@@ -31,7 +31,7 @@ session_destroy();
     <header id="home">
         <nav id="navbar">
             <div>
-                <a href="#"> <img class="logoNavbar" src="images/logo_principal.svg"></a>
+                <a href="#"> <img class="logoNavbar" src="assets/images/logo_principal.svg"></a>
             </div>
 
             <div>
@@ -41,7 +41,7 @@ session_destroy();
             </div>
 
             <div>
-                <a href="views/login/pages/forms/login.php" class="navbarElement">Entrar</a>
+                <a href="views/login/login.php" class="navbarElement">Entrar</a>
                 <a href="views/register/pages/escolha-tipo-usuario.php" class="navbarElementBotao">Cadastre-se</a>
             </div>
         </nav>
@@ -58,7 +58,7 @@ session_destroy();
                     </div>
 
                     <div>
-                        <img src="images/ilustração - pc.svg" alt="">
+                        <img src="assets/images/ilustração - pc.svg" alt="">
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@ session_destroy();
 
                 <div class="textoEpost">
                     <div>
-                        <img class="imgPosts" src="images/posts.svg" alt="">
+                        <img class="imgPosts" src="assets/images/posts.svg" alt="">
                     </div>
 
                     <div class="divTexto">
@@ -118,7 +118,7 @@ session_destroy();
                     </div>
 
                     <div>
-                        <img class="lojinhaImg" src="images/lojinha - petshop.svg" alt="">
+                        <img class="lojinhaImg" src="assets/images/lojinha - petshop.svg" alt="">
                     </div>
                 </div>
             </div>
@@ -127,19 +127,19 @@ session_destroy();
         <section id="QuintaPartePage">
 
             <div class="holderQuintaPage">
-                <img class="leandro" src="images/leandro.svg" alt="">
+                <img class="leandro" src="assets/images/leandro.svg" alt="">
 
 
                 <div class="funcionalidadesHolder">
                     <div class="baloesFuncionalidades">
 
                         <div class="balaoFuncionalidade">
-                            <img class="iconeFuncionalidade" src="images/coração quebrado.svg" alt="">
+                            <img class="iconeFuncionalidade" src="assets/images/coração quebrado.svg" alt="">
                             <span class="textoFuncionalidade">Animais perdidos</span>
                         </div>
 
                         <div class="balaoFuncionalidade">
-                            <img class="iconeFuncionalidade" src="images/caixa.svg" alt="">
+                            <img class="iconeFuncionalidade" src="assets/images/caixa.svg" alt="">
                             <span class="textoFuncionalidade">Animais em adoção</span>
                         </div>
 
@@ -159,7 +159,7 @@ session_destroy();
     <footer class="container-footer">
 
         <a href="#">
-            <img class="imgSetaTopo" src="images/setinha-topo.svg" alt="">
+            <img class="imgSetaTopo" src="assets/images/setinha-topo.svg" alt="">
         </a>
 
         <div class="FooterHolder">
