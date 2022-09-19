@@ -7,7 +7,7 @@ require_once("/xampp/htdocs/petiti/classes/Cookies.php");
 
 $cookie = new Cookies();
 $fotoPet = new FotoPet();
-$caminho = "/xampp/htdocs/projeto-petiti/private-user/fotos-pet/";
+$caminho = "/xampp/htdocs/petiti/private-user/fotos-pet/";
 $caminhoBanco = "";
 $foto = $_FILES['flFotoPet'];
 $nomeFoto = $foto['name'];

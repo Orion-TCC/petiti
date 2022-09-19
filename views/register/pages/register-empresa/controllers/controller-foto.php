@@ -7,7 +7,7 @@ $usuario = new Usuario();
 $fotoUsuario = new FotoUsuario();
 $cookie = new Cookies();
 
-$caminho = "/xampp/htdocs/projeto-petiti/private-user/fotos-perfil/";
+$caminho = "/xampp/htdocs/petiti/private-user/fotos-perfil/";
 $caminhoBanco = "";
 $foto = $_FILES['flFoto'];
 $nomeFoto = $foto['name'];

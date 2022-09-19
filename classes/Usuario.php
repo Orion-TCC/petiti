@@ -1,5 +1,5 @@
 <?php
-require_once('/xampp/htdocs/projeto-Petiti/database/conexao.php');
+require_once('/xampp/htdocs/petiti/database/conexao.php');
 require_once("FotoUsuario.php");
 class Usuario
 
@@ -348,5 +348,21 @@ class Usuario
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll();
         return $lista;
+    }
+    public function procuraEmail($email)
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT emailUsuario FROM tbusuario WHERE emailUsuario = '$email'";
+        $emailBanco = "";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll();
+        foreach ($lista as $linha) {
+            $emailBanco = $linha[0];
+        }
+        if ($email == $emailBanco) {
+            return true;
+        }else {
+            return 'fodase';
+        }
     }
 }

@@ -33,7 +33,6 @@
             <div class="holderLogin">
                 <div class="Login">
 
-
                     <img class="loginLogo" src="../assets/img/logo_principal.svg" alt="">
 
                     <form action="verificaLogin.php" method="POST">
@@ -52,6 +51,10 @@
 
                     <span class="textoLogin">
                         Não tem uma conta? <a href="../register/pages/escolha-tipo-usuario.php" class="textoLoginAhref"> Cadastre-se</a>
+                    </span>
+
+                    <span class="recuperarSenha">
+                        Esqueceu sua senha? <a href="./formularioRecuperacao.php" class="recuperarSenhaAhref"> Recupere</a>
                     </span>
 
 

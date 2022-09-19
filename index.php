@@ -22,6 +22,7 @@ session_destroy();
     <link rel="icon" href="assets/images/logo-icon.svg">
 
     <!--script-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
     <script src="js/script.js" async></script>
 </head>
@@ -178,7 +179,15 @@ session_destroy();
         </div>
     </footer>
 
-
 </body>
+<script>
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= 50) {
+            $('#navbar').css('background-color', 'rgba(255, 255, 255, 0.3)');
+        } else {
+            $('#navbar').css('background', 'transparent');
+        }
+    });
+</script>
 
 </html>
