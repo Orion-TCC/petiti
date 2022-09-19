@@ -33,31 +33,14 @@ include_once("sentinela.php");
             <div class="elementsHud"> 
             <img style="width:200px; padding-left: 27%; padding-top:20px;" src="assets/images/logo_principal.svg" alt="">
 
-            <div class="elementos">
-                <div id="elementsHolder">
-                    <img src="assets/images/icon-home.svg" alt="">
-                    <span class="elementHudText" style="padding-left: 6px;">Home</span>
-                </div>
-                <div class="elementsHolder">
-                    <img src="assets/images/animaisPerdidos-icon.svg" alt="">
-                    <span class="elementHudText" style="padding-left: 5px;">Animais perdidos</span>
-                </div>
-                <div class="elementsHolder">
-                    <img src="assets/images/animaisEmDoacao-icon.svg" alt="">
-                    <span class="elementHudText" style="padding-left: -1px;">Animais em doação</span>
-                </div>
-                <div class="elementsHolder">
-                    <img src="assets/images/notificacoes.svg" alt="">
-                    <span class="elementHudText" style="padding-left: 8px;">Notificações</span>
-                </div>
-                <div class="elementsHolder">
-                    <img src="assets/images/mensagens.svg" alt="">
-                    <span class="elementHudText" style="padding-left: 9px;">Mensagens</span>
-                </div>
-                <div class="elementsHolder">
-                    <img src="assets/images/produtos-icon.svg" alt="">
-                    <span class="elementHudText" style="padding-left: 5px;">Produtos e Serviços</span>
-                </div>
+            <div class="elementosContainer" >
+                <div class="elementos">
+            <a class="hudA" href="#">Home</a>
+            <a class="hudA" href="#">Animais perdidos</a>
+            <a class="hudA" href="#">Animais em doação</a>
+            <a class="hudA" href="#">Notificações</a>
+            <a class="hudA" href="#">Mensagens</a>
+            <a class="hudA" style="margin-top: 10px;" href="#">Produtos e serviços</a>
             </div>
                 <div class="line"></div>
 
