@@ -57,7 +57,7 @@
                             <input class="formInput" placeholder="Insira a raça" type=" text" name="txtRacaPet" required>
                             <label class="formText">Idade</label>
                             <div class="idadePet">
-                                <input class="formInput" placeholder="Insira a idade" type="number" name="txtIdadePet" id="txtIdadePet" required>
+                                <input min="1" class="formInput" placeholder="Insira a idade" type="number" name="txtIdadePet" id="txtIdadePet" required>
                                 <select class="SelectDiaMesAno" name="slIdade" id="slIdade" required>
                                     <option value="n" selected disabled>Escolha</option>
                                     <option value="d">Dia (Dias)</option>
@@ -75,20 +75,6 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-<script>
-    $('.SelectDiaMesAno').on('change', function() {
-        switch (this.value) {
-            case 'd':
-                $("#txtIdadePet").attr('max', '59');
-                break;
-            case 'm':
-                $("#txtIdadePet").attr('max', '11');
-                break;
-            case 'y':
-                $("#txtIdadePet").attr('max', '2022');
-                break;
-        }
-    });
-</script>
+<script src="../../../assets/js/script-jquery.js"></script>
 
 </html>

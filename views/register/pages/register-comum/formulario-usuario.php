@@ -56,21 +56,30 @@
                         <label class="formText">Nome de usuário</label>
                     <input class="formInput" placeholder="Insira seu username"type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4" >
                         <div class="avisoNomeUsuario" id="avisoNomeUsuario">
-
+                            
                         </div>
                         <label class="formText">Senha</label>
                     <input class="formInput" placeholder="Insira sua melhor senha"type="password" name="txtPw" id="txtPw" required minlength="6" >
 
                         <label class="formText">Confirme sua senha</label>
                     <input class="formInput" placeholder="Confirme a senha"type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6" >
-                    <button class="formSubmit" type="submit">Continuar</button>
+                    <div class="caixaMostrarSenha">
+                        <input class="checkboxSenha" type="checkbox" id="mostrarSenha"> 
+                        <label class="formTextMostrarSenha">Mostrar Senha</label>
+                    </div>
+
+                    <button  id="submitUsuario" class="formSubmit" type="submit">Continuar</button>
                            
                     </form>
                 </div>
-                         
-                    <div class="cookieCadastro animate__bounce">
+                
+                <div id="senhaAviso" class="senhaAviso animate__bounce">
+                </div>
+
+                <div class="cookieCadastro animate__bounce">
                     <p class="animate__animated animate__tada "><?php echo @$_COOKIE['erro-cadastro'] ?></p>
-                    </div>
+                </div>
+
 
 
             </div>    

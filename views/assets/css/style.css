@@ -213,6 +213,27 @@ body {
   border: none;
 }
 
+.caixaMostrarSenha{
+  display: flex;
+  padding-top: 15px;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: baseline;
+}
+.checkboxSenha{
+  background: #ffffff;
+  mix-blend-mode: normal;
+  border: 1px solid #c1c1c1;
+  backdrop-filter: blur(40px);
+  border-radius: 50px;
+}
+.formTextMostrarSenha{
+  font-family: "Raleway Bold", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+}
 .cookieCadastro {
   position: absolute;
   margin-top: 685px;
@@ -221,6 +242,27 @@ body {
   font-family: "Raleway Bold", sans-serif;
   color: #db310c;
 }
+
+.senhaAviso {
+  display: flex;
+  align-items: center;
+  font-family: "Raleway Bold", sans-serif;
+}
+
+.senhaAvisoErrada {
+  display: flex;
+  align-items: center;
+  font-family: "Raleway Bold", sans-serif;
+  color: #db310c;
+}
+
+.senhaAvisoCerta {
+  display: flex;
+  align-items: center;
+  font-family: "Raleway Bold", sans-serif;
+  color: #3837a1;
+}
+
 
 .cookieCadastroEmpresa {
   position: absolute;
@@ -235,7 +277,20 @@ body {
   display: flex;
   align-items: center;
   font-family: "Raleway Bold", sans-serif;
+}
+
+.avisoNomeUsuarioInvalido{
+  display: flex;
+  align-items: center;
+  font-family: "Raleway Bold", sans-serif;
   color: #db310c;
+}
+
+.avisoNomeUsuarioValido{
+  display: flex;
+  align-items: center;
+  font-family: "Raleway Bold", sans-serif;
+  color: #3837a1;
 }
 
 /* PAGE CADASTRO DE FOTO */

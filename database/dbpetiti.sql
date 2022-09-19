@@ -20,12 +20,16 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dbpetiti`
 --
+CREATE DATABASE dbpetiti;
 
+USE dbpetiti;
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `tbcategoria`
 --
+
+
 
 CREATE TABLE `tbcategoria` (
   `idCategoria` int(11) NOT NULL,
