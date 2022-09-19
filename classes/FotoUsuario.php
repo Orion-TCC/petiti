@@ -1,5 +1,5 @@
 <?php
-require_once('/xampp/htdocs/projeto-Petiti/database/conexao.php');
+require_once('/xampp/htdocs/petiti/database/conexao.php');
 
 class FotoUsuario
 {
@@ -70,15 +70,15 @@ class FotoUsuario
         }
 
 
-        public function listarInfoFoto($id){
+        public function listarInfoFoto($id)
+        {
                 $con = Conexao::conexao();
                 $query = "SELECT nomeFoto, caminhoFoto from tbfotousuario WHERE idFotoUsuario = $id";
                 $resultado = $con->query($query);
 
                 $lista =  $resultado->fetchAll();
-               
-                return $lista;
 
+                return $lista;
         }
 
         public function update($update)
@@ -105,10 +105,10 @@ class FotoUsuario
                 $stmt->bindValue(1, $delete->getIdFotoUsuario());
                 $id = $delete->getIdFotoUsuario();
                 $infos = $delete->listarInfoFoto($id);
-                foreach ($infos as $linhas ) {
+                foreach ($infos as $linhas) {
                         $caminho = $linhas['caminhoFoto'];
                 }
-                $caminhoDelete = "/xampp/htdocs/projeto-petiti/".$caminho;
+                $caminhoDelete = "/xampp/htdocs/petiti/" . $caminho;
                 unlink($caminhoDelete);
 
                 $stmt->execute();
@@ -118,7 +118,7 @@ class FotoUsuario
         {
                 $con = Conexao::conexao();
                 $query = "SELECT caminhoFoto FROM `tbfotousuario` WHERE idFotoUsuario = (SELECT MAX(idFotoUsuario) FROM tbfotousuario WHERE idUsuario = $id)";
-                
+
                 $resultado = $con->query($query);
                 $lista = $resultado->fetchAll();
                 foreach ($lista as $linha) {

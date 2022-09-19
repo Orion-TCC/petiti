@@ -1,11 +1,11 @@
 let input = document.getElementById("inputTag");
-let imageName = document.getElementById("imageName")
+let imageName = document.getElementById("imageName");
 
-input.addEventListener("change", ()=>{
-    let inputImage = document.querySelector("input[type=file]").files[0];
+input.addEventListener("change", () => {
+  let inputImage = document.querySelector("input[type=file]").files[0];
 
-    imageName.innerText = inputImage.name;
-})
+  imageName.innerText = inputImage.name;
+});
 function preview() {
-    frame.src=URL.createObjectURL(event.target.files[0]);
+  frame.src = URL.createObjectURL(event.target.files[0]);
 }

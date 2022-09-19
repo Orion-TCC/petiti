@@ -1,72 +1,83 @@
 <?php
-require_once('/xampp/htdocs/projeto-Petiti/database/conexao.php');
-    class FotoPet{
+require_once('/xampp/htdocs/petiti/database/conexao.php');
+class FotoPet
+{
         private $idFotoPet;
         private $nomeFotoPet;
         private $caminhoFotoPet;
         private $pet;
 
-        
-        public function getPet(){
+
+        public function getPet()
+        {
                 return $this->pet;
         }
 
-       
-        public function setPet($pet){
+
+        public function setPet($pet)
+        {
                 $this->pet = $pet;
 
                 return $this;
         }
 
-      
-        public function getCaminhoFotoPet(){
+
+        public function getCaminhoFotoPet()
+        {
                 return $this->caminhoFotoPet;
         }
 
-        public function setCaminhoFotoPet($caminhoFotoPet){
+        public function setCaminhoFotoPet($caminhoFotoPet)
+        {
                 $this->caminhoFotoPet = $caminhoFotoPet;
 
                 return $this;
         }
 
-       
-        public function getNomeFotoPet(){
+
+        public function getNomeFotoPet()
+        {
                 return $this->nomeFotoPet;
         }
 
- 
-        public function setNomeFotoPet($nomeFotoPet){
+
+        public function setNomeFotoPet($nomeFotoPet)
+        {
                 $this->nomeFotoPet = $nomeFotoPet;
 
                 return $this;
         }
 
 
-        public function getIdFotoPet(){
+        public function getIdFotoPet()
+        {
                 return $this->idFotoPet;
         }
 
-        
-        public function setIdFotoPet($idFotoPet){
+
+        public function setIdFotoPet($idFotoPet)
+        {
                 $this->idFotoPet = $idFotoPet;
 
                 return $this;
         }
 
-        public function cadastrar($fotoPet){
+        public function cadastrar($fotoPet)
+        {
 
                 $con = Conexao::conexao();
 
                 $stmt = $con->prepare("INSERT INTO tbfotopet VALUES(DEFAULT, ?, ?, ?)");
-                
+
                 $stmt->bindValue(1, $fotoPet->getNomeFotoPet());
                 $stmt->bindValue(2, $fotoPet->getCaminhoFotoPet());
                 $stmt->bindValue(3, $fotoPet->getPet()->getIdPet());
                 $stmt->execute();
         }
 
-        public function delete($delete){
-             
+        public function delete($delete)
+        {
+
                 $con = Conexao::conexao();
 
                 $stmt = $con->prepare("DELETE FROM tbfotopet WHERE idFotoPet = ?");
@@ -76,27 +87,27 @@ require_once('/xampp/htdocs/projeto-Petiti/database/conexao.php');
                 foreach ($infos as $linhas) {
                         $caminho = $linhas['caminhoFoto'];
                 }
-                $caminhoDelete = "/xampp/htdocs/projeto-petiti/" . $caminho;
+                $caminhoDelete = "/xampp/htdocs/petiti/" . $caminho;
                 unlink($caminhoDelete);
 
                 $stmt->execute();
         }
 
-        public function update($update){
+        public function update($update)
+        {
                 $con = Conexao::conexao();
                 $stmt = $con->prepare("UPDATE `tbfotopet` 
                 SET `nomeFotoPet`= ?,
                 `caminhoFotoPet`= ?,
                 WHERE idFotoPet = ?");
-        
-                $stmt->bindValue(1,$update->getNomeFotoPet());
-                $stmt->bindValue(2,$update->getCaminhoFotoPet());
-                $stmt->bindValue(3,$update->getIdFotoPet());
 
-        
+                $stmt->bindValue(1, $update->getNomeFotoPet());
+                $stmt->bindValue(2, $update->getCaminhoFotoPet());
+                $stmt->bindValue(3, $update->getIdFotoPet());
+
+
                 $stmt->execute();
-
-            }
+        }
         public function listarInfoFoto($id)
         {
                 $con = Conexao::conexao();
@@ -107,4 +118,4 @@ require_once('/xampp/htdocs/projeto-Petiti/database/conexao.php');
 
                 return $lista;
         }
-    }
+}

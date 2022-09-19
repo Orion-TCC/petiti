@@ -1,5 +1,5 @@
 <?php
-require_once('/xampp/htdocs/projeto-Petiti/database/conexao.php');
+require_once('/xampp/htdocs/petiti/database/conexao.php');
 require_once('FotoPet.php');
 class Pet
 {

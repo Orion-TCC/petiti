@@ -231,6 +231,13 @@ body {
   color: #db310c;
 }
 
+.avisoNomeUsuario{
+  display: flex;
+  align-items: center;
+  font-family: "Raleway Bold", sans-serif;
+  color: #db310c;
+}
+
 /* PAGE CADASTRO DE FOTO */
 
 .holderFormularioFoto {

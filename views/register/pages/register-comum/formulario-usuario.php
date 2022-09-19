@@ -18,6 +18,8 @@
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="../../../assets/js/script-jquery.js" async></script> 
     <script src="../../../assets/js/script.js" async></script>
     </head>
 <body>
@@ -53,7 +55,9 @@
 
                         <label class="formText">Nome de usuário</label>
                     <input class="formInput" placeholder="Insira seu username"type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4" >
+                        <div class="avisoNomeUsuario" id="avisoNomeUsuario">
 
+                        </div>
                         <label class="formText">Senha</label>
                     <input class="formInput" placeholder="Insira sua melhor senha"type="password" name="txtPw" id="txtPw" required minlength="6" >
 
