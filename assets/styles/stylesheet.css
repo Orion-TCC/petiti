@@ -29,6 +29,9 @@ input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
 input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
 
 /* GERAL */
+a{
+  text-decoration: none;
+}
 
 html, body {
   scroll-behavior: smooth;
@@ -503,10 +506,34 @@ justify-content: center;
   flex-direction: column;
 }
 
-.elementos{
-padding-left: 27%;
-padding-top: 40px;
+
+.elementosContainer{
+display: flex;
+flex-direction: column;
+justify-self: center;
+align-items: center;
 }
+.elementos{
+  width: fit-content;
+  display: flex; 
+  flex-direction: column;  
+  font-family: 'Raleway Bold'; 
+  font-size: 25px; 
+  align-self: end; 
+  margin: 40px 20px 30px 0px ;
+}
+
+
+.hudA:hover{
+  color: #3837A1;
+}
+.hudA{
+  margin-block: 10px; 
+  color: #000000;
+  transition: 0,5s;
+}
+
+
 
 .elementHudText{
   font-family: 'Raleway Bold';
@@ -704,7 +731,7 @@ padding-top: 40px;
   height: 0px;
   border: 0.5px solid rgba(153, 152, 211, 1);
   margin-left: 20%;
-  margin-block: 20px;
+
 }
 
 .botaoCriarPost{
