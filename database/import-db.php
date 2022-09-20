@@ -1,5 +1,5 @@
 <?php
-$connection = mysqli_connect('localhost','root','','dbpetiti');
+$connection = mysqli_connect('localhost','root','','test');
 $filename = 'dbpetiti.sql';
 $handle = fopen($filename,"r+");
 $contents = fread($handle,filesize($filename));
