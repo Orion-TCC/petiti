@@ -14,7 +14,7 @@
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
-    <link rel="icon" href="../..//petiti/views/assets/img/logo-icon.svg">
+    <link rel="icon" href="/petiti/views/assets/img/logo-icon.svg">
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
@@ -44,7 +44,7 @@
                     </div>
 
                     <div>
-                        <img src="../..//petiti/views/assets/img/logo-icon-achatada.svg" alt="">
+                        <img src="/petiti/views/assets/img/logo-icon-achatada.svg" alt="">
                     </div>
                 </div>
             </div>

@@ -19,6 +19,6 @@ if ($msg == "Bem vindo.") {
     header('location: ../../feed');
     $cookie->criarCookie('retorno-login', $msg, 2);
 }else {
-    header('location: /login');
+    header('location: /petiti/login/');
     $cookie->criarCookie('retorno-login', $msg, 2);
 }

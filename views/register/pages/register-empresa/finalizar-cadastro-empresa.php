@@ -37,13 +37,13 @@ unset($_SESSION['id-cadastro']);
                         <span>Pelo visto tudo foi preenchido. Finalize seu cadastro e explore a <span style="color: #3837A1;">pet iti</span>. Insira seus produtos/serviços e interaja com petlovers (clientes)!</span>
                     </div>
                     <div style="margin-bottom: 20px;">
-                        <img src="../..//petiti/views/assets/img/ilustração-sacolinhas.svg" alt="">
+                        <img src="/petiti/views/assets/img/ilustração-sacolinhas.svg" alt="">
                     </div>
                     <div>
-                        <a class="botaoFinalizar" href="../../../login/login.php">Finalizar</a>
+                        <a class="botaoFinalizar" href="/petiti/login">Finalizar</a>
                     </div>
                     <div>
-                        <img class="logoPrincipalFinalizarForm" src="../..//petiti/views/assets/img/logo-principal-achatada.svg" alt="">
+                        <img class="logoPrincipalFinalizarForm" src="/petiti/views/assets/img/logo-principal-achatada.svg" alt="">
                     </div>
                 </div>
             </div>

@@ -36,7 +36,7 @@
 
                     <img class="loginLogo" src="/petiti/views/assets/img/logo_principal.svg" alt="">
 
-                    <form action="verificaLogin.php" method="POST">
+                    <form action="/petiti/views/login/verificaLogin.php" method="POST">
                         <div class="loginInputHolder">
                             <label class="formTextLogin">Nome de usúario ou email</label>
                             <input class="formInputLogin" name="txtLoginEmail" placeholder="Nome de usuário ou email" required minlength="4">
