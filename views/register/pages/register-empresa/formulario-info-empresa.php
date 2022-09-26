@@ -11,17 +11,17 @@
     <!-- styles -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="/petiti/views/assets/css/style.css">
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
-    <link rel="icon" href="../../../assets/img/logo-icon.svg">
+    <link rel="icon" href="/petiti/views/assets/img/logo-icon.svg">
 
     <!--script-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
-    <script src="../../../assets/js/script.js" async></script>
-    <script src="../../../assets/js/cep.js" async></script>
+    <script src="/petiti/views/assets/js/script.js"></script>
+    <script src="/petiti/views/assets/js/cep.js"></script>
 </head>
 
 <body>
@@ -64,13 +64,13 @@
 
                             <div class="CidadeEUFHolder">
                                 <div style="width: 380px;">
-                                <label class="formText">Cidade</label>
-                                <input class="formInput" type="text" name="txtCidadeEmpresa" id="cidade" required minlength="6">
+                                    <label class="formText">Cidade</label>
+                                    <input class="formInput" type="text" name="txtCidadeEmpresa" id="cidade" required minlength="6">
                                 </div>
-                                
+
                                 <div style="width: 160px; margin-left: 20px;">
-                                <label class="formText">UF</label>
-                                <input class="formInput" type="text" name="txtUfEmpresa" id="uf" required minlength="6">
+                                    <label class="formText">UF</label>
+                                    <input class="formInput" type="text" name="txtUfEmpresa" id="uf" required minlength="6">
                                 </div>
                             </div>
                             <button class="formSubmit" type="submit">Continuar</button>

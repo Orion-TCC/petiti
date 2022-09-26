@@ -5,6 +5,7 @@
 unset($_SESSION['id-cadastro']);
 unset($_SESSION['id-cadastro-pet']);
 ?>
+
 <head>
     <!-- HTML base -->
     <meta charset="UTF-8">
@@ -14,11 +15,11 @@ unset($_SESSION['id-cadastro-pet']);
 
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="/petiti/views/assets/css/style.css">
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
-    <link rel="icon" href="../../../assets/img/logo-icon.svg">
+    <link rel="icon" href="/petiti/views/assets/img/logo-icon.svg">
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
@@ -37,13 +38,13 @@ unset($_SESSION['id-cadastro-pet']);
                         <span>Pelo visto está tudo completo agora, finalize seu cadastro e explore a <span style="color: #3837A1;">pet iti</span> e tudo que nós temos a oferecer! Interaja com petlovers igual a você</span>
                     </div>
                     <div>
-                        <img src="../../../assets/img/calopsita.svg" alt="">
+                        <img src="../..//petiti/views/assets/img/calopsita.svg" alt="">
                     </div>
                     <div>
                         <a class="botaoFinalizar" href="../../../login/login.php">Finalizar</a>
                     </div>
                     <div>
-                        <img class="logoPrincipalFinalizarForm" src="../../../assets/img/logo-principal-achatada.svg" alt="">
+                        <img class="logoPrincipalFinalizarForm" src="../..//petiti/views/assets/img/logo-principal-achatada.svg" alt="">
                     </div>
                 </div>
             </div>

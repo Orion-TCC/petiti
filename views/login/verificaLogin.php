@@ -16,9 +16,9 @@ $msg = $usuario->login($login_email, $senha);
 
 echo $msg;
 if ($msg == "Bem vindo.") {
-    header('location: ../../feed.php');
+    header('location: ../../feed');
     $cookie->criarCookie('retorno-login', $msg, 2);
 }else {
-    header('location: login.php');
+    header('location: /login');
     $cookie->criarCookie('retorno-login', $msg, 2);
 }

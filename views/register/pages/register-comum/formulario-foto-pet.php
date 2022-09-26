@@ -10,15 +10,15 @@
 
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="../../../assets/css/style.css">
+    <link rel="stylesheet" href="/petiti/views/assets/css/style.css">
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
-    <link rel="icon" href="../../../assets/img/logo-icon.svg">
+    <link rel="icon" href="/petiti/views/assets/img/logo-icon.svg">
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
-    <script src="../../../assets/js/script.js" async></script>
+    <script src="/petiti/views/assets/js/script.js"></script>
 </head>
 
 <body>

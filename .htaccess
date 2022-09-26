@@ -1,0 +1,11 @@
+RewriteEngine On
+
+RewriteRule ^home index.php [NC,L]
+RewriteRule ^feed feed.php [NC,L]
+RewriteRule ^login views/login/login.php [NC,L]
+
+RewriteRule ^cadastro-usuario views/register/pages/register-comum/formulario-usuario.php [NC,L]
+RewriteRule ^foto-usuario views/register/pages/register-comum/formulario-foto.php [NC,L]
+
+RewriteRule ^inicio-pet views/register/pages/register-comum/formulario-pet1.php [NC,L]
+RewriteRule ^formulario-pet views/register/pages/register-comum/formulario-pet2.php [NC,L]

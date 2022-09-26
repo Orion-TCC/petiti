@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet iti</title>
-    <script src="js/script.js" async></script>
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="/petiti/views/assets/css/style.css">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
             <div class="fundo1">
                 <div class="holderETU">
                     <div class="logoHolder">
-                        <img class="logo" src="../../assets/img/logo_principal.svg" alt="">
+                        <img class="logo" src="/petiti/views/assets/img/logo_principal.svg" alt="">
                     </div>
 
                     <div class="textHolder">
@@ -24,8 +24,8 @@
                     </div>
 
                     <div class="opcoesHolder">
-                        <a href="register-comum/formulario-usuario.php"><img src="../../assets/img/tutor.svg" alt=""></a>
-                        <a href="register-empresa/formulario-usuario-empresa.php"><img src="../../assets/img/empresa.svg" alt=""></a>
+                        <a href="register-comum/formulario-usuario.php"><img src="/petiti/views/assets/img/tutor.svg" alt=""></a>
+                        <a href="register-empresa/formulario-usuario-empresa.php"><img src="/petiti/views/assets/img/empresa.svg" alt=""></a>
                     </div>
                 </div>
             </div>
