@@ -33,7 +33,7 @@
                         </span>
                     </div>
 
-                    <form enctype="multipart/form-data" action="controllers/controller-foto.php" method="POST" class="formElementsHolder">
+                    <form enctype="multipart/form-data" action="/petiti/views/register/pages/register-comum/controllers/controller-foto.php" method="post" class="formElementsHolder">
 
                         <label class="subTituloFormFoto">
                             Foto

@@ -4,16 +4,19 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 require_once("classes/Usuario.php");
-require_once("classes/Usuario.php");
+require_once("classes/FotoUsuario.php");
 require_once("classes/TipoUsuario.php");
 require_once("classes/Cookies.php");
 
 use Slim\Factory\AppFactory;
 use Slim\Exception\NotFoundException;
+use Slim\Http\UploadedFile;
 
 require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
+
+
 
 $basePath = str_replace('/' . basename(__FILE__), '', $_SERVER['SCRIPT_NAME']);
 $app = $app->setBasePath($basePath);
@@ -87,6 +90,7 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
 });
 
 
+
 $app->get('/usuario/delete/{id}', function (Request $request, Response $response, array $args) {
     $id = $args['id'];
     $usuario = new Usuario();
@@ -104,6 +108,5 @@ $app->get('/usuario/update/{id}/{campo}/{valor}', function (Request $request, Re
     $usuario->update($id, $campo, $valor);
     return $response;
 });
-
 
 $app->run();

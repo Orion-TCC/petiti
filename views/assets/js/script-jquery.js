@@ -1,5 +1,4 @@
 // Validar nome de usuário
-
 $("#txtLoginUsuario").keyup(function () {
   var regex = new RegExp("^[a-z0-9]+$");
   var login = $(this).val();
@@ -45,7 +44,7 @@ $("#txtPwConfirm").keyup(function () {
 
 //mostrarSenhas
 
-$("#mostrarSenha").change(function (e) { 
+$("#mostrarSenha").change(function () {
   if ($("#mostrarSenha").is(":checked")) {
     $("#txtPw").prop("type", "text");
     $("#txtPwConfirm").prop("type", "text");
