@@ -50,6 +50,11 @@ body{
   padding: 0;
 }
 
+::-webkit-scrollbar {
+  
+}
+
+
 /* NAV */
 #navbar {
   position: fixed;
@@ -471,210 +476,90 @@ body{
 
 /* PAGE FEED */
 
-.bodyFeed{
-display: flex; 
-justify-content: center;
-}
-
 .holderFeed{
- width:1680px; 
- height: 100vh; 
- display: flex; 
- flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr );
+  width: 100vw;
+  height: 100vh;
 }
 
-
-
-.hudHolder{
-  width: 25%; 
-  height: 100%; 
-  position: fixed;
-  left: 0;
+.leftBarHolder{
+    grid-column: 2 span / 2 span;
+    width: 100%;
+    height: 100%;
 }
 
-.hud{
-  width: 100%; 
-  height: 100%; 
+.leftBar{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
+  height: 100%;
+  padding-left: 30%;
 }
 
-.elementsHud{
-  display: flex;
-  flex-direction: column;
+.imgLogoFeed{
+  width: 210px;
+  height: 100px;
+  margin-block: 25px;
+  padding-left: 10%;
 }
 
-
-.elementosContainer{
-display: flex;
-flex-direction: column;
-justify-self: center;
-align-items: center;
-}
-.elementos{
-  width: fit-content;
-  display: flex; 
-  flex-direction: column;  
-  font-family: 'Raleway Bold'; 
-  font-size: 25px; 
-  align-self: end; 
-  margin: 40px 20px 30px 0px ;
-}
-
-
-.hudA:hover{
-  color: #3837A1;
-}
-.hudA{
-  margin-block: 10px; 
-  color: #000000;
-  transition: 0,5s;
-}
-
-
-
-.elementHudText{
+.leftBarMenu a {
   font-family: 'Raleway Bold';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 25px;
-  line-height: 29px;
-  color: #000000;
+  font-size: 28px;
+  margin-block: 10px;
 }
 
-.elementsHolder{
-  padding-block: 15px;
+.leftBarMenu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+padding-bottom: 25px;  
+padding-left: 10%;
+
+margin-bottom: 30px;
+
+  border-style: solid;
+  border-bottom-width: 0.7px;
+  border-left-width: 0px;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-color: black;
+  
 }
 
 
+.botaoCPost{
+  margin-inline: 60px;
+  height: 50px;
+  background: rgb(241, 241, 139);
+  border-radius: 12px;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: gray;
+}
 
 .postsHolder{
-  width: 50%; 
-  height: fit-content; 
-  background-color:#E0F1F4;
-  margin-left: 420px;
-  z-index: 99;
-
-}
-
-.posts{
-  width: 100%; 
-  height: fit-content; 
-
-}
-.elementosPosts{
-  width: 93%;
+  background-color: #000000;
+  grid-column: 3 span / 3 span;
+  width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-left: 60px;
-  padding-top: 30px;
 }
 
-.barraPesquisaFeed{
-  width: 601px;
-  height: 49px;
-  background: #FFFFFF;
-  border: 1px solid #9998D3;
-  border-radius: 18px;
-  margin-right: 115px;
-  text-indent:63px;
-  z-index: 100;
-  
-  
-  font-family: 'Raleway Bold';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  color: #000000;
-
-  background-image: url(../images/lupa-icon.svg);
-  background-repeat: no-repeat;
-  background-position: 30px 13px;
-
+.rightBarHolder{
+  background-color: #000000;
+  grid-column:  2 span / 2 span;
+  width: 100%;
+  height: 100%;
 }
 
-#barraPesquisa{
-  position: fixed; 
-  z-index: 100; 
-  transition: 1s;
-  margin-right: 725px;
-}
-
-.barraPesquisaFeed::placeholder{
-  color: #000000;
-}
-
-.postarFeed{
-  width: 663px;
-  height: 101px;
-  background: #FFFFFF;
-  border-radius: 20px;
-  margin-right: 115px;
-  margin-bottom: 20px;
-  margin-top: 80px;
-
-  background-image: url('../images/postar-feed.svg');
-}
-
-.textoPostarFeed{
-  font-family: 'Raleway Bold';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-
-  color: #000000;
-}
-.placeHolderPostarFeedBotao{
-  width: 115px;
-  height: 30px;
-  margin-left: 80%;
-  top: -20px;
-  position: relative;
-
-  background: #FBF793;
-  box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.25);
-  border-radius: 15px;
-
-  font-family: 'Raleway Bold';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  color: #000000;
-}
-
-
-.placeholderPost{
-  display: flex;
-  flex-direction: column;
-
-  width: 589px;
-  height: 761px;
-  background: #FFFFFF;
-  border-radius: 20px;
-  margin-right: 115px;
-  margin-block: 20px;
-
-  background-image: url('../images/placeholder-Post.svg');
-}
 
 
 
 .functionHolder{
   width: 25%;
   height: 100%; 
-  position: fixed;
   right: 0;
 }
 
@@ -789,3 +674,4 @@ font-size: 20px;
 line-height: 23px;
 color: #565656;
 }
+
