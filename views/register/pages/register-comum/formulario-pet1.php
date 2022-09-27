@@ -35,8 +35,8 @@
 
 
                     <div class="escolhasHolder">
-                        <a class="escolha1" href="formulario-pet2.php">Sim! Continuar por favor</a>
-                        <a class="escolha2" href="finalizar-forms.php">Agora não...</a>
+                        <a class="escolha1" href="/petiti/formulario-pet">Sim! Continuar por favor</a>
+                        <a class="escolha2" href="/petiti/final-usuario">Agora não...</a>
                     </div>
 
                     <div class="infoFormHolder">

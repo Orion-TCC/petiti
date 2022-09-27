@@ -41,7 +41,7 @@ unset($_SESSION['id-cadastro-pet']);
                         <img src="petiti/views/assets/img/calopsita.svg" alt="">
                     </div>
                     <div>
-                        <a class="botaoFinalizar" href="login/login.php">Finalizar</a>
+                        <a class="botaoFinalizar" href="/petiti/login">Finalizar</a>
                     </div>
                     <div>
                         <img class="logoPrincipalFinalizarForm" src="petiti/views/assets/img/logo-principal-achatada.svg" alt="">
