@@ -48,6 +48,7 @@ body{
 * {
   margin: 0;
   padding: 0;
+
 }
 
 ::-webkit-scrollbar {
@@ -478,77 +479,149 @@ body{
 
 .holderFeed{
   display: grid;
-  grid-template-columns: repeat(7, 1fr );
+  grid-template-columns: repeat(8, 1fr );
   width: 100vw;
   height: 100vh;
+  
 }
 
 .leftBarHolder{
     grid-column: 2 span / 2 span;
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: end;
+    
 }
 
 .leftBar{
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-left: 30%;
+  width: fit-content;
+  align-items: center;
 }
 
 .imgLogoFeed{
   width: 210px;
   height: 100px;
   margin-block: 25px;
-  padding-left: 10%;
+  align-self: flex-start;
 }
 
 .leftBarMenu a {
   font-family: 'Raleway Bold';
   font-size: 28px;
   margin-block: 10px;
+  color: black;
+  transition: 0.1s;
+}
+
+.leftBarMenu a:hover {
+  color: rgba(56, 55, 161, 1);
+  
 }
 
 .leftBarMenu {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 20vw;
+  height: 100%;
+  align-items: center;
+  align-self: end;
 
-padding-bottom: 25px;  
-padding-left: 10%;
+}
 
-margin-bottom: 30px;
+.innerLeftBarMenu{
+  display: flex; 
+  flex-direction: column; 
+  width: 346px;
+  height: 100%;
+  justify-content: space-between;
+  align-self: end;
+}
 
-  border-style: solid;
-  border-bottom-width: 0.7px;
-  border-left-width: 0px;
-  border-top-width: 0px;
-  border-right-width: 0px;
-  border-bottom-color: black;
+
+.line{
+  margin: 15px 0 30px 0;
+ height: 1px;
+}
+
+.botaoCPost{
+  height: 60px;
+  width: 300px;
+  background: rgb(241, 241, 139);
+  border-radius: 30px;
+
+  border: 1px solid rgb(128, 128, 128);
+
+  font-family: 'Raleway Bold';
+  font-size: 23px;
   
 }
 
-
-.botaoCPost{
-  margin-inline: 60px;
-  height: 50px;
-  background: rgb(241, 241, 139);
-  border-radius: 12px;
-
-  border-width: 1px;
-  border-style: solid;
-  border-color: gray;
+.botaoCPost:hover{
+  background: rgb(241, 241, 100);
+  cursor: pointer;
+  transition: 0.1s;
 }
 
+
+
+
+.userElementos{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 300px;
+  padding:7px 0 7px 10px;
+  border-radius: 50px;
+}
+
+.userElementos:hover{
+  background-color: rgba(231, 233, 234, 0.7);
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+  .imagemUser{
+    width: 60px; 
+    height: 60px; 
+    border-radius: 100px;  
+    border: 2px solid #a0bbc0;
+    background-color: #bad5db;
+    }
+
+  .textNomeUsuario{
+    font-family: 'Raleway Bold';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    color: #000000;
+    }
+    
+    .textTagUsuario{
+    font-family: 'Raleway Regular';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 23px;
+    color: #565656;
+    }
+    
+
+
+
 .postsHolder{
-  background-color: #000000;
-  grid-column: 3 span / 3 span;
+  background-color: #E0F1F4;
+  grid-column: 4 span / 4 span;
   width: 100%;
   height: 100%;
 }
 
 .rightBarHolder{
-  background-color: #000000;
   grid-column:  2 span / 2 span;
   width: 100%;
   height: 100%;
@@ -557,121 +630,7 @@ margin-bottom: 30px;
 
 
 
-.functionHolder{
-  width: 25%;
-  height: 100%; 
-  right: 0;
-}
-
-.function{
-  width: 100%;
-  height: 100%; 
-
-}
-
-.placeHolderFeedAnimalPerdido{
-  display: flex;
-  flex-direction: column;
-
-  width: 390px;
-  height: 300px;
-  background: #FFFFFF;
-  border-radius: 20px;
-  margin: 10px;
-  margin-block: 20px;
-
- 
-
-}
-.placeholderCategorias{
-  display: flex;
-  flex-direction: column;
-
-  width: 382px;
-  height: 241px;
-  background: #FFFFFF;
-  border-radius: 20px;
-  margin: 10px;
-  margin-block: 20px;
-}
-
-.placeholderCopyright{
-  display: flex;
-  flex-direction: column;
-
-  width: 385px;
-  height: 47px;
-  background: #FFFFFF;
-  border-radius: 20px;
-  margin: 10px;
-  margin-block: 20px;
-}
 
 
 
-
-
-.line{
-  width: 400px;
-  height: 0px;
-  border: 0.5px solid rgba(153, 152, 211, 1);
-  margin-left: 20%;
-
-}
-
-.botaoCriarPost{
-  width: 292px;
-  height: 60px;
-  background: #FBF793;
-  border: 1px solid #9998D3;
-  border-radius: 15px;
-  margin-left: 27%;
-  margin-top: 10px;
-
-  font-family: 'Raleway Bold';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  color: #000000;
-}
-
-.userElementos{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-block: 20px;
-    padding-right: 30px;
-}
-
-.imagemUser{
-  width: 75px; 
-  height: 75px; 
-  border-radius: 100px;  
-
-  border: 2px solid rgba(0, 0, 0, 1);
-}
-
-.textNomeUsuario{
-  font-family: 'Raleway Bold';
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 23px;
-color: #000000;
-}
-
-.textLoginUsuario{
-  font-family: 'Raleway Bold';
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 23px;
-color: #565656;
-}
 
