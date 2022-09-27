@@ -51,7 +51,7 @@
                     </form>
 
                     <span class="textoLogin">
-                        Não tem uma conta? <a href="../register/pages/escolha-tipo-usuario.php" class="textoLoginAhref"> Cadastre-se</a>
+                        Não tem uma conta? <a href="/petiti/tipo-usuario" class="textoLoginAhref"> Cadastre-se</a>
                     </span>
 
                     <span class="recuperarSenha">

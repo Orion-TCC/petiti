@@ -24,8 +24,8 @@
                     </div>
 
                     <div class="opcoesHolder">
-                        <a href="register-comum/formulario-usuario.php"><img src="/petiti/views/assets/img/tutor.svg" alt=""></a>
-                        <a href="register-empresa/formulario-usuario-empresa.php"><img src="/petiti/views/assets/img/empresa.svg" alt=""></a>
+                        <a href="/petiti/cadastro-usuario"><img src="/petiti/views/assets/img/tutor.svg" alt=""></a>
+                        <a href="/petiti/cadastro-empresa"><img src="/petiti/views/assets/img/empresa.svg" alt=""></a>
                     </div>
                 </div>
             </div>

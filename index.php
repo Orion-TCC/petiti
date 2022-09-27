@@ -42,8 +42,8 @@ session_destroy();
             </div>
 
             <div>
-                <a href="views/login/login.php" class="navbarElement">Entrar</a>
-                <a href="views/register/pages/escolha-tipo-usuario.php" class="navbarElementBotao">Cadastre-se</a>
+                <a href="/petiti/login/" class="navbarElement">Entrar</a>
+                <a href="/petiti/tipo-usuario" class="navbarElementBotao">Cadastre-se</a>
             </div>
         </nav>
     </header>
@@ -172,7 +172,7 @@ session_destroy();
 
         <div class="FooterHolder2">
             <a href="#" class="FooterElement">Entrar</a>
-            <a href="views/register/pages/escolha-tipo-usuario.php" class="FooterElement">Cadastre-se</a>
+            <a href="/petiti/tipo-usuario" class="FooterElement">Cadastre-se</a>
         </div>
         <div class="FooterHolder3">
             <span class="FooterElement">Copyright © Orion - 2022. Todos os direitos reservados.</span>
