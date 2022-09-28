@@ -1,193 +1,225 @@
 <?php
-session_start();
-session_destroy();
-?>
 
-<!DOCTYPE php>
-<html lang="pt-br">
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
-<head>
-    <!-- HTML base -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A Orion é uma empresa especializada em softwares para empresas de pequeno e médio porte.">
+// require_once("classes/TipoUsuario.php");
+// require_once("classes/Usuario.php");
+// require_once("classes/UsuarioEndereco.php");
+// require_once("classes/FotoUsuario.php");
+// require_once("classes/Cookies.php");
+// require_once("classes/Pet.php");
+// require_once("classes/FotoPet.php");
+//
+//
 
-    <!-- styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="assets/styles/stylesheet.css">
+foreach (glob("classes/*") as $filename) {
+    require_once $filename;
+}
 
-    <!-- título da pág e icone (logo) -->
-    <title>Pet iti - A rede social para petlovers</title>
-    <link rel="icon" href="assets/images/logo-icon.svg">
+use Slim\Factory\AppFactory;
+use Slim\Exception\NotFoundException;
+use Slim\Http\UploadedFile;
 
-    <!--script-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
-</head>
+require __DIR__ . '/vendor/autoload.php';
 
+$app = AppFactory::create();
 
-<body>
-    <header id="home">
-        <nav id="navbar">
-            <div>
-                <a href="#"> <img class="logoNavbar" src="assets/images/logo_principal.svg"></a>
-            </div>
+$basePath = str_replace('/' . basename(__FILE__), '', $_SERVER['SCRIPT_NAME']);
+$app = $app->setBasePath($basePath);
 
-            <div>
-                <a href="#postagens" class="navbarElement">Postagens</a>
-                <a href="#networking" class="navbarElement">Networking</a>
-                <a href="#parcerias" class="navbarElement">Parcerias</a>
-            </div>
+$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
+    $name = $args['name'];
+    $response->getBody()->write("Hello, $name");
+    return $response;
+});
 
-            <div>
-                <a href="/petiti/login/" class="navbarElement">Entrar</a>
-                <a href="/petiti/tipo-usuario" class="navbarElementBotao">Cadastre-se</a>
-            </div>
-        </nav>
-    </header>
+// Usuario
 
+$app->get('/usuarios', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+   
+    $json = "{\"usuarios\":" . json_encode($lista = $usuario->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
 
-    <main class="container-content">
-        <section id="primeiraPartePage">
-            <div class="holderPrimeiraPage">
-                <div class="descEilus">
-                    <div class="descHolder">
-                        <span class="desc"> O MELHOR LUGAR PARA PETLOVERS QUE NEM VOCÊ! </span>
-                        <span class="desc2">Uma rede social capaz de ampliar o networking entre petlovers e empresas voltadas para animais.</span>
-                    </div>
+$app->get('/usuario/{id}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $usuario = new Usuario();
 
-                    <div>
-                        <img src="assets/images/ilustração - pc.svg" alt="">
-                    </div>
-                </div>
-            </div>
-        </section>
+    $json = "{\"usuario\":" . json_encode($lista = $usuario->listarUsuario($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
 
-        <section id="postagens">
-            <div class="holderSegundaPage">
-                <div class="textinhoHolder">
-                    <div class="textinho">
-                        <span class="textin">Poste fotos dos momentos mais fofos dos seus pets!</span>
-                    </div>
-                </div>
+$app->post('/usuario/add', function (Request $request, Response $response, array $args) {
+    $data = $request->getParsedBody();
+    $usuario = new Usuario();
+    $tipoUsuario = new TipoUsuario();
+    $cookie = new Cookies();
 
+    // Verficação 
+    $email = $_POST['txtEmailUsuario'];
+    $email = strtolower ($email);
+    $senha = $_POST['txtPw'];
+    $senhaConfirmacao = $_POST['txtPwConfirm'];
 
-                <div class="textoEpost">
-                    <div>
-                        <img class="imgPosts" src="assets/images/posts.svg" alt="">
-                    </div>
+    $validacaoEmail = $usuario->validarEmail($email);
+    if ($validacaoEmail == false) {
+        $cookie->criarCookie("erro-cadastro", "Email Inválido", 1);
+        header('location: /petiti/cadastro-usuario');
+    } elseif ($senha <> $senhaConfirmacao) {
+        $cookie->criarCookie("erro-cadastro", "Senhas não coincindem", 1);
+        header('location: /petiti/cadastro-usuario');
+    } else {
+        $usuario->setNomeUsuario($_POST['txtNomeUsuario']);
+        $usuario->setLoginUsuario($_POST['txtLoginUsuario']);
+        $usuario->setEmailUsuario($_POST['txtEmailUsuario']);
+        $usuario->setSenhaUsuario($_POST['txtPw']);
+        $usuario->setVerificadoUsuario(0);
+        $tipoUsuario->setIdTipoUsuario(1);
+        $usuario->setTipoUsuario($tipoUsuario);
 
-                    <div class="divTexto">
-                        <span class="textin2titulo">Sua mais nova rede social, apenas para pets</span>
-                        <span class="textin2"> Faça posts de seus melhores momentos com seu melhor amigo e explore seu novo vício. </span>
-                        <span class="textin2">Filtre suas publicações e pesquisas para ficarem de acordo com o seu gosto! Assim como irá facilitar que seu círculo de petmigos tenha petlovers com os mesmos interesses que você.</span>
-                    </div>
-                </div>
+        // Cadastro
+        $retorno = $usuario->cadastrar($usuario);
+        $msg = $retorno["msg"];
+        if ($msg == "Cadastro realizado com sucesso") {
+            $id = $retorno["id"];
+            @session_start();
+            $_SESSION['id-cadastro'] = $id;
 
-            </div>
-        </section>
-
-        <section id="networking">
-            <div class="holderTerceiraPage">
-                <div class="faixaNetworking">
-                    <div class="networkingTextoHolder">
-                        <span class="networkingTitulo">Networking</span>
-                        <span class="networkingTexto">Além de postar fotos, interaja com novas pessoas e compartilhe conhecimento.</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="parcerias">
-            <div class="holderQuartaPage">
-                <div class="lojinhaHolder">
-                    <div class="lojinhaTextTituloHolder">
-                        <div>
-                            <span class="lojinhaTextTitulo">Além de posts, veja nossas parcerias com petshops da sua região.</span>
-                        </div>
-
-                        <div>
-                            <span class="lojinhaTextSubTitulo">Tudo que seu pet precisa</span>
-                        </div>
-
-                        <div class="lojinhaTextHolder">
-                            <span class="lojinhaText">Veja se o <span class="lojinhaTextStyle">petshop</span>, <span class="lojinhaTextStyle">casa de ração</span> ou até <span class="lojinhaTextStyle">mesmo banho e tosa</span> da sua região criou um perfil na nossa rede social e seja capaz de ver os produtos que ele oferece.</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <img class="lojinhaImg" src="assets/images/lojinha - petshop.svg" alt="">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="QuintaPartePage">
-
-            <div class="holderQuintaPage">
-                <img class="leandro" src="assets/images/leandro.svg" alt="">
-
-
-                <div class="funcionalidadesHolder">
-                    <div class="baloesFuncionalidades">
-
-                        <div class="balaoFuncionalidade">
-                            <img class="iconeFuncionalidade" src="assets/images/coração quebrado.svg" alt="">
-                            <span class="textoFuncionalidade">Animais perdidos</span>
-                        </div>
-
-                        <div class="balaoFuncionalidade">
-                            <img class="iconeFuncionalidade" src="assets/images/caixa.svg" alt="">
-                            <span class="textoFuncionalidade">Animais em adoção</span>
-                        </div>
-
-                    </div>
-
-                    <div class="textosFuncionalidades">
-                        <span class="funcionalidadesTitulo">Funcionalidades especiais </span>
-                        <span class="funcionalidadesSubTitulo">Feeds exclusivos</span>
-                        <span class="funcionalidadesTextos">Muitas vezes posts sobre animais perdidos e animas em adoção são ignorados, então, resolvemos fazer feeds exclusivos para esses tópicos, para que eles tenham o engajamento que precisam e merecem.</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    </main>
-
-    <footer class="container-footer">
-
-        <a href="#">
-            <img class="imgSetaTopo" src="assets/images/setinha-topo.svg" alt="">
-        </a>
-
-        <div class="FooterHolder">
-            <a href="#postagens" class="FooterElement">Postagens</a>
-            <a href="#networking" class="FooterElement">Networking</a>
-            <a href="#parcerias" class="FooterElement">Parcerias</a>
-            <a href="#" class="FooterElement">Sobre a empresa</a>
-        </div>
-
-        <div class="FooterHolder2">
-            <a href="#" class="FooterElement">Entrar</a>
-            <a href="/petiti/tipo-usuario" class="FooterElement">Cadastre-se</a>
-        </div>
-        <div class="FooterHolder3">
-            <span class="FooterElement">Copyright © Orion - 2022. Todos os direitos reservados.</span>
-        </div>
-    </footer>
-
-</body>
-<script>
-    $(window).scroll(function() {
-        if ($(window).scrollTop() >= 50) {
-            $('#navbar').css('background-color', 'rgba(255, 255, 255, 0.3)');
+            header('location: /petiti/foto-usuario');
         } else {
-            $('#navbar').css('background', 'transparent');
+            $cookie->criarCookie("erro-cadastro", $msg, 1);
+            header('location: /petiti/cadastro-usuario');
         }
-    });
-</script>
+    }
+});
 
-</html>
+$app->get('/usuario/delete/{id}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($id);
+    $usuario->delete($usuario);
+    return $response;
+});
+
+$app->get('/usuario/update/{id}/{campo}/{valor}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $campo = $args['campo'];
+    $valor = $args['valor'];
+    $usuario = new Usuario();
+
+    $usuario->update($id, $campo, $valor);
+    return $response;
+});
+
+// Usuario - Pet
+
+$app->get('/usuario/{id}/pets', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $usuario = new Usuario();
+
+    $json = "{\"pets\":" . json_encode($lista = $usuario->listarPetsUsuario($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+// PET
+
+$app->get('/pets', function (Request $request, Response $response, array $args) {
+    $pet = new Pet();
+
+    $json = "{\"pets\":" . json_encode($lista = $pet->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+$app->get('/pet/{id}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $pet = new Pet();
+
+    $json = "{\"pet\":" . json_encode($lista = $pet->listarPet($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+$app->get('/pet/update/{id}/{campo}/{valor}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $campo = $args['campo'];
+    $valor = $args['valor'];
+    $pet = new Pet();
+
+    $pet->update($id, $campo, $valor);
+    return $response;
+});
+
+$app->get('/pet/delete/{id}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $pet = new Pet();
+    $pet->setIdPet($id);
+    $pet->delete($pet);
+    return $response;
+});
+
+$app->post('/pet/add', function (Request $request, Response $response, array $args) {
+    $data = $request->getParsedBody();
+    $usuario = new Usuario();
+    $pet = new Pet();
+    $cookie = new Cookies();
+    $arrayEspecies = array(
+        1 => "Cachorro",
+        2 => "Gato",
+        3 => "Roedor",
+        4 => "Ave",
+        5 => "Exótico"
+    );
+    $idade = $_POST['txtIdadePet'];
+    $slDiaMesAno = $_POST['slIdade'];
+    if ($idade > 1) {
+        $arrayData = array(
+            "d" => "dias",
+            "m" => "meses",
+            "y" => "anos",
+        );
+        $idadeCompleta = $idade . " " . $arrayData[$slDiaMesAno];
+    } else {
+        $arrayData = array(
+            "d" => "dia",
+            "m" => "mês",
+            "y" => "ano",
+        );
+        $idadeCompleta = $idade . " " . $arrayData[$slDiaMesAno];
+    }
+
+    
+    @session_start();
+    
+    
+    if ($_POST['slEspecie'] == 0) {
+        $cookie->criarCookie('retorno-erro-especie', "Selecione uma espécie", 1);
+        header('location: ../formulario-pet2.php');
+    }
+    $especie = $arrayEspecies[$_POST['slEspecie']];
+
+    $pet->setNomePet($_POST['txtNomePet']);
+    $pet->setRacaPet($_POST['txtRacaPet']);
+    $pet->setEspeciePet($especie);
+    $pet->setIdadePet($idadeCompleta);
+    $usuario->setIdUsuario($_SESSION['id-cadastro']);
+    $pet->setUsuario($usuario);
+
+    $return = $pet->cadastrar($pet);
+    $id = $return['id'];
+    $_SESSION['id-cadastro-pet'] = $id;
+
+    header('location: /petiti/foto-pet');
+});
+
+try {
+    $app->run();
+} catch (Exception $e) { 
+    header('location: /petiti/views/erroGeral.php');
+}   
+
