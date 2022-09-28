@@ -1,6 +1,6 @@
 // Validar nome de usuário
 $("#txtLoginUsuario").keyup(function () {
-  var regex = new RegExp("^[a-z0-9]+$");
+  var regex = new RegExp("^[A-Za-z0-9]+$");
   var login = $(this).val();
   if (regex.test(login)) {
     $("#avisoNomeUsuario").text("Usuário Válido");

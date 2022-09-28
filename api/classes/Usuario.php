@@ -364,7 +364,7 @@ class Usuario
         WHERE tbusuario.idUsuario = $id
         ";
         $resultado = $con->query($query);
-        $lista = $resultado->fetchAll();
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
     public function procuraEmail($email)

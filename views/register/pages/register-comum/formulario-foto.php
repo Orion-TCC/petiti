@@ -45,7 +45,7 @@
                         </label>
 
                         <label class="previewFormFoto" id="imagePreview">
-                            <img class="previewFoto" id="frame" src="private-user/fotos-perfil/padrao.png" width="150px" height="150px" />
+                            <img class="previewFoto" id="frame" src="/petiti/private-user/fotos-perfil/padrao.png" width="150px" height="150px" />
                         </label>
 
                         <label class="formTextFotoInput" id="imageName">

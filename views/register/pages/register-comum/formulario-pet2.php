@@ -40,7 +40,7 @@
                     </div>
 
                     <div class="formularioHolder ">
-                        <form class="formElementsHolder" action="controllers/controller-pet.php" method="POST" enctype="multipart/form-data">
+                        <form class="formElementsHolder" action="/petiti/api/pet/add" method="POST" enctype="multipart/form-data">
 
                             <label class="formText">Nome</label>
                             <input class="formInput" placeholder="Insira o nome" type="text" name="txtNomePet" required>

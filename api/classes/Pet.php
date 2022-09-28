@@ -114,9 +114,26 @@ class Pet
         `idUsuario` FROM tbpet
         ";
         $resultado = $con->query($query);
-        $lista = $resultado->fetchAll();
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
+
+    public function listarPet($id)
+    {
+        $con = Conexao::conexao();
+        $query = "
+        SELECT `idPet`,
+        `nomePet`,
+        `racaPet`,
+        `especiePet`,
+        `idadePet`,
+        `idUsuario` FROM tbpet WHERE idPet = '$id'
+        ";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
+    }
+    
     public function cadastrar($pet)
     {
         $con = Conexao::conexao();
@@ -150,25 +167,32 @@ class Pet
         $array = array("msg" => "Cadastro de pet realizado com sucesso", "id" => "$id");
         return $array;
     }
-    public function update($update)
+    public function update($id, $campo, $valor)
     {
         $con = Conexao::conexao();
-        $stmt = $con->prepare(
-            "UPDATE `tbpet` 
-                SET `nomePet`= ?,
-                `racaPet`= ?,`especiePet`= ?,
-                `idadePet`= ?,`idUsuario`= ? WHERE idPet = ?"
-        );
-        $stmt->bindValue(1, $update->getNomePet());
-        $stmt->bindValue(2, $update->getRacaPet());
-        $stmt->bindValue(3, $update->getEspeciePet());
-        $stmt->bindValue(4, $update->getIdadePet());
-        $stmt->bindValue(5, $update->getUsuario()->getIdUsuario());
-        $stmt->bindValue(6, $update->getIdPet());
 
-        $stmt->execute();
-        $array = array("msg" => "Dados do pet atualizados com sucesso", "id" => "$update->getIdPet()");
-        return $array;
+        switch ($campo) {
+            case 'nome':
+                $stmt = $con->prepare("UPDATE `tbpet` 
+                SET `nomePet`= '$valor'
+                WHERE idPet = $id");
+                $stmt->execute();
+                break;
+            case 'raca':
+                $stmt = $con->prepare("UPDATE `tbpet` 
+                    SET `racaPet`= '$valor'
+                    WHERE idPet = $id");
+                $stmt->execute();
+                break;
+            case 'idade':
+                $stmt = $con->prepare("UPDATE `tbpet` 
+                        SET `idadePet`= '$valor'
+                        WHERE idPet = $id");
+                $stmt->execute();
+                break;
+        }
+        
+        return $msg = "Os dados do Pet foram atualizados.";
     }
 
     public function delete($delete)

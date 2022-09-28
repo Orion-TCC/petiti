@@ -34,19 +34,19 @@
                         </span>
                     </div>
 
-                    <form action="controllers/controller-foto-pet.php" enctype="multipart/form-data" method="post" class="formElementsHolder">
+                    <form action="/petiti/views/register/pages/register-comum/controllers/controller-foto-pet.php" enctype="multipart/form-data" method="post" class="formElementsHolder">
 
                         <label class="subTituloFormFoto">
                             Foto
                         </label>
 
                         <label class="formLabelFotoPet" id="inputTag">
-                            <input onchange="preview()" class="inputFormFotoPet" type="file" name="flFotoPet" id="flFotoPet">
+                            <input onchange="preview()" accept=".jpg, .png" class="inputFormFotoPet" type="file" name="flFotoPet" id="flFotoPet">
                             Anexar foto dos meus arquivos
                         </label>
 
                         <label class="previewFormFoto" id="imagePreview">
-                            <img class="previewFoto" id="frame" src="../../../../private-user/fotos-pet/padrao.png" width="150px" height="150px" />
+                            <img class="previewFoto" id="frame" src="/petiti/private-user/fotos-pet/padrao.png" width="150px" height="150px" />
                         </label>
 
                         <label class="formTextFotoPetInput" id="imageName">

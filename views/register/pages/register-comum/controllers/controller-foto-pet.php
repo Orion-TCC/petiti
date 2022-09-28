@@ -7,7 +7,7 @@ require_once("/xampp/htdocs/petiti/classes/Cookies.php");
 
 $cookie = new Cookies();
 $fotoPet = new FotoPet();
-$caminho = "/xampp/htdocs/petiti/private-user/fotos-pet/";
+$caminho = "/petiti/private-user/fotos-pet/";
 $caminhoBanco = "";
 $foto = $_FILES['flFotoPet'];
 $nomeFoto = $foto['name'];
@@ -22,13 +22,13 @@ if ($foto['size'] == 0) {
     $fotoPet->setNomeFotoPet("padrao.png");
     $fotoPet->setCaminhoFotoPet("private-user/fotos-pet/padrao.png");
     $fotoPet->cadastrar($fotoPet);
-    header('location: ../finalizar-forms.php');
+    header('location: /petiti/final-usuario');
 } elseif ($foto['error'] <> 0) {
     $cookie->criarCookie("erro-foto", "Erro ao subir imagem, tente novamente.", 1);
-    header('location: ../formulario-foto-pet.php');
+    header('location: /petiti/foto-pet');
 } elseif (($tipo <> 'jpg') && ($tipo <> 'jpeg') && ($tipo <> 'png')) {
     $cookie->criarCookie("erro-foto", "Formato inválido.", 1);
-    header('location: ../formulario-foto-pet.php');
+    header('location: /petiti/foto-pet');
 } else {
     $nomeRandom = uniqid();
     $caminhoCompleto = $caminho . $nomeRandom . "." . $tipo;
@@ -42,5 +42,5 @@ if ($foto['size'] == 0) {
     $fotoPet->setNomeFotoPet($nomeTipo);
     $fotoPet->setCaminhoFotoPet($caminhoBanco);
     $fotoPet->cadastrar($fotoPet);
-    header('location: ../finalizar-forms.php');
+    header('location: /petiti/final-usuario');
 }

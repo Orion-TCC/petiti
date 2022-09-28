@@ -3,10 +3,19 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-require_once("classes/Usuario.php");
-require_once("classes/FotoUsuario.php");
-require_once("classes/TipoUsuario.php");
-require_once("classes/Cookies.php");
+// require_once("classes/TipoUsuario.php");
+// require_once("classes/Usuario.php");
+// require_once("classes/UsuarioEndereco.php");
+// require_once("classes/FotoUsuario.php");
+// require_once("classes/Cookies.php");
+// require_once("classes/Pet.php");
+// require_once("classes/FotoPet.php");
+//
+//
+
+foreach (glob("classes/*") as $filename) {
+    require_once $filename;
+}
 
 use Slim\Factory\AppFactory;
 use Slim\Exception\NotFoundException;
@@ -16,8 +25,6 @@ require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
-
-
 $basePath = str_replace('/' . basename(__FILE__), '', $_SERVER['SCRIPT_NAME']);
 $app = $app->setBasePath($basePath);
 
@@ -26,6 +33,8 @@ $app->get('/hello/{name}', function (Request $request, Response $response, array
     $response->getBody()->write("Hello, $name");
     return $response;
 });
+
+// Usuario
 
 $app->get('/usuarios', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
@@ -50,7 +59,6 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
     $tipoUsuario = new TipoUsuario();
     $cookie = new Cookies();
 
-
     // Verficação 
     $email = $_POST['txtEmailUsuario'];
     $senha = $_POST['txtPw'];
@@ -72,7 +80,6 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
         $tipoUsuario->setIdTipoUsuario(1);
         $usuario->setTipoUsuario($tipoUsuario);
 
-
         // Cadastro
         $retorno = $usuario->cadastrar($usuario);
         $msg = $retorno["msg"];
@@ -88,8 +95,6 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
         }
     }
 });
-
-
 
 $app->get('/usuario/delete/{id}', function (Request $request, Response $response, array $args) {
     $id = $args['id'];
@@ -107,6 +112,104 @@ $app->get('/usuario/update/{id}/{campo}/{valor}', function (Request $request, Re
 
     $usuario->update($id, $campo, $valor);
     return $response;
+});
+
+// Usuario - Pet
+
+$app->get('/usuario/{id}/pets', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $usuario = new Usuario();
+
+    $json = "{\pets\":" . json_encode($lista = $usuario->listarPetsUsuario($id)) . "}";
+    $response->getBody()->write($json);
+    return $response;
+});
+
+// PET
+
+$app->get('/pets', function (Request $request, Response $response, array $args) {
+    $pet = new Pet();
+
+    $json = "{\pets\":" . json_encode($lista = $pet->listar()) . "}";
+    $response->getBody()->write($json);
+    return $response;
+});
+
+$app->get('/pet/{id}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $pet = new Pet();
+
+    $json = "{\"pet\":" . json_encode($lista = $pet->listarPet($id)) . "}";
+    $response->getBody()->write($json);
+    return $response;
+});
+
+$app->get('/pet/update/{id}/{campo}/{valor}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $campo = $args['campo'];
+    $valor = $args['valor'];
+    $pet = new Pet();
+
+    $pet->update($id, $campo, $valor);
+    return $response;
+});
+
+$app->get('/pet/delete/{id}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $pet = new Pet();
+    $pet->setIdPet($id);
+    $pet->delete($pet);
+    return $response;
+});
+
+$app->post('/pet/add', function (Request $request, Response $response, array $args) {
+    $data = $request->getParsedBody();
+    $usuario = new Usuario();
+    $pet = new Pet();
+    $cookie = new Cookies();
+    $arrayEspecies = array(
+        1 => "Cachorro",
+        2 => "Gato",
+        3 => "Roedor",
+        4 => "Ave",
+        5 => "Exótico"
+    );
+    $idade = $_POST['txtIdadePet'];
+    $slDiaMesAno = $_POST['slIdade'];
+    if ($idade > 1) {
+        $arrayData = array(
+            "d" => "dias",
+            "m" => "meses",
+            "y" => "anos",
+        );
+        $idadeCompleta = $idade . " " . $arrayData[$slDiaMesAno];
+    } else {
+        $arrayData = array(
+            "d" => "dia",
+            "m" => "mês",
+            "y" => "ano",
+        );
+        $idadeCompleta = $idade . " " . $arrayData[$slDiaMesAno];
+    }
+    @session_start();
+    if ($_POST['slEspecie'] == 0) {
+        $cookie->criarCookie('retorno-erro-especie', "Selecione uma espécie", 1);
+        header('location: ../formulario-pet2.php');
+    }
+    $especie = $arrayEspecies[$_POST['slEspecie']];
+
+    $pet->setNomePet($_POST['txtNomePet']);
+    $pet->setRacaPet($_POST['txtRacaPet']);
+    $pet->setEspeciePet($especie);
+    $pet->setIdadePet($idadeCompleta);
+    $usuario->setIdUsuario($_SESSION['id-cadastro']);
+    $pet->setUsuario($usuario);
+
+    $return = $pet->cadastrar($pet);
+    $id = $return['id'];
+    $_SESSION['id-cadastro-pet'] = $id;
+
+    header('location: /petiti/foto-pet');
 });
 
 $app->run();
