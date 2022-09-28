@@ -561,6 +561,10 @@ body{
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+.botaoCPost a:hover{
+color: black;
+}
+
 .botaoCPost:hover{
   background:  #FBF793;
   cursor: pointer;

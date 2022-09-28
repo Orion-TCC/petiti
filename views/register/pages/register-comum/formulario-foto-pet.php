@@ -1,5 +1,8 @@
 <!DOCTYPE php>
 <html lang="pt-br">
+<?php
+include_once("sentinela-cadastro.php");
+?>
 
 <head>
     <!-- HTML base -->

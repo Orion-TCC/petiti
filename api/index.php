@@ -38,10 +38,10 @@ $app->get('/hello/{name}', function (Request $request, Response $response, array
 
 $app->get('/usuarios', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
-
+   
     $json = "{\"usuarios\":" . json_encode($lista = $usuario->listar()) . "}";
     $response->getBody()->write($json);
-    return $response;
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
 $app->get('/usuario/{id}', function (Request $request, Response $response, array $args) {
@@ -50,7 +50,7 @@ $app->get('/usuario/{id}', function (Request $request, Response $response, array
 
     $json = "{\"usuario\":" . json_encode($lista = $usuario->listarUsuario($id)) . "}";
     $response->getBody()->write($json);
-    return $response;
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
 $app->post('/usuario/add', function (Request $request, Response $response, array $args) {
@@ -120,9 +120,9 @@ $app->get('/usuario/{id}/pets', function (Request $request, Response $response, 
     $id = $args['id'];
     $usuario = new Usuario();
 
-    $json = "{\pets\":" . json_encode($lista = $usuario->listarPetsUsuario($id)) . "}";
+    $json = "{\"pets\":" . json_encode($lista = $usuario->listarPetsUsuario($id)) . "}";
     $response->getBody()->write($json);
-    return $response;
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
 // PET
@@ -130,9 +130,9 @@ $app->get('/usuario/{id}/pets', function (Request $request, Response $response, 
 $app->get('/pets', function (Request $request, Response $response, array $args) {
     $pet = new Pet();
 
-    $json = "{\pets\":" . json_encode($lista = $pet->listar()) . "}";
+    $json = "{\"pets\":" . json_encode($lista = $pet->listar()) . "}";
     $response->getBody()->write($json);
-    return $response;
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
 $app->get('/pet/{id}', function (Request $request, Response $response, array $args) {
@@ -141,7 +141,7 @@ $app->get('/pet/{id}', function (Request $request, Response $response, array $ar
 
     $json = "{\"pet\":" . json_encode($lista = $pet->listarPet($id)) . "}";
     $response->getBody()->write($json);
-    return $response;
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
 $app->get('/pet/update/{id}/{campo}/{valor}', function (Request $request, Response $response, array $args) {
@@ -191,7 +191,13 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
         );
         $idadeCompleta = $idade . " " . $arrayData[$slDiaMesAno];
     }
-    @session_start();
+
+    try {
+        @session_start();
+    } catch(Exception $e) {
+       header('/erro');
+    }
+    
     if ($_POST['slEspecie'] == 0) {
         $cookie->criarCookie('retorno-erro-especie', "Selecione uma espécie", 1);
         header('location: ../formulario-pet2.php');

@@ -16,7 +16,7 @@ include_once("sentinela.php");
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="assets/styles/stylesheet.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
@@ -25,6 +25,9 @@ include_once("sentinela.php");
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
     <script src="assets/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+
 </head>
 
 <body id="bodyFeed">  
@@ -49,7 +52,17 @@ include_once("sentinela.php");
 
             <hr class="line">
 
-           <button class="botaoCPost" > Criar um post</button>
+            <!-- Modal Post -->
+           <button class="botaoCPost" > 
+            <p>
+             <a href="#ex1" rel="modal:open">Criar um Post</a>
+            </p>
+           </button>
+
+           <div id="ex1" class="modal">
+            <p>Thanks for clicking. That felt good.</p>
+            <a href="#" rel="modal:close">Close</a>
+           </div>
 
         </div>
 

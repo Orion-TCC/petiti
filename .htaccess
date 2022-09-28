@@ -21,4 +21,4 @@ RewriteRule ^ramo-empresa views/register/pages/register-empresa/formulario-ramo.
 RewriteRule ^foto-empresa views/register/pages/register-empresa/formulario-foto-empresa.php [NC,L]
 RewriteRule ^final-empresa views/register/pages/register-empresa/finalizar-cadastro-empresa.php [NC,L]
 
-
+RewriteRule ^erro views/erroGeral.php [NC,L]
