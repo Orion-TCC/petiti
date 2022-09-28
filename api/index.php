@@ -3,15 +3,6 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-// require_once("classes/TipoUsuario.php");
-// require_once("classes/Usuario.php");
-// require_once("classes/UsuarioEndereco.php");
-// require_once("classes/FotoUsuario.php");
-// require_once("classes/Cookies.php");
-// require_once("classes/Pet.php");
-// require_once("classes/FotoPet.php");
-//
-//
 
 foreach (glob("classes/*") as $filename) {
     require_once $filename;
