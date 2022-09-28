@@ -38,8 +38,8 @@ $app->get('/hello/{name}', function (Request $request, Response $response, array
 
 $app->get('/usuarios', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
-   
-    $json = "{\"usuarios\":" . json_encode($lista = $usuario->listar()) . "}";
+
+    $json = "{\"usuarios\":" . json_encode($lista = $usuario->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
@@ -48,7 +48,7 @@ $app->get('/usuario/{id}', function (Request $request, Response $response, array
     $id = $args['id'];
     $usuario = new Usuario();
 
-    $json = "{\"usuario\":" . json_encode($lista = $usuario->listarUsuario($id)) . "}";
+    $json = "{\"usuario\":" . json_encode($lista = $usuario->listarUsuario($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
@@ -61,16 +61,17 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
 
     // Verficação 
     $email = $_POST['txtEmailUsuario'];
+    $email = strtolower($email);
     $senha = $_POST['txtPw'];
     $senhaConfirmacao = $_POST['txtPwConfirm'];
 
     $validacaoEmail = $usuario->validarEmail($email);
     if ($validacaoEmail == false) {
         $cookie->criarCookie("erro-cadastro", "Email Inválido", 1);
-        header('location: /petiti/views/register/pages/register-comum/formulario-usuario.php');
+        header('location: /petiti/cadastro-usuario');
     } elseif ($senha <> $senhaConfirmacao) {
         $cookie->criarCookie("erro-cadastro", "Senhas não coincindem", 1);
-        header('location: /petiti/views/register/pages/register-comum/formulario-usuario.php');
+        header('location: /petiti/cadastro-usuario');
     } else {
         $usuario->setNomeUsuario($_POST['txtNomeUsuario']);
         $usuario->setLoginUsuario($_POST['txtLoginUsuario']);
@@ -88,10 +89,10 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
             @session_start();
             $_SESSION['id-cadastro'] = $id;
 
-            header('location: /petiti/views/register/pages/register-comum/formulario-foto.php');
+            header('location: /petiti/foto-usuario');
         } else {
             $cookie->criarCookie("erro-cadastro", $msg, 1);
-            header('location: /petiti/views/register/pages/register-comum/formulario-usuario.php');
+            header('location: /petiti/cadastro-usuario');
         }
     }
 });
@@ -120,7 +121,7 @@ $app->get('/usuario/{id}/pets', function (Request $request, Response $response, 
     $id = $args['id'];
     $usuario = new Usuario();
 
-    $json = "{\"pets\":" . json_encode($lista = $usuario->listarPetsUsuario($id)) . "}";
+    $json = "{\"pets\":" . json_encode($lista = $usuario->listarPetsUsuario($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
@@ -130,7 +131,7 @@ $app->get('/usuario/{id}/pets', function (Request $request, Response $response, 
 $app->get('/pets', function (Request $request, Response $response, array $args) {
     $pet = new Pet();
 
-    $json = "{\"pets\":" . json_encode($lista = $pet->listar()) . "}";
+    $json = "{\"pets\":" . json_encode($lista = $pet->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
@@ -139,7 +140,7 @@ $app->get('/pet/{id}', function (Request $request, Response $response, array $ar
     $id = $args['id'];
     $pet = new Pet();
 
-    $json = "{\"pet\":" . json_encode($lista = $pet->listarPet($id)) . "}";
+    $json = "{\"pet\":" . json_encode($lista = $pet->listarPet($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
@@ -192,12 +193,10 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
         $idadeCompleta = $idade . " " . $arrayData[$slDiaMesAno];
     }
 
-    try {
-        @session_start();
-    } catch(Exception $e) {
-       header('/erro');
-    }
-    
+
+    @session_start();
+
+
     if ($_POST['slEspecie'] == 0) {
         $cookie->criarCookie('retorno-erro-especie', "Selecione uma espécie", 1);
         header('location: ../formulario-pet2.php');
@@ -218,4 +217,8 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     header('location: /petiti/foto-pet');
 });
 
-$app->run();
+try {
+    $app->run();
+} catch (Exception $e) {
+    header('location: /petiti/views/erroGeral.php');
+}
