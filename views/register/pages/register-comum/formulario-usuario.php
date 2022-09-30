@@ -60,6 +60,9 @@
                         </form>
                     </div>
                     <div id="senhaAviso" class="senhaAviso animate__bounce">
+                        <p id="senhaAvisoTamanho"></p>
+
+                        <p id="senhaAvisoVerificacao"></p>
                     </div>
 
                     <div class="cookieCadastro animate__bounce">

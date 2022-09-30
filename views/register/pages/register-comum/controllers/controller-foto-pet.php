@@ -1,7 +1,7 @@
 <?php
-require_once("/xampp/htdocs/petiti/classes/Pet.php");
-require_once("/xampp/htdocs/petiti/classes/FotoPet.php");
-require_once("/xampp/htdocs/petiti/classes/Cookies.php");
+require_once("/xampp/htdocs/petiti/api/classes/Pet.php");
+require_once("/xampp/htdocs/petiti/api/classes/FotoPet.php");
+require_once("/xampp/htdocs/petiti/api/classes/Cookies.php");
 
 // Objetos
 

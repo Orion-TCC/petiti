@@ -1,7 +1,7 @@
 <?php
-require_once("/xampp/htdocs/petiti/classes/Usuario.php");
-require_once("/xampp/htdocs/petiti/classes/UsuarioEndereco.php");
-require_once("/xampp/htdocs/petiti/classes/TipoUsuario.php");
+require_once("/xampp/htdocs/petiti/api/classes/Usuario.php");
+require_once("/xampp/htdocs/petiti/api/classes/UsuarioEndereco.php");
+require_once("/xampp/htdocs/petiti/api/classes/TipoUsuario.php");
 
 $usuario = new Usuario();
 $tipoUsuario = new TipoUsuario();

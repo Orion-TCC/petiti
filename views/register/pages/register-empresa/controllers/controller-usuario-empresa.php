@@ -1,7 +1,7 @@
 <?php
-require_once("/xampp/htdocs/petiti/classes/Usuario.php");
-require_once("/xampp/htdocs/petiti/classes/TipoUsuario.php");
-require_once("/xampp/htdocs/petiti/classes/Cookies.php");
+require_once("/xampp/htdocs/petiti/api/classes/Usuario.php");
+require_once("/xampp/htdocs/petiti/api/classes/TipoUsuario.php");
+require_once("/xampp/htdocs/petiti/api/classes/Cookies.php");
 
 
 // Objetos

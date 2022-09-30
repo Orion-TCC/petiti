@@ -40,7 +40,7 @@
                     </div>
 
                     <?php
-                    require_once("/xampp/htdocs/petiti/classes/TipoUsuario.php");
+                    require_once("/xampp/htdocs/petiti/api/classes/TipoUsuario.php");
                     $tipoUsuario = new TipoUsuario();
                     $listaTipos = $tipoUsuario->listar();
                     ?>

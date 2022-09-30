@@ -1,6 +1,6 @@
 <?php
-require_once("/xampp/htdocs/petiti/classes/Usuario.php");
-require_once("/xampp/htdocs/petiti/classes/Cookies.php");
+require_once("/xampp/htdocs/petiti/api/classes/Usuario.php");
+require_once("/xampp/htdocs/petiti/api/classes/Cookies.php");
 
 
 // Objetos
@@ -21,4 +21,3 @@ if ($boolean == 1) {
     $msg = "Email inexistente.";
     $cookie->criarCookie('retorno-login', $msg, 2);
 }
-?>

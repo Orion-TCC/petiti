@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25-Ago-2022 às 08:22
+-- Tempo de geração: 30-Set-2022 às 01:31
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -20,16 +20,14 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dbpetiti`
 --
-CREATE DATABASE dbpetiti;
+CREATE DATABASE IF NOT EXISTS `dbpetiti` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `dbpetiti`;
 
-USE dbpetiti;
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `tbcategoria`
 --
-
-
 
 CREATE TABLE `tbcategoria` (
   `idCategoria` int(11) NOT NULL,
@@ -179,7 +177,7 @@ CREATE TABLE `tbpet` (
   `nomePet` varchar(200) NOT NULL,
   `racaPet` varchar(200) NOT NULL,
   `especiePet` varchar(200) NOT NULL,
-  `idadePet` int(11) NOT NULL,
+  `idadePet` varchar(30) NOT NULL,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -193,7 +191,6 @@ CREATE TABLE `tbpublicacao` (
   `idPublicacao` int(11) NOT NULL,
   `textoPublicacao` varchar(200) NOT NULL,
   `dataPublicacao` date NOT NULL,
-  `qtdCurtidaPublicacao` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -207,14 +204,6 @@ CREATE TABLE `tbtipousuario` (
   `idTipoUsuario` int(11) NOT NULL,
   `tipoUsuario` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `tbtipousuario`
---
-
-INSERT INTO `tbtipousuario` (`idTipoUsuario`, `tipoUsuario`) VALUES
-(1, 'Tutor'),
-(2, 'Pet Shop');
 
 -- --------------------------------------------------------
 
@@ -476,7 +465,7 @@ ALTER TABLE `tbpublicacao`
 -- AUTO_INCREMENT de tabela `tbtipousuario`
 --
 ALTER TABLE `tbtipousuario`
-  MODIFY `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuario`
@@ -573,6 +562,12 @@ ALTER TABLE `tbpet`
   ADD CONSTRAINT `tbpet_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Limitadores para a tabela `tbpublicacao`
+--
+ALTER TABLE `tbpublicacao`
+  ADD CONSTRAINT `tbpublicacao_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Limitadores para a tabela `tbusuario`
 --
 ALTER TABLE `tbusuario`
@@ -588,8 +583,8 @@ ALTER TABLE `tbusuarioendereco`
 -- Limitadores para a tabela `tbusuarioseguidor`
 --
 ALTER TABLE `tbusuarioseguidor`
-  ADD CONSTRAINT `tbusuarioseguidor_ibfk_1` FOREIGN KEY (`idSeguidor`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbusuarioseguidor_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbusuarioseguidor_ibfk_1` FOREIGN KEY (`idSeguidor`) REFERENCES `tbusuario` (`idUsuario`),
+  ADD CONSTRAINT `tbusuarioseguidor_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

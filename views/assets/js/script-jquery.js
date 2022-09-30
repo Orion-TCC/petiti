@@ -14,16 +14,30 @@ $("#txtLoginUsuario").keyup(function () {
     $("#avisoNomeUsuario").text("Usuário Inválido");
   }
 });
+//Senha aviso
 
-//Verificar Senhas
+$("#txtPw").keyup(function () {
+  var tamanhoSenha = $("#txtPw").val().length;
+
+  if (tamanhoSenha < 6) {
+    $(".senhaAviso").text("Utilize uma senha com 6 ou mais caracteres.");
+    $("#senhaAviso").addClass("senhaAvisoErrada");
+    $("#senhaAviso").removeClass("senhaAvisoCerta");
+  } else {
+    $("#senhaAviso").text("");
+  }
+});
+
 $("#txtPw").keyup(function () {
   var senha = $("#txtPwConfirm").val();
+
+  //Verificar Senhas
   if (senha == $(this).val()) {
-    $(".senhaAviso").text("Senhas correspondem.");
+    $("#senhaAvisoVerificacao").text("Senhas correspondem.");
     $("#senhaAviso").addClass("senhaAvisoCerta");
     $("#senhaAviso").removeClass("senhaAvisoErrada");
   } else {
-    $("#senhaAviso").text("Senhas não correspondem.");
+    $("#senhaAvisoVerificacao").text("Senhas não correspondem.");
     $("#senhaAviso").addClass("senhaAvisoErrada");
     $("#senhaAviso").removeClass("senhaAvisoCerta");
   }
