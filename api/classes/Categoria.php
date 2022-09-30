@@ -1,22 +1,17 @@
 <?php
-class categoria 
+require_once('/xampp/htdocs/petiti/api/database/conexao.php');
+class categoria
 {
     private $idCategoria;
     private $categoria;
 
-    /**
-     * Get the value of categoria
-     */ 
+
     public function getCategoria()
     {
         return $this->categoria;
     }
 
-    /**
-     * Set the value of categoria
-     *
-     * @return  self
-     */ 
+
     public function setCategoria($categoria)
     {
         $this->categoria = $categoria;
@@ -24,24 +19,38 @@ class categoria
         return $this;
     }
 
-    /**
-     * Get the value of idCategoria
-     */ 
+
     public function getIdCategoria()
     {
         return $this->idCategoria;
     }
 
-    /**
-     * Set the value of idCategoria
-     *
-     * @return  self
-     */ 
+
     public function setIdCategoria($idCategoria)
     {
         $this->idCategoria = $idCategoria;
 
         return $this;
     }
+
+    public function listar(){
+        $con = Conexao::conexao();
+        $query = "SELECT idCategoria, categoria FROM tbcategoria";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        return $lista;
+    }
+
+    public function listarCategoriasPopulares(){
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(tbcategoriapublicacao.idCategoria), 
+        categoria  FROM tbcategoriapublicacao 
+        INNER JOIN tbcategoria ON tbcategoriapublicacao.idCategoria = tbcategoria.idCategoria";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        return $lista;
+    }
+
 }
-?>

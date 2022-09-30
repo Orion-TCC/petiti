@@ -38,7 +38,6 @@ $app->get('/usuarios', function (Request $request, Response $response, array $ar
 $app->get('/usuario/{id}', function (Request $request, Response $response, array $args) {
     $id = $args['id'];
     $usuario = new Usuario();
-
     $json = json_encode($lista = $usuario->listarUsuario($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
@@ -51,11 +50,20 @@ $app->post('/login', function (Request $request, Response $response, array $args
 
 
     $login_email = $_POST['txtLoginEmail'];
-    $senha = $_POST['pw'];
+    $senha = sha1("pet").sha1($_POST['pw']).sha1("iti");
 
     $msg = $usuario->login($login_email, $senha);
     @session_start();
-    $id = $usuario->procuraId2($login_email = $_POST['txtLoginEmail']);
+    
+
+    $verificaEmail = $usuario->validarEmail($login_email);
+
+    if ($verificaEmail == false) {
+        $id = $usuario->procuraId2($login_email = $_POST['txtLoginEmail']);
+    } else {
+        $id = $usuario->procuraId($login_email = $_POST['txtLoginEmail']);
+    }
+    
     if ($msg == "Bem vindo.") {
 
         $url = "http://localhost/petiti/api/usuario/$id";
@@ -92,10 +100,11 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
         $cookie->criarCookie("erro-cadastro", "Senhas não coincindem", 1);
         header('location: /petiti/cadastro-usuario');
     } else {
+        $senha = sha1("pet").sha1($_POST['txtPw']).sha1("iti");
         $usuario->setNomeUsuario($_POST['txtNomeUsuario']);
         $usuario->setLoginUsuario($_POST['txtLoginUsuario']);
         $usuario->setEmailUsuario($_POST['txtEmailUsuario']);
-        $usuario->setSenhaUsuario($_POST['txtPw']);
+        $usuario->setSenhaUsuario($senha);
         $usuario->setVerificadoUsuario(0);
         $tipoUsuario->setIdTipoUsuario(1);
         $usuario->setTipoUsuario($tipoUsuario);

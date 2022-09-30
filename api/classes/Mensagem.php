@@ -1,5 +1,5 @@
 <?php
-
+require_once('/xampp/htdocs/petiti/api/database/conexao.php');
 class Mensagem
 {
     private $idMensagem;

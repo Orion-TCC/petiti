@@ -25,10 +25,9 @@
         <section id="loginUsuario">
             <div class="holderLogin">
                 <div class="Login">
-
                     <img class="loginLogo" src="/petiti/views/assets/img/logo_principal.svg" alt="">
 
-                    <form action="api/login" method="POST">
+                    <form action="/petiti/api/login" method="POST">
                         <div class="loginInputHolder">
                             <label class="formTextLogin">Nome de usúario ou email</label>
                             <input class="formInputLogin" name="txtLoginEmail" placeholder="Nome de usuário ou email" required minlength="4">
@@ -49,8 +48,6 @@
                     <span class="recuperarSenha">
                         Esqueceu sua senha? <a href="./formularioRecuperacao.php" class="recuperarSenhaAhref"> Recupere</a>
                     </span>
-
-
                 </div>
         </section>
     </main>

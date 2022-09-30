@@ -20,7 +20,7 @@ include_once("sentinela.php");
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
-    <link rel="icon" href="images/logo-icon.svg">
+    <link rel="icon" href="assets/images/logo-icon.svg"> 
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>

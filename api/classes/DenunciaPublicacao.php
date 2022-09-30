@@ -1,5 +1,6 @@
 <?php
-class denunciaPublicacao
+require_once('/xampp/htdocs/petiti/api/database/conexao.php');
+class DenunciaPublicacao
 {
     private $idDenunciaPublicacao;
     private $Usuario;

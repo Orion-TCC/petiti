@@ -1,4 +1,5 @@
 <?php
+require_once('/xampp/htdocs/petiti/api/database/conexao.php');
 class FotoPublicacao
 {
     private $idFotoPublicacao;

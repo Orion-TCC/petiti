@@ -1,4 +1,5 @@
 <?php
+require_once('/xampp/htdocs/petiti/api/database/conexao.php');
 class Comentario
 {
     private $idComentario;
@@ -12,7 +13,7 @@ class Comentario
         return $this->Publicacao;
     }
 
-    public function setIdPublicacao($Publicacao){
+    public function setPublicacao($Publicacao){
         $this->Publicacao = $Publicacao;
 
         return $this;
@@ -24,7 +25,7 @@ class Comentario
     }
 
 
-    public function setIdUsuario($Usuario){
+    public function setUsuario($Usuario){
         $this->Usuario = $Usuario;
 
         return $this;
@@ -65,4 +66,32 @@ class Comentario
 
         return $this;
     }
-}
+    public function listar(){
+        $con = Conexao::conexao();
+        $query = "SELECT idComentario, 
+        textoComentario,
+        qtdcurtidaComentario,
+        (tbusuario.idUsuario) FROM tbcomentario
+        INNER JOIN tbcomentario ON tbusuario.idusuario = tbcomentario.idusuario";
+
+    $resultado = $con->query($query);
+    $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+    return $lista;
+    }
+
+    public function listarComentario($id)
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idComentario,
+        textoComentario,
+        qtdcurtidaComentario,
+        (tbusuario.idUsuario) FROM tbcomentario
+        WHERE idUsuario = $id
+        INNER JOIN tbcomentario ON tbusuario.idusuario = tbcomentario.idusuario";
+
+        $resultado = $con->query($query);
+        $lista =  $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
+    }
+} 
+// faz um pra listar os comentarios de uma publicacao especifica, se baseia no listarUsuario da classe usuario. Nele passa um $id no parametro, dá uma olhada
