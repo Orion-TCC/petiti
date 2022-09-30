@@ -85,13 +85,12 @@ class Comentario
         $query = "SELECT idComentario,
         textoComentario,
         qtdcurtidaComentario,
-        (tbusuario.idUsuario) FROM tbcomentario
-        WHERE idUsuario = $id
-        INNER JOIN tbcomentario ON tbusuario.idusuario = tbcomentario.idusuario";
+        tbusuario.idUsuario FROM tbcomentario
+        INNER JOIN tbcomentario ON tbusuario.idusuario = tbcomentario.idusuario
+        WHERE idUsuario = $id";
 
         $resultado = $con->query($query);
         $lista =  $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
 } 
-// faz um pra listar os comentarios de uma publicacao especifica, se baseia no listarUsuario da classe usuario. Nele passa um $id no parametro, dá uma olhada

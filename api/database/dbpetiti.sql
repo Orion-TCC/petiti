@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30-Set-2022 às 01:31
+-- Tempo de geração: 30-Set-2022 às 23:51
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dbpetiti`
 --
-CREATE DATABASE IF NOT EXISTS `dbpetiti` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `dbpetiti`;
 
 -- --------------------------------------------------------
 
