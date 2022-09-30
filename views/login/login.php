@@ -1,13 +1,5 @@
-<!-- <form action="verificaLogin.php" method="POST">
-    <input type="text" name="txtLoginEmail" placeholder="Login ou Email">
-    <input type="text" name="pw" placeholder="Senha">
-    <input type="submit" value="Entrar">
-</form>
- -->
-
 <!DOCTYPE php>
 <html lang="pt-br">
-
 <head>
     <!-- HTML base -->
 
@@ -36,7 +28,7 @@
 
                     <img class="loginLogo" src="/petiti/views/assets/img/logo_principal.svg" alt="">
 
-                    <form action="/petiti/views/login/verificaLogin.php" method="POST">
+                    <form action="api/login" method="POST">
                         <div class="loginInputHolder">
                             <label class="formTextLogin">Nome de usúario ou email</label>
                             <input class="formInputLogin" name="txtLoginEmail" placeholder="Nome de usuário ou email" required minlength="4">

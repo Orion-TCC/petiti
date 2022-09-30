@@ -13,12 +13,19 @@ $login_email = $_POST['txtLoginEmail'];
 $senha = $_POST['pw'];
 
 $msg = $usuario->login($login_email, $senha);
-
-echo $msg;
+@session_start();
+$id = $usuario->procuraId2($login_email = $_POST['txtLoginEmail']);
 if ($msg == "Bem vindo.") {
-    header('location: ../../feed');
-    $cookie->criarCookie('retorno-login', $msg, 2);
+   
+    $url = "http://localhost/petiti/api/usuario/$id";
+
+    $json = file_get_contents($url);
+    $dados = json_decode($json);
+    $login = $dados[0]->loginUsuario;
+
+    $_SESSION['login'] = $login;
+    header('location: /petiti/feed');
 } else {
-    header('location: /petiti/login/');
+    header('location: /petiti/login');
     $cookie->criarCookie('retorno-login', $msg, 2);
 }

@@ -1,5 +1,5 @@
 <?php
-require_once('database/conexao.php');
+require_once('/xampp/htdocs/petiti/api/database/conexao.php');
 class TipoUsuario
 {
     private $idTipoUsuario;

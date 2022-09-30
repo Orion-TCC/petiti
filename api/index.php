@@ -39,9 +39,37 @@ $app->get('/usuario/{id}', function (Request $request, Response $response, array
     $id = $args['id'];
     $usuario = new Usuario();
 
-    $json = "{\"usuario\":" . json_encode($lista = $usuario->listarUsuario($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $json = json_encode($lista = $usuario->listarUsuario($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+$app->post('/login', function (Request $request, Response $response, array $args) {
+    $data = $request->getParsedBody();
+    $usuario = new Usuario();
+    $cookie = new Cookies();
+
+
+    $login_email = $_POST['txtLoginEmail'];
+    $senha = $_POST['pw'];
+
+    $msg = $usuario->login($login_email, $senha);
+    @session_start();
+    $id = $usuario->procuraId2($login_email = $_POST['txtLoginEmail']);
+    if ($msg == "Bem vindo.") {
+
+        $url = "http://localhost/petiti/api/usuario/$id";
+
+        $json = file_get_contents($url);
+        $dados = json_decode($json);
+        $login = $dados[0]->loginUsuario;
+
+        $_SESSION['login'] = $login;
+        header('location: /petiti/feed');
+    } else {
+        header('location: /petiti/login');
+        $cookie->criarCookie('retorno-login', $msg, 2);
+    }
 });
 
 $app->post('/usuario/add', function (Request $request, Response $response, array $args) {

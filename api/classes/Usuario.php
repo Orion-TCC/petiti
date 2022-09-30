@@ -1,5 +1,5 @@
 <?php
-require_once('database/conexao.php');
+require_once('/xampp/htdocs/petiti/api/database/conexao.php');
 require_once("FotoUsuario.php");
 class Usuario
 
@@ -251,20 +251,21 @@ class Usuario
                 $contagemValidacao = count($lista_Array);
 
                 if ($contagemValidacao > 0) {
-                    session_start();
+                    @session_start();
                     $id = $usuario->procuraId($login_ou_email);
-                    $lista = $usuario->listarUsuario($id);
                     $foto = $fotoUsuario->exibirFotoUsuario($id);
-                    foreach ($lista as $linha) {
-                        $_SESSION['id'] = $linha[0];
-                        $_SESSION['nome'] = $linha[1];
-                        $_SESSION['senha'] = $linha[2];
-                        $_SESSION['login'] = $linha[3];
-                        $_SESSION['verificado'] = $linha[4];
-                        $_SESSION['email'] = $linha[5];
-                        $_SESSION['tipo'] = $linha[6];
-                        $_SESSION['foto'] = $foto;
-                    }
+                    $url = "http://localhost/petiti/api/usuario/$id";
+                    $json = file_get_contents($url);
+                    $dados = json_decode($json);
+
+                    $_SESSION['id'] = $dados[0]->idUsuario;
+                    $_SESSION['nome'] = $dados[0]->nomeUsuario;
+                    $_SESSION['senha'] = $dados[0]->senhaUsuario;
+                    $_SESSION['login'] = $dados[0]->loginUsuario;
+                    $_SESSION['verificado'] = $dados[0]->verificadoUsuario;
+                    $_SESSION['email'] = $dados[0]->emailUsuario;
+                    $_SESSION['tipo'] = $dados[0]->tipoUsuario;
+                    $_SESSION['foto'] = $foto;
 
                     return $msg = "Bem vindo.";
                 } else {
@@ -280,18 +281,20 @@ class Usuario
                 if ($contagemValidacao > 0) {
                     @session_start();
                     $id = $usuario->procuraId2($login_ou_email);
-                    $lista = $usuario->listarUsuario($id);
                     $foto = $fotoUsuario->exibirFotoUsuario($id);
-                    foreach ($lista as $linha) {
-                        $_SESSION['id'] = $linha[0];
-                        $_SESSION['nome'] = $linha[1];
-                        $_SESSION['senha'] = $linha[2];
-                        $_SESSION['login'] = $linha[3];
-                        $_SESSION['verificado'] = $linha[4];
-                        $_SESSION['email'] = $linha[5];
-                        $_SESSION['tipo'] = $linha[6];
-                        $_SESSION['foto'] = $foto;
-                    }
+                    $url = "http://localhost/petiti/api/usuario/$id";
+                    $json = file_get_contents($url);
+                    $dados = json_decode($json);
+
+                    $_SESSION['id'] = $dados[0]->idUsuario;
+                    $_SESSION['nome'] = $dados[0]->nomeUsuario;
+                    $_SESSION['senha'] = $dados[0]->senhaUsuario;
+                    $_SESSION['login'] = $dados[0]->loginUsuario;
+                    $_SESSION['verificado'] = $dados[0]->verificadoUsuario;
+                    $_SESSION['email'] = $dados[0]->emailUsuario;
+                    $_SESSION['tipo'] = $dados[0]->idTipoUsuario;
+                    $_SESSION['foto'] = $foto;
+
 
                     return $msg = "Bem vindo.";
                 } else {

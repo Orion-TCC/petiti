@@ -1,5 +1,5 @@
 <?php
-require_once('database/conexao.php');
+require_once('/xampp/htdocs/petiti/api/database/conexao.php');
 require_once('FotoPet.php');
 class Pet
 {
@@ -133,7 +133,7 @@ class Pet
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
-    
+
     public function cadastrar($pet)
     {
         $con = Conexao::conexao();
@@ -191,7 +191,7 @@ class Pet
                 $stmt->execute();
                 break;
         }
-        
+
         return $msg = "Os dados do Pet foram atualizados.";
     }
 

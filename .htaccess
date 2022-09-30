@@ -2,6 +2,8 @@ RewriteEngine On
 
 RewriteRule ^home index.php [NC,L]
 RewriteRule ^feed feed.php [NC,L]
+RewriteRule ^feed sair.php [NC,L]
+
 RewriteRule ^login views/login/login.php [NC,L]
 RewriteRule ^tipo-usuario views/register/pages/escolha-tipo-usuario.php [NC,L]
 
