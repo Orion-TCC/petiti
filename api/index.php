@@ -43,8 +43,6 @@ $app->get('/usuario/{id}', function (Request $request, Response $response, array
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
-
-
 $app->post('/usuario/add', function (Request $request, Response $response, array $args) {
     $data = $request->getParsedBody();
     $usuario = new Usuario();
@@ -279,6 +277,41 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     $_SESSION['id-cadastro-pet'] = $id;
 
     header('location: /petiti/foto-pet');
+});
+
+$app->post('/usuario/endereco/add', function (Request $request, Response $response, array $args) {
+    $data = $request->getParsedBody();
+    $usuarioEndereco = new usuarioEndereco;
+    $usuario = new Usuario();
+
+    $cep = $_POST['txtCepEmpresa'];
+    $url = 'viacep.com.br/ws/$cep/json/';
+
+        $json = file_get_contents($url);
+        $dados = json_decode($json);
+        $logradouro = $dados->logradouro;
+        $numero = $_POST['txtNumeroEmpresa'];
+        $bairro = $dados->bairro;
+        $complemento = $_POST['txtComplementoEmpresa'];
+        $cidade = $dados->cidade;
+        $estado = $_POST['txtUfEmpresa'];
+
+    @session_start();
+    
+    $usuarioEndereco->setLogradouroUsuario($logradouro);
+    $usuarioEndereco->setNumeroUsuario($numero);
+    $usuarioEndereco->setCepUsuario($cep);
+    $usuarioEndereco->setBairroUsuario($bairro);
+    $usuarioEndereco->setComplementoUsuario($complemento);
+    $usuarioEndereco->setCidadeUsuario($cidade);
+    $usuarioEndereco->setEstadoUsuario($estado);
+    $usuario->setIdUsuario($_SESSION['id-cadastro']);
+    
+    $usuarioEndereco->setUsuario($usuario);
+
+    $return = $usuarioEndereco->cadastrar($usuarioEndereco);
+    $id = $return['id'];
+    $_SESSION['id-cadastro'] = $id;
 });
 
 try {
