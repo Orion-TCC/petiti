@@ -1,5 +1,9 @@
 <!DOCTYPE php>
 <html lang="pt-br">
+<?php
+session_start();
+$_SESSION['tipo-usuario'] = "usuario";
+?>
 
 <head>
     <!-- HTML base -->

@@ -1,6 +1,9 @@
 <!DOCTYPE php>
 <html lang="en">
-
+<?php
+session_start();
+$_SESSION['tipo-usuario'] = "empresa";
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +12,11 @@
     <script src="js/script.js"></script>
     <link rel="stylesheet" href="/petiti/views/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script async src="/petiti/views/assets/js/script-jquery.js"></script>
+    <script src="/petiti/views/assets/js/script.js"></script>
+
 </head>
 
 <body>
@@ -34,25 +42,37 @@
 
 
                     <div class="formularioHolder ">
-                        <form class="formElementsHolder" action="controllers/controller-usuario-empresa.php" method="post">
-
+                        <form class="formElementsHolder" action="api/usuario/add" method="post">
+                            <input type="hidden" value=" " name="txtNomeUsuario">
                             <label class="formText">Email</label>
-                            <input class="formInput" placeholder="Insira seu email" type="email" name="txtEmailUsuarioEmpresa" id="txtEmailUsuarioEmpresa">
+                            <input class="formInput" placeholder="Insira seu email" type="email" name="txtEmailUsuario" id="txtEmailUsuario">
 
                             <label class="formText">Nome de usuário</label>
-                            <input class="formInput" placeholder="Insira seu username" type=" text" name="txtLoginUsuarioEmpresa" id="txtLoginUsuarioEmpresa" required minlength="4">
+                            <input class="formInput" placeholder="Insira seu username" type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4">
+                            <div class="avisoNomeUsuario" id="avisoNomeUsuario">
+                            </div>
 
                             <label class="formText">Senha</label>
                             <input class="formInput" placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
 
                             <label class="formText">Confirme sua senha</label>
                             <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
+                            <div class="caixaMostrarSenha">
+                                <input class="checkboxSenha" type="checkbox" id="mostrarSenha">
+                                <label for="mostrarSenha" class="formTextMostrarSenha" id=mostrarSenhaLabel style="cursor: pointer;">Mostrar Senha</label>
+                            </div>
                             <button class="formSubmit" type="submit">Continuar</button>
 
                         </form>
                     </div>
 
-                    <div class="cookieCadastroEmpresa animate__bounce">
+                    <div id="senhaAviso" class="senhaAviso animate__bounce">
+                        <p id="senhaAvisoTamanho"></p>
+
+                        <p id="senhaAvisoVerificacao"></p>
+                    </div>
+
+                    <div class="cookieCadastroEmpresa">
                         <p class="animate__animated animate__tada "><?php echo @$_COOKIE['erro-cadastro'] ?></p>
                     </div>
 

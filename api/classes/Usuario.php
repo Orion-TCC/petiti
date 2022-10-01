@@ -318,6 +318,13 @@ class Usuario
                 $stmt->execute();
                 break;
 
+            case 'ramo':
+                $stmt = $con->prepare("UPDATE `tbusuario` 
+                SET `idTipoUsuario`= $valor
+                WHERE idUsuario = $id");
+                $stmt->execute();
+                break;
+
             case 'senha':
                 $stmt = $con->prepare("UPDATE `tbusuario` 
                 SET 

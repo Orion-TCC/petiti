@@ -22,13 +22,13 @@ if ($foto['size'] == 0) {
     $fotoUsuario->setNomeFoto("padrao.png");
     $fotoUsuario->setCaminhoFoto("private-user/fotos-perfil/padrao.png");
     $fotoUsuario->cadastrar($fotoUsuario);
-    header('location: ../finalizar-cadastro-empresa.php');
+    header('location: /petiti/final-empresa');
 } elseif ($foto['error'] <> 0) {
     $cookie->criarCookie("erro-foto", "Erro ao subir imagem, tente novamente.", 1);
-    header('location: ../formulario-foto-empresa.php');
+    header('location: /petiti/foto-empresa');
 } elseif (($tipo <> 'jpg') && ($tipo <> 'jpeg') && ($tipo <> 'png')) {
     $cookie->criarCookie("erro-foto", "Formato inválido.", 1);
-    header('location: ../formulario-foto-empresa.php');
+    header('location: ');
 } else {
     $nomeRandom = uniqid();
     $caminhoCompleto = $caminho . $nomeRandom . "." . $tipo;
@@ -42,5 +42,5 @@ if ($foto['size'] == 0) {
     $fotoUsuario->setNomeFoto($nomeTipo);
     $fotoUsuario->setCaminhoFoto($caminhoBanco);
     $fotoUsuario->cadastrar($fotoUsuario);
-    header('location: ../formulario-ramo.php');
+    header('location: /petiti/ramo-empresa');
 }

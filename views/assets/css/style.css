@@ -344,10 +344,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 30px;
+  
 }
 
 .previewFoto {
+  width: 150px;
+  height: 150px;
   border-radius: 100px;
   background-color: white;
 }

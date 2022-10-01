@@ -45,7 +45,8 @@
                     $listaTipos = $tipoUsuario->listar();
                     ?>
 
-                    <form action="controllers/controller-ramo-empresa.php" method="post">
+                    <form action="api/usuario/update" method="post">
+                        <input type="hidden" name="campo" value="ramo">
                         <select name="slRamo" id="slRamo" class="SelectRamo">
                             <option value="0" disabled selected>Escolha</option>
                             <?php

@@ -43,42 +43,7 @@ $app->get('/usuario/{id}', function (Request $request, Response $response, array
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
-$app->post('/login', function (Request $request, Response $response, array $args) {
-    $data = $request->getParsedBody();
-    $usuario = new Usuario();
-    $cookie = new Cookies();
 
-
-    $login_email = $_POST['txtLoginEmail'];
-    $senha = sha1("pet").sha1($_POST['pw']).sha1("iti");
-
-    $msg = $usuario->login($login_email, $senha);
-    @session_start();
-    
-
-    $verificaEmail = $usuario->validarEmail($login_email);
-
-    if ($verificaEmail == false) {
-        $id = $usuario->procuraId2($login_email = $_POST['txtLoginEmail']);
-    } else {
-        $id = $usuario->procuraId($login_email = $_POST['txtLoginEmail']);
-    }
-    
-    if ($msg == "Bem vindo.") {
-
-        $url = "http://localhost/petiti/api/usuario/$id";
-
-        $json = file_get_contents($url);
-        $dados = json_decode($json);
-        $login = $dados[0]->loginUsuario;
-
-        $_SESSION['login'] = $login;
-        header('location: /petiti/feed');
-    } else {
-        header('location: /petiti/login');
-        $cookie->criarCookie('retorno-login', $msg, 2);
-    }
-});
 
 $app->post('/usuario/add', function (Request $request, Response $response, array $args) {
     $data = $request->getParsedBody();
@@ -116,8 +81,11 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
             $id = $retorno["id"];
             @session_start();
             $_SESSION['id-cadastro'] = $id;
-
+            if ($_SESSION['tipo-usuario'] == "empresa") {
+                header('location: /petiti/foto-empresa');  
+            }else{
             header('location: /petiti/foto-usuario');
+            }
         } else {
             $cookie->criarCookie("erro-cadastro", $msg, 1);
             header('location: /petiti/cadastro-usuario');
@@ -133,14 +101,82 @@ $app->get('/usuario/delete/{id}', function (Request $request, Response $response
     return $response;
 });
 
-$app->get('/usuario/update/{id}/{campo}/{valor}', function (Request $request, Response $response, array $args) {
-    $id = $args['id'];
-    $campo = $args['campo'];
-    $valor = $args['valor'];
+$app->post('/usuario/update', function (Request $request, Response $response, array $args) {
+    $data = $request->getParsedBody();
+    @session_start();
+    $campo = $_POST['campo'];
+    $id = $_SESSION['id-cadastro'];
     $usuario = new Usuario();
+    switch ($campo) {
+        case 'nome':
+            $valor = "";
+            $usuario->update($id, $campo, $valor);
+            break;
 
-    $usuario->update($id, $campo, $valor);
-    return $response;
+        case 'ramo':
+            $valor = $_POST['slRamo'];
+
+            $usuario->update($id, $campo, $valor);
+
+            header('location: /petiti/info-empresa');
+            
+            break;
+
+        case 'senha':
+            $valor = "";
+            $usuario->update($id, $campo, $valor);
+            break;
+
+        case 'login':
+            $valor = "";
+            $usuario->update($id, $campo, $valor);
+            break;
+
+        case 'email':
+            $valor = "";
+            $usuario->update($id, $campo, $valor);
+            break;
+    }
+
+  
+ 
+});
+
+$app->post('/login', function (Request $request, Response $response, array $args) {
+    $data = $request->getParsedBody();
+    $usuario = new Usuario();
+    $cookie = new Cookies();
+
+
+    $login_email = $_POST['txtLoginEmail'];
+    $senha = sha1("pet") . sha1($_POST['pw']) . sha1("iti");
+
+    $msg = $usuario->login($login_email, $senha);
+    @session_start();
+
+
+    $verificaEmail = $usuario->validarEmail($login_email);
+
+    if ($verificaEmail == false) {
+        $id = $usuario->procuraId2($login_email = $_POST['txtLoginEmail']);
+    } else {
+        $id = $usuario->procuraId($login_email = $_POST['txtLoginEmail']);
+    }
+
+    if ($msg == "Bem vindo.") {
+
+        $url = "http://localhost/petiti/api/usuario/$id";
+
+        $json = file_get_contents($url);
+        $dados = json_decode($json);
+        $login = $dados[0]->loginUsuario;
+
+        $_SESSION['login'] = $login;
+        header('location: /petiti/feed');
+    } else {
+        header('location: /petiti/login');
+        $cookie->criarCookie('retorno-login', $msg, 2);
+    }
 });
 
 // Usuario - Pet

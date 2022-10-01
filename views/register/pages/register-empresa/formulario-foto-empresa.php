@@ -17,7 +17,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
     <script src="/petiti/views/assets/js/script.js"></script>
-    <script src="./petiti/views/assets/js/cep.js"></script>
+    <script src="/petiti/views/assets/js/cep.js"></script>
+
 </head>
 
 
@@ -34,15 +35,19 @@
                         </span>
                     </div>
 
-                    <form action="controllers/controller-foto.php" method="post" enctype="multipart/form-data" class="formElementsHolder">
+                    <form action="/petiti/views/register/pages/register-empresa/controllers/controller-foto.php" method="post" enctype="multipart/form-data" class="formElementsHolder">
 
                         <label class="subTituloFormFoto">
                             Foto
                         </label>
 
                         <label class="formLabelFoto" id="inputTag">
-                            <input class="inputFormFoto" type="file" name="flFoto">
+                            <input onchange="preview()" accept=".jpg, .png" class="inputFormFoto" type="file" name="flFoto">
                             Anexar foto dos meus arquivos
+                        </label>
+
+                        <label class="previewFormFoto" id="imagePreview">
+                            <img class="previewFoto" id="frame" src="/petiti/private-user/fotos-perfil/padrao.png" />
                         </label>
 
                         <label class="formTextFotoInput" id="imageName">
