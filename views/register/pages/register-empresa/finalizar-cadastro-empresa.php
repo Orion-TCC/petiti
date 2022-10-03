@@ -3,6 +3,8 @@
 <?php
 @session_start();
 unset($_SESSION['id-cadastro']);
+unset($_SESSION['tipo-usuario']);
+session_destroy();
 ?>
 
 <head>

@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="formularioHolder">
-                        <form class="formElementsHolder" action="controllers/controller-info-empresa.php" method="post">
+                        <form class="formElementsHolder" action="/petiti/api/usuario/endereco/add" method="post">
 
                             <label class="formText">Nome da empresa</label>
                             <input class="formInput" placeholder="Insira um nome" type="text" name="txtNomeEmpresa" id="txtNomeEmpresa" required autofocus>
@@ -56,7 +56,12 @@
                             <span class="textoAviso">*Ao inserir o CEP, o outro campo será preenchido automaticamente</span>
 
                             <label class="formText">Endereço</label>
-                            <input class="formInput" type="text" name="txtEnderecoEmpresa" id="rua" required minlength="4">
+                            <input class="formInput" placeholder="Rua Feliciano de Mendonça" type="text" name="txtEnderecoEmpresa" id="rua" required minlength="4">
+                            
+                            
+                            <label class="formText">Complemento</label>
+                            <input class="formInput" placeholder="Bloco B" type="text" name="txtComplementoEmpresa" id="txtComplementoEmpresa" minlength="1">
+
 
 
                             <label class="formText">Número</label>
@@ -65,12 +70,12 @@
                             <div class="CidadeEUFHolder">
                                 <div style="width: 380px;">
                                     <label class="formText">Cidade</label>
-                                    <input class="formInput" type="text" name="txtCidadeEmpresa" id="cidade" required minlength="6">
+                                    <input class="formInput" placeholder="São Paulo" type="text" name="txtCidadeEmpresa" id="cidade" required minlength="6">
                                 </div>
 
                                 <div style="width: 160px; margin-left: 20px;">
                                     <label class="formText">UF</label>
-                                    <input class="formInput" type="text" name="txtUfEmpresa" id="uf" required minlength="6">
+                                    <input class="formInput" placeholder="SP" type="text" name="txtUfEmpresa" id="uf" required minlength="6">
                                 </div>
                             </div>
                             <button class="formSubmit" type="submit">Continuar</button>
