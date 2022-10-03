@@ -22,7 +22,7 @@ if ($foto['size'] == 0) {
     $fotoUsuario->setNomeFoto("padrao.png");
     $fotoUsuario->setCaminhoFoto("private-user/fotos-perfil/padrao.png");
     $fotoUsuario->cadastrar($fotoUsuario);
-    header('location: /petiti/final-empresa');
+    header('location: /petiti/ramo-empresa');
 } elseif ($foto['error'] <> 0) {
     $cookie->criarCookie("erro-foto", "Erro ao subir imagem, tente novamente.", 1);
     header('location: /petiti/foto-empresa');
