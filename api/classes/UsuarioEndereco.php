@@ -125,14 +125,12 @@ class usuarioEndereco
         $con = Conexao::conexao();
 
         $stmt = $con->prepare(
-            "
-            INSERT INTO `tbusuarioendereco`(
+            "INSERT INTO `tbusuarioendereco`(
                 `idUsuarioEndereco`, `logradouroUsuario`, `numeroEnderecoUsuario`,
                 `cepUsuario`, `bairroUsuario`, `complementoUsuario`,
-                `cidadeUsuario`, `estadoUsuario`, `idUsuario`
+                `cidadeUsuario`, `estadoUsuario`, idUsuario
             ) VALUES (
-                default, ?,?,?,?,?,?,?,?)
-            "
+                default, ?,?,?,?,?,?,?,?)"
         );
 
         $stmt->bindValue(1, $usuarioEndereco->getLogradouroUsuario());
@@ -145,14 +143,6 @@ class usuarioEndereco
         $stmt->bindValue(8, $usuarioEndereco->getUsuario()->getIdUsuario());
 
         $stmt->execute();
-        $resultado = $con->query("SELECT MAX(idUsuarioEndereco) FROM tbUsuarioEndereco");
-        $lista = $resultado->fetchAll();
-
-        foreach ($lista as $linha) {
-            $id = $linha[0];
-        }
-        $array = array("msg" => "Cadastro de endereço de usuário realizado com sucesso", "id: " => "$id");
-        return $array;
     }
 
     public function update($update)
