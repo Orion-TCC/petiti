@@ -54,7 +54,7 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
     $email = strtolower($email);
     $senha = $_POST['txtPw'];
     $senhaConfirmacao = $_POST['txtPwConfirm'];
-
+    $msg="";
     $validacaoEmail = $usuario->validarEmail($email);
     if ($validacaoEmail == false) {
         $cookie->criarCookie("erro-cadastro", "Email Inválido", 1);
@@ -63,7 +63,7 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
         $cookie->criarCookie("erro-cadastro", "Senhas não coincindem", 1);
         header('location: /petiti/cadastro-usuario');
     } else {
-        $senha = sha1("pet").sha1($_POST['txtPw']).sha1("iti");
+        $senha = $_POST['txtPw'];
         $usuario->setNomeUsuario($_POST['txtNomeUsuario']);
         $usuario->setLoginUsuario($_POST['txtLoginUsuario']);
         $usuario->setEmailUsuario($_POST['txtEmailUsuario']);
@@ -147,7 +147,7 @@ $app->post('/login', function (Request $request, Response $response, array $args
 
 
     $login_email = $_POST['txtLoginEmail'];
-    $senha = sha1("pet") . sha1($_POST['pw']) . sha1("iti");
+    $senha = $_POST['pw'];
 
     $msg = $usuario->login($login_email, $senha);
     @session_start();
@@ -169,7 +169,7 @@ $app->post('/login', function (Request $request, Response $response, array $args
         $dados = json_decode($json);
         $login = $dados[0]->loginUsuario;
 
-        $_SESSION['login'] = $login;
+        $_SESSION['login'] = $id;
         header('location: /petiti/feed');
     } else {
         header('location: /petiti/login');
@@ -284,16 +284,20 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
     $usuarioEndereco = new usuarioEndereco;
     $usuario = new Usuario();
 
-    $cep = $_POST['txtCepEmpresa'];
-    $url = 'viacep.com.br/ws/$cep/json/';
+    $cep = $_POST['txtCep'];
+    
 
+   
+
+    $url = "https://viacep.com.br/ws/" .$cep. "/json";
+ 
         $json = file_get_contents($url);
         $dados = json_decode($json);
         $logradouro = $dados->logradouro;
         $numero = $_POST['txtNumeroEmpresa'];
         $bairro = $dados->bairro;
         $complemento = $_POST['txtComplementoEmpresa'];
-        $cidade = $dados->cidade;
+        $cidade = $dados->localidade;
         $estado = $_POST['txtUfEmpresa'];
 
     @session_start();
@@ -309,13 +313,14 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
     
     $usuarioEndereco->setUsuario($usuario);
 
-    $return = $usuarioEndereco->cadastrar($usuarioEndereco);
-    $id = $return['id'];
-    $_SESSION['id-cadastro'] = $id;
+    $usuarioEndereco->cadastrar($usuarioEndereco);
+
+    header('location: /petiti/final-empresa');
 });
 
 try {
     $app->run();
 } catch (Exception $e) {
-    header('location: /petiti/views/erroGeral.php');
+    print_r($e);
+    //header('location: /petiti/views/erroGeral.php');
 }
