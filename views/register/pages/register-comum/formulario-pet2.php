@@ -50,6 +50,8 @@ include_once("sentinela-cadastro.php");
 
                             <label class="formText">Espécie</label>
                             <select name="slEspecie" id="slEspecie" required class="SelectEspecie">
+                                <option selected disabled style="color: #000000; font-family: 'Raleway Bold';" value="0">Escolha</option>
+
                                 <option style="color: #000000; font-family: 'Raleway Bold';" value="1">Cachorro</option>
                                 <option style="color: #000000; font-family: 'Raleway Bold';" value="2">Gato</option>
                                 <option style="color: #000000; font-family: 'Raleway Bold';" value="3">Roedor</option>

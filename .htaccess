@@ -15,6 +15,7 @@ RewriteRule ^inicio-pet views/register/pages/register-comum/formulario-pet1.php 
 RewriteRule ^formulario-pet views/register/pages/register-comum/formulario-pet2.php [NC,L]
 RewriteRule ^foto-pet views/register/pages/register-comum/formulario-foto-pet.php [NC,L]
 RewriteRule ^final-usuario views/register/pages/register-comum/finalizar-forms.php [NC,L]
+RewriteRule ^editar views/editar-conta.php [NC,L]
 
 
 RewriteRule ^cadastro-empresa views/register/pages/register-empresa/formulario-usuario-empresa.php [NC,L]

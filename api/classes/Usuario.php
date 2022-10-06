@@ -105,7 +105,8 @@ class Usuario
         `loginUsuario`, 
         `verificadoUsuario`, 
         `emailUsuario`, 
-        `idTipoUsuario` FROM `tbusuario`
+        `idTipoUsuario` 
+        FROM `tbusuario`
         ";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -114,16 +115,17 @@ class Usuario
     public function listarUsuario($id)
     {
         $con = Conexao::conexao();
-        $query = "
-        SELECT `idUsuario`, 
-        `nomeUsuario`, 
-        `senhaUsuario`, 
-        `loginUsuario`, 
-        `verificadoUsuario`, 
-        `emailUsuario`, 
-        `idTipoUsuario` FROM `tbusuario`
-        WHERE idUsuario = $id
-        ";
+        $query = "SELECT idUsuario, 
+        nomeUsuario, 
+        senhaUsuario, 
+        loginUsuario, 
+        verificadoUsuario, 
+        emailUsuario, 
+        tbtipousuario.idTipoUsuario,
+        tipoUsuario
+        FROM tbusuario 
+        INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
+        WHERE tbusuario.idUsuario = $id";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
@@ -234,10 +236,10 @@ class Usuario
         $lista = $resultado->fetchAll();
         $lista_Array = (array) $lista;
         $contagemEmail = count($lista_Array);
-
         $msg = "";
+       
         if (($contagemEmail > 0) || ($contagemLogin > 0)) {
-
+           
 
             $fotoUsuario = new FotoUsuario();
             $usuario = new Usuario();
@@ -292,7 +294,7 @@ class Usuario
                     $_SESSION['login'] = $dados[0]->loginUsuario;
                     $_SESSION['verificado'] = $dados[0]->verificadoUsuario;
                     $_SESSION['email'] = $dados[0]->emailUsuario;
-                    $_SESSION['tipo'] = $dados[0]->idTipoUsuario;
+                    $_SESSION['tipo'] = $dados[0]->tipoUsuario;
                     $_SESSION['foto'] = $foto;
 
 
@@ -352,6 +354,30 @@ class Usuario
 
                 break;
         }
+
+        return $msg = "Seu perfil foi atualizado.";
+    }
+
+    public function updateFull($update)
+    {
+        $con = Conexao::conexao();
+
+        $stmt = $con->prepare("UPDATE `tbusuario` 
+        SET `nomeUsuario`= ?,
+        `senhaUsuario`= ?,`loginUsuario`= ?,
+        `verificadoUsuario`= ?,`emailUsuario`= ?,
+        `idTipoUsuario`= ? 
+        WHERE idUsuario = ?");
+
+        $stmt->bindValue(1, $update->getNomeUsuario());
+        $stmt->bindValue(2, $update->getSenhaUsuario());
+        $stmt->bindValue(3, $update->getLoginUsuario());
+        $stmt->bindValue(4, $update->getVerificadoUsuario());
+        $stmt->bindValue(5, $update->getEmailUsuario());
+        $stmt->bindValue(6, $update->getTipoUsuario());
+        $stmt->bindValue(7, $update->getIdUsuario());
+
+        $stmt->execute();
 
         return $msg = "Seu perfil foi atualizado.";
     }

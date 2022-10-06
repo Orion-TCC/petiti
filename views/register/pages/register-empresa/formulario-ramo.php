@@ -45,7 +45,7 @@
                     $listaTipos = $tipoUsuario->listar();
                     ?>
 
-                    <form action="api/usuario/update" method="post">
+                    <form action="api/usuario/update/ramo" method="post">
                         <input type="hidden" name="campo" value="ramo">
                         <select name="slRamo" id="slRamo" class="SelectRamo">
                             <option value="0" disabled selected>Escolha</option>
@@ -54,7 +54,7 @@
                                 if ($linha['idTipoUsuario'] > 1) { ?>
                                     <option style="color: #000000;" value="<?php echo $linha['idTipoUsuario'] ?>"><?php echo $linha['tipoUsuario'] ?></option>
                                 <?php } ?>
-                            <?php   }
+                            <?php }
                             ?>
                         </select>
                         <div class="formTextRamo">

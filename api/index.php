@@ -54,7 +54,7 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
     $email = strtolower($email);
     $senha = $_POST['txtPw'];
     $senhaConfirmacao = $_POST['txtPwConfirm'];
-    $msg="";
+    $msg = "";
     $validacaoEmail = $usuario->validarEmail($email);
     if ($validacaoEmail == false) {
         $cookie->criarCookie("erro-cadastro", "Email Inválido", 1);
@@ -80,9 +80,9 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
             @session_start();
             $_SESSION['id-cadastro'] = $id;
             if ($_SESSION['tipo-usuario'] == "empresa") {
-                header('location: /petiti/foto-empresa');  
-            }else{
-            header('location: /petiti/foto-usuario');
+                header('location: /petiti/foto-empresa');
+            } else {
+                header('location: /petiti/foto-usuario');
             }
         } else {
             $cookie->criarCookie("erro-cadastro", $msg, 1);
@@ -98,6 +98,86 @@ $app->get('/usuario/delete/{id}', function (Request $request, Response $response
     $usuario->delete($usuario);
     return $response;
 });
+
+$app->post('/usuario/update/ramo', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $usuario = new Usuario();
+    $id = $_SESSION['id-cadastro'];
+    $valor = $_POST['slRamo'];
+
+    $usuario->update($id, "ramo", $valor);
+
+    header('location: /petiti/info-empresa');
+});
+
+// $app->post('/usuario/update/conta', function (Request $request, Response $response, array $args) {
+//     @session_start();
+//     $usuario = new Usuario();
+//     $tipoUsuario = new TipoUsuario();
+//     $id = $_SESSION['id-cadastro'];
+
+
+//     $usuario->setIdUsuario($id);
+//     $usuario->setNomeUsuario($_POST['']);
+//     $usuario->setLoginUsuario($_POST['']);
+//     $usuario->setSenhaUsuario($_POST['']);
+//     $usuario->setEmailUsuario($_POST['']);
+//     $usuario->setVerificadoUsuario($_POST['']);
+//     $tipoUsuario->setTipoUsuario($_POST['']);
+//     $usuario->setTipoUsuario($tipoUsuario);
+//     $usuario->updateFull($usuario);
+
+
+
+
+//     header('location: /petiti/info-empresa');
+// });
+
+// $app->post('/usuario/update/perfil', function (Request $request, Response $response, array $args) {
+//     @session_start();
+//     $usuario = new Usuario();
+//     $tipoUsuario = new TipoUsuario();
+//     $id = $_SESSION['id-cadastro'];
+
+
+//     $usuario->setIdUsuario($id);
+//     $usuario->setNomeUsuario($_POST['']);
+//     $usuario->setLoginUsuario($_POST['']);
+//     $usuario->setSenhaUsuario($_POST['']);
+//     $usuario->setEmailUsuario($_POST['']);
+//     $usuario->setVerificadoUsuario($_POST['']);
+//     $tipoUsuario->setTipoUsuario($_POST['']);
+//     $usuario->setTipoUsuario($tipoUsuario);
+//     $usuario->updateFull($usuario);
+
+
+
+
+//     header('location: /petiti/info-empresa');
+// });
+
+// $app->post('/usuario/update/adm', function (Request $request, Response $response, array $args) {
+//     @session_start();
+//     $usuario = new Usuario();
+//     $tipoUsuario = new TipoUsuario();
+//     $id = $_SESSION['id-cadastro'];
+
+
+//     $usuario->setIdUsuario($id);
+//     $usuario->setNomeUsuario($_POST['']);
+//     $usuario->setLoginUsuario($_POST['']);
+//     $usuario->setSenhaUsuario($_POST['']);
+//     $usuario->setEmailUsuario($_POST['']);
+//     $usuario->setVerificadoUsuario($_POST['']);
+//     $tipoUsuario->setTipoUsuario($_POST['']);
+//     $usuario->setTipoUsuario($tipoUsuario);
+//     $usuario->updateFull($usuario);
+
+
+
+
+//     header('location: /petiti/info-empresa');
+// });
 
 $app->post('/usuario/update', function (Request $request, Response $response, array $args) {
     $data = $request->getParsedBody();
@@ -117,7 +197,7 @@ $app->post('/usuario/update', function (Request $request, Response $response, ar
             $usuario->update($id, $campo, $valor);
 
             header('location: /petiti/info-empresa');
-            
+
             break;
 
         case 'senha':
@@ -135,9 +215,6 @@ $app->post('/usuario/update', function (Request $request, Response $response, ar
             $usuario->update($id, $campo, $valor);
             break;
     }
-
-  
- 
 });
 
 $app->post('/login', function (Request $request, Response $response, array $args) {
@@ -285,23 +362,23 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
     $usuario = new Usuario();
 
     $cep = $_POST['txtCep'];
-    
 
-   
 
-    $url = "https://viacep.com.br/ws/" .$cep. "/json";
- 
-        $json = file_get_contents($url);
-        $dados = json_decode($json);
-        $logradouro = $dados->logradouro;
-        $numero = $_POST['txtNumeroEmpresa'];
-        $bairro = $dados->bairro;
-        $complemento = $_POST['txtComplementoEmpresa'];
-        $cidade = $dados->localidade;
-        $estado = $_POST['txtUfEmpresa'];
+
+
+    $url = "https://viacep.com.br/ws/" . $cep . "/json";
+
+    $json = file_get_contents($url);
+    $dados = json_decode($json);
+    $logradouro = $dados->logradouro;
+    $numero = $_POST['txtNumeroEmpresa'];
+    $bairro = $dados->bairro;
+    $complemento = $_POST['txtComplementoEmpresa'];
+    $cidade = $dados->localidade;
+    $estado = $_POST['txtUfEmpresa'];
 
     @session_start();
-    
+
     $usuarioEndereco->setLogradouroUsuario($logradouro);
     $usuarioEndereco->setNumeroUsuario($numero);
     $usuarioEndereco->setCepUsuario($cep);
@@ -310,7 +387,7 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
     $usuarioEndereco->setCidadeUsuario($cidade);
     $usuarioEndereco->setEstadoUsuario($estado);
     $usuario->setIdUsuario($_SESSION['id-cadastro']);
-    
+
     $usuarioEndereco->setUsuario($usuario);
 
     $usuarioEndereco->cadastrar($usuarioEndereco);
