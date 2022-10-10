@@ -16,6 +16,7 @@ include_once("sentinela.php");
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="assets/styles/stylesheet.css">
+    <link rel="stylesheet" href="assets/libs/croppie/croppie.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
     <!-- título da pág e icone (logo) -->
@@ -23,10 +24,15 @@ include_once("sentinela.php");
     <link rel="icon" href="assets/images/logo-icon.svg">
 
     <!--script-->
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script src="assets/libs/croppie/croppie.js"></script>
+    <script src="assets/js/jquery-scripts.js"></script>
+    <script src="assets/js/script.js"></script>
+
 
 </head>
 
@@ -59,40 +65,23 @@ include_once("sentinela.php");
                                 </p>
                             </button>
 
-                            <div id="foto" class="modal">
-                                <form action="api/publicar" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="flFoto" id="flFoto">
-                                    <a href="#recortar" rel="modal:open">Continuar</a>
-                                    <div id="recortar" class="modal">
-
-                                    </div>
-                                </form>
-                            </div>
-
-                        </div>
-
-                        <div class="userElementos">
-
-                            <img class="imagemUser" src="<?php
-                                                            echo $_SESSION['foto']; ?>" alt="">
-
-                            <div style="display: flex; flex-direction: column; margin-left: 10px;">
-
-                                <span class="textNomeUsuario"><?php
-                                                                echo $_SESSION['nome'];
-                                                                ?></span>
-
-                                <span class="textTagUsuario"> <?php
-                                                                echo "@" . $_SESSION['login'];
-                                                                ?>
-                            </div>
+                    
                         </div>
                     </div>
 
+                    <div class="userElementos">
 
+                        <img class="imagemUser" src="<?php echo $_SESSION['foto']; ?>" alt="">
 
+                        <div style="display: flex; flex-direction: column; margin-left: 10px;">
 
+                            <span class="textNomeUsuario"><?php echo $_SESSION['nome']; ?></span>
+
+                            <span class="textTagUsuario"> <?php echo "@" . $_SESSION['login']; ?>
+                        </div>
+                    </div>
                 </div>
+            </div>
         </section>
 
 
@@ -101,9 +90,6 @@ include_once("sentinela.php");
 
 
         <section class="postsHolder">
-            <div id="tui-image-editor" style="height: 800px">
-                <canvas></canvas>
-            </div>
         </section>
 
         <section class="rightBarHolder">
