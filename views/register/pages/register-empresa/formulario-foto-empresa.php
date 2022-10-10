@@ -1,4 +1,8 @@
+<html>
 <head>
+    <?php
+    include_once("sentinela-cadastro.php");
+    ?>
     <!-- HTML base -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

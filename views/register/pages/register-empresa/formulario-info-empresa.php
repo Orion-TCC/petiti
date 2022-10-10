@@ -1,7 +1,13 @@
 <!DOCTYPE php>
 <html lang="pt-br">
+<?php
+include_once("sentinela-cadastro.php");
+?>
 
 <head>
+    <?php
+    include_once("sentinela-cadastro.php");
+    ?>
     <!-- HTML base -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,8 +63,8 @@
 
                             <label class="formText">Endereço</label>
                             <input class="formInput" placeholder="Rua Feliciano de Mendonça" type="text" name="txtEnderecoEmpresa" id="rua" required minlength="4">
-                            
-                            
+
+
                             <label class="formText">Complemento</label>
                             <input class="formInput" placeholder="Bloco B" type="text" name="txtComplementoEmpresa" id="txtComplementoEmpresa" minlength="1">
 

@@ -307,6 +307,42 @@ class Usuario
             return $msg = "Credenciais Inválidas.";
         }
     }
+    public function updateNome($update){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbusuario SET nomeUsuario = ? WHERE idUsuario = ?");
+        $stmt->bindValue(1, $update->getNomeUsuario());
+        $stmt->bindValue(2, $update->getIdUsuario());
+        $stmt->execute();
+    }
+
+    public function updateTipo($update){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbusuario SET idTipoUsuario = ? WHERE idUsuario = ?");
+        $stmt->bindValue(1, $update->getTipoUsuario()->getIdTipoUsuario());
+        $stmt->bindValue(2, $update->getIdUsuario());
+        $stmt->execute();
+    }
+    public function updateLogin($update){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbusuario SET loginUsuario = ? WHERE idUsuario = ?");
+        $stmt->bindValue(1, $update->getLoginUsuario());
+        $stmt->bindValue(2, $update->getIdUsuario());
+        $stmt->execute();
+    }
+    public function updateEmail($update){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbusuario SET emailUsuario = ? WHERE idUsuario = ?");
+        $stmt->bindValue(1, $update->getEmailUsuario());
+        $stmt->bindValue(2, $update->getIdUsuario());
+        $stmt->execute();
+    }
+    public function updateSenha($update){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbusuario SET senhaUsuario = ? WHERE idUsuario = ?");
+        $stmt->bindValue(1, $update->getSenhaUsuario());
+        $stmt->bindValue(2, $update->getIdUsuario());
+        $stmt->execute();
+    }
 
     public function update($id, $campo, $valor)
     {

@@ -1,3 +1,4 @@
+<html>
 <head>
     <!-- HTML base -->
     <meta charset="UTF-8">
@@ -45,7 +46,7 @@
                     $listaTipos = $tipoUsuario->listar();
                     ?>
 
-                    <form action="api/usuario/update/ramo" method="post">
+                    <form action="api/usuario/cadastro/update/ramo" method="post">
                         <input type="hidden" name="campo" value="ramo">
                         <select name="slRamo" id="slRamo" class="SelectRamo">
                             <option value="0" disabled selected>Escolha</option>

@@ -5,7 +5,7 @@ include_once("sentinela.php");
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
-    
+
 <head>
     <!-- HTML base -->
     <meta charset="UTF-8">
@@ -14,13 +14,13 @@ include_once("sentinela.php");
     <meta name="description" content="A Orion é uma empresa especializada em softwares para empresas de pequeno e médio porte.">
 
     <!-- styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="assets/styles/stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
-    <link rel="icon" href="assets/images/logo-icon.svg"> 
+    <link rel="icon" href="assets/images/logo-icon.svg">
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
@@ -30,79 +30,89 @@ include_once("sentinela.php");
 
 </head>
 
-<body id="bodyFeed">  
+<body id="bodyFeed">
 
-<main class="holderFeed">
-    <section class="leftBarHolder">
-    <div class="leftBar">
-        
+    <main class="holderFeed">
+        <section class="leftBarHolder">
+            <div class="leftBar">
 
-        <div class="leftBarMenu">
 
-        <div class="innerLeftBarMenu">
-        
-        <div style="display: flex; flex-direction: column;">
-        <img src="./assets/images/logo_principal.svg" class="imgLogoFeed">
-            <a href="#">Home</a>
-            <a href="#">Animais perdidos</a>
-            <a href="#">Animais em doação</a>
-            <a href="#">Notificações</a>
-            <a href="#">Mensagens</a>
-            <a href="#">Produto e serviços</a>
+                <div class="leftBarMenu">
 
-            <hr class="line">
+                    <div class="innerLeftBarMenu">
 
-            <!-- Modal Post -->
-           <button class="botaoCPost" > 
-            <p>
-             <a href="#ex1" rel="modal:open">Criar um Post</a>
-            </p>
-           </button>
+                        <div style="display: flex; flex-direction: column;">
+                            <img src="./assets/images/logo_principal.svg" class="imgLogoFeed">
+                            <a href="#">Home</a>
+                            <a href="#">Animais perdidos</a>
+                            <a href="#">Animais em doação</a>
+                            <a href="#">Notificações</a>
+                            <a href="#">Mensagens</a>
+                            <a href="#">Produto e serviços</a>
 
-           <div id="ex1" class="modal">
-            <p>Thanks for clicking. That felt good.</p>
-            <a href="#" rel="modal:close">Close</a>
-           </div>
+                            <hr class="line">
 
-        </div>
+                            <!-- Modal Post -->
+                            <button class="botaoCPost">
+                                <p>
+                                    <a href="#foto" rel="modal:open">Criar um Post</a>
+                                </p>
+                            </button>
 
-           <div class="userElementos">
+                            <div id="foto" class="modal">
+                                <form action="api/publicar" method="post" enctype="multipart/form-data">
+                                    <input type="file" name="flFoto" id="flFoto">
+                                    <a href="#recortar" rel="modal:open">Continuar</a>
+                                    <div id="recortar" class="modal">
 
-            <img class="imagemUser" src="<?php
-            echo $_SESSION['foto'];?>" alt="">
+                                    </div>
+                                </form>
+                            </div>
 
-            <div style="display: flex; flex-direction: column; margin-left: 10px;">
+                        </div>
 
-            <span class="textNomeUsuario"><?php
-            echo $_SESSION['nome'];
-            ?></span>
+                        <div class="userElementos">
 
-            <span class="textTagUsuario"> <?php
-            echo "@".$_SESSION['login'];
-            ?>
+                            <img class="imagemUser" src="<?php
+                                                            echo $_SESSION['foto']; ?>" alt="">
+
+                            <div style="display: flex; flex-direction: column; margin-left: 10px;">
+
+                                <span class="textNomeUsuario"><?php
+                                                                echo $_SESSION['nome'];
+                                                                ?></span>
+
+                                <span class="textTagUsuario"> <?php
+                                                                echo "@" . $_SESSION['login'];
+                                                                ?>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+        </section>
+
+
+
+
+
+
+        <section class="postsHolder">
+            <div id="tui-image-editor" style="height: 800px">
+                <canvas></canvas>
             </div>
-        </div>
-        </div>
-        
-       
+        </section>
 
-
-    </div>
-    </section>
-
-
-
-
-
-
-    <section class="postsHolder">
-
-    </section>
-    
         <section class="rightBarHolder">
 
         </section>
-</main>
+    </main>
+    <script>
 
+    </script>
 </body>
+
 </html>

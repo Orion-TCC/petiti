@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 foreach (glob("classes/*") as $filename) {
     require_once $filename;
 }
-
+date_default_timezone_set('America/Sao_Paulo');
 use Slim\Factory\AppFactory;
 use Slim\Exception\NotFoundException;
 use Slim\Http\UploadedFile;
@@ -102,10 +102,28 @@ $app->get('/usuario/delete/{id}', function (Request $request, Response $response
 $app->post('/usuario/update/ramo', function (Request $request, Response $response, array $args) {
     @session_start();
     $usuario = new Usuario();
-    $id = $_SESSION['id-cadastro'];
+    $tipousuario = new TipoUsuario();
+    $id = $_SESSION['id'];
     $valor = $_POST['slRamo'];
 
+
     $usuario->update($id, "ramo", $valor);
+
+    header('location: /petiti/info-empresa');
+});
+
+$app->post('/usuario/cadastro/update/ramo', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $usuario = new Usuario();
+    $tipoUsuario = new TipoUsuario();
+    $id = $_SESSION['id-cadastro'];
+    $valor = $_POST['slRamo'];
+    $usuario->setIdUsuario($id);
+    $tipoUsuario->setIdTipoUsuario($valor);
+    $usuario->setTipoUsuario($tipoUsuario);
+    $usuario->updateTipo($usuario);
+
+    // $usuario->update($id, "ramo", $valor);
 
     header('location: /petiti/info-empresa');
 });
@@ -246,7 +264,7 @@ $app->post('/login', function (Request $request, Response $response, array $args
         $dados = json_decode($json);
         $login = $dados[0]->loginUsuario;
 
-        $_SESSION['login'] = $id;
+        $_SESSION['login'] = $login;
         header('location: /petiti/feed');
     } else {
         header('location: /petiti/login');
@@ -363,9 +381,6 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
 
     $cep = $_POST['txtCep'];
 
-
-
-
     $url = "https://viacep.com.br/ws/" . $cep . "/json";
 
     $json = file_get_contents($url);
@@ -388,6 +403,9 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
     $usuarioEndereco->setEstadoUsuario($estado);
     $usuario->setIdUsuario($_SESSION['id-cadastro']);
 
+    $usuario->setNomeUsuario($_POST['txtNomeEmpresa']);
+    $usuario->updateNome($usuario);
+
     $usuarioEndereco->setUsuario($usuario);
 
     $usuarioEndereco->cadastrar($usuarioEndereco);
@@ -395,6 +413,49 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
     header('location: /petiti/final-empresa');
 });
 
+$app->post('/publicar', function (Request $request, Response $response, array $args) {
+        $usuario = new Usuario();
+        $fotoPublicacao = new FotoPublicacao();
+        $cookie = new Cookies();
+        $publicacao = new Publicacao();
+
+        $caminho = "/xampp/htdocs/petiti/private-user/fotos-publicacao/";
+        $caminhoBanco = "";
+        $foto = $_FILES['flFoto'];
+        $nomeFoto = $foto['name'];
+
+
+        $tipo = strtolower(pathinfo($nomeFoto, PATHINFO_EXTENSION));
+
+        @session_start();
+        if ($foto['size'] == 0) {
+            header('location: /petiti/feed');
+        } elseif ($foto['error'] <> 0) {
+            $cookie->criarCookie("erro-foto", "Erro ao subir imagem, tente novamente.", 1);
+            header('location: /petiti/feed');
+        } elseif (($tipo <> 'jpg') && ($tipo <> 'jpeg') && ($tipo <> 'png')) {
+            $cookie->criarCookie("erro-foto", "Formato inválido.", 1);
+            header('location: /petiti/feed');
+        } else {
+            $nomeRandom = uniqid();
+            $caminhoCompleto = $caminho . $nomeRandom . "." . $tipo;
+            move_uploaded_file($foto['tmp_name'], $caminhoCompleto);
+
+
+            $caminhoBanco = "private-user/fotos-publicacao/" . $nomeRandom . "." . $tipo;
+            $nomeTipo = $nomeRandom . "." . $tipo;
+            $usuario->setIdUsuario($_SESSION['id']);
+            $publicacao->setIdPublicacao($_SESSION['id-publicacao']);
+            $data = date('Y-m-d H:i:s');
+            $publicacao->setDataPublicacao($data);
+            $fotoPublicacao->setPublicacao($publicacao);
+            $fotoPublicacao->setNomeFoto($nomeTipo);
+            $fotoPublicacao->setCaminhoFoto($caminhoBanco);
+            $fotoPublicacao->cadastrar($fotoUsuario);
+            header('location: /petiti/inicio-pet');
+        }
+    }
+);
 try {
     $app->run();
 } catch (Exception $e) {

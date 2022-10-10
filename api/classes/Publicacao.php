@@ -68,5 +68,24 @@ class Publicacao
 
         return $this;
     }
+
+
+    public function cadastrar($publicacao){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare('INSERT INTO tbpublicacao(idPublicacao, textoPublicacao, dataPublicacao, idUsuario)
+        VALUES (default, ?, ?, ?)');
+        $stmt->bindValue(1, $publicacao->getTextoPublicacao());
+        $stmt->bindValue(2, $publicacao->getDataPublicacao());
+        $stmt->bindValue(3, $publicacao->getUsuario()->getIdUsuario());
+        $stmt->execute();
+        $resultado = $con->query("SELECT MAX(idPublicacao) FROM tbpublicacao");
+        $lista = $resultado->fetchAll();
+
+        foreach ($lista as $linha) {
+            $id = $linha[0];
+        }
+        return $id;
+    }
 }
+
 ?>
