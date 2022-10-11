@@ -30,20 +30,21 @@ session_destroy();
 
 <body>
     <header id="home">
-        <nav id="navbar">
+        <nav id="navbar" >
             <div>
                 <a href="#"> <img class="logoNavbar" src="assets/images/logo_principal.svg"></a>
             </div>
 
             <div>
-                <a href="#postagens" class="navbarElement">Postagens</a>
-                <a href="#networking" class="navbarElement">Networking</a>
-                <a href="#parcerias" class="navbarElement">Parcerias</a>
+                <a href="#postagens" class="navbarElement hover-underline-animation">Postagens</a>
+                <a href="#networking" class="navbarElement hover-underline-animation">Networking</a>
+                <a href="#parcerias" class="navbarElement hover-underline-animation">Parcerias</a>
+                <a href="#funcionalidades" class="navbarElement hover-underline-animation">Funcionalidades</a>
             </div>
 
             <div>
                 <a href="/petiti/login/" class="navbarElement">Entrar</a>
-                <a href="/petiti/tipo-usuario" class="navbarElementBotao">Cadastre-se</a>
+                <a href="/petiti/tipo-usuario" class="navbarElementBotao ">Cadastre-se</a>
             </div>
         </nav>
     </header>
@@ -59,7 +60,7 @@ session_destroy();
                     </div>
 
                     <div>
-                        <img src="assets/images/ilustração - pc.svg" alt="">
+                        <img class="descImage" src="assets/images/ilustração - pc.svg" alt="">
                     </div>
 
             </div>
@@ -68,9 +69,9 @@ session_destroy();
         <section id="postagens">
             <div class="holderSegundaPage">
                 <div class="textinhoHolder">
-                    <div class="textinho">
-                        <span class="textin">Poste fotos dos momentos mais fofos dos seus pets!</span>
-                    </div>
+                    
+                        <span class="textin">Poste fotos dos momentos mais </span>
+                        <span class="textin">fofos dos seus pets!</span>
                 </div>
 
 
@@ -106,7 +107,7 @@ session_destroy();
                 <div class="lojinhaHolder">
                     <div class="lojinhaTextTituloHolder">
                         <div>
-                            <span class="lojinhaTextTitulo">Além de posts, veja nossas parcerias com petshops da sua região.</span>
+                            <span class="lojinhaTextTitulo">Explore a <enfase> Pet iti</enfase>! Veja nossas parcerias com petshops da sua região.</span>
                         </div>
 
                         <div>
@@ -114,7 +115,7 @@ session_destroy();
                         </div>
 
                         <div class="lojinhaTextHolder">
-                            <span class="lojinhaText">Veja se o <span class="lojinhaTextStyle">petshop</span>, <span class="lojinhaTextStyle">casa de ração</span> ou até <span class="lojinhaTextStyle">mesmo banho e tosa</span> da sua região criou um perfil na nossa rede social e seja capaz de ver os produtos que ele oferece.</span>
+                            <span class="lojinhaText">Veja se o <enfase>petshop</enfase>, <enfase>casa de ração</enfase> ou até mesmo <enfase>banho e tosa</enfase> da sua região criou um perfil na nossa rede social e seja capaz de ver os produtos que ele oferece.</span>
                         </div>
                     </div>
 
@@ -125,7 +126,7 @@ session_destroy();
             </div>
         </section>
 
-        <section id="QuintaPartePage">
+        <section id="funcionalidades">
 
             <div class="holderQuintaPage">
                 <img class="leandro" src="assets/images/leandro.svg" alt="">
@@ -164,15 +165,16 @@ session_destroy();
         </a>
 
         <div class="FooterHolder">
-            <a href="#postagens" class="FooterElement">Postagens</a>
-            <a href="#networking" class="FooterElement">Networking</a>
-            <a href="#parcerias" class="FooterElement">Parcerias</a>
-            <a href="#" class="FooterElement">Sobre a empresa</a>
+            <a href="#postagens" class="FooterElement hover-underline-animation">Postagens</a>
+            <a href="#networking" class="FooterElement hover-underline-animation">Networking</a>
+            <a href="#parcerias" class="FooterElement hover-underline-animation">Parcerias</a>
+            <a href="#funcionalidades" class="FooterElement hover-underline-animation">Funcionalidades</a>
+            <a href="#" class="FooterElement hover-underline-animation">Sobre a empresa</a>
         </div>
 
         <div class="FooterHolder2">
-            <a href="#" class="FooterElement">Entrar</a>
-            <a href="/petiti/tipo-usuario" class="FooterElement">Cadastre-se</a>
+            <a href="#" class="FooterElement hover-underline-animation">Entrar</a>
+            <a href="/petiti/tipo-usuario" class="FooterElement hover-underline-animation">Cadastre-se</a>
         </div>
         <div class="FooterHolder3">
             <span class="FooterElement">Copyright © Orion - 2022. Todos os direitos reservados.</span>
