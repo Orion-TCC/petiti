@@ -165,16 +165,16 @@ session_destroy();
         </a>
 
         <div class="FooterHolder">
-            <a href="#postagens" class="FooterElement hover-underline-animation">Postagens</a>
-            <a href="#networking" class="FooterElement hover-underline-animation">Networking</a>
-            <a href="#parcerias" class="FooterElement hover-underline-animation">Parcerias</a>
-            <a href="#funcionalidades" class="FooterElement hover-underline-animation">Funcionalidades</a>
-            <a href="#" class="FooterElement hover-underline-animation">Sobre a empresa</a>
+            <a href="#postagens" class="FooterElement hover-underline-animation-white">Postagens</a>
+            <a href="#networking" class="FooterElement hover-underline-animation-white">Networking</a>
+            <a href="#parcerias" class="FooterElement hover-underline-animation-white">Parcerias</a>
+            <a href="#funcionalidades" class="FooterElement hover-underline-animation-white">Funcionalidades</a>
+            <a href="#" class="FooterElement hover-underline-animation-white">Sobre a empresa</a>
         </div>
 
         <div class="FooterHolder2">
-            <a href="#" class="FooterElement hover-underline-animation">Entrar</a>
-            <a href="/petiti/tipo-usuario" class="FooterElement hover-underline-animation">Cadastre-se</a>
+            <a href="#" class="FooterElement hover-underline-animation-white">Entrar</a>
+            <a href="/petiti/tipo-usuario" class="FooterElement hover-underline-animation-white">Cadastre-se</a>
         </div>
         <div class="FooterHolder3">
             <span class="FooterElement">Copyright © Orion - 2022. Todos os direitos reservados.</span>
