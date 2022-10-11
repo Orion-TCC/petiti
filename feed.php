@@ -24,11 +24,12 @@ include_once("sentinela.php");
     <link rel="icon" href="assets/images/logo-icon.svg">
 
     <!--script-->
-    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script src="assets/libs/croppie/croppie.js"></script>
     <script src="assets/js/jquery-scripts.js"></script>
     <script src="assets/js/script.js"></script>
@@ -57,15 +58,13 @@ include_once("sentinela.php");
                             <a href="#">Produto e serviços</a>
 
                             <hr class="line">
-
-                            <!-- Modal Post -->
                             <button class="botaoCPost">
                                 <p>
-                                    <a href="#foto" rel="modal:open">Criar um Post</a>
+                                    <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
                                 </p>
                             </button>
 
-                    
+
                         </div>
                     </div>
 
@@ -96,9 +95,29 @@ include_once("sentinela.php");
 
         </section>
     </main>
-    <script>
 
-    </script>
+    
+    <!-- Modal Post -->
+    <section id="post">
+
+        <div id="modal-foto-post" class="modal">
+            <p>Arraste fotos, vídeos ou gif aqui</p>
+            <input type="file" accept="image/*" id="flFoto">
+        </div>
+
+        <div id="modal-recortar-foto" class="modal">
+            <p>
+                <a id="continuar-post" href="#criar-post" rel="modal:open">Continuar</a>
+            </p>
+            <div id="upload-demo"></div>
+        </div>
+
+        <div id="criar-post" class="modal">
+            <div id="preview-crop-image">
+
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>

@@ -1,51 +1,62 @@
 $(document).ready(function () {
-  $image_crop = $("#image_demo").croppie({
+  
+  var resize = $("#upload-demo").croppie({
     enableExif: true,
+    enableOrientation: true,
     viewport: {
+      // Default { width: 100, height: 100, type: 'square' }
       width: 200,
       height: 200,
-      type: "square", //circle
+      type: "square", //square
     },
     boundary: {
       width: 300,
       height: 300,
     },
   });
-
-  $("#before_crop_image").on("change", function () {
+  
+  $("#flFoto").on("change", function () {
     var reader = new FileReader();
-    reader.onload = function (event) {
-      $image_crop
+    reader.onload = function (e) {
+      resize
         .croppie("bind", {
-          url: event.target.result,
+          url: e.target.result,
         })
         .then(function () {
           console.log("jQuery bind complete");
         });
     };
     reader.readAsDataURL(this.files[0]);
-
-    $("#imageModel").modal("show");
+    $("#modal-foto-post").modal("hide");
+    $("#modal-recortar-foto").modal("show");
   });
 
-  $(".crop_image").click(function (event) {
-    $image_crop
+  $("#continuar-post").on("click", function (ev) {
+    ev.preventDefault(); 
+    var blob;
+    resize
       .croppie("result", {
-        type: "canvas",
-        size: "viewport",
+        type: "blob",
       })
-      .then(function (response) {
-        $.ajax({
-          url: "index.php",
-          type: "POST",
-          data: {
-            image: response,
-          },
-          success: function (data) {
-            $("#imageModel").modal("hide");
-            alert("Crop image has been uploaded");
-          },
-        });
+      .then(function (resp) {
+        blob = resp;
       });
+    
+    resize.croppie("result", {
+         type: "canvas",
+         size: "viewport",
+       }).then(function (img) {
+         $.ajax({
+           type: "POST",
+           enctype: "multipart/form-data",
+           data: {"image":img},
+           url: "/petiti/assets/libs/croppie/croppie.php",
+           success: function (data) {
+             html = '<img src="' + img + '" />';
+             $("#preview-crop-image").html(html);
+             console.log(data);
+           },
+         });
+       });
   });
 });
