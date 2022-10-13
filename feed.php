@@ -34,7 +34,6 @@ include_once("sentinela.php");
     <script src="assets/js/jquery-scripts.js"></script>
     <script src="assets/js/script.js"></script>
 
-
 </head>
 
 <body id="bodyFeed">
@@ -82,20 +81,11 @@ include_once("sentinela.php");
                 </div>
             </div>
         </section>
-
-
-
-
-
-
         <section class="postsHolder">
         </section>
-
         <section class="rightBarHolder">
-
         </section>
     </main>
-
     
     <!-- Modal Post -->
     <section id="post">

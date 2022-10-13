@@ -23,6 +23,14 @@ $_SESSION['tipo-usuario'] = "usuario";
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <script src="/petiti/assets/libs/croppie/croppie.js"></script>
+    
+    <script async src="/petiti/views/assets/js/script-jquery-foto.js"></script>
+
     <script async src="/petiti/views/assets/js/script-jquery.js"></script>
     <script src="/petiti/views/assets/js/script.js"></script>
 </head>
@@ -32,7 +40,7 @@ $_SESSION['tipo-usuario'] = "usuario";
         <section id="formularioUsuario">
             <div class="holderFormularioUsuario">
                 <div class="formulario">
-                   <a class="setaVoltar" href="tipo-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
+                    <a class="setaVoltar" href="tipo-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder">
                         <span>
                             Vamos começar!
@@ -52,21 +60,18 @@ $_SESSION['tipo-usuario'] = "usuario";
 
                             <label class="formText">Seu nome</label>
                             <input class="formInput" placeholder="Insira seu nome ou apelido" type="text" name="txtNomeUsuario" id="txtNomeUsuario" required minlength="2">
-                           
+
                             <label class="formText">Nome de usuário</label>
                             <input class="formInput" placeholder="Insira seu username" type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4">
 
                             <p class="avisoNomeUsuarioValidacao"></p>
                             <p class="avisoNomeUsuarioQtd"></p>
-                         
-
-
 
                             <label class="formText">Senha</label>
                             <input class="formInput" placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
                             <p id="senhaAvisoTamanho"></p>
 
-                            
+
                             <label class="formText">Confirme sua senha</label>
                             <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
 
@@ -76,7 +81,7 @@ $_SESSION['tipo-usuario'] = "usuario";
                                 <input class="checkboxSenha" type="checkbox" id="mostrarSenha">
                                 <label for="mostrarSenha" class="formTextMostrarSenha" id=mostrarSenhaLabel style="cursor: pointer;">Mostrar Senha</label>
                             </div>
-                            
+
                             <button id="submitUsuario" class="formSubmit" type="submit">Continuar</button>
                         </form>
                     </div>

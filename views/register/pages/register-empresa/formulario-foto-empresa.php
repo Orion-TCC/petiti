@@ -12,6 +12,9 @@
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="/petiti/views/assets/css/style.css">
+    <link rel="stylesheet" href="/petiti/assets/libs/croppie/croppie.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
@@ -22,6 +25,14 @@
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
     <script src="/petiti/views/assets/js/script.js"></script>
     <script src="/petiti/views/assets/js/cep.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <script src="/petiti/assets/libs/croppie/croppie.js"></script>
+
+    <script async src="/petiti/views/assets/js/script-jquery-foto.js"></script>
+    <script src="/petiti/views/assets/js/script.js"></script>
 
 </head>
 
@@ -46,7 +57,7 @@
                         </label>
 
                         <label class="formLabelFoto" id="inputTag">
-                            <input onchange="preview()" accept=".jpg, .png" class="inputFormFoto" type="file" name="flFoto">
+                            <input accept=".jpg, .png" class="inputFormFoto" type="file" name="flFoto">
                             Anexar foto dos meus arquivos
                         </label>
 
@@ -69,6 +80,11 @@
             </div>
         </section>
     </main>
+    <div id="modal-recortar-foto" class="modal">
+        <a href="#close-modal" rel="modal:close">
+            <label rel="modal:close" id="continuar-crop-foto" style="cursor:pointer;">Confirmar</label>
+        </a>
+        <div id="upload-demo"></div>
+    </div>
 </body>
-
 </html>
