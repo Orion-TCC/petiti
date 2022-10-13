@@ -120,7 +120,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("../img//fundo-cadastro.svg");
@@ -131,7 +131,9 @@ body {
   flex-direction: column;
   align-items: center;
   width: 600px;
-  height: 840px;
+  height: 820px;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: #bad5db;
   border-radius: 20px;
   margin: 20px;
@@ -148,11 +150,10 @@ body {
 .formElementsHolder {
   display: flex;
   flex-direction: column;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 20px;
-  padding-bottom: 30px;
+
+  padding: 20px 50px 20px 50px ;
 }
+
 
 .tituloFormHolder {
   font-family: "Raleway Bold", sans-serif;
@@ -188,7 +189,7 @@ body {
 
   text-decoration: none;
   letter-spacing: 1px;
-  padding-top: 30px;
+  padding-top: 20px;
  
 
 }
