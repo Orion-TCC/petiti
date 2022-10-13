@@ -56,26 +56,20 @@ $_SESSION['tipo-usuario'] = "usuario";
                             <label class="formText">Nome de usuário</label>
                             <input class="formInput" placeholder="Insira seu username" type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4">
 
-                            <p class="avisoNomeUsuarioQtd"></p>
                             <p class="avisoNomeUsuarioValidacao"></p>
+                            <p class="avisoNomeUsuarioQtd"></p>
+                         
 
-
-                            <p class="avisoNomeUsuarioQtd">
-
-                            </p>
-                            <p class="avisoNomeUsuarioValidacao">
-
-                            </p>
 
 
                             <label class="formText">Senha</label>
                             <input class="formInput" placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
                             <p id="senhaAvisoTamanho"></p>
-                            <p id="senhaAvisoVerificacao"></p>
+
                             
                             <label class="formText">Confirme sua senha</label>
                             <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
-                            <p id="senhaAvisoTamanho"></p>
+
 
                             <p id="senhaAvisoVerificacao"></p>
                             <div class="caixaMostrarSenha">

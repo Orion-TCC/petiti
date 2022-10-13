@@ -290,20 +290,6 @@ outline: #646363 solid 2px;
   font-family: "Raleway Bold", sans-serif;
 }
 
-.senhaAvisoErrada {
-  display: flex;
-  align-items: center;
-  font-family: "Raleway Bold", sans-serif;
-  color: #db310c;
-}
-
-.senhaAvisoCerta {
-  display: flex;
-  align-items: center;
-  font-family: "Raleway Bold", sans-serif;
-  color: #3837a1;
-}
-
 
 .cookieCadastroEmpresa {
   position: absolute;
@@ -320,45 +306,20 @@ outline: #646363 solid 2px;
   font-family: "Raleway Bold", sans-serif;
 }
 
-.avisoNomeUsuarioInvalido{
-  margin: 7px 0 0 22px;
-  font-family: "Raleway Bold", sans-serif;
-  color: #db310c;
-}
 
-.avisoNomeUsuarioValido{
+
+
+.textoCerto{
   margin: 7px 0 0 22px;
   font-family: "Raleway Bold", sans-serif;
   color: #3837a1;
 }
 
-.emailErrado {
-  display: flex;
-  align-items: center;
+.textoErrado {
+  margin: 7px 0 0 22px;
   font-family: "Raleway Bold", sans-serif;
   color: #db310c;
 }
-.emailCerto{
-  display: flex;
-  align-items: center;
-  font-family: "Raleway Bold", sans-serif;
-  color: #3837a1;
-}
-
-
-.emailErrado {
-  display: flex;
-  align-items: center;
-  font-family: "Raleway Bold", sans-serif;
-  color: #db310c;
-}
-.emailCerto{
-  display: flex;
-  align-items: center;
-  font-family: "Raleway Bold", sans-serif;
-  color: #3837a1;
-}
-
 
 /* PAGE CADASTRO DE FOTO */
 

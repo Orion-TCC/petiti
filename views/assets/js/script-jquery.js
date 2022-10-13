@@ -12,12 +12,12 @@ $("#txtEmailUsuario").keyup(function () {
   var bool = validateEmail(email);
   if (bool == true) {
     $("#avisoEmail").text("Email Válido");
-    $("#avisoEmail").addClass("emailCerto");
-    $("#avisoEmail").removeClass("emailErrado");
+    $("#avisoEmail").addClass("textoCerto");
+    $("#avisoEmail").removeClass("textoErrado");
   } else {
     $("#avisoEmail").text("Email inválido");
-    $("#avisoEmail").addClass("emailErrado");
-    $("#avisoEmail").removeClass("emailCerto");
+    $("#avisoEmail").addClass("textoErrado");
+    $("#avisoEmail").removeClass("textoCerto");
   }
 });
 
@@ -32,23 +32,23 @@ $("#txtLoginUsuario").keyup(function () {
       $(".avisoNomeUsuarioQtd").text(
         "Utilize um login com 4 ou mais caracteres."
       );
-      $(".avisoNomeUsuarioQtd").removeClass("avisoNomeUsuarioValido");
-      $(".avisoNomeUsuarioQtd").addClass("avisoNomeUsuarioInvalido");
+      $(".avisoNomeUsuarioQtd").removeClass("textoCerto");
+      $(".avisoNomeUsuarioQtd").addClass("textoErrado");
       $("#submitUsuario").prop("disabled", true);
-      $(".avisoNomeUsuarioValidacao").addClass("avisoNomeUsuarioInvalido");
-      $(".avisoNomeUsuarioValidacao").removeClass("avisoNomeUsuarioValido");
+      $(".avisoNomeUsuarioValidacao").addClass("textoErrado");
+      $(".avisoNomeUsuarioValidacao").removeClass("textoCerto");
       $(".avisoNomeUsuarioValidacao").text("Usuário Inválido");
     } else {
       $(".avisoNomeUsuarioQtd").text("");
       $("#submitUsuario").prop("disabled", false);
       $(".avisoNomeUsuarioValidacao").text("Usuário Válido");
-      $(".avisoNomeUsuarioValidacao").addClass("avisoNomeUsuarioValido");
-      $(".avisoNomeUsuarioValidacao").removeClass("avisoNomeUsuarioInvalido");
+      $(".avisoNomeUsuarioValidacao").addClass("textoCerto");
+      $(".avisoNomeUsuarioValidacao").removeClass("textoErrado");
     }
   } else {
     $("#submitUsuario").prop("disabled", true);
-    $(".avisoNomeUsuarioValidacao").addClass("avisoNomeUsuarioInvalido");
-    $(".avisoNomeUsuarioValidacao").removeClass("avisoNomeUsuarioValido");
+    $(".avisoNomeUsuarioValidacao").addClass("textoErrado");
+    $(".avisoNomeUsuarioValidacao").removeClass("textoCerto");
     $(".avisoNomeUsuarioValidacao").text("Usuário Inválido");
   }
 });
@@ -61,12 +61,12 @@ $("#txtPw").keyup(function () {
   if (tamanhoSenha > 0) {
     if (senha == $(this).val()) {
       $("#senhaAvisoVerificacao").text("Senhas correspondem.");
-      $("#senhaAvisoVerificacao").addClass("senhaAvisoCerta");
-      $("#senhaAvisoVerificacao").removeClass("senhaAvisoErrada");
+      $("#senhaAvisoVerificacao").addClass("textoCerto");
+      $("#senhaAvisoVerificacao").removeClass("textoErrado");
     } else {
       $("#senhaAvisoVerificacao").text("Senhas não correspondem.");
-      $("#senhaAvisoVerificacao").addClass("senhaAvisoErrada");
-      $("#senhaAvisoVerificacao").removeClass("senhaAvisoCerta");
+      $("#senhaAvisoVerificacao").addClass("textoErrado");
+      $("#senhaAvisoVerificacao").removeClass("textoCerto");
     }
   } else {
     $("#senhaAvisoVerificacao").text("");
@@ -80,12 +80,12 @@ $("#txtPwConfirm").keyup(function () {
   if (tamanhoSenha > 0) {
     if (senha == $(this).val()) {
       $("#senhaAvisoVerificacao").text("Senhas correspondem.");
-      $("#senhaAvisoVerificacao").addClass("senhaAvisoCerta");
-      $("#senhaAvisoVerificacao").removeClass("senhaAvisoErrada");
+      $("#senhaAvisoVerificacao").addClass("textoCerto");
+      $("#senhaAvisoVerificacao").removeClass("textoErrado");
     } else {
       $("#senhaAvisoVerificacao").text("Senhas não correspondem.");
-      $("#senhaAvisoVerificacao").addClass("senhaAvisoErrada");
-      $("#senhaAvisoVerificacao").removeClass("senhaAvisoCerta");
+      $("#senhaAvisoVerificacao").addClass("textoErrado");
+      $("#senhaAvisoVerificacao").removeClass("textoCerto");
     }
   } else {
     $("#senhaAvisoVerificacao").text("");
@@ -97,8 +97,8 @@ $("#txtPw").keyup(function () {
 
   if (tamanhoSenha < 6) {
     $("#senhaAvisoTamanho").text("Utilize uma senha com 6 ou mais caracteres.");
-    $("#senhaAvisoTamanho").addClass("senhaAvisoErrada");
-    $("#senhaAvisoTamanho").removeClass("senhaAvisoCerta");
+    $("#senhaAvisoTamanho").addClass("textoErrado");
+    $("#senhaAvisoTamanho").removeClass("textoCerto");
   } else {
     $("#senhaAvisoTamanho").text("");
   }
