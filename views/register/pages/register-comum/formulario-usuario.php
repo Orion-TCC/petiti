@@ -46,16 +46,28 @@ $_SESSION['tipo-usuario'] = "usuario";
                         <form class="formElementsHolder" action="api/usuario/add" method="post">
                             <label class="formText">Email</label>
                             <input class="formInput" placeholder="Insira seu email" type="email" name="txtEmailUsuario" id="txtEmailUsuario" required autofocus>
+                            <p id="avisoEmail">
+
+                            </p>
                             <label class="formText">Seu nome</label>
                             <input class="formInput" placeholder="Insira seu nome ou apelido" type="text" name="txtNomeUsuario" id="txtNomeUsuario" required minlength="2">
                             <label class="formText">Nome de usuário</label>
                             <input class="formInput" placeholder="Insira seu username" type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4">
-                            <div class="avisoNomeUsuario" id="avisoNomeUsuario">
-                            </div>
+
+                            <p class="avisoNomeUsuarioQtd">
+
+                            </p>
+                            <p class="avisoNomeUsuarioValidacao">
+
+                            </p>
+
                             <label class="formText">Senha</label>
                             <input class="formInput" placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
                             <label class="formText">Confirme sua senha</label>
                             <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
+                            <p id="senhaAvisoTamanho"></p>
+
+                            <p id="senhaAvisoVerificacao"></p>
                             <div class="caixaMostrarSenha">
                                 <input class="checkboxSenha" type="checkbox" id="mostrarSenha">
                                 <label for="mostrarSenha" class="formTextMostrarSenha" id=mostrarSenhaLabel style="cursor: pointer;">Mostrar Senha</label>
@@ -63,11 +75,7 @@ $_SESSION['tipo-usuario'] = "usuario";
                             <button id="submitUsuario" class="formSubmit" type="submit">Continuar</button>
                         </form>
                     </div>
-                    <div id="senhaAviso" class="senhaAviso animate__bounce">
-                        <p id="senhaAvisoTamanho"></p>
 
-                        <p id="senhaAvisoVerificacao"></p>
-                    </div>
 
                     <div class="cookieCadastro animate__bounce">
                         <p class="animate__animated animate__tada "><?php echo @$_COOKIE['erro-cadastro'] ?></p>

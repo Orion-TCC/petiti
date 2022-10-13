@@ -293,6 +293,19 @@ body {
   color: #3837a1;
 }
 
+.emailErrado {
+  display: flex;
+  align-items: center;
+  font-family: "Raleway Bold", sans-serif;
+  color: #db310c;
+}
+.emailCerto{
+  display: flex;
+  align-items: center;
+  font-family: "Raleway Bold", sans-serif;
+  color: #3837a1;
+}
+
 /* PAGE CADASTRO DE FOTO */
 
 .holderFormularioFoto {
