@@ -107,6 +107,8 @@ $("#txtPw").keyup(function () {
     $("#senhaAvisoTamanho").removeClass("textoCerto");
   } else {
     $("#senhaAvisoTamanho").text("Senha válida");
+    $("#senhaAvisoTamanho").addClass("textoCerto");
+    $("#senhaAvisoTamanho").removeClass("textoErrado");
   }
 });
 

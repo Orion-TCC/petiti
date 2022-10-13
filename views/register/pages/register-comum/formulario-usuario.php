@@ -74,11 +74,10 @@ $_SESSION['tipo-usuario'] = "usuario";
 
                             <label class="formText">Confirme sua senha</label>
                             <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
-
-
                             <p id="senhaAvisoVerificacao"></p>
-                            <div class="caixaMostrarSenha">
-                                <input class="checkboxSenha" type="checkbox" id="mostrarSenha">
+
+                            <div class="caixaMostrarSenha" >
+                                <input class="checkboxSenha" type="checkbox" id="mostrarSenha" style="cursor: pointer;">
                                 <label for="mostrarSenha" class="formTextMostrarSenha" id=mostrarSenhaLabel style="cursor: pointer;">Mostrar Senha</label>
                             </div>
 
