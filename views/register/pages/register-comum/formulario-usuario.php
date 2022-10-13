@@ -47,7 +47,6 @@ $_SESSION['tipo-usuario'] = "usuario";
                         <form class="formElementsHolder" action="api/usuario/add" method="post">
                             <label class="formText">Email</label>
                             <input class="formInput" placeholder="Insira seu email" type="email" name="txtEmailUsuario" id="txtEmailUsuario" required autofocus>
-
                             <p id="avisoEmail"></p>
 
                             <label class="formText">Seu nome</label>
@@ -76,14 +75,17 @@ $_SESSION['tipo-usuario'] = "usuario";
                                 <label for="mostrarSenha" class="formTextMostrarSenha" id=mostrarSenhaLabel style="cursor: pointer;">Mostrar Senha</label>
                             </div>
                             
+                            <div class="cookieCadastro animate__bounce">
+                            <p class="animate__animated animate__tada "><?php echo @$_COOKIE['erro-cadastro'] ?></p>
+                            </div>
                             <button id="submitUsuario" class="formSubmit" type="submit">Continuar</button>
+                           
+
                         </form>
                     </div>
 
 
-                    <div class="cookieCadastro animate__bounce">
-                        <p class="animate__animated animate__tada "><?php echo @$_COOKIE['erro-cadastro'] ?></p>
-                    </div>
+
                 </div>
             </div>
         </section>

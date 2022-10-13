@@ -46,6 +46,8 @@
   src: url("../fonts/PublicSans-Bold.ttf");
 }
 
+
+
 /* GERAL */
 .container-content {
   width: 100vw;
@@ -130,6 +132,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+
   width: 600px;
   height: 820px;
   overflow-y: auto;
@@ -167,7 +171,8 @@ body {
 }
 
 .setaVoltar{
-  padding: 30px 0 30px 50px;
+  padding: 0 0 30px 50px;
+  margin-top: 40px;
   align-self: flex-start;
 }
 
@@ -243,7 +248,27 @@ outline: #646363 solid 2px;
   border-radius: 20px;
   width: 495px;
   height: 44px;
-  margin-top: 45px;
+  margin-top: 10px;
+  cursor: pointer;
+
+  font-family: "Raleway Bold", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 19px;
+  color: #000000;
+  border: none;
+}
+
+.formSubmitLogin {
+  background: #fcf892;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  width: 370px;
+  height: 44px;
+  margin: 45px 0 20px 0;
+  align-self: center;
+  justify-self: center;
   cursor: pointer;
 
   font-family: "Raleway Bold", sans-serif;
@@ -257,12 +282,18 @@ outline: #646363 solid 2px;
 
 .caixaMostrarSenha{
   display: flex;
-  padding-top: 15px;
+  align-items: center;
+  height: 40px;
+  width: 130px;
   flex-direction: row;
-  justify-content: flex-start;
   gap: 10px;
-  align-items: baseline;
+  margin-left: 20px;
 }
+
+
+
+
+
 .checkboxSenha{
   background: #ffffff;
   mix-blend-mode: normal;
@@ -277,10 +308,9 @@ outline: #646363 solid 2px;
   font-size: 15px;
 }
 .cookieCadastro {
-  position: absolute;
-  margin-top: 685px;
+  width: 100%;
   display: flex;
-  align-items: center;
+  justify-content: center;
   font-family: "Raleway Bold", sans-serif;
   color: #db310c;
 }
@@ -441,8 +471,8 @@ outline: #646363 solid 2px;
 
 /* PAGE FORMULARIO PET 1 */
 .holderFormularioPet1 {
-  height: 911px;
-  width: 1680px;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -900,25 +930,7 @@ outline: #646363 solid 2px;
   margin-top: 35px;
 }
 
-.formSubmitLogin {
-  background: #fcf892;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  width: 370px;
-  height: 44px;
-  margin: 45px 0 20px 0;
-  align-self: center;
-  justify-self: center;
-  cursor: pointer;
 
-  font-family: "Raleway Bold", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 19px;
-  color: #000000;
-  border: none;
-}
 
 .textoLogin {
   font-family: "Raleway Bold";
