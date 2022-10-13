@@ -284,11 +284,6 @@ outline: #646363 solid 2px;
   color: #db310c;
 }
 
-.senhaAviso {
-  display: flex;
-  align-items: center;
-  font-family: "Raleway Bold", sans-serif;
-}
 
 
 .cookieCadastroEmpresa {
@@ -300,11 +295,6 @@ outline: #646363 solid 2px;
   color: #db310c;
 }
 
-.avisoNomeUsuario{
-  display: flex;
-  align-items: center;
-  font-family: "Raleway Bold", sans-serif;
-}
 
 
 
