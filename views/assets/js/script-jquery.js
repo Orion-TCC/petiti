@@ -10,15 +10,21 @@ $("#txtEmailUsuario").keyup(function () {
   }
   var email = $(this).val();
   var bool = validateEmail(email);
-  if (bool == true) {
-    $("#avisoEmail").text("Email Válido");
-    $("#avisoEmail").addClass("textoCerto");
-    $("#avisoEmail").removeClass("textoErrado");
+  var tamanhoEmail = $("#txtEmailUsuario").val().length;
+  if (tamanhoEmail > 0) {
+      if (bool == true) {
+        $("#avisoEmail").text("Email Válido");
+        $("#avisoEmail").addClass("textoCerto");
+        $("#avisoEmail").removeClass("textoErrado");
+      } else {
+        $("#avisoEmail").text("Email inválido");
+        $("#avisoEmail").addClass("textoErrado");
+        $("#avisoEmail").removeClass("textoCerto");
+      }
   } else {
-    $("#avisoEmail").text("Email inválido");
-    $("#avisoEmail").addClass("textoErrado");
-    $("#avisoEmail").removeClass("textoCerto");
+    $("#avisoEmail").text("");
   }
+
 });
 
 // Validar nome de usuário
@@ -100,7 +106,7 @@ $("#txtPw").keyup(function () {
     $("#senhaAvisoTamanho").addClass("textoErrado");
     $("#senhaAvisoTamanho").removeClass("textoCerto");
   } else {
-    $("#senhaAvisoTamanho").text("");
+    $("#senhaAvisoTamanho").text("Senha válida");
   }
 });
 
@@ -130,5 +136,3 @@ $(".SelectDiaMesAno").on("change", function () {
       break;
   }
 });
-
-
