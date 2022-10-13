@@ -19,7 +19,34 @@
   src: url("../fonts/Raleway-ExtraBold.ttf");
 }
 
-/* PAGE ESCOLHA TIPO USUARIO */
+
+
+@font-face {
+  font-family: "Public Sans Extra Bold";
+  src: url("../fonts/PublicSans-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Public Sans Medium";
+  src: url("../fonts/PublicSans-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Public Sans Regular";
+  src: url("../fonts/PublicSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Public Sans Thin";
+  src: url("../fonts/PublicSans-Thin.ttf");
+}
+
+@font-face {
+  font-family: "Public Sans Bold";
+  src: url("../fonts/PublicSans-Bold.ttf");
+}
+
+/* GERAL */
 .container-content {
   width: 100vw;
   display: flex;
@@ -40,9 +67,12 @@ body {
   overflow-x: hidden;
 }
 
+
+/* PAGE ESCOLHA TIPO USUARIO */
+
 .holderETU {
-  height: 911px;
-  width: 1680px;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,8 +114,8 @@ body {
 
 /* PAGE CADASTRO USUARIO */
 .holderFormularioUsuario {
-  height: 911px;
-  width: 1680px;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -101,12 +131,12 @@ body {
   flex-direction: column;
   align-items: center;
   width: 600px;
-  height: fit-content;
+  height: 840px;
   background-color: #bad5db;
   border-radius: 20px;
   margin: 20px;
   padding-bottom: 10px;
-  margin-bottom: 30px;
+
 }
 
 .imgSetaVoltarHolder {
@@ -129,10 +159,15 @@ body {
   color: #000000;
   font-size: 50px;
   text-decoration: none;
-  padding-top: 70px;
+
   width: 450px;
 
   text-align: center;
+}
+
+.setaVoltar{
+  padding: 30px 0 30px 50px;
+  align-self: flex-start;
 }
 
 .tituloFormHolder2 {
@@ -150,11 +185,12 @@ body {
   font-family: "Raleway Bold", sans-serif;
   color: #3837a1;
   font-size: 20px;
+
   text-decoration: none;
   letter-spacing: 1px;
   padding-top: 30px;
-  padding-left: 104px;
-  width: 100%;
+ 
+
 }
 
 .formularioHolder {
@@ -166,6 +202,7 @@ body {
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
+  margin-left: 20px;
   line-height: 23px;
   padding-top: 20px;
 }
@@ -179,12 +216,16 @@ body {
   height: 50px;
   width: 100%;
   padding-inline: 20px;
-  font-family: "Raleway Bold", sans-serif;
+  font-family: "Public Sans Bold", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
 }
+.formInput:focus {
+outline: #646363 solid 2px;
+}
+
 
 .formInput::placeholder {
   font-family: "Raleway Bold", sans-serif;
@@ -280,18 +321,30 @@ body {
 }
 
 .avisoNomeUsuarioInvalido{
-  display: flex;
-  align-items: center;
+  margin: 7px 0 0 22px;
   font-family: "Raleway Bold", sans-serif;
   color: #db310c;
 }
 
 .avisoNomeUsuarioValido{
+  margin: 7px 0 0 22px;
+  font-family: "Raleway Bold", sans-serif;
+  color: #3837a1;
+}
+
+.emailErrado {
+  display: flex;
+  align-items: center;
+  font-family: "Raleway Bold", sans-serif;
+  color: #db310c;
+}
+.emailCerto{
   display: flex;
   align-items: center;
   font-family: "Raleway Bold", sans-serif;
   color: #3837a1;
 }
+
 
 /* PAGE CADASTRO DE FOTO */
 
@@ -804,20 +857,28 @@ body {
 
 /* PAGE LOGIN */
 .holderLogin {
-  width: 1680px;
-  height: 990px;
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: end;
+  flex-direction: row;
+
   overflow: hidden;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url("../img/Login-BG.svg");
+  background: #fabf7a;
+  background-size: 65vw;
+  background-image: url("/petiti/views/assets/img/onda-login.svg");
 }
 
+.ilustracaoLogin{
+  width: 65%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .login {
-  height: 100%;
+  height: 100vh;
   width: 35%;
   background: #bad5db;
 
@@ -830,6 +891,13 @@ body {
 .loginLogo {
   width: 250px;
   margin-bottom: 30px;
+}
+
+.formLogin{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .formTextLogin {
@@ -870,9 +938,11 @@ body {
   background: #fcf892;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  width: 400px;
+  width: 370px;
   height: 44px;
-  margin-top: 45px;
+  margin: 45px 0 20px 0;
+  align-self: center;
+  justify-self: center;
   cursor: pointer;
 
   font-family: "Raleway Bold", sans-serif;
@@ -893,7 +963,7 @@ body {
   display: flex;
   align-items: center;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 10px;
 
   color: #000000;
 }
@@ -910,4 +980,5 @@ body {
   text-align: center;
 
   color: #3837a2;
+  margin-left: 10px;
 }

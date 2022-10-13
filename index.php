@@ -36,10 +36,10 @@ session_destroy();
             </div>
 
             <div>
-                <a href="#postagens" class="navbarElement hover-underline-animation">Postagens</a>
-                <a href="#networking" class="navbarElement hover-underline-animation">Networking</a>
-                <a href="#parcerias" class="navbarElement hover-underline-animation">Parcerias</a>
-                <a href="#funcionalidades" class="navbarElement hover-underline-animation">Funcionalidades</a>
+                <a href="#postagens" class="navbarElement ">Postagens</a>
+                <a href="#networking" class="navbarElement ">Networking</a>
+                <a href="#parcerias" class="navbarElement ">Parcerias</a>
+                <a href="#funcionalidades" class="navbarElement ">Funcionalidades</a>
             </div>
 
             <div>

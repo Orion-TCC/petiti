@@ -24,10 +24,15 @@
     <main class="container-content">
         <section id="loginUsuario">
             <div class="holderLogin">
-                <div class="Login">
-                    <img class="loginLogo" src="/petiti/views/assets/img/logo_principal.svg" alt="">
+                <div class="ilustracaoLogin">
+                    <img style="margin-left: 500px;" src="/petiti/views/assets/img/ilustracao-login.svg" alt="">
+                </div>
 
-                    <form action="/petiti/api/login" method="POST">
+
+
+                <div class="Login">
+                    <a href="/petiti/index.php"><img class="loginLogo" src="/petiti/views/assets/img/logo_principal.svg" alt=""></a>
+                    <form class="formLogin" action="/petiti/api/login" method="POST">
                         <div class="loginInputHolder">
                             <label class="formTextLogin">Nome de usúario ou email</label>
                             <input class="formInputLogin" name="txtLoginEmail" placeholder="Nome de usuário ou email" required minlength="4">
@@ -45,8 +50,8 @@
                         Não tem uma conta? <a href="/petiti/tipo-usuario" class="textoLoginAhref"> Cadastre-se</a>
                     </span>
 
-                    <span class="recuperarSenha">
-                        Esqueceu sua senha? <a href="./formularioRecuperacao.php" class="recuperarSenhaAhref"> Recupere</a>
+                    <span class="textoLogin">
+                        Esqueceu sua senha? <a href="./formularioRecuperacao.php" class="textoLoginAhref "> Recupere</a>
                     </span>
                 </div>
         </section>
