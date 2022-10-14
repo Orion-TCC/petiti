@@ -83,10 +83,14 @@ include_once("sentinela-cadastro.php");
     </main>
 </body>
 <div id="modal-recortar-foto" class="modal">
-    <a href="#close-modal" rel="modal:close">
-        <label rel="modal:close" id="continuar-crop-foto-pet" style="cursor:pointer;">Confirmar</label>
-    </a>
-    <div id="upload-demo"></div>
+    <div class="modalInner">
+     <span class="subTituloForm">Redimensione sua imagem!</span>
+       <div id="upload-demo"></div>
+           <a href="#close-modal" rel="modal:close" class="formInputFoto">
+                <span rel="modal:close" id="continuar-crop-foto" style="padding-block: 10px; padding-inline: 87px;">Confirmar</span>
+            </a>
+    </div>
+
 </div>
 
 </html>
