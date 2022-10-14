@@ -41,30 +41,26 @@ include_once("sentinela-cadastro.php");
             <div class="holderFormularioFotoPet">
                 <div class="formulario">
 
-
+                <a class="setaVoltar" href="cadastro-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder2">
                         <span>
                             Escolha a sua foto preferida do seu pet
                         </span>
                     </div>
 
-                    <form action="/petiti/views/register/pages/register-comum/controllers/controller-foto-pet.php" enctype="multipart/form-data" method="post" class="formElementsHolder">
+                   
+                    <form action="/petiti/views/register/pages/register-comum/controllers/controller-foto-pet.php" enctype="multipart/form-data" method="post" class="formElementsHolderflexivel">
 
-                        <label class="subTituloFormFoto">
-                            Foto
-                        </label>
 
-                        <label class="formLabelFotoPet" id="inputTag">
-                            <input accept=".jpg, .png" class="inputFormFotoPet" type="file" name="flFotoPet" id="flFotoPet">
-                            Anexar foto dos meus arquivos
-                        </label>
+
 
                         <label class="previewFormFoto" id="imagePreview">
-                            <img class="previewFoto" id="frame" src="/petiti/private-user/fotos-pet/padrao.png" width="150px" height="150px" />
+                            <img class="previewFoto" id="frame" src="/petiti/private-user/fotos-perfil/padrao.png" width="150px" height="150px" />
                         </label>
 
-                        <label class="formTextFotoPetInput" id="imageName">
-                            Nenhum arquivo selecionado
+                        <label class="formLabelFoto" id="inputTag">
+                            <input accept=".jpg, .png" class="inputFormFotoPet" type="file" name="flFotoPet" id="flFotoPet">
+                            Anexar foto dos meus arquivos
                         </label>
 
                         <div class="EHolder">
@@ -79,6 +75,7 @@ include_once("sentinela-cadastro.php");
 
                         <input class="formInputFoto" type="submit" value="Continuar">
                     </form>
+                   
                 </div>
             </div>
 

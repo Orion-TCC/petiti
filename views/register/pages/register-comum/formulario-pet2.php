@@ -29,19 +29,20 @@ include_once("sentinela-cadastro.php");
             <div class="holderFormularioPet">
 
                 <div class="formulario">
-
+                <a class="setaVoltar" href="inicio-pet"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder">
                         <span>
                             Vamos conhecer seu pet!
                         </span>
                     </div>
 
+                   
                     <div class="subTituloFormHolderUsuario">
                         <span>
                             Insira os dados dele abaixo:
                         </span>
                     </div>
-
+                 <div class="formElementsHolderflexivel">
                     <div class="formularioHolder ">
                         <form class="formElementsHolder" action="/petiti/api/pet/add" method="POST" enctype="multipart/form-data">
 
@@ -72,6 +73,7 @@ include_once("sentinela-cadastro.php");
                             </div>
                             <button class="formSubmit" type="submit">Continuar</button>
                         </form>
+                    </div>
                     </div>
                 </div>
             </div>

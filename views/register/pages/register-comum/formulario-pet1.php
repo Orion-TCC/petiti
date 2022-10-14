@@ -27,10 +27,12 @@ include_once("sentinela-cadastro.php");
         <section id="formularioPet1">
             <div class="holderFormularioPet1">
                 <div class="formulario">
-
-                    <div class="tituloFormHolder">
+                <a class="setaVoltar" href="foto-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
+                <div class="tituloFormHolder">
                         <span>Agora, vamos ao que interessa...</span>
-                    </div>
+                </div>
+
+                <div class="formElementsHolderflexivel"> 
 
                     <div class="subTituloForm">
                         <span>Deseja criar uma conta para o seu pet agora ?</span>
@@ -49,6 +51,7 @@ include_once("sentinela-cadastro.php");
                     <div>
                         <img src="/petiti/views/assets/img/logo-icon-achatada.svg" alt="">
                     </div>
+                </div>
                 </div>
             </div>
         </section>

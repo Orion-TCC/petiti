@@ -41,15 +41,14 @@ include_once("sentinela-cadastro.php");
         <section id="formularioFoto">
             <div class="holderFormularioFoto">
                 <div class="formulario">
-
+                <a class="setaVoltar" href="cadastro-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolderFoto">
                         <span>
                             Deixe seu pefil mais a sua cara!
                         </span>
                     </div>
 
-                    <form enctype="multipart/form-data" action="/petiti/views/register/pages/register-comum/controllers/controller-foto.php" method="post" id="formFotoUsuario" class="formElementsHolderFoto">
-
+                    <div class="formElementsHolderflexivel">
 
                         <label class="previewFormFoto">
                             <div id="imagePreview"></div>
@@ -73,17 +72,21 @@ include_once("sentinela-cadastro.php");
                             <span>Caso não tenha escolhido uma foto, você pode fazer isso depois. E, caso você tenha anexado uma foto e não tenha gostado muito, será possível alterar quando sua conta estiver feita.</span>
                         </div>
 
-                        <input class="formInputFoto" type="submit" value="Continuar">
+                       <a href="inicio-pet" class="formInputFoto"> Continuar</a>
 
-                    </form>
+                        </div>
                 </div>
+                    <div id="modal-recortar-foto" class="modal">
+                          <div class="modalInner">
+                                 <span class="subTituloForm">Redimensione sua imagem!</span>
+                                <div id="upload-demo"></div>               
+                                    <a href="#close-modal" rel="modal:close" class="formInputFoto">
+                                        <span rel="modal:close" id="continuar-crop-foto" style="padding-block: 10px; padding-inline: 87px;">Confirmar</span>
+                                    </a>
+                            </div>
+                    </div>
             </div>
+
         </section>
     </main>
 
-    <div id="modal-recortar-foto" class="modal">
-        <a href="#close-modal" rel="modal:close">
-            <span rel="modal:close" id="continuar-crop-foto" style="cursor:pointer;">Confirmar</span>
-        </a>
-        <div id="upload-demo"></div>
-    </div>

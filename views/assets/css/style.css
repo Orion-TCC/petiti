@@ -136,8 +136,8 @@ body {
 
   width: 600px;
   height: 820px;
-  overflow-y: auto;
-  overflow-x: hidden;
+overflow-y: auto;
+
   background-color: #bad5db;
   border-radius: 20px;
   margin: 20px;
@@ -155,14 +155,17 @@ body {
   display: flex;
   flex-direction: column;
 
-  padding: 15px 50px 0 50px ;
+  padding: 0 50px 0 50px ;
 }
 
-.formElementsHolderFoto {
+.formElementsHolderflexivel {
   display: flex;
   flex-direction: column;
-align-items: center;
-  padding: 5px 50px 0 50px ;
+  align-items: center;
+  width: 100%;
+  height: 670px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 
@@ -171,7 +174,6 @@ align-items: center;
   color: #000000;
   font-size: 50px;
   text-decoration: none;
-  margin-top: 30px;
   width: 450px;
 
   text-align: center;
@@ -189,8 +191,8 @@ align-items: center;
 }
 
 .setaVoltar{
-  padding: 0 0 30px 50px;
-  margin-top: 40px;
+  padding: 15px 0 15px 50px;
+ 
   align-self: flex-start;
 }
 
@@ -199,7 +201,7 @@ align-items: center;
   color: #000000;
   font-size: 50px;
   text-decoration: none;
-  padding-top: 70px;
+
   width: 500px;
 
   text-align: center;
@@ -212,13 +214,15 @@ align-items: center;
 
   text-decoration: none;
   letter-spacing: 1px;
-  padding-top: 20px;
+  padding: 20px 0 15px 0;
  
 
 }
 
 .formularioHolder {
   width: 100%;
+  height: 610px;
+  overflow-y: auto;
 }
 
 .formText {
@@ -266,7 +270,7 @@ outline: #646363 solid 2px;
   border-radius: 20px;
   width: 495px;
   height: 44px;
-  margin-top: 10px;
+  margin-block: 10px;
   cursor: pointer;
 
   font-family: "Raleway Bold", sans-serif;
@@ -363,8 +367,8 @@ outline: #646363 solid 2px;
 /* PAGE CADASTRO DE FOTO */
 
 .holderFormularioFoto {
-  height: 911px;
-  width: 1680px;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -391,13 +395,15 @@ outline: #646363 solid 2px;
 }
 
 .formLabelFoto {
-  padding-top: 13px;
-  padding-left: 65px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding-block: 5px;
   margin-top: 20px;
   width: 440px;
   height: 40px;
   background: #9998d3;
-  border-radius: 20px;
+  border-radius: 25px;
   font-family: "Raleway Bold";
   font-style: normal;
   font-weight: 700;
@@ -418,7 +424,7 @@ outline: #646363 solid 2px;
   width: 180px;
   height: 180px;
   border-radius: 100px;
-  border: #646363 solid 3px;
+  border: #9998D3 solid 2px;
 
 }
 
@@ -472,8 +478,6 @@ outline: #646363 solid 2px;
   background: #fcf892;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  margin-top: 70px;
-  margin-left: 5px;
   border: none;
 
   font-family: "Raleway Bold", sans-serif;
@@ -489,6 +493,84 @@ outline: #646363 solid 2px;
   cursor: pointer;
 }
 
+.modal{
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 500px;
+  height: fit-content;
+  padding: 0 0 0 0 !important;
+  background: #BAD5DB !important;
+  border-radius: 20px !important;
+}
+
+.modalInner{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 500px;
+  height: fit-content;
+  padding: 0 0 0 0 !important;
+  background: #BAD5DB !important;
+  border-radius: 20px;
+}
+.blocker{
+  display: flex;
+  justify-content: center;
+}
+
+.croppie-container .cr-slider-wrap {
+  display: flex;
+  width: 78% !important;
+  height: 30px;
+  margin: 15px auto;
+  text-align: center;
+  border-radius: 10px;
+  padding-inline: 5px;
+  border: rgba(0,0,0, 0.1) solid 2px;
+  background: rgba(0,0,0,0.1);
+  align-content: center;
+}
+
+.cr-slider{
+  width: 390px !important;
+}
+
+.croppie-container .cr-boundary{
+  width: 80% !important;
+  height: 380px !important;
+  border-radius: 15px;
+  border: rgba(0,0,0,0.5) solid 2px;
+}
+
+.modal a.close-modal{
+  display: none !important;
+}
+
+.modal a.formInputFoto{
+
+  width: 270px;
+}
+
+.modal a{
+  text-decoration: none !important;
+}
+.modal span.subTituloForm {
+  font-family: "Raleway Medium", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 33px;
+  text-align: center;
+  line-height: 40px;
+  width: 449px;
+  align-self: center;
+  height: fit-content;
+  color: #000000;
+  padding-right: 0 !important;
+  margin-block: 20px;
+}
+
 /* PAGE FORMULARIO PET 1 */
 .holderFormularioPet1 {
   height: 100vh;
@@ -502,6 +584,11 @@ outline: #646363 solid 2px;
   background-size: cover;
   background-image: url("../img//fundo-cadastro.svg");
 }
+
+.holderFormularioPet1 a.setaVoltar{
+  padding-top: 25px;
+}
+
 .subTituloForm {
   font-family: "Raleway Bold", sans-serif;
   font-style: normal;
@@ -575,8 +662,8 @@ outline: #646363 solid 2px;
 
 /* PAGE FORMULARIO PET 2 TA USANDO O CSS DO FORMULARIO DO USUARIO */
 .holderFormularioPet {
-  height: 911px;
-  width: 1680px;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -587,6 +674,14 @@ outline: #646363 solid 2px;
   background-image: url("../img//fundo-cadastro.svg");
 }
 
+.holderFormularioPet a.setaVoltar{
+  padding-top: 30px;
+}
+
+.holderFormularioPet button.formSubmit{
+  margin-top: 40px;
+}
+
 .SelectEspecie {
   width: 495px;
   height: 49px;
@@ -594,13 +689,12 @@ outline: #646363 solid 2px;
   border-radius: 20px;
 
   border: none;
-  font-family: "Raleway Bold";
+  font-family: "Public Sans Bold";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 23px;
   text-align: left;
-  margin-top: 20px;
   padding-left: 20px;
 }
 
@@ -634,7 +728,7 @@ outline: #646363 solid 2px;
   border-radius: 20px;
   margin-left: 5px;
   border: none;
-  font-family: "Raleway Bold" !important;
+  font-family: "Public Sans Bold" !important;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
@@ -645,8 +739,8 @@ outline: #646363 solid 2px;
 
 /* PAGE FORMULARIO FOTO PET */
 .holderFormularioFotoPet {
-  height: 911px;
-  width: 1680px;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -703,6 +797,11 @@ outline: #646363 solid 2px;
   text-justify: auto;
   color: #000000;
 }
+
+#paginafinal div.tituloFormHolder2{
+  padding-top: 50px;
+}
+
 
 .botaoFinalizar {
   width: 495px;

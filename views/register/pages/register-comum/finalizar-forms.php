@@ -29,25 +29,26 @@ session_destroy();
 
 <body>
     <main class="container-content">
-        <section id="formularioFoto">
+        <section id="paginafinal">
             <div class="holderFormularioFotoPet">
                 <div class="formulario">
-
-                    <div class="tituloFormHolder2">
-                        <span>Uau! Finalmente. Aproveite!</span>
-                    </div>
-                    <div class="formTextFinalizarForms">
-                        <span>Pelo visto está tudo completo agora, finalize seu cadastro e explore a <span style="color: #3837A1;">pet iti</span> e tudo que nós temos a oferecer! Interaja com petlovers igual a você</span>
-                    </div>
-                    <div>
-                        <img src="petiti/views/assets/img/calopsita.svg" alt="">
-                    </div>
-                    <div>
-                        <a class="botaoFinalizar" href="/petiti/login">Finalizar</a>
-                    </div>
-                    <div>
-                        <img class="logoPrincipalFinalizarForm" src="petiti/views/assets/img/logo-principal-achatada.svg" alt="">
-                    </div>
+                    <div class="formElementsHolderflexivel">
+                        <div class="tituloFormHolder2">
+                            <span>Uau! Finalmente. Aproveite!</span>
+                        </div>
+                        <div class="formTextFinalizarForms">
+                            <span>Pelo visto está tudo completo agora, finalize seu cadastro e explore a <span style="color: #3837A1;">pet iti</span> e tudo que nós temos a oferecer! Interaja com petlovers igual a você</span>
+                        </div>
+                        <div>
+                            <img src="/petiti/views/assets/img/calopsita.svg" alt="" style="margin-bottom: 10px;">
+                        </div>
+                        <div>
+                            <a class="botaoFinalizar" href="/petiti/login">Finalizar</a>
+                        </div>
+                        <div>
+                            <img class="logoPrincipalFinalizarForm" src="petiti/views/assets/img/logo-principal-achatada.svg" alt="">
+                        </div>
+                    </div>                    
                 </div>
             </div>
 
