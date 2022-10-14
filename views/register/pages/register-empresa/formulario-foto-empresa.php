@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <?php
     include_once("sentinela-cadastro.php");
@@ -23,7 +24,7 @@
     <!--script-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
-    <script src="/petiti/views/assets/js/script.js"></script>
+
     <script src="/petiti/views/assets/js/cep.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
@@ -32,7 +33,7 @@
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
 
     <script async src="/petiti/views/assets/js/script-jquery-foto.js"></script>
-    <script src="/petiti/views/assets/js/script.js"></script>
+
 
 </head>
 
@@ -50,19 +51,20 @@
                         </span>
                     </div>
 
-                    <form action="/petiti/views/register/pages/register-empresa/controllers/controller-foto.php" method="post" enctype="multipart/form-data" class="formElementsHolder">
+                    <div class="formElementsHolder">
 
                         <label class="subTituloFormFoto">
                             Foto
                         </label>
 
                         <label class="formLabelFoto" id="inputTag">
-                            <input accept=".jpg, .png" class="inputFormFoto" type="file" name="flFoto">
+                            <input accept=".jpg, .png" class="inputFormFoto" type="file" id="flFoto" name="flFoto">
+                            <input id="baseFoto" type="hidden" name="baseFoto" value="">
                             Anexar foto dos meus arquivos
                         </label>
 
                         <label class="previewFormFoto" id="imagePreview">
-                            <img class="previewFoto" id="frame" src="/petiti/private-user/fotos-perfil/padrao.png" />
+                            <img class="previewFoto" id="preview" src="/petiti/private-user/fotos-perfil/padrao.png" />
                         </label>
 
                         <label class="formTextFotoInput" id="imageName">
@@ -74,8 +76,8 @@
                             <span>*Será possível alterar quando sua conta estiver feita.</span>
                         </div>
 
-                        <input class="formInputFoto" type="submit" value="Continuar">
-                    </form>
+                        <a id="enviarFoto" href="ramo-empresa" class="formInputFoto"> Continuar</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -87,4 +89,5 @@
         <div id="upload-demo"></div>
     </div>
 </body>
+
 </html>

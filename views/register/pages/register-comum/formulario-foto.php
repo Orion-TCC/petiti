@@ -25,7 +25,7 @@ include_once("sentinela-cadastro.php");
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
-    <script src="/petiti/views/assets/js/script.js"></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -33,7 +33,6 @@ include_once("sentinela-cadastro.php");
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
 
     <script async src="/petiti/views/assets/js/script-jquery-foto.js"></script>
-    <script src="/petiti/views/assets/js/script.js"></script>
 </head>
 
 <body>
@@ -58,6 +57,7 @@ include_once("sentinela-cadastro.php");
                         
                         <label class="formLabelFoto" id="inputTag">
                             <input class="inputFormFoto" type="file" accept=".jpg, .png" name="flFoto" id="flFoto">
+                            <input id="baseFoto" type="hidden" name="baseFoto" value="">
                             Anexar foto dos meus arquivos
                         </label>
 
@@ -72,7 +72,7 @@ include_once("sentinela-cadastro.php");
                             <span>Caso não tenha escolhido uma foto, você pode fazer isso depois. E, caso você tenha anexado uma foto e não tenha gostado muito, será possível alterar quando sua conta estiver feita.</span>
                         </div>
 
-                       <a href="inicio-pet" class="formInputFoto"> Continuar</a>
+                       <a id="enviarFoto" href="inicio-pet" class="formInputFoto"> Continuar</a>
 
                         </div>
                 </div>

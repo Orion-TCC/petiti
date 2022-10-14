@@ -21,7 +21,7 @@ include_once("sentinela-cadastro.php");
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
-    <script src="/petiti/views/assets/js/script.js"></script>
+
 
 <body>
     <main class="container-content">
@@ -29,51 +29,51 @@ include_once("sentinela-cadastro.php");
             <div class="holderFormularioPet">
 
                 <div class="formulario">
-                <a class="setaVoltar" href="inicio-pet"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
+                    <a class="setaVoltar" href="inicio-pet"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder">
                         <span>
                             Vamos conhecer seu pet!
                         </span>
                     </div>
 
-                   
+
                     <div class="subTituloFormHolderUsuario">
                         <span>
                             Insira os dados dele abaixo:
                         </span>
                     </div>
-                 <div class="formElementsHolderflexivel">
-                    <div class="formularioHolder ">
-                        <form class="formElementsHolder" action="/petiti/api/pet/add" method="POST" enctype="multipart/form-data">
+                    <div class="formElementsHolderflexivel">
+                        <div class="formularioHolder ">
+                            <form class="formElementsHolder" action="/petiti/api/pet/add" method="POST" enctype="multipart/form-data">
 
-                            <label class="formText">Nome</label>
-                            <input class="formInput" placeholder="Insira o nome" type="text" name="txtNomePet" required>
+                                <label class="formText">Nome</label>
+                                <input class="formInput" placeholder="Insira o nome" type="text" name="txtNomePet" required>
 
-                            <label class="formText">Espécie</label>
-                            <select name="slEspecie" id="slEspecie" required class="SelectEspecie">
-                                <option selected disabled style="color: #000000; font-family: 'Raleway Bold';" value="0">Escolha</option>
+                                <label class="formText">Espécie</label>
+                                <select name="slEspecie" id="slEspecie" required class="SelectEspecie">
+                                    <option selected disabled style="color: #000000; font-family: 'Raleway Bold';" value="0">Escolha</option>
 
-                                <option style="color: #000000; font-family: 'Raleway Bold';" value="1">Cachorro</option>
-                                <option style="color: #000000; font-family: 'Raleway Bold';" value="2">Gato</option>
-                                <option style="color: #000000; font-family: 'Raleway Bold';" value="3">Roedor</option>
-                                <option style="color: #000000; font-family: 'Raleway Bold';" value="4">Ave</option>
-                                <option style="color: #000000; font-family: 'Raleway Bold';" value="5">Exótico</option>
-                            </select>
-                            <label class="formText">Raça</label>
-                            <input class="formInput" placeholder="Insira a raça" type=" text" name="txtRacaPet" required>
-                            <label class="formText">Idade</label>
-                            <div class="idadePet">
-                                <input min="1" class="formInput" placeholder="Insira a idade" type="number" name="txtIdadePet" id="txtIdadePet" required>
-                                <select class="SelectDiaMesAno" name="slIdade" id="slIdade" required>
-                                    <option value="n" selected disabled>Escolha</option>
-                                    <option value="d">Dia (Dias)</option>
-                                    <option value="m">Mês (Meses)</option>
-                                    <option value="y">Ano(s)</option>
+                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="1">Cachorro</option>
+                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="2">Gato</option>
+                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="3">Roedor</option>
+                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="4">Ave</option>
+                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="5">Exótico</option>
                                 </select>
-                            </div>
-                            <button class="formSubmit" type="submit">Continuar</button>
-                        </form>
-                    </div>
+                                <label class="formText">Raça</label>
+                                <input class="formInput" placeholder="Insira a raça" type=" text" name="txtRacaPet" required>
+                                <label class="formText">Idade</label>
+                                <div class="idadePet">
+                                    <input min="1" class="formInput" placeholder="Insira a idade" type="number" name="txtIdadePet" id="txtIdadePet" required>
+                                    <select class="SelectDiaMesAno" name="slIdade" id="slIdade" required>
+                                        <option value="n" selected disabled>Escolha</option>
+                                        <option value="d">Dia (Dias)</option>
+                                        <option value="m">Mês (Meses)</option>
+                                        <option value="y">Ano(s)</option>
+                                    </select>
+                                </div>
+                                <button class="formSubmit" type="submit">Continuar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

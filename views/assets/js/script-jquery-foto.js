@@ -29,6 +29,21 @@ $(document).ready(function () {
     $("#modal-recortar-foto").modal("show");
   });
 
+    $("#flFotoPet").on("change", function () {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        resize
+          .croppie("bind", {
+            url: e.target.result,
+          })
+          .then(function () {
+            console.log("jQuery bind complete");
+          });
+      };
+      reader.readAsDataURL(this.files[0]);
+      $("#modal-recortar-foto").modal("show");
+    });
+
   $("#continuar-crop-foto").on("click", function (ev) {
     ev.preventDefault();
     var blob;
@@ -53,42 +68,41 @@ $(document).ready(function () {
           url: "/petiti/assets/libs/croppie/envio.php",
           success: function (data) {
             html = img;
+            $("#baseFoto").val(img);
             $("#preview").attr("src", "");
             $("#preview").attr("src", html);
-            // $("#imagePreview").html(html);
             console.log(data);
           },
         });
       });
   });
 
-    $("#formFotoUsuario").submit(function (ev) {
-      ev.preventDefault();
-      var blob;
-      resize
-        .croppie("result", {
-          type: "blob",
-        })
-        .then(function (resp) {
-          blob = resp;
-        });
+  $("#enviarFoto").on("click", function (ev) {
+   var foto =  $("#baseFoto").val();
+    $.ajax({
+      type: "POST",
+      enctype: "multipart/form-data",
+      data: {"imageBase": foto},
+      url: "/petiti/assets/libs/croppie/croppie-usuario.php",
+      success: function (data) {
+        console.log(data);
+        console.log(foto);
+      },
+    });
+  });
 
-      resize
-        .croppie("result", {
-          type: "canvas",
-          size: "viewport",
-        })
-        .then(function (img) {
-          $.ajax({
-            type: "POST",
-            enctype: "multipart/form-data",
-            data: { "image": img },
-            url: "/petiti/assets/libs/croppie/croppie-usuario.php",
-            success: function (data) {
-              console.log(data);
-            },
-          });
-        });
+    $("#enviarFotoPet").on("click", function (ev) {
+      var foto = $("#baseFoto").val();
+      $.ajax({
+        type: "POST",
+        enctype: "multipart/form-data",
+        data: {"imageBase": foto },
+        url: "/petiti/assets/libs/croppie/croppie-pet.php",
+        success: function (data) {
+          console.log(data);
+          console.log(foto);
+        },
+      });
     });
 
   $("#continuar-crop-foto-pet").on("click", function (ev) {
@@ -112,12 +126,12 @@ $(document).ready(function () {
           type: "POST",
           enctype: "multipart/form-data",
           data: { image: img },
-          url: "/petiti/assets/libs/croppie/croppie-pet.php",
+          url: "/petiti/assets/libs/croppie/envio.php",
           success: function (data) {
             html = img;
+            $("#baseFoto").val(img);
             $("#preview").attr("src", "");
             $("#preview").attr("src", html);
-            // $("#imagePreview").html(html);
             console.log(data);
           },
         });

@@ -28,11 +28,11 @@ $_SESSION['tipo-usuario'] = "usuario";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
-    
+
     <script async src="/petiti/views/assets/js/script-jquery-foto.js"></script>
 
     <script async src="/petiti/views/assets/js/script-jquery.js"></script>
-    <script src="/petiti/views/assets/js/script.js"></script>
+
 </head>
 
 <body>
@@ -75,12 +75,12 @@ $_SESSION['tipo-usuario'] = "usuario";
                             <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
                             <p id="senhaAvisoVerificacao"></p>
 
-                            <div class="caixaMostrarSenha" >
+                            <div class="caixaMostrarSenha">
                                 <input class="checkboxSenha" type="checkbox" id="mostrarSenha" style="cursor: pointer;">
                                 <label for="mostrarSenha" class="formTextMostrarSenha" id=mostrarSenhaLabel style="cursor: pointer;">Mostrar Senha</label>
                             </div>
                             <button id="submitUsuario" class="formSubmit" type="submit">Continuar</button>
-                           
+
 
                         </form>
                     </div>

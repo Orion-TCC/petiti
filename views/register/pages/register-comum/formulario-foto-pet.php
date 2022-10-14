@@ -24,7 +24,7 @@ include_once("sentinela-cadastro.php");
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
-    <script src="/petiti/views/assets/js/script.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -32,7 +32,7 @@ include_once("sentinela-cadastro.php");
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
 
     <script async src="/petiti/views/assets/js/script-jquery-foto.js"></script>
-    <script src="/petiti/views/assets/js/script.js"></script>
+
 </head>
 
 <body>
@@ -41,25 +41,26 @@ include_once("sentinela-cadastro.php");
             <div class="holderFormularioFotoPet">
                 <div class="formulario">
 
-                <a class="setaVoltar" href="cadastro-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
+                    <a class="setaVoltar" href="cadastro-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder2">
                         <span>
                             Escolha a sua foto preferida do seu pet
                         </span>
                     </div>
 
-                   
-                    <form action="/petiti/views/register/pages/register-comum/controllers/controller-foto-pet.php" enctype="multipart/form-data" method="post" class="formElementsHolderflexivel">
+
+                    <div class="formElementsHolderflexivel">
 
 
 
 
                         <label class="previewFormFoto" id="imagePreview">
-                            <img class="previewFoto" id="frame" src="/petiti/private-user/fotos-perfil/padrao.png" width="150px" height="150px" />
+                            <img class="previewFoto" id="preview" src="/petiti/private-user/fotos-perfil/padrao.png" width="150px" height="150px" />
                         </label>
 
                         <label class="formLabelFoto" id="inputTag">
                             <input accept=".jpg, .png" class="inputFormFotoPet" type="file" name="flFotoPet" id="flFotoPet">
+                            <input id="baseFoto" type="hidden" name="baseFoto" value="">
                             Anexar foto dos meus arquivos
                         </label>
 
@@ -72,10 +73,9 @@ include_once("sentinela-cadastro.php");
                         <div class="formTextFoto">
                             <span>Novamente, caso não tenha escolhido uma foto, você pode fazer isso depois. E, caso você tenha anexado uma foto e não tenha gostado muito, será possível alterar.</span>
                         </div>
+                        <a id="enviarFotoPet" href="final-usuario" class="formInputFoto"> Continuar</a>
+                    </div>
 
-                        <input class="formInputFoto" type="submit" value="Continuar">
-                    </form>
-                   
                 </div>
             </div>
 

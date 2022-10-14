@@ -1,12 +1,35 @@
 <?php
+require_once("/xampp/htdocs/petiti/api/classes/Pet.php");
+require_once("/xampp/htdocs/petiti/api/classes/FotoPet.php");
 require_once("/xampp/htdocs/petiti/api/classes/Cookies.php");
-$cookie = new Cookies();
-$image = $_POST['image'];
-$cookie->criarCookie("imagem-cortada", $image, 10000);
-list($type, $image) = explode(';',$image);
-list(, $image) = explode(',',$image);
-$image = base64_decode($image);
-$image_name = time().uniqid() . '.png';
-file_put_contents("../../../private-user/fotos-publicacao/" . $image_name, $image);
+@session_start();
+// Objetos
 
-echo 'successfully uploaded';
+$cookie = new Cookies();
+$fotoPet = new FotoPet();
+$pet = new Pet();
+$image = $_POST['imageBase'];
+if ($image == "") {
+    $pet->setIdPet($_SESSION['id-cadastro-pet']);
+    $fotoPet->setPet($pet);
+    $fotoPet->setNomeFotoPet("padrao.png");
+    $fotoPet->setCaminhoFotoPet("private-user/fotos-pet/padrao.png");
+    $fotoPet->cadastrar($fotoPet);
+} else {
+    $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-pet/";
+
+
+    $nomeArquivo = time() . ".png";
+    $arquivoCompleto = $caminhoSalvar . $nomeArquivo;
+    $caminhoBanco = "private-user/fotos-pet/" . $nomeArquivo;
+
+    $pet->setIdPet($_SESSION['id-cadastro-pet']);
+    $fotoPet->setPet($pet);
+    $fotoPet->setNomeFotoPet($nomeArquivo);
+    $fotoPet->setCaminhoFotoPet($caminhoBanco);
+    $fotoPet->cadastrar($fotoPet);
+
+    file_put_contents($arquivoCompleto, file_get_contents($image));
+    echo $arquivoCompleto;
+
+}

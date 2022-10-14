@@ -1,17 +1,5 @@
 <?php
-require_once("/xampp/htdocs/petiti/api/classes/Pet.php");
-require_once("/xampp/htdocs/petiti/api/classes/FotoPet.php");
-require_once("/xampp/htdocs/petiti/api/classes/Cookies.php");
 
-// Objetos
-
-$cookie = new Cookies();
-$fotoPet = new FotoPet();
-$caminho = "/petiti/private-user/fotos-pet/";
-$caminhoBanco = "";
-$foto = $_FILES['flFotoPet'];
-$nomeFoto = $foto['name'];
-$pet = new Pet();
 
 $tipo = strtolower(pathinfo($nomeFoto, PATHINFO_EXTENSION));
 
