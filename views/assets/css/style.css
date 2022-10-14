@@ -155,9 +155,27 @@ body {
   display: flex;
   flex-direction: column;
 
-  padding: 20px 50px 20px 50px ;
+  padding: 15px 50px 0 50px ;
 }
 
+.formElementsHolderFoto {
+  display: flex;
+  flex-direction: column;
+align-items: center;
+  padding: 5px 50px 0 50px ;
+}
+
+
+.tituloFormHolderFoto {
+  font-family: "Raleway Bold", sans-serif;
+  color: #000000;
+  font-size: 50px;
+  text-decoration: none;
+  margin-top: 30px;
+  width: 450px;
+
+  text-align: center;
+}
 
 .tituloFormHolder {
   font-family: "Raleway Bold", sans-serif;
@@ -389,7 +407,7 @@ outline: #646363 solid 2px;
   cursor: pointer;
 }
 .previewFormFoto {
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -397,10 +415,13 @@ outline: #646363 solid 2px;
 }
 
 .previewFoto {
-  width: 250px;
-  height: 250px;
+  width: 180px;
+  height: 180px;
   border-radius: 100px;
+  border: #646363 solid 3px;
+
 }
+
 
 .inputFormFoto {
   display: none;
@@ -427,12 +448,12 @@ outline: #646363 solid 2px;
   font-weight: 700;
   font-size: 18px;
   line-height: 21px;
+  gap: 10px;
   color: #686868;
 }
 
 .formTextFoto {
-  padding-left: 25px;
-  width: 470px;
+  width: 440px;
   height: 151px;
   margin-block: 50px;
   font-family: "Raleway Bold";
@@ -440,8 +461,8 @@ outline: #646363 solid 2px;
   font-weight: 700;
   font-size: 24px;
   line-height: 28px;
-  text-align: center;
-  text-justify: auto;
+  text-align: justify;
+  text-justify: inter-word;
   color: #000000;
 }
 
