@@ -1040,6 +1040,7 @@ outline: #646363 solid 2px;
   height: 100vh;
   width: 35%;
   background: #bad5db;
+overflow: hidden;
 
   display: flex;
   flex-direction: column;
