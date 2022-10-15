@@ -6,71 +6,80 @@ class Publicacao
     private $textoPublicacao;
     private $dataPublicacao;
     private $Usuario;
-    private $CategoriaPublicacao;
+    // private $CategoriaPublicacao;
 
-  
-    public function getCategoriaPublicacao(){
-        return $this->CategoriaPublicacao;
-    }
 
-   
-    public function setCategoriaPublicacao($CategoriaPublicacao){
-        $this->CategoriaPublicacao = $CategoriaPublicacao;
+    // public function getCategoriaPublicacao(){
+    //     return $this->CategoriaPublicacao;
+    // }
 
-        return $this;
-    }
 
- 
-    public function getUsuario(){
+    // public function setCategoriaPublicacao($CategoriaPublicacao){
+    //     $this->CategoriaPublicacao = $CategoriaPublicacao;
+
+    //     return $this;
+    // }
+
+
+    public function getUsuario()
+    {
         return $this->Usuario;
     }
 
-  
-    public function setUsuario($Usuario){
+
+    public function setUsuario($Usuario)
+    {
         $this->Usuario = $Usuario;
 
         return $this;
     }
 
-  
-    public function getDataPublicacao(){
+
+    public function getDataPublicacao()
+    {
         return $this->dataPublicacao;
     }
 
-  
-    public function setDataPublicacao($dataPublicacao){
+
+    public function setDataPublicacao($dataPublicacao)
+    {
         $this->dataPublicacao = $dataPublicacao;
 
         return $this;
     }
 
-    
-    public function getTextoPublicacao(){
+
+    public function getTextoPublicacao()
+    {
         return $this->textoPublicacao;
     }
 
-    
-   
-    public function setTextoPublicacao($textoPublicacao){
+
+
+    public function setTextoPublicacao($textoPublicacao)
+    {
         $this->textoPublicacao = $textoPublicacao;
 
         return $this;
     }
 
-  
-    public function getIdPublicacao(){
+
+    public function getIdPublicacao()
+    {
         return $this->idPublicacao;
     }
 
- 
-    public function setIdPublicacao($idPublicacao){
+
+    public function setIdPublicacao($idPublicacao)
+    {
         $this->idPublicacao = $idPublicacao;
 
         return $this;
     }
 
 
-    public function cadastrar($publicacao){
+    public function cadastrar($publicacao)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare('INSERT INTO tbpublicacao(idPublicacao, textoPublicacao, dataPublicacao, idUsuario)
         VALUES (default, ?, ?, ?)');
@@ -86,6 +95,13 @@ class Publicacao
         }
         return $id;
     }
-}
 
-?>
+    public function listar()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idPublicacao, textoPublicacao, dataPublicacao, idUsuario FROM tbPublicacao";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
+    }
+}

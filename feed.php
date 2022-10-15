@@ -82,11 +82,26 @@ include_once("sentinela.php");
             </div>
         </section>
         <section class="postsHolder">
+
+            <?php $url = "http://localhost/petiti/api/publicacoes";
+
+            $json = file_get_contents($url);
+            
+            $dados = json_decode($json);
+            $pubs = 0;
+           
+
+ 
+
+           
+
+            ?>
+
         </section>
         <section class="rightBarHolder">
         </section>
     </main>
-    
+
     <!-- Modal Post -->
     <section id="post">
 
@@ -104,8 +119,13 @@ include_once("sentinela.php");
 
         <div id="criar-post" class="modal">
             <div id="preview-crop-image">
-
             </div>
+
+            <form method="post" action="./api/publicar">
+                <textarea name="txtLegendaPub" placeholder="Texto"></textarea>
+
+                <input type="submit" value="Publicar">
+            </form>
         </div>
     </section>
 </body>

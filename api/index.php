@@ -8,6 +8,7 @@ foreach (glob("classes/*") as $filename) {
     require_once $filename;
 }
 date_default_timezone_set('America/Sao_Paulo');
+
 use Slim\Factory\AppFactory;
 use Slim\Exception\NotFoundException;
 use Slim\Http\UploadedFile;
@@ -413,47 +414,30 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
     header('location: /petiti/final-empresa');
 });
 
+$app->get('/publicacoes', function (Request $request, Response $response, array $args) {
+    $publicacao = new Publicacao();
+
+    $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
 $app->post('/publicar', function (Request $request, Response $response, array $args) {
         $usuario = new Usuario();
         $fotoPublicacao = new FotoPublicacao();
         $cookie = new Cookies();
+        @session_start();
         $publicacao = new Publicacao();
+        date_default_timezone_set('America/Sao_Paulo');
+
+        $DateAndTime = date('Y-m-d H:i:s');
 
         $caminho = "/xampp/htdocs/petiti/private-user/fotos-publicacao/";
-        $caminhoBanco = "";
-        $foto = $_FILES['flFoto'];
-        $nomeFoto = $foto['name'];
-
-
-        $tipo = strtolower(pathinfo($nomeFoto, PATHINFO_EXTENSION));
-
-        @session_start();
-        if ($foto['size'] == 0) {
-            header('location: /petiti/feed');
-        } elseif ($foto['error'] <> 0) {
-            $cookie->criarCookie("erro-foto", "Erro ao subir imagem, tente novamente.", 1);
-            header('location: /petiti/feed');
-        } elseif (($tipo <> 'jpg') && ($tipo <> 'jpeg') && ($tipo <> 'png')) {
-            $cookie->criarCookie("erro-foto", "Formato inválido.", 1);
-            header('location: /petiti/feed');
-        } else {
-            $nomeRandom = uniqid();
-            $caminhoCompleto = $caminho . $nomeRandom . "." . $tipo;
-            move_uploaded_file($foto['tmp_name'], $caminhoCompleto);
-
-
-            $caminhoBanco = "private-user/fotos-publicacao/" . $nomeRandom . "." . $tipo;
-            $nomeTipo = $nomeRandom . "." . $tipo;
-            $usuario->setIdUsuario($_SESSION['id']);
-            $publicacao->setIdPublicacao($_SESSION['id-publicacao']);
-            $data = date('Y-m-d H:i:s');
-            $publicacao->setDataPublicacao($data);
-            $fotoPublicacao->setPublicacao($publicacao);
-            $fotoPublicacao->setNomeFoto($nomeTipo);
-            $fotoPublicacao->setCaminhoFoto($caminhoBanco);
-            $fotoPublicacao->cadastrar($fotoUsuario);
-            header('location: /petiti/inicio-pet');
-        }
+        $publicacao->setTextoPublicacao($_POST['txtLegendaPub']);
+        $usuario->setIdUsuario($_SESSION['id']);
+        $publicacao->setUsuario($usuario);
+        $publicacao->setDataPublicacao($DateAndTime);
+        $publicacao->cadastrar($publicacao);
     }
 );
 try {

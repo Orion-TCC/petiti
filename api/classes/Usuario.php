@@ -12,6 +12,8 @@ class Usuario
     private $verificadoUsuario;
     private $emailUsuario;
     private $tipoUsuario;
+    private $bioUsuario;
+    private $localizacaoUsuario;
 
 
     public function getIdUsuario()
@@ -122,7 +124,9 @@ class Usuario
         verificadoUsuario, 
         emailUsuario, 
         tbtipousuario.idTipoUsuario,
-        tipoUsuario
+        tipoUsuario,
+        bioUsuario,
+        localizacaoUsuario
         FROM tbusuario 
         INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
         WHERE tbusuario.idUsuario = $id";
@@ -268,6 +272,8 @@ class Usuario
                     $_SESSION['email'] = $dados[0]->emailUsuario;
                     $_SESSION['tipo'] = $dados[0]->tipoUsuario;
                     $_SESSION['foto'] = $foto;
+                    $_SESSION['bio'] = $dados[0]->bio;
+                    $_SESSION['local'] = $dados[0]->local;
 
                     return $msg = "Bem vindo.";
                 } else {
@@ -296,6 +302,8 @@ class Usuario
                     $_SESSION['email'] = $dados[0]->emailUsuario;
                     $_SESSION['tipo'] = $dados[0]->tipoUsuario;
                     $_SESSION['foto'] = $foto;
+                    $_SESSION['bio'] = $dados[0]->bio;
+                    $_SESSION['local'] = $dados[0]->local;
 
 
                     return $msg = "Bem vindo.";
@@ -340,6 +348,22 @@ class Usuario
         $con = Conexao::conexao();
         $stmt = $con->prepare("UPDATE tbusuario SET senhaUsuario = ? WHERE idUsuario = ?");
         $stmt->bindValue(1, $update->getSenhaUsuario());
+        $stmt->bindValue(2, $update->getIdUsuario());
+        $stmt->execute();
+    }
+    public function updateBio($update)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbusuario SET bioUsuario = ? WHERE idUsuario = ?");
+        $stmt->bindValue(1, $update->getBioUsuario());
+        $stmt->bindValue(2, $update->getIdUsuario());
+        $stmt->execute();
+    }
+    public function updateLocalizacao($update)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbusuario SET localizacaoUsuario = ? WHERE idUsuario = ?");
+        $stmt->bindValue(1, $update->getLocalizacaoUsuario());
         $stmt->bindValue(2, $update->getIdUsuario());
         $stmt->execute();
     }
@@ -454,5 +478,28 @@ class Usuario
         } else {
             return 'fodase';
         }
+    }
+
+
+    public function getBioUsuario()
+    {
+        return $this->bioUsuario;
+    }
+
+    public function setBioUsuario($bioUsuario)
+    {
+        $this->bioUsuario = $bioUsuario;
+    }
+
+
+    public function getLocalizacaoUsuario()
+    {
+        return $this->localizacaoUsuario;
+    }
+
+
+    public function setLocalizacaoUsuario($localizacaoUsuario)
+    {
+        $this->localizacaoUsuario = $localizacaoUsuario;
     }
 }
