@@ -37,9 +37,8 @@ include_once("sentinela-cadastro.php");
 
                 <div class="formulario">
 
-
+                <a class="setaVoltar" href="ramo-empresa"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>    
                     <div class="tituloFormHolder">
-
                         <span>
                             Conte um pouco sobre você...
                         </span>
@@ -66,7 +65,7 @@ include_once("sentinela-cadastro.php");
 
 
                             <label class="formText">Complemento</label>
-                            <input class="formInput" placeholder="Bloco B" type="text" name="txtComplementoEmpresa" id="txtComplementoEmpresa" minlength="1">
+                            <input class="formInput" placeholder="Bloco B *Opcional" type="text" name="txtComplementoEmpresa" id="txtComplementoEmpresa" minlength="1">
 
 
 

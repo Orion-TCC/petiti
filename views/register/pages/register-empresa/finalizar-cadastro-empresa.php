@@ -28,13 +28,15 @@ session_destroy();
 
 <body>
     <main class="container-content">
-        <section id="formularioFoto">
+        <section id="finalizarCadastroEmpresa">
             <div class="holderFormularioFotoPet">
                 <div class="formulario">
 
                     <div class="tituloFormHolder2">
                         <span>Tudo pronto! Comece a organizar seu perfil</span>
                     </div>
+
+                <div class="formElementsHolderflexivel">
                     <div class="formTextFinalizarForms">
                         <span>Pelo visto tudo foi preenchido. Finalize seu cadastro e explore a <span style="color: #3837A1;">pet iti</span>. Insira seus produtos/serviços e interaja com petlovers (clientes)!</span>
                     </div>
@@ -47,6 +49,7 @@ session_destroy();
                     <div>
                         <img class="logoPrincipalFinalizarForm" src="/petiti/views/assets/img/logo-principal-achatada.svg" alt="">
                     </div>
+                </div>
                 </div>
             </div>
 

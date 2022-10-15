@@ -212,9 +212,12 @@ overflow-y: auto;
   color: #3837a1;
   font-size: 20px;
 
+  padding: 15px 0 15px 50px;
+  align-self: flex-start;
+
   text-decoration: none;
   letter-spacing: 1px;
-  padding: 20px 0 15px 0;
+ 
  
 
 }
@@ -589,6 +592,10 @@ outline: #646363 solid 2px;
   padding-top: 25px;
 }
 
+#formulariopet1 div.tituloFormHolder{
+  margin-top: 80px;
+}
+
 .subTituloForm {
   font-family: "Raleway Bold", sans-serif;
   font-style: normal;
@@ -676,6 +683,14 @@ outline: #646363 solid 2px;
 
 .holderFormularioPet a.setaVoltar{
   padding-top: 30px;
+}
+
+#formularioPet2 div.tituloFormHolder{
+  padding-top: 60px;
+}
+
+#formularioPet2 div.formulario{
+  height: 750px;
 }
 
 .holderFormularioPet button.formSubmit{
@@ -802,6 +817,10 @@ outline: #646363 solid 2px;
   padding-top: 50px;
 }
 
+#finalizarCadastroEmpresa div.tituloFormHolder2{
+  padding-top: 50px;
+}
+
 
 .botaoFinalizar {
   width: 495px;
@@ -830,16 +849,21 @@ outline: #646363 solid 2px;
 /* PAGE FORMULARIO INFO EMPRESA */
 
 .holderFormularioUsuarioEmpresa {
-  height: 911px;
-  width: 1680px;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   overflow-x: hidden;
 
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("../img//fundo-cadastro.svg");
+}
+
+#formularioUsuarioEmpresa button.formSubmit{
+  margin-top: 40px;
 }
 
 #formularioUsuarioEmpresa a.setaVoltar{
@@ -852,9 +876,9 @@ outline: #646363 solid 2px;
   font-size: 20px;
   text-decoration: none;
   letter-spacing: 1px;
-  padding-top: 30px;
-  padding-left: 104;
-  width: 100%;
+  padding: 15px 0 15px 50px;
+  align-self: flex-start;
+  width: 70%;
 }
 
 .textoAviso {
@@ -877,8 +901,8 @@ outline: #646363 solid 2px;
 /* PAGE FORMULARIO FOTO EMPRES */
 
 .holderFormularioFotoEmpresa {
-  height: 911px;
-  width: 1680px;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -887,6 +911,10 @@ outline: #646363 solid 2px;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("../img//fundo-cadastro.svg");
+}
+
+#formularioFotoEmpresa div.formulario{
+  height: 760px;
 }
 
 .formTextFotoEmpresa {
@@ -931,6 +959,18 @@ outline: #646363 solid 2px;
   margin-top: 40px;
   margin-bottom: 50px;
   color: #000000;
+}
+
+#formularioRamoEmpresa a.setaVoltar {
+  padding-top: 40px;
+}
+
+#formularioRamoEmpresa div.formulario{
+  height: 650px;
+}
+
+#formularioRamoEmpresa div.tituloFormHolder{
+  margin-top: 70px;
 }
 
 .formInputRamo {

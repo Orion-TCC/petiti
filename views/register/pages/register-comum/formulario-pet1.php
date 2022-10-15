@@ -27,7 +27,7 @@ include_once("sentinela-cadastro.php");
         <section id="formularioPet1">
             <div class="holderFormularioPet1">
                 <div class="formulario">
-                <a class="setaVoltar" href="foto-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
+               
                 <div class="tituloFormHolder">
                         <span>Agora, vamos ao que interessa...</span>
                 </div>

@@ -41,7 +41,7 @@ include_once("sentinela-cadastro.php");
             <div class="holderFormularioFotoPet">
                 <div class="formulario">
 
-                    <a class="setaVoltar" href="cadastro-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
+                    <a class="setaVoltar" href="formulario-pet"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder2">
                         <span>
                             Escolha a sua foto preferida do seu pet
@@ -50,9 +50,6 @@ include_once("sentinela-cadastro.php");
 
 
                     <div class="formElementsHolderflexivel">
-
-
-
 
                         <label class="previewFormFoto" id="imagePreview">
                             <img class="previewFoto" id="preview" src="/petiti/private-user/fotos-perfil/padrao.png" width="150px" height="150px" />

@@ -45,16 +45,18 @@
             <div class="holderFormularioFotoEmpresa">
                 <div class="formulario">
 
+                <a class="setaVoltar" href="cadastro-empresa"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder">
                         <span>
                             Identificação da empresa
                         </span>
                     </div>
 
-                    <div class="formElementsHolder">
+                    <div class="formElementsHolderflexivel">
 
-                        <label class="subTituloFormFoto">
-                            Foto
+
+                        <label class="previewFormFoto" id="imagePreview">
+                            <img class="previewFoto" id="preview" src="/petiti/private-user/fotos-perfil/padrao.png" />
                         </label>
 
                         <label class="formLabelFoto" id="inputTag">
@@ -63,17 +65,14 @@
                             Anexar foto dos meus arquivos
                         </label>
 
-                        <label class="previewFormFoto" id="imagePreview">
-                            <img class="previewFoto" id="preview" src="/petiti/private-user/fotos-perfil/padrao.png" />
-                        </label>
+                        <div class="EHolder">
+                            <div class="line"></div>
+                            <span style="font-family:'Raleway Bold' ;">E</span>
+                            <div class="line"></div>
+                        </div>
 
-                        <label class="formTextFotoInput" id="imageName">
-                            Nenhum arquivo selecionado
-                        </label>
-
-
-                        <div class="formTextFotoEmpresa">
-                            <span>*Será possível alterar quando sua conta estiver feita.</span>
+                        <div class="formTextFoto">
+                            <span>Será possível alterar a identificação da sua empresa quando sua conta estiver feita.</span>
                         </div>
 
                         <a id="enviarFoto" href="ramo-empresa" class="formInputFoto"> Continuar</a>
@@ -83,10 +82,12 @@
         </section>
     </main>
     <div id="modal-recortar-foto" class="modal">
-        <a href="#close-modal" rel="modal:close">
-            <label rel="modal:close" id="continuar-crop-foto" style="cursor:pointer;">Confirmar</label>
-        </a>
-        <div id="upload-demo"></div>
+    <div class="modalInner">
+     <span class="subTituloForm">Redimensione sua imagem!</span>
+       <div id="upload-demo"></div>
+           <a href="#close-modal" rel="modal:close" class="formInputFoto">
+                <span rel="modal:close" id="continuar-crop-foto" style="padding-block: 10px; padding-inline: 87px;">Confirmar</span>
+            </a>
     </div>
 </body>
 

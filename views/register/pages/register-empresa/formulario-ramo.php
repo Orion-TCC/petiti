@@ -28,7 +28,6 @@
         <section id="formularioRamoEmpresa">
             <div class="holderFormularioFotoEmpresa">
                 <div class="formulario">
-
                     <div class="tituloFormHolder">
                         <span>
                             Qual o ramo da sua empresa?
@@ -46,7 +45,7 @@
                     $tipoUsuario = new TipoUsuario();
                     $listaTipos = $tipoUsuario->listar();
                     ?>
-
+            <div class="formElementsHolderflexivel">
                     <form action="api/usuario/cadastro/update/ramo" method="post">
                         <input type="hidden" name="campo" value="ramo">
                         <select name="slRamo" id="slRamo" class="SelectRamo">
@@ -65,9 +64,7 @@
 
                         <input class="formInputRamo" type="submit" value="Continuar">
                     </form>
-
-
-                    </form>
+            </div>
                 </div>
             </div>
         </section>
