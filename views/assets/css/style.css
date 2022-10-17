@@ -134,15 +134,14 @@ body {
   align-items: center;
   justify-content: center;
 
-  width: 600px;
-  height: 820px;
-overflow-y: auto;
+  width: 620px;
+  height: fit-content;
+
 
   background-color: #bad5db;
   border-radius: 20px;
   margin: 20px;
-  padding-bottom: 10px;
-
+  padding-block: 20px;
 }
 
 .imgSetaVoltarHolder {
@@ -155,7 +154,7 @@ overflow-y: auto;
   display: flex;
   flex-direction: column;
 
-  padding: 0 50px 0 50px ;
+  padding: 0 50px 15px 50px ;
 }
 
 .formElementsHolderflexivel {
@@ -224,8 +223,8 @@ overflow-y: auto;
 
 .formularioHolder {
   width: 100%;
-  height: 610px;
-  overflow-y: auto;
+  height: fit-content;
+
 }
 
 .formText {
@@ -233,7 +232,6 @@ overflow-y: auto;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
-  margin-left: 20px;
   line-height: 23px;
   padding-top: 20px;
 }
@@ -271,8 +269,8 @@ outline: #646363 solid 2px;
   background: #fcf892;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  width: 495px;
-  height: 44px;
+  width: 100%;
+  height: 50px;
   margin-block: 10px;
   cursor: pointer;
 
@@ -403,8 +401,8 @@ outline: #646363 solid 2px;
  align-items: center;
  padding-block: 5px;
   margin-top: 20px;
-  width: 440px;
-  height: 40px;
+  width: 495px;
+  height: 50px;
   background: #9998d3;
   border-radius: 25px;
   font-family: "Raleway Bold";
@@ -462,27 +460,29 @@ outline: #646363 solid 2px;
 }
 
 .formTextFoto {
-  width: 440px;
-  height: 151px;
+  width: 430px;
+  height: 170px;
   margin-block: 50px;
   font-family: "Raleway Bold";
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
   line-height: 28px;
-  text-align: justify;
+  text-align: center;
   text-justify: inter-word;
   color: #000000;
 }
 
 .formInputFoto {
   width: 495px;
-  height: 44px;
+  height: 50px;
   background: #fcf892;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   border: none;
 
+  display: flex;
+  justify-content: center;
   font-family: "Raleway Bold", sans-serif;
   text-decoration: none;
   font-style: normal;
@@ -492,7 +492,7 @@ outline: #646363 solid 2px;
   align-items: center;
   text-align: center;
   color: #000000;
-  margin-block: 20px;
+  margin-bottom: 20px;
   cursor: pointer;
 }
 
@@ -505,6 +505,7 @@ outline: #646363 solid 2px;
   padding: 0 0 0 0 !important;
   background: #BAD5DB !important;
   border-radius: 20px !important;
+  align-self: center;
 }
 
 .modalInner{
@@ -667,6 +668,17 @@ outline: #646363 solid 2px;
   margin-top: 50px;
 }
 
+#formulariopet1 div.formElementsHolderflexivel{
+  height: 550px;
+}
+
+#formulariopet1 div.tituloFormHolder{
+  margin-top: 10px;
+}
+
+#formulariopet1 div.subTituloForm{
+  margin-top: 20px;
+}
 /* PAGE FORMULARIO PET 2 TA USANDO O CSS DO FORMULARIO DO USUARIO */
 .holderFormularioPet {
   height: 100vh;
