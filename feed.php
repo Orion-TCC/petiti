@@ -33,6 +33,8 @@ include_once("sentinela.php");
     <script src="assets/libs/croppie/croppie.js"></script>
     <script src="assets/js/jquery-scripts.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/funcs.js"></script>
+
 
 </head>
 
@@ -86,15 +88,17 @@ include_once("sentinela.php");
             <?php $url = "http://localhost/petiti/api/publicacoes";
 
             $json = file_get_contents($url);
-            
-            $dados = json_decode($json);
-            $pubs = 0;
-           
-
- 
-
-           
-
+            @$json1 = $_POST['json'];
+            print_r($json1);
+            $dados = (array)json_decode($json, true);
+            $contagem = count($dados['publicacoes']);
+            for ($i = 0; $i < $contagem; $i++) {
+                echo $dados['publicacoes'][$i]['nomeUsuario'] . "<br>";
+                echo "<img src = " . $dados['publicacoes'][$i]['caminhoFotoPublicacao'] . ">";
+                echo $dados['publicacoes'][$i]['itimalias'] . "<br>";
+            ?>
+                <button id="curtir" value="<?php echo $dados['publicacoes'][$i]['idPublicacao'] ?>">❤</button>
+            <?php }
             ?>
 
         </section>
@@ -121,9 +125,10 @@ include_once("sentinela.php");
             <div id="preview-crop-image">
             </div>
 
-            <form method="post" action="./api/publicar">
+            <form id="form-aid" method="post" action="./api/publicar">
                 <textarea name="txtLegendaPub" placeholder="Texto"></textarea>
-
+                <input type="hidden" name="baseFoto" id="baseFoto">
+                <input type="text" name="" id="">
                 <input type="submit" value="Publicar">
             </form>
         </div>

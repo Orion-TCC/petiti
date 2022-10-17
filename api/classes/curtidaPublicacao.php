@@ -41,4 +41,46 @@ class curtidaPublicacao
 
         return $this;
     }
+    public function cadastrar($curtidaPublicacao)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("INSERT INTO tbcurtidapublicacao
+        (idCurtidaPublicacao, idUsuarioCurtida, idPublicacaoCurtida) 
+        VALUES (DEFAULT, ?, ?)");
+        $stmt->bindValue(1, $curtidaPublicacao->getUsuarioCurtida()->getIdUsuario());
+        $stmt->bindValue(2, $curtidaPublicacao->getPublicacaoCurtida()->getIdPublicacao());
+        $stmt->execute();
+    }
+    public function delete($delete)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("DELETE FROM tbcurtidapublicacao WHERE idCurtidaPublicacao = ?");
+        $stmt->bindValue(1, $delete->getIdCurtidaPublicacao());
+
+        $stmt->execute();
+    }
+    public function verificarCurtida($idPub, $idUsuario){
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idCurtidaPublicacao) as qtd, idCurtidaPublicacao
+        FROM tbcurtidapublicacao
+        WHERE idPublicacaoCurtida = $idPub
+        AND
+        idUsuarioCurtida = $idUsuario";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll();
+        foreach ($lista as $linha) {
+            $qtd = $linha[0];
+            $id = $linha[1];
+        }
+        if ($qtd>0) {
+            $array = array("boolean" => false, "id" => "$id");
+            return $array;
+        } else {
+            $array = array("boolean" => true);
+            return $array;
+
+        }
+        
+    }
+
 }

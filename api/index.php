@@ -9,13 +9,16 @@ foreach (glob("classes/*") as $filename) {
 }
 date_default_timezone_set('America/Sao_Paulo');
 
+
 use Slim\Factory\AppFactory;
 use Slim\Exception\NotFoundException;
 use Slim\Http\UploadedFile;
 
 require __DIR__ . '/vendor/autoload.php';
 
+
 $app = AppFactory::create();
+
 
 $basePath = str_replace('/' . basename(__FILE__), '', $_SERVER['SCRIPT_NAME']);
 $app = $app->setBasePath($basePath);
@@ -416,7 +419,7 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
 
 $app->get('/publicacoes', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
-
+    
     $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
@@ -424,22 +427,66 @@ $app->get('/publicacoes', function (Request $request, Response $response, array 
 
 $app->post('/publicar', function (Request $request, Response $response, array $args) {
         $usuario = new Usuario();
+        $publicacao = new Publicacao();
         $fotoPublicacao = new FotoPublicacao();
         $cookie = new Cookies();
+        $image = $_POST['baseFoto'];
         @session_start();
         $publicacao = new Publicacao();
         date_default_timezone_set('America/Sao_Paulo');
 
         $DateAndTime = date('Y-m-d H:i:s');
 
-        $caminho = "/xampp/htdocs/petiti/private-user/fotos-publicacao/";
         $publicacao->setTextoPublicacao($_POST['txtLegendaPub']);
         $usuario->setIdUsuario($_SESSION['id']);
         $publicacao->setUsuario($usuario);
         $publicacao->setDataPublicacao($DateAndTime);
-        $publicacao->cadastrar($publicacao);
+        $id = $publicacao->cadastrar($publicacao);
+
+        $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-publicacao/";
+
+        $nomeArquivo = time() . ".png";
+        $arquivoCompleto = $caminhoSalvar . $nomeArquivo;
+        file_put_contents($arquivoCompleto, file_get_contents($image));
+
+        $caminhoBanco = "private-user/fotos-publicacao/" . $nomeArquivo;
+        $publicacao->setIdPublicacao($id);
+        $fotoPublicacao->setPublicacao($publicacao);
+        $fotoPublicacao->setNomeFotoPublicacao($nomeArquivo);
+        $fotoPublicacao->setCaminhoFotoPublicacao($caminhoBanco);
+        $fotoPublicacao->cadastrar($fotoPublicacao);
+     
+        header('location: /petiti/feed');
+
     }
 );
+$app->post('/curtir', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $curtidaPub = new CurtidaPublicacao();
+    $usuario = new Usuario();
+    $publicacao = new Publicacao();
+    $idPub = $_POST['id'];
+    $idUser = $_SESSION['id'];
+    
+    $result = $curtidaPub->verificarCurtida($idPub, $idUser);
+    $boolean = $result['boolean'];
+    if ($boolean == true) {
+            $usuario->setIdUsuario($idUser);
+            $publicacao->setIdPublicacao($idPub);
+            $curtidaPub->setPublicacaoCurtida($publicacao);
+            $curtidaPub->setUsuarioCurtida($usuario);
+            $curtidaPub->cadastrar($curtidaPub);
+    } else {
+            $idCurtidaExistente = $result['id'];
+            $curtidaPub->setIdCurtidaPublicacao($idCurtidaExistente);
+            $curtidaPub->delete($curtidaPub);
+    }
+
+    }
+);
+
+
+
 try {
     $app->run();
 } catch (Exception $e) {

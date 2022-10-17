@@ -49,10 +49,16 @@ class FotoPublicacao
     public function cadastrar($fotoPublicacao)
     {
         $con = Conexao::conexao();
-        $stmt = $con->prepare("INSERT INTO tbFotoPublicacao VALUES(DEFAULT, ?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO tbFotoPublicacao(
+            idFotoPublicacao,
+            nomeFotoPublicacao,
+            caminhoFotoPublicacao,
+            idPublicacao
+            ) VALUES(DEFAULT, ?, ?, ?)");
         $stmt->bindValue(1, $fotoPublicacao->getNomeFotoPublicacao());
         $stmt->bindValue(2, $fotoPublicacao->getCaminhoFotoPublicacao());
         $stmt->bindValue(3, $fotoPublicacao->getPublicacao()->getIdPublicacao());
         $stmt->execute();
     }
+    
 }

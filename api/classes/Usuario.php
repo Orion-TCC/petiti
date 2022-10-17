@@ -14,6 +14,7 @@ class Usuario
     private $tipoUsuario;
     private $bioUsuario;
     private $localizacaoUsuario;
+    private $siteUsuario;
 
 
     public function getIdUsuario()
@@ -107,7 +108,10 @@ class Usuario
         `loginUsuario`, 
         `verificadoUsuario`, 
         `emailUsuario`, 
-        `idTipoUsuario` 
+        `idTipoUsuario`, 
+        bioUsuario,
+        localizacaoUsuario, 
+        siteUsuario
         FROM `tbusuario`
         ";
         $resultado = $con->query($query);
@@ -126,7 +130,8 @@ class Usuario
         tbtipousuario.idTipoUsuario,
         tipoUsuario,
         bioUsuario,
-        localizacaoUsuario
+        localizacaoUsuario, 
+        siteUsuario
         FROM tbusuario 
         INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
         WHERE tbusuario.idUsuario = $id";
@@ -274,6 +279,7 @@ class Usuario
                     $_SESSION['foto'] = $foto;
                     $_SESSION['bio'] = $dados[0]->bio;
                     $_SESSION['local'] = $dados[0]->local;
+                    $_SESSION['site'] = $dados[0]->site;
 
                     return $msg = "Bem vindo.";
                 } else {
@@ -304,6 +310,7 @@ class Usuario
                     $_SESSION['foto'] = $foto;
                     $_SESSION['bio'] = $dados[0]->bio;
                     $_SESSION['local'] = $dados[0]->local;
+                    $_SESSION['site'] = $dados[0]->site;
 
 
                     return $msg = "Bem vindo.";
@@ -364,6 +371,14 @@ class Usuario
         $con = Conexao::conexao();
         $stmt = $con->prepare("UPDATE tbusuario SET localizacaoUsuario = ? WHERE idUsuario = ?");
         $stmt->bindValue(1, $update->getLocalizacaoUsuario());
+        $stmt->bindValue(2, $update->getIdUsuario());
+        $stmt->execute();
+    }
+    public function updateSite($update)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbusuario SET siteUsuario = ? WHERE idUsuario = ?");
+        $stmt->bindValue(1, $update->getSiteUsuario());
         $stmt->bindValue(2, $update->getIdUsuario());
         $stmt->execute();
     }
@@ -501,5 +516,17 @@ class Usuario
     public function setLocalizacaoUsuario($localizacaoUsuario)
     {
         $this->localizacaoUsuario = $localizacaoUsuario;
+    }
+
+    public function getSiteUsuario()
+    {
+        return $this->siteUsuario;
+    }
+
+
+    public function setSiteUsuario($siteUsuario)
+    {
+        $this->siteUsuario = $siteUsuario;
+
     }
 }

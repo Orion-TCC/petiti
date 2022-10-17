@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15-Out-2022 às 16:58
+-- Tempo de geração: 30-Set-2022 às 23:51
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -20,9 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dbpetiti`
 --
-CREATE DATABASE IF NOT EXISTS `dbpetiti` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `dbpetiti`;
-
+CREATE DATABASE dbpetiti;
+USE dbpetiti;
 -- --------------------------------------------------------
 
 --
@@ -190,7 +189,7 @@ CREATE TABLE `tbpet` (
 CREATE TABLE `tbpublicacao` (
   `idPublicacao` int(11) NOT NULL,
   `textoPublicacao` varchar(200) NOT NULL,
-  `dataPublicacao` datetime NOT NULL,
+  `dataPublicacao` date NOT NULL,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -218,8 +217,6 @@ CREATE TABLE `tbusuario` (
   `loginUsuario` varchar(200) NOT NULL,
   `verificadoUsuario` tinyint(1) NOT NULL,
   `emailUsuario` varchar(100) NOT NULL,
-  `bioUsuario` text DEFAULT NULL,
-  `localizacaoUsuario` text DEFAULT NULL,
   `idTipoUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

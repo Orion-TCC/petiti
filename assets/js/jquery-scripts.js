@@ -51,8 +51,10 @@ $(document).ready(function () {
            type: "POST",
            enctype: "multipart/form-data",
            data: {"image":img},
-           url: "/petiti/assets/libs/croppie/croppie.php",
+           url: "/petiti/assets/libs/croppie/envio.php",
            success: function (data) {
+              html = img;
+              $("#baseFoto").val(img);
              html = '<img src="' + img + '" />';
              $("#preview-crop-image").html(html);
              console.log(data);
@@ -90,7 +92,15 @@ $(document).ready(function () {
         });
       });
   });
-
+        $("#form-id").on("keypress", function (event) {
+            console.log("aaya");
+            var keyPressed = event.keyCode || event.which;
+            if (keyPressed === 13) {
+                alert("You pressed the Enter key!!");
+                event.preventDefault();
+                return false;
+            }
+        });
   $("#continuar-crop-foto").on("click", function (ev) {
     ev.preventDefault();
     var blob;

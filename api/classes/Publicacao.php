@@ -99,7 +99,14 @@ class Publicacao
     public function listar()
     {
         $con = Conexao::conexao();
-        $query = "SELECT idPublicacao, textoPublicacao, dataPublicacao, idUsuario FROM tbPublicacao";
+        $query = "SELECT tbpublicacao.idPublicacao,
+        COUNT(idCurtidaPublicacao) as itimalias, 
+        tbpublicacao.idPublicacao, textoPublicacao, dataPublicacao, 
+        tbpublicacao.idUsuario, nomeUsuario, caminhoFotoPublicacao
+        FROM tbPublicacao 
+        INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
+        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao 
+        INNER JOIN tbcurtidapublicacao ON tbcurtidapublicacao.idPublicacaoCurtida = tbpublicacao.idPublicacao;";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;

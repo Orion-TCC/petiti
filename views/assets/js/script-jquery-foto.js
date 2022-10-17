@@ -64,7 +64,7 @@ $(document).ready(function () {
         $.ajax({
           type: "POST",
           enctype: "multipart/form-data",
-          data: { image: img },
+          data: {"image": img },
           url: "/petiti/assets/libs/croppie/envio.php",
           success: function (data) {
             html = img;
