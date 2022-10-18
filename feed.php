@@ -124,8 +124,11 @@ include_once("sentinela.php");
         <div id="criar-post" class="modal">
             <div id="preview-crop-image">
             </div>
-
+            <label for="txtCategoria">Categoria</label>
+            <input type="text" name="txtCategoria" id="txtCategoria">
+            <button id="submitCategoria">Adicionar categoria</button>
             <form id="form-aid" method="post" action="./api/publicar">
+                <input type="text" name="categoriasValue" id="categoriasValue" value="categorias">
                 <textarea name="txtLegendaPub" placeholder="Texto"></textarea>
                 <input type="hidden" name="baseFoto" id="baseFoto">
                 <input type="text" name="" id="">
