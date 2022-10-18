@@ -419,21 +419,26 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
 
 $app->get('/publicacoes', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
-    
+
     $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
-$app->post('/publicar', function (Request $request, Response $response, array $args) {
+$app->post(
+    '/publicar',
+    function (Request $request, Response $response, array $args) {
         $usuario = new Usuario();
         $publicacao = new Publicacao();
         $fotoPublicacao = new FotoPublicacao();
+        $categoria = new Categoria();
         $cookie = new Cookies();
         $image = $_POST['baseFoto'];
         @session_start();
         $publicacao = new Publicacao();
         date_default_timezone_set('America/Sao_Paulo');
+        $categorias = $_POST['categoriasValue'];
+        $categoriasA = explode(",", $categorias);
 
         $DateAndTime = date('Y-m-d H:i:s');
 
@@ -442,6 +447,7 @@ $app->post('/publicar', function (Request $request, Response $response, array $a
         $publicacao->setUsuario($usuario);
         $publicacao->setDataPublicacao($DateAndTime);
         $id = $publicacao->cadastrar($publicacao);
+        
 
         $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-publicacao/";
 
@@ -455,33 +461,42 @@ $app->post('/publicar', function (Request $request, Response $response, array $a
         $fotoPublicacao->setNomeFotoPublicacao($nomeArquivo);
         $fotoPublicacao->setCaminhoFotoPublicacao($caminhoBanco);
         $fotoPublicacao->cadastrar($fotoPublicacao);
-     
-        header('location: /petiti/feed');
+
+        foreach ($categoriasA as $categoriaAtual) {
+            $categoria->setCategoria($categoriaAtual);
+            $idCategoria = $categoria->cadastrar($categoria);
+            $categoria->setIdCategoria($idCategoria);
+        }
+        
+        
+
+        //header('location: /petiti/feed');
 
     }
 );
-$app->post('/curtir', function (Request $request, Response $response, array $args) {
-    @session_start();
-    $curtidaPub = new CurtidaPublicacao();
-    $usuario = new Usuario();
-    $publicacao = new Publicacao();
-    $idPub = $_POST['id'];
-    $idUser = $_SESSION['id'];
-    
-    $result = $curtidaPub->verificarCurtida($idPub, $idUser);
-    $boolean = $result['boolean'];
-    if ($boolean == true) {
+$app->post(
+    '/curtir',
+    function (Request $request, Response $response, array $args) {
+        @session_start();
+        $curtidaPub = new CurtidaPublicacao();
+        $usuario = new Usuario();
+        $publicacao = new Publicacao();
+        $idPub = $_POST['id'];
+        $idUser = $_SESSION['id'];
+
+        $result = $curtidaPub->verificarCurtida($idPub, $idUser);
+        $boolean = $result['boolean'];
+        if ($boolean == true) {
             $usuario->setIdUsuario($idUser);
             $publicacao->setIdPublicacao($idPub);
             $curtidaPub->setPublicacaoCurtida($publicacao);
             $curtidaPub->setUsuarioCurtida($usuario);
             $curtidaPub->cadastrar($curtidaPub);
-    } else {
+        } else {
             $idCurtidaExistente = $result['id'];
             $curtidaPub->setIdCurtidaPublicacao($idCurtidaExistente);
             $curtidaPub->delete($curtidaPub);
-    }
-
+        }
     }
 );
 
