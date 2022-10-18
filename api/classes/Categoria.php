@@ -33,6 +33,21 @@ class categoria
         return $this;
     }
 
+    public function cadastrar($categoria){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare('INSERT INTO tbCategoria(idCategoria, categoria)
+        VALUES (default, ?)');
+        $stmt->bindValue(1, $categoria->getCategoria());
+        $stmt->execute();
+        $resultado = $con->query("SELECT MAX(idCategoria) FROM tbCategoria");
+        $lista = $resultado->fetchAll();
+
+        foreach ($lista as $linha) {
+            $id = $linha[0];
+        }
+        return $id;
+    }
+
     public function listar(){
         $con = Conexao::conexao();
         $query = "SELECT idCategoria, categoria FROM tbcategoria";
