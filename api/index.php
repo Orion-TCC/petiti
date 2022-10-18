@@ -145,74 +145,7 @@ $app->post('/usuario/cadastro/update/ramo', function (Request $request, Response
     header('location: /petiti/info-empresa');
 });
 
-// $app->post('/usuario/update/conta', function (Request $request, Response $response, array $args) {
-//     @session_start();
-//     $usuario = new Usuario();
-//     $tipoUsuario = new TipoUsuario();
-//     $id = $_SESSION['id-cadastro'];
 
-
-//     $usuario->setIdUsuario($id);
-//     $usuario->setNomeUsuario($_POST['']);
-//     $usuario->setLoginUsuario($_POST['']);
-//     $usuario->setSenhaUsuario($_POST['']);
-//     $usuario->setEmailUsuario($_POST['']);
-//     $usuario->setVerificadoUsuario($_POST['']);
-//     $tipoUsuario->setTipoUsuario($_POST['']);
-//     $usuario->setTipoUsuario($tipoUsuario);
-//     $usuario->updateFull($usuario);
-
-
-
-
-//     header('location: /petiti/info-empresa');
-// });
-
-// $app->post('/usuario/update/perfil', function (Request $request, Response $response, array $args) {
-//     @session_start();
-//     $usuario = new Usuario();
-//     $tipoUsuario = new TipoUsuario();
-//     $id = $_SESSION['id-cadastro'];
-
-
-//     $usuario->setIdUsuario($id);
-//     $usuario->setNomeUsuario($_POST['']);
-//     $usuario->setLoginUsuario($_POST['']);
-//     $usuario->setSenhaUsuario($_POST['']);
-//     $usuario->setEmailUsuario($_POST['']);
-//     $usuario->setVerificadoUsuario($_POST['']);
-//     $tipoUsuario->setTipoUsuario($_POST['']);
-//     $usuario->setTipoUsuario($tipoUsuario);
-//     $usuario->updateFull($usuario);
-
-
-
-
-//     header('location: /petiti/info-empresa');
-// });
-
-// $app->post('/usuario/update/adm', function (Request $request, Response $response, array $args) {
-//     @session_start();
-//     $usuario = new Usuario();
-//     $tipoUsuario = new TipoUsuario();
-//     $id = $_SESSION['id-cadastro'];
-
-
-//     $usuario->setIdUsuario($id);
-//     $usuario->setNomeUsuario($_POST['']);
-//     $usuario->setLoginUsuario($_POST['']);
-//     $usuario->setSenhaUsuario($_POST['']);
-//     $usuario->setEmailUsuario($_POST['']);
-//     $usuario->setVerificadoUsuario($_POST['']);
-//     $tipoUsuario->setTipoUsuario($_POST['']);
-//     $usuario->setTipoUsuario($tipoUsuario);
-//     $usuario->updateFull($usuario);
-
-
-
-
-//     header('location: /petiti/info-empresa');
-// });
 
 $app->post('/usuario/update', function (Request $request, Response $response, array $args) {
     $data = $request->getParsedBody();
@@ -537,3 +470,72 @@ try {
     print_r($e);
     //header('location: /petiti/views/erroGeral.php');
 }
+
+// $app->post('/usuario/update/conta', function (Request $request, Response $response, array $args) {
+//     @session_start();
+//     $usuario = new Usuario();
+//     $tipoUsuario = new TipoUsuario();
+//     $id = $_SESSION['id-cadastro'];
+
+
+//     $usuario->setIdUsuario($id);
+//     $usuario->setNomeUsuario($_POST['']);
+//     $usuario->setLoginUsuario($_POST['']);
+//     $usuario->setSenhaUsuario($_POST['']);
+//     $usuario->setEmailUsuario($_POST['']);
+//     $usuario->setVerificadoUsuario($_POST['']);
+//     $tipoUsuario->setTipoUsuario($_POST['']);
+//     $usuario->setTipoUsuario($tipoUsuario);
+//     $usuario->updateFull($usuario);
+
+
+
+
+//     header('location: /petiti/info-empresa');
+// });
+
+// $app->post('/usuario/update/perfil', function (Request $request, Response $response, array $args) {
+//     @session_start();
+//     $usuario = new Usuario();
+//     $tipoUsuario = new TipoUsuario();
+//     $id = $_SESSION['id-cadastro'];
+
+
+//     $usuario->setIdUsuario($id);
+//     $usuario->setNomeUsuario($_POST['']);
+//     $usuario->setLoginUsuario($_POST['']);
+//     $usuario->setSenhaUsuario($_POST['']);
+//     $usuario->setEmailUsuario($_POST['']);
+//     $usuario->setVerificadoUsuario($_POST['']);
+//     $tipoUsuario->setTipoUsuario($_POST['']);
+//     $usuario->setTipoUsuario($tipoUsuario);
+//     $usuario->updateFull($usuario);
+
+
+
+
+//     header('location: /petiti/info-empresa');
+// });
+
+// $app->post('/usuario/update/adm', function (Request $request, Response $response, array $args) {
+//     @session_start();
+//     $usuario = new Usuario();
+//     $tipoUsuario = new TipoUsuario();
+//     $id = $_SESSION['id-cadastro'];
+
+
+//     $usuario->setIdUsuario($id);
+//     $usuario->setNomeUsuario($_POST['']);
+//     $usuario->setLoginUsuario($_POST['']);
+//     $usuario->setSenhaUsuario($_POST['']);
+//     $usuario->setEmailUsuario($_POST['']);
+//     $usuario->setVerificadoUsuario($_POST['']);
+//     $tipoUsuario->setTipoUsuario($_POST['']);
+//     $usuario->setTipoUsuario($tipoUsuario);
+//     $usuario->updateFull($usuario);
+
+
+
+
+//     header('location: /petiti/info-empresa');
+// });
