@@ -67,7 +67,35 @@ $_SESSION['tipo-usuario'] = "usuario";
                             <p class="avisoNomeUsuarioQtd"></p>
 
                             <label class="formText">Senha</label>
-                            <input class="formInput" placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
+                            
+                            <div class="formInput">
+                            <input  placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
+                              <div id="revealPassword" onclick="showHide()"></div>
+                             
+                             <script type="text/javascript">
+                                const password = document.getElementById ('txtPw');
+                                const passwordConfirm = document.getElementById('txtPwConfirm')
+
+                                const toggle = document.getElementById ('revealPassword');
+
+                                function showHide(){
+                                    if (password.type === 'password'){
+                                        
+                                        password.setAttribute('type', 'text');
+                                        toggle.classList.add('hide');
+                                        passwordConfirm.setAttribute('type', 'text');
+                                        toggle.classList.add('hide')
+                                    }
+                                    else{
+                                        password.setAttribute('type', 'password');
+                                        toggle.classList.remove('hide')
+                                        passwordConfirm.setAttribute('type', 'password');
+                                        toggle.classList.remove('hide')  
+                                    }
+                                }
+                              </script>
+
+                            </div>
                             <p id="senhaAvisoTamanho"></p>
 
 
@@ -75,10 +103,7 @@ $_SESSION['tipo-usuario'] = "usuario";
                             <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
                             <p id="senhaAvisoVerificacao"></p>
 
-                            <div class="caixaMostrarSenha">
-                                <input class="checkboxSenha" type="checkbox" id="mostrarSenha" style="cursor: pointer;">
-                                <label for="mostrarSenha" class="formTextMostrarSenha" id=mostrarSenhaLabel style="cursor: pointer;">Mostrar Senha</label>
-                            </div>
+
                             <button id="submitUsuario" class="formSubmit" type="submit">Continuar</button>
 
 
