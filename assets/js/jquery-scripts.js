@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  
+
   var resize = $("#upload-demo").croppie({
     enableExif: true,
     enableOrientation: true,
@@ -14,7 +14,10 @@ $(document).ready(function () {
       height: 300,
     },
   });
-  
+
+  var categorias = [];
+  var input = document.getElementById("txtCategoria");
+
   $("#flFoto").on("change", function () {
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -33,7 +36,7 @@ $(document).ready(function () {
 
 
   $("#continuar-post").on("click", function (ev) {
-    ev.preventDefault(); 
+    ev.preventDefault();
     var blob;
     resize
       .croppie("result", {
@@ -42,25 +45,25 @@ $(document).ready(function () {
       .then(function (resp) {
         blob = resp;
       });
-    
+
     resize.croppie("result", {
-         type: "canvas",
-         size: "viewport",
-       }).then(function (img) {
-         $.ajax({
-           type: "POST",
-           enctype: "multipart/form-data",
-           data: {"image":img},
-           url: "/petiti/assets/libs/croppie/envio.php",
-           success: function (data) {
-              html = img;
-              $("#baseFoto").val(img);
-             html = '<img src="' + img + '" />';
-             $("#preview-crop-image").html(html);
-             console.log(data);
-           },
-         });
-       });
+      type: "canvas",
+      size: "viewport",
+    }).then(function (img) {
+      $.ajax({
+        type: "POST",
+        enctype: "multipart/form-data",
+        data: { "image": img },
+        url: "/petiti/assets/libs/croppie/envio.php",
+        success: function (data) {
+          html = img;
+          $("#baseFoto").val(img);
+          html = '<img src="' + img + '" />';
+          $("#preview-crop-image").html(html);
+          console.log(data);
+        },
+      });
+    });
   });
 
   $("#continuar-crop-foto").on("click", function (ev) {
@@ -92,15 +95,15 @@ $(document).ready(function () {
         });
       });
   });
-        $("#form-id").on("keypress", function (event) {
-            console.log("aaya");
-            var keyPressed = event.keyCode || event.which;
-            if (keyPressed === 13) {
-                alert("You pressed the Enter key!!");
-                event.preventDefault();
-                return false;
-            }
-        });
+  $("#form-id").on("keypress", function (event) {
+    console.log("aaya");
+    var keyPressed = event.keyCode || event.which;
+    if (keyPressed === 13) {
+      alert("You pressed the Enter key!!");
+      event.preventDefault();
+      return false;
+    }
+  });
   $("#continuar-crop-foto").on("click", function (ev) {
     ev.preventDefault();
     var blob;
@@ -129,5 +132,33 @@ $(document).ready(function () {
           },
         });
       });
+  });
+
+
+  $("#submitCategoria").click(function () {
+    if (input.value == "") { }
+    else {
+      categorias.push(input.value);
+      console.log(categorias);
+      document.getElementById("categoriasValue").value = categorias;
+      input.value = "";
+      input.focus();
+    }
+
+  });
+
+  $("#txtCategoria").keypress(function (event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if (keycode == '13') {
+      if (input.value == "") { }
+      else {
+        categorias.push(input.value);
+        console.log(categorias);
+        document.getElementById("categoriasValue").value = categorias;
+        input.value = "";
+        input.focus();
+      }
+    }
+
   });
 });
