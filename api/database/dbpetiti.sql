@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30-Set-2022 às 23:51
+-- Tempo de geração: 18-Out-2022 às 00:52
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -20,8 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dbpetiti`
 --
-CREATE DATABASE dbpetiti;
-USE dbpetiti;
+CREATE DATABASE IF NOT EXISTS `dbpetiti` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `dbpetiti`;
+
 -- --------------------------------------------------------
 
 --
@@ -189,7 +190,7 @@ CREATE TABLE `tbpet` (
 CREATE TABLE `tbpublicacao` (
   `idPublicacao` int(11) NOT NULL,
   `textoPublicacao` varchar(200) NOT NULL,
-  `dataPublicacao` date NOT NULL,
+  `dataPublicacao` datetime NOT NULL,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -204,6 +205,14 @@ CREATE TABLE `tbtipousuario` (
   `tipoUsuario` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `tbtipousuario`
+--
+
+INSERT INTO `tbtipousuario` (`idTipoUsuario`, `tipoUsuario`) VALUES
+(1, 'Tutor'),
+(2, 'Pet Shop');
+
 -- --------------------------------------------------------
 
 --
@@ -217,6 +226,9 @@ CREATE TABLE `tbusuario` (
   `loginUsuario` varchar(200) NOT NULL,
   `verificadoUsuario` tinyint(1) NOT NULL,
   `emailUsuario` varchar(100) NOT NULL,
+  `bioUsuario` text DEFAULT NULL,
+  `localizacaoUsuario` text DEFAULT NULL,
+  `siteUsuario` text DEFAULT NULL,
   `idTipoUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -464,7 +476,7 @@ ALTER TABLE `tbpublicacao`
 -- AUTO_INCREMENT de tabela `tbtipousuario`
 --
 ALTER TABLE `tbtipousuario`
-  MODIFY `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuario`

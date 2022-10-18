@@ -98,6 +98,38 @@ class Usuario
         $this->tipoUsuario = $tipoUsuario;
     }
 
+    public function getBioUsuario()
+    {
+        return $this->bioUsuario;
+    }
+
+    public function setBioUsuario($bioUsuario)
+    {
+        $this->bioUsuario = $bioUsuario;
+    }
+
+
+    public function getLocalizacaoUsuario()
+    {
+        return $this->localizacaoUsuario;
+    }
+
+
+    public function setLocalizacaoUsuario($localizacaoUsuario)
+    {
+        $this->localizacaoUsuario = $localizacaoUsuario;
+    }
+
+    public function getSiteUsuario()
+    {
+        return $this->siteUsuario;
+    }
+
+
+    public function setSiteUsuario($siteUsuario)
+    {
+        $this->siteUsuario = $siteUsuario;
+    }
     public function listar()
     {
         $con = Conexao::conexao();
@@ -118,6 +150,7 @@ class Usuario
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
+
     public function listarUsuario($id)
     {
         $con = Conexao::conexao();
@@ -496,37 +529,5 @@ class Usuario
     }
 
 
-    public function getBioUsuario()
-    {
-        return $this->bioUsuario;
-    }
 
-    public function setBioUsuario($bioUsuario)
-    {
-        $this->bioUsuario = $bioUsuario;
-    }
-
-
-    public function getLocalizacaoUsuario()
-    {
-        return $this->localizacaoUsuario;
-    }
-
-
-    public function setLocalizacaoUsuario($localizacaoUsuario)
-    {
-        $this->localizacaoUsuario = $localizacaoUsuario;
-    }
-
-    public function getSiteUsuario()
-    {
-        return $this->siteUsuario;
-    }
-
-
-    public function setSiteUsuario($siteUsuario)
-    {
-        $this->siteUsuario = $siteUsuario;
-
-    }
 }

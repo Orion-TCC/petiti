@@ -103,6 +103,19 @@ $app->get('/usuario/delete/{id}', function (Request $request, Response $response
     return $response;
 });
 
+$app->get('/logins', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+    $lista = $usuario->listar();
+    $usuarios = array();
+    
+    foreach ($lista as $linha) {
+       array_push($usuarios, $linha['loginUsuario']);
+    }
+    
+    $response->getBody()->write(json_encode($usuarios));
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
 $app->post('/usuario/update/ramo', function (Request $request, Response $response, array $args) {
     @session_start();
     $usuario = new Usuario();
@@ -276,6 +289,44 @@ $app->post('/login', function (Request $request, Response $response, array $args
     }
 });
 
+$app->post('/usuario/endereco/add', function (Request $request, Response $response, array $args) {
+    $data = $request->getParsedBody();
+    $usuarioEndereco = new usuarioEndereco;
+    $usuario = new Usuario();
+
+    $cep = $_POST['txtCep'];
+
+    $url = "https://viacep.com.br/ws/" . $cep . "/json";
+
+    $json = file_get_contents($url);
+    $dados = json_decode($json);
+    $logradouro = $dados->logradouro;
+    $numero = $_POST['txtNumeroEmpresa'];
+    $bairro = $dados->bairro;
+    $complemento = $_POST['txtComplementoEmpresa'];
+    $cidade = $dados->localidade;
+    $estado = $_POST['txtUfEmpresa'];
+
+    @session_start();
+
+    $usuarioEndereco->setLogradouroUsuario($logradouro);
+    $usuarioEndereco->setNumeroUsuario($numero);
+    $usuarioEndereco->setCepUsuario($cep);
+    $usuarioEndereco->setBairroUsuario($bairro);
+    $usuarioEndereco->setComplementoUsuario($complemento);
+    $usuarioEndereco->setCidadeUsuario($cidade);
+    $usuarioEndereco->setEstadoUsuario($estado);
+    $usuario->setIdUsuario($_SESSION['id-cadastro']);
+
+    $usuario->setNomeUsuario($_POST['txtNomeEmpresa']);
+    $usuario->updateNome($usuario);
+
+    $usuarioEndereco->setUsuario($usuario);
+
+    $usuarioEndereco->cadastrar($usuarioEndereco);
+
+    header('location: /petiti/final-empresa');
+});
 // Usuario - Pet
 
 $app->get('/usuario/{id}/pets', function (Request $request, Response $response, array $args) {
@@ -378,49 +429,19 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     header('location: /petiti/foto-pet');
 });
 
-$app->post('/usuario/endereco/add', function (Request $request, Response $response, array $args) {
-    $data = $request->getParsedBody();
-    $usuarioEndereco = new usuarioEndereco;
-    $usuario = new Usuario();
 
-    $cep = $_POST['txtCep'];
-
-    $url = "https://viacep.com.br/ws/" . $cep . "/json";
-
-    $json = file_get_contents($url);
-    $dados = json_decode($json);
-    $logradouro = $dados->logradouro;
-    $numero = $_POST['txtNumeroEmpresa'];
-    $bairro = $dados->bairro;
-    $complemento = $_POST['txtComplementoEmpresa'];
-    $cidade = $dados->localidade;
-    $estado = $_POST['txtUfEmpresa'];
-
-    @session_start();
-
-    $usuarioEndereco->setLogradouroUsuario($logradouro);
-    $usuarioEndereco->setNumeroUsuario($numero);
-    $usuarioEndereco->setCepUsuario($cep);
-    $usuarioEndereco->setBairroUsuario($bairro);
-    $usuarioEndereco->setComplementoUsuario($complemento);
-    $usuarioEndereco->setCidadeUsuario($cidade);
-    $usuarioEndereco->setEstadoUsuario($estado);
-    $usuario->setIdUsuario($_SESSION['id-cadastro']);
-
-    $usuario->setNomeUsuario($_POST['txtNomeEmpresa']);
-    $usuario->updateNome($usuario);
-
-    $usuarioEndereco->setUsuario($usuario);
-
-    $usuarioEndereco->cadastrar($usuarioEndereco);
-
-    header('location: /petiti/final-empresa');
-});
 
 $app->get('/publicacoes', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
 
     $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+$app->get('/publicacao/{id}', function (Request $request, Response $response, array $args) {
+    $publicacao = new Publicacao();
+    $id = $args['id'];
+    $json = json_encode($lista = $publicacao->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
@@ -497,6 +518,14 @@ $app->post(
             $curtidaPub->setIdCurtidaPublicacao($idCurtidaExistente);
             $curtidaPub->delete($curtidaPub);
         }
+        $json = json_encode($lista = $publicacao->listarPub($idPub), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        foreach ($lista as $linha) {
+        $itimalias = $linha['itimalias'];
+        }
+        
+        $response->getBody()->write("$itimalias");
+        return $response;
+
     }
 );
 

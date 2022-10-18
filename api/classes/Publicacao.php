@@ -111,4 +111,19 @@ class Publicacao
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
+    public function listarPub($id){
+        $con = Conexao::conexao();
+        $query = "SELECT tbpublicacao.idPublicacao,
+        COUNT(idCurtidaPublicacao) as itimalias, 
+        tbpublicacao.idPublicacao, textoPublicacao, dataPublicacao, 
+        tbpublicacao.idUsuario, nomeUsuario, caminhoFotoPublicacao
+        FROM tbPublicacao 
+        INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
+        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao 
+        INNER JOIN tbcurtidapublicacao ON tbcurtidapublicacao.idPublicacaoCurtida = tbpublicacao.idPublicacao
+        WHERE tbpublicacao.idPublicacao = $id;";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista; 
+    }
 }
