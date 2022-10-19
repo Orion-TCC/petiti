@@ -16,13 +16,9 @@ class categoriaPublicacao
         return $this;
     }
 
-
-
     public function getCategoria(){
         return $this->Categoria;
     }
-
-
 
     public function setCategoria($Categoria){
         $this->Categoria = $Categoria;
@@ -30,11 +26,9 @@ class categoriaPublicacao
         return $this;
     }
 
-
     public function getIdCategoriaPublicacao(){
         return $this->idCategoriaPublicacao;
     }
-
 
     public function setIdCategoriaPublicacao($idCategoriaPublicacao){
         $this->idCategoriaPublicacao = $idCategoriaPublicacao;
@@ -55,8 +49,13 @@ class categoriaPublicacao
         $stmt = $con->prepare("INSERT INTO tbcategoriapublicacao (idCategoria, idPublicacao) VALUES ?, ?");
         $stmt->bindValue(1, $categoriapublicacao->getCategoria()->getIdCategoria());
         $stmt->bindValue(2, $categoriapublicacao->getPublicacao()->getIdPublicacao());
-
         $stmt->execute();
+        $resultado = $con->query("SELECT MAX(idCategoriaPublicacao) FROM tbcategoriapublicacao");
+        $lista = $resultado->fetchAll();
+        foreach ($lista as $linha) {
+            $id = $linha[0];
+        }
+        return $id;
     }
 
     public function update($update){
