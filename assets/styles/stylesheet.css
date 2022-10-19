@@ -577,6 +577,7 @@ border-bottom-width: 1px;
   height: 100%;
   width: fit-content;
   align-items: center;
+  position: fixed;
 }
 
 .imgLogoFeed{

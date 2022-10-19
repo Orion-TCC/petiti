@@ -45,7 +45,7 @@ include_once("sentinela-cadastro.php");
                     </div>
 
                     <div class="infoFormHolder">
-                        <span>Não se preocupe, você ainda terá chance de criar uma ou várias contas para os seus queridos pets. Nesse tempo, explore a pet iti e tudo que nós temos a oferecer! Interaja com petlovers igual a você. </span>
+                        <span>Não se preocupe, você ainda terá chance de criar uma ou várias contas para os seus queridos pets. Nesse tempo, explore a <span class="enfaseTexto">pet iti</span> e tudo que nós temos a oferecer! Interaja com petlovers igual a você. </span>
                     </div>
 
                     <div>

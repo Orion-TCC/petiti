@@ -72,6 +72,7 @@ body {
 }
 
 
+
 /* PAGE ESCOLHA TIPO USUARIO */
 
 .holderETU {
@@ -248,7 +249,7 @@ height: fit-content;
   border-radius: 20px;
   height: 50px;
   width: 100%;
-  padding-left: 20px;
+  padding: 0 20px 0 20px;
   font-family: "Public Sans Bold", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -374,21 +375,6 @@ outline: #646363 solid 2px;
 
 
 
-
-
-.checkboxSenha{
-  background: #ffffff;
-  mix-blend-mode: normal;
-  border: 1px solid #c1c1c1;
-  backdrop-filter: blur(40px);
-  border-radius: 50px;
-}
-.formTextMostrarSenha{
-  font-family: "Raleway Bold", sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 15px;
-}
 .cookieCadastro {
   width: 100%;
   display: flex;
@@ -422,6 +408,34 @@ outline: #646363 solid 2px;
   margin: 7px 0 0 0;
   font-family: "Raleway Bold", sans-serif;
   color: #db310c;
+}
+
+/* PAGE INFORMACAO USUARIO */
+.holderMaisSobre {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img//fundo-cadastro.svg");
+}
+
+#formularioMaisSobre textarea.formInput{
+  height: 120px;
+  resize: none;
+  overflow-y: auto;
+  padding: 10px 20px 10px 20px  ;
+  
+}
+
+#formularioMaisSobre textarea.formInput::placeholder{
+  padding-top: 48px;
+  
+
 }
 
 /* PAGE CADASTRO DE FOTO */
@@ -653,7 +667,7 @@ outline: #646363 solid 2px;
 }
 
 #formulariopet1 div.tituloFormHolder{
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
 .subTituloForm {
@@ -667,6 +681,10 @@ outline: #646363 solid 2px;
   height: 30px;
   color: #000000;
   margin-top: 90px;
+}
+
+.enfaseTexto{
+  color: #3837A1;
 }
 
 .escolhasHolder {
@@ -731,12 +749,10 @@ outline: #646363 solid 2px;
   height: 550px;
 }
 
-#formulariopet1 div.tituloFormHolder{
-  margin-top: 10px;
-}
+
 
 #formulariopet1 div.subTituloForm{
-  margin-top: 20px;
+  margin-top: 40px;
 }
 /* PAGE FORMULARIO PET 2 TA USANDO O CSS DO FORMULARIO DO USUARIO */
 .holderFormularioPet {
@@ -756,9 +772,7 @@ outline: #646363 solid 2px;
   padding-top: 30px;
 }
 
-#formularioPet2 div.tituloFormHolder{
-  padding-top: 60px;
-}
+
 
 #formularioPet2 div.formulario{
   height: 750px;
@@ -769,7 +783,7 @@ outline: #646363 solid 2px;
 }
 
 .SelectEspecie {
-  width: 495px;
+  width: 100%;
   height: 49px;
   background: #ffffff;
   border-radius: 20px;
@@ -871,7 +885,7 @@ outline: #646363 solid 2px;
 
 .formTextFinalizarForms {
   padding-left: 25px;
-  width: 470px;
+  width: 460px;
   height: 151px;
   margin-top: 50px;
   font-family: "Raleway Bold";

@@ -40,7 +40,7 @@ include_once("sentinela-cadastro.php");
         <section id="formularioFoto">
             <div class="holderFormularioFoto">
                 <div class="formulario">
-                <a class="setaVoltar" href="cadastro-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
+                <a class="setaVoltar" href="info-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolderFoto">
                         <span>
                             Deixe seu pefil mais a sua cara!

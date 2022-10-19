@@ -29,7 +29,7 @@ include_once("sentinela-cadastro.php");
             <div class="holderFormularioPet">
 
                 <div class="formulario">
-                   
+                <a class="setaVoltar" href="inicio-pet"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder">
                         <span>
                             Vamos conhecer seu pet!

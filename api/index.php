@@ -452,7 +452,7 @@ $app->post(
         
         
 
-        //header('location: /petiti/feed');
+        header('location: /petiti/feed');
 
     }
 );

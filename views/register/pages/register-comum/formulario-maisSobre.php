@@ -1,8 +1,10 @@
 <!DOCTYPE php>
 <html lang="pt-br">
 <?php
-session_start();
+@session_start();
+include_once("sentinela-cadastro.php");
 $_SESSION['tipo-usuario'] = "usuario";
+
 ?>
 
 <head>
@@ -37,10 +39,10 @@ $_SESSION['tipo-usuario'] = "usuario";
 
 <body>
     <main class="container-content">
-        <section id="formularioUsuario">
-            <div class="holderFormularioUsuario">
+        <section id="formularioMaisSobre">
+            <div class="holderMaisSobre">
                 <div class="formulario">
-                    <a class="setaVoltar" href="tipo-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
+                    <a class="setaVoltar" href="cadastro-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder">
                         <span>
                             Conte um pouco sobre você...
@@ -48,37 +50,30 @@ $_SESSION['tipo-usuario'] = "usuario";
                     </div>
                     <div class="subTituloFormHolderUsuario">
                         <span>
-                            Insira seus dados de acesso abaixo:
+                            Insira seus dados pessoais abaixo:
                         </span>
                     </div>
                     <div class="formularioHolder ">
-                        <form class="formElementsHolder" action="api/usuario/add" method="post">
-                            <label class="formText">Email</label>
-                            <input class="formInput" placeholder="Insira seu email" type="email" name="txtEmailUsuario" id="txtEmailUsuario" required autofocus>
-                            <p id="avisoEmail"></p>
+                        <form class="formElementsHolder" action="api/usuario/info" method="post">
+
+                            <label class="formText">Nome</label>
+                            <input class="formInput" placeholder="Insira seu nome ou apelido" type="text" name="txNome" id="txNome" required autofocus>
 
 
-                            <label class="formText">Nome de usuário</label>
-                            <input class="formInput" placeholder="Insira seu nome de usuario" type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4">
 
-                            <p class="avisoNomeUsuarioValidacao"></p>
-                            <p class="avisoNomeUsuarioQtd"></p>
+                            <label class="formText">Biografia</label>
+                            <textarea class="formInput" name="txBio" id="txBio" cols="30" rows="10" placeholder="Escreva algo sobre você, curiosidades talvez..."></textarea>
 
-                            <label class="formText">Senha</label>
-                            
-                            <div class="formInput">
-                            <input  placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
-                              <div id="revealPassword" onclick="showHide()"></div>
+
+                            <label class="formText">Localização</label>
+                            <input  class="formInput" placeholder="Insira sua localização" type="text" name="txLocal" id="txLocal" required >
+                        
                              
 
 
-                            </div>
-                            <p id="senhaAvisoTamanho"></p>
+                            <label class="formText">Site</label>
+                            <input class="formInput" placeholder="Insira uma URL" type="text" name="txSite" id="txSite" required minlength="6">
 
-
-                            <label class="formText">Confirme sua senha</label>
-                            <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
-                            <p id="senhaAvisoVerificacao"></p>
 
 
                             <button id="submitUsuario" class="formSubmit" type="submit">Continuar</button>

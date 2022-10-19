@@ -3,7 +3,10 @@
 <?php
 session_start();
 $_SESSION['tipo-usuario'] = "usuario";
+
 ?>
+
+
 
 <head>
     <!-- HTML base -->
@@ -83,7 +86,8 @@ $_SESSION['tipo-usuario'] = "usuario";
 
                             <button id="submitUsuario" class="formSubmit" type="submit">Continuar</button>
 
-
+                <?php 
+                echo @$_COOKIE["erro-cadastro"];?>
                         </form>
                     </div>
 
