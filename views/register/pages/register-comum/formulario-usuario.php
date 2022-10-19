@@ -68,13 +68,9 @@ $_SESSION['tipo-usuario'] = "usuario";
                             <p class="avisoNomeUsuarioQtd"></p>
 
                             <label class="formText">Senha</label>
-                            
                             <div class="formInput">
-                            <input  placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
-                              <div id="revealPassword" onclick="showHide()"></div>
-                             
-
-
+                                <input  placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
+                                <div id="revealPassword" onclick="showHide()"></div>
                             </div>
                             <p id="senhaAvisoTamanho"></p>
 
@@ -86,8 +82,7 @@ $_SESSION['tipo-usuario'] = "usuario";
 
                             <button id="submitUsuario" class="formSubmit" type="submit">Continuar</button>
 
-                <?php 
-                echo @$_COOKIE["erro-cadastro"];?>
+                                <span> <?php echo @$_COOKIE["erro-cadastro"];?></span>
                         </form>
                     </div>
 

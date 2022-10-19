@@ -36,13 +36,13 @@ a{
 html, body {
   scroll-behavior: smooth;
   max-width: 100%;
-  overflow-x: hidden;
+
 }
 body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+    overflow-x: hidden;
 }
 
 * {

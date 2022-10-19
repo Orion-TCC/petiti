@@ -14,7 +14,7 @@ $(document).ready(function () {
     var tamanhoEmail = $("#txtEmailUsuario").val().length;
     if (tamanhoEmail > 0) {
       if (bool == true) {
-        $("#avisoEmail").text("Email Válido");
+        $("#avisoEmail").text("");
         $("#avisoEmail").addClass("textoCerto");
         $("#avisoEmail").removeClass("textoErrado");
       } else {
