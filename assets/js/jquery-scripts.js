@@ -144,7 +144,6 @@ $(document).ready(function () {
       input.value = "";
       input.focus();
     }
-
   });
 
   $("#txtCategoria").keypress(function (event) {
@@ -159,6 +158,18 @@ $(document).ready(function () {
         input.focus();
       }
     }
+  });
 
+  $('input.checkbox').change(function () {
+    checkA = $(this).val();
+    if($(this).is(":checked")) {
+      categorias.push(checkA);
+      console.log(categorias);
+      document.getElementById("categoriasValue").value = categorias;
+    }else{
+      categorias.splice(categorias.indexOf(checkA), 1);
+      document.getElementById("categoriasValue").value = categorias;
+    }
+    
   });
 });
