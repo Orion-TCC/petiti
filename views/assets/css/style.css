@@ -156,6 +156,7 @@ body {
   display: flex;
   flex-direction: column;
 
+height: fit-content;
   padding: 0 50px 15px 50px ;
 }
 
@@ -167,6 +168,7 @@ body {
   height: 670px;
   overflow-y: auto;
   overflow-x: hidden;
+  
 }
 
 
@@ -235,7 +237,7 @@ body {
   font-weight: 700;
   font-size: 20px;
   line-height: 23px;
-  padding-top: 20px;
+  margin: 15px 0 7px 0;
 }
 
 .formInput {
@@ -272,6 +274,11 @@ outline: #646363 solid 2px;
   border: none;
   border-radius: 20px;
   padding-left: 20px;
+  font-family: "Public Sans Bold", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
   position: relative;
 }
 
@@ -406,13 +413,13 @@ outline: #646363 solid 2px;
 
 
 .textoCerto{
-  margin: 7px 0 0 22px;
+  margin: 7px 0 0 0;
   font-family: "Raleway Bold", sans-serif;
   color: #3837a1;
 }
 
 .textoErrado {
-  margin: 7px 0 0 22px;
+  margin: 7px 0 0 0;
   font-family: "Raleway Bold", sans-serif;
   color: #db310c;
 }
