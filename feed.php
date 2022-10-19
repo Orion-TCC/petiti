@@ -2,6 +2,7 @@
 @session_start();
 
 include_once("sentinela.php");
+
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
@@ -127,6 +128,22 @@ include_once("sentinela.php");
             <label for="txtCategoria">Categoria</label>
             <input type="text" name="txtCategoria" id="txtCategoria">
             <button id="submitCategoria">Adicionar categoria</button>
+            
+            
+            <?php $urlCategorias = "http://localhost/petiti/api/categorias";
+            $jsonCategorias = file_get_contents($urlCategorias);
+            $dadosCategoria = (array)json_decode($jsonCategorias, true);
+            $contagemCategoria = count($dadosCategoria['categorias']);
+            for ($i=0;$i<$contagemCategoria;$i++){
+                ?><br>
+                <input class="checkbox" type="checkbox" name="categorias[]"
+                id="<?php $dadosCategoria['categorias'][$i]['idCategoria']?>"
+                value="<?php echo $dadosCategoria['categorias'][$i]['categoria'];?>">
+                <?php echo $dadosCategoria['categorias'][$i]['categoria'];?>
+                <?php
+            }
+            ?>
+
             <form id="form-aid" method="post" action="./api/publicar">
                 <input type="text" name="categoriasValue" id="categoriasValue" value="categorias">
                 <textarea name="txtLegendaPub" placeholder="Texto"></textarea>
