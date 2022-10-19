@@ -135,11 +135,11 @@ $app->get('/logins', function (Request $request, Response $response, array $args
     $usuario = new Usuario();
     $lista = $usuario->listar();
     $usuarios = array();
-    
+
     foreach ($lista as $linha) {
-       array_push($usuarios, $linha['loginUsuario']);
+        array_push($usuarios, $linha['loginUsuario']);
     }
-    
+
     $response->getBody()->write(json_encode($usuarios));
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
@@ -390,7 +390,13 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     header('location: /petiti/foto-pet');
 });
 
+$app->get('/categorias', function (Request $request, Response $response, array $args) {
+    $categoria = new Categoria();
 
+    $json = "{\"categorias\":" . json_encode($lista = $categoria->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
 
 $app->get('/publicacoes', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
@@ -415,6 +421,7 @@ $app->post(
         $fotoPublicacao = new FotoPublicacao();
         $categoria = new Categoria();
         $cookie = new Cookies();
+        $categoriaPublicacao = new categoriaPublicacao();
         $image = $_POST['baseFoto'];
         @session_start();
         $publicacao = new Publicacao();
@@ -429,7 +436,7 @@ $app->post(
         $publicacao->setUsuario($usuario);
         $publicacao->setDataPublicacao($DateAndTime);
         $id = $publicacao->cadastrar($publicacao);
-        
+
 
         $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-publicacao/";
 
@@ -449,11 +456,8 @@ $app->post(
             $idCategoria = $categoria->cadastrar($categoria);
             $categoria->setIdCategoria($idCategoria);
         }
-        
-        
 
         header('location: /petiti/feed');
-
     }
 );
 $app->post(
@@ -481,12 +485,11 @@ $app->post(
         }
         $json = json_encode($lista = $publicacao->listarPub($idPub), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         foreach ($lista as $linha) {
-        $itimalias = $linha['itimalias'];
+            $itimalias = $linha['itimalias'];
         }
-        
+
         $response->getBody()->write("$itimalias");
         return $response;
-
     }
 );
 
