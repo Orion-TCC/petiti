@@ -86,7 +86,7 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
             if ($_SESSION['tipo-usuario'] == "empresa") {
                 header('location: /petiti/foto-empresa');
             } else {
-                header('location: /petiti/tipo-usuario');
+                header('location: /petiti/info-usuario');
             }
         } else {
             $cookie->criarCookie("erro-cadastro", $msg, 1);
