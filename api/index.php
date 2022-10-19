@@ -84,7 +84,7 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
             @session_start();
             $_SESSION['id-cadastro'] = $id;
             if ($_SESSION['tipo-usuario'] == "empresa") {
-                header('location: /petiti/foto-empresa');
+                header('location: /petiti/info-empresa');
             } else {
                 header('location: /petiti/info-usuario');
             }
@@ -119,8 +119,11 @@ $app->post('/usuario/info', function (Request $request, Response $response, arra
     $usuario->updateLocalizacao($usuario);
     $usuario->updateBio($usuario);
 
-
-    header('location: /petiti/foto-usuario');
+    if ($_SESSION['tipo-usuario'] == "empresa") {
+        header('location: /petiti/foto-empresa');
+    } else {
+        header('location: /petiti/foto-usuario');
+    }
 });
 
 $app->get('/usuario/delete/{id}', function (Request $request, Response $response, array $args) {
