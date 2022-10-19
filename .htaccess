@@ -9,6 +9,7 @@ RewriteRule ^tipo-usuario views/register/pages/escolha-tipo-usuario.php [NC,L]
 
 
 RewriteRule ^cadastro-usuario views/register/pages/register-comum/formulario-usuario.php [NC,L]
+RewriteRule ^info-usuario views/register/pages/register-comum/formulario-maisSobre.php [NC,L]
 RewriteRule ^foto-usuario views/register/pages/register-comum/formulario-foto.php [NC,L]
 
 RewriteRule ^inicio-pet views/register/pages/register-comum/formulario-pet1.php [NC,L]

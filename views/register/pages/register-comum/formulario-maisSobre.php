@@ -43,7 +43,7 @@ $_SESSION['tipo-usuario'] = "usuario";
                     <a class="setaVoltar" href="tipo-usuario"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder">
                         <span>
-                            Vamos começar!
+                            Conte um pouco sobre você...
                         </span>
                     </div>
                     <div class="subTituloFormHolderUsuario">
