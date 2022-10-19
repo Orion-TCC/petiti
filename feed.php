@@ -89,8 +89,6 @@ include_once("sentinela.php");
             <?php $url = "http://localhost/petiti/api/publicacoes";
 
             $json = file_get_contents($url);
-            @$json1 = $_POST['json'];
-            print_r($json1);
             $dados = (array)json_decode($json, true);
             $contagem = count($dados['publicacoes']);
             for ($i = 0; $i < $contagem; $i++) {
