@@ -68,7 +68,7 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
         header('location: /petiti/cadastro-usuario');
     } else {
         $senha = $_POST['txtPw'];
-        $usuario->setNomeUsuario($_POST['txtNomeUsuario']);
+        $usuario->setNomeUsuario(" ");
         $usuario->setLoginUsuario($_POST['txtLoginUsuario']);
         $usuario->setEmailUsuario($_POST['txtEmailUsuario']);
         $usuario->setSenhaUsuario($senha);
@@ -93,6 +93,34 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
             header('location: /petiti/cadastro-usuario');
         }
     }
+});
+
+$app->post('/usuario/info', function (Request $request, Response $response, array $args) {
+    $data = $request->getParsedBody();
+    $usuario = new Usuario();
+    $cookie = new Cookies();
+    @session_start();
+    $id = $_SESSION['id-cadastro'];
+
+    $nome = $_POST['txNome'];
+    $bio = $_POST['txBio'];
+    $local = $_POST['txLocal'];
+    $site = $_POST['txSite'];
+
+
+    $usuario->setIdUsuario($id);
+    $usuario->setNomeUsuario($nome);
+    $usuario->setBioUsuario($bio);
+    $usuario->setLocalizacaoUsuario($local);
+    $usuario->setSiteUsuario($site);
+
+    $usuario->updateNome($usuario);
+    $usuario->updateSite($usuario);
+    $usuario->updateLocalizacao($usuario);
+    $usuario->updateBio($usuario);
+
+
+    header('location: /petiti/foto-usuario');
 });
 
 $app->get('/usuario/delete/{id}', function (Request $request, Response $response, array $args) {
