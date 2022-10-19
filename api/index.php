@@ -411,7 +411,7 @@ $app->get('/publicacoes', function (Request $request, Response $response, array 
 $app->get('/publicacao/{id}', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
     $id = $args['id'];
-    $json = json_encode($lista = $publicacao->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    $json = json_encode($lista = $publicacao->listarPub($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
@@ -420,6 +420,7 @@ $app->post(
     '/publicar',
     function (Request $request, Response $response, array $args) {
         $usuario = new Usuario();
+        $curtidaPub = new CurtidaPublicacao();
         $publicacao = new Publicacao();
         $fotoPublicacao = new FotoPublicacao();
         $categoria = new Categoria();
@@ -459,7 +460,11 @@ $app->post(
             $idCategoria = $categoria->cadastrar($categoria);
             $categoria->setIdCategoria($idCategoria);
         }
-
+        $usuario->setIdUsuario(1);
+        $publicacao->setIdPublicacao($id);
+        $curtidaPub->setUsuarioCurtida($usuario);
+        $curtidaPub->setPublicacaoCurtida($publicacao);
+        $curtidaPub->cadastrar($curtidaPub);
         header('location: /petiti/feed');
     }
 );

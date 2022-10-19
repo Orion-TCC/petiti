@@ -8,8 +8,8 @@ $(document).ready(function () {
       data: {"id":id },
       success: function (data) {
         console.log(data);
-        var qtdItis = data;
-        $("#itimalias").text(qtdItis);
+        var qtdItis = data - 1;
+        $("#itimalias["+id+"]").text(qtdItis);
       },
     });
 

@@ -95,7 +95,7 @@ include_once("sentinela.php");
                 echo $dados['publicacoes'][$i]['nomeUsuario'] . "<br>";
                 echo "<img src = " . $dados['publicacoes'][$i]['caminhoFotoPublicacao'] . ">";
             ?>
-                <p id="itimalias"><?php echo $dados['publicacoes'][$i]['itimalias'] ?></p>
+                <p id="itimalias[<?php echo $dados['publicacoes'][$i]['idPublicacao'] ?>]"><?php echo $dados['publicacoes'][$i]['itimalias'] ?></p>
                 <button id="curtir" value="<?php echo $dados['publicacoes'][$i]['idPublicacao'] ?>">❤</button>
             <?php }
             ?>
