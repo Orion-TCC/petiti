@@ -56,7 +56,7 @@ $_SESSION['tipo-usuario'] = "empresa";
                     </div>
 
 
-                    <div class="formElementsHolderflexivel">
+                    <div class="formularioHolder">
                         <form class="formElementsHolder" action="api/usuario/add" method="post">
                             <input type="hidden" value=" " name="txtNomeUsuario">
                           
@@ -70,19 +70,19 @@ $_SESSION['tipo-usuario'] = "empresa";
                             <p class="avisoNomeUsuarioQtd"></p>
 
                             <label class="formText">Senha</label>
-                            <input class="formInput" placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
+                            <div class="formInput">
+                                <input  placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
+                                <div id="revealPassword" onclick="showHide()"></div>
+                            </div>
                             <p id="senhaAvisoTamanho"></p>
 
                             <label class="formText">Confirme sua senha</label>
                             <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
                             <p id="senhaAvisoVerificacao"></p>
-                          
-                            <div class="caixaMostrarSenha">
-                                <input class="checkboxSenha" type="checkbox" id="mostrarSenha">
-                                <label for="mostrarSenha" class="formTextMostrarSenha" id=mostrarSenhaLabel style="cursor: pointer;">Mostrar Senha</label>
-                            </div>
+
                             <button class="formSubmit" type="submit">Continuar</button>
 
+                            <span> <?php echo @$_COOKIE["erro-cadastro"];?></span>
                         </form>
                     </div>
 
@@ -92,5 +92,26 @@ $_SESSION['tipo-usuario'] = "empresa";
         </section>
     </main>
 </body>
+                              <script type="text/javascript">
+                                const password = document.getElementById ('txtPw');
+                                const passwordConfirm = document.getElementById('txtPwConfirm')
 
+                                const toggle = document.getElementById ('revealPassword');
+
+                                function showHide(){
+                                    if (password.type === 'password'){
+                                        
+                                        password.setAttribute('type', 'text');
+                                        toggle.classList.add('hide');
+                                        passwordConfirm.setAttribute('type', 'text');
+                                        toggle.classList.add('hide')
+                                    }
+                                    else{
+                                        password.setAttribute('type', 'password');
+                                        toggle.classList.remove('hide')
+                                        passwordConfirm.setAttribute('type', 'password');
+                                        toggle.classList.remove('hide')  
+                                    }
+                                }
+                              </script>
 </html>

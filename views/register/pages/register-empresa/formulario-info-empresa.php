@@ -32,8 +32,8 @@ include_once("sentinela-cadastro.php");
 
 <body>
     <main class="container-content">
-        <section id="formularioUsuarioEmpresa">
-            <div class="holderFormularioUsuarioEmpresa">
+        <section id="formularioMaisSobreEmpresa">
+            <div class="holderMaisSobreEmpresa">
 
                 <div class="formulario">
 
@@ -46,7 +46,7 @@ include_once("sentinela-cadastro.php");
 
                     <div class="subTituloFormHolderUsuarioEmpresa">
                         <span>
-                            Insira seus dados de acesso abaixo:
+                            Insira os dados da empresa abaixo:
                         </span>
                     </div>
 
@@ -55,6 +55,13 @@ include_once("sentinela-cadastro.php");
 
                             <label class="formText">Nome da empresa</label>
                             <input class="formInput" placeholder="Insira um nome" type="text" name="txtNomeEmpresa" id="txtNomeEmpresa" required autofocus>
+
+                            <label class="formText">Biografia</label>
+                            <textarea class="formInput" name="txBioEmpresa" id="txBio" cols="30" rows="10" placeholder="Escreva algo sobre você, curiosidades talvez..."></textarea>
+
+                            <label class="formText">Site</label>
+                            <input class="formInput" placeholder="Insira uma URL" type="text" name="txSiteEmpresa" id="txSite" required minlength="6">
+
 
                             <label class="formText">CEP</label>
                             <input class="formInput" placeholder="Insira seu CEP" type="text" onblur="pesquisacep(this.value)" name="txtCep" id="cep" required minlength="2">
