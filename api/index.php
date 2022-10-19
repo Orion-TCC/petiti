@@ -157,7 +157,7 @@ $app->post('/usuario/update/ramo', function (Request $request, Response $respons
 
     $usuario->update($id, "ramo", $valor);
 
-    header('location: /petiti/info-empresa');
+    header('location: /petiti/final-empresa');
 });
 
 $app->post('/usuario/cadastro/update/ramo', function (Request $request, Response $response, array $args) {
