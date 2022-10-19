@@ -289,7 +289,7 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
 
     $usuarioEndereco->cadastrar($usuarioEndereco);
 
-    header('location: /petiti/final-empresa');
+    header('location: /petiti/foto-empresa');
 });
 // Usuario - Pet
 
