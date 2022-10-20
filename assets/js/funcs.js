@@ -1,17 +1,15 @@
 $(document).ready(function () {
-  $("#curtir").click(function () {
-      var id = $(this).val();
-
+  var id = "";
+  $(".curtir").on("click",function () {
+    id = $(this).val();
     $.ajax({
       type: "POST",
       url: "/petiti/api/curtir",
       data: {"id":id },
       success: function (data) {
-        console.log(data);
-        var qtdItis = data - 1;
-        $("#itimalias["+id+"]").text(qtdItis);
-      },
+        console.log("post de id "+id+" foi curtido");
+        $("#itimaliasPost"+id).text(data+" itimalias");
+      }
     });
-
   });
 });

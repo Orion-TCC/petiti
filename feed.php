@@ -1,6 +1,6 @@
 <?php
 @session_start();
-
+date_default_timezone_set('America/Sao_Paulo');
 include_once("sentinela.php");
 
 ?>
@@ -92,11 +92,55 @@ include_once("sentinela.php");
             $dados = (array)json_decode($json, true);
             $contagem = count($dados['publicacoes']);
             for ($i = 0; $i < $contagem; $i++) {
-                echo $dados['publicacoes'][$i]['nomeUsuario'] . "<br>";
-                echo "<img src = " . $dados['publicacoes'][$i]['caminhoFotoPublicacao'] . ">";
-            ?>
-                <p id="itimalias[<?php echo $dados['publicacoes'][$i]['idPublicacao'] ?>]"><?php echo $dados['publicacoes'][$i]['itimalias'] ?></p>
-                <button id="curtir" value="<?php echo $dados['publicacoes'][$i]['idPublicacao'] ?>">❤</button>
+                $id =  $dados['publicacoes'][$i]['id'];
+                $nome = $dados['publicacoes'][$i]['nome'];
+                $login = $dados['publicacoes'][$i]['login'];
+                $foto = $dados['publicacoes'][$i]['caminhoFoto'];
+                $idUsuario = $dados['publicacoes'][$i]['idUsuario'];
+                $data = $dados['publicacoes'][$i]['data'];
+                $texto = $dados['publicacoes'][$i]['texto'];
+                $itimalias = $dados['publicacoes'][$i]['itimalias'];
+
+                $hoje = new DateTime();
+                $dataPost = new DateTime($data);
+                $intervalo = $hoje->diff($dataPost);
+                $diferencaAnos = $intervalo->format('%y');
+                $diferencaMeses = $intervalo->format('%m');
+                $diferencaDias = $intervalo->format('%a');
+                $diferencaHoras = $intervalo->format('%h');
+                $diferencaMinutos = $intervalo->format('%i');
+
+                if ($diferencaAnos == 0){
+                    if ($diferencaMeses == 0){
+                        if ($diferencaDias == 0){
+                            if ($diferencaHoras == 0){
+                                $diferencaFinal = $diferencaMinutos." minutos";
+                            }else{
+                                $diferencaFinal = $diferencaHoras." horas";
+                            }
+                        }else{
+                            $diferencaFinal = $diferencaDias." dias";
+
+                        }
+                    }else{
+                        $diferencaFinal = $diferencaMeses." meses";
+
+                    }
+                }else{
+                    $diferencaFinal = $diferencaAnos." anos";
+                }
+
+
+                ?>
+                <div id="post" class="post">
+                    <p class="usuario"><?php echo $nome?></p>
+                    <p class="login">@<?php echo $login?></p>
+                    <p class="dataDif"><?php echo $diferencaFinal?></p>
+
+                    <img class="foto" src="<?php echo $foto?>" >
+                    <p id="itimaliasPost<?php echo $id?>"><?php echo $itimalias?> itimalias</p>
+                    <button class="curtir" value="<?php echo $id?>">Curtir</button>
+                </div>
             <?php }
             ?>
 

@@ -68,4 +68,19 @@ class categoria
         return $lista;
     }
 
+    public function verificarCategoria($categoria){
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idCategoria) FROM tbcategoria WHERE categoria = $categoria";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($lista as $linha) {
+            $qtdCat = $linha[0];
+        }
+        if ($qtdCat > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

@@ -343,6 +343,7 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     $data = $request->getParsedBody();
     $usuario = new Usuario();
     $pet = new Pet();
+    $categoria = new categoria();
     $cookie = new Cookies();
     $arrayEspecies = array(
         1 => "Cachorro",
@@ -378,7 +379,12 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
         header('location: ../formulario-pet2.php');
     }
     $especie = $arrayEspecies[$_POST['slEspecie']];
-
+    $raca = $_POST['txtRacaPet'];
+    $boolCategoria = $categoria->verificarCategoria($raca);
+    if($boolCategoria == true){
+        $categoria->setCategoria($raca);
+        $categoria->cadastrar($categoria);
+    }
     $pet->setNomePet($_POST['txtNomePet']);
     $pet->setRacaPet($_POST['txtRacaPet']);
     $pet->setEspeciePet($especie);
@@ -460,11 +466,7 @@ $app->post(
             $idCategoria = $categoria->cadastrar($categoria);
             $categoria->setIdCategoria($idCategoria);
         }
-        $usuario->setIdUsuario(1);
-        $publicacao->setIdPublicacao($id);
-        $curtidaPub->setUsuarioCurtida($usuario);
-        $curtidaPub->setPublicacaoCurtida($publicacao);
-        $curtidaPub->cadastrar($curtidaPub);
+
         header('location: /petiti/feed');
     }
 );

@@ -99,30 +99,25 @@ class Publicacao
     public function listar()
     {
         $con = Conexao::conexao();
-        $query = "SELECT tbpublicacao.idPublicacao,
-        COUNT(idCurtidaPublicacao) - 1 as itimalias, 
-        tbpublicacao.idPublicacao, textoPublicacao, dataPublicacao, 
-        tbpublicacao.idUsuario, nomeUsuario, caminhoFotoPublicacao
+        $query = "SELECT tbpublicacao.idPublicacao as id, itimalias,
+       textoPublicacao as texto, dataPublicacao as data, 
+        tbpublicacao.idUsuario as idUsuario, nomeUsuario as nome, loginUsuario as login,caminhoFotoPublicacao as caminhoFoto
         FROM tbPublicacao 
         INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
-        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao 
-        INNER JOIN tbcurtidapublicacao ON tbcurtidapublicacao.idPublicacaoCurtida = tbpublicacao.idPublicacao
-        GROUP BY tbpublicacao.idPublicacao;";
+        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
     public function listarPub($id){
         $con = Conexao::conexao();
-        $query = "SELECT tbpublicacao.idPublicacao,
-        COUNT(idCurtidaPublicacao) as itimalias, 
-        tbpublicacao.idPublicacao, textoPublicacao, dataPublicacao, 
-        tbpublicacao.idUsuario, nomeUsuario, caminhoFotoPublicacao
+        $query = "SELECT tbpublicacao.idPublicacao as id, itimalias,
+       textoPublicacao as texto, dataPublicacao as data, 
+        tbpublicacao.idUsuario as idUsuario, nomeUsuario as nome, loginUsuario as login,caminhoFotoPublicacao as caminhoFoto
         FROM tbPublicacao 
         INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
-        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao 
-        INNER JOIN tbcurtidapublicacao ON tbcurtidapublicacao.idPublicacaoCurtida = tbpublicacao.idPublicacao
-        WHERE tbpublicacao.idPublicacao = $id;";
+        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
+        WHERE tbpublicacao.idPublicacao = $id";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista; 
