@@ -45,7 +45,7 @@
             <div class="holderFormularioFotoEmpresa">
                 <div class="formulario">
 
-                <a class="setaVoltar" href="cadastro-empresa"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
+                <a class="setaVoltar" href="info-empresa"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder">
                         <span>
                             Identificação da empresa

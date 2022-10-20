@@ -37,7 +37,7 @@ include_once("sentinela-cadastro.php");
 
                 <div class="formulario">
 
-                <a class="setaVoltar" href="ramo-empresa"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>    
+                <a class="setaVoltar" href="cadastro-empresa"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>    
                     <div class="tituloFormHolder">
                         <span>
                             Conte um pouco sobre você...
@@ -60,7 +60,7 @@ include_once("sentinela-cadastro.php");
                             <textarea class="formInput" name="txBioEmpresa" id="txBio" cols="30" rows="10" placeholder="Escreva algo sobre você, curiosidades talvez..."></textarea>
 
                             <label class="formText">Site</label>
-                            <input class="formInput" placeholder="Insira uma URL" type="text" name="txSiteEmpresa" id="txSite" required minlength="6">
+                            <input class="formInput" placeholder="Insira uma URL" type="text" name="txSiteEmpresa" id="txSite"  minlength="6">
 
 
                             <label class="formText">CEP</label>
