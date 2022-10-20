@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18-Out-2022 às 00:52
+-- Tempo de geração: 21-Out-2022 às 01:28
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -29,6 +29,7 @@ USE `dbpetiti`;
 -- Estrutura da tabela `tbcategoria`
 --
 
+DROP TABLE IF EXISTS `tbcategoria`;
 CREATE TABLE `tbcategoria` (
   `idCategoria` int(11) NOT NULL,
   `categoria` varchar(200) NOT NULL
@@ -40,6 +41,7 @@ CREATE TABLE `tbcategoria` (
 -- Estrutura da tabela `tbcategoriapublicacao`
 --
 
+DROP TABLE IF EXISTS `tbcategoriapublicacao`;
 CREATE TABLE `tbcategoriapublicacao` (
   `idCategoriaPublicacao` int(11) NOT NULL,
   `idCategoria` int(11) NOT NULL,
@@ -52,6 +54,7 @@ CREATE TABLE `tbcategoriapublicacao` (
 -- Estrutura da tabela `tbcomentario`
 --
 
+DROP TABLE IF EXISTS `tbcomentario`;
 CREATE TABLE `tbcomentario` (
   `idComentario` int(11) NOT NULL,
   `textoComentario` varchar(200) NOT NULL,
@@ -65,11 +68,31 @@ CREATE TABLE `tbcomentario` (
 -- Estrutura da tabela `tbcurtidapublicacao`
 --
 
+DROP TABLE IF EXISTS `tbcurtidapublicacao`;
 CREATE TABLE `tbcurtidapublicacao` (
   `idCurtidaPublicacao` int(11) NOT NULL,
   `idUsuarioCurtida` int(11) NOT NULL,
   `idPublicacaoCurtida` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Acionadores `tbcurtidapublicacao`
+--
+DROP TRIGGER IF EXISTS `tg_curtir`;
+DELIMITER $$
+CREATE TRIGGER `tg_curtir` AFTER INSERT ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
+	UPDATE tbpublicacao SET itimalias = itimalias + 1 WHERE idPublicacao = NEW.idPublicacaoCurtida;
+END
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_descurtir`;
+DELIMITER $$
+CREATE TRIGGER `tg_descurtir` AFTER DELETE ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
+	UPDATE tbpublicacao SET itimalias  = itimalias  - 1
+WHERE idPublicacao = OLD.idPublicacaoCurtida;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -77,6 +100,7 @@ CREATE TABLE `tbcurtidapublicacao` (
 -- Estrutura da tabela `tbdenunciacomentario`
 --
 
+DROP TABLE IF EXISTS `tbdenunciacomentario`;
 CREATE TABLE `tbdenunciacomentario` (
   `idDenunciaComentario` int(11) NOT NULL,
   `textoDenunciaComentario` varchar(200) NOT NULL,
@@ -91,6 +115,7 @@ CREATE TABLE `tbdenunciacomentario` (
 -- Estrutura da tabela `tbdenunciapublicacao`
 --
 
+DROP TABLE IF EXISTS `tbdenunciapublicacao`;
 CREATE TABLE `tbdenunciapublicacao` (
   `idDenunciaPublicacao` int(11) NOT NULL,
   `textoDenunciaPublicacao` varchar(200) NOT NULL,
@@ -105,6 +130,7 @@ CREATE TABLE `tbdenunciapublicacao` (
 -- Estrutura da tabela `tbdenunciausuario`
 --
 
+DROP TABLE IF EXISTS `tbdenunciausuario`;
 CREATE TABLE `tbdenunciausuario` (
   `idUsuarioPublicacao` int(11) NOT NULL,
   `textoDenunciaUsuario` varchar(200) NOT NULL,
@@ -119,6 +145,7 @@ CREATE TABLE `tbdenunciausuario` (
 -- Estrutura da tabela `tbfotopet`
 --
 
+DROP TABLE IF EXISTS `tbfotopet`;
 CREATE TABLE `tbfotopet` (
   `idFotoPet` int(11) NOT NULL,
   `nomeFotoPet` varchar(200) NOT NULL,
@@ -132,6 +159,7 @@ CREATE TABLE `tbfotopet` (
 -- Estrutura da tabela `tbfotopublicacao`
 --
 
+DROP TABLE IF EXISTS `tbfotopublicacao`;
 CREATE TABLE `tbfotopublicacao` (
   `idFotoPublicacao` int(11) NOT NULL,
   `caminhoFotoPublicacao` varchar(500) DEFAULT NULL,
@@ -145,6 +173,7 @@ CREATE TABLE `tbfotopublicacao` (
 -- Estrutura da tabela `tbfotousuario`
 --
 
+DROP TABLE IF EXISTS `tbfotousuario`;
 CREATE TABLE `tbfotousuario` (
   `idFotoUsuario` int(11) NOT NULL,
   `nomeFoto` varchar(200) NOT NULL,
@@ -158,6 +187,7 @@ CREATE TABLE `tbfotousuario` (
 -- Estrutura da tabela `tbmensagem`
 --
 
+DROP TABLE IF EXISTS `tbmensagem`;
 CREATE TABLE `tbmensagem` (
   `idMensagem` int(11) NOT NULL,
   `idUsuarioOrigem` int(11) NOT NULL,
@@ -172,6 +202,7 @@ CREATE TABLE `tbmensagem` (
 -- Estrutura da tabela `tbpet`
 --
 
+DROP TABLE IF EXISTS `tbpet`;
 CREATE TABLE `tbpet` (
   `idPet` int(11) NOT NULL,
   `nomePet` varchar(200) NOT NULL,
@@ -187,10 +218,12 @@ CREATE TABLE `tbpet` (
 -- Estrutura da tabela `tbpublicacao`
 --
 
+DROP TABLE IF EXISTS `tbpublicacao`;
 CREATE TABLE `tbpublicacao` (
   `idPublicacao` int(11) NOT NULL,
   `textoPublicacao` varchar(200) NOT NULL,
   `dataPublicacao` datetime NOT NULL,
+  `itimalias` int(11) DEFAULT 0,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -200,6 +233,7 @@ CREATE TABLE `tbpublicacao` (
 -- Estrutura da tabela `tbtipousuario`
 --
 
+DROP TABLE IF EXISTS `tbtipousuario`;
 CREATE TABLE `tbtipousuario` (
   `idTipoUsuario` int(11) NOT NULL,
   `tipoUsuario` varchar(100) NOT NULL
@@ -219,6 +253,7 @@ INSERT INTO `tbtipousuario` (`idTipoUsuario`, `tipoUsuario`) VALUES
 -- Estrutura da tabela `tbusuario`
 --
 
+DROP TABLE IF EXISTS `tbusuario`;
 CREATE TABLE `tbusuario` (
   `idUsuario` int(11) NOT NULL,
   `nomeUsuario` varchar(200) NOT NULL,
@@ -238,6 +273,7 @@ CREATE TABLE `tbusuario` (
 -- Estrutura da tabela `tbusuarioendereco`
 --
 
+DROP TABLE IF EXISTS `tbusuarioendereco`;
 CREATE TABLE `tbusuarioendereco` (
   `idUsuarioEndereco` int(11) NOT NULL,
   `logradouroUsuario` varchar(200) NOT NULL,
@@ -256,6 +292,7 @@ CREATE TABLE `tbusuarioendereco` (
 -- Estrutura da tabela `tbusuarioseguidor`
 --
 
+DROP TABLE IF EXISTS `tbusuarioseguidor`;
 CREATE TABLE `tbusuarioseguidor` (
   `idUsuarioSeguidor` int(11) NOT NULL,
   `idSeguidor` int(11) NOT NULL,
