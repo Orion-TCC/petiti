@@ -5,13 +5,13 @@ $(document).ready(function () {
     enableOrientation: true,
     viewport: {
       // Default { width: 100, height: 100, type: 'square' }
-      width: 200,
-      height: 200,
+      width: 795,
+      height: 720,
       type: "square", //square
     },
     boundary: {
-      width: 300,
-      height: 300,
+      width: 800,
+      height: 720,
     },
   });
 
@@ -60,6 +60,7 @@ $(document).ready(function () {
           $("#baseFoto").val(img);
           html = '<img src="' + img + '" />';
           $("#preview-crop-image").html(html);
+          
           console.log(data);
         },
       });

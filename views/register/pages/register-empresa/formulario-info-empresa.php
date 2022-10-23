@@ -54,10 +54,10 @@ include_once("sentinela-cadastro.php");
                         <form class="formElementsHolder" action="/petiti/api/usuario/endereco/add" method="post">
 
                             <label class="formText">Nome da empresa</label>
-                            <input class="formInput" placeholder="Insira um nome" type="text" name="txtNomeEmpresa" id="txtNomeEmpresa" required autofocus>
+                            <input class="formInput" placeholder="Insira um nome" type="text" name="txtNomeEmpresa" id="txtNomeEmpresa"  required autofocus>
 
                             <label class="formText">Biografia</label>
-                            <textarea class="formInput" name="txBioEmpresa" id="txBio" cols="30" rows="10" placeholder="Escreva algo sobre você, curiosidades talvez..."></textarea>
+                            <textarea class="formInput" name="txBioEmpresa" id="txBio" cols="30" rows="10" maxlength="250" placeholder="Escreva algo sobre você, curiosidades talvez..."></textarea>
 
                             <label class="formText">Site</label>
                             <input class="formInput" placeholder="Insira uma URL" type="text" name="txSiteEmpresa" id="txSite"  minlength="6">

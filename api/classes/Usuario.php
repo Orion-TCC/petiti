@@ -2,7 +2,6 @@
 require_once('/xampp/htdocs/petiti/api/database/conexao.php');
 require_once("FotoUsuario.php");
 class Usuario
-
 {
 
     private $idUsuario;

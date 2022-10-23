@@ -39,11 +39,11 @@ class categoria
         VALUES (default, ?)');
         $stmt->bindValue(1, $categoria->getCategoria());
         $stmt->execute();
-        $resultado = $con->query("SELECT MAX(idCategoria) FROM tbCategoria");
+        $resultado = $con->query("SELECT MAX(idCategoria) as id FROM tbCategoria");
         $lista = $resultado->fetchAll();
 
         foreach ($lista as $linha) {
-            $id = $linha[0];
+            $id = $linha['id'];
         }
         return $id;
     }
@@ -70,17 +70,37 @@ class categoria
 
     public function verificarCategoria($categoria){
         $con = Conexao::conexao();
-        $query = "SELECT COUNT(idCategoria) FROM tbcategoria WHERE categoria = $categoria";
+        $query = "SELECT COUNT(idCategoria) as qtd FROM tbcategoria WHERE categoria = '$categoria'";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         foreach ($lista as $linha) {
-            $qtdCat = $linha[0];
+            $qtdCat = $linha['qtd'];
         }
         if ($qtdCat > 0) {
             return false;
         } else {
             return true;
         }
+    }
+    public function categoriaPost($idPub){
+        $con = Conexao::conexao();
+        $query = "SELECT categoria FROM tbcategoria
+        INNER JOIN tbcategoriapublicacao t on tbcategoria.idCategoria = t.idCategoria
+        INNER JOIN tbpublicacao t2 on t.idPublicacao = t2.idPublicacao
+        WHERE t.idPublicacao = $idPub";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
+    }
+    public function pesquisarCategoria($categoria){
+        $con = Conexao::conexao();
+        $query = "SELECT idCategoria as id FROM tbcategoria WHERE categoria = '$categoria'";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($lista as $linha) {
+            $id = $linha['id'];
+        }
+        return $id;
     }
 
 }

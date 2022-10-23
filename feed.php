@@ -37,6 +37,7 @@ include_once("sentinela.php");
     <script src="assets/js/funcs.js"></script>
 
 
+
 </head>
 
 <body id="bodyFeed">
@@ -52,7 +53,7 @@ include_once("sentinela.php");
 
                         <div style="display: flex; flex-direction: column;">
                             <img src="./assets/images/logo_principal.svg" class="imgLogoFeed">
-                            <a href="#">Home</a>
+                            <a href="#" class="enfase ">Home</a>
                             <a href="#">Animais perdidos</a>
                             <a href="#">Animais em doação</a>
                             <a href="#">Notificações</a>
@@ -86,12 +87,17 @@ include_once("sentinela.php");
         </section>
         <section class="postsHolder">
 
-            <?php $url = "http://localhost/petiti/api/publicacoes";
+            <?php
+            $url = "http://localhost/petiti/api/publicacoes";
 
             $json = file_get_contents($url);
             $dados = (array)json_decode($json, true);
             $contagem = count($dados['publicacoes']);
+
+
             for ($i = 0; $i < $contagem; $i++) {
+
+
                 $id =  $dados['publicacoes'][$i]['id'];
                 $nome = $dados['publicacoes'][$i]['nome'];
                 $login = $dados['publicacoes'][$i]['login'];
@@ -110,36 +116,37 @@ include_once("sentinela.php");
                 $diferencaHoras = $intervalo->format('%h');
                 $diferencaMinutos = $intervalo->format('%i');
 
-                if ($diferencaAnos == 0){
-                    if ($diferencaMeses == 0){
-                        if ($diferencaDias == 0){
-                            if ($diferencaHoras == 0){
-                                $diferencaFinal = $diferencaMinutos." minutos";
-                            }else{
-                                $diferencaFinal = $diferencaHoras." horas";
+                if ($diferencaAnos == 0) {
+                    if ($diferencaMeses == 0) {
+                        if ($diferencaDias == 0) {
+                            if ($diferencaHoras == 0) {
+                                $diferencaFinal = $diferencaMinutos . " minutos";
+                            } else {
+                                $diferencaFinal = $diferencaHoras . " horas";
                             }
-                        }else{
-                            $diferencaFinal = $diferencaDias." dias";
-
+                        } else {
+                            $diferencaFinal = $diferencaDias . " dias";
                         }
-                    }else{
-                        $diferencaFinal = $diferencaMeses." meses";
-
+                    } else {
+                        $diferencaFinal = $diferencaMeses . " meses";
                     }
-                }else{
-                    $diferencaFinal = $diferencaAnos." anos";
+                } else {
+                    $diferencaFinal = $diferencaAnos . " anos";
                 }
 
 
-                ?>
+            ?>
                 <div id="post" class="post">
-                    <p class="usuario"><?php echo $nome?></p>
-                    <p class="login">@<?php echo $login?></p>
-                    <p class="dataDif"><?php echo $diferencaFinal?></p>
+                    <p class="usuario"><?php echo $nome ?></p>
+                    <p class="login">@<?php echo $login ?></p>
+                    <p class="dataDif"><?php echo $diferencaFinal ?></p>
 
-                    <img class="foto" src="<?php echo $foto?>" >
-                    <p id="itimaliasPost<?php echo $id?>"><?php echo $itimalias?> itimalias</p>
-                    <button class="curtir" value="<?php echo $id?>">Curtir</button>
+
+                    <img class="foto" src="<?php echo $foto ?>">
+                    <p id="itimaliasPost<?php echo $id ?>"><?php echo $itimalias ?> itimalias</p>
+                    <input type="text" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>">
+                    <button value="<?php echo $id ?>" class="comentar" value="">Comentar</button>
+                    <button class="curtir" value="<?php echo $id ?>">Curtir</button>
                 </div>
             <?php }
             ?>
@@ -153,47 +160,97 @@ include_once("sentinela.php");
     <section id="post">
 
         <div id="modal-foto-post" class="modal">
-            <p>Arraste fotos, vídeos ou gif aqui</p>
-            <input type="file" accept="image/*" id="flFoto">
+            <div class="modal-foto-post">
+                <div class="tituloModalPost">Criar um post</div>
+                <div class="inputArea">
+                    <img src="./assets/images/selectFotoIlustracao.png">
+                    <span class="textPadrao">Arraste fotos, vídeos ou gifs aqui</span>
+                    <label class="inputButtonEstilo">
+                        <input class="inputForm" type="file" accept="image/*" id="flFoto">
+                        <span>Selecionar no computador</span>
+                        <label>
+                </div>
+            </div>
+
         </div>
+
+        <script>
+            var holder = document.getElementById('modal-foto-post');
+            holder.ondragover = function() {
+                this.className = 'hover';
+                return false;
+            };
+            holder.ondragend = function() {
+                this.className = '';
+                return false;
+            };
+            holder.ondrop = function(e) {
+                this.className = '';
+                e.preventDefault();
+                readfiles(e.dataTransfer.files);
+            }
+        </script>
+
+        </div>
+
+
+
 
         <div id="modal-recortar-foto" class="modal">
-            <p>
-                <a id="continuar-post" href="#criar-post" rel="modal:open">Continuar</a>
-            </p>
-            <div id="upload-demo"></div>
-        </div>
+            <div class="tituloModalPost">
 
-        <div id="criar-post" class="modal">
-            <div id="preview-crop-image">
+                <div style="width: 60%; display: flex; justify-content: end;"><span>Recortar</span></div>
+                <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> <a id="continuar-post" href="#criar-post" rel="modal:open">Continuar</a> </div>
+
             </div>
-            <label for="txtCategoria">Categoria</label>
-            <input type="text" name="txtCategoria" id="txtCategoria">
-            <button id="submitCategoria">Adicionar categoria</button>
-            
-            
-            <?php $urlCategorias = "http://localhost/petiti/api/categorias";
-            $jsonCategorias = file_get_contents($urlCategorias);
-            $dadosCategoria = (array)json_decode($jsonCategorias, true);
-            $contagemCategoria = count($dadosCategoria['categorias']);
-            for ($i=0;$i<$contagemCategoria;$i++){
-                ?><br>
-                <input class="checkbox" type="checkbox" name="categorias[]"
-                id="<?php $dadosCategoria['categorias'][$i]['idCategoria']?>"
-                value="<?php echo $dadosCategoria['categorias'][$i]['categoria'];?>">
-                <?php echo $dadosCategoria['categorias'][$i]['categoria'];?>
-                <?php
-            }
-            ?>
 
-            <form id="form-aid" method="post" action="./api/publicar">
-                <input type="text" name="categoriasValue" id="categoriasValue" value="categorias">
-                <textarea name="txtLegendaPub" placeholder="Texto"></textarea>
-                <input type="hidden" name="baseFoto" id="baseFoto">
-                <input type="text" name="" id="">
-                <input type="submit" value="Publicar">
-            </form>
+            <div id="upload-demo"></div>
+
         </div>
+
+
+
+
+        <secti <div id="criar-post" class="modal">
+            <div class="tituloModalPost">
+
+                <div style="width: 60%; display: flex; justify-content: end;"><span>Criar um post</span></div>
+                <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> <input type="submit" value="Publicar" style="display: none;"><label>Compartilhar</label></input></div>
+
+            </div>
+
+            <div>
+                <div>
+                    <div id="preview-crop-image"></div>
+                </div>
+
+                <div>
+                    <label for="txtCategoria">Categoria</label>
+                    <input type="text" name="txtCategoria" id="txtCategoria">
+                    <button id="submitCategoria">Adicionar categoria</button>
+
+                    <?php $urlCategorias = "http://localhost/petiti/api/categorias";
+                    $jsonCategorias = file_get_contents($urlCategorias);
+                    $dadosCategoria = (array)json_decode($jsonCategorias, true);
+                    $contagemCategoria = count($dadosCategoria['categorias']);
+                    for ($i = 0; $i < $contagemCategoria; $i++) {
+                    ?><br>
+                        <input class="checkbox" type="checkbox" name="categorias[]" id="<?php $dadosCategoria['categorias'][$i]['idCategoria'] ?>" value="<?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>">
+                        <?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>
+                    <?php
+                    }
+                    ?>
+
+                    <form id="form-aid" method="post" action="./api/publicar">
+                        <input type="text" name="categoriasValue" id="categoriasValue" value="categorias">
+                        <textarea name="txtLegendaPub" placeholder="Texto"></textarea>
+                        <input type="hidden" name="baseFoto" id="baseFoto">
+                        <input type="text" name="" id="">
+
+                    </form>
+                </div>
+            </div>
+            </div>
     </section>
 </body>
 

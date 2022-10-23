@@ -82,7 +82,7 @@ $_SESSION['tipo-usuario'] = "empresa";
 
                             <button class="formSubmit" type="submit">Continuar</button>
 
-                            <span> <?php echo @$_COOKIE["erro-cadastro"];?></span>
+                            <span  class="textoErrado" style="align-self: center;"> <?php echo @$_COOKIE["erro-cadastro"];?></span>
                         </form>
                     </div>
 

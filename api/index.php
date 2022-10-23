@@ -381,7 +381,7 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     $especie = $arrayEspecies[$_POST['slEspecie']];
     $raca = $_POST['txtRacaPet'];
     $boolCategoria = $categoria->verificarCategoria($raca);
-    if($boolCategoria == true){
+    if ($boolCategoria == true) {
         $categoria->setCategoria($raca);
         $categoria->cadastrar($categoria);
     }
@@ -421,6 +421,24 @@ $app->get('/publicacao/{id}', function (Request $request, Response $response, ar
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
+$app->get('/comentario/{id}', function (Request $request, Response $response, array $args) {
+    $publicacao = new Publicacao();
+    $comentario = new Comentario();
+    $id = $args['id'];
+    $json = json_encode($dadosComentario = $comentario->listarComentario($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+$app->get('/categoria/pub/{id}', function (Request $request, Response $response, array $args) {
+    $comentario = new Comentario();
+    $categoria = new Categoria();
+    $id = $args['id'];
+    $json = json_encode($categoriasPub = $categoria->categoriaPost($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
 
 $app->post(
     '/publicar',
@@ -447,7 +465,6 @@ $app->post(
         $publicacao->setDataPublicacao($DateAndTime);
         $id = $publicacao->cadastrar($publicacao);
 
-
         $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-publicacao/";
 
         $nomeArquivo = time() . ".png";
@@ -462,11 +479,23 @@ $app->post(
         $fotoPublicacao->cadastrar($fotoPublicacao);
 
         foreach ($categoriasA as $categoriaAtual) {
-            $categoria->setCategoria($categoriaAtual);
-            $idCategoria = $categoria->cadastrar($categoria);
-            $categoria->setIdCategoria($idCategoria);
+            $boolCategoria = $categoria->verificarCategoria($categoriaAtual);
+            if ($boolCategoria == true) {
+                $categoria->setCategoria($categoriaAtual);
+                $idCategoria = $categoria->cadastrar($categoria);
+                $categoria->setIdCategoria($idCategoria);
+                $categoriaPublicacao->setCategoria($categoria);
+                $categoriaPublicacao->setPublicacao($publicacao);
+                $categoriaPublicacao->cadastrar($categoriaPublicacao);
+            }
+            $idCategoriaPublicacao = $categoria->pesquisarCategoria($categoriaAtual);
+            $categoria->setIdCategoria($idCategoriaPublicacao);
+            $categoriaPublicacao->setCategoria($categoria);
+            $categoriaPublicacao->setPublicacao($publicacao);
+            $categoriaPublicacao->cadastrar($categoriaPublicacao);
         }
 
+        //$categoriaPublicacao->setIdCategoriaPublicacao();
         header('location: /petiti/feed');
     }
 );
@@ -503,7 +532,31 @@ $app->post(
     }
 );
 
+$app->post(
+    '/comentar',
+    function (Request $request, Response $response, array $args) {
+        @session_start();
+        $usuario = new Usuario();
+        $publicacao = new Publicacao();
+        $comentario = new Comentario();
+        $idPub = $_POST['id'];
+        $idUser = $_SESSION['id'];
+        $usuario->setIdUsuario($idUser);
+        $publicacao->setIdPublicacao($idPub);
 
+        $comentario->setTextoComentario($_POST['texto']);
+        $comentario->setPublicacao($publicacao);
+        $comentario->setUsuario($usuario);
+
+
+        $idComentario = $comentario->cadastrar($comentario);
+       
+
+        $json = json_encode($dadosComentario = $comentario->listarComentario($idComentario), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        $response->getBody()->write($json);
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+    }
+);
 
 try {
     $app->run();

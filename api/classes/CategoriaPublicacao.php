@@ -41,12 +41,12 @@ class categoriaPublicacao
         $query = "SELECT idCategoriaPublicacao, idPublicacao, idCategoria FROM tbcategoriapublicacao";
         $resultado = $con->query($query);
         $listar = $resultado->fetchAll();
-        return $resultado;
+        return $listar;
     }
 
     public function cadastrar($categoriapublicacao){
         $con = Conexao::conexao();
-        $stmt = $con->prepare("INSERT INTO tbcategoriapublicacao (idCategoria, idPublicacao) VALUES ?, ?");
+        $stmt = $con->prepare('INSERT INTO tbcategoriapublicacao (idCategoriaPublicacao, idCategoria, idPublicacao) VALUES(default, ?, ?)');
         $stmt->bindValue(1, $categoriapublicacao->getCategoria()->getIdCategoria());
         $stmt->bindValue(2, $categoriapublicacao->getPublicacao()->getIdPublicacao());
         $stmt->execute();

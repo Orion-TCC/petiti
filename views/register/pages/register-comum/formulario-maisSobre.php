@@ -57,22 +57,22 @@ $_SESSION['tipo-usuario'] = "usuario";
                         <form class="formElementsHolder" action="api/usuario/info" method="post">
 
                             <label class="formText">Nome</label>
-                            <input class="formInput" placeholder="Insira seu nome ou apelido" type="text" name="txNome" id="txNome" required autofocus>
+                            <input class="formInput" placeholder="Insira seu nome ou apelido" type="text" name="txNome" id="txNome" autofocus>
 
 
 
                             <label class="formText">Biografia</label>
-                            <textarea class="formInput" name="txBio" id="txBio" cols="30" rows="10" placeholder="Escreva algo sobre você, curiosidades talvez..."></textarea>
+                            <textarea class="formInput" name="txBio" id="txBio" cols="30" rows="10" maxlength="240" placeholder="Escreva algo sobre você, curiosidades talvez..."></textarea>
 
 
                             <label class="formText">Localização</label>
-                            <input  class="formInput" placeholder="Insira sua localização" type="text" name="txLocal" id="txLocal" required >
-                        
-                             
+                            <input class="formInput" placeholder="Insira sua localização" type="text" name="txLocal" id="txLocal" >
+
+
 
 
                             <label class="formText">Site</label>
-                            <input class="formInput" placeholder="Insira uma URL" type="text" name="txSite" id="txSite" required minlength="6">
+                            <input class="formInput" placeholder="Insira uma URL" type="text" name="txSite" id="txSite"  minlength="6">
 
 
 

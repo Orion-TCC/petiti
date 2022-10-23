@@ -66,12 +66,31 @@ class Comentario
 
         return $this;
     }
+    public function cadastrar($comentario){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("INSERT INTO tbcomentario 
+             (idComentario, textoComentario, idUsuario, idPublicacao)
+             VALUES (DEFAULT, ?, ?, ?)");
+        $stmt->bindValue(1, $comentario->getTextoComentario());
+        $stmt->bindValue(2, $comentario->getUsuario()->getIdUsuario());
+        $stmt->bindValue(3, $comentario->getPublicacao()->getIdPublicacao());
+        $stmt->execute();
+
+        $resultado = $con->query("SELECT MAX(idComentario) FROM tbcomentario");
+        $lista = $resultado->fetchAll();
+
+        foreach ($lista as $linha) {
+            $id = $linha[0];
+        }
+       
+        return $id;
+    }
     public function listar(){
         $con = Conexao::conexao();
         $query = "SELECT idComentario, 
         textoComentario,
         qtdcurtidaComentario,
-        (tbusuario.idUsuario) FROM tbcomentario
+        tbusuario.idUsuario FROM tbcomentario
         INNER JOIN tbcomentario ON tbusuario.idusuario = tbcomentario.idusuario";
 
     $resultado = $con->query($query);
@@ -83,11 +102,13 @@ class Comentario
     {
         $con = Conexao::conexao();
         $query = "SELECT idComentario,
+        nomeUsuario,
         textoComentario,
-        qtdcurtidaComentario,
-        tbusuario.idUsuario FROM tbcomentario
-        INNER JOIN tbcomentario ON tbusuario.idusuario = tbcomentario.idusuario
-        WHERE idUsuario = $id";
+        qtdcurtidaComentario
+        FROM tbcomentario
+        INNER JOIN tbpublicacao ON tbpublicacao.idPublicacao = tbcomentario.idPublicacao
+        INNER JOIN tbusuario ON tbusuario.idUsuario = tbcomentario.idUsuario
+        WHERE idComentario = ". $id;
 
         $resultado = $con->query($query);
         $lista =  $resultado->fetchAll(PDO::FETCH_ASSOC);
