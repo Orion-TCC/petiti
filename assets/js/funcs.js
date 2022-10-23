@@ -12,6 +12,12 @@ $(document).ready(function () {
       }
     });
   });
+
+  $(".seguir").on("click", function (){
+    id = $(this).val();
+    $.ajax({type: "POST", url: '/petiti/api/seguir', data: {"id":id}});
+    console.log("seguido");
+  });
   
   $(".comentar").on("click",function () {
     id = $(this).val();
