@@ -163,6 +163,9 @@ $(document).ready(function () {
     }
   });
   
+
+});
+
 const password = document.getElementById ('txtPw');
 const passwordConfirm = document.getElementById('txtPwConfirm')
 
@@ -183,5 +186,3 @@ function showHide(){
         toggle.classList.remove('hide')  
     }
 }
-});
-

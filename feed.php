@@ -91,7 +91,7 @@ include_once("sentinela.php");
         </section>
 
         <section class="postsHolder">
-
+            <div class="publicacoesHolder">
             <?php
             $url = "http://localhost/petiti/api/publicacoes";
 
@@ -143,22 +143,43 @@ include_once("sentinela.php");
 
             ?>
                 <div id="post" class="post">
-                    <img src="<?php echo $fotoUsuario?>" alt="">
-                    <p class="usuario"><?php echo $nome ?></p>
-                    <p class="login">@<?php echo $login ?></p>
-                    <p class="dataDif"><?php echo $diferencaFinal ?></p>
-                    <p class="texto"><?php echo $texto ?></p>
+                   
+                <div class="elementosUserPost">
+
+                <img class="imagemUser" src="<?php echo $fotoUsuario?>" alt="">
+
+                <p class="login"><?php echo $login ?></p>
+                
+                </div>
+
+                <img class="foto" src="<?php echo $foto ?>">
 
 
-                    <img class="foto" src="<?php echo $foto ?>">
-                    <p id="itimaliasPost<?php echo $id ?>"><?php echo $itimalias ?> itimalias</p>
-                    <input type="text" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>">
-                    <button value="<?php echo $id ?>" class="comentar" value="">Comentar</button>
-                    <button class="curtir" value="<?php echo $id ?>">Curtir</button>
+                <div class="holderPost">
+                <button class="curtir" value="<?php echo $id ?>">Curtir</button>
+            
+                <button value="<?php echo $id ?>" class="comentar" value="">Comentar</button>
+                </div>
+
+                <p class="itimaliasPost" id="itimaliasPost<?php echo $id ?>"><?php echo $itimalias?> itimalias</p>
+
+                <div class="holderPost">
+
+                <p class="login"> <?php echo $login ?> <span><?php echo $texto ?></span> </p>
+                
+                
+                </div>
+
+             
+
+                <p class="dataDif"><?php echo $diferencaFinal ?></p>
+
+                <input type="text" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>">
+
                 </div>
             <?php }
             ?>
-
+        </div>
         </section>
 
         <section class="rightBarHolder">
