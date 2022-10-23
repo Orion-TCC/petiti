@@ -1,5 +1,6 @@
 <!DOCTYPE php>
 <html lang="pt-br">
+
 <head>
     <!-- HTML base -->
 
@@ -51,7 +52,7 @@
                     </span>
 
                     <span class="textoLogin">
-                        Esqueceu sua senha? <a href="./formularioRecuperacao.php" class="textoLoginAhref "> Recupere</a>
+                        Esqueceu sua senha? <a href="/petiti/views/recover/senha-recuperacao.php" class="textoLoginAhref "> Recupere</a>
                     </span>
                 </div>
         </section>

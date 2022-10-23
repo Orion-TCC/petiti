@@ -8,7 +8,7 @@
     <title>Recuperação de senha</title>
     <style>
         .formulario {
-            display:flex;
+            display: flex;
             flex-direction: column;
             align-items: center;
         }
@@ -16,21 +16,21 @@
 </head>
 
 <body>
-        <?php
-        session_start();
-        $nome = $_SESSION['nome-recuperacao'];
-        echo "Olá ".$nome."!";
-        ?>
-        <form method="post" action="/petiti/api/usuario/update/senha/recuperacao">
+    <?php
+    session_start();
+    $nome = $_SESSION['nome-recuperacao'];
+    echo "Olá " . $nome . "!";
+    ?>
+    <form method="post" action="/petiti/api/usuario/update/senha/recuperacao">
         <div class="formulario">
             <label for="novaSenha">Sua nova senha:</label>
             <input type="text" id="novaSenha" name="novaSenha">
             <label for="confirmNovaSenha">Confirme a senha:</label>
             <input type="text" id="confirmNovaSenha" name="confirmNovaSenha">
             <input type="submit" value="Atualizar senha">
-            </div>
-        </form>
-    
+        </div>
+    </form>
+
 </body>
 
 </html>

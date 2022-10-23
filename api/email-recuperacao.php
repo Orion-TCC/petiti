@@ -12,13 +12,14 @@ if ($usuario->procuraEmail($_POST['txtEmail']) == true) {
     foreach ($lista as $linha) {
         $login = $linha['loginUsuario'];
     }
+//header('location: /petiti/views/recover/senha-recuperacao.php?emailenviado=true');
 require 'vendor/autoload.php';
 
 $mail = new PHPMailer(true);
 
-
-
 try {
+    $mail->CharSet = 'UTF-8';
+    $mail->Priority = 1; // High priority flag is set.  
     //Server settings
     $mail->SMTPDebug = SMTP::DEBUG_SERVER;
     $mail->isSMTP();
@@ -35,10 +36,13 @@ try {
     $mail->addReplyTo($_POST['txtEmail'], 'Usuario(a)');
     $mail->addCC($_POST['txtEmail'], 'Usuario(a)');
     $mail->addBCC($_POST['txtEmail'], 'Usuario(a)');
-
+    $mail->AddEmbeddedImage('chopper.jpg', 'chopper');
     $mail->isHTML(true);
-    $mail->Subject = "Recuperação de senha - PetIti";
-    $mail->Body = "Você poderá recriar a sua senha no link: http://localhost/petiti/api/recuperar/senha/".$login;
+    $mail->Subject = "Recuperação de senha - petiti";
+    $mail->Body = "
+    <h1>Você poderá recriar a sua senha no link: http://localhost/petiti/api/recuperar/senha/" . $login . "</h1>
+    <img src=\"cid:chopper\" />
+    ";
     $mail->AltBody = '';
 
     $mail->send();

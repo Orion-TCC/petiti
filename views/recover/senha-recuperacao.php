@@ -16,12 +16,18 @@
 </head>
 
 <body>
-    <form action="/petiti/api/email-recuperacao.php" method="post">
-        <div class="formulario">
-            <input type="email" name="txtEmail" id="txtEmail">
-            <button type="submit">Enviar</button>
-        </div>
-    </form>
+    <?php if (isset($_GET['emailenviado'])) { ?>
+    <p>Email Enviado</p>
+    <p>Essa aba pode ser fechada.</p>
+        <?php } else { ?>
+        <form action="/petiti/api/email-recuperacao.php" method="post">
+            <div class="formulario">
+                <input type="email" name="txtEmail" id="txtEmail">
+                <button type="submit">Enviar</button>
+            </div>
+        </form>
+    <?php } ?>
+
 </body>
 
 </html>
