@@ -162,4 +162,26 @@ $(document).ready(function () {
         break;
     }
   });
+  
+const password = document.getElementById ('txtPw');
+const passwordConfirm = document.getElementById('txtPwConfirm')
+
+const toggle = document.getElementById ('revealPassword');
+
+function showHide(){
+    if (password.type === 'password'){
+        
+        password.setAttribute('type', 'text');
+        toggle.classList.add('hide');
+        passwordConfirm.setAttribute('type', 'text');
+        toggle.classList.add('hide')
+    }
+    else{
+        password.setAttribute('type', 'password');
+        toggle.classList.remove('hide')
+        passwordConfirm.setAttribute('type', 'password');
+        toggle.classList.remove('hide')  
+    }
+}
 });
+

@@ -20,6 +20,10 @@ include_once("sentinela.php");
     <link rel="stylesheet" href="assets/libs/croppie/croppie.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
     <link rel="icon" href="assets/images/logo-icon.svg">
@@ -85,6 +89,7 @@ include_once("sentinela.php");
                 </div>
             </div>
         </section>
+
         <section class="postsHolder">
 
             <?php
@@ -106,6 +111,7 @@ include_once("sentinela.php");
                 $data = $dados['publicacoes'][$i]['data'];
                 $texto = $dados['publicacoes'][$i]['texto'];
                 $itimalias = $dados['publicacoes'][$i]['itimalias'];
+                $fotoUsuario = $dados['publicacoes'][$i]['fotoUsuario'];
 
                 $hoje = new DateTime();
                 $dataPost = new DateTime($data);
@@ -137,9 +143,11 @@ include_once("sentinela.php");
 
             ?>
                 <div id="post" class="post">
+                    <img src="<?php echo $fotoUsuario?>" alt="">
                     <p class="usuario"><?php echo $nome ?></p>
                     <p class="login">@<?php echo $login ?></p>
                     <p class="dataDif"><?php echo $diferencaFinal ?></p>
+                    <p class="texto"><?php echo $texto ?></p>
 
 
                     <img class="foto" src="<?php echo $foto ?>">
@@ -152,7 +160,9 @@ include_once("sentinela.php");
             ?>
 
         </section>
+
         <section class="rightBarHolder">
+
         </section>
     </main>
 
@@ -211,46 +221,98 @@ include_once("sentinela.php");
 
 
 
-        <secti <div id="criar-post" class="modal">
-            <div class="tituloModalPost">
+        <section> 
+            <div id="criar-post" class="modal">
+             <form id="form-aid" method="post" action="./api/publicar">
+                <div class="tituloModalPost">
+                        <div style="width: 60%; display: flex; justify-content: end;"><span>Criar um post</span></div>
+                
+                         <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> 
+                                <input class="submitCriarPost" type="submit" value="Compartilhar">
+                         </div> 
+                </div>
 
-                <div style="width: 60%; display: flex; justify-content: end;"><span>Criar um post</span></div>
-                <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> <input type="submit" value="Publicar" style="display: none;"><label>Compartilhar</label></input></div>
-
-            </div>
-
-            <div>
+            <div style="display: flex; flex-direction: row;">
                 <div>
                     <div id="preview-crop-image"></div>
                 </div>
 
-                <div>
-                    <label for="txtCategoria">Categoria</label>
-                    <input type="text" name="txtCategoria" id="txtCategoria">
-                    <button id="submitCategoria">Adicionar categoria</button>
+                <div class="criarPostElements">
 
-                    <?php $urlCategorias = "http://localhost/petiti/api/categorias";
-                    $jsonCategorias = file_get_contents($urlCategorias);
-                    $dadosCategoria = (array)json_decode($jsonCategorias, true);
-                    $contagemCategoria = count($dadosCategoria['categorias']);
-                    for ($i = 0; $i < $contagemCategoria; $i++) {
-                    ?><br>
-                        <input class="checkbox" type="checkbox" name="categorias[]" id="<?php $dadosCategoria['categorias'][$i]['idCategoria'] ?>" value="<?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>">
-                        <?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>
-                    <?php
-                    }
-                    ?>
 
-                    <form id="form-aid" method="post" action="./api/publicar">
-                        <input type="text" name="categoriasValue" id="categoriasValue" value="categorias">
-                        <textarea name="txtLegendaPub" placeholder="Texto"></textarea>
+                <div class="parte1CriarPost">
+                    <div class="userElementos">
+                        <img class="imagemUser" src="<?php echo $_SESSION['foto']; ?>" alt="">
+                        <span class="textNomeUsuario"><?php echo $_SESSION['nome']; ?></span>
+                    </div>
+
+                    
+                        <textarea name="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!"  maxlength="200"></textarea>
+                        <input type="hidden" name="categoriasValue" id="categoriasValue" value="categorias">
                         <input type="hidden" name="baseFoto" id="baseFoto">
-                        <input type="text" name="" id="">
+                    
+                   
+                    <div class="letraCont">
+                    <span>0</span>
+                        <span>/200</span>
+                    </div>
 
-                    </form>
+                </div>
+
+                <div class="parte2CriarPost">
+                  <input placeholder="Adicione uma localização" type="text" name="txtLocalizacao">
+                  <span class="material-symbols-outlined">location_on</span>
+                </div>
+
+
+
+
+                <div class="parte3CriarPost">
+
+                  <span id="botaoShowHide" class="botaoShowHide" onclick="showHideElement()">
+                     <label for="txtCategoria">Categoria</label>
+                     <span id="expandMoreIcon" class="material-symbols-outlined">expand_more</span>
+                     <span id="expandLessIcon" class="material-symbols-outlined" style="display: none;">expand_less</span>
+                  </span>
+
+                    <div id="categoriasHolder">
+
+                        <span class="textPlaceholder">
+                         Insira categorias no seu post e você irá alcançar mais engajamento e até mesmo ajudar a filtrar a “Para você” de outros petlovers/petmigos.
+                        </span>
+
+                        <div style="display: grid; grid-template-columns: repeat(10, 1fr); width: 100%;">
+                            <input type="text" name="txtCategoria" id="txtCategoria" placeholder="Ex: Lhama">
+                            <p id="submitCategoria"><span id="addIcon" class="material-symbols-outlined">add</span></p>
+                        </div>
+
+                           <div id="categoriasChecksHolder" style="display: grid; grid-template-columns: repeat(9, 1fr); width: 100%; gap: 10px; overflow-y: auto; height: 100px;">            
+                                    <?php $urlCategorias = "http://localhost/petiti/api/categorias";
+                                    $jsonCategorias = file_get_contents($urlCategorias);
+                                    $dadosCategoria = (array)json_decode($jsonCategorias, true);
+                                    $contagemCategoria = count($dadosCategoria['categorias']);
+                                    for ($i = 0; $i < $contagemCategoria; $i++) {
+                                    ?>
+
+                                    <div class="categoriaSelector">
+                                        <input class="checkbox" type="checkbox" name="categorias[]" id="<?php $dadosCategoria['categorias'][$i]['idCategoria'] ?>" value="<?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>">
+                                        <?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>
+                                    </div>
+                                    <?php
+                                    }
+                                    ?>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
                 </div>
             </div>
-            </div>
+            </form> 
+        </div>
     </section>
 </body>
 

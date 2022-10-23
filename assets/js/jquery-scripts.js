@@ -6,12 +6,12 @@ $(document).ready(function () {
     viewport: {
       // Default { width: 100, height: 100, type: 'square' }
       width: 795,
-      height: 720,
+      height: 740,
       type: "square", //square
     },
     boundary: {
-      width: 800,
-      height: 720,
+      width: 795,
+      height: 740,
     },
   });
 
@@ -137,9 +137,16 @@ $(document).ready(function () {
 
 
   $("#submitCategoria").click(function () {
-    if (input.value == "") { }
+    if (input.value == "") { 
+
+    }
     else {
-      categorias.push(input.value);
+      var categoriaCheck = categorias.push(input.value);
+
+      $("#categoriasChecksHolder").prepend(
+        "<div class='categoriaSelector'> <input class='checkbox' type='checkbox' name='categorias[]' id='' value=''> "+ $(categorias).get(-1)
+        );
+      console.log(categoriaCheck);
       console.log(categorias);
       document.getElementById("categoriasValue").value = categorias;
       input.value = "";
@@ -153,6 +160,11 @@ $(document).ready(function () {
       if (input.value == "") { }
       else {
         categorias.push(input.value);
+        var categoriaCheck = categorias.push(input.value);
+
+        $("#categoriasChecksHolder").prepend(
+          "<div class='categoriaSelector'> <input class='checkbox' type='checkbox' name='categorias[]' id='' value=''> "+ $(categorias).get(-1)
+          );
         console.log(categorias);
         document.getElementById("categoriasValue").value = categorias;
         input.value = "";
@@ -174,3 +186,4 @@ $(document).ready(function () {
     
   });
 });
+

@@ -101,10 +101,12 @@ class Publicacao
         $con = Conexao::conexao();
         $query = "SELECT tbpublicacao.idPublicacao as id, itimalias,
        textoPublicacao as texto, dataPublicacao as data, 
-        tbpublicacao.idUsuario as idUsuario, nomeUsuario as nome, loginUsuario as login,caminhoFotoPublicacao as caminhoFoto
+        tbpublicacao.idUsuario as idUsuario, nomeUsuario as nome, loginUsuario as login,caminhoFotoPublicacao as caminhoFoto, caminhoFoto as fotoUsuario
         FROM tbPublicacao 
         INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
-        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao";
+        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
+        INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario";
+        
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
