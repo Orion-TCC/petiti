@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 $(document).ready(function () {
   var id = "";
   $(".curtir").on("click",function () {
@@ -36,7 +35,6 @@ $(document).ready(function () {
     });
   });
 });
-=======
 $(document).ready(function () {
   var id = "";
   $(".curtir").on("click",function () {
@@ -108,4 +106,3 @@ function showHideElement() {
 
 
 
->>>>>>> Stashed changes
