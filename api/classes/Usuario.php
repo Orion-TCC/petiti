@@ -523,7 +523,7 @@ class Usuario
         if ($email == $emailBanco) {
             return true;
         } else {
-            return 'fodase';
+            return false;
         }
     }
 

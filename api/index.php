@@ -176,6 +176,39 @@ $app->post('/usuario/cadastro/update/ramo', function (Request $request, Response
     header('location: /petiti/final-empresa');
 });
 
+$app->get('/recuperar/senha/{login}', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $login = $args['login'];
+    $usuario = new Usuario();
+    $idUsuario = $usuario->procuraId2($login);
+    $lista = $usuario->listarUsuario($idUsuario);
+    foreach ($lista as $linha) {
+        $idRecover = $linha['idUsuario'];
+        $nomeUsuario = $linha['nomeUsuario'];
+    }
+     $_SESSION['nome-recuperacao'] = $nomeUsuario;
+     $_SESSION['id-senha-recuperacao'] = $idRecover;
+
+    header('location: /petiti/views/recover/passrecover.php');
+});
+
+$app->post('/usuario/update/senha/recuperacao', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $usuario = new Usuario();
+    $senha = $_POST['novaSenha'];
+    $usuario->setIdUsuario($_SESSION['id-senha-recuperacao']);
+    $usuario->setSenhaUsuario($senha);
+    $usuario->updateSenha($usuario);
+
+   
+
+    unset($_SESSION['id-senha-recuperacao']);
+    unset($_SESSION['nome-recuperacao']);
+    session_destroy();
+    
+    header('location: /petiti/login');
+});
+
 
 
 $app->post('/usuario/update', function (Request $request, Response $response, array $args) {
