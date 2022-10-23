@@ -558,6 +558,30 @@ $app->post(
     }
 );
 
+$app->post('/seguir', function(Request $request, Response $response, array $args){
+    @session_start();
+    $usuarioSeguidor = new UsuarioSeguidor();
+    $usuario = new Usuario();
+    $idUsuario = $_POST['id'];
+    $idSeguidor = $_SESSION['id'];
+
+    $ver = $usuarioSeguidor->verificarSeguidor($idUsuario, $idSeguidor);
+
+    $verificador = $ver['boolean'];
+
+    if($verificador == true){
+        $usuarioSeguidor->setIdSeguidor($idSeguidor);
+        $usuarioSeguidor->setIdUsuarioSeguido($idUsuario);
+        $idUsuarioSeguidor = $usuarioSeguidor->cadastrar($usuarioSeguidor);
+        $usuarioSeguidor->setIdUsuarioSeguidor($idUsuarioSeguidor);
+    }else{
+        $idSeguidorExistente = $ver['id'];
+        $usuarioSeguidor->setIdUsuarioSeguidor($idSeguidorExistente);
+        $usuarioSeguidor->delete($usuarioSeguidor);
+    }
+
+});
+
 try {
     $app->run();
 } catch (Exception $e) {
