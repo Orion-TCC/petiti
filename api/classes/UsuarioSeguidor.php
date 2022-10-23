@@ -4,15 +4,14 @@ class UsuarioSeguidor
 {
     private $idUsuarioSeguidor;
     private $idSeguidor;
-    private $idUsuario;
+    private $idUsuarioSeguido;
 
-    
-    public function getIdUsuario(){
-        return $this->idUsuario;
+    public function getIdUsuarioSeguido(){
+        return $this->idUsuarioSeguido;
     }
 
-    public function setIdUsuario($idUsuario){
-        $this->idUsuario = $idUsuario;
+    public function setIdUsuarioSeguido($idUsuarioSeguido){
+        $this->idUsuarioSeguido = $idUsuarioSeguido;
 
         return $this;
     }
@@ -39,6 +38,47 @@ class UsuarioSeguidor
         $this->idUsuarioSeguidor = $idUsuarioSeguidor;
 
         return $this;
+    }
+
+    public function delete($delete)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("DELETE FROM tbusuarioseguidor
+         WHERE idUsuarioseguidor = ?");
+        $stmt->bindValue(1, $delete->getIdUsuarioSeguidor());
+
+        $stmt->execute();
+    }
+
+    public function cadastrar($usuarioSeguidor)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("INSERT INTO tbusuarioseguidor
+        (idUsuarioSeguidor, idSeguidor, idUsuario) 
+        VALUES (DEFAULT, ?, ?)");
+        $stmt->bindValue(1, $usuarioSeguidor->getIdSeguidor());
+        $stmt->bindValue(2, $usuarioSeguidor->getIdUsuarioSeguido());
+        $stmt->execute();
+    }
+
+    public function verificarSeguidor($idUsuario, $idSeguidor){
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idUsuarioSeguidor), idUsuarioSeguidor
+        FROM tbUsuarioSeguidor
+        WHERE idUsuario = $idUsuario AND idSeguidor = $idSeguidor";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll();
+        foreach ($lista as $linha) {
+            $qtd = $linha[0];
+            $id = $linha[1];
+        }
+        if($qtd>0){
+            $array = array("boolean" => false, "id" => "$id");
+            return $array;
+        }else{
+            $array = array("boolean" => true);
+            return $array;
+        }
     }
 }
 ?>
