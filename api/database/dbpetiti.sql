@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Out-2022 às 12:46
+-- Tempo de geração: 24-Out-2022 às 13:14
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.0.13
 
@@ -212,6 +212,7 @@ CREATE TABLE `tbpublicacao` (
   `idPublicacao` int(11) NOT NULL,
   `textoPublicacao` varchar(200) NOT NULL,
   `dataPublicacao` datetime NOT NULL,
+  `localPub` text DEFAULT NULL,
   `itimalias` int(11) DEFAULT 0,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
