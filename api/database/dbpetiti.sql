@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Out-2022 às 02:45
+-- Tempo de geração: 24-Out-2022 às 05:41
 -- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.1
+-- versão do PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dbpetiti`
 --
-CREATE DATABASE IF NOT EXISTS `dbpetiti` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `dbpetiti`;
 
 -- --------------------------------------------------------
 
@@ -33,6 +31,23 @@ CREATE TABLE `tbcategoria` (
   `idCategoria` int(11) NOT NULL,
   `categoria` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `tbcategoria`
+--
+
+INSERT INTO `tbcategoria` (`idCategoria`, `categoria`) VALUES
+(1, 'saas'),
+(2, 'sim'),
+(3, 'nao'),
+(4, 'categorias'),
+(5, 'higiene'),
+(6, 'ihash'),
+(7, 'jdidn'),
+(8, 'snjh'),
+(9, 'giuahga'),
+(10, 'hajbghuia'),
+(11, 'giushguiys');
 
 -- --------------------------------------------------------
 
@@ -170,6 +185,13 @@ CREATE TABLE `tbfotousuario` (
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `tbfotousuario`
+--
+
+INSERT INTO `tbfotousuario` (`idFotoUsuario`, `nomeFoto`, `caminhoFoto`, `idUsuario`) VALUES
+(1, '1666573357.png', 'private-user/fotos-perfil/1666573357.png', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -248,8 +270,17 @@ CREATE TABLE `tbusuario` (
   `bioUsuario` text DEFAULT NULL,
   `localizacaoUsuario` text DEFAULT NULL,
   `siteUsuario` text DEFAULT NULL,
-  `idTipoUsuario` int(11) NOT NULL
+  `idTipoUsuario` int(11) NOT NULL,
+  `dataCriacaoConta` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `tbusuario`
+--
+
+INSERT INTO `tbusuario` (`idUsuario`, `nomeUsuario`, `senhaUsuario`, `loginUsuario`, `verificadoUsuario`, `emailUsuario`, `bioUsuario`, `localizacaoUsuario`, `siteUsuario`, `idTipoUsuario`, `dataCriacaoConta`) VALUES
+(1, 'kauan', 'kauan10', 'kauan', 0, 'kauaanmatheus@gmail.com', '', '', '', 1, '2022-10-24 03:39:04'),
+(2, 'kauaninc', 'kauaninc', 'kauaninc', 0, 'kauaninc@gmail.com', NULL, NULL, NULL, 2, '2022-10-24 03:39:04');
 
 -- --------------------------------------------------------
 
@@ -418,25 +449,25 @@ ALTER TABLE `tbusuarioseguidor`
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriapublicacao`
 --
 ALTER TABLE `tbcategoriapublicacao`
-  MODIFY `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de tabela `tbcomentario`
 --
 ALTER TABLE `tbcomentario`
-  MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tbcurtidapublicacao`
 --
 ALTER TABLE `tbcurtidapublicacao`
-  MODIFY `idCurtidaPublicacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCurtidaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `tbdenunciacomentario`
@@ -466,13 +497,13 @@ ALTER TABLE `tbfotopet`
 -- AUTO_INCREMENT de tabela `tbfotopublicacao`
 --
 ALTER TABLE `tbfotopublicacao`
-  MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `tbfotousuario`
 --
 ALTER TABLE `tbfotousuario`
-  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tbmensagem`
@@ -490,7 +521,7 @@ ALTER TABLE `tbpet`
 -- AUTO_INCREMENT de tabela `tbpublicacao`
 --
 ALTER TABLE `tbpublicacao`
-  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `tbtipousuario`
@@ -502,7 +533,7 @@ ALTER TABLE `tbtipousuario`
 -- AUTO_INCREMENT de tabela `tbusuario`
 --
 ALTER TABLE `tbusuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuarioendereco`
