@@ -2,33 +2,61 @@
 <html lang="pt-br">
 <?php
 require_once("../../../../api/database/conexao.php");
-$con = Conexao::conexao();
 
 $con = Conexao::conexao();
-$query = "SELECT idUsuario, loginUsuario FROM tbcategoria WHERE statusCategoria = 1";
-$resultado = $con->query($query);
-$listaCat = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-$con = Conexao::conexao();
-$query = "SELECT idCategoria, categoria FROM tbcategoria WHERE statusCategoria = 0";
-$resultado = $con->query($query);
-$listaCatBloqueadas = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-$query = "SELECT COUNT(idCategoria) as qtd FROM tbcategoria WHERE statusCategoria = 1";
+$query = "SELECT idUsuario, 
+nomeUsuario, 
+senhaUsuario, 
+loginUsuario, 
+verificadoUsuario, 
+emailUsuario, 
+tbtipousuario.idTipoUsuario,
+tipoUsuario,
+bioUsuario,
+localizacaoUsuario, 
+siteUsuario
+FROM tbusuario 
+INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
+WHERE statusUsuario = 1";
+
 $resultado = $con->query($query);
-$listaCatQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
-foreach ($listaCatQtd as $linha) {
-  $qtdCat = $linha['qtd'];
+$listaUsuarios = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+
+$query = "SELECT idUsuario, 
+nomeUsuario, 
+senhaUsuario, 
+loginUsuario, 
+verificadoUsuario, 
+emailUsuario, 
+tbtipousuario.idTipoUsuario,
+tipoUsuario,
+bioUsuario,
+localizacaoUsuario, 
+siteUsuario
+FROM tbusuario 
+INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
+WHERE statusUsuario = 0";
+$resultado = $con->query($query);
+$listaUsuariosBloqueados = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+$query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 1";
+$resultado = $con->query($query);
+$listaUsuariosQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
+foreach ($listaUsuariosQtd as $linha) {
+  $qtdUsuarios = $linha['qtd'];
 }
-$con = Conexao::conexao();
-$query = "SELECT COUNT(idCategoria) as qtd FROM tbcategoria WHERE statusCategoria = 0";
+
+$query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 0";
 $resultado = $con->query($query);
-$listaCatBloqueadasQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
-foreach ($listaCatBloqueadasQtd as $linha) {
-  $qtdCatBloqueada = $linha['qtd'];
+$listaUsuariosQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
+foreach ($listaUsuariosQtd as $linha) {
+  $qtdUsuariosBloqueados = $linha['qtd'];
 }
 ?>
-?>
+
 
 <head>
   <meta charset="UTF-8" />
@@ -116,14 +144,139 @@ foreach ($listaCatBloqueadasQtd as $linha) {
 
           <!-- Tab content -->
           <div id="ativo" class="tabcontent">
-            <h3 id="total-qtd">Total(0)</h3>
-            <!--php aqui puxando os numeros do banco-->
+            <h3 id="total-qtd">Total (<?php echo $qtdUsuarios?>)</h3>
+            <div class="tabelaUsuarios">
+              <table>
+                <thead class="">
+                  <th>
+                    Id
+                  </th>
+                  <th>
+                    Nome
+                  </th>
+                  <th>
+                    Usuário
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Verificado
+                  </th>
+                  <th>
+                    Tipo conta
+                  </th>
+                </thead>
+                <tbody>
+                <?php 
+                    foreach ($listaUsuarios as $linha) { 
+                    $id = $linha['idUsuario'];
+                     $nome  = $linha['nomeUsuario'];
+                     $login =  $linha['loginUsuario'];
+                     $email = $linha['emailUsuario'];
+                     $verificado =  $linha['verificadoUsuario'];
+                     $tipo = $linha['tipoUsuario']; ?>
+                    
+                    <td>
+                      <?php echo $id ?>
+                    </td>
+
+                    <td>
+                      <?php echo $nome?>
+                    </td>
+
+                    <td>
+                      <?php echo $login?>
+                    </td>
+
+                    <td>
+                    <?php echo $email?>
+                    </td>
+
+                    <td>
+                      <?php echo $verificado?>
+                    </td>
+
+                    <td>
+                      <?php echo $tipo?>
+                    </td>
+
+
+                  <?php  }
+                  ?>
+                </tbody>
+              </table>
+
+            </div>
           </div>
 
           <div id="bloqueado" class="tabcontent">
-            <h3 id="total-qtd">Total(0)</h3>
-            <!--php aqui puxando os numeros do banco-->
-            <p>teste</p>
+            <h3 id="total-qtd">Total (<?php echo $qtdUsuariosBloqueados?>)</h3>
+          
+            <div class="tabelaUsuarios">
+              <table>
+                <thead class="">
+                  <th>
+                    Id
+                  </th>
+                  <th>
+                    Nome               
+                  </th>
+                  <th>
+                    Usuário
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th>
+                    Verificado
+                  </th>
+                  <th>
+                    Tipo conta
+                  </th>
+                </thead>
+                <tbody>
+                  <?php 
+                    foreach ($listaUsuariosBloqueados as $linha) { 
+                    $id = $linha['idUsuario'];
+                     $nome  = $linha['nomeUsuario'];
+                     $login =  $linha['loginUsuario'];
+                     $email = $linha['emailUsuario'];
+                     $verificado =  $linha['verificadoUsuario'];
+                     $tipo = $linha['tipoUsuario']; ?>
+                    
+                    <td>
+                      <?php echo $id ?>
+                    </td>
+
+                    <td>
+                      <?php echo $nome?>
+                    </td>
+
+                    <td>
+                      <?php echo $login?>
+                    </td>
+
+                    <td>
+                    <?php echo $email?>
+                    </td>
+
+                    <td>
+                      <?php echo $verificado?>
+                    </td>
+
+                    <td>
+                      <?php echo $tipo?>
+                    </td>
+
+
+                  <?php  }
+                  ?>
+                </tbody>
+              </table>
+
+            </div>
+           
           </div>
         </div>
       </div>
