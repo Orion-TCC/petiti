@@ -10,6 +10,7 @@ class Pet
     private $racaPet;
     private $idadePet;
     private $usuario;
+    private $usuarioPet;
 
     public function getUsuario()
     {
@@ -19,6 +20,18 @@ class Pet
     public function setUsuario($usuario)
     {
         $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    public function getUsuarioPet()
+    {
+        return $this->usuarioPet;
+    }
+
+    public function setUsuarioPet($usuarioPet)
+    {
+        $this->usuarioPet = $usuarioPet;
 
         return $this;
     }
@@ -110,6 +123,7 @@ class Pet
         `nomePet`,
         `racaPet`,
         `especiePet`,
+        `usuarioPet`,
         `idadePet`,
         `idUsuario` FROM tbpet
         ";
@@ -126,6 +140,7 @@ class Pet
         `nomePet`,
         `racaPet`,
         `especiePet`,
+        `usuarioPet`,
         `idadePet`,
         `idUsuario` FROM tbpet WHERE idPet = '$id'
         ";
@@ -142,9 +157,9 @@ class Pet
             "
             INSERT INTO `tbpet`(
                 `idPet`, `nomePet`,`racaPet`, `especiePet`, 
-                `idadePet`, `idUsuario` 
+                `idadePet`, `idUsuario`, usuarioPet
             )VALUES (
-                default, ?, ?, ?, ?, ?
+                default, ?, ?, ?, ?, ?, ?
                 )
             "
         );
@@ -154,6 +169,7 @@ class Pet
         $stmt->bindValue(3, $pet->getEspeciePet());
         $stmt->bindValue(4, $pet->getIdadePet());
         $stmt->bindValue(5, $pet->getUsuario()->getIdUsuario());
+        $stmt->bindValue(6, $pet->getUsuarioPet());
 
 
 
