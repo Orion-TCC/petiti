@@ -757,10 +757,6 @@ body {
   padding-top: 30px;
 }
 
-#formularioPet2 div.formulario {
-  height: 750px;
-}
-
 .holderFormularioPet button.formSubmit {
   margin-top: 40px;
 }
@@ -895,6 +891,26 @@ body {
   background: #fcf892;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
 
+  border-radius: 20px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  font-family: "Raleway Bold", sans-serif;
+  text-decoration: none;
+  line-height: 45px;
+}
+
+.botaoOutroCadastro {
+  width: 495px;
+  height: 50px;
+  background: #9998d3;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+
+  margin-top: 1rem;
   border-radius: 20px;
   font-style: normal;
   font-weight: 700;
