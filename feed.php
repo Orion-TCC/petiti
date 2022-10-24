@@ -147,8 +147,10 @@ include_once("sentinela.php");
                 <div class="elementosUserPost">
 
                 <img class="imagemUser" src="<?php echo $fotoUsuario?>" alt="">
-
+                <div>
                 <p class="login"><?php echo $login ?></p>
+                <span class="local">Local (se botar)</span>
+                </div>
                 
                 </div>
 
@@ -164,17 +166,17 @@ include_once("sentinela.php");
                 <p class="itimaliasPost" id="itimaliasPost<?php echo $id ?>"><?php echo $itimalias?> itimalias</p>
 
                 <div class="holderPost">
-
-                <p class="login"> <?php echo $login ?> <span><?php echo $texto ?></span> </p>
-                
-                
+                 <p class="login"> <?php echo $login ?> <span class="texto"><?php echo $texto ?></span> </p>
                 </div>
 
              
 
-                <p class="dataDif"><?php echo $diferencaFinal ?></p>
-
-                <input type="text" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>">
+                <p class="dataDif">Há <?php echo $diferencaFinal ?></p>
+                   
+                <div class="comentarioArea">
+                    <textarea oninput="auto_grow(this)" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>" ></textarea>
+                </div>
+                
 
                 </div>
             <?php }

@@ -1215,6 +1215,7 @@ background: rgb(245, 245, 245);
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-bottom: 60px;
 
 }
 
@@ -1238,15 +1239,14 @@ background: rgb(245, 245, 245);
   width: 100%;
 }
 .holderPost{
-  display: flex;
-  flex-direction: row;
+
   align-items: center;
   padding-inline: 24px;
   gap: 10px;
-  width: 90%;
-  margin-top: 10px;
+  width: 600px;
+  margin-top: 5px;
 
- word-break: break-all;
+  word-break: break-all;
 }
 
 
@@ -1265,13 +1265,24 @@ background: rgb(245, 245, 245);
 }
 
 .texto{
-  font-family: 'Raleway Bold';
+  font-family: 'Public Sans regular';
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
 
 color: #5E5E5E;
+margin-left: 5px;
+}
+
+.local{
+  font-family: 'Public Sans regular';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #5E5E5E;
 }
 
 .itimaliasPost{
@@ -1298,6 +1309,59 @@ color: #5E5E5E;
   color: #000000;
 }
 
+.dataDif{
+  padding-inline: 24px;
+  margin-top: 5px;
+
+  font-family: 'Public Sans Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 23px;
+
+
+  color: #848484;
+}
+
+.comentarioArea textarea{
+  width: 650px;
+  height: 50px;
+
+  border-bottom: 1px solid gray;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+
+  margin-top: 5px;
+  padding: 15px 30px 0 50px;
+
+  font-family: 'Public Sans Medium';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+
+  color: #000000;
+  resize: none;
+  overflow: hidden;
+}
+.comentarioArea textarea:focus{
+  background: rgb(245, 245, 245);
+}
+
+.comentarioArea textarea::placeholder{
+  font-family: 'Raleway Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #838383;
+}
+
+.comentarioArea textarea:focus{
+  outline: none;
+}
 
 .rightBarHolder {
   grid-column: 2 span / 2 span;
