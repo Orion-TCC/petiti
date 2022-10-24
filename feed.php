@@ -1,8 +1,10 @@
 <?php
 @session_start();
+require('api/classes/curtidaPublicacao.php');
+$curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 include_once("sentinela.php");
-
+$idUsuarioCurtida = $_SESSION['id'];
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
@@ -20,10 +22,10 @@ include_once("sentinela.php");
     <link rel="stylesheet" href="assets/libs/croppie/croppie.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link async rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link async rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link async rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link async rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
     <link rel="icon" href="assets/images/logo-icon.svg">
@@ -158,8 +160,16 @@ include_once("sentinela.php");
 
 
                 <div class="holderPost">
-                <button class="curtir" value="<?php echo $id ?>">Curtir</button>
-            
+                <?php 
+                    $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
+                    if ($verificaCurtida['boolean'] == false) { ?>
+                 <input checked class="curtir" value="<?php echo $id ?>" type="checkbox">        
+                <?php }else{ ?>
+                    <!-- curtido -->
+                 <input  class="curtir" value="<?php echo $id ?>" type="checkbox">      
+                  <!-- nao curtido  -->
+                <?php }
+                ?>
                 <button value="<?php echo $id ?>" class="comentar" value="">Comentar</button>
                 </div>
 
