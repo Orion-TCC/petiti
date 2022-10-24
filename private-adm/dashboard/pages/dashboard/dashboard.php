@@ -13,6 +13,7 @@
     $qtdTutores = $linha[0];
   }
 
+  //
   $query = "SELECT COUNT(idPet) FROM tbPet";
 
   $resultado = $con->query($query);
@@ -20,7 +21,9 @@
   foreach ($lista as $linha) {
     $qtdPets = $linha[0];
   }
+//
 
+//
   $query = "SELECT COUNT(idUsuario) FROM tbusuario WHERE idTipoUsuario > 1 AND dataCriacaoConta >= DATE_SUB(CURDATE(),INTERVAL 24 HOUR)";
 
   $resultado = $con->query($query);
@@ -28,7 +31,7 @@
   foreach ($lista as $linha) {
     $qtdEmpresas = $linha[0];
   }
-  
+  //
 
 ?>
 <head>
@@ -42,7 +45,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
 
   <!--style-->
-  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/dashboard/dashboard.css" />
 </head>
 
 <body>
@@ -51,7 +54,7 @@
     <aside>
       <div class="top">
         <div class="logo">
-          <img src="../../images/logo-petiti.svg" />
+          <img src="/petiti/private-adm/dashboard/images/logo-petiti.svg" />
           <h1>pet iti</h1>
         </div>
         <div class="close" id="close-btn">
@@ -60,31 +63,31 @@
       </div>
 
       <div class="sidebar">
-        <a class="menu-item active" href="dashboard.php">
+        <a class="menu-item active" href="/petiti/dashboard">
           <span class="material-icons-round">dashboard</span>
           <h3>Dashboard</h3>
-        </a>
-        <a class="menu-item" href="../tutores/tutores.php">
+        </a>  
+        <a class="menu-item" href="/petiti/tutores-dashboard">
           <span class="material-icons-round">person_outline</span>
           <h3>Tutores</h3>
         </a>
-        <a class="menu-item" href="../pets/pets.php">
+        <a class="menu-item" href="/petiti/pets-dashboard">
           <span class="material-icons-round">pets</span>
           <h3>Pets</h3>
         </a>
-        <a class="menu-item" href="../empresas/empresas.php">
+        <a class="menu-item" href="/petiti/empresas-dashboard">
           <span class="material-icons-round">store</span>
           <h3>Empresas</h3>
         </a>
-        <a class="menu-item" href="../categorias/categorias.php">
+        <a class="menu-item" href="/petiti/categorias-dashboard">
           <span class="material-icons-round">category</span>
           <h3>Categorias</h3>
         </a>
-        <a class="menu-item" href="../denuncias/denuncias.php">
+        <a class="menu-item" href="/petiti/denuncias-dashboard">
           <span class="material-icons-outlined">report</span>
           <h3>Denúncias</h3>
         </a>
-        <a id="logout" class="menu-item" href="/petiti/sair.php">
+        <a id="logout" class="menu-item" href="/petiti/sair">
           <span class="material-icons-round">logout</span>
           <h3>Sair</h3>
         </a>
@@ -163,7 +166,7 @@
           </div>
           <div class="msg-denuncia">
             <div class="foto-perfil">
-              <img src="../../images/le.jpg" />
+              <img src="/petiti/private-adm/dashboard/images/le.jpg" />
               <!--puxar do banco (pessoa que fez a denuncia)-->
             </div>
             <div class="mensagem">
@@ -176,7 +179,7 @@
           </div>
           <div class="msg-denuncia">
             <div class="foto-perfil">
-              <img src="../../images/le.jpg" />
+              <img src="/petiti/private-adm/dashboard/images/le.jpg" />
             </div>
             <div class="mensagem">
               <p>
@@ -188,7 +191,7 @@
           </div>
           <div class="msg-denuncia">
             <div class="foto-perfil">
-              <img src="../../images/le.jpg" />
+              <img src="/petiti/private-adm/dashboard/images/le.jpg" />
             </div>
             <div class="mensagem">
               <p>
@@ -256,7 +259,7 @@
     </div>
   </div>
 
-  <script src="../../js/script.js"></script>
+  <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 </body>
 
 </html>

@@ -220,4 +220,45 @@ class Pet
         $stmt->execute();
         return $msg = "Pet excluído :c";
     }
+    
+    public function buscaPetAtivo()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idPet, nomePet, racaPet, especiePet, idadePet, dataCriacaoPet, idUsuario
+                        WHERE statusPet = 1";
+
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaPetBloqueado()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idPet, nomePet, racaPet, especiePet, idadePet, dataCriacaoPet, idUsuario
+                        WHERE statusPet = 0";
+
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaQtdPetAtivo()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idPet) as qtd FROM tbPet WHERE statusPet = 1";
+        $resultado = $con->query($query);
+        $listaPetsQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($listaPetsQtd as $linha) {
+            return $linha['qtd'];
+        }
+    }
+    public function buscaQtdPetBloqueado()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idPet) as qtd FROM tbPet WHERE statusPet = 0";
+        $resultado = $con->query($query);
+        $listaPetsQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($listaPetsQtd as $linha) {
+            return $linha['qtd'];
+        }
+    }
 }

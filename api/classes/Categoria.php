@@ -33,7 +33,8 @@ class categoria
         return $this;
     }
 
-    public function cadastrar($categoria){
+    public function cadastrar($categoria)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare('INSERT INTO tbCategoria(idCategoria, categoria)
         VALUES (default, ?)');
@@ -48,7 +49,8 @@ class categoria
         return $id;
     }
 
-    public function listar(){
+    public function listar()
+    {
         $con = Conexao::conexao();
         $query = "SELECT idCategoria, categoria FROM tbcategoria";
         $resultado = $con->query($query);
@@ -57,7 +59,8 @@ class categoria
         return $lista;
     }
 
-    public function listarCategoriasPopulares(){
+    public function listarCategoriasPopulares()
+    {
         $con = Conexao::conexao();
         $query = "SELECT COUNT(tbcategoriapublicacao.idCategoria), 
         categoria  FROM tbcategoriapublicacao 
@@ -68,7 +71,8 @@ class categoria
         return $lista;
     }
 
-    public function verificarCategoria($categoria){
+    public function verificarCategoria($categoria)
+    {
         $con = Conexao::conexao();
         $query = "SELECT COUNT(idCategoria) as qtd FROM tbcategoria WHERE categoria = '$categoria'";
         $resultado = $con->query($query);
@@ -82,7 +86,8 @@ class categoria
             return true;
         }
     }
-    public function categoriaPost($idPub){
+    public function categoriaPost($idPub)
+    {
         $con = Conexao::conexao();
         $query = "SELECT categoria FROM tbcategoria
         INNER JOIN tbcategoriapublicacao t on tbcategoria.idCategoria = t.idCategoria
@@ -92,7 +97,8 @@ class categoria
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
-    public function pesquisarCategoria($categoria){
+    public function pesquisarCategoria($categoria)
+    {
         $con = Conexao::conexao();
         $query = "SELECT idCategoria as id FROM tbcategoria WHERE categoria = '$categoria'";
         $resultado = $con->query($query);
@@ -103,4 +109,41 @@ class categoria
         return $id;
     }
 
+    public function buscaCategoriaAtiva()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idCategoria, categoria FROM tbcategoria WHERE statusCategoria = 1";
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaCategoriaBloqueada()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idCategoria, categoria FROM tbcategoria WHERE statusCategoria = 0";
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaQtdCategoriaAtiva()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idCategoria) as qtd FROM tbcategoria WHERE statusCategoria = 1";
+        $resultado = $con->query($query);
+        $listaCatQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($listaCatQtd as $linha) {
+            return $linha['qtd'];
+        }
+    }
+
+    public function buscaQtdCategoriaBloqueada()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idCategoria) as qtd FROM tbcategoria WHERE statusCategoria = 0";
+        $resultado = $con->query($query);
+        $listaCatQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($listaCatQtd as $linha) {
+            return $linha['qtd'];
+        }
+    }
 }

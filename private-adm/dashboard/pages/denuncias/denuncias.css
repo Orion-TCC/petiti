@@ -40,7 +40,7 @@ body{
     height: 100vh;
     font-family: 'Raleway', 'sans-serif';
     overflow-x: hidden;
-    background-image: url(/images/dashboard-bg.svg);
+    background-image: url(/petiti/private-adm/dashboard/images/dashboard-bg.svg);
     background-repeat: no-repeat;
     background-position: cover;
 }
@@ -434,7 +434,7 @@ main .info-pets .perfis-pets{
 }
 
 .right-side .contato{
-    background-image: url(/images/fundo-btn.svg);
+    background-image: url(/petiti/private-adm/dashboard/images/fundo-btn.svg);
     background-repeat: no-repeat;
     background-size: cover;
 

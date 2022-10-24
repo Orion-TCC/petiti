@@ -39,7 +39,7 @@ foreach ($listaCatBloqueadasQtd as $linha) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
 
   <!--style-->
-  <link rel="stylesheet" href="pets.css" />
+  <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/pets/pets.css" />
 </head>
 
 <body>
@@ -48,7 +48,7 @@ foreach ($listaCatBloqueadasQtd as $linha) {
     <aside>
       <div class="top">
         <div class="logo">
-          <img src="../../images/logo-petiti.svg" />
+          <img src="/petiti/private-adm/dashboard/images/logo-petiti.svg" />
           <h1>pet iti</h1>
         </div>
         <div class="close" id="close-btn">
@@ -57,31 +57,31 @@ foreach ($listaCatBloqueadasQtd as $linha) {
       </div>
 
       <div class="sidebar">
-        <a class="menu-item" href="../dashboard/dashboard.php">
+        <a class="menu-item" href="/petiti/dashboard">
           <span class="material-icons-round">dashboard</span>
           <h3>Dashboard</h3>
-        </a>
-        <a class="menu-item" href="../tutores/tutores.php">
+        </a>  
+        <a class="menu-item" href="/petiti/tutores-dashboard">
           <span class="material-icons-round">person_outline</span>
           <h3>Tutores</h3>
         </a>
-        <a class="menu-item active" href="pets.php">
+        <a class="menu-item active" href="/petiti/pets-dashboard">
           <span class="material-icons-round">pets</span>
           <h3>Pets</h3>
         </a>
-        <a class="menu-item" href="../empresas/empresas.php">
+        <a class="menu-item" href="/petiti/empresas-dashboard">
           <span class="material-icons-round">store</span>
           <h3>Empresas</h3>
         </a>
-        <a class="menu-item" href="../categorias/categorias.php">
+        <a class="menu-item" href="/petiti/categorias-dashboard">
           <span class="material-icons-round">category</span>
           <h3>Categorias</h3>
         </a>
-        <a class="menu-item" href="../denuncias/denuncias.php">
+        <a class="menu-item" href="/petiti/denuncias-dashboard">
           <span class="material-icons-outlined">report</span>
           <h3>Denúncias</h3>
         </a>
-        <a id="logout" class="menu-item" href="/petiti/sair.php">
+        <a id="logout" class="menu-item" href="/petiti/sair">
           <span class="material-icons-round">logout</span>
           <h3>Sair</h3>
         </a>
@@ -98,7 +98,7 @@ foreach ($listaCatBloqueadasQtd as $linha) {
           <form action="" method="" class="search-bar">
             <input type="text" name="procurarPerfil" id="procurarPerfil" placeholder="Pesquise por perfis de pets" class="form-input" />
             <button type="submit">
-              <img id="search-img" src="../../images/search-icon.svg" />
+              <img id="search-img" src="/petiti/private-adm/dashboard/images/search-icon.svg" />
             </button>
           </form>
 
@@ -146,7 +146,7 @@ foreach ($listaCatBloqueadasQtd as $linha) {
           </div>
           <div class="msg-denuncia">
             <div class="foto-perfil">
-              <img id="img-denuncia" src="../../images/le.jpg" />
+              <img id="img-denuncia" src="/petiti/private-adm/dashboard/images/le.jpg" />
             </div>
             <div class="mensagem">
               <p>
@@ -158,7 +158,7 @@ foreach ($listaCatBloqueadasQtd as $linha) {
           </div>
           <div class="msg-denuncia">
             <div class="foto-perfil">
-              <img id="img-denuncia" src="../../images/le.jpg" />
+              <img id="img-denuncia" src="/petiti/private-adm/dashboard/images/le.jpg" />
             </div>
             <div class="mensagem">
               <p>
@@ -170,7 +170,7 @@ foreach ($listaCatBloqueadasQtd as $linha) {
           </div>
           <div class="msg-denuncia">
             <div class="foto-perfil">
-              <img id="img-denuncia" src="../../images/le.jpg" />
+              <img id="img-denuncia" src="/petiti/private-adm/dashboard/images/le.jpg" />
             </div>
             <div class="mensagem">
               <p>
@@ -239,7 +239,7 @@ foreach ($listaCatBloqueadasQtd as $linha) {
   </div>
   <!--.container-->
 
-  <script src="../../js/script.js"></script>
+  <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 </body>
 
 </html>

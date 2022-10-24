@@ -278,9 +278,9 @@ class Usuario
         $lista_Array = (array) $lista;
         $contagemEmail = count($lista_Array);
         $msg = "";
-       
+
         if (($contagemEmail > 0) || ($contagemLogin > 0)) {
-           
+
 
             $fotoUsuario = new FotoUsuario();
             $usuario = new Usuario();
@@ -354,7 +354,8 @@ class Usuario
             return $msg = "Credenciais Inválidas.";
         }
     }
-    public function updateNome($update){
+    public function updateNome($update)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare("UPDATE tbusuario SET nomeUsuario = ? WHERE idUsuario = ?");
         $stmt->bindValue(1, $update->getNomeUsuario());
@@ -362,28 +363,32 @@ class Usuario
         $stmt->execute();
     }
 
-    public function updateTipo($update){
+    public function updateTipo($update)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare("UPDATE tbusuario SET idTipoUsuario = ? WHERE idUsuario = ?");
         $stmt->bindValue(1, $update->getTipoUsuario()->getIdTipoUsuario());
         $stmt->bindValue(2, $update->getIdUsuario());
         $stmt->execute();
     }
-    public function updateLogin($update){
+    public function updateLogin($update)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare("UPDATE tbusuario SET loginUsuario = ? WHERE idUsuario = ?");
         $stmt->bindValue(1, $update->getLoginUsuario());
         $stmt->bindValue(2, $update->getIdUsuario());
         $stmt->execute();
     }
-    public function updateEmail($update){
+    public function updateEmail($update)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare("UPDATE tbusuario SET emailUsuario = ? WHERE idUsuario = ?");
         $stmt->bindValue(1, $update->getEmailUsuario());
         $stmt->bindValue(2, $update->getIdUsuario());
         $stmt->execute();
     }
-    public function updateSenha($update){
+    public function updateSenha($update)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare("UPDATE tbusuario SET senhaUsuario = ? WHERE idUsuario = ?");
         $stmt->bindValue(1, $update->getSenhaUsuario());
@@ -527,6 +532,70 @@ class Usuario
         }
     }
 
+    public function buscaUsuarioAtivo()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idUsuario, 
+                        nomeUsuario, 
+                        senhaUsuario, 
+                        loginUsuario, 
+                        verificadoUsuario, 
+                        emailUsuario, 
+                        tbtipousuario.idTipoUsuario,
+                        tipoUsuario,
+                        bioUsuario,
+                        localizacaoUsuario, 
+                        siteUsuario
+                        FROM tbusuario 
+                        INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
+                        WHERE statusUsuario = 1";
 
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaUsuarioBloqueado()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idUsuario, 
+                        nomeUsuario, 
+                        senhaUsuario, 
+                        loginUsuario, 
+                        verificadoUsuario, 
+                        emailUsuario, 
+                        tbtipousuario.idTipoUsuario,
+                        tipoUsuario,
+                        bioUsuario,
+                        localizacaoUsuario, 
+                        siteUsuario
+                        FROM tbusuario 
+                        INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
+                        WHERE statusUsuario = 0";
+
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaQtdUsuarioAtivo()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 1";
+        $resultado = $con->query($query);
+        $listaUsuariosQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($listaUsuariosQtd as $linha) {
+            return $linha['qtd'];
+        }
+    }
+
+    public function buscaQtdUsuarioBloqueado()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 0";
+        $resultado = $con->query($query);
+        $listaUsuariosQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($listaUsuariosQtd as $linha) {
+            return $linha['qtd'];
+        }
+    }
 
 }
