@@ -385,6 +385,7 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
         4 => "Ave",
         5 => "Exótico"
     );
+    
     $idade = $_POST['txtIdadePet'];
     $slDiaMesAno = $_POST['slIdade'];
     if ($idade > 1) {
@@ -418,13 +419,14 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
         $categoria->setCategoria($raca);
         $categoria->cadastrar($categoria);
     }
+    $pet->setUsuarioPet($_POST['txtUserPet']);
     $pet->setNomePet($_POST['txtNomePet']);
     $pet->setRacaPet($_POST['txtRacaPet']);
     $pet->setEspeciePet($especie);
     $pet->setIdadePet($idadeCompleta);
     $usuario->setIdUsuario($_SESSION['id-cadastro']);
     $pet->setUsuario($usuario);
-
+    
     $return = $pet->cadastrar($pet);
     $id = $return['id'];
     $_SESSION['id-cadastro-pet'] = $id;
