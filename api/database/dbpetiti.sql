@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Out-2022 às 13:25
+-- Tempo de geração: 24-Out-2022 às 17:05
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.0.13
 
@@ -72,23 +72,6 @@ CREATE TABLE `tbcurtidapublicacao` (
   `idUsuarioCurtida` int(11) NOT NULL,
   `idPublicacaoCurtida` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Acionadores `tbcurtidapublicacao`
---
-DELIMITER $$
-CREATE TRIGGER `tg_curtir` AFTER INSERT ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
-	UPDATE tbpublicacao SET itimalias = itimalias + 1 WHERE idPublicacao = NEW.idPublicacaoCurtida;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `tg_descurtir` AFTER DELETE ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
-	UPDATE tbpublicacao SET itimalias  = itimalias  - 1
-WHERE idPublicacao = OLD.idPublicacaoCurtida;
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -199,7 +182,8 @@ CREATE TABLE `tbpet` (
   `statusPet` int(11) NOT NULL DEFAULT 1,
   `idadePet` varchar(30) NOT NULL,
   `dataCriacaoPet` int(11) NOT NULL DEFAULT current_timestamp(),
-  `idUsuario` int(11) NOT NULL
+  `idUsuario` int(11) NOT NULL,
+  `usuarioPet` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
