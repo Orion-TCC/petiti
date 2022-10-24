@@ -49,6 +49,9 @@ include_once("sentinela-cadastro.php");
                                 <label class="formText">Nome</label>
                                 <input class="formInput" placeholder="Insira o nome" type="text" name="txtNomePet" required>
 
+                                <label class="formText">Nome de usuário</label>
+                                <input class="formInput" placeholder="Insira um username" type="text" name="txtUserPet" required>
+
                                 <label class="formText">Espécie</label>
                                 <select name="slEspecie" id="slEspecie" required class="SelectEspecie">
                                     <option selected disabled style="color: #000000; font-family: 'Raleway Bold';" value="0">Escolha</option>
