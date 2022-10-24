@@ -12,7 +12,7 @@ if ($usuario->procuraEmail($_POST['txtEmail']) == true) {
     foreach ($lista as $linha) {
         $login = $linha['loginUsuario'];
     }
-//header('location: /petiti/views/recover/senha-recuperacao.php?emailenviado=true');
+header('location: /petiti/views/recover/senha-recuperacao.php?emailenviado=true');
 require 'vendor/autoload.php';
 
 $mail = new PHPMailer(true);
@@ -52,7 +52,7 @@ try {
 }
 
 }else{
-    header('location: /petiti/views/recover/senha-recuperacao.php');
+    header('location: /petiti/views/recover/senha-recuperacao.php?emailenviado=false');
 }
 
 

@@ -1223,7 +1223,49 @@ body {
 }
 
 
-
+/* Recuperação de senha */
+#navRecover {
+  position: fixed;
+  display: flex;
+  width: 80%;
+  height: 130px;
+  justify-content: start;
+  align-items: center;
+  padding-left: 10%;
+  padding-right: 20%;
+  transition: top 1s;
+  z-index: 99;
+  background-color: #bad5db;
+  gap: 15px;
+}
+.textoNavRecover{
+  font-family: "Raleway Bold";
+  font-size: 35px;
+  margin-bottom: 5px;
+}
+.logoNavbar {
+  width: 270px;
+}
+.formRecover{
+  background-color: #bad5db;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 50px;
+  align-items: center;
+}
+.tituloFormRecover{
+    font-family: "Raleway Bold", sans-serif;
+    color: #000000;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+.textoFormRecover{
+    font-family: "Raleway Bold", sans-serif;
+    color: #000000;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
 
 
 
