@@ -1213,6 +1213,10 @@ background: rgb(245, 245, 245);
   width: 650px;
   height: fit-content;
   display: flex;
+  background-color: white;
+  padding-top: 30px;
+
+  border-radius: 20px;
   justify-content: center;
   flex-direction: column;
   margin-bottom: 60px;
@@ -1223,7 +1227,7 @@ background: rgb(245, 245, 245);
 .publicacoesHolder{
   width: 650px;
   height: fit-content;
-  background: white;
+
   margin: 60px 0 60px 0 ;
   padding: 30px 0 30px 0 ;
 
@@ -1327,10 +1331,12 @@ margin-left: 5px;
   width: 650px;
   height: 60px;
 
-  border-bottom: 1px solid gray;
+  border-bottom: none;
   border-left: none;
   border-right: none;
-  border-top: none;
+  border-top: 1px solid gray;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 
   margin-top: 5px;
   padding: 15px 30px 0 50px;
