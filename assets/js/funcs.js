@@ -104,7 +104,8 @@ function showHideElement() {
 
 
 function auto_grow(element) {
-  element.style.height = "6px";
+  element.style.height = "60px";
+  element.style.paddingBottom = "12px"
   element.style.height = (element.scrollHeight)+"px";
 }
 
