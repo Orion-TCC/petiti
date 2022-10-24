@@ -335,7 +335,7 @@ body {
   background: #fcf892;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  width: 370px;
+  width: 400px;
   height: 44px;
   margin: 45px 0 20px 0;
   align-self: center;
@@ -621,7 +621,7 @@ body {
   text-decoration: none !important;
 }
 .modal span.subTituloForm {
-  font-family: "Raleway Medium", sans-serif;
+  font-family: "Raleway Bold", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 33px;
