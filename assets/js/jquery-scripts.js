@@ -60,7 +60,7 @@ $(document).ready(function () {
           $("#baseFoto").val(img);
           html = '<img src="' + img + '" />';
           $("#preview-crop-image").html(html);
-          
+
           console.log(data);
         },
       });
@@ -137,15 +137,13 @@ $(document).ready(function () {
 
 
   $("#submitCategoria").click(function () {
-    if (input.value == "") { 
-
+    if (input.value == "") {
     }
     else {
       var categoriaCheck = categorias.push(input.value);
 
       $("#categoriasChecksHolder").prepend(
-        "<div class='categoriaSelector'> <input class='checkbox' type='checkbox' name='categorias[]' id='' value=''> "+ $(categorias).get(-1)
-        );
+        "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='' value=''> " + $(categorias).get(-1));
       console.log(categoriaCheck);
       console.log(categorias);
       document.getElementById("categoriasValue").value = categorias;
@@ -154,7 +152,15 @@ $(document).ready(function () {
     }
   });
 
-  $("#txtCategoria").keypress(function (event) {
+  $('#form-aid').on('keyup keypress', function(e) {
+    var keyCode = e.keyCode || e.which;
+    if (keyCode === 13) { 
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  $("#form-aid #txtCategoria").keypress(function (event) {
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if (keycode == '13') {
       if (input.value == "") { }
@@ -163,8 +169,7 @@ $(document).ready(function () {
         var categoriaCheck = categorias.push(input.value);
 
         $("#categoriasChecksHolder").prepend(
-          "<div class='categoriaSelector'> <input class='checkbox' type='checkbox' name='categorias[]' id='' value=''> "+ $(categorias).get(-1)
-          );
+          "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='' value=''> " + $(categorias).get(-1));
         console.log(categorias);
         document.getElementById("categoriasValue").value = categorias;
         input.value = "";
@@ -175,15 +180,15 @@ $(document).ready(function () {
 
   $('input.checkbox').change(function () {
     checkA = $(this).val();
-    if($(this).is(":checked")) {
+    if ($(this).is(":checked")) {
       categorias.push(checkA);
       console.log(categorias);
       document.getElementById("categoriasValue").value = categorias;
-    }else{
+    } else {
       categorias.splice(categorias.indexOf(checkA), 1);
       document.getElementById("categoriasValue").value = categorias;
+      console.log(categorias);
     }
-    
   });
 });
 
