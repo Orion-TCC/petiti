@@ -37,13 +37,16 @@ session_destroy();
                             <span>Uau! Finalmente. Aproveite!</span>
                         </div>
                         <div class="formTextFinalizarForms">
-                            <span>Pelo visto está tudo completo agora, finalize seu cadastro e explore a <span style="color: #3837A1;">pet iti</span> e tudo que nós temos a oferecer! Interaja com petlovers igual a você</span>
+                            <span> Caso esteja tudo certo podemos explorar a <span style="color: #3837A1;">pet iti</span> e interagir com petlovers igual a você! 
+                                Mas se desejar, você pode fazer o cadastro de outro pet agora. 
+                            </span>
                         </div>
                         <div>
                             <img src="/petiti/views/assets/img/calopsita.svg" alt="" style="margin-bottom: 10px;">
                         </div>
                         <div>
                             <a class="botaoFinalizar" href="/petiti/login">Finalizar</a>
+                            <a class="botaoOutroCadastro" href="#">Fazer outro cadastro</a>
                         </div>
                         <div>
                             <img class="logoPrincipalFinalizarForm" src="petiti/views/assets/img/logo-principal-achatada.svg" alt="">
