@@ -4,7 +4,6 @@
 require_once("../../../../api/database/conexao.php");
 $con = Conexao::conexao();
 
-$con = Conexao::conexao();
 $query = "SELECT idCategoria, categoria FROM tbcategoria WHERE statusCategoria = 1";
 $resultado = $con->query($query);
 $listaCat = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -27,7 +26,6 @@ $listaCatBloqueadasQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
 foreach ($listaCatBloqueadasQtd as $linha) {
   $qtdCatBloqueada = $linha['qtd'];
 }
-?>
 ?>
 
 <head>
