@@ -102,14 +102,15 @@ class Comentario
     {
         $con = Conexao::conexao();
         $query = "SELECT idComentario,
+        tbcomentario.idPublicacao,
         nomeUsuario,
         textoComentario,
         qtdcurtidaComentario
         FROM tbcomentario
         INNER JOIN tbpublicacao ON tbpublicacao.idPublicacao = tbcomentario.idPublicacao
         INNER JOIN tbusuario ON tbusuario.idUsuario = tbcomentario.idUsuario
-        WHERE idComentario = ". $id;
-
+        WHERE tbcomentario.idPublicacao = ". $id;
+            
         $resultado = $con->query($query);
         $lista =  $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
