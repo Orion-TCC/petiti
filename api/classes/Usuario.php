@@ -132,19 +132,19 @@ class Usuario
     public function listar()
     {
         $con = Conexao::conexao();
-        $query = "
-        SELECT `idUsuario`, 
-        `nomeUsuario`, 
-        `senhaUsuario`, 
-        `loginUsuario`, 
-        `verificadoUsuario`, 
-        `emailUsuario`, 
-        `idTipoUsuario`, 
+        $query = "SELECT idUsuario, 
+        nomeUsuario, 
+        senhaUsuario, 
+        loginUsuario, 
+        verificadoUsuario, 
+        emailUsuario, 
+        tbtipousuario.idTipoUsuario,
+        tipoUsuario,
         bioUsuario,
         localizacaoUsuario, 
         siteUsuario
-        FROM `tbusuario`
-        ";
+        FROM tbusuario 
+        INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
