@@ -138,7 +138,7 @@ class Usuario
         loginUsuario, 
         verificadoUsuario, 
         emailUsuario, 
-        tbtipousuario.idTipoUsuario,
+        tbusuario.idTipoUsuario,
         tipoUsuario,
         bioUsuario,
         localizacaoUsuario, 
@@ -159,7 +159,7 @@ class Usuario
         loginUsuario, 
         verificadoUsuario, 
         emailUsuario, 
-        tbtipousuario.idTipoUsuario,
+        tbusuario.idTipoUsuario,
         tipoUsuario,
         bioUsuario,
         localizacaoUsuario, 
@@ -506,8 +506,9 @@ class Usuario
     public function listarPetsUsuario($id)
     {
         $con = Conexao::conexao();
-        $query = "SELECT `idPet`,`nomePet`,`racaPet`,`especiePet`,`idadePet`
-        FROM tbpet
+        $query = "SELECT tbpet.idPet, nomePet, racaPet, especiePet, idadePet, dataCriacaoPet, idUsuario, caminhoFotoPet
+                FROM tbpet
+                INNER JOIN tbfotopet ON tbpet.idPet  = tbfotopet.idPet
         INNER JOIN tbusuario ON tbusuario.idUsuario = tbpet.idUsuario
         WHERE tbusuario.idUsuario = $id
         ";
@@ -535,20 +536,23 @@ class Usuario
     public function buscaUsuarioAtivo()
     {
         $con = Conexao::conexao();
-        $query = "SELECT idUsuario, 
+        $query = "SELECT tbusuario.idUsuario, 
                         nomeUsuario, 
                         senhaUsuario, 
                         loginUsuario, 
                         verificadoUsuario, 
                         emailUsuario, 
-                        tbtipousuario.idTipoUsuario,
+                        tbusuario.idTipoUsuario,
                         tipoUsuario,
+                        caminhoFoto,
                         bioUsuario,
                         localizacaoUsuario, 
                         siteUsuario
                         FROM tbusuario 
                         INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
-                        WHERE statusUsuario = 1";
+                        INNER JOIN tbfotousuario ON tbfotousuario.idUsuario = tbusuario.idUsuario
+
+                        WHERE statusUsuario = 1 AND tbusuario.idTipoUsuario = 1";
 
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -557,20 +561,23 @@ class Usuario
     public function buscaUsuarioBloqueado()
     {
         $con = Conexao::conexao();
-        $query = "SELECT idUsuario, 
+        $query = "SELECT tbusuario.idUsuario, 
                         nomeUsuario, 
                         senhaUsuario, 
                         loginUsuario, 
                         verificadoUsuario, 
-                        emailUsuario, 
-                        tbtipousuario.idTipoUsuario,
+                        emailUsuario,
+                        caminhoFoto,
+                        tbusuario.idTipoUsuario,
                         tipoUsuario,
                         bioUsuario,
                         localizacaoUsuario, 
                         siteUsuario
                         FROM tbusuario 
                         INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
-                        WHERE statusUsuario = 0";
+                        INNER JOIN tbfotousuario ON tbfotousuario.idUsuario = tbusuario.idUsuario
+
+                        WHERE statusUsuario = 0 AND tbusuario.idTipoUsuario = 1";
 
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -579,7 +586,7 @@ class Usuario
     public function buscaQtdUsuarioAtivo()
     {
         $con = Conexao::conexao();
-        $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 1";
+        $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 1 AND tbusuario.idTipoUsuario = 1";
         $resultado = $con->query($query);
         $listaUsuariosQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
         foreach ($listaUsuariosQtd as $linha) {
@@ -590,7 +597,7 @@ class Usuario
     public function buscaQtdUsuarioBloqueado()
     {
         $con = Conexao::conexao();
-        $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 0";
+        $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 0 AND tbusuario.idTipoUsuario = 1";
         $resultado = $con->query($query);
         $listaUsuariosQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
         foreach ($listaUsuariosQtd as $linha) {
@@ -598,4 +605,72 @@ class Usuario
         }
     }
 
+    public function buscaQtdUsuarioAtivoEmpresa()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 1 AND tbusuario.idTipoUsuario != 1";
+        $resultado = $con->query($query);
+        $listaUsuariosQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($listaUsuariosQtd as $linha) {
+            return $linha['qtd'];
+        }
+    }
+
+    public function buscaQtdUsuarioBloqueadoEmpresa()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 0 AND tbusuario.idTipoUsuario != 1";
+        $resultado = $con->query($query);
+        $listaUsuariosQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($listaUsuariosQtd as $linha) {
+            return $linha['qtd'];
+        }
+    }
+
+    public function buscaEmpresaAtiva()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT tbusuario.idUsuario,
+        nomeUsuario,
+        senhaUsuario,
+        loginUsuario,
+        verificadoUsuario,
+        emailUsuario,
+        tbusuario.idTipoUsuario,
+        tipoUsuario,
+        bioUsuario,
+        localizacaoUsuario,
+        caminhoFoto,
+        siteUsuario
+        FROM tbusuario 
+        INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
+        INNER JOIN tbfotousuario ON tbfotousuario.idUsuario = tbusuario.idUsuario
+        WHERE statusUsuario = 1 AND tbusuario.idTipoUsuario != 1";
+
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function buscaEmpresaBloqueada()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT tbusuario.idUsuario,
+        nomeUsuario,
+        senhaUsuario,
+        loginUsuario,
+        verificadoUsuario,
+        emailUsuario,
+        tbusuario.idTipoUsuario,
+        caminhoFoto,
+        tipoUsuario,
+        bioUsuario,
+        localizacaoUsuario,
+        siteUsuario
+        FROM tbusuario INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
+        INNER JOIN tbfotousuario ON tbfotousuario.idUsuario = tbusuario.idUsuario
+
+        WHERE statusUsuario = 0 AND tbusuario.idTipoUsuario != 1";
+
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

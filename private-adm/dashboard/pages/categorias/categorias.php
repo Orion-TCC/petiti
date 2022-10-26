@@ -1,33 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php
-// require_once("../../../../api/database/conexao.php");
-// $con = Conexao::conexao();
+require_once("../objetos.php");
+$categoria = new Categoria();
 
-// $con = Conexao::conexao();
-// $query = "SELECT idCategoria, categoria FROM tbcategoria WHERE statusCategoria = 1";
-// $resultado = $con->query($query);
-// $listaCat = $resultado->fetchAll(PDO::FETCH_ASSOC);
+$listaCat = $categoria->buscaCategoriaAtiva();
+$qtdCat = $categoria->buscaQtdCategoriaAtiva();
 
-// $con = Conexao::conexao();
-// $query = "SELECT idCategoria, categoria FROM tbcategoria WHERE statusCategoria = 0";
-// $resultado = $con->query($query);
-// $listaCatBloqueadas = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-// $query = "SELECT COUNT(idCategoria) as qtd FROM tbcategoria WHERE statusCategoria = 1";
-// $resultado = $con->query($query);
-// $listaCatQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
-// foreach ($listaCatQtd as $linha) {
-//   $qtdCat = $linha['qtd'];
-// }
-
-// $con = Conexao::conexao();
-// $query = "SELECT COUNT(idCategoria) as qtd FROM tbcategoria WHERE statusCategoria = 0";
-// $resultado = $con->query($query);
-// $listaCatBloqueadasQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
-// foreach ($listaCatBloqueadasQtd as $linha) {
-//   $qtdCatBloqueada = $linha['qtd'];
-// }
+$listaCatBloqueadas = $categoria->buscaCategoriaBloqueada();
+$qtdCatBloqueada = $categoria->buscaQtdCategoriaBloqueada();
 ?>
 
 <head>
@@ -62,7 +43,7 @@
         <a class="menu-item" href="/petiti/dashboard">
           <span class="material-icons-round">dashboard</span>
           <h3>Dashboard</h3>
-        </a>  
+        </a>
         <a class="menu-item" href="/petiti/tutores-dashboard">
           <span class="material-icons-round">person_outline</span>
           <h3>Tutores</h3>

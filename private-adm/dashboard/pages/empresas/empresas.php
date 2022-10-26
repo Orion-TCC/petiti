@@ -2,6 +2,15 @@
 <html lang="pt-br">
 <?php
 require_once("../../../../api/database/conexao.php");
+
+require_once("../objetos.php");
+
+
+$listaEmpresasAtivas = $usuario->buscaEmpresaAtiva();
+$qtdEmpresasAtivas = $usuario->buscaQtdUsuarioAtivoEmpresa();
+
+$listaEmpresasBloqueadas = $usuario->buscaEmpresaBloqueada();
+$qtdEmpresasBloqueadas = $usuario->buscaQtdUsuarioBloqueadoEmpresa();
 ?>
 
 <head>
@@ -36,7 +45,7 @@ require_once("../../../../api/database/conexao.php");
         <a class="menu-item" href="/petiti/dashboard">
           <span class="material-icons-round">dashboard</span>
           <h3>Dashboard</h3>
-        </a>  
+        </a>
         <a class="menu-item" href="/petiti/tutores-dashboard">
           <span class="material-icons-round">person_outline</span>
           <h3>Tutores</h3>
@@ -90,14 +99,75 @@ require_once("../../../../api/database/conexao.php");
 
           <!-- Tab content -->
           <div id="ativo" class="tabcontent">
-            <h3 id="total-qtd">Total(0)</h3>
-            <!--php aqui puxando os numeros do banco-->
+            <h3 id="total-qtd">Total (<?php echo $qtdEmpresasAtivas ?>)</h3>
+            <div class="listaUsuarios">
+
+              <?php
+              foreach ($listaEmpresasAtivas as $linha) {
+                $id = $linha['idUsuario'];
+                $nome  = $linha['nomeUsuario'];
+                $login =  $linha['loginUsuario'];
+                $email = $linha['emailUsuario'];
+                $verificado =  $linha['verificadoUsuario'];
+                if ($verificado == 0) {
+                  $verificado = "Não";
+                } else {
+                  $verificado = "Sim";
+                }
+                $tipo = $linha['tipoUsuario'];
+                $foto = $linha['caminhoFoto']; ?>
+
+                <div class="usuario">
+                  <img class="fotoUsuario" src="<?php echo $foto ?>">
+                  <div class="infoUsuario">
+                    <p>ID: <?php echo $id ?> </p>
+                    <p>Nome: <?php echo $nome ?> </p>
+                    <p>Login: <?php echo $login ?> </p>
+                    <p>Email: <?php echo $email ?> </p>
+                    <p>Verificado: <?php echo $verificado ?> </p>
+                    <p>Tipo de conta: <?php echo $tipo ?> </p>
+                  </div>
+                </div>
+              <?php  }
+              ?>
+
+            </div>
           </div>
 
           <div id="bloqueado" class="tabcontent">
-            <h3 id="total-qtd">Total(0)</h3>
-            <!--php aqui puxando os numeros do banco-->
-            <p>teste</p>
+            <h3 id="total-qtd">Total (<?php echo $qtdEmpresasBloqueadas ?>)</h3>
+
+            <div class="listaUsuarios">
+
+              <?php
+              foreach ($listaEmpresasBloqueadas as $linha) {
+                $id = $linha['idUsuario'];
+                $nome  = $linha['nomeUsuario'];
+                $login =  $linha['loginUsuario'];
+                $email = $linha['emailUsuario'];
+                $verificado =  $linha['verificadoUsuario'];
+                if ($verificado == 0) {
+                  $verificado = "Não";
+                } else {
+                  $verificado = "Sim";
+                }
+                $tipo = $linha['tipoUsuario'];
+                $foto = $linha['caminhoFoto']; ?>
+
+                <div class="usuario">
+                  <img class="fotoUsuario" src="<?php echo $foto ?>">
+                  <div class="infoUsuario">
+                    <p>ID: <?php echo $id ?> </p>
+                    <p>Nome: <?php echo $nome ?> </p>
+                    <p>Login: <?php echo $login ?> </p>
+                    <p>Email: <?php echo $email ?> </p>
+                    <p>Verificado: <?php echo $verificado ?> </p>
+                    <p>Tipo de conta: <?php echo $tipo ?> </p>
+                  </div>
+                </div>
+              <?php  }
+              ?>
+            </div>
           </div>
         </div>
       </div>
@@ -215,7 +285,7 @@ require_once("../../../../api/database/conexao.php");
   </div>
   <!--.container-->
 
-  <script src="/js/script.js"></script>
+  <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 </body>
 
 </html>

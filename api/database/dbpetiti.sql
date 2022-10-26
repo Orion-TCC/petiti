@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Out-2022 às 17:05
+-- Tempo de geração: 26-Out-2022 às 04:59
 -- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.0.13
+-- versão do PHP: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,6 +34,18 @@ CREATE TABLE `tbcategoria` (
   `categoria` varchar(200) NOT NULL,
   `statusCategoria` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `tbcategoria`
+--
+
+INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
+(1, 'Perdido', 1),
+(2, 'Animal Perdido', 1),
+(3, 'Pet Perdido', 1),
+(4, 'Desaparecido', 1),
+(5, 'leandro', 1),
+(6, 'cachorro', 1);
 
 -- --------------------------------------------------------
 
@@ -181,7 +193,7 @@ CREATE TABLE `tbpet` (
   `especiePet` varchar(200) NOT NULL,
   `statusPet` int(11) NOT NULL DEFAULT 1,
   `idadePet` varchar(30) NOT NULL,
-  `dataCriacaoPet` int(11) NOT NULL DEFAULT current_timestamp(),
+  `dataCriacaoPet` datetime NOT NULL DEFAULT current_timestamp(),
   `idUsuario` int(11) NOT NULL,
   `usuarioPet` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -408,7 +420,7 @@ ALTER TABLE `tbusuarioseguidor`
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriapublicacao`

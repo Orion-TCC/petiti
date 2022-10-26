@@ -1,60 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php
-// require_once("../../../../api/database/conexao.php");
+require_once("../objetos.php");
+$listaTutoresAtivos = $usuario->buscaUsuarioAtivo();
+$qtdTutoresAtivos = $usuario->buscaQtdUsuarioAtivo();
 
-// $con = Conexao::conexao();
-
-
-// $query = "SELECT idUsuario, 
-// nomeUsuario, 
-// senhaUsuario, 
-// loginUsuario, 
-// verificadoUsuario, 
-// emailUsuario, 
-// tbtipousuario.idTipoUsuario,
-// tipoUsuario,
-// bioUsuario,
-// localizacaoUsuario, 
-// siteUsuario
-// FROM tbusuario 
-// INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
-// WHERE statusUsuario = 1";
-
-// $resultado = $con->query($query);
-// $listaUsuarios = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-
-// $query = "SELECT idUsuario, 
-// nomeUsuario, 
-// senhaUsuario, 
-// loginUsuario, 
-// verificadoUsuario, 
-// emailUsuario, 
-// tbtipousuario.idTipoUsuario,
-// tipoUsuario,
-// bioUsuario,
-// localizacaoUsuario, 
-// siteUsuario
-// FROM tbusuario 
-// INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
-// WHERE statusUsuario = 0";
-// $resultado = $con->query($query);
-// $listaUsuariosBloqueados = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-// $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 1";
-// $resultado = $con->query($query);
-// $listaUsuariosQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
-// foreach ($listaUsuariosQtd as $linha) {
-//   $qtdUsuarios = $linha['qtd'];
-// }
-
-// $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 0";
-// $resultado = $con->query($query);
-// $listaUsuariosQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
-// foreach ($listaUsuariosQtd as $linha) {
-//   $qtdUsuariosBloqueados = $linha['qtd'];
-// }
+$listaTutoresBloqueados = $usuario->buscaUsuarioBloqueado();
+$qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
 ?>
 
 
@@ -69,7 +21,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
 
   <!--style-->
-  <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/tutores/tutores.css"/>
+  <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/tutores/tutores.css" />
 </head>
 
 <body>
@@ -90,7 +42,7 @@
         <a class="menu-item" href="/petiti/dashboard">
           <span class="material-icons-round">dashboard</span>
           <h3>Dashboard</h3>
-        </a>  
+        </a>
         <a class="menu-item active" href="/petiti/tutores-dashboard">
           <span class="material-icons-round">person_outline</span>
           <h3>Tutores</h3>
@@ -144,140 +96,77 @@
 
           <!-- Tab content -->
           <div id="ativo" class="tabcontent">
-            <h3 id="total-qtd">Total (<?php echo $qtdUsuarios?>)</h3>
-            <div class="tabelaUsuarios">
-              <table>
-                <thead class="">
-                  <th>
-                    Id
-                  </th>
-                  <th>
-                    Nome
-                  </th>
-                  <th>
-                    Usuário
-                  </th>
-                  <th>
-                    Email
-                  </th>
-                  <th>
-                    Verificado
-                  </th>
-                  <th>
-                    Tipo conta
-                  </th>
-                </thead>
-                <tbody>
-                <?php 
-                    foreach ($listaUsuarios as $linha) { 
-                    $id = $linha['idUsuario'];
-                     $nome  = $linha['nomeUsuario'];
-                     $login =  $linha['loginUsuario'];
-                     $email = $linha['emailUsuario'];
-                     $verificado =  $linha['verificadoUsuario'];
-                     $tipo = $linha['tipoUsuario']; ?>
-                    
-                    <td>
-                      <?php echo $id ?>
-                    </td>
+            <h3 id="total-qtd">Total (<?php echo $qtdTutoresAtivos ?>)</h3>
+            <div class="listaUsuarios">
 
-                    <td>
-                      <?php echo $nome?>
-                    </td>
+              <?php
+              foreach ($listaTutoresAtivos as $linha) {
+                $id = $linha['idUsuario'];
+                $nome  = $linha['nomeUsuario'];
+                $login =  $linha['loginUsuario'];
+                $email = $linha['emailUsuario'];
+                $verificado =  $linha['verificadoUsuario'];
+                if ($verificado == 0) {
+                  $verificado = "Não";
+                } else {
+                  $verificado = "Sim";
+                }
+                $tipo = $linha['tipoUsuario'];
+                $foto = $linha['caminhoFoto']; ?>
 
-                    <td>
-                      <?php echo $login?>
-                    </td>
-
-                    <td>
-                    <?php echo $email?>
-                    </td>
-
-                    <td>
-                      <?php echo $verificado?>
-                    </td>
-
-                    <td>
-                      <?php echo $tipo?>
-                    </td>
-
-
-                  <?php  }
-                  ?>
-                </tbody>
-              </table>
+                <div class="usuario">
+                  <img class="fotoUsuario" src="<?php echo $foto ?>">
+                  <div class="infoUsuario">
+                    <p>ID: <?php echo $id ?> </p>
+                    <p>Nome: <?php echo $nome ?> </p>
+                    <p>Login: <?php echo $login ?> </p>
+                    <p>Email: <?php echo $email ?> </p>
+                    <p>Verificado: <?php echo $verificado ?> </p>
+                    <p>Tipo de conta: <?php echo $tipo ?> </p>
+                  </div>
+                </div>
+              <?php  }
+              ?>
 
             </div>
           </div>
 
           <div id="bloqueado" class="tabcontent">
-            <h3 id="total-qtd">Total (<?php echo $qtdUsuariosBloqueados?>)</h3>
-          
-            <div class="tabelaUsuarios">
-              <table>
-                <thead class="">
-                  <th>
-                    Id
-                  </th>
-                  <th>
-                    Nome               
-                  </th>
-                  <th>
-                    Usuário
-                  </th>
-                  <th>
-                    Email
-                  </th>
-                  <th>
-                    Verificado
-                  </th>
-                  <th>
-                    Tipo conta
-                  </th>
-                </thead>
-                <tbody>
-                  <?php 
-                    foreach ($listaUsuariosBloqueados as $linha) { 
-                    $id = $linha['idUsuario'];
-                     $nome  = $linha['nomeUsuario'];
-                     $login =  $linha['loginUsuario'];
-                     $email = $linha['emailUsuario'];
-                     $verificado =  $linha['verificadoUsuario'];
-                     $tipo = $linha['tipoUsuario']; ?>
-                    
-                    <td>
-                      <?php echo $id ?>
-                    </td>
+            <h3 id="total-qtd">Total (<?php echo $qtdTutoresBloqueado ?>)</h3>
 
-                    <td>
-                      <?php echo $nome?>
-                    </td>
+            <div class="listaUsuarios">
 
-                    <td>
-                      <?php echo $login?>
-                    </td>
+              <?php
+              foreach ($listaTutoresBloqueados as $linha) {
+                $id = $linha['idUsuario'];
+                $nome  = $linha['nomeUsuario'];
+                $login =  $linha['loginUsuario'];
+                $email = $linha['emailUsuario'];
+                $verificado =  $linha['verificadoUsuario'];
+                if ($verificado == 0) {
+                  $verificado = "Não";
+                } else {
+                  $verificado = "Sim";
+                }
+                $tipo = $linha['tipoUsuario'];
+                $foto = $linha['caminhoFoto']; ?>
 
-                    <td>
-                    <?php echo $email?>
-                    </td>
-
-                    <td>
-                      <?php echo $verificado?>
-                    </td>
-
-                    <td>
-                      <?php echo $tipo?>
-                    </td>
-
-
-                  <?php  }
-                  ?>
-                </tbody>
-              </table>
-
+                <div class="usuario">
+                  <img class="fotoUsuario" src="<?php echo $foto ?>">
+                  <div class="infoUsuario">
+                    <p>ID: <?php echo $id ?> </p>
+                    <p>Nome: <?php echo $nome ?> </p>
+                    <p>Login: <?php echo $login ?> </p>
+                    <p>Email: <?php echo $email ?> </p>
+                    <p>Verificado: <?php echo $verificado ?> </p>
+                    <p>Tipo de conta: <?php echo $tipo ?> </p>
+                  </div>
+                </div>
+              <?php  }
+              ?>
             </div>
-           
           </div>
+          
         </div>
       </div>
     </main>
