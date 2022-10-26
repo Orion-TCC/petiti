@@ -1,11 +1,7 @@
 <!DOCTYPE php>
 <html lang="pt-br">
 <?php
-@session_start();
-unset($_SESSION['id-cadastro']);
-unset($_SESSION['id-cadastro-pet']);
-unset($_SESSION['tipo-usuario']);
-session_destroy();
+
 ?>
 
 <head>
