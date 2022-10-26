@@ -457,6 +457,35 @@ main .info-tutores .perfis-tutores{
     align-items: center;
 }
 
-.tabelaUsuarios{
-    
+.listaUsuarios{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+.usuario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-width: 1px;
+    border-color: #3837A1;
+    border-style: solid;
+    border-radius: 30px;
+    padding: 30px;
+}
+.usuario:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-width: 1px;
+    background-color: #3837A1;
+    border-style: solid;
+    border-radius: 30px;
+    padding: 30px;
+    color: white;
+    transition: all 0.5s;
+}
+.fotoUsuario{
+    width: 150px;
 }

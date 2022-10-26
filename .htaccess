@@ -7,6 +7,7 @@ RewriteRule ^import api/database/import-db.php [NC,L]
 RewriteRule ^login views/login/login.php [NC,L]
 RewriteRule ^tipo-usuario views/register/pages/escolha-tipo-usuario.php [NC,L]
 
+
 RewriteRule ^categorias-dashboard private-adm/dashboard/pages/categorias/categorias.php [NC,L]
 RewriteRule ^dashboard private-adm/dashboard/pages/dashboard/dashboard.php [NC,L]
 RewriteRule ^denuncias-dashboard private-adm/dashboard/pages/denuncias/denuncias.php [NC,L]
@@ -14,7 +15,6 @@ RewriteRule ^empresas-dashboard private-adm/dashboard/pages/empresas/empresas.ph
 RewriteRule ^pets-dashboard private-adm/dashboard/pages/pets/pets.php [NC,L]
 RewriteRule ^tutores-dashboard private-adm/dashboard/pages/tutores/tutores.php [NC,L]
 RewriteRule ^tutorial-dashboard private-adm/dashboard/pages/tutorial/tutorial.php [NC,L]
-
 
 RewriteRule ^cadastro-usuario views/register/pages/register-comum/formulario-usuario.php [NC,L]
 RewriteRule ^info-usuario views/register/pages/register-comum/formulario-maisSobre.php [NC,L]

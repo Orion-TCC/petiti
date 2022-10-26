@@ -1,31 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php
-require_once("../../../../api/database/conexao.php");
-$con = Conexao::conexao();
+require_once("../objetos.php");
+$pet = new Pet();
 
-$query = "SELECT idCategoria, categoria FROM tbcategoria WHERE statusCategoria = 1";
-$resultado = $con->query($query);
-$listaCat = $resultado->fetchAll(PDO::FETCH_ASSOC);
+$listaPetsAtivos = $pet->buscaPetAtivo();
+$qtdPetsAtivos = $pet->buscaQtdPetAtivo();
 
-$con = Conexao::conexao();
-$query = "SELECT idCategoria, categoria FROM tbcategoria WHERE statusCategoria = 0";
-$resultado = $con->query($query);
-$listaCatBloqueadas = $resultado->fetchAll(PDO::FETCH_ASSOC);
+$listaPetsBloquados = $pet->buscaPetBloqueado();
+$qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
 
-$query = "SELECT COUNT(idCategoria) as qtd FROM tbcategoria WHERE statusCategoria = 1";
-$resultado = $con->query($query);
-$listaCatQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
-foreach ($listaCatQtd as $linha) {
-  $qtdCat = $linha['qtd'];
-}
-$con = Conexao::conexao();
-$query = "SELECT COUNT(idCategoria) as qtd FROM tbcategoria WHERE statusCategoria = 0";
-$resultado = $con->query($query);
-$listaCatBloqueadasQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
-foreach ($listaCatBloqueadasQtd as $linha) {
-  $qtdCatBloqueada = $linha['qtd'];
-}
+
 ?>
 
 <head>
@@ -60,7 +45,7 @@ foreach ($listaCatBloqueadasQtd as $linha) {
         <a class="menu-item" href="/petiti/dashboard">
           <span class="material-icons-round">dashboard</span>
           <h3>Dashboard</h3>
-        </a>  
+        </a>
         <a class="menu-item" href="/petiti/tutores-dashboard">
           <span class="material-icons-round">person_outline</span>
           <h3>Tutores</h3>
@@ -114,14 +99,39 @@ foreach ($listaCatBloqueadasQtd as $linha) {
 
           <!-- Tab content -->
           <div id="ativo" class="tabcontent">
-            <h3 id="total-qtd">Total(0)</h3>
-            <!--php aqui puxando os numeros do banco-->
+            <h3 id="total-qtd">Total(<?php echo $qtdPetsAtivos ?>)</h3>
+            <div class="listaPets">
+              <?php foreach ($listaPetsAtivos as $linha) { ?>
+                <div class="pet">
+                  <img class="fotoPet" src="<?php echo $linha['caminhoFotoPet'] ?>">
+                  <div class="infoPet">
+                    <p><span style="font-weight: 800;">Nome:</span> <?php echo $linha['nomePet'] ?></p>
+                    <p><span style="font-weight: 800;">Usuário Pet</span>: @<?php echo $linha['usuarioPet'] ?></p>
+                  </div>
+                  <div class="tutorPet">
+                    <p><span style="font-weight: 800;">Tutor:</span> @<?php echo $linha['loginUsuario'] ?></p>
+                  </div>
+                </div>
+              <?php  } ?>
+            </div>
           </div>
 
           <div id="bloqueado" class="tabcontent">
-            <h3 id="total-qtd">Total(0)</h3>
-            <!--php aqui puxando os numeros do banco-->
-            <p>teste</p>
+            <h3 id="total-qtd">Total(<?php echo $qtdPetsBloqeuados ?>)</h3>
+            <div class="listaPets">
+              <?php foreach ($listaPetsBloquados as $linha) { ?>
+                <div class="pet">
+                  <img class="fotoPet" src="<?php echo $linha['caminhoFotoPet'] ?>">
+                  <div class="infoPet">
+                    <p><span style="font-weight: 800;">Nome:</span> <?php echo $linha['nomePet'] ?></p>
+                    <p><span style="font-weight: 800;">Usuário Pet</span>: @<?php echo $linha['usuarioPet'] ?></p>
+                  </div>
+                  <div class="tutorPet">
+                    <p><span style="font-weight: 800;">Tutor:</span> @<?php echo $linha['loginUsuario'] ?></p>
+                  </div>
+                </div>
+              <?php  } ?>
+            </div>
           </div>
         </div>
       </div>
