@@ -72,7 +72,7 @@ input[type="search"]::-ms-reveal {
 :root{
   --color-white: #FFFFFF;
   --color-dark: rgba(0, 0, 0, 1);
-  --color-lightGray: #E5E5E5;
+  --color-lightGray: #f5f5f5;
   --color-extraLightGray: rgba(245, 245, 245, 1);
   --color-gray: rgba(86, 86, 86, 1);
   --color-light: rgba(224, 224, 224, 1);
@@ -125,7 +125,6 @@ body {
   margin: 0;
   padding: 0;
   outline: 0;
-  box-sizing: border-box;
   text-decoration: none;
   list-style: none;
   border: none;
@@ -452,6 +451,7 @@ body {
   align-self: flex-end;
   padding-left: 4vw;
   height: 24vh;
+  width: 11rem;
 }
 
 .funcionalidadesHolder {
@@ -1495,9 +1495,12 @@ nav .caixa-de-busca input[type="search"]::placeholder{
 nav .opcoes {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
+nav .opcoes label{
+  font-size: 1.7rem;
+}
 
 /* main */
 
@@ -1552,7 +1555,7 @@ main .container .ladoEsquerdo .perfil{
 }
 
 .ladoEsquerdo .sidebar .menu-item:hover{
-  background-color: var(--color-light) ;
+  background-color: var(--color-lightGray) ;
 }
 
 .ladoEsquerdo .sidebar i{
@@ -1572,7 +1575,7 @@ main .container .ladoEsquerdo .perfil{
 }
 
 .ladoEsquerdo .sidebar .ativo{
-  background-color: var(--color-light);
+  background-color: var(--color-lightGray);
 }
 
 .ladoEsquerdo .sidebar .ativo i, .ladoEsquerdo .sidebar .ativo h3{
@@ -1604,7 +1607,7 @@ main .container .ladoEsquerdo .perfil{
   width: 100%;
   text-align: center;
   padding: 1rem 0;
-
+  box-shadow: 1px 4px 19px 0px #696969;
 
 }
 
@@ -1745,9 +1748,21 @@ main .container .ladoEsquerdo .perfil{
   justify-content: space-between;
 }
 
+.meio .feed .head .edit{
+font-size: 1.5rem;
+display: flex;
+align-items: center;
+}
+
 .meio .feed .usuario{
   display: flex;
   gap: 1rem;
+}
+
+.meio .feed .usuario .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .meio .feed .imagemPost{
@@ -1761,6 +1776,10 @@ main .container .ladoEsquerdo .perfil{
   align-items: center;
   font-size: 1.4rem;
   margin: 0.6rem;
+}
+
+.meio .feed .botoes .botoesDeInteracao span{
+  cursor: pointer;
 }
 
 .meio .curtidoPor{
@@ -1784,3 +1803,139 @@ main .container .ladoEsquerdo .perfil{
 .meio .curtidoPor p{
   margin-left: 0.5rem;
 }
+
+
+
+/* lado direito */
+.ladoDireito .whiteBoxHolder {
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  height: fit-content ;
+  max-height: 17.5rem;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.ladoDireito .whiteBoxHolder .heading h4{
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.ladoDireito .whiteBoxHolder .postsPerdidos{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1.1rem 0;
+  width: 100%;
+  height: 2.5rem;
+}
+
+.ladoDireito .whiteBoxHolder .postsPerdidos .fotoDePerfil{
+  width: 4rem;
+  cursor: pointer;
+}
+
+.ladoDireito .whiteBoxHolder .postsPerdidos .infoPostPerdidos{
+  margin: 0 0.7rem;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ladoDireito .whiteBoxHolder .postsPerdidos h4{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.2rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.ladoDireito .whiteBoxHolder .postsPerdidos h5{
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.ladoDireito .whiteBoxHolder .categoriasEmAlta{
+  margin-top: 0.5rem;
+}
+
+.ladoDireito .whiteBoxHolder .categorias{
+  display: grid;
+  margin: 0.5rem 0;
+  grid-template-columns: 9vw 10vw;
+  column-gap: 0.5rem;
+  row-gap: 0.9rem;
+}
+
+.ladoDireito .whiteBoxHolder .categorias .lugar{
+  display: flex;
+  align-items: center;
+  width: 9.6rem;
+  height: 3.5rem;
+}
+
+.ladoDireito .whiteBoxHolder .categorias .lugar .fotoDePerfil{
+  width: 6.5rem;
+  cursor: pointer;
+  border: none;
+}
+
+.ladoDireito .whiteBoxHolder .categorias .lugar .infoCategoria h4{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ladoDireito .whiteBoxHolder .categorias .lugar .infoCategoria{
+  margin: 0 0.7rem;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+
+.ladoDireito .categoriasEmAlta .whiteBoxHolder {
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  height: fit-content ;
+  max-height: 20rem;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.sugestoes{
+  height: fit-content;
+  max-height: 28rem;
+  overflow: hidden;
+}
+
+.sugestoes .whiteBoxHolder {
+  display: flex;
+  margin-top: 1rem 
+}
+
+.sugestoes .whiteBoxHolder .fotoDePerfil{
+  width: 3rem;
+}
+
+.sugestoes .whiteBoxHolder .infoSugestoes{
+   margin:  0 0.5rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   margin-right: 2.5rem;
+}
+
+.sugestoes .whiteBoxHolder button{
+  color: var(--color-dark);
+  align-self: center;
+  font-weight: 700;
+  height: 2.2rem;
+  box-shadow: 1px 4px 19px 0px #696969;
+}
+

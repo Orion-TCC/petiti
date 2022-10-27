@@ -194,11 +194,69 @@ $idUsuarioCurtida = $_SESSION['id'];
                     </div>
                 </div>
             </div>
+                    <!-- fim do meio -->
+
 
             <div class="ladoDireito">
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam laudantium ipsum sapiente architecto accusantium ad placeat dolor, natus quasi recusandae consequatur iure fugiat assumenda tenetur consectetur veniam vel quaerat provident?
-            </div>
+                <!-- posts de pets perdidos -->
+            <div class="whiteBoxHolder">
+                    <div class="heading">
+                        <h4>Ajude alguém a encontrar seu pet</h4>
+                    </div>
 
+                    <div class="postsPerdidos">
+                        <div class="fotoDePerfil">
+                           <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                        </div>
+                        <div class="infoPostPerdidos">
+                            <h4>Minha cachorrinha fugiu de casa!</h4>
+                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
+                        </div>
+                    </div>                                
+                </div>
+                <!-- fim de posts de pets perdidos -->
+                
+            <div class="categoriasEmAlta">
+                <div class="whiteBoxHolder">
+                    <div class="heading">
+                        <h4>Categorias em alta</h4>
+                    </div>
+
+                        <div class="categorias">
+
+                        <div class="Lugar">
+                                <div class="fotoDePerfil">
+                                    <img src="./assets/images/caixa.svg" alt="">
+                                </div>
+                                <div class="infoCategoria">
+                                    <h4>tamandua</h4>
+                                </div>
+                            </div>                          
+                        </div>           
+                </div>
+            </div>
+            <!-- fim das categorias em alta -->
+        
+
+            <div class="sugestoes">
+                <h4>Sugestões para você</h4>
+
+                <div class="whiteBoxHolder">
+                    <div class="fotoDePerfil">
+                        <img src="#" alt="">
+                    </div>
+
+                    <div class="infoSugestoes">
+                        <h4>nome de usuario</h4>
+                        <h5 class="text-muted">@username</h5>
+                    </div>
+
+                    <button class="btn btn-primary">Seguir</button>
+                </div>              
+
+
+            </div>
+        </div>
         </div>
     </main>
 
