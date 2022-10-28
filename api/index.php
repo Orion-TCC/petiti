@@ -301,15 +301,18 @@ $app->post('/login', function (Request $request, Response $response, array $args
     }
 
     if ($msg == "Bem vindo.") {
+        if ($_SESSION['tipo'] != 'adm'){
+            $url = "http://localhost/petiti/api/usuario/$id";
 
-        $url = "http://localhost/petiti/api/usuario/$id";
-
-        $json = file_get_contents($url);
-        $dados = json_decode($json);
-        $login = $dados[0]->loginUsuario;
-
-        $_SESSION['login'] = $login;
-        header('location: /petiti/feed');
+            $json = file_get_contents($url);
+            $dados = json_decode($json);
+            $login = $dados[0]->loginUsuario;
+    
+            $_SESSION['login'] = $login;
+            header('location: /petiti/feed');
+        }else{
+            header('location: /petiti/dashboard');
+        }
     } else {
         header('location: /petiti/login');
         $cookie->criarCookie('retorno-login', $msg, 2);
@@ -464,6 +467,22 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     header('location: /petiti/foto-pet');
 });
 
+$app->get('/ativar-pet/{id}', function (Request $request, Response $response, array $args){
+    $pet = new Pet();
+    $pet->setStatusPet(1);
+    $pet->setIdPet($args['id']);
+    $pet->updateStatus($pet);
+    header("location: /petiti/pets-dashboard/");
+});
+
+$app->get('/bloquear-pet/{id}', function (Request $request, Response $response, array $args){
+    $pet = new Pet();
+    $pet->setStatusPet(0);
+    $pet->setIdPet($args['id']);
+    $pet->updateStatus($pet);
+    header("location: /petiti/pets-dashboard/");
+});
+
 $app->get('/categorias', function (Request $request, Response $response, array $args) {
     $categoria = new Categoria();
 
@@ -477,7 +496,7 @@ $app->get('/ativar-categoria/{id}', function (Request $request, Response $respon
     $categoria->setStatusCategoria(1);
     $categoria->setIdCategoria($args['id']);
     $categoria->updateStatus($categoria);
-    header("location: /petiti/empresas-dashboard/");
+    header("location: /petiti/categorias-dashboard/");
 });
 
 $app->get('/bloquear-categoria/{id}', function (Request $request, Response $response, array $args) {
@@ -485,7 +504,7 @@ $app->get('/bloquear-categoria/{id}', function (Request $request, Response $resp
     $categoria->setStatusCategoria(0);
     $categoria->setIdCategoria($args['id']);
     $categoria->updateStatus($categoria);
-    header("location: /petiti/empresas-dashboard/");
+    header("location: /petiti/categorias-dashboard/");
 });
 
 $app->get('/publicacoes', function (Request $request, Response $response, array $args) {

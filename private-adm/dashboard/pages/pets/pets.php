@@ -106,6 +106,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
                 $nome = $linha['nomePet'];
                 $usuario = $linha['usuarioPet'];
                 $tutor = $linha['loginUsuario'];
+                $idPet = $linha['idPet'];
               ?>
                 <div class="pet">
                   <div class="fotoPet">
@@ -118,6 +119,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
                       <p> Tutor:<?php echo $tutor ?></p>
                     </div>
                   </div>
+                  <a href="/petiti/api/bloquear-pet/<?php echo $idPet?>">Bloquear</a>
                 </div>
               <?php  } ?>
             </div>
@@ -131,6 +133,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
                 $nome = $linha['nomePet'];
                 $usuario = $linha['usuarioPet'];
                 $tutor = $linha['loginUsuario'];
+                $idPet = $linha['idPet'];
               ?>
                 <div class="pet">
                   <div class="fotoPet">
@@ -143,6 +146,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
                       <p> Tutor: <?php echo $tutor ?></p>
                     </div>
                   </div>
+                  <a href="/petiti/api/ativar-pet/<?php echo $idPet?>">Ativar</a>
                 </div>
               <?php  } ?>
             </div>
