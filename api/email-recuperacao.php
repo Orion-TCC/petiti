@@ -12,7 +12,7 @@ if ($usuario->procuraEmail($_POST['txtEmail']) == true) {
     foreach ($lista as $linha) {
         $login = $linha['loginUsuario'];
     }
-header('location: /petiti/views/recover/senha-recuperacao.php?emailenviado=true');
+//header('location: /petiti/views/recover/senha-recuperacao.php?emailenviado=true');
 require 'vendor/autoload.php';
 
 $mail = new PHPMailer(true);
@@ -29,20 +29,19 @@ try {
     $mail->Password   = 'lkmrvehesalnmidm';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
+        $mail->addCustomHeader("X-MSMail-Priority: " . $m . "");
+        $mail->addCustomHeader("X-Message-Flag: " . $flag . ""); 
 
     $mail->setFrom('orion.etec@gmail.com', 'Orion');
     $mail->addAddress($_POST['txtEmail'], 'Usuario(a)');
     $mail->addAddress($_POST['txtEmail'], 'Usuario(a)');
-    $mail->addReplyTo($_POST['txtEmail'], 'Usuario(a)');
+    $mail->addReplyTo('noreply@orion.com', 'Não responda.');
     $mail->addCC($_POST['txtEmail'], 'Usuario(a)');
     $mail->addBCC($_POST['txtEmail'], 'Usuario(a)');
-    $mail->AddEmbeddedImage('chopper.jpg', 'chopper');
     $mail->isHTML(true);
-    $mail->Subject = "Recuperação de senha - petiti";
+    $mail->Subject = "Recuperação de senha | pet iti";
     $mail->Body = "
-    <h1>Você poderá recriar a sua senha no link: http://localhost/petiti/api/recuperar/senha/" . $login . "</h1>
-    <img src=\"cid:chopper\" />
-    ";
+    <h1>Você poderá recriar a sua senha no link: http://localhost/petiti/api/recuperar/senha/" . $login . "</h1>    ";
     $mail->AltBody = '';
 
     $mail->send();

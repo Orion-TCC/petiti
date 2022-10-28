@@ -17,14 +17,12 @@
 </head>
 
 <body>
-    <nav id="navRecover">
-        <div>
-            <a href="#">
-                <img class="logoNavbar" src="/petiti/assets/images/logo_principal.svg" /></a>
-        </div>
-        <div class="textoNavRecover">Recuperação de senha</div>
-    </nav>
-    <div class="holderFormularioUsuario">
+
+
+
+    <div class="fundoRecuperarSenha">
+        <img class="logoNavbar" src="/petiti/assets/images/logo_principal.svg" /></a>
+
         <?php
         @session_start();
         $nome = $_SESSION['nome-recuperacao'];
@@ -33,10 +31,11 @@
             <p class="tituloFormRecover" for="">Crie uma nova senha</p>
             <label class="formTextLogin" for="novaSenha">Sua nova senha</label>
             <input class="formInputLogin" type="text" id="novaSenha" name="novaSenha">
-            <p id="senhaAvisoTamanho"></p>
-            <label class="formTextLogin" for="confirmNovaSenha">Confirme a senha</label>
+            <label style="margin-top: 20px;" class="formTextLogin" for="confirmNovaSenha">Confirme a senha</label>
             <input class="formInputLogin" type="text" id="confirmNovaSenha" name="confirmNovaSenha">
             <input class="formSubmitLogin" type="submit" value="Atualizar senha">
+            <p id="senhaAvisoTamanho"></p>
+
             <p id="senhaAvisoVerificacao"></p>
         </form>
 

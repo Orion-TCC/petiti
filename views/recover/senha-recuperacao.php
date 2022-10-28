@@ -15,18 +15,12 @@ $status = @$_GET['emailenviado'];
 </head>
 
 <body>
-    <nav id="navRecover">
-        <div>
-            <a href="#">
-                <img class="logoNavbar" src="/petiti/assets/images/logo_principal.svg" /></a>
-        </div>
-        <div class="textoNavRecover">Recuperação de senha</div>
-    </nav>
+
     <?php if (isset($_GET['emailenviado'])) { ?>
 
         <?php
         if ($status == "true") { ?>
-            <div class="holderFormularioUsuario">
+            <div class="fundoRecuperarSenha">
 
                 <p class="tituloFormRecover" for="">Email Enviado!</p>
                 <p class="textoFormRecover" for="">Essa aba pode ser fechada.</p>
@@ -35,30 +29,40 @@ $status = @$_GET['emailenviado'];
             </div>
         <?php }
         if ($status == "false") { ?>
-            <div class="holderFormularioUsuario">
+            <div class="fundoRecuperarSenha">
+                <img class="fotoRecover" src="/petiti/assets/images/logo_principal.svg" /></a>
 
-                <p class="tituloFormRecover" for="">Email de recuperação não foi enviado!</p>
-                <p class="textoFormRecover" for="">Favor inserir um email válido</p>
                 <form class="formRecover" action="/petiti/api/email-recuperacao.php" method="post">
-                    <p class="tituloFormRecover" for="">Esqueceu sua senha?</p>
-                    <p class="textoFormRecover" for="">Insira seu email para começar o processo de recuperação.</p>
-                    <label class="formTextLogin" for="txtEmail">Email</label>
-                    <input class="formInputLogin" type="email" name="txtEmail" id="txtEmail" />
-                    <button class="formSubmitLogin" type="submit">Enviar</button>
-                </form>
+                    <div class="itemsForm">
+                        <img src="/petiti/views/assets/img/cadeado.png" alt="">
+                        <p class="tituloFormRecover" for="">Recuperação de senha</p>
+                        <p class="textoFormRecover" for="">
+                            Insira o email utilizado no cadastro de sua conta que enviaremos um link para recuperar sua senha. </p>
 
+                    </div>
+                    <input class="formInputLogin" type="email" name="txtEmail" id="txtEmail" />
+                    <p class="textoFormRecoverEmail" for="">Favor inserir um email existente</p>
+
+                    <button class="formSubmitLogin" type="submit">Continuar</button>
+                </form>
             </div>
         <?php }
         ?>
 
     <?php } else { ?>
-        <div class="holderFormularioUsuario">
+        <div class="fundoRecuperarSenha">
+            <img class="fotoRecover" src="/petiti/assets/images/logo_principal.svg" /></a>
+
             <form class="formRecover" action="/petiti/api/email-recuperacao.php" method="post">
-                <p class="tituloFormRecover" for="">Esqueceu sua senha?</p>
-                <p class="textoFormRecover" for="">Insira seu email para começar o processo de recuperação.</p>
-                <label class="formTextLogin" for="txtEmail">Email</label>
+                <div class="itemsForm">
+                    <img src="/petiti/views/assets/img/cadeado.png" alt="">
+                    <p class="tituloFormRecover" for="">Recuperação de senha</p>
+                    <p class="textoFormRecover" for="">
+                        Insira o email utilizado no cadastro de sua conta que enviaremos um link para recuperar sua senha. </p>
+
+                </div>
                 <input class="formInputLogin" type="email" name="txtEmail" id="txtEmail" />
-                <button class="formSubmitLogin" type="submit">Enviar</button>
+                <button class="formSubmitLogin" type="submit">Continuar</button>
             </form>
         </div>
     <?php } ?>

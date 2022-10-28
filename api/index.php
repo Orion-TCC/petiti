@@ -28,7 +28,13 @@ $app->get('/hello/{name}', function (Request $request, Response $response, array
     $response->getBody()->write("Hello, $name");
     return $response;
 });
-
+$app->get('/', function (Request $request, Response $response, array $args) {
+    
+    $response->getBody()->write("
+    Bem vindo
+    ");
+    return $response;
+});
 // Usuario
 
 $app->get('/usuarios', function (Request $request, Response $response, array $args) {
