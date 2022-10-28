@@ -1,9 +1,9 @@
 <?php
 @session_start();
-require('api/classes/curtidaPublicacao.php');
+require('../../api/classes/curtidaPublicacao.php');
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
-include_once("sentinela.php");
+include_once("../../sentinela.php");
 $idUsuarioCurtida = $_SESSION['id'];
 ?>
 <!DOCTYPE php>
@@ -83,7 +83,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="novaFeed.php" class="menu-item">
+                    <a href="/petiti/nova-feed" class="menu-item">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
@@ -184,12 +184,31 @@ $idUsuarioCurtida = $_SESSION['id'];
                     <!-- fim das tabs de navegacao de usuario -->
 
                     <div class="postagens">
-                        <div class="previewPostImage">
-                            <img src="#" alt="">
-                        </div>
+                        <?php
+                        $url = "http://localhost/petiti/api/publicacoes/usuario/".$_SESSION['id'];
+
+                        $json = file_get_contents($url);
+                        $dados = (array)json_decode($json, true);
+                        $contagem = count($dados['publicacoes']);
+
+                        if ($contagem < 1) { ?>
                         <div class="aviso">
                             <h3>Não há postagens ainda. Faça uma clicando no botão “Criar um post”!</h3>
                         </div>
+
+                        <?php } 
+                        else {
+
+                        for ($i = 0; $i < $contagem; $i++) {
+                            $foto = $dados['publicacoes'][$i]['caminhoFoto'];
+                        ?>
+                            <div class="previewPostImage">
+                                <img src="<?php echo $foto ?>" alt="">
+                            </div>
+
+                        <?php } 
+                        } ?>
+                        
                     </div>
 
                     <div class="marcacoes">

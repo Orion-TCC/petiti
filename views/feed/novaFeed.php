@@ -1,14 +1,13 @@
 <?php
 @session_start();
-require('api/classes/curtidaPublicacao.php');
+require_once('../../api/classes/curtidaPublicacao.php');
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
-include_once("sentinela.php");
+include_once("../../sentinela.php");
 $idUsuarioCurtida = $_SESSION['id'];
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
-
 <head>
     <!-- HTML base -->
     <meta charset="UTF-8">
@@ -18,8 +17,8 @@ $idUsuarioCurtida = $_SESSION['id'];
 
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="assets/css/feed-style.css">
-    <link rel="stylesheet" href="assets/libs/croppie/croppie.css">
+    <link rel="stylesheet" href="/petiti/assets/css/feed-style.css">
+    <link rel="stylesheet" href="/petiti/assets/libs/croppie/croppie.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
     <!--- iconscout icon --->
@@ -27,7 +26,7 @@ $idUsuarioCurtida = $_SESSION['id'];
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - Feed</title>
-    <link rel="icon" href="assets/images/logo-icon.svg">
+    <link rel="icon" href="/petiti/assets/images/logo-icon.svg">
 
     <!--script-->
 
@@ -36,10 +35,10 @@ $idUsuarioCurtida = $_SESSION['id'];
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
-    <script src="assets/libs/croppie/croppie.js"></script>
-    <script src="assets/js/jquery-scripts.js"></script>
-    <script src="assets/js/script.js"></script>
-    <script src="assets/js/funcs.js"></script>
+    <script src="/petiti/assets/libs/croppie/croppie.js"></script>
+    <script src="/petiti/assets/js/jquery-scripts.js"></script>
+    <script src="/petiti/assets/js/script.js"></script>
+    <script src="/petiti/assets/js/funcs.js"></script>
 </head>
 
 <body class="feed">
@@ -47,7 +46,7 @@ $idUsuarioCurtida = $_SESSION['id'];
     <nav class="feed">
         <div class="container">
             <h2 class="logo">
-                <img src="./assets/images/logo_principal.svg">
+                <img src="/petiti/assets/images/logo_principal.svg">
             </h2>
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
@@ -69,7 +68,7 @@ $idUsuarioCurtida = $_SESSION['id'];
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
-                <a href="perfilUsuario.php" class="perfil">
+                <a href="/petiti/meu-perfil" class="perfil">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
@@ -189,13 +188,13 @@ $idUsuarioCurtida = $_SESSION['id'];
                     for ($i = 0; $i < $contagem; $i++) {
                         $id =  $dados['publicacoes'][$i]['id'];
 
-                        $urlComentarios = "http://localhost/petiti/api/comentarios/".$id;
+                        $urlComentarios = "http://localhost/petiti/api/comentarios/" . $id;
 
                         $jsonComentarios = file_get_contents($urlComentarios);
 
                         $dadosComentarios = (array)json_decode($jsonComentarios, true);
                         $qtdComentarios = $dadosComentarios[0]['qtd'];
-                        
+
                         $nome = $dados['publicacoes'][$i]['nome'];
                         $login = $dados['publicacoes'][$i]['login'];
                         $foto = $dados['publicacoes'][$i]['caminhoFoto'];
@@ -239,7 +238,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                             <div class="head">
                                 <div class="usuario">
                                     <div class="fotoDePerfil">
-                                        <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                                        <img src="<?php echo $fotoUsuario; ?>" alt="">
                                     </div>
                                     <div class="info">
                                         <h3><?php echo $_SESSION['login']; ?></h3>
@@ -268,10 +267,10 @@ $idUsuarioCurtida = $_SESSION['id'];
                             </div>
 
                             <div class="caption">
-                                <p><b><?php echo $_SESSION['login']; ?></b> <?php echo $texto ?></p>
+                                <p><b><?php echo $login; ?></b> <?php echo $texto ?></p>
                             </div>
 
-                            <div class="comments text-muted">Ver todos <?php echo $qtdComentarios?> comentarios</div>
+                            <div class="comments text-muted">Ver todos <?php echo $qtdComentarios ?> comentarios</div>
 
                         </div>
                     <?php }
@@ -310,7 +309,7 @@ $idUsuarioCurtida = $_SESSION['id'];
 
                             <div class="Lugar">
                                 <div class="fotoDePerfil">
-                                    <img src="./assets/images/caixa.svg" alt="">
+                                    <img src="/petiti/assets/images/caixa.svg" alt="">
                                 </div>
                                 <div class="infoCategoria">
                                     <h4>tamandua</h4>
