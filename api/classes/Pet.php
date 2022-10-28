@@ -11,6 +11,7 @@ class Pet
     private $idadePet;
     private $usuario;
     private $usuarioPet;
+    private $statusPet;
 
     public function getUsuario()
     {
@@ -113,7 +114,17 @@ class Pet
         return $this;
     }
 
+    public function getStatusPet()
+    {
+        return $this->statusPet;
+    }
 
+    public function setStatusPet($statusPet)
+    {
+        $this->statusPet = $statusPet;
+
+        return $this;
+    }
 
     public function listar()
     {
@@ -215,7 +226,7 @@ class Pet
     public function buscaPetAtivo()
     {
         $con = Conexao::conexao();
-        $query = "SELECT tbpet.idPet, nomePet, racaPet, especiePet, usuarioPet, idadePet, dataCriacaoPet, tbusuario.idUsuario, loginUsuario,caminhoFotoPet
+        $query = "SELECT tbpet.idPet, nomePet, racaPet, especiePet, statusPet, usuarioPet, idadePet, dataCriacaoPet, tbusuario.idUsuario, loginUsuario,caminhoFotoPet
                     FROM tbpet
                     INNER JOIN tbfotopet ON tbpet.idPet  = tbfotopet.idPet
                     INNER JOIN tbusuario ON tbusuario.idUsuario = tbpet.idUsuario
@@ -258,4 +269,14 @@ class Pet
             return $linha['qtd'];
         }
     }
+
+    public function updateStatus($update){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbpet SET statusPet = ? WHERE idPet = ?");
+        $stmt->bindValue(1, $update->getStatusPet());
+        $stmt->bindValue(2, $update->getIdPet());
+
+        $stmt->execute();
+    }
+
 }

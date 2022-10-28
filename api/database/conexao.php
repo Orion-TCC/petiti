@@ -10,7 +10,8 @@ class Conexao
             ""
         );
         $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $conexao->exec("SET CHARACTER SET utf8");
+        $conexao->exec("SET CHARACTER SET utf8;");
+        $conexao->exec("SET lc_time_names = 'pt_BR';");
 
         return $conexao;
     }

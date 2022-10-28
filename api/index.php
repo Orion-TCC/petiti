@@ -209,7 +209,37 @@ $app->post('/usuario/update/senha/recuperacao', function (Request $request, Resp
     header('location: /petiti/login');
 });
 
+$app->get('/ativar-tutor/{id}', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($args['id']);
+    $usuario->setStatusUsuario(1);
+    $usuario->updateStatus($usuario);
+    header('location:/petiti/tutores-dashboard');
+  
+});
+$app->get('/bloquear-tutor/{id}', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($args['id']);
+    $usuario->setStatusUsuario(0);
+    $usuario->updateStatus($usuario);
+    header('location:/petiti/tutores-dashboard');
 
+});
+
+$app->get('/ativar-empresa/{id}', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($args['id']);
+    $usuario->setStatusUsuario(1);
+    $usuario->updateStatus($usuario);
+    header('location:/petiti/empresas-dashboard');
+});
+$app->get('/bloquear-empresa/{id}', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($args['id']);
+    $usuario->setStatusUsuario(0);
+    $usuario->updateStatus($usuario);
+    header('location:/petiti/empresas-dashboard');
+});
 
 $app->post('/usuario/update', function (Request $request, Response $response, array $args) {
     $data = $request->getParsedBody();
@@ -271,15 +301,18 @@ $app->post('/login', function (Request $request, Response $response, array $args
     }
 
     if ($msg == "Bem vindo.") {
+        if ($_SESSION['tipo'] != 'adm'){
+            $url = "http://localhost/petiti/api/usuario/$id";
 
-        $url = "http://localhost/petiti/api/usuario/$id";
-
-        $json = file_get_contents($url);
-        $dados = json_decode($json);
-        $login = $dados[0]->loginUsuario;
-
-        $_SESSION['login'] = $login;
-        header('location: /petiti/feed');
+            $json = file_get_contents($url);
+            $dados = json_decode($json);
+            $login = $dados[0]->loginUsuario;
+    
+            $_SESSION['login'] = $login;
+            header('location: /petiti/feed');
+        }else{
+            header('location: /petiti/dashboard');
+        }
     } else {
         header('location: /petiti/login');
         $cookie->criarCookie('retorno-login', $msg, 2);
@@ -434,12 +467,44 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     header('location: /petiti/foto-pet');
 });
 
+$app->get('/ativar-pet/{id}', function (Request $request, Response $response, array $args){
+    $pet = new Pet();
+    $pet->setStatusPet(1);
+    $pet->setIdPet($args['id']);
+    $pet->updateStatus($pet);
+    header("location: /petiti/pets-dashboard/");
+});
+
+$app->get('/bloquear-pet/{id}', function (Request $request, Response $response, array $args){
+    $pet = new Pet();
+    $pet->setStatusPet(0);
+    $pet->setIdPet($args['id']);
+    $pet->updateStatus($pet);
+    header("location: /petiti/pets-dashboard/");
+});
+
 $app->get('/categorias', function (Request $request, Response $response, array $args) {
     $categoria = new Categoria();
 
     $json = "{\"categorias\":" . json_encode($lista = $categoria->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+$app->get('/ativar-categoria/{id}', function (Request $request, Response $response, array $args) {
+    $categoria = new categoria();
+    $categoria->setStatusCategoria(1);
+    $categoria->setIdCategoria($args['id']);
+    $categoria->updateStatus($categoria);
+    header("location: /petiti/categorias-dashboard/");
+});
+
+$app->get('/bloquear-categoria/{id}', function (Request $request, Response $response, array $args) {
+    $categoria = new categoria();
+    $categoria->setStatusCategoria(0);
+    $categoria->setIdCategoria($args['id']);
+    $categoria->updateStatus($categoria);
+    header("location: /petiti/categorias-dashboard/");
 });
 
 $app->get('/publicacoes', function (Request $request, Response $response, array $args) {

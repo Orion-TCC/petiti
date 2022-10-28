@@ -101,16 +101,25 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
           <div id="ativo" class="tabcontent">
             <h3 id="total-qtd">Total(<?php echo $qtdPetsAtivos ?>)</h3>
             <div class="listaPets">
-              <?php foreach ($listaPetsAtivos as $linha) { ?>
+              <?php foreach ($listaPetsAtivos as $linha) {
+                $foto = $linha['caminhoFotoPet'];
+                $nome = $linha['nomePet'];
+                $usuario = $linha['usuarioPet'];
+                $tutor = $linha['loginUsuario'];
+                $idPet = $linha['idPet'];
+              ?>
                 <div class="pet">
-                  <img class="fotoPet" src="<?php echo $linha['caminhoFotoPet'] ?>">
+                  <div class="fotoPet">
+                    <img class="foto" src="<?php echo $foto ?>">
+                  </div>
                   <div class="infoPet">
-                    <p><span style="font-weight: 800;">Nome:</span> <?php echo $linha['nomePet'] ?></p>
-                    <p><span style="font-weight: 800;">Usuário Pet</span>: @<?php echo $linha['usuarioPet'] ?></p>
+                    <div class="texto-info">
+                      <p> Nome:<?php echo $nome ?></p>
+                      <p> Usuário:<?php echo $usuario ?></p>
+                      <p> Tutor:<?php echo $tutor ?></p>
+                    </div>
                   </div>
-                  <div class="tutorPet">
-                    <p><span style="font-weight: 800;">Tutor:</span> @<?php echo $linha['loginUsuario'] ?></p>
-                  </div>
+                  <a href="/petiti/api/bloquear-pet/<?php echo $idPet?>">Bloquear</a>
                 </div>
               <?php  } ?>
             </div>
@@ -119,16 +128,25 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
           <div id="bloqueado" class="tabcontent">
             <h3 id="total-qtd">Total(<?php echo $qtdPetsBloqeuados ?>)</h3>
             <div class="listaPets">
-              <?php foreach ($listaPetsBloquados as $linha) { ?>
+              <?php foreach ($listaPetsBloquados as $linha) {
+                $foto = $linha['caminhoFotoPet'];
+                $nome = $linha['nomePet'];
+                $usuario = $linha['usuarioPet'];
+                $tutor = $linha['loginUsuario'];
+                $idPet = $linha['idPet'];
+              ?>
                 <div class="pet">
-                  <img class="fotoPet" src="<?php echo $linha['caminhoFotoPet'] ?>">
+                  <div class="fotoPet">
+                    <img class="foto" src="<?php echo $foto ?>">
+                  </div>
                   <div class="infoPet">
-                    <p><span style="font-weight: 800;">Nome:</span> <?php echo $linha['nomePet'] ?></p>
-                    <p><span style="font-weight: 800;">Usuário Pet</span>: @<?php echo $linha['usuarioPet'] ?></p>
+                    <div class="texto-info">
+                      <p> Nome: <?php echo $nome ?></p>
+                      <p> Usuário: <?php echo $usuario ?></p>
+                      <p> Tutor: <?php echo $tutor ?></p>
+                    </div>
                   </div>
-                  <div class="tutorPet">
-                    <p><span style="font-weight: 800;">Tutor:</span> @<?php echo $linha['loginUsuario'] ?></p>
-                  </div>
+                  <a href="/petiti/api/ativar-pet/<?php echo $idPet?>">Ativar</a>
                 </div>
               <?php  } ?>
             </div>

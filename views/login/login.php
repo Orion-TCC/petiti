@@ -28,9 +28,6 @@
                 <div class="ilustracaoLogin">
                     <img style="margin-left: 500px;" src="/petiti/views/assets/img/ilustracao-login.svg" alt="">
                 </div>
-
-
-
                 <div class="Login">
                     <a href="/petiti/index.php"><img class="loginLogo" src="/petiti/views/assets/img/logo_principal.svg" alt=""></a>
                     <form class="formLogin" action="/petiti/api/login" method="POST">

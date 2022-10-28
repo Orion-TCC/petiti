@@ -4,6 +4,7 @@ class categoria
 {
     private $idCategoria;
     private $categoria;
+    private $statusCategoria;
 
 
     public function getCategoria()
@@ -32,7 +33,16 @@ class categoria
 
         return $this;
     }
+    public function getStatusCategoria()
+    {
+        return $this->statusCategoria;
+    }
 
+
+    public function setStatusCategoria($statusCategoria)
+    {
+        $this->statusCategoria = $statusCategoria;
+    }
     public function cadastrar($categoria)
     {
         $con = Conexao::conexao();
@@ -145,5 +155,13 @@ class categoria
         foreach ($listaCatQtd as $linha) {
             return $linha['qtd'];
         }
+    }
+    public function updateStatus($update){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbcategoria SET statusCategoria = ? WHERE idCategoria = ?");
+        $stmt->bindValue(1, $update->getStatusCategoria());
+        $stmt->bindValue(2, $update->getIdCategoria());
+
+        $stmt->execute();
     }
 }
