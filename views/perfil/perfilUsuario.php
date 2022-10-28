@@ -5,6 +5,12 @@ $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 include_once("../../sentinela.php");
 $idUsuarioCurtida = $_SESSION['id'];
+
+$url = "http://localhost/petiti/api/publicacoes/usuario/" . $_SESSION['id'];
+
+$json = file_get_contents($url);
+$dados = (array)json_decode($json, true);
+$contagem = count($dados['publicacoes']);
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
@@ -148,7 +154,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                                 </div>
 
                                 <div class="infoHolder meio">
-                                    <h3> 0 <span class="text-muted"> postagens </span></h3>
+                                    <h3> <?php echo $contagem?> <span class="text-muted"> postagens </span></h3>
                                     <h3> 0 <span class="text-muted">seguidores</span></h3>
                                     <h3> 0 <span class="text-muted">Seguindo</span></h3>
                                 </div>
@@ -185,30 +191,24 @@ $idUsuarioCurtida = $_SESSION['id'];
 
                     <div class="postagens">
                         <?php
-                        $url = "http://localhost/petiti/api/publicacoes/usuario/".$_SESSION['id'];
-
-                        $json = file_get_contents($url);
-                        $dados = (array)json_decode($json, true);
-                        $contagem = count($dados['publicacoes']);
 
                         if ($contagem < 1) { ?>
-                        <div class="aviso">
-                            <h3>Não há postagens ainda. Faça uma clicando no botão “Criar um post”!</h3>
-                        </div>
-
-                        <?php } 
-                        else {
-
-                        for ($i = 0; $i < $contagem; $i++) {
-                            $foto = $dados['publicacoes'][$i]['caminhoFoto'];
-                        ?>
-                            <div class="previewPostImage">
-                                <img src="<?php echo $foto ?>" alt="">
+                            <div class="aviso">
+                                <h3>Não há postagens ainda. Faça uma clicando no botão “Criar um post”!</h3>
                             </div>
 
-                        <?php } 
+                            <?php } else {
+
+                            for ($i = 0; $i < $contagem; $i++) {
+                                $foto = $dados['publicacoes'][$i]['caminhoFoto'];
+                            ?>
+                                <div class="previewPostImage">
+                                    <img src="<?php echo $foto ?>" alt="">
+                                </div>
+
+                        <?php }
                         } ?>
-                        
+
                     </div>
 
                     <div class="marcacoes">
