@@ -727,4 +727,157 @@ body.feed{
   
   
   
-  /*  */
+  /* perfil do usuario */
+
+.perfilUsuario main .container{
+
+
+    grid-template-columns: 18vw auto 10vw;
+
+}
+
+  .meio .userArea {
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    height: 100%;
+  }
+
+  .meio .userHandle {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    
+  }
+
+  .meio .userHandle::after{
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: gray;
+    position: absolute;
+    bottom: 0;
+
+  }
+  .userCima {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .meio .fotoDePerfil{
+    width: 9rem;
+  }
+
+  .meio .userInfo{
+    margin: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .meio .infoHolder {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+  }
+
+  .meio .topo{
+    align-items: center;
+  }
+
+  .meio .topo .btn{
+    color: var(--color-dark);
+    padding-inline: 1.2rem;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    box-shadow: 4px 1px 18px 0px #00000057;
+  }
+  
+  .meio .meio {
+    gap: 2.2rem;
+  }
+
+  .meio .baixo{
+    align-items: center;
+    margin-left: -0.8rem;
+  }
+
+  .meio .baixo i{
+    font-size: 2rem;
+  }
+
+  .meio .userBaixo{
+    margin: 1.5rem 1rem;
+    gap: 1rem;
+  }
+
+  .meio .subUserBaixo{
+    display: flex;
+    margin-bottom: 1rem;
+
+    align-items: center;
+  }
+
+  .meio .subUserBaixo h4{
+    padding-top: 0.3rem;
+    margin-left: 1rem;
+  }
+
+  .meio .bio{
+    height: fit-content;
+    max-height: 57px;
+    width: 35rem;
+    overflow: hidden;
+  }
+
+
+  .meio .userTabs{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+  }
+
+  .meio .userTabs span{
+    position: relative;
+    cursor: pointer;
+  }
+
+  .tabAtiva::before{
+    content: "";
+    height: 0.5rem;
+    background: var(--color-purple);
+    width: 75%;
+    position: absolute;
+    margin-left: 0.9rem;
+    margin-top: 1.9rem;
+    border-radius: 80px;
+}
+
+.postagens{
+    position: relative;
+    padding: 2rem 0;
+    margin-left: 1.4rem;
+    display: grid;    
+    grid-template-columns: 33% 33% 33%;
+    row-gap: 2rem;
+}
+
+.postagens .previewPostImage {
+    width: 14.5rem;
+    border: 1px solid gray;
+    aspect-ratio: 1/1;
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+}
+
+.postagens .aviso{
+    display: block;
+    position: absolute;
+    width: 24rem;
+    align-self: center;
+    justify-self: center;
+}

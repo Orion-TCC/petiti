@@ -42,7 +42,7 @@ $idUsuarioCurtida = $_SESSION['id'];
     <script src="assets/js/funcs.js"></script>
 </head>
 
-<body class="feed">
+<body class="feed perfilUsuario">
     
     <nav class="feed">
             <div class="container">
@@ -83,7 +83,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                             <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="#" class="menu-item">
+                    <a href="novaFeed.php" class="menu-item">
                         <span><i class="uil uil-house-user"></i> </span> <h3>Home</h3>
                     </a>  
 
@@ -124,23 +124,73 @@ $idUsuarioCurtida = $_SESSION['id'];
                 <!-- FIM DO LADO ESQUERDO -->
 
             <div class="Meio">
-                <div class="userArea">
+            <div class="userArea">
+                    
                     <div class="userHandle">
-
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-
-                        <div class="userInfo">
-                            <div>
-                                <h4>/nome de usuario</h4>
-                                <button class="btn btn-primary">Editar perfil</button>
+                      
+                        <div class="userCima">
+                            <div class="fotoDePerfil">
+                                <img src="<?php echo $_SESSION['foto']; ?>"  alt="">
                             </div>
 
-                            <div>
-                                <h4></h4>
+                            <div class="userInfo">
+
+                                <div class="infoHolder topo">
+                                    <h2><?php echo $_SESSION['login']; ?></h2>
+                                    <button class="btn btn-primary">Editar perfil</button>
+                                </div>
+
+                                <div class="infoHolder meio">
+                                    <h3> 0 <span class="text-muted"> postagens </span></h3>
+                                    <h3> 0 <span class="text-muted">seguidores</span></h3>
+                                    <h3> 0 <span class="text-muted">Seguindo</span></h3>
+                                </div>
+
+                                <div class="infoHolder baixo">
+                                    <h4><i class="uil uil-map-marker"></i> local</h4>
+                                    <h4><i class="uil uil-link-alt"></i> site</h4>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="userBaixo">
+
+                            <div class="subUserBaixo">
+                                <h2><?php echo $_SESSION['nome']; ?></h2>
+                                <h4 class="text-muted">(Sou dono(a) do @/nomedopet)</h4>
+                            </div>
+
+                            <div class="bio">
+                              <h4 class="text-muted">Adicione uma biografia! Conte um pouco sobre você :D</h4>
+                            </div>
+
+                        </div>
+                    </div>
+                        <!-- fim da parte de informacao do usuario -->
+
+
+                        <div class="userTabs">
+                            <span class="tabAtiva">Postagens</span>
+                            <span >marcacoes</span>
+                            <span>curtidas</span>
+                        </div>
+                        <!-- fim das tabs de navegacao de usuario -->
+
+                    <div class="postagens">
+                        <div class="previewPostImage">
+                          <img  src="#" alt="">
+                        </div>
+                            <div class="aviso">
+                                <h3>Não há postagens ainda. Faça uma clicando no botão “Criar um post”!</h3>
+                            </div>
+                    </div>
+
+                    <div class="marcacoes">
+
+                    </div>
+
+                    <div class="curtidas">
+
                     </div>
                 </div>
             </div>

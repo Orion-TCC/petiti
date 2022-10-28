@@ -62,7 +62,7 @@ $_SESSION['tipo-usuario'] = "usuario";
 
 
                             <label class="formText">Biografia</label>
-                            <textarea class="formInput" name="txBio" id="txBio" cols="30" rows="10" maxlength="240" placeholder="Escreva algo sobre você, curiosidades talvez..."></textarea>
+                            <textarea class="formInput" name="txBio" id="txBio" cols="30" rows="10" maxlength="150" placeholder="Escreva algo sobre você, curiosidades talvez..."></textarea>
 
 
                             <label class="formText">Localização</label>

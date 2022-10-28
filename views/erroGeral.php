@@ -12,7 +12,11 @@
 </head>
 
 <body>
-    <div class="fundo404"></div>
+    <main class="error404Main">
+        <div class="imgError404">
+             <img src="./views/assets/img/erro404.svg" alt="">
+        </div>
+    </main>
 </body>
 
 </html>

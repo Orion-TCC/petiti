@@ -1291,10 +1291,25 @@ body {
   margin-top: 30px;
 }
 /* ERRO 404 */
-.fundo404 {
-  height: 100vh;
+
+.error404Main{
   width: 100vw;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url("../img/erro404.svg");
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.imgError404{
+  width: 85%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+
+}
+
+.error404Main .imgError404 img{
+
+    display: block;
+    width: 100%;
+ 
 }
