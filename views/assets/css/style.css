@@ -1290,3 +1290,11 @@ body {
   font-size: 20px;
   margin-top: 30px;
 }
+/* ERRO 404 */
+.fundo404 {
+  height: 100vh;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../img/erro404.svg");
+}
