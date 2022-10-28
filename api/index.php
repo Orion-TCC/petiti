@@ -534,6 +534,13 @@ $app->get('/publicacao/{id}', function (Request $request, Response $response, ar
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
+$app->get('/publicacoes/usuario/{id}', function (Request $request, Response $response, array $args) {
+    $publicacao = new Publicacao();
+    $id = $args['id'];
+    $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listarPubUsuario($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
 $app->get('/comentarios/{id}', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
     $comentario = new Comentario();

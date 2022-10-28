@@ -5,7 +5,7 @@ RewriteRule ^feed feed.php [NC,L]
 RewriteRule ^feed sair.php [NC,L]
 RewriteRule ^import api/database/import-db.php [NC,L]
 RewriteRule ^login views/login/login.php [NC,L]
-RewriteRule ^tipo-usuario views/register/pages/escolha-tipo-usuario.php [NC,L]
+RewriteRule ^tipo-usuario views/register/escolha-tipo-usuario.php [NC,L]
 
 
 RewriteRule ^categorias-dashboard private-adm/dashboard/pages/categorias/categorias.php [NC,L]
@@ -16,22 +16,22 @@ RewriteRule ^pets-dashboard private-adm/dashboard/pages/pets/pets.php [NC,L]
 RewriteRule ^tutores-dashboard private-adm/dashboard/pages/tutores/tutores.php [NC,L]
 RewriteRule ^tutorial-dashboard private-adm/dashboard/pages/tutorial/tutorial.php [NC,L]
 
-RewriteRule ^cadastro-usuario views/register/pages/register-comum/formulario-usuario.php [NC,L]
-RewriteRule ^info-usuario views/register/pages/register-comum/formulario-maisSobre.php [NC,L]
-RewriteRule ^foto-usuario views/register/pages/register-comum/formulario-foto.php [NC,L]
+RewriteRule ^cadastro-usuario views/register/register-comum/formulario-usuario.php [NC,L]
+RewriteRule ^info-usuario views/register/register-comum/formulario-maisSobre.php [NC,L]
+RewriteRule ^foto-usuario views/register/register-comum/formulario-foto.php [NC,L]
 
-RewriteRule ^inicio-pet views/register/pages/register-comum/formulario-pet1.php [NC,L]
-RewriteRule ^formulario-pet views/register/pages/register-comum/formulario-pet2.php [NC,L]
-RewriteRule ^foto-pet views/register/pages/register-comum/formulario-foto-pet.php [NC,L]
-RewriteRule ^final-usuario views/register/pages/register-comum/finalizar-forms.php [NC,L]
+RewriteRule ^inicio-pet views/register/register-comum/formulario-pet1.php [NC,L]
+RewriteRule ^formulario-pet views/register/register-comum/formulario-pet2.php [NC,L]
+RewriteRule ^foto-pet views/register/register-comum/formulario-foto-pet.php [NC,L]
+RewriteRule ^final-usuario views/register/register-comum/finalizar-forms.php [NC,L]
 RewriteRule ^editar views/editar-conta.php [NC,L]
 
 
-RewriteRule ^cadastro-empresa views/register/pages/register-empresa/formulario-usuario-empresa.php [NC,L]
-RewriteRule ^info-empresa views/register/pages/register-empresa/formulario-info-empresa.php [NC,L]
-RewriteRule ^ramo-empresa views/register/pages/register-empresa/formulario-ramo.php [NC,L]
-RewriteRule ^foto-empresa views/register/pages/register-empresa/formulario-foto-empresa.php [NC,L]
-RewriteRule ^final-empresa views/register/pages/register-empresa/finalizar-cadastro-empresa.php [NC,L]
+RewriteRule ^cadastro-empresa views/register/register-empresa/formulario-usuario-empresa.php [NC,L]
+RewriteRule ^info-empresa views/register/register-empresa/formulario-info-empresa.php [NC,L]
+RewriteRule ^ramo-empresa views/register/register-empresa/formulario-ramo.php [NC,L]
+RewriteRule ^foto-empresa views/register/register-empresa/formulario-foto-empresa.php [NC,L]
+RewriteRule ^final-empresa views/register/register-empresa/finalizar-cadastro-empresa.php [NC,L]
 
 
 ErrorDocument 404 /petiti/views/erroGeral.php

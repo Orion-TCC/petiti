@@ -33,7 +33,7 @@ $_SESSION['tipo-usuario'] = "empresa";
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
 
     <script async src="/petiti/views/assets/js/script-jquery-foto.js"></script>
-    <script async src="/petiti/views/assets/js/script-jquery.js"></script>
+    <script  src="/petiti/views/assets/js/script-jquery.js"></script>
 </head>
 
 <body>

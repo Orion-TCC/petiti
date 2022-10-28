@@ -150,4 +150,21 @@ class Publicacao
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
+    public function listarPubUsuario($id)
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT tbpublicacao.idPublicacao as id, itimalias,
+       textoPublicacao as texto, dataPublicacao as data, 
+       localPub as local,
+        tbpublicacao.idUsuario as idUsuario, nomeUsuario as nome, loginUsuario as login,caminhoFotoPublicacao as caminhoFoto, caminhoFoto as fotoUsuario
+        FROM tbPublicacao 
+        INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
+        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
+        INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
+        WHERE tbusuario.idUsuario=$id";
+
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
+    }
 }
