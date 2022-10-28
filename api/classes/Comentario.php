@@ -101,7 +101,7 @@ class Comentario
     public function listarComentario($id)
     {
         $con = Conexao::conexao();
-        $query = "SELECT idComentario,
+        $query = "SELECT COUNT(tbcomentario.idComentario) as qtd, idComentario,
         tbcomentario.idPublicacao,
         nomeUsuario,
         textoComentario,

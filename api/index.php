@@ -520,6 +520,13 @@ $app->get('/publicacoes', function (Request $request, Response $response, array 
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
+$app->get('/publicacoes/impulsionadas', function (Request $request, Response $response, array $args) {
+    $publicacao = new Publicacao();
+
+    $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listarImpulsao(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
 $app->get('/publicacao/{id}', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
     $id = $args['id'];
@@ -527,7 +534,7 @@ $app->get('/publicacao/{id}', function (Request $request, Response $response, ar
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
-$app->get('/comentario/{id}', function (Request $request, Response $response, array $args) {
+$app->get('/comentarios/{id}', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
     $comentario = new Comentario();
     $id = $args['id'];
@@ -562,7 +569,13 @@ $app->post(
         date_default_timezone_set('America/Sao_Paulo');
         $categorias = $_POST['categoriasValue'];
         $categoriasA = explode(",", $categorias);
-
+        if (isset($_POST['txtLocalizacao'])) {
+           $local = $_POST['txtLocalizacao'];
+        }else {
+        $local = "";        
+        }
+        $publicacao->setLocalPub($local);
+        
         $DateAndTime = date('Y-m-d H:i:s');
 
         $publicacao->setTextoPublicacao($_POST['txtLegendaPub']);

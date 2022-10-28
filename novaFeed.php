@@ -21,7 +21,7 @@ $idUsuarioCurtida = $_SESSION['id'];
     <link rel="stylesheet" href="assets/css/feed-style.css">
     <link rel="stylesheet" href="assets/libs/croppie/croppie.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-    
+
     <!--- iconscout icon --->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 
@@ -43,100 +43,124 @@ $idUsuarioCurtida = $_SESSION['id'];
 </head>
 
 <body class="feed">
-    
-    <nav class="feed">
-            <div class="container">
-                <h2 class="logo">
-                 <img src="./assets/images/logo_principal.svg">
-                </h2>
-                <div class="caixa-de-busca">
-                  <i class="uil uil-search"></i>
-                  <input type="search" placeholder="Pesquisar">
-                </div>
 
-                <div class="opcoes">
-                    <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
-                    <div class="fotoDePerfil">
-                        <img src="<?php echo $_SESSION['foto']; ?>"  alt="">
-                    </div>
+    <nav class="feed">
+        <div class="container">
+            <h2 class="logo">
+                <img src="./assets/images/logo_principal.svg">
+            </h2>
+            <div class="caixa-de-busca">
+                <i class="uil uil-search"></i>
+                <input type="search" placeholder="Pesquisar">
+            </div>
+
+            <div class="opcoes">
+                <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
+                <div class="fotoDePerfil">
+                    <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                 </div>
             </div>
+        </div>
     </nav>
 
     <main class="feed">
         <div class="container">
 
-                            <!-- LADO ESQUERDO -->
+            <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
                 <a href="perfilUsuario.php" class="perfil">
                     <div class="fotoDePerfil">
-                      <img src="<?php echo $_SESSION['foto']; ?>"  alt="">
+                        <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
                     <div class="handle">
                         <h4><?php echo $_SESSION['nome']; ?></h4>
                         <p class="text-muted">
-                        <?php echo "@" . $_SESSION['login']; ?>
+                            <?php echo "@" . $_SESSION['login']; ?>
                         </p>
                     </div>
                 </a>
-                            <!-- SIDEBAR LADO ESQUERDO -->
+                <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
                     <a href="#" class="menu-item ativo">
-                        <span><i class="uil uil-house-user"></i> </span> <h3>Home</h3>
-                    </a>  
+                        <span><i class="uil uil-house-user"></i> </span>
+                        <h3>Home</h3>
+                    </a>
 
                     <a href="#" class="menu-item">
-                        <span><i class="uil uil-heart-break"></i></span>  <h3>Animais perdidos</h3>
-                    </a> 
-                    
+                        <span><i class="uil uil-heart-break"></i></span>
+                        <h3>Animais perdidos</h3>
+                    </a>
+
                     <a href="#" class="menu-item">
-                        <span><i class="uil uil-archive"></i> </span>  <h3>Animais em doação</h3>
-                    </a> 
+                        <span><i class="uil uil-archive"></i> </span>
+                        <h3>Animais em doação</h3>
+                    </a>
 
 
                     <a href="#" class="menu-item">
-                        <span><i class="uil uil-bell"></i> </span>  <h3>Notificações</h3>
-                    </a> 
-                       
+                        <span><i class="uil uil-bell"></i> </span>
+                        <h3>Notificações</h3>
+                    </a>
+
                     <a href="#" class="menu-item">
-                        <span><i class="uil uil-envelope"></i> </span>  <h3>Mensagens</h3>
-                    </a> 
-                         
+                        <span><i class="uil uil-envelope"></i> </span>
+                        <h3>Mensagens</h3>
+                    </a>
+
                     <a href="#" class="menu-item">
-                        <span><i class="uil uil-shopping-bag"></i> </span>  <h3>Produtos e Serviços</h3>
-                    </a> 
-                    
+                        <span><i class="uil uil-shopping-bag"></i> </span>
+                        <h3>Produtos e Serviços</h3>
+                    </a>
+
                     <a href="#" class="menu-item">
-                        <span><i class="uil uil-coffee"></i> </span>  <h3>Para Você</h3>
+                        <span><i class="uil uil-coffee"></i> </span>
+                        <h3>Para Você</h3>
                     </a>
                 </div>
 
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">
-                        <p>
-                            <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
-                        </p>
+                    <p>
+                        <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
+                    </p>
                 </button>
 
             </div>
-                <!-- FIM DO LADO ESQUERDO -->
+            <!-- FIM DO LADO ESQUERDO -->
 
             <div class="Meio">
                 <!-- ads/servicos(passar a limpo depois) -->
                 <span class="adTitulo">Veja o que estão anunciando!</span>
                 <div class="ads">
-                <div class="ad">
-                        <div class="adHandler">
-                            <div class="fotoDePerfil">
-                             <img src="<?php echo $_SESSION['foto']; ?>"  alt="">
+                    <?php
+                    $url = "http://localhost/petiti/api/publicacoes/impulsionadas";
+
+                    $jsonAds = file_get_contents($url);
+                    $dadosAds = (array)json_decode($jsonAds, true);
+                    $contagemAds = count($dadosAds['publicacoes']);
+                    for ($i = 0; $i < $contagemAds; $i++) {
+
+
+                        $nomeAds = $dadosAds['publicacoes'][$i]['nome'];
+                        $loginAds = $dadosAds['publicacoes'][$i]['login'];
+                        $fotoAds = $dadosAds['publicacoes'][$i]['caminhoFoto'];
+                        $idUsuario = $dadosAds['publicacoes'][$i]['idUsuario'];
+                        $fotoUsuarioAds = $dadosAds['publicacoes'][$i]['fotoUsuario'];
+                    ?>
+                        <div class="ad" style="background: url(<?php echo $fotoAds ?>) no-repeat center center/cover">
+                            <div class="adHandler">
+                                <div class="fotoDePerfil">
+                                    <img src="<?php echo $fotoUsuarioAds; ?>" alt="">
+                                </div>
+                                <p class="name">
+                                    <?php echo $loginAds; ?>
+                                </p>
                             </div>
-                            <p class="name">
-                               <?php echo $_SESSION['login']; ?>
-                            </p>
                         </div>
-                    </div>
+                    <?php } ?>
+
                 </div>
 
                 <div class="criarPost">
@@ -144,123 +168,182 @@ $idUsuarioCurtida = $_SESSION['id'];
                     <div class="faixaPost">
                         <h3>Crie um post anexando uma foto, gif ou video!</h3>
                         <h3 class="text-muted">Compartilhe seu bichinho dormindo...</h3>
-                            <button class="btn btn-primary">
-                                    <p>
-                                        <a href="#modal-foto-post" rel="modal:open">Postar</a>
-                                    </p>
-                            </button>
+                        <button class="btn btn-primary">
+                            <p>
+                                <a href="#modal-foto-post" rel="modal:open">Postar</a>
+                            </p>
+                        </button>
                     </div>
                 </div>
                 <!-- fim da parte de ad -->
 
                 <div class="feeds">
-                    
-                    <div class="feed">
-                        <div class="head">
-                            <div class="usuario">
-                                <div class="fotoDePerfil">
-                                  <img src="<?php echo $_SESSION['foto']; ?>"  alt="">
+                    <?php
+                    $url = "http://localhost/petiti/api/publicacoes";
+
+
+                    $json = file_get_contents($url);
+                    $dados = (array)json_decode($json, true);
+                    $contagem = count($dados['publicacoes']);
+
+                    for ($i = 0; $i < $contagem; $i++) {
+                        $id =  $dados['publicacoes'][$i]['id'];
+
+                        $urlComentarios = "http://localhost/petiti/api/comentarios/".$id;
+
+                        $jsonComentarios = file_get_contents($urlComentarios);
+
+                        $dadosComentarios = (array)json_decode($jsonComentarios, true);
+                        $qtdComentarios = $dadosComentarios[0]['qtd'];
+                        
+                        $nome = $dados['publicacoes'][$i]['nome'];
+                        $login = $dados['publicacoes'][$i]['login'];
+                        $foto = $dados['publicacoes'][$i]['caminhoFoto'];
+                        $idUsuario = $dados['publicacoes'][$i]['idUsuario'];
+                        $data = $dados['publicacoes'][$i]['data'];
+                        $texto = $dados['publicacoes'][$i]['texto'];
+                        $itimalias = $dados['publicacoes'][$i]['itimalias'];
+                        $fotoUsuario = $dados['publicacoes'][$i]['fotoUsuario'];
+                        $local =  $dados['publicacoes'][$i]['local'];
+                        $hoje = new DateTime();
+                        $dataPost = new DateTime($data);
+                        $intervalo = $hoje->diff($dataPost);
+                        $diferencaAnos = $intervalo->format('%y');
+                        $diferencaMeses = $intervalo->format('%m');
+                        $diferencaDias = $intervalo->format('%a');
+                        $diferencaHoras = $intervalo->format('%h');
+                        $diferencaMinutos = $intervalo->format('%i');
+
+                        if ($diferencaAnos == 0) {
+                            if ($diferencaMeses == 0) {
+                                if ($diferencaDias == 0) {
+                                    if ($diferencaHoras == 0) {
+                                        $diferencaFinal = $diferencaMinutos . " minutos";
+                                    } else {
+                                        $diferencaFinal = $diferencaHoras . " horas";
+                                    }
+                                } else {
+                                    $diferencaFinal = $diferencaDias . " dias";
+                                }
+                            } else {
+                                $diferencaFinal = $diferencaMeses . " meses";
+                            }
+                        } else {
+                            $diferencaFinal = $diferencaAnos . " anos";
+                        }
+
+
+                    ?>
+
+                        <div class="feed">
+                            <div class="head">
+                                <div class="usuario">
+                                    <div class="fotoDePerfil">
+                                        <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                                    </div>
+                                    <div class="info">
+                                        <h3><?php echo $_SESSION['login']; ?></h3>
+                                        <small><?php echo $local ?> e <?php echo $diferencaFinal ?></small>
+                                    </div>
+
                                 </div>
-                                <div class="info">
-                                    <h3><?php echo $_SESSION['login']; ?></h3>
-                                    <small>/local e data</small>
+                                <span class="edit"><i class="uil uil-ellipsis-v"></i></span>
+                            </div>
+
+                            <div class="imagemPost">
+                                <img src="<?php echo $foto ?>" alt="">
+                            </div>
+
+                            <div class="botoes">
+                                <div class="botoesDeInteracao">
+                                    <span><i class="uil uil-heart"></i></span>
+                                    <span><i class="uil uil-comment"></i></span>
+                                    <span><i class="uil uil-envelope"></i></span>
                                 </div>
-                                
                             </div>
-                              <span class="edit"><i class="uil uil-ellipsis-v"></i></span>
-                        </div>
 
-                        <div class="imagemPost">
-                            <img src="./assets/images/Lontrinhas.svg" alt="">
-                        </div>
-
-                        <div class="botoes"> 
-                            <div class="botoesDeInteracao">
-                                <span><i class="uil uil-heart"></i></span>
-                                <span><i class="uil uil-comment"></i></span>
-                                <span><i class="uil uil-envelope"></i></span>
+                            <div class="curtidoPor">
+                                <span><img src="<?php echo $_SESSION['foto']; ?>" alt=""></span>
+                                <p>Curtido por <b><?php echo $_SESSION['login']; ?></b> e <b>mais outros <?php echo $itimalias ?></b></p>
                             </div>
+
+                            <div class="caption">
+                                <p><b><?php echo $_SESSION['login']; ?></b> <?php echo $texto ?></p>
+                            </div>
+
+                            <div class="comments text-muted">Ver todos <?php echo $qtdComentarios?> comentarios</div>
+
                         </div>
-
-                        <div class="curtidoPor">
-                            <span><img src="<?php echo $_SESSION['foto']; ?>" alt=""></span>
-                            <p>Curtido por <b><?php echo $_SESSION['login']; ?></b> e <b>mais outros /quantidade total de itimalias</b></p> 
-                        </div>
-
-                        <div class="caption">
-                            <p><b><?php echo $_SESSION['login']; ?></b> /texto da publicacao</p>
-                        </div>
-
-                        <div class="comments text-muted">Ver todos /qtdCmt comentarios</div>
-
-                    </div>
+                    <?php }
+                    ?>
                 </div>
             </div>
-                    <!-- fim do meio -->
+            <!-- fim do meio -->
 
 
             <div class="ladoDireito">
                 <!-- posts de pets perdidos -->
-            <div class="whiteBoxHolder">
+                <div class="whiteBoxHolder">
                     <div class="heading">
                         <h4>Ajude alguém a encontrar seu pet</h4>
                     </div>
 
                     <div class="postsPerdidos">
                         <div class="fotoDePerfil">
-                           <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                            <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                         </div>
                         <div class="infoPostPerdidos">
                             <h4>Minha cachorrinha fugiu de casa!</h4>
                             <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
                         </div>
-                    </div>                                
+                    </div>
                 </div>
                 <!-- fim de posts de pets perdidos -->
-                
-            <div class="categoriasEmAlta">
-                <div class="whiteBoxHolder">
-                    <div class="heading">
-                        <h4>Categorias em alta</h4>
-                    </div>
+
+                <div class="categoriasEmAlta">
+                    <div class="whiteBoxHolder">
+                        <div class="heading">
+                            <h4>Categorias em alta</h4>
+                        </div>
 
                         <div class="categorias">
 
-                        <div class="Lugar">
+                            <div class="Lugar">
                                 <div class="fotoDePerfil">
                                     <img src="./assets/images/caixa.svg" alt="">
                                 </div>
                                 <div class="infoCategoria">
                                     <h4>tamandua</h4>
                                 </div>
-                            </div>                          
-                        </div>           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- fim das categorias em alta -->
+
+
+                <div class="sugestoes">
+                    <h4>Sugestões para você</h4>
+
+                    <div class="whiteBoxHolder">
+                        <div class="fotoDePerfil">
+                            <img src="#" alt="">
+                        </div>
+
+                        <div class="infoSugestoes">
+                            <h4>nome de usuario</h4>
+                            <h5 class="text-muted">@username</h5>
+                        </div>
+
+                        <button class="btn btn-primary">Seguir</button>
+                    </div>
+
+
                 </div>
             </div>
-            <!-- fim das categorias em alta -->
-        
-
-            <div class="sugestoes">
-                <h4>Sugestões para você</h4>
-
-                <div class="whiteBoxHolder">
-                    <div class="fotoDePerfil">
-                        <img src="#" alt="">
-                    </div>
-
-                    <div class="infoSugestoes">
-                        <h4>nome de usuario</h4>
-                        <h5 class="text-muted">@username</h5>
-                    </div>
-
-                    <button class="btn btn-primary">Seguir</button>
-                </div>              
-
-
-            </div>
-        </div>
         </div>
     </main>
 
 </body>
+
 </html>

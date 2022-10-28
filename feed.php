@@ -187,7 +187,6 @@ $idUsuarioCurtida = $_SESSION['id'];
                     <textarea oninput="auto_grow(this)" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>" ></textarea>
                 </div>
                 
-
                 </div>
             <?php }
             ?>

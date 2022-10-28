@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26-Out-2022 às 04:59
+-- Tempo de geração: 28-Out-2022 às 22:03
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -45,7 +45,8 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 (3, 'Pet Perdido', 1),
 (4, 'Desaparecido', 1),
 (5, 'leandro', 1),
-(6, 'cachorro', 1);
+(6, 'cachorro', 1),
+(7, 'categorias', 1);
 
 -- --------------------------------------------------------
 
@@ -210,6 +211,7 @@ CREATE TABLE `tbpublicacao` (
   `dataPublicacao` datetime NOT NULL,
   `localPub` text DEFAULT NULL,
   `itimalias` int(11) DEFAULT 0,
+  `pubImpulso` int(11) NOT NULL DEFAULT 0,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -420,7 +422,7 @@ ALTER TABLE `tbusuarioseguidor`
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriapublicacao`
