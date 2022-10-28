@@ -17,7 +17,7 @@ if (isset($_SESSION['login'])) {
 
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/index-style.css">
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>

@@ -18,7 +18,7 @@ $idUsuarioCurtida = $_SESSION['id'];
 
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/feed-style.css">
     <link rel="stylesheet" href="assets/libs/croppie/croppie.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     
@@ -43,6 +43,7 @@ $idUsuarioCurtida = $_SESSION['id'];
 </head>
 
 <body class="feed">
+    
     <nav class="feed">
             <div class="container">
                 <h2 class="logo">
@@ -67,7 +68,8 @@ $idUsuarioCurtida = $_SESSION['id'];
 
                             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
-                <a class="perfil">
+
+                <a href="perfilUsuario.php" class="perfil">
                     <div class="fotoDePerfil">
                       <img src="<?php echo $_SESSION['foto']; ?>"  alt="">
                     </div>
