@@ -209,7 +209,37 @@ $app->post('/usuario/update/senha/recuperacao', function (Request $request, Resp
     header('location: /petiti/login');
 });
 
+$app->get('/ativar-tutor/{id}', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($args['id']);
+    $usuario->setStatusUsuario(1);
+    $usuario->updateStatus($usuario);
+    header('location:/petiti/tutores-dashboard');
+  
+});
+$app->get('/bloquear-tutor/{id}', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($args['id']);
+    $usuario->setStatusUsuario(0);
+    $usuario->updateStatus($usuario);
+    header('location:/petiti/tutores-dashboard');
 
+});
+
+$app->get('/ativar-empresa/{id}', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($args['id']);
+    $usuario->setStatusUsuario(1);
+    $usuario->updateStatus($usuario);
+    header('location:/petiti/empresas-dashboard');
+});
+$app->get('/bloquear-empresa/{id}', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($args['id']);
+    $usuario->setStatusUsuario(0);
+    $usuario->updateStatus($usuario);
+    header('location:/petiti/empresas-dashboard');
+});
 
 $app->post('/usuario/update', function (Request $request, Response $response, array $args) {
     $data = $request->getParsedBody();
@@ -440,6 +470,22 @@ $app->get('/categorias', function (Request $request, Response $response, array $
     $json = "{\"categorias\":" . json_encode($lista = $categoria->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+$app->get('/ativar-categoria/{id}', function (Request $request, Response $response, array $args) {
+    $categoria = new categoria();
+    $categoria->setStatusCategoria(1);
+    $categoria->setIdCategoria($args['id']);
+    $categoria->updateStatus($categoria);
+    header("location: /petiti/empresas-dashboard/");
+});
+
+$app->get('/bloquear-categoria/{id}', function (Request $request, Response $response, array $args) {
+    $categoria = new categoria();
+    $categoria->setStatusCategoria(0);
+    $categoria->setIdCategoria($args['id']);
+    $categoria->updateStatus($categoria);
+    header("location: /petiti/empresas-dashboard/");
 });
 
 $app->get('/publicacoes', function (Request $request, Response $response, array $args) {

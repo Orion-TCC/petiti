@@ -22,7 +22,7 @@ $qtdEmpresasBloqueadas = $usuario->buscaQtdUsuarioBloqueadoEmpresa();
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/empresas/empresas.css" />
 </head>
@@ -100,70 +100,101 @@ $qtdEmpresasBloqueadas = $usuario->buscaQtdUsuarioBloqueadoEmpresa();
           <!-- Tab content -->
           <div id="ativo" class="tabcontent">
             <h3 id="total-qtd">Total (<?php echo $qtdEmpresasAtivas ?>)</h3>
-            <div class="listaUsuarios">
-
+            <div class="cards">
               <?php
               foreach ($listaEmpresasAtivas as $linha) {
                 $id = $linha['idUsuario'];
                 $nome  = $linha['nomeUsuario'];
                 $login =  $linha['loginUsuario'];
+                $bio = $linha['bioUsuario'];
                 $email = $linha['emailUsuario'];
+                $dataCompleta = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
                 $verificado =  $linha['verificadoUsuario'];
                 if ($verificado == 0) {
-                  $verificado = "Não";
+                  $verificado = "<p class='badge nao-verificado'>Não</p>";
                 } else {
-                  $verificado = "Sim";
+                  $verificado = "<p class='badge verificado'>Sim</p>";
                 }
                 $tipo = $linha['tipoUsuario'];
                 $foto = $linha['caminhoFoto']; ?>
 
-                <div class="usuario">
-                  <img class="fotoUsuario" src="<?php echo $foto ?>">
-                  <div class="infoUsuario">
-                    <p>ID: <?php echo $id ?> </p>
-                    <p>Nome: <?php echo $nome ?> </p>
-                    <p>Login: <?php echo $login ?> </p>
-                    <p>Email: <?php echo $email ?> </p>
-                    <p>Verificado: <?php echo $verificado ?> </p>
-                    <p>Tipo de conta: <?php echo $tipo ?> </p>
+
+                <div class="card">
+                  <div class="badges">
+                    <p class="badge ativo">Ativo</p>
+                    <p class="badge tipo"><?php echo $tipo ?></p>
                   </div>
+
+                  <div class="infos-card">
+                    <img class="foto-info" src="<?php echo $foto ?>">
+                    <div class="perfil-info">
+                      <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
+                      <p><?php echo $bio ?></p>
+                    </div>
+                  </div>
+
+                  <div class="card-data">
+                    <span class="material-symbols-outlined">
+                      date_range
+                    </span>
+                    <p> Entrou em: <?php echo $dataCompleta ?></p>
+                  </div>
+                  <div class="card-perfil">
+                    <a href="">Ver perfil</a>
+                  </div>
+                  <a class="botao bloquear" href="/petiti/api/bloquear-empresa/<?php echo $id ?>">Bloquear empresa</a>
                 </div>
               <?php  }
               ?>
-
             </div>
           </div>
 
           <div id="bloqueado" class="tabcontent">
             <h3 id="total-qtd">Total (<?php echo $qtdEmpresasBloqueadas ?>)</h3>
 
-            <div class="listaUsuarios">
-
+            <div class="cards">
               <?php
               foreach ($listaEmpresasBloqueadas as $linha) {
                 $id = $linha['idUsuario'];
                 $nome  = $linha['nomeUsuario'];
                 $login =  $linha['loginUsuario'];
+                $bio = $linha['bioUsuario'];
                 $email = $linha['emailUsuario'];
+                $dataCompleta = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
                 $verificado =  $linha['verificadoUsuario'];
                 if ($verificado == 0) {
-                  $verificado = "Não";
+                  $verificado = "<p class='badge nao-verificado'>Não</p>";
                 } else {
-                  $verificado = "Sim";
+                  $verificado = "<p class='badge verificado'>Sim</p>";
                 }
                 $tipo = $linha['tipoUsuario'];
                 $foto = $linha['caminhoFoto']; ?>
 
-                <div class="usuario">
-                  <img class="fotoUsuario" src="<?php echo $foto ?>">
-                  <div class="infoUsuario">
-                    <p>ID: <?php echo $id ?> </p>
-                    <p>Nome: <?php echo $nome ?> </p>
-                    <p>Login: <?php echo $login ?> </p>
-                    <p>Email: <?php echo $email ?> </p>
-                    <p>Verificado: <?php echo $verificado ?> </p>
-                    <p>Tipo de conta: <?php echo $tipo ?> </p>
+
+                <div class="card">
+                  <div class="badges">
+                    <p class="badge bloqueado">Bloqueado</p>
+                    <p class="badge tipo"><?php echo $tipo ?></p>
                   </div>
+
+                  <div class="infos-card">
+                    <img class="foto-info" src="<?php echo $foto ?>">
+                    <div class="perfil-info">
+                      <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
+                      <p><?php echo $bio ?></p>
+                    </div>
+                  </div>
+
+                  <div class="card-data">
+                    <span class="material-symbols-outlined">
+                      date_range
+                    </span>
+                    <p> Entrou em: <?php echo $dataCompleta ?></p>
+                  </div>
+                  <div class="card-perfil">
+                    <a href="">Ver perfil</a>
+                  </div>
+                  <a class="botao ativar" href="/petiti/api/ativar-empresa/<?php echo $id ?>">Ativar empresa</a>
                 </div>
               <?php  }
               ?>

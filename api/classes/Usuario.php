@@ -14,6 +14,7 @@ class Usuario
     private $bioUsuario;
     private $localizacaoUsuario;
     private $siteUsuario;
+    private $statusUsuario;
 
 
     public function getIdUsuario()
@@ -129,6 +130,19 @@ class Usuario
     {
         $this->siteUsuario = $siteUsuario;
     }
+
+    public function getStatusUsuario()
+    {
+        return $this->statusUsuario;
+    }
+
+
+    public function setStatusUsuario($statusUsuario)
+    {
+        $this->statusUsuario = $statusUsuario;
+
+        return $this;
+    }
     public function listar()
     {
         $con = Conexao::conexao();
@@ -142,6 +156,7 @@ class Usuario
         tipoUsuario,
         bioUsuario,
         localizacaoUsuario, 
+        dataCriacaoConta,
         siteUsuario
         FROM tbusuario 
         INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario";
@@ -161,7 +176,8 @@ class Usuario
         emailUsuario, 
         tbusuario.idTipoUsuario,
         tipoUsuario,
-        bioUsuario,
+        bioUsuario,        
+        dataCriacaoConta,
         localizacaoUsuario, 
         siteUsuario
         FROM tbusuario 
@@ -420,6 +436,15 @@ class Usuario
         $stmt->execute();
     }
 
+    public function updateStatus($update)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbusuario SET statusUsuario = ? WHERE idUsuario = ?");
+        $stmt->bindValue(1, $update->getStatusUsuario());
+        $stmt->bindValue(2, $update->getIdUsuario());
+        $stmt->execute();
+    }
+
     public function update($id, $campo, $valor)
     {
         $con = Conexao::conexao();
@@ -544,7 +569,9 @@ class Usuario
                         emailUsuario, 
                         tbusuario.idTipoUsuario,
                         tipoUsuario,
+                        DAY(dataCriacaoConta) as dia, MONTHNAME(dataCriacaoConta) as mes, YEAR(dataCriacaoConta) as ano,
                         caminhoFoto,
+                        dataCriacaoConta,
                         bioUsuario,
                         localizacaoUsuario, 
                         siteUsuario
@@ -568,7 +595,10 @@ class Usuario
                         verificadoUsuario, 
                         emailUsuario,
                         caminhoFoto,
+                        dataCriacaoConta,
                         tbusuario.idTipoUsuario,
+                        DAY(dataCriacaoConta) as dia, MONTHNAME(dataCriacaoConta) as mes, YEAR(dataCriacaoConta) as ano,
+
                         tipoUsuario,
                         bioUsuario,
                         localizacaoUsuario, 
@@ -639,6 +669,8 @@ class Usuario
         tbusuario.idTipoUsuario,
         tipoUsuario,
         bioUsuario,
+        dataCriacaoConta,
+        DAY(dataCriacaoConta) as dia, MONTHNAME(dataCriacaoConta) as mes, YEAR(dataCriacaoConta) as ano,
         localizacaoUsuario,
         caminhoFoto,
         siteUsuario
@@ -659,6 +691,8 @@ class Usuario
         loginUsuario,
         verificadoUsuario,
         emailUsuario,
+        dataCriacaoConta,
+        DAY(dataCriacaoConta) as dia, MONTHNAME(dataCriacaoConta) as mes, YEAR(dataCriacaoConta) as ano,
         tbusuario.idTipoUsuario,
         caminhoFoto,
         tipoUsuario,
