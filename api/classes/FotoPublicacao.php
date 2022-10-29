@@ -8,11 +8,11 @@ class FotoPublicacao
     private $publicacao;
 
     public function getPublicacao(){
-        return $this->Publicacao;
+        return $this->publicacao;
     }
 
     public function setPublicacao($Publicacao){
-        $this->Publicacao = $Publicacao;
+        $this->publicacao = $Publicacao;
 
         return $this;
     }

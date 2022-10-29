@@ -152,6 +152,7 @@ class Usuario
         loginUsuario, 
         verificadoUsuario, 
         emailUsuario, 
+        statusUsuario,
         tbusuario.idTipoUsuario,
         tipoUsuario,
         bioUsuario,
@@ -174,6 +175,7 @@ class Usuario
         loginUsuario, 
         verificadoUsuario, 
         emailUsuario, 
+        statusUsuario,
         tbusuario.idTipoUsuario,
         tipoUsuario,
         bioUsuario,        
@@ -317,6 +319,7 @@ class Usuario
                     $json = file_get_contents($url);
                     $dados = json_decode($json);
 
+                    $_SESSION['status'] = $dados[0]->statusUsuario;
                     $_SESSION['id'] = $dados[0]->idUsuario;
                     $_SESSION['nome'] = $dados[0]->nomeUsuario;
                     $_SESSION['senha'] = $dados[0]->senhaUsuario;

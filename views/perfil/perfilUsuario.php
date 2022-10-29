@@ -11,11 +11,17 @@ $url = "http://localhost/petiti/api/publicacoes/usuario/" . $_SESSION['id'];
 $json = file_get_contents($url);
 $dados = (array)json_decode($json, true);
 $contagem = count($dados['publicacoes']);
+
+$urlCurtidas = "http://localhost/petiti/api/publicacoes/curtidas/" . $_SESSION['id'];
+
+$jsonCurtidas = file_get_contents($urlCurtidas);
+$dadosCurtidas = (array)json_decode($jsonCurtidas, true);
+$contagemCurtidas = count($dadosCurtidas['publicacoes']);
 ?>
 
 
 
-    
+
 <!DOCTYPE php>
 <html lang="pt-br">
 
@@ -36,7 +42,7 @@ $contagem = count($dados['publicacoes']);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 
     <!-- título da pág e icone (logo) -->
-                    
+
     <title>Pet iti - meu perfil </title>
 
 
@@ -161,7 +167,7 @@ $contagem = count($dados['publicacoes']);
                                 </div>
 
                                 <div class="infoHolder meio">
-                                    <h3> <?php echo $contagem?> <span class="text-muted"> postagens </span></h3>
+                                    <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
                                     <h3> 0 <span class="text-muted">seguidores</span></h3>
                                     <h3> 0 <span class="text-muted">Seguindo</span></h3>
                                 </div>
@@ -198,52 +204,64 @@ $contagem = count($dados['publicacoes']);
                         <!-- fim das tabs de navegacao de usuario -->
 
                         <div class="tabs_content postagens tabAtiva" data-tab="1">
-                                        <?php
+                            <?php
 
-                                        if ($contagem < 1) { ?>
-                                            <div class="aviso">
-                                                <h3>Não há postagens ainda. Faça uma clicando no botão “Criar um post”!</h3>
-                                            </div>
+                            if ($contagem < 1) { ?>
+                                <div class="aviso">
+                                    <h3>Não há postagens ainda. Faça uma clicando no botão “Criar um post”!</h3>
+                                </div>
 
-                                            <?php } else {
+                                <?php } else {
 
-                                            for ($i = 0; $i < $contagem; $i++) {
-                                                $foto = $dados['publicacoes'][$i]['caminhoFoto'];
-                                            ?>
-                                                <div class="previewPostImage">
-                                                    <img src="<?php echo $foto ?>" alt="">
-                                                </div>
-
-                                        <?php }
-                                        } ?>
-
-                                    </div>
-
-                        <div class="tabs_content marcacoes" data-tab="2">
+                                for ($i = 0; $i < $contagem; $i++) {
+                                    $foto = $dados['publicacoes'][$i]['caminhoFoto'];
+                                ?>
                                     <div class="previewPostImage">
                                         <img src="<?php echo $foto ?>" alt="">
                                     </div>
 
-                                    <div class="aviso">
-                                         <h3>Parece que ninguém te marcou em um post ainda...</h3>
-                                    </div>
+                            <?php }
+                            } ?>
+
+                        </div>
+
+                        <div class="tabs_content marcacoes" data-tab="2">
+                            <div class="previewPostImage">
+                                <img src="<?php echo $foto ?>" alt="">
+                            </div>
+
+                            <div class="aviso">
+                                <h3>Parece que ninguém te marcou em um post ainda...</h3>
+                            </div>
                         </div>
 
                         <div class="tabs_content curtidas" data-tab="3">
-                                    <div class="previewPostImage">
-                                        <img src="<?php echo $foto ?>" alt="">
-                                    </div>
 
-                                    <div class="aviso">
-                                        <h3>Ainda nenhuma postagem curtida. Va para sua <a href="feed">Home</a> ou <a href="#">Para você</a> e curta alguma coisa!</h3>
+                            <?php
+
+                            if ($contagemCurtidas < 1) { ?>
+                                <div class="aviso">
+                                    <h3>Ainda nenhuma postagem curtida. Va para sua <a href="feed">Home</a> ou <a href="#">Para você</a> e curta alguma coisa!</h3>
+                                </div>
+
+                                <?php } else {
+
+                                for ($i = 0; $i < $contagemCurtidas; $i++) {
+                                    $fotoCurtidas = $dadosCurtidas['publicacoes'][$i]['caminhoFoto'];
+                                ?>
+                                    <div class="previewPostImage">
+                                        <img src="<?php echo $fotoCurtidas ?>" alt="">
                                     </div>
+                            <?php }
+                            } ?>
+
                         </div>
                     </div>
 
-                    </div>
                 </div>
             </div>
-            <!-- fim do meio -->
+        </div>
+        <!-- fim do meio -->
 
         </div>
     </main>

@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
   var resize = $("#upload-demo").croppie({
     enableExif: true,
     enableOrientation: true,
@@ -31,9 +30,9 @@ $(document).ready(function () {
     };
     reader.readAsDataURL(this.files[0]);
     $("#modal-foto-post").modal("hide");
+    $("#flFoto").val("");
     $("#modal-recortar-foto").modal("show");
   });
-
 
   $("#continuar-post").on("click", function (ev) {
     ev.preventDefault();
@@ -46,25 +45,27 @@ $(document).ready(function () {
         blob = resp;
       });
 
-    resize.croppie("result", {
-      type: "canvas",
-      size: "viewport",
-    }).then(function (img) {
-      $.ajax({
-        type: "POST",
-        enctype: "multipart/form-data",
-        data: { "image": img },
-        url: "/petiti/assets/libs/croppie/envio.php",
-        success: function (data) {
-          html = img;
-          $("#baseFoto").val(img);
-          html = '<img src="' + img + '" />';
-          $("#preview-crop-image").html(html);
+    resize
+      .croppie("result", {
+        type: "canvas",
+        size: "viewport",
+      })
+      .then(function (img) {
+        $.ajax({
+          type: "POST",
+          enctype: "multipart/form-data",
+          data: { image: img },
+          url: "/petiti/assets/libs/croppie/envio.php",
+          success: function (data) {
+            html = img;
+            $("#baseFoto").val(img);
+            html = '<img src="' + img + '" />';
+            $("#preview-crop-image").html(html);
 
-          console.log(data);
-        },
+            console.log(data);
+          },
+        });
       });
-    });
   });
 
   $("#continuar-crop-foto").on("click", function (ev) {
@@ -135,15 +136,15 @@ $(document).ready(function () {
       });
   });
 
-
   $("#submitCategoria").click(function () {
     if (input.value == "") {
-    }
-    else {
+    } else {
       var categoriaCheck = categorias.push(input.value);
 
       $("#categoriasChecksHolder").prepend(
-        "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='' value=''> " + $(categorias).get(-1));
+        "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='' value=''> " +
+          $(categorias).get(-1)
+      );
       console.log(categoriaCheck);
       console.log(categorias);
       document.getElementById("categoriasValue").value = categorias;
@@ -152,24 +153,26 @@ $(document).ready(function () {
     }
   });
 
-  $('#form-aid').on('keyup keypress', function(e) {
+  $("#form-aid").on("keyup keypress", function (e) {
     var keyCode = e.keyCode || e.which;
-    if (keyCode === 13) { 
+    if (keyCode === 13) {
       e.preventDefault();
       return false;
     }
   });
 
   $("#form-aid #txtCategoria").keypress(function (event) {
-    var keycode = (event.keyCode ? event.keyCode : event.which);
-    if (keycode == '13') {
-      if (input.value == "") { }
-      else {
+    var keycode = event.keyCode ? event.keyCode : event.which;
+    if (keycode == "13") {
+      if (input.value == "") {
+      } else {
         categorias.push(input.value);
         var categoriaCheck = categorias.push(input.value);
 
         $("#categoriasChecksHolder").prepend(
-          "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='' value=''> " + $(categorias).get(-1));
+          "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='' value=''> " +
+            $(categorias).get(-1)
+        );
         console.log(categorias);
         document.getElementById("categoriasValue").value = categorias;
         input.value = "";
@@ -178,7 +181,7 @@ $(document).ready(function () {
     }
   });
 
-  $('input.checkbox').change(function () {
+  $("input.checkbox").change(function () {
     checkA = $(this).val();
     if ($(this).is(":checked")) {
       categorias.push(checkA);
@@ -191,4 +194,3 @@ $(document).ready(function () {
     }
   });
 });
-

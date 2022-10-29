@@ -38,7 +38,7 @@ $idUsuarioCurtida = $_SESSION['id'];
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
     <script src="/petiti/assets/js/jquery-scripts.js"></script>
     <script src="/petiti/assets/js/script.js"></script>
-    <script src="/petiti/assets/js/funcs.js"></script>
+    <script src="/petiti/views/assets/js/funcs.js"></script>
 </head>
 
 <body class="feed">
@@ -179,7 +179,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                 <div class="feeds">
                     <?php
                     $url = "http://localhost/petiti/api/publicacoes";
-
+                    
 
                     $json = file_get_contents($url);
                     $dados = (array)json_decode($json, true);

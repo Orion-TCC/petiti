@@ -112,8 +112,23 @@ class Publicacao
         FROM tbPublicacao 
         INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
         INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
-        INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario";
+        INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
+        WHERE statusUsuario = 1";
 
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
+    }
+    
+    public function listarPubsCurtidas($id)
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT  tbpublicacao.idPublicacao as idPub, caminhoFotoPublicacao as caminhoFoto
+        FROM tbPublicacao 
+        INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
+        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
+        INNER JOIN tbcurtidapublicacao ON tbpublicacao.idPublicacao = tbcurtidapublicacao.idPublicacaoCurtida
+        WHERE tbcurtidapublicacao.idUsuarioCurtida = $id AND statusUsuario = 1";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
@@ -129,7 +144,7 @@ class Publicacao
         INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
         INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
         INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
-        WHERE pubImpulso = 1";
+        WHERE pubImpulso = 1 AND statusUsuario = 1";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -145,7 +160,7 @@ class Publicacao
         FROM tbPublicacao 
         INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
         INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
-        WHERE tbpublicacao.idPublicacao = $id";
+        WHERE tbpublicacao.idPublicacao = $id AND statusUsuario = 1";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
@@ -161,7 +176,7 @@ class Publicacao
         INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
         INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
         INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
-        WHERE tbusuario.idUsuario=$id";
+        WHERE tbusuario.idUsuario = $id AND statusUsuario = 1";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);

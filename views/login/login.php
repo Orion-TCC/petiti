@@ -43,7 +43,13 @@
 
                         <button class="formSubmitLogin" type="submit">Entrar</button>
                     </form>
-
+                    <?php
+                    ?>
+                    <?php if (isset($_COOKIE['retorno-login'])) { ?>
+                        <div class="textoErrado">
+                            <?php echo $_COOKIE['retorno-login'] ?>
+                        </div>
+                    <?php } ?>
                     <span class="textoLogin">
                         Não tem uma conta? <a href="/petiti/tipo-usuario" class="textoLoginAhref"> Cadastre-se</a>
                     </span>

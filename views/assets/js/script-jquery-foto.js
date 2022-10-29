@@ -27,22 +27,24 @@ $(document).ready(function () {
     };
     reader.readAsDataURL(this.files[0]);
     $("#modal-recortar-foto").modal("show");
+    $("#flFoto").val("");
   });
 
-    $("#flFotoPet").on("change", function () {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        resize
-          .croppie("bind", {
-            url: e.target.result,
-          })
-          .then(function () {
-            console.log("jQuery bind complete");
-          });
-      };
-      reader.readAsDataURL(this.files[0]);
-      $("#modal-recortar-foto").modal("show");
-    });
+  $("#flFotoPet").on("change", function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      resize
+        .croppie("bind", {
+          url: e.target.result,
+        })
+        .then(function () {
+          console.log("jQuery bind complete");
+        });
+    };
+    reader.readAsDataURL(this.files[0]);
+    $("#modal-recortar-foto").modal("show");
+    $("#flFotoPet").val("");
+  });
 
   $("#continuar-crop-foto").on("click", function (ev) {
     ev.preventDefault();
@@ -64,7 +66,7 @@ $(document).ready(function () {
         $.ajax({
           type: "POST",
           enctype: "multipart/form-data",
-          data: {"image": img },
+          data: { image: img },
           url: "/petiti/assets/libs/croppie/envio.php",
           success: function (data) {
             html = img;
@@ -78,11 +80,11 @@ $(document).ready(function () {
   });
 
   $("#enviarFoto").on("click", function (ev) {
-   var foto =  $("#baseFoto").val();
+    var foto = $("#baseFoto").val();
     $.ajax({
       type: "POST",
       enctype: "multipart/form-data",
-      data: {"imageBase": foto},
+      data: { imageBase: foto },
       url: "/petiti/assets/libs/croppie/croppie-usuario.php",
       success: function (data) {
         console.log(data);
@@ -91,19 +93,19 @@ $(document).ready(function () {
     });
   });
 
-    $("#enviarFotoPet").on("click", function (ev) {
-      var foto = $("#baseFoto").val();
-      $.ajax({
-        type: "POST",
-        enctype: "multipart/form-data",
-        data: {"imageBase": foto },
-        url: "/petiti/assets/libs/croppie/croppie-pet.php",
-        success: function (data) {
-          console.log(data);
-          console.log(foto);
-        },
-      });
+  $("#enviarFotoPet").on("click", function (ev) {
+    var foto = $("#baseFoto").val();
+    $.ajax({
+      type: "POST",
+      enctype: "multipart/form-data",
+      data: { imageBase: foto },
+      url: "/petiti/assets/libs/croppie/croppie-pet.php",
+      success: function (data) {
+        console.log(data);
+        console.log(foto);
+      },
     });
+  });
 
   $("#continuar-crop-foto-pet").on("click", function (ev) {
     ev.preventDefault();

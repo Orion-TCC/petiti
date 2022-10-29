@@ -306,22 +306,40 @@ $app->post('/login', function (Request $request, Response $response, array $args
         $id = $usuario->procuraId($login_email = $_POST['txtLoginEmail']);
     }
 
-    if ($msg == "Bem vindo.") {
-        if ($_SESSION['tipo'] != 'adm'){
-            $url = "http://localhost/petiti/api/usuario/$id";
-
-            $json = file_get_contents($url);
-            $dados = json_decode($json);
-            $login = $dados[0]->loginUsuario;
+    $url = "http://localhost/petiti/api/usuario/$id";
+    $json = file_get_contents($url);
+    $dados = json_decode($json);
+    $status = $dados[0]->statusUsuario;
     
-            $_SESSION['login'] = $login;
-            header('location: /petiti/feed');
-        }else{
-            header('location: /petiti/dashboard');
-        }
-    } else {
+    if ($status == 0) {
         header('location: /petiti/login');
-        $cookie->criarCookie('retorno-login', $msg, 2);
+        @session_start();
+        @session_destroy();
+        $cookie->criarCookie('retorno-login', "Usuário bloqueado.", 2);
+    } else {
+        if ($msg == "Bem vindo.") {
+            if ($_SESSION['tipo'] != 'adm') {
+                $url = "http://localhost/petiti/api/usuario/$id";
+
+                $json = file_get_contents($url);
+                $dados = json_decode($json);
+                $login = $dados[0]->loginUsuario;
+
+                $_SESSION['login'] = $login;
+                header('location: /petiti/feed');
+            } else {
+                $url = "http://localhost/petiti/api/usuario/$id";
+                $json = file_get_contents($url);
+                $dados = json_decode($json);
+                $login = $dados[0]->loginUsuario;
+
+                $_SESSION['login'] = $login;
+                header('location: /petiti/dashboard');
+            }
+        } else {
+            header('location: /petiti/login');
+            $cookie->criarCookie('retorno-login', $msg, 2);
+        }
     }
 });
 
@@ -449,7 +467,7 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
 
     if ($_POST['slEspecie'] == 0) {
         $cookie->criarCookie('retorno-erro-especie', "Selecione uma espécie", 1);
-        header('location: ../formulario-pet2.php');
+        header('location: /petiti/formulario-pet');
     }
     $especie = $arrayEspecies[$_POST['slEspecie']];
     $raca = $_POST['txtRacaPet'];
@@ -524,6 +542,14 @@ $app->get('/publicacoes/impulsionadas', function (Request $request, Response $re
     $publicacao = new Publicacao();
 
     $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listarImpulsao(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+$app->get('/publicacoes/curtidas/{id}', function (Request $request, Response $response, array $args) {
+    $publicacao = new Publicacao();
+    $id = $args['id'];
+
+    $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listarPubsCurtidas($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
