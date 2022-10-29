@@ -13,6 +13,7 @@ date_default_timezone_set('America/Sao_Paulo');
 use Slim\Factory\AppFactory;
 use Slim\Exception\NotFoundException;
 use Slim\Http\UploadedFile;
+use Slim\Psr7\Header;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -732,6 +733,33 @@ $app->post('/seguir', function(Request $request, Response $response, array $args
         $usuarioSeguidor->delete($usuarioSeguidor);
     }
 
+});
+
+$app->post('/editar-perfil', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($_SESSION['id']);
+    if (isset($_POST['txtNome'])) {
+        $usuario->setNomeUsuario($_POST['txtNome']);
+        $usuario->updateNome($usuario);
+    }
+    if (isset($_POST['txtLocal'])) {
+        $usuario->setLocalizacaoUsuario($_POST['txtLocal']);
+        $usuario->updateLocalizacao($usuario);
+
+    }
+    if (isset($_POST['txtSite'])) {
+        $usuario->setSiteUsuario($_POST['txtSite']);
+        $usuario->updateSite($usuario);
+
+    }
+    if (isset($_POST['txtBio'])) {
+        $usuario->setBioUsuario($_POST['txtBio']);
+        $usuario->updateBio($usuario);
+
+    }
+    $usuario->login($_SESSION['login'], $_SESSION['senha']);
+    header('location: /petiti/meu-perfil');
 });
 
 try {

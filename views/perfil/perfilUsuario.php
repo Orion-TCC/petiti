@@ -1,8 +1,12 @@
 <?php
 @session_start();
 require('../../api/classes/curtidaPublicacao.php');
+require('../../api/classes/Usuario.php');
+
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
+
+
 include_once("../../sentinela.php");
 $idUsuarioCurtida = $_SESSION['id'];
 
@@ -163,7 +167,20 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
 
                                 <div class="infoHolder topo">
                                     <h2><?php echo $_SESSION['login']; ?></h2>
-                                    <button class="btn btn-primary">Editar perfil</button>
+                                    <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
+                                </div>
+                                <div class="modal" id="modal-editar-perfil">
+                                    <form style="display: flex;flex-direction: column;" action="/petiti/api/editar-perfil" method="post">
+                                        <button type="submit">Salvar</button>
+                                        <label for="">Nome:</label>
+                                        <input value="<?php echo $_SESSION['nome'] ?>" placeholder="Nome escolhido no cadastro" type="text" name="txtNome" id="txtNome">
+                                        <label for="">Local:</label>
+                                        <input <?php if ($_SESSION['local'] != null) { ?> value="<?php echo $_SESSION['local'] ?>" <?php } ?> placeholder="Localização" type="text" name="txtLocal" id="txtLocal">
+                                        <label for="">Site:</label>
+                                        <input <?php if ($_SESSION['site'] != null) { ?> value="<?php echo $_SESSION['site'] ?>" <?php } ?> placeholder="URL" type="text" name="txtSite" id="txtSite">
+                                        <label for="">Bio:</label>
+                                        <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." type="text" name="txtBio" id="txtBio"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
+                                    </form>
                                 </div>
 
                                 <div class="infoHolder meio">
@@ -173,8 +190,8 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                                 </div>
 
                                 <div class="infoHolder baixo">
-                                    <h4><i class="uil uil-map-marker"></i> local</h4>
-                                    <h4><i class="uil uil-link-alt"></i> site</h4>
+                                    <h4><i class="uil uil-map-marker"></i> <?php echo $_SESSION['local'] ?></h4>
+                                    <h4><i class="uil uil-link-alt"></i> <?php echo $_SESSION['site'] ?></h4>
                                 </div>
                             </div>
                         </div>
@@ -187,7 +204,13 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                             </div>
 
                             <div class="bio">
-                                <h4 class="text-muted">Adicione uma biografia! Conte um pouco sobre você :D</h4>
+                                <?php
+                                if ($_SESSION['bio'] == null) { ?>
+                                    <h4 class="text-muted"><?php echo $_SESSION['bio'] ?> Adicione uma biografia! Conte um pouco sobre você :D</h4>
+                                <?php } else { ?>
+                                    <h4 class="text-muted"><?php echo $_SESSION['bio'] ?></h4>
+                                <?php }
+                                ?>
                             </div>
 
                         </div>

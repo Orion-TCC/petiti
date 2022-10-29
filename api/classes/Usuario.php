@@ -328,7 +328,7 @@ class Usuario
                     $_SESSION['email'] = $dados[0]->emailUsuario;
                     $_SESSION['tipo'] = $dados[0]->tipoUsuario;
                     $_SESSION['foto'] = $foto;
-                    $_SESSION['bio'] = $dados[0]->bio;
+                    $_SESSION['bio'] = $dados[0]->bioUsuario;
                     $_SESSION['local'] = $dados[0]->local;
                     $_SESSION['site'] = $dados[0]->site;
 
@@ -359,9 +359,9 @@ class Usuario
                     $_SESSION['email'] = $dados[0]->emailUsuario;
                     $_SESSION['tipo'] = $dados[0]->tipoUsuario;
                     $_SESSION['foto'] = $foto;
-                    $_SESSION['bio'] = $dados[0]->bio;
-                    $_SESSION['local'] = $dados[0]->local;
-                    $_SESSION['site'] = $dados[0]->site;
+                    $_SESSION['bio'] = $dados[0]->bioUsuario;
+                    $_SESSION['local'] = $dados[0]->localizacaoUsuario;
+                    $_SESSION['site'] = $dados[0]->siteUsuario;
 
 
                     return $msg = "Bem vindo.";
