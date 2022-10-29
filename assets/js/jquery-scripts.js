@@ -67,36 +67,6 @@ $(document).ready(function () {
         });
       });
   });
-
-  $("#continuar-crop-foto").on("click", function (ev) {
-    ev.preventDefault();
-    var blob;
-    resize
-      .croppie("result", {
-        type: "blob",
-      })
-      .then(function (resp) {
-        blob = resp;
-      });
-
-    resize
-      .croppie("result", {
-        type: "canvas",
-        size: "viewport",
-      })
-      .then(function (img) {
-        $.ajax({
-          type: "POST",
-          enctype: "multipart/form-data",
-          data: { image: img },
-          url: "/petiti/assets/libs/croppie/croppie-usuario.php",
-          success: function (data) {
-            html = img;
-            console.log(data);
-          },
-        });
-      });
-  });
   $("#form-id").on("keypress", function (event) {
     console.log("aaya");
     var keyPressed = event.keyCode || event.which;
@@ -106,36 +76,6 @@ $(document).ready(function () {
       return false;
     }
   });
-  $("#continuar-crop-foto").on("click", function (ev) {
-    ev.preventDefault();
-    var blob;
-    resize
-      .croppie("result", {
-        type: "blob",
-      })
-      .then(function (resp) {
-        blob = resp;
-      });
-
-    resize
-      .croppie("result", {
-        type: "canvas",
-        size: "viewport",
-      })
-      .then(function (img) {
-        $.ajax({
-          type: "POST",
-          enctype: "multipart/form-data",
-          data: { image: img },
-          url: "/petiti/assets/libs/croppie/croppie-pet.php",
-          success: function (data) {
-            html = img;
-            console.log(data);
-          },
-        });
-      });
-  });
-
   $("#submitCategoria").click(function () {
     if (input.value == "") {
     } else {

@@ -59,9 +59,9 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
-    <script src="/petiti/views/assets/libs/croppie/croppie.js"></script>
-    <script src="/petiti/views/assets/js/jquery-scripts.js"></script>
-    <script src="/petiti/views/assets/js/script.js"></script>
+    <script src="/petiti/assets/libs/croppie/croppie.js"></script>
+    <script src="/petiti/views/assets/js/script-jquery-foto.js"></script>
+    <script src="/petiti/assets/js/script.js"></script>
     <script src="/petiti/views/assets/js/funcs.js"></script>
 </head>
 
@@ -172,6 +172,9 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                                 <div class="modal" id="modal-editar-perfil">
                                     <form style="display: flex;flex-direction: column;" action="/petiti/api/editar-perfil" method="post">
                                         <button type="submit">Salvar</button>
+                                        <img id="preview" style="width: 70px;" src="<?php echo $_SESSION['foto'] ?>">
+                                        <input id="flFoto" type="file" accept=".jpg, .png">
+                                        <input id="baseFoto" type="hidden">
                                         <label for="">Nome:</label>
                                         <input value="<?php echo $_SESSION['nome'] ?>" placeholder="Nome escolhido no cadastro" type="text" name="txtNome" id="txtNome">
                                         <label for="">Local:</label>
@@ -181,6 +184,15 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                                         <label for="">Bio:</label>
                                         <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." type="text" name="txtBio" id="txtBio"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
                                     </form>
+                                </div>
+                                <div id="modal-recortar-foto" class="modal">
+                                    <div class="modalInner">
+                                        <span class="subTituloForm">Redimensione sua imagem!</span>
+                                        <a class="formInputFoto">
+                                            <span id="continuar-crop-foto-perfil" style="padding-block: 10px; padding-inline: 87px;">Confirmar</span>
+                                        </a>
+                                        <div id="upload-demo"></div>
+                                    </div>
                                 </div>
 
                                 <div class="infoHolder meio">

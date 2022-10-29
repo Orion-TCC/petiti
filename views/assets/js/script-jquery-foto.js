@@ -79,6 +79,42 @@ $(document).ready(function () {
       });
   });
 
+    $("#continuar-crop-foto-perfil").on("click", function (ev) {
+      ev.preventDefault();
+
+      var blob;
+      resize
+        .croppie("result", {
+          type: "blob",
+        })
+        .then(function (resp) {
+          blob = resp;
+        });
+
+      resize
+        .croppie("result", {
+          type: "canvas",
+          size: "viewport",
+        })
+        .then(function (img) {
+          $.ajax({
+            type: "POST",
+            enctype: "multipart/form-data",
+            data: { image: img },
+            url: "/petiti/assets/libs/croppie/envio.php",
+            success: function (data) {
+              html = img;
+              $("#baseFoto").val(img);
+              $("#preview").attr("src", "");
+              $("#preview").attr("src", html);
+              $("#modal-recortar-foto").modal("hide");
+              $("#modal-editar-perfil").modal("show");
+              console.log(data);
+            },
+          });
+        });
+    });
+
   $("#enviarFoto").on("click", function (ev) {
     var foto = $("#baseFoto").val();
     $.ajax({
@@ -92,6 +128,8 @@ $(document).ready(function () {
       },
     });
   });
+  
+
 
   $("#enviarFotoPet").on("click", function (ev) {
     var foto = $("#baseFoto").val();
