@@ -318,7 +318,7 @@ $app->post('/login', function (Request $request, Response $response, array $args
         $cookie->criarCookie('retorno-login', "Usuário bloqueado.", 2);
     } else {
         if ($msg == "Bem vindo.") {
-            if ($_SESSION['tipo'] != 'adm') {
+            if ($_SESSION['tipo'] != 'Adm') {
                 $url = "http://localhost/petiti/api/usuario/$id";
 
                 $json = file_get_contents($url);

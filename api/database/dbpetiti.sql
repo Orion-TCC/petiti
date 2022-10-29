@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Out-2022 às 22:03
+-- Tempo de geração: 29-Out-2022 às 17:52
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -46,7 +46,9 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 (4, 'Desaparecido', 1),
 (5, 'leandro', 1),
 (6, 'cachorro', 1),
-(7, 'categorias', 1);
+(7, 'categorias', 1),
+(8, 'ka', 1),
+(9, 'Pixel', 1);
 
 -- --------------------------------------------------------
 
@@ -232,7 +234,8 @@ CREATE TABLE `tbtipousuario` (
 
 INSERT INTO `tbtipousuario` (`idTipoUsuario`, `tipoUsuario`) VALUES
 (1, 'Tutor'),
-(2, 'Pet Shop');
+(2, 'Pet Shop'),
+(3, 'Adm');
 
 -- --------------------------------------------------------
 
@@ -422,7 +425,7 @@ ALTER TABLE `tbusuarioseguidor`
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriapublicacao`
@@ -500,7 +503,7 @@ ALTER TABLE `tbpublicacao`
 -- AUTO_INCREMENT de tabela `tbtipousuario`
 --
 ALTER TABLE `tbtipousuario`
-  MODIFY `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuario`
