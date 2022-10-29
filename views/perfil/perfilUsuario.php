@@ -12,6 +12,10 @@ $json = file_get_contents($url);
 $dados = (array)json_decode($json, true);
 $contagem = count($dados['publicacoes']);
 ?>
+
+
+
+    
 <!DOCTYPE php>
 <html lang="pt-br">
 
@@ -32,7 +36,10 @@ $contagem = count($dados['publicacoes']);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 
     <!-- título da pág e icone (logo) -->
-    <title>Pet iti - Feed</title>
+                    
+    <title>Pet iti - meu perfil </title>
+
+
     <link rel="icon" href="/petiti/assets/images/logo-icon.svg">
 
     <!--script-->
@@ -42,10 +49,10 @@ $contagem = count($dados['publicacoes']);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
-    <script src="/petiti/assets/assets/libs/croppie/croppie.js"></script>
-    <script src="/petiti/assets/assets/js/jquery-scripts.js"></script>
-    <script src="/petiti/assets/assets/js/script.js"></script>
-    <script src="/petiti/assets/assets/js/funcs.js"></script>
+    <script src="/petiti/views/assets/libs/croppie/croppie.js"></script>
+    <script src="/petiti/views/assets/js/jquery-scripts.js"></script>
+    <script src="/petiti/views/assets/js/script.js"></script>
+    <script src="/petiti/views/assets/js/funcs.js"></script>
 </head>
 
 <body class="feed perfilUsuario">
@@ -75,7 +82,7 @@ $contagem = count($dados['publicacoes']);
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
-                <a href="perfilUsuario.php" class="perfilAtivo">
+                <a class="perfilAtivo">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
@@ -89,7 +96,7 @@ $contagem = count($dados['publicacoes']);
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="/petiti/nova-feed" class="menu-item">
+                    <a href="/petiti/feed" class="menu-item">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
@@ -181,41 +188,57 @@ $contagem = count($dados['publicacoes']);
                     </div>
                     <!-- fim da parte de informacao do usuario -->
 
+                    <div class="tabs">
 
-                    <div class="userTabs">
-                        <span class="tabAtiva">Postagens</span>
-                        <span>marcacoes</span>
-                        <span>curtidas</span>
+                        <div class="userTabs ">
+                            <button class="userTabOption userTabOption--ativo " data-for-tab="1">Postagens</button>
+                            <button class="userTabOption" data-for-tab="2">Marcaçoes</button>
+                            <button class="userTabOption" data-for-tab="3">Curtidas</button>
+                        </div>
+                        <!-- fim das tabs de navegacao de usuario -->
+
+                        <div class="tabs_content postagens tabAtiva" data-tab="1">
+                                        <?php
+
+                                        if ($contagem < 1) { ?>
+                                            <div class="aviso">
+                                                <h3>Não há postagens ainda. Faça uma clicando no botão “Criar um post”!</h3>
+                                            </div>
+
+                                            <?php } else {
+
+                                            for ($i = 0; $i < $contagem; $i++) {
+                                                $foto = $dados['publicacoes'][$i]['caminhoFoto'];
+                                            ?>
+                                                <div class="previewPostImage">
+                                                    <img src="<?php echo $foto ?>" alt="">
+                                                </div>
+
+                                        <?php }
+                                        } ?>
+
+                                    </div>
+
+                        <div class="tabs_content marcacoes" data-tab="2">
+                                    <div class="previewPostImage">
+                                        <img src="<?php echo $foto ?>" alt="">
+                                    </div>
+
+                                    <div class="aviso">
+                                         <h3>Parece que ninguém te marcou em um post ainda...</h3>
+                                    </div>
+                        </div>
+
+                        <div class="tabs_content curtidas" data-tab="3">
+                                    <div class="previewPostImage">
+                                        <img src="<?php echo $foto ?>" alt="">
+                                    </div>
+
+                                    <div class="aviso">
+                                        <h3>Ainda nenhuma postagem curtida. Va para sua <a href="feed">Home</a> ou <a href="#">Para você</a> e curta alguma coisa!</h3>
+                                    </div>
+                        </div>
                     </div>
-                    <!-- fim das tabs de navegacao de usuario -->
-
-                    <div class="postagens">
-                        <?php
-
-                        if ($contagem < 1) { ?>
-                            <div class="aviso">
-                                <h3>Não há postagens ainda. Faça uma clicando no botão “Criar um post”!</h3>
-                            </div>
-
-                            <?php } else {
-
-                            for ($i = 0; $i < $contagem; $i++) {
-                                $foto = $dados['publicacoes'][$i]['caminhoFoto'];
-                            ?>
-                                <div class="previewPostImage">
-                                    <img src="<?php echo $foto ?>" alt="">
-                                </div>
-
-                        <?php }
-                        } ?>
-
-                    </div>
-
-                    <div class="marcacoes">
-
-                    </div>
-
-                    <div class="curtidas">
 
                     </div>
                 </div>

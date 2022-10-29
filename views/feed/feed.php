@@ -234,22 +234,22 @@ $idUsuarioCurtida = $_SESSION['id'];
         </script>
 
         </div>
+    </section>
 
 
+        <section>
+            <div id="modal-recortar-foto" class="modal">
+                <div class="tituloModalPost">
 
+                    <div style="width: 60%; display: flex; justify-content: end;"><span>Recortar</span></div>
+                    <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> <a id="continuar-post" href="#criar-post" rel="modal:open">Continuar</a> </div>
 
-        <div id="modal-recortar-foto" class="modal">
-            <div class="tituloModalPost">
+                </div>
 
-                <div style="width: 60%; display: flex; justify-content: end;"><span>Recortar</span></div>
-                <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> <a id="continuar-post" href="#criar-post" rel="modal:open">Continuar</a> </div>
+                <div id="upload-demo"></div>
 
             </div>
-
-            <div id="upload-demo"></div>
-
-        </div>
-
+        </section>
 
 
 

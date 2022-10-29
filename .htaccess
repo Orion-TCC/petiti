@@ -1,8 +1,7 @@
 RewriteEngine On
 
 RewriteRule ^home index.php [NC,L]
-RewriteRule ^feed views/feed/feed.php [NC,L]
-RewriteRule ^nova-feed views/feed/novaFeed.php [NC,L]
+RewriteRule ^feed views/feed/novaFeed.php [NC,L]
 
 RewriteRule ^meu-perfil views/perfil/perfilUsuario.php [NC,L]
 RewriteRule ^perfil views/feed/perfil.php [NC,L]

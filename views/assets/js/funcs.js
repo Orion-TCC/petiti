@@ -72,12 +72,41 @@ function showHideElement() {
 }
 
 
+
+
+
 function auto_grow(element) {
   element.style.height = "60px";
   element.style.paddingBottom = "12px"
   element.style.height = (element.scrollHeight)+"px";
 }
 
+function setupTabs(){
+  document.querySelectorAll(".userTabOption").forEach(button =>{
+      button.addEventListener("click", () =>{
+          const userTabs = button.parentElement;
+          const tabsContainer = userTabs.parentElement;
+          const tabNumber = button.dataset.forTab;
+          const tabToActivate = tabsContainer.querySelector(`.tabs_content[data-tab="${tabNumber}"]`);
+      
+          userTabs.querySelectorAll(".userTabOption").forEach(button =>{
+              button.classList.remove("userTabOption--ativo");
 
+          });
+
+          tabsContainer.querySelectorAll(".tabs_content").forEach(tab =>{
+              tab.classList.remove("tabAtiva");
+              
+          });
+
+          button.classList.add("userTabOption--ativo");
+          tabToActivate.classList.add("tabAtiva");
+      });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () =>{
+  setupTabs();
+});
 
 
