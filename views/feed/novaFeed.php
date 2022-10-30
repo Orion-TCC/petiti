@@ -257,6 +257,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                             <div class="botoes">
                                 <div class="botoesDeInteracao">
 
+
                                     <?php
                                     $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
                                     if ($verificaCurtida['boolean'] == false) { ?>
@@ -268,34 +269,33 @@ $idUsuarioCurtida = $_SESSION['id'];
                                         <!-- nao curtido  -->
                                     <?php }
                                     ?>
+                                    
+                                    <button class="comentar"></button>
 
-                                    <button><i class="uil uil-comment"></i></button>
-
-                                    <button> <i class="uil uil-envelope"></i></button>
+                                    <button class="mensagem"></button>
 
                                 </div>
                             </div>
 
                             <div class="curtidoPor">
-                                <span><img src="<?php echo $_SESSION['foto']; ?>" alt=""></span>
 
                                 <?php
                                 $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
                                 if ($verificaCurtida['boolean'] == false) { ?>
-                                    <p>Curtido por <b><?php echo $_SESSION['login']; ?></b> e <b>mais outros <b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b></p>
+                                  <span> <b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b> itimalias</span>
                                     <!-- curtido -->
                                 <?php } else { ?>
-                                    <p>Curtido por <b><b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b></p>
+                                    <span><b><b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b> itimalias</span>
                                     <!-- nao curtido  -->
                                 <?php }
                                 ?>
                             </div>
 
                             <div class="caption">
-                                <p><b><?php echo $login; ?></b> <?php echo $texto ?></p>
+                               <span class="text-bold"> <?php echo $login; ?></span>  <span class="text-muted"><?php echo $texto ?></span>
                             </div>
 
-                            <div class="comments text-muted">Ver todos <?php echo $qtdComentarios ?> comentarios</div>
+                            <div class="comments text-muted"></div>
 
                         </div>
                     <?php }

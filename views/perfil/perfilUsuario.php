@@ -318,9 +318,6 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                         </div>
 
                         <div class="tabs_content marcacoes" data-tab="2">
-                            <div class="previewPostImage">
-                                <img src="<?php echo $foto ?>" alt="">
-                            </div>
 
                             <div class="aviso">
                                 <h3>Parece que ninguém te marcou em um post ainda...</h3>
