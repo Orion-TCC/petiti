@@ -30,7 +30,7 @@ $app->get('/hello/{name}', function (Request $request, Response $response, array
     return $response;
 });
 $app->get('/', function (Request $request, Response $response, array $args) {
-    
+
     $response->getBody()->write("
     Bem vindo
     ");
@@ -193,8 +193,8 @@ $app->get('/recuperar/senha/{login}', function (Request $request, Response $resp
         $idRecover = $linha['idUsuario'];
         $nomeUsuario = $linha['nomeUsuario'];
     }
-     $_SESSION['nome-recuperacao'] = $nomeUsuario;
-     $_SESSION['id-senha-recuperacao'] = $idRecover;
+    $_SESSION['nome-recuperacao'] = $nomeUsuario;
+    $_SESSION['id-senha-recuperacao'] = $idRecover;
 
     header('location: /petiti/views/recover/passrecover.php');
 });
@@ -207,12 +207,12 @@ $app->post('/usuario/update/senha/recuperacao', function (Request $request, Resp
     $usuario->setSenhaUsuario($senha);
     $usuario->updateSenha($usuario);
 
-   
+
 
     unset($_SESSION['id-senha-recuperacao']);
     unset($_SESSION['nome-recuperacao']);
     session_destroy();
-    
+
     header('location: /petiti/login');
 });
 
@@ -222,7 +222,6 @@ $app->get('/ativar-tutor/{id}', function (Request $request, Response $response, 
     $usuario->setStatusUsuario(1);
     $usuario->updateStatus($usuario);
     header('location:/petiti/tutores-dashboard');
-  
 });
 $app->get('/bloquear-tutor/{id}', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
@@ -230,7 +229,6 @@ $app->get('/bloquear-tutor/{id}', function (Request $request, Response $response
     $usuario->setStatusUsuario(0);
     $usuario->updateStatus($usuario);
     header('location:/petiti/tutores-dashboard');
-
 });
 
 $app->get('/ativar-empresa/{id}', function (Request $request, Response $response, array $args) {
@@ -311,36 +309,36 @@ $app->post('/login', function (Request $request, Response $response, array $args
     $json = file_get_contents($url);
     $dados = json_decode($json);
     $status = $dados[0]->statusUsuario;
-    
-    if ($status == 0) {
-        header('location: /petiti/login');
-        @session_start();
-        @session_destroy();
-        $cookie->criarCookie('retorno-login', "Usuário bloqueado.", 2);
-    } else {
-        if ($msg == "Bem vindo.") {
-            if ($_SESSION['tipo'] != 'Adm') {
-                $url = "http://localhost/petiti/api/usuario/$id";
 
-                $json = file_get_contents($url);
-                $dados = json_decode($json);
-                $login = $dados[0]->loginUsuario;
 
-                $_SESSION['login'] = $login;
-                header('location: /petiti/feed');
-            } else {
-                $url = "http://localhost/petiti/api/usuario/$id";
-                $json = file_get_contents($url);
-                $dados = json_decode($json);
-                $login = $dados[0]->loginUsuario;
-
-                $_SESSION['login'] = $login;
-                header('location: /petiti/dashboard');
-            }
-        } else {
+    if ($msg == "Bem vindo.") {
+        if ($status == 0) {
             header('location: /petiti/login');
-            $cookie->criarCookie('retorno-login', $msg, 2);
+            @session_start();
+            @session_destroy();
+            $cookie->criarCookie('retorno-login', "Usuário bloqueado.", 2);
         }
+        if ($_SESSION['tipo'] != 'Adm') {
+            $url = "http://localhost/petiti/api/usuario/$id";
+
+            $json = file_get_contents($url);
+            $dados = json_decode($json);
+            $login = $dados[0]->loginUsuario;
+
+            $_SESSION['login'] = $login;
+            header('location: /petiti/feed');
+        } else {
+            $url = "http://localhost/petiti/api/usuario/$id";
+            $json = file_get_contents($url);
+            $dados = json_decode($json);
+            $login = $dados[0]->loginUsuario;
+
+            $_SESSION['login'] = $login;
+            header('location: /petiti/dashboard');
+        }
+    } else {
+        header('location: /petiti/login');
+        $cookie->criarCookie('retorno-login', $msg, 2);
     }
 });
 
@@ -443,7 +441,7 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
         4 => "Ave",
         5 => "Exótico"
     );
-    
+
     $idade = $_POST['txtIdadePet'];
     $slDiaMesAno = $_POST['slIdade'];
     if ($idade > 1) {
@@ -484,7 +482,7 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     $pet->setIdadePet($idadeCompleta);
     $usuario->setIdUsuario($_SESSION['id-cadastro']);
     $pet->setUsuario($usuario);
-    
+
     $return = $pet->cadastrar($pet);
     $id = $return['id'];
     $_SESSION['id-cadastro-pet'] = $id;
@@ -492,7 +490,7 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     header('location: /petiti/foto-pet');
 });
 
-$app->get('/ativar-pet/{id}', function (Request $request, Response $response, array $args){
+$app->get('/ativar-pet/{id}', function (Request $request, Response $response, array $args) {
     $pet = new Pet();
     $pet->setStatusPet(1);
     $pet->setIdPet($args['id']);
@@ -500,7 +498,7 @@ $app->get('/ativar-pet/{id}', function (Request $request, Response $response, ar
     header("location: /petiti/pets-dashboard");
 });
 
-$app->get('/bloquear-pet/{id}', function (Request $request, Response $response, array $args){
+$app->get('/bloquear-pet/{id}', function (Request $request, Response $response, array $args) {
     $pet = new Pet();
     $pet->setStatusPet(0);
     $pet->setIdPet($args['id']);
@@ -604,12 +602,12 @@ $app->post(
         $categorias = $_POST['categoriasValue'];
         $categoriasA = explode(",", $categorias);
         if (isset($_POST['txtLocalizacao'])) {
-           $local = $_POST['txtLocalizacao'];
-        }else {
-        $local = "";        
+            $local = $_POST['txtLocalizacao'];
+        } else {
+            $local = "";
         }
         $publicacao->setLocalPub($local);
-        
+
         $DateAndTime = date('Y-m-d H:i:s');
 
         $publicacao->setTextoPublicacao($_POST['txtLegendaPub']);
@@ -703,7 +701,7 @@ $app->post(
 
 
         $idComentario = $comentario->cadastrar($comentario);
-       
+
 
         $json = json_encode($dadosComentario = $comentario->listarComentario($idComentario), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         $response->getBody()->write($json);
@@ -711,7 +709,7 @@ $app->post(
     }
 );
 
-$app->post('/seguir', function(Request $request, Response $response, array $args){
+$app->post('/seguir', function (Request $request, Response $response, array $args) {
     @session_start();
     $usuarioSeguidor = new UsuarioSeguidor();
     $usuario = new Usuario();
@@ -722,17 +720,16 @@ $app->post('/seguir', function(Request $request, Response $response, array $args
 
     $verificador = $ver['boolean'];
 
-    if($verificador == true){
+    if ($verificador == true) {
         $usuarioSeguidor->setIdSeguidor($idSeguidor);
         $usuarioSeguidor->setIdUsuarioSeguido($idUsuario);
         $idUsuarioSeguidor = $usuarioSeguidor->cadastrar($usuarioSeguidor);
         $usuarioSeguidor->setIdUsuarioSeguidor($idUsuarioSeguidor);
-    }else{
+    } else {
         $idSeguidorExistente = $ver['id'];
         $usuarioSeguidor->setIdUsuarioSeguidor($idSeguidorExistente);
         $usuarioSeguidor->delete($usuarioSeguidor);
     }
-
 });
 
 $app->post('/editar-perfil', function (Request $request, Response $response, array $args) {
@@ -746,44 +743,30 @@ $app->post('/editar-perfil', function (Request $request, Response $response, arr
     if (isset($_POST['txtLocal'])) {
         $usuario->setLocalizacaoUsuario($_POST['txtLocal']);
         $usuario->updateLocalizacao($usuario);
-
     }
     if (isset($_POST['txtSite'])) {
         $usuario->setSiteUsuario($_POST['txtSite']);
         $usuario->updateSite($usuario);
-
     }
     if (isset($_POST['txtBio'])) {
         $usuario->setBioUsuario($_POST['txtBio']);
         $usuario->updateBio($usuario);
-
     }
 
-if( $_POST['baseFoto'] != 0) {
-    
-    $fotoUsuario = new FotoUsuario();
-    $image = $_POST['baseFoto'];
-   
-  
+    if ($_POST['baseFoto'] != 0) {
+        $fotoUsuario = new FotoUsuario();
+        $image = $_POST['baseFoto'];
         $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-perfil/";
-
-
         $nomeArquivo = time() . ".png";
         $arquivoCompleto = $caminhoSalvar . $nomeArquivo;
-
         $fotoUsuario->setUsuario($usuario);
         $fotoUsuario->setNomeFoto($nomeArquivo);
-
         $caminhoBanco = "private-user/fotos-perfil/" . $nomeArquivo;
-
         $fotoUsuario->setCaminhoFoto($caminhoBanco);
         $fotoUsuario->cadastrar($fotoUsuario);
-
-
         file_put_contents($arquivoCompleto, file_get_contents($image));
         echo $arquivoCompleto;
-    
-}
+    }
 
     $usuario->login($_SESSION['login'], $_SESSION['senha']);
     header('location: /petiti/meu-perfil');
