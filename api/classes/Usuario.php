@@ -581,8 +581,14 @@ class Usuario
                         FROM tbusuario 
                         INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
                         INNER JOIN tbfotousuario ON tbfotousuario.idUsuario = tbusuario.idUsuario
-
-                        WHERE statusUsuario = 1 AND tbusuario.idTipoUsuario = 1";
+                        WHERE statusUsuario = 1 AND tbusuario.idTipoUsuario = 1 AND tbfotousuario.idFotoUsuario =(
+                            SELECT
+                                MAX(tbfotousuario.idFotoUsuario)
+                            FROM
+                                tbfotousuario
+                            WHERE
+                                tbfotousuario.idUsuario = tbUsuario.idUsuario
+                        )";
 
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -610,7 +616,14 @@ class Usuario
                         INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
                         INNER JOIN tbfotousuario ON tbfotousuario.idUsuario = tbusuario.idUsuario
 
-                        WHERE statusUsuario = 0 AND tbusuario.idTipoUsuario = 1";
+                        WHERE statusUsuario = 0 AND tbusuario.idTipoUsuario = 1 AND tbfotousuario.idFotoUsuario =(
+    SELECT
+        MAX(tbfotousuario.idFotoUsuario)
+    FROM
+        tbfotousuario
+     WHERE
+        tbfotousuario.idUsuario = tbUsuario.idUsuario
+)";
 
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -680,7 +693,14 @@ class Usuario
         FROM tbusuario 
         INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
         INNER JOIN tbfotousuario ON tbfotousuario.idUsuario = tbusuario.idUsuario
-        WHERE statusUsuario = 1 AND tbusuario.idTipoUsuario != 1";
+        WHERE statusUsuario = 1 AND tbusuario.idTipoUsuario != 1 AND tbfotousuario.idFotoUsuario =(
+    SELECT
+        MAX(tbfotousuario.idFotoUsuario)
+    FROM
+        tbfotousuario
+     WHERE
+        tbfotousuario.idUsuario = tbUsuario.idUsuario
+)";
 
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -705,7 +725,14 @@ class Usuario
         FROM tbusuario INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
         INNER JOIN tbfotousuario ON tbfotousuario.idUsuario = tbusuario.idUsuario
 
-        WHERE statusUsuario = 0 AND tbusuario.idTipoUsuario != 1";
+        WHERE statusUsuario = 0 AND tbusuario.idTipoUsuario != 1 AND tbfotousuario.idFotoUsuario =(
+    SELECT
+        MAX(tbfotousuario.idFotoUsuario)
+    FROM
+        tbfotousuario
+     WHERE
+        tbfotousuario.idUsuario = tbUsuario.idUsuario
+)";
 
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);

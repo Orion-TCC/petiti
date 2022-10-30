@@ -69,10 +69,21 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
     $validacaoEmail = $usuario->validarEmail($email);
     if ($validacaoEmail == false) {
         $cookie->criarCookie("erro-cadastro", "Email Inválido", 1);
-        header('location: /petiti/cadastro-usuario');
+        if ($_SESSION['tipo-usuario'] == "empresa") {
+            header('location: /petiti/cadastro-empresa');
+        } else {
+            header('location: /petiti/cadastro-usuario');
+        }
+       
     } elseif ($senha <> $senhaConfirmacao) {
         $cookie->criarCookie("erro-cadastro", "Senhas não coincindem", 1);
+        if ($_SESSION['tipo-usuario'] == "empresa") {
+            header('location: /petiti/info-empresa');
+        } else {
+            header('location: /petiti/info-usuario');
+        }
         header('location: /petiti/cadastro-usuario');
+
     } else {
         $senha = $_POST['txtPw'];
         $usuario->setNomeUsuario(" ");
@@ -97,7 +108,11 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
             }
         } else {
             $cookie->criarCookie("erro-cadastro", $msg, 1);
-            header('location: /petiti/cadastro-usuario');
+            if ($_SESSION['tipo-usuario'] == "empresa") {
+                header('location: /petiti/cadastro-empresa');
+            } else {
+                header('location: /petiti/cadastro-usuario');
+            }
         }
     }
 });

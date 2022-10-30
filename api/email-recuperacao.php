@@ -12,7 +12,7 @@ if ($usuario->procuraEmail($_POST['txtEmail']) == true) {
     foreach ($lista as $linha) {
         $login = $linha['loginUsuario'];
     }
-//header('location: /petiti/views/recover/senha-recuperacao.php?emailenviado=true');
+header('location: /petiti/views/recover/senha-recuperacao.php?emailenviado=true');
 require 'vendor/autoload.php';
 
 $mail = new PHPMailer(true);
@@ -29,8 +29,6 @@ try {
     $mail->Password   = 'lkmrvehesalnmidm';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port       = 465;
-        $mail->addCustomHeader("X-MSMail-Priority: " . $m . "");
-        $mail->addCustomHeader("X-Message-Flag: " . $flag . ""); 
 
     $mail->setFrom('orion.etec@gmail.com', 'Orion');
     $mail->addAddress($_POST['txtEmail'], 'Usuario(a)');
