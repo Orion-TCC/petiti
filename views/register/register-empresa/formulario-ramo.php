@@ -28,6 +28,7 @@
         <section id="formularioRamoEmpresa">
             <div class="holderFormularioFotoEmpresa">
                 <div class="formulario">
+                <a class="setaVoltar" href="foto-empresa"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder">
                         <span>
                             Qual o ramo da sua empresa?

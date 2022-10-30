@@ -161,7 +161,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
 
                         <div class="userCima">
                             <div class="fotoDePerfil">
-                                <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                                <img src="#" alt=""> <!--  foto do pet  -->
                             </div>
 
                             <div class="userInfo">
@@ -261,11 +261,11 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
 
                                 <div class="infoHolder baixo">
                                     <div style="width: 15rem; display: flex; align-items: center;">
-                                          <i class="uil uil-map-marker"></i> <h4><?php echo $_SESSION['local'] ?></h4>
+                                            <i class="icon enciclopedia"></i> <h4>/raçaDoPet</h4>
                                     </div>
 
                                     <div style="width: 15rem; display: flex; align-items: center;">
-                                           <i class="uil uil-link-alt"></i> <a href="http://<?php echo $_SESSION['site'] ?>"><?php echo $_SESSION['site'] ?> </a>
+                                            <i class="icon boloDeAniversario"></i>  <h4>/dataAniversarioPet</h4>
                                     </div>
                                 </div>
                             </div>
@@ -275,10 +275,10 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
 
                             <div class="subUserBaixo">
                                 <div style="width: fit-content; max-width: 25rem; display: flex; align-items: center;">
-                                     <h2><?php echo $_SESSION['nome']; ?></h2>
+                                     <h2>/nomeDoPet</h2>
                                 </div>
 
-                                <h4 class="text-muted">(Sou dono(a) do @/nomedopet)</h4>
+                                <h4 class="text-muted">(Meu dono(a) é @tutor)</h4>
                             </div>
 
                             <div class="bio">
@@ -286,7 +286,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                                 if ($_SESSION['bio'] == null) { ?>
                                     <h4 class="text-muted"><?php echo $_SESSION['bio'] ?> Adicione uma biografia! Conte um pouco sobre você :D</h4>
                                 <?php } else { ?>
-                                    <h4 class="text-muted"><?php echo $_SESSION['bio'] ?></h4>
+                                    <h4 class="text-muted">/biografiaDoPet</h4>
                                 <?php }
                                 ?>
                             </div>

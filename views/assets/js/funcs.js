@@ -112,13 +112,15 @@ document.addEventListener("DOMContentLoaded", () =>{
 
 
 
-const password = document.getElementById ('txtPw');
-const passwordConfirm = document.getElementById('txtPwConfirm');
 
-const toggle = document.getElementById ('revealPassword');
-const untoggle = document.getElementById ('hidePassword');
 
-function showPassword(){      
+function showPassword(){    
+        const password = document.getElementById ('txtPw');
+        const passwordConfirm = document.getElementById('txtPwConfirm');
+
+        const toggle = document.getElementById ('revealPassword');
+        const untoggle = document.getElementById ('hidePassword');
+  
         password.setAttribute('type', 'text');
 
         toggle.style.display = "block";
@@ -130,6 +132,12 @@ function showPassword(){
 
 
 function hidePassword(){
+          const password = document.getElementById ('txtPw');
+          const passwordConfirm = document.getElementById('txtPwConfirm');
+
+          const toggle = document.getElementById ('revealPassword');
+          const untoggle = document.getElementById ('hidePassword');
+
         password.setAttribute('type', 'password');
 
         toggle.style.display = "none";

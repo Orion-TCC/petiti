@@ -23,6 +23,9 @@ $_SESSION['tipo-usuario'] = "empresa";
     <title>Pet iti - A rede social para petlovers</title>
     <link rel="icon" href="/petiti/views/assets/img/logo-icon.svg">
 
+        <!-- iconscout icones -->
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
 
@@ -33,7 +36,11 @@ $_SESSION['tipo-usuario'] = "empresa";
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
 
     <script async src="/petiti/views/assets/js/script-jquery-foto.js"></script>
+
     <script  src="/petiti/views/assets/js/script-jquery.js"></script>
+
+    <script async src="/petiti/views/assets/js/funcs.js"></script>
+
 </head>
 
 <body>
@@ -61,23 +68,26 @@ $_SESSION['tipo-usuario'] = "empresa";
                             <input type="hidden" value=" " name="txtNomeUsuario">
                           
                             <label class="formText">Email</label>
-                            <input class="formInput" placeholder="Insira seu email" type="email" name="txtEmailUsuario" id="txtEmailUsuario">
+                            <input class="formInput" autocomplete="off" placeholder="Insira seu email" type="email" name="txtEmailUsuario" id="txtEmailUsuario">
                             <p id="avisoEmail"></p>
 
                             <label class="formText">Nome de usuário</label>
-                            <input class="formInput" placeholder="Insira seu username" type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4">
+                            <input class="formInput" autocomplete="off" placeholder="Insira seu username" type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4">
                             <p class="avisoNomeUsuarioValidacao"></p>
                             <p class="avisoNomeUsuarioQtd"></p>
 
                             <label class="formText">Senha</label>
                             <div class="formInput">
-                                <input  placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
-                                <div id="revealPassword" onclick="showHide()"></div>
+                                <input  placeholder="Insira sua melhor senha" autocomplete="off" type="password" name="txtPw" id="txtPw" required minlength="6">
+                                
+                                <i id="revealPassword" onclick="hidePassword()" class="uil uil-eye"></i>
+                                <i id="hidePassword" onclick="showPassword()" class="uil uil-eye-slash"></i>
+ 
                             </div>
                             <p id="senhaAvisoTamanho"></p>
 
                             <label class="formText">Confirme sua senha</label>
-                            <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
+                            <input class="formInput" placeholder="Confirme a senha" autocomplete="off" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
                             <p id="senhaAvisoVerificacao"></p>
 
                             <button class="formSubmit" type="submit">Continuar</button>

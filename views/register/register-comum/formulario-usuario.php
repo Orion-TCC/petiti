@@ -63,19 +63,19 @@ $_SESSION['tipo-usuario'] = "usuario";
                     <div class="formularioHolder ">
                         <form class="formElementsHolder" action="api/usuario/add" method="post">
                             <label class="formText">Email</label>
-                            <input class="formInput" placeholder="Insira seu email" type="email" name="txtEmailUsuario" id="txtEmailUsuario" required autofocus>
+                            <input class="formInput" autocomplete="off" placeholder="Insira seu email" type="email" name="txtEmailUsuario" id="txtEmailUsuario" required autofocus>
                             <p id="avisoEmail"></p>
 
 
                             <label class="formText">Nome de usuário</label>
-                            <input class="formInput" placeholder="Insira seu nome de usuario" type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4">
+                            <input class="formInput" autocomplete="off" placeholder="Insira seu nome de usuario" type=" text" name="txtLoginUsuario" id="txtLoginUsuario" required minlength="4">
 
                             <p class="avisoNomeUsuarioValidacao"></p>
                             <p class="avisoNomeUsuarioQtd"></p>
 
                             <label class="formText">Senha</label>
                             <div class="formInput">
-                                <input  placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
+                                <input  placeholder="Insira sua melhor senha" autocomplete="off" type="password" name="txtPw" id="txtPw" required minlength="6">
                                
                                 <i id="revealPassword" onclick="hidePassword()" class="uil uil-eye"></i>
                                 <i id="hidePassword" onclick="showPassword()" class="uil uil-eye-slash"></i>
@@ -84,7 +84,7 @@ $_SESSION['tipo-usuario'] = "usuario";
 
 
                             <label class="formText">Confirme sua senha</label>
-                            <input class="formInput" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
+                            <input class="formInput" autocomplete="off" placeholder="Confirme a senha" type="password" name="txtPwConfirm" id="txtPwConfirm" required minlength="6">
                             <p id="senhaAvisoVerificacao"></p>
 
 
