@@ -256,7 +256,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                             <div class="botoes">
                                 <div class="botoesDeInteracao">
 
-                                    <button><i class="uil uil-heart"></i></button>
+                                    <input type="checkbox" id="">
 
                                     <button><i class="uil uil-comment"></i></button>
 

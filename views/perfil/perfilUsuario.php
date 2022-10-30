@@ -290,7 +290,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
 
                         <div class="userTabs ">
                             <button class="userTabOption userTabOption--ativo " data-for-tab="1">Postagens</button>
-                            <button class="userTabOption" data-for-tab="2">Marcaçoes</button>
+                            <button class="userTabOption" data-for-tab="2">Marcações</button>
                             <button class="userTabOption" data-for-tab="3">Curtidas</button>
                         </div>
                         <!-- fim das tabs de navegacao de usuario -->
@@ -332,7 +332,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                             <?php
 
                             if ($contagemCurtidas < 1) { ?>
-                            
+
                                 <div class="aviso">
                                     <h3>Ainda nenhuma postagem curtida. Va para sua <a href="feed">Home</a> ou <a href="#">Para você</a> e curta alguma coisa!</h3>
                                 </div>
