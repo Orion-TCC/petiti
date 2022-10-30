@@ -53,7 +53,7 @@
                             <option value="0" disabled selected>Escolha</option>
                             <?php
                             foreach ($listaTipos as $linha) {
-                                if ($linha['idTipoUsuario'] > 1) { ?>
+                                if ($linha['tipoUsuario'] != "Adm" && $linha['tipoUsuario'] != "Tutor") { ?>
                                     <option style="color: #000000;" value="<?php echo $linha['idTipoUsuario'] ?>"><?php echo $linha['tipoUsuario'] ?></option>
                                 <?php } ?>
                             <?php }
