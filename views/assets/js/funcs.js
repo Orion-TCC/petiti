@@ -5,10 +5,11 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       url: "/petiti/api/curtir",
-      data: {"id":id },
+      data: {"idPub":id },
       success: function (data) {
-        console.log("post de id "+id+" foi curtido");
-        $("#itimaliasPost"+id).text(data+" itimalias");
+        console.log("post de id " + id + " foi curtido");
+        console.log(data);
+        $("#itimalias"+id).text(data);
       }
     });
   });

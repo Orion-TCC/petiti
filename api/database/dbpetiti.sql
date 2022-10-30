@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Out-2022 às 17:52
+-- Tempo de geração: 30-Out-2022 às 05:15
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -48,7 +48,10 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 (6, 'cachorro', 1),
 (7, 'categorias', 1),
 (8, 'ka', 1),
-(9, 'Pixel', 1);
+(9, 'Pixel', 1),
+(10, 'aa', 1),
+(11, 'kauansafadus', 1),
+(12, 'kauan safadus', 1);
 
 -- --------------------------------------------------------
 
@@ -87,6 +90,23 @@ CREATE TABLE `tbcurtidapublicacao` (
   `idUsuarioCurtida` int(11) NOT NULL,
   `idPublicacaoCurtida` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Acionadores `tbcurtidapublicacao`
+--
+DELIMITER $$
+CREATE TRIGGER `tg_curtir` AFTER INSERT ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
+	UPDATE tbpublicacao SET itimalias = itimalias + 1 WHERE idPublicacao = NEW.idPublicacaoCurtida;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `tg_descurtir` AFTER DELETE ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
+	UPDATE tbpublicacao SET itimalias  = itimalias  - 1
+WHERE idPublicacao = OLD.idPublicacaoCurtida;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -425,7 +445,7 @@ ALTER TABLE `tbusuarioseguidor`
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriapublicacao`

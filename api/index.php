@@ -657,7 +657,7 @@ $app->post(
         $curtidaPub = new CurtidaPublicacao();
         $usuario = new Usuario();
         $publicacao = new Publicacao();
-        $idPub = $_POST['id'];
+        $idPub = $_POST['idPub'];
         $idUser = $_SESSION['id'];
 
         $result = $curtidaPub->verificarCurtida($idPub, $idUser);
@@ -673,6 +673,8 @@ $app->post(
             $curtidaPub->setIdCurtidaPublicacao($idCurtidaExistente);
             $curtidaPub->delete($curtidaPub);
         }
+        $lista = $publicacao->listarPub($idPub);
+        $resultado = 
         $json = json_encode($lista = $publicacao->listarPub($idPub), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         foreach ($lista as $linha) {
             $itimalias = $linha['itimalias'];

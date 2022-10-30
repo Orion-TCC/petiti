@@ -8,6 +8,7 @@ $idUsuarioCurtida = $_SESSION['id'];
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
+
 <head>
     <!-- HTML base -->
     <meta charset="UTF-8">
@@ -179,7 +180,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                 <div class="feeds">
                     <?php
                     $url = "http://localhost/petiti/api/publicacoes";
-                    
+
 
                     $json = file_get_contents($url);
                     $dados = (array)json_decode($json, true);
@@ -256,7 +257,17 @@ $idUsuarioCurtida = $_SESSION['id'];
                             <div class="botoes">
                                 <div class="botoesDeInteracao">
 
-                                    <input type="checkbox" id="">
+                                    <?php
+                                    $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
+                                    if ($verificaCurtida['boolean'] == false) { ?>
+                                        <input checked class="curtir" value="<?php echo $id ?>" type="checkbox">
+                                        <!-- curtido -->
+                                    <?php } else { ?>
+
+                                        <input class="curtir" value="<?php echo $id ?>" type="checkbox">
+                                        <!-- nao curtido  -->
+                                    <?php }
+                                    ?>
 
                                     <button><i class="uil uil-comment"></i></button>
 
@@ -267,7 +278,17 @@ $idUsuarioCurtida = $_SESSION['id'];
 
                             <div class="curtidoPor">
                                 <span><img src="<?php echo $_SESSION['foto']; ?>" alt=""></span>
-                                <p>Curtido por <b><?php echo $_SESSION['login']; ?></b> e <b>mais outros <?php echo $itimalias ?></b></p>
+
+                                <?php
+                                $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
+                                if ($verificaCurtida['boolean'] == false) { ?>
+                                    <p>Curtido por <b><?php echo $_SESSION['login']; ?></b> e <b>mais outros <b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b></p>
+                                    <!-- curtido -->
+                                <?php } else { ?>
+                                    <p>Curtido por <b><b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b></p>
+                                    <!-- nao curtido  -->
+                                <?php }
+                                ?>
                             </div>
 
                             <div class="caption">
@@ -348,30 +369,30 @@ $idUsuarioCurtida = $_SESSION['id'];
 
 
 
-            <!-- Modal Post -->
-    <section id="post">
+        <!-- Modal Post -->
+        <section id="post">
 
-<div id="modal-foto-post" class="modal">
-    <div class="modal-foto-post">
-     <div class="tituloModalPost">Criar um post</div>
-        <div class="inputArea">
+            <div id="modal-foto-post" class="modal">
+                <div class="modal-foto-post">
+                    <div class="tituloModalPost">Criar um post</div>
+                    <div class="inputArea">
 
-            <div class="fotoSelecionarImagem">
-              <img src="./assets/images/selectFotoIlustracao.png">
+                        <div class="fotoSelecionarImagem">
+                            <img src="./assets/images/selectFotoIlustracao.png">
+                        </div>
+
+                        <span class="textPadrao">Arraste fotos, vídeos ou gifs aqui</span>
+
+                        <label class="btn inputButtonEstilo">
+                            <input class="inputForm" type="file" accept="image/*" id="flFoto">
+                            <span>Selecionar no computador</span>
+                            <label>
+                    </div>
+                </div>
+
             </div>
 
-            <span class="textPadrao">Arraste fotos, vídeos ou gifs aqui</span>
-
-            <label class="btn inputButtonEstilo">
-                <input class="inputForm" type="file" accept="image/*" id="flFoto">
-                <span>Selecionar no computador</span>
-            <label>
-        </div>
-    </div>
-
-</div>
-
-<!-- <script>
+            <!-- <script>
     var holder = document.getElementById('modal-foto-post');
     holder.ondragover = function() {
         this.className = 'hover';
@@ -388,126 +409,126 @@ $idUsuarioCurtida = $_SESSION['id'];
     }
 </script> -->
 
-</div>
-</section>
-
-
-<section>
-    <div id="modal-recortar-foto" class="modal">
-        <div class="tituloModalPost">
-
-            <div style="width: 60%; display: flex; justify-content: end;"><span>Recortar</span></div>
-            <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> <a id="continuar-post" href="#criar-post" rel="modal:open">Continuar</a> </div>
-
-        </div>
-
-        <div id="upload-demo"></div>
-
-    </div>
-</section>
-
-
-
-<section>
-    <div id="criar-post" class="modal">
-        <form id="form-aid" method="post" action="./api/publicar">
-            <div class="tituloModalPost">
-                <div style="width: 60%; display: flex; justify-content: end;"><span>Criar um post</span></div>
-
-                <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;">
-                    <input class="submitCriarPost" type="submit" value="Compartilhar">
-                </div>
             </div>
+        </section>
 
-            <div style="display: flex; flex-direction: row;">
-                <div>
-                    <div id="preview-crop-image"></div>
+
+        <section>
+            <div id="modal-recortar-foto" class="modal">
+                <div class="tituloModalPost">
+
+                    <div style="width: 60%; display: flex; justify-content: end;"><span>Recortar</span></div>
+                    <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> <a id="continuar-post" href="#criar-post" rel="modal:open">Continuar</a> </div>
+
                 </div>
 
-                <div class="criarPostElements">
+                <div id="upload-demo"></div>
+
+            </div>
+        </section>
 
 
-                    <div class="parte1CriarPost">
 
-                        <div class="userElementos">
+        <section>
+            <div id="criar-post" class="modal">
+                <form id="form-aid" method="post" action="./api/publicar">
+                    <div class="tituloModalPost">
+                        <div style="width: 60%; display: flex; justify-content: end;"><span>Criar um post</span></div>
 
-                            <div class="fotoDePerfil">
-                             <img class="imagemUser" src="<?php echo $_SESSION['foto']; ?>" alt="">
-                            </div>
+                        <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;">
+                            <input class="submitCriarPost" type="submit" value="Compartilhar">
+                        </div>
+                    </div>
 
-                            <span class="textNomeUsuario"><?php echo $_SESSION['nome']; ?></span>
+                    <div style="display: flex; flex-direction: row;">
+                        <div>
+                            <div id="preview-crop-image"></div>
                         </div>
 
-
-                        <textarea name="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!" maxlength="200"></textarea>
-                        
-                        <input type="hidden" name="categoriasValue" id="categoriasValue" value="categorias">
-                        
-                        <input type="hidden" name="baseFoto" id="baseFoto">
+                        <div class="criarPostElements">
 
 
-                        <div class="letraCont">
-                            <span>0</span>
-                            <span>/200</span>
-                        </div>
+                            <div class="parte1CriarPost">
 
-                    </div>
+                                <div class="userElementos">
 
-                    <div class="parte2CriarPost">
-                        <input placeholder="Adicione uma localização" type="text" name="txtLocalizacao">
-                        <i class="uil uil-map-marker"></i>
-                    </div>
-
-
-
-
-                    <div class="parte3CriarPost">
-
-                    <div class="categoriaSelectTitulo">
-                        <span>
-                           Categoria
-                        </span>
-                    </div>
-                        <div id="categoriasHolder">
-
-                            <span class="text-muted">
-                                Insira categorias no seu post e você irá alcançar mais engajamento e até mesmo ajudar a filtrar a “Para você” de outros petlovers/petmigos.
-                            </span>
-
-                            <div style="display: grid; grid-template-columns: repeat(10, 1fr); width: 100%;">
-                                <input type="text" name="txtCategoria" id="txtCategoria" placeholder="Ex: Lhama">
-                                <p id="submitCategoria"><i class="uil uil-plus"></i></p>
-                            </div>
-
-                            <div class="categoriasChecksHolder">
-                                <?php $urlCategorias = "http://localhost/petiti/api/categorias";
-                                $jsonCategorias = file_get_contents($urlCategorias);
-                                $dadosCategoria = (array)json_decode($jsonCategorias, true);
-                                $contagemCategoria = count($dadosCategoria['categorias']);
-                                for ($i = 0; $i < $contagemCategoria; $i++) {
-                                ?>
-
-                                    <div class="categoriaSelector">
-                                        <input class="checkbox" type="checkbox" name="categorias[]" id="<?php $dadosCategoria['categorias'][$i]['idCategoria'] ?>" value="<?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>">
-                                        <?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>
+                                    <div class="fotoDePerfil">
+                                        <img class="imagemUser" src="<?php echo $_SESSION['foto']; ?>" alt="">
                                     </div>
-                                <?php
-                                }
-                                ?>
+
+                                    <span class="textNomeUsuario"><?php echo $_SESSION['nome']; ?></span>
+                                </div>
+
+
+                                <textarea name="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!" maxlength="200"></textarea>
+
+                                <input type="hidden" name="categoriasValue" id="categoriasValue" value="categorias">
+
+                                <input type="hidden" name="baseFoto" id="baseFoto">
+
+
+                                <div class="letraCont">
+                                    <span>0</span>
+                                    <span>/200</span>
+                                </div>
 
                             </div>
+
+                            <div class="parte2CriarPost">
+                                <input placeholder="Adicione uma localização" type="text" name="txtLocalizacao">
+                                <i class="uil uil-map-marker"></i>
+                            </div>
+
+
+
+
+                            <div class="parte3CriarPost">
+
+                                <div class="categoriaSelectTitulo">
+                                    <span>
+                                        Categoria
+                                    </span>
+                                </div>
+                                <div id="categoriasHolder">
+
+                                    <span class="text-muted">
+                                        Insira categorias no seu post e você irá alcançar mais engajamento e até mesmo ajudar a filtrar a “Para você” de outros petlovers/petmigos.
+                                    </span>
+
+                                    <div style="display: grid; grid-template-columns: repeat(10, 1fr); width: 100%;">
+                                        <input type="text" name="txtCategoria" id="txtCategoria" placeholder="Ex: Lhama">
+                                        <p id="submitCategoria"><i class="uil uil-plus"></i></p>
+                                    </div>
+
+                                    <div class="categoriasChecksHolder">
+                                        <?php $urlCategorias = "http://localhost/petiti/api/categorias";
+                                        $jsonCategorias = file_get_contents($urlCategorias);
+                                        $dadosCategoria = (array)json_decode($jsonCategorias, true);
+                                        $contagemCategoria = count($dadosCategoria['categorias']);
+                                        for ($i = 0; $i < $contagemCategoria; $i++) {
+                                        ?>
+
+                                            <div class="categoriaSelector">
+                                                <input class="checkbox" type="checkbox" name="categorias[]" id="<?php $dadosCategoria['categorias'][$i]['idCategoria'] ?>" value="<?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>">
+                                                <?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+
+
                     </div>
-                </div>
-
-
-
             </div>
-    </div>
-    </form>
-    </div>
-</section>
-                    <!-- fim Modals -->
+            </form>
+            </div>
+        </section>
+        <!-- fim Modals -->
 
     </main>
 
