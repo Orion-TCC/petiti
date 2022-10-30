@@ -69,7 +69,7 @@ $idUsuarioCurtida = $_SESSION['id'];
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
-                <a href="/petiti/meu-perfil" class="perfil">
+                <a href="/petiti/tutor-perfil" class="perfil">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
@@ -295,7 +295,11 @@ $idUsuarioCurtida = $_SESSION['id'];
                                <span class="text-bold"> <?php echo $login; ?></span>  <span class="text-muted"><?php echo $texto ?></span>
                             </div>
 
-                            <div class="comments text-muted"></div>
+                            <div class="commentArea">
+                                <i class="uil uil-heart"></i>
+                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200"></textarea>
+                                <span class="text-muted">0/200</span>
+                            </div>
 
                         </div>
                     <?php }

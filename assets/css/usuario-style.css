@@ -487,6 +487,17 @@
   min-height: 15rem;
 }
 
+.serviços{
+  position: relative;
+  padding: 2rem 0;
+  margin-left: 1.4rem;
+  display: none;    
+  grid-template-columns: 33% 33% 33%;
+  row-gap: 2rem;
+  height: fit-content;
+  min-height: 15rem;
+}
+
 .produtos{
   position: relative;
   padding: 2rem 0;

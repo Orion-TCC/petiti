@@ -680,6 +680,7 @@ body.feed{
   
   .meio .caption{
     margin: 0 0.6rem;
+    padding-bottom: 2rem;
   }
 
   .meio .caption :nth-child(1){
@@ -691,6 +692,42 @@ body.feed{
     font-size: 1.1rem;
     font-weight: 400;
   }
+
+.meio .commentArea{
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  display: flex;
+}
+
+.meio .commentArea textarea{
+  border-top: 1px solid gray;
+  resize: none;
+  width: 37rem;
+  height: 59px;
+  padding: var(--card-padding);
+  padding-left: 2rem;
+  font-family: "Public Sans Bold", sans-serif;
+  font-size: 1rem;
+  overflow: hidden;
+
+}
+  
+.meio .commentArea i{
+  position: absolute;
+  font-size: 1.4rem;
+  align-self: center;
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+}
+
+.meio .commentArea span{
+  align-self: flex-end;
+  right: 0;
+  position: absolute;
+  font-weight: 700;
+}
+
   /* lado direito */
   .ladoDireito .whiteBoxHolder {
     background: var(--color-white);

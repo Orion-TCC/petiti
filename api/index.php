@@ -405,7 +405,7 @@ $app->get('/pet/{id}', function (Request $request, Response $response, array $ar
     $id = $args['id'];
     $pet = new Pet();
 
-    $json = "{\"pet\":" . json_encode($lista = $pet->listarPet($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $json = json_encode($lista = $pet->listarPet($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });

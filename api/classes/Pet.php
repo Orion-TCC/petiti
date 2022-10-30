@@ -129,7 +129,7 @@ class Pet
     public function listar()
     {
         $con = Conexao::conexao();
-        $query = "SELECT tbpet.idPet, nomePet, racaPet, especiePet, idadePet, dataCriacaoPet, tbusuario.idUsuario, loginUsuario, caminhoFotoPet
+        $query = "SELECT tbpet.idPet, nomePet, racaPet, especiePet, idadePet, dataCriacaoPet, usuarioPet,tbusuario.idUsuario, loginUsuario, caminhoFotoPet
                     FROM tbpet
                     INNER JOIN tbfotopet ON tbpet.idPet  = tbfotopet.idPet                    
                     INNER JOIN tbusuario ON tbusuario.idUsuario = tbpet.idUsuario";
@@ -141,7 +141,7 @@ class Pet
     public function listarPet($id)
     {
         $con = Conexao::conexao();
-        $query = "SELECT tbpet.idPet, nomePet, racaPet, especiePet, idadePet, dataCriacaoPet, tbusuario.idUsuario, loginUsuario, caminhoFotoPet
+        $query = "SELECT tbpet.idPet, nomePet, usuarioPet,racaPet, especiePet, idadePet, dataCriacaoPet, tbusuario.idUsuario, loginUsuario, caminhoFotoPet
                     FROM tbpet
                     INNER JOIN tbfotopet ON tbpet.idPet  = tbfotopet.idPet
                     INNER JOIN tbusuario ON tbusuario.idUsuario = tbpet.idUsuario 

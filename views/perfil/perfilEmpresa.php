@@ -300,7 +300,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                         <div class="userTabs ">
                             <button class="userTabOption userTabOption--ativo " data-for-tab="1">Postagens</button>
                             <button class="userTabOption" data-for-tab="2">Produtos</button>
-                            <button class="userTabOption" data-for-tab="3">Curtidas</button>
+                            <button class="userTabOption" data-for-tab="3">Serviços</button>
                         </div>
                         <!-- fim das tabs de navegacao de usuario -->
 
@@ -338,26 +338,11 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                         </div>
 
                         
-                        <div class="tabs_content curtidas" data-tab="3">
+                        <div class="tabs_content serviços" data-tab="3">
 
-                            <?php
-
-                            if ($contagemCurtidas < 1) { ?>
-
-                                <div class="aviso">
-                                    <h3>Ainda nenhuma postagem curtida. Va para sua <a href="feed">Home</a> ou <a href="#">Para você</a> e curta alguma coisa!</h3>
+                        <div class="aviso">
+                                    <h3>Ainda nenhum serviço... eu imagino oque o dono desse perfil esta fazendo...</h3>
                                 </div>
-
-                                <?php } else {
-
-                                for ($i = 0; $i < $contagemCurtidas; $i++) {
-                                    $fotoCurtidas = $dadosCurtidas['publicacoes'][$i]['caminhoFoto'];
-                                ?>
-                                    <div class="previewPostImage">
-                                        <img src="<?php echo $fotoCurtidas ?>" alt="">
-                                    </div>
-                            <?php }
-                            } ?>
 
                         </div>
                     </div>
