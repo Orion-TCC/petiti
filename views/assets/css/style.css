@@ -294,24 +294,34 @@ body {
 }
 
 #revealPassword {
-  background: url(https://cdn-icons-png.flaticon.com/512/3945/3945105.png);
-  background-size: cover;
 
-  width: 25px;
-  height: 25px;
+  display: none;
+
+  font-size: 1.9rem;
   transform: translateY(-50%);
 
   position: absolute;
-  top: 50%;
-  right: 20px;
+  top: 55%;
+  right: 5px;
+
+  cursor: pointer;
+
+
+}
+
+#hidePassword {
+
+  font-size: 1.9rem;
+
+  transform: translateY(-50%);
+
+  position: absolute;
+  top: 55%;
+  right: 5px;
 
   cursor: pointer;
 }
 
-#revealPassword.hide {
-  background: url(https://cdn-icons-png.flaticon.com/512/2533/2533656.png);
-  background-size: cover;
-}
 
 .formSubmit {
   background: #fcf892;

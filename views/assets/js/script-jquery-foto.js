@@ -30,6 +30,22 @@ $(document).ready(function () {
     $("#flFoto").val("");
   });
 
+  $("#flFotoPerfil").on("change", function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      resize
+        .croppie("bind", {
+          url: e.target.result,
+        })
+        .then(function () {
+          console.log("jQuery bind complete");
+        });
+    };
+    reader.readAsDataURL(this.files[0]);
+    $("#modal-recortar-foto-perfil").modal("show");
+    $("#flFotoPerfil").val("");
+  });
+
   $("#flFotoPet").on("change", function () {
     var reader = new FileReader();
     reader.onload = function (e) {

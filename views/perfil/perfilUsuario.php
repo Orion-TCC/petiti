@@ -169,23 +169,72 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                                     <h2><?php echo $_SESSION['login']; ?></h2>
                                     <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
                                 </div>
+
+
+
+
                                 <div class="modal" id="modal-editar-perfil">
-                                    <form style="display: flex;flex-direction: column;" action="/petiti/api/editar-perfil" method="post">
-                                        <button type="submit">Salvar</button>
-                                        <img id="preview" style="width: 70px;" src="<?php echo $_SESSION['foto'] ?>">
-                                        <input id="flFoto" type="file" accept=".jpg, .png">
-                                        <input id="baseFoto" type="hidden">
-                                        <label for="">Nome:</label>
-                                        <input value="<?php echo $_SESSION['nome'] ?>" placeholder="Nome escolhido no cadastro" type="text" name="txtNome" id="txtNome">
-                                        <label for="">Local:</label>
-                                        <input <?php if ($_SESSION['local'] != null) { ?> value="<?php echo $_SESSION['local'] ?>" <?php } ?> placeholder="Localização" type="text" name="txtLocal" id="txtLocal">
-                                        <label for="">Site:</label>
-                                        <input <?php if ($_SESSION['site'] != null) { ?> value="<?php echo $_SESSION['site'] ?>" <?php } ?> placeholder="URL" type="text" name="txtSite" id="txtSite">
-                                        <label for="">Bio:</label>
-                                        <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." type="text" name="txtBio" id="txtBio"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
+                                    
+                                    <form class="flex-col" action="/petiti/api/editar-perfil" method="post">
+                                        
+                                            <div class="editPerfilHeader">
+                                                <div class="flex-row" >
+                                                    <a style="display: block !important;" href="#close-modal" rel="modal:close"><i class="uil uil-multiply"></i></i></a>
+                                                    <h2>Editar perfil</h2>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary">Salvar</button>
+                                            
+                                            </div>
+
+                                    <div class="editarPerfilForm">
+
+                                        <div class="flex-row">
+
+                                            <img class="fotoDePerfil" id="preview"  src="<?php echo $_SESSION['foto'] ?>">
+
+                                            <label class="flFotoPerfil">
+                                                <input id="flFotoPerfil" type="file" accept=".jpg, .png">
+                                            </label>
+
+                                            <input value="0" id="baseFoto" type="hidden" name="baseFoto">
+
+                                            <h2>
+                                                <label class="flFotoPerfil2">
+                                                    Alterar foto do perfil
+                                                    <input id="flFotoPerfil" type="file" accept=".jpg, .png">
+                                                </label>
+                                            </h2>
+
+                                        </div>
+
+                                        <div class="flex-col">
+                                            <label class="text-bold" for="">Nome</label>
+                                            <input placeholder="Nome" value="<?php echo $_SESSION['nome'] ?>" type="text" name="txtNome" id="txtNome" autocomplete="off" maxlength="40">
+                                        </div>
+
+                                        <div class="flex-col">
+                                            <label class="text-bold" for="">Local</label>
+                                            <input <?php if ($_SESSION['local'] != null) { ?> value="<?php echo $_SESSION['local'] ?>" <?php } ?> placeholder="Localização" type="text" name="txtLocal" id="txtLocal" autocomplete="off" maxlength="40">
+                                        </div>
+
+                                        <div class="flex-col">
+                                            <label class="text-bold" for="">Site</label>
+                                            <input class="a-text" <?php if ($_SESSION['site'] != null) { ?>value="<?php echo $_SESSION['site'] ?>" <?php } ?> placeholder="URL" type="text" name="txtSite" id="txtSite" autocomplete="off" maxlength="40">
+                                        </div>
+
+                                        <div class="flex-col biografia">
+                                            <label class="text-bold" for="">Biografia</label>
+                                            <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." autocomplete="off" type="text" name="txtBio" id="txtBio" maxlength="200"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
+                                            <h4 class="text-muted">0/200</h3>
+                                        </div>
+
+                                    </div>
+
                                     </form>
                                 </div>
-                                <div id="modal-recortar-foto" class="modal">
+
+                                <div id="modal-recortar-foto-perfil" class="modal">
                                     <div class="modalInner">
                                         <span class="subTituloForm">Redimensione sua imagem!</span>
                                         <a class="formInputFoto">
@@ -202,8 +251,13 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                                 </div>
 
                                 <div class="infoHolder baixo">
-                                    <h4><i class="uil uil-map-marker"></i> <?php echo $_SESSION['local'] ?></h4>
-                                    <h4><i class="uil uil-link-alt"></i> <?php echo $_SESSION['site'] ?></h4>
+                                    <div style="width: 15rem; display: flex; align-items: center;">
+                                          <i class="uil uil-map-marker"></i> <h4><?php echo $_SESSION['local'] ?></h4>
+                                    </div>
+
+                                    <div style="width: 15rem; display: flex; align-items: center;">
+                                           <i class="uil uil-link-alt"></i> <a href="http://<?php echo $_SESSION['site'] ?>"><?php echo $_SESSION['site'] ?> </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -211,7 +265,10 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                         <div class="userBaixo">
 
                             <div class="subUserBaixo">
-                                <h2><?php echo $_SESSION['nome']; ?></h2>
+                                <div style="width: fit-content; max-width: 25rem; display: flex; align-items: center;">
+                                     <h2><?php echo $_SESSION['nome']; ?></h2>
+                                </div>
+
                                 <h4 class="text-muted">(Sou dono(a) do @/nomedopet)</h4>
                             </div>
 

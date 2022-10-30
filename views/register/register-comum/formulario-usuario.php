@@ -23,6 +23,10 @@ $_SESSION['tipo-usuario'] = "usuario";
     <title>Pet iti - A rede social para petlovers</title>
     <link rel="icon" href="/petiti/views/assets/img/logo-icon.svg">
 
+
+    <!-- iconscout icones -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -35,6 +39,8 @@ $_SESSION['tipo-usuario'] = "usuario";
     <script async src="/petiti/views/assets/js/script-jquery-foto.js"></script>
 
     <script async src="/petiti/views/assets/js/script-jquery.js"></script>
+
+    <script async src="/petiti/views/assets/js/funcs.js"></script>
 
 </head>
 
@@ -70,7 +76,9 @@ $_SESSION['tipo-usuario'] = "usuario";
                             <label class="formText">Senha</label>
                             <div class="formInput">
                                 <input  placeholder="Insira sua melhor senha" type="password" name="txtPw" id="txtPw" required minlength="6">
-                                <div id="revealPassword" onclick="showHide()"></div>
+                               
+                                <i id="revealPassword" onclick="hidePassword()" class="uil uil-eye"></i>
+                                <i id="hidePassword" onclick="showPassword()" class="uil uil-eye-slash"></i>
                             </div>
                             <p id="senhaAvisoTamanho"></p>
 

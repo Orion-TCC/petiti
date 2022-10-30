@@ -110,3 +110,59 @@ document.addEventListener("DOMContentLoaded", () =>{
 });
 
 
+
+const password = document.getElementById ('txtPw');
+const passwordConfirm = document.getElementById('txtPwConfirm');
+
+const toggle = document.getElementById ('revealPassword');
+const untoggle = document.getElementById ('hidePassword');
+
+function showPassword(){      
+        password.setAttribute('type', 'text');
+
+        toggle.style.display = "block";
+        untoggle.style.display = "none";
+
+        passwordConfirm.setAttribute('type', 'text');
+
+    }
+
+
+function hidePassword(){
+        password.setAttribute('type', 'password');
+
+        toggle.style.display = "none";
+        untoggle.style.display = "block";
+
+        passwordConfirm.setAttribute('type', 'password');
+}
+
+
+
+function showPasswordUm(){      
+  const password = document.getElementById ('txtPw');
+
+  const toggle = document.getElementById ('revealPassword');
+  const untoggle = document.getElementById ('hidePassword');
+
+  password.setAttribute('type', 'text');
+
+  toggle.style.display = "block";
+  untoggle.style.display = "none";
+
+
+}
+
+
+function hidePasswordUm(){
+  const password = document.getElementById ('txtPw');
+
+  const toggle = document.getElementById ('revealPassword');
+  const untoggle = document.getElementById ('hidePassword');
+
+  password.setAttribute('type', 'password');
+
+  toggle.style.display = "none";
+  untoggle.style.display = "block";
+
+}

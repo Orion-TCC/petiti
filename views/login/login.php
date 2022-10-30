@@ -13,12 +13,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="/petiti/views/assets/css/style.css">
 
+    <!-- iconscout icones -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
     <link rel="icon" href="/petiti/views/assets/img/logo-icon.svg">
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
+    <script async src="/petiti/views/assets/js/funcs.js"></script>
+
 </head>
 
 <body style="overflow: hidden;">
@@ -38,7 +43,14 @@
 
                         <div class="loginInputHolder">
                             <label class="formTextLogin">Senha</label>
-                            <input class="formInputLogin" type="password" name="pw" placeholder="Senha" required minlength="4">
+                            
+                            <div style="position: relative;">
+                                <input class="formInputLogin" id="txtPw" type="password" name="pw" placeholder="Senha" required minlength="4">
+                                
+                                <i id="revealPassword" onclick="hidePasswordUm()" class="uil uil-eye"></i>
+                                <i id="hidePassword" onclick="showPasswordUm()" class="uil uil-eye-slash"></i>
+                            </div>
+
                         </div>
 
                         <button class="formSubmitLogin" type="submit">Entrar</button>

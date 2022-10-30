@@ -497,7 +497,7 @@ $app->get('/ativar-pet/{id}', function (Request $request, Response $response, ar
     $pet->setStatusPet(1);
     $pet->setIdPet($args['id']);
     $pet->updateStatus($pet);
-    header("location: /petiti/pets-dashboard/");
+    header("location: /petiti/pets-dashboard");
 });
 
 $app->get('/bloquear-pet/{id}', function (Request $request, Response $response, array $args){
@@ -505,7 +505,7 @@ $app->get('/bloquear-pet/{id}', function (Request $request, Response $response, 
     $pet->setStatusPet(0);
     $pet->setIdPet($args['id']);
     $pet->updateStatus($pet);
-    header("location: /petiti/pets-dashboard/");
+    header("location: /petiti/pets-dashboard");
 });
 
 $app->get('/categorias', function (Request $request, Response $response, array $args) {
@@ -758,6 +758,33 @@ $app->post('/editar-perfil', function (Request $request, Response $response, arr
         $usuario->updateBio($usuario);
 
     }
+
+if( $_POST['baseFoto'] != 0) {
+    
+    $fotoUsuario = new FotoUsuario();
+    $image = $_POST['baseFoto'];
+   
+  
+        $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-perfil/";
+
+
+        $nomeArquivo = time() . ".png";
+        $arquivoCompleto = $caminhoSalvar . $nomeArquivo;
+
+        $fotoUsuario->setUsuario($usuario);
+        $fotoUsuario->setNomeFoto($nomeArquivo);
+
+        $caminhoBanco = "private-user/fotos-perfil/" . $nomeArquivo;
+
+        $fotoUsuario->setCaminhoFoto($caminhoBanco);
+        $fotoUsuario->cadastrar($fotoUsuario);
+
+
+        file_put_contents($arquivoCompleto, file_get_contents($image));
+        echo $arquivoCompleto;
+    
+}
+
     $usuario->login($_SESSION['login'], $_SESSION['senha']);
     header('location: /petiti/meu-perfil');
 });
