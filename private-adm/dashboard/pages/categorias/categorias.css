@@ -463,8 +463,9 @@ main .info-pets .perfis-pets {
   text-align: center;
   font-family: "Raleway", "sans-serif";
   padding: 15px;
+  gap: 8px;
   border-radius: 20px;
-  BORDER-color: #3837a1;
+  border-color: #3837a1;
   border-width: 2px;
   border-style: solid;
 }
@@ -473,20 +474,21 @@ main .info-pets .perfis-pets {
   font-family: "Raleway", "sans-serif";
   padding: 15px;
   border-radius: 20px;
-  BORDER-color: #677483;
+  border-color: #677483;
   border-width: 2px;
   border-style: solid;
 }
-.itemCat:hover{
-background-color: #3837a1;
+.bloquear {
+  background-color: #d30c1d;
+  padding: 5px;
+  border-radius: 15px;
   color: white;
-
-transition: all 0.6;
+  font-size: 10px;
 }
-.itemCatBloqueada:hover{
-  background-color: #677483;
-  transition: all 0.6;
+.ativar {
+  background-color: #7380ec;
+  padding: 5px;
+  border-radius: 15px;
   color: white;
+  font-size: 10px;
 }
-
-
