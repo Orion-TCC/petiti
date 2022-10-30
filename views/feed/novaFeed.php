@@ -69,7 +69,7 @@ $idUsuarioCurtida = $_SESSION['id'];
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
-                <a href="/petiti/meu-perfil" class="perfil">
+                <a href="/petiti/tutor-perfil" class="perfil">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
