@@ -453,67 +453,96 @@ main .info-pets .perfis-pets {
   align-items: center;
 }
 
-/* lista pet */
-.listaPets {
+
+.cards {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 12px;
+
+  margin-top: 1rem;
 }
-.pet {
+
+.card {
   display: flex;
-  width: 200px;
-  padding: 15px;
-  gap: 10px;
+  width: 400px;
   flex-direction: column;
-  align-items: center;
+  border-radius: 25px;
+  border-style: solid;
   border-width: 1px;
-  border-color: black;
- 
-  border-style: solid;
-  border-radius: 30px;
+  border-color: #677483;
+  padding: 20px;
+  gap: 25px;
 }
 
-.fotoPet {
-  margin-top: 10px;
+
+.badges {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
-.infoPet {
-  width: 100%;
-  padding: 5px;
-  border-color: #9998d3;
-  border-radius: 30px;
-  border-width: 2px;
-  border-style: solid;
- 
+.badge {
+  border-radius: 20px;
+  padding: 8px;
 }
-.texto-info {
+.tipo {
+  background-color: #3837a1;
+  color: white;
+  font-weight: 900;
+}
+.ativo {
+  background-color: #9998d3;
+  color: white;
+  font-weight: 900;
+}
+.bloqueado {
+  background-color: #fd9191;
+  color: white;
+  font-weight: 900;
+}
+
+.infos-card {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.foto-info {
+  width: 70px;
+}
+
+.perfil-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
+}
+.card-data {
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 6px;
-  height: 100px;
-  font-weight: 900;
-  color: black;
+  gap: 5px;
+  font-weight: bold;
 }
-.foto {
-  width: 150px;
+
+.card-perfil a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #7380ec;
 }
-.bloquear {
-  background-color: #d30c1d;
-  padding: 8px;
+
+.botao {
+  width: 100%;
+  padding: 15px;
+  text-align: center;
   border-radius: 15px;
   color: white;
-  font-size: 12px;
-  font-weight: bold;
-
+  font-weight: bolder;
 }
-.ativar {
-  background-color: #7380ec;
-  padding: 8px;
-  border-radius: 15px;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
 
+.bloquear{
+    background-color: #d30c1d;
+}
+
+.ativar{
+    background-color: #7380ec;
 }
