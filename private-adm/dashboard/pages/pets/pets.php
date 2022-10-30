@@ -3,7 +3,10 @@
 <?php
 require_once("../objetos.php");
 $pet = new Pet();
-
+@session_start();
+if ($_SESSION['tipo'] != "Adm") {
+  header("Location: /petiti/feed");
+}
 $listaPetsAtivos = $pet->buscaPetAtivo();
 $qtdPetsAtivos = $pet->buscaQtdPetAtivo();
 
@@ -119,7 +122,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
                       <p> Tutor:<?php echo $tutor ?></p>
                     </div>
                   </div>
-                  <a class="bloquear" href="/petiti/api/bloquear-pet/<?php echo $idPet?>">Bloquear</a>
+                  <a class="bloquear" href="/petiti/api/bloquear-pet/<?php echo $idPet ?>">Bloquear</a>
                 </div>
               <?php  } ?>
             </div>
@@ -146,7 +149,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
                       <p> Tutor: <?php echo $tutor ?></p>
                     </div>
                   </div>
-                  <a class="ativar" href="/petiti/api/ativar-pet/<?php echo $idPet?>">Ativar</a>
+                  <a class="ativar" href="/petiti/api/ativar-pet/<?php echo $idPet ?>">Ativar</a>
                 </div>
               <?php  } ?>
             </div>

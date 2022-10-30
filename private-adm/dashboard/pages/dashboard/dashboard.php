@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php
-  
-  require_once("../../../../api/database/conexao.php");
 
-  $con = Conexao::conexao();
-  $query = "SELECT COUNT(idUsuario) FROM `tbusuario` WHERE idTipoUsuario = 1 AND dataCriacaoConta >= DATE_SUB(CURDATE(),INTERVAL 24 HOUR)";
+require_once("../../../../api/database/conexao.php");
+@session_start();
+if ($_SESSION['tipo'] != "Adm") {
+  header("Location: /petiti/feed");
+}
+$con = Conexao::conexao();
+$query = "SELECT COUNT(idUsuario) FROM `tbusuario` WHERE idTipoUsuario = 1 AND dataCriacaoConta >= DATE_SUB(CURDATE(),INTERVAL 24 HOUR)";
 
-  $resultado = $con->query($query);
-  $lista = $resultado->fetchAll();
-  foreach ($lista as $linha) {
-    $qtdTutores = $linha[0];
-  }
+$resultado = $con->query($query);
+$lista = $resultado->fetchAll();
+foreach ($lista as $linha) {
+  $qtdTutores = $linha[0];
+}
 
-  //
-  $query = "SELECT COUNT(idPet) FROM tbPet";
+//
+$query = "SELECT COUNT(idPet) FROM tbPet";
 
-  $resultado = $con->query($query);
-  $lista = $resultado->fetchAll();
-  foreach ($lista as $linha) {
-    $qtdPets = $linha[0];
-  }
+$resultado = $con->query($query);
+$lista = $resultado->fetchAll();
+foreach ($lista as $linha) {
+  $qtdPets = $linha[0];
+}
 //
 
 //
-  $query = "SELECT COUNT(idUsuario) FROM tbusuario WHERE idTipoUsuario > 1 AND dataCriacaoConta >= DATE_SUB(CURDATE(),INTERVAL 24 HOUR)";
+$query = "SELECT COUNT(idUsuario) FROM tbusuario WHERE idTipoUsuario > 1 AND dataCriacaoConta >= DATE_SUB(CURDATE(),INTERVAL 24 HOUR)";
 
-  $resultado = $con->query($query);
-  $lista = $resultado->fetchAll();
-  foreach ($lista as $linha) {
-    $qtdEmpresas = $linha[0];
-  }
-  //
+$resultado = $con->query($query);
+$lista = $resultado->fetchAll();
+foreach ($lista as $linha) {
+  $qtdEmpresas = $linha[0];
+}
+//
 
 ?>
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -66,7 +70,7 @@
         <a class="menu-item active" href="/petiti/dashboard">
           <span class="material-icons-round">dashboard</span>
           <h3>Dashboard</h3>
-        </a>  
+        </a>
         <a class="menu-item" href="/petiti/tutores-dashboard">
           <span class="material-icons-round">person_outline</span>
           <h3>Tutores</h3>
@@ -105,7 +109,7 @@
           <div class="info">
             <div class="left-side">
               <h3>Total de Tutores</h3>
-              <h2><?php echo $qtdTutores?> contas</h2>
+              <h2><?php echo $qtdTutores ?> contas</h2>
               <!-- php aqui (puxar a qtd de contas do banco)-->
             </div>
             <div class="progresso">
@@ -121,7 +125,7 @@
           <div class="info">
             <div class="left-side">
               <h3>Total de Pets</h3>
-              <h2><?php echo $qtdPets?> contas</h2>
+              <h2><?php echo $qtdPets ?> contas</h2>
             </div>
           </div>
           <p id="cinza">Últimas 24 horas</p>
@@ -133,7 +137,7 @@
           <div class="info">
             <div class="left-side">
               <h3>Total de Empresas</h3>
-              <h2><?php echo $qtdEmpresas?> contas</h2>
+              <h2><?php echo $qtdEmpresas ?> contas</h2>
             </div>
             <p id="cinza">Últimas 24 horas</p>
           </div>

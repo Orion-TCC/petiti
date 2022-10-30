@@ -242,7 +242,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                                         <img src="<?php echo $fotoUsuario; ?>" alt="">
                                     </div>
                                     <div class="info">
-                                        <h3><?php echo $login ?></h3>
+                                        <h3><?php echo $nome ?></h3>
                                         <small><?php echo $local ?> - há <?php echo $diferencaFinal ?></small>
                                     </div>
 

@@ -4,7 +4,10 @@
 require_once("../objetos.php");
 $listaTutoresAtivos = $usuario->buscaUsuarioAtivo();
 $qtdTutoresAtivos = $usuario->buscaQtdUsuarioAtivo();
-
+@session_start();
+if ($_SESSION['tipo'] != "Adm") {
+  header("Location: /petiti/feed");
+}
 $listaTutoresBloqueados = $usuario->buscaUsuarioBloqueado();
 $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
 ?>

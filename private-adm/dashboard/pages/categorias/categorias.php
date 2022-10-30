@@ -3,7 +3,10 @@
 <?php
 require_once("../objetos.php");
 $categoria = new Categoria();
-
+@session_start();
+if ($_SESSION['tipo'] != "Adm") {
+  header("Location: /petiti/feed");
+}
 $listaCat = $categoria->buscaCategoriaAtiva();
 $qtdCat = $categoria->buscaQtdCategoriaAtiva();
 
@@ -102,7 +105,7 @@ $qtdCatBloqueada = $categoria->buscaQtdCategoriaBloqueada();
               <?php
               foreach ($listaCat as $linha) { ?>
                 <div class="itemCat">
-                 <?php echo $linha['categoria'] ?>
+                  <?php echo $linha['categoria'] ?>
                   <a class="bloquear" href="/petiti/api/bloquear-categoria/<?php echo $linha['idCategoria'] ?>">Bloquear</a>
                 </div>
 

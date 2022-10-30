@@ -2,7 +2,10 @@
 <html lang="pt-br">
 <?php
 require_once("../../../../api/database/conexao.php");
-
+@session_start();
+if ($_SESSION['tipo'] != "Adm") {
+  header("Location: /petiti/feed");
+}
 require_once("../objetos.php");
 
 

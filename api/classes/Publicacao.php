@@ -105,21 +105,38 @@ class Publicacao
     public function listar()
     {
         $con = Conexao::conexao();
-        $query = "SELECT tbpublicacao.idPublicacao as id, itimalias,
-       textoPublicacao as texto, dataPublicacao as data, 
-       localPub as local,
-        tbpublicacao.idUsuario as idUsuario, nomeUsuario as nome, loginUsuario as login,caminhoFotoPublicacao as caminhoFoto, caminhoFoto as fotoUsuario
-        FROM tbPublicacao 
-        INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
-        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
-        INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
-        WHERE statusUsuario = 1  AND tbfotousuario.idFotoUsuario = (SELECT MAX(tbfotousuario.idFotoUsuario) FROM tbfotousuario)";
+        $query = "SELECT
+    tbpublicacao.idPublicacao AS id,
+    itimalias,
+    textoPublicacao AS texto,
+    dataPublicacao AS data,
+    localPub AS local,
+    tbpublicacao.idUsuario AS idUsuario,
+    nomeUsuario AS nome,
+    loginUsuario AS login,
+    tbfotousuario.idFotoUsuario,
+    caminhoFotoPublicacao AS caminhoFoto,
+    caminhoFoto AS fotoUsuario
+FROM
+    tbPublicacao
+INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario
+INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
+INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
+WHERE
+    statusUsuario = 1 AND tbfotousuario.idFotoUsuario =(
+    SELECT
+        MAX(tbfotousuario.idFotoUsuario)
+    FROM
+        tbfotousuario
+    WHERE
+        tbfotousuario.idUsuario = tbpublicacao.idUsuario
+)";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
-    
+
     public function listarPubsCurtidas($id)
     {
         $con = Conexao::conexao();
@@ -144,7 +161,14 @@ class Publicacao
         INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
         INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
         INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
-        WHERE pubImpulso = 1 AND statusUsuario = 1 AND tbfotousuario.idFotoUsuario = (SELECT MAX(tbfotousuario.idFotoUsuario) FROM tbfotousuario)";
+        WHERE pubImpulso = 1 AND statusUsuario = 1 AND tbfotousuario.idFotoUsuario =(
+    SELECT
+        MAX(tbfotousuario.idFotoUsuario)
+    FROM
+        tbfotousuario
+     WHERE
+        tbfotousuario.idUsuario = tbpublicacao.idUsuario
+)";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -176,7 +200,14 @@ class Publicacao
         INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
         INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
         INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
-        WHERE tbusuario.idUsuario = $id AND statusUsuario = 1  AND tbfotousuario.idFotoUsuario = (SELECT MAX(tbfotousuario.idFotoUsuario) FROM tbfotousuario)";
+        WHERE tbusuario.idUsuario = $id AND statusUsuario = 1  AND tbfotousuario.idFotoUsuario =(
+    SELECT
+        MAX(tbfotousuario.idFotoUsuario)
+    FROM
+        tbfotousuario
+     WHERE
+        tbfotousuario.idUsuario = tbpublicacao.idUsuario
+)";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);

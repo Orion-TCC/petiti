@@ -3,7 +3,10 @@
 <?php
 require_once("../../../../api/database/conexao.php");
 $con = Conexao::conexao();
-
+@session_start();
+if ($_SESSION['tipo'] != "Adm") {
+  header("Location: /petiti/feed");
+}
 ?>
 
 <head>
