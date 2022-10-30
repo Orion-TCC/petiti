@@ -234,15 +234,23 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                                     </form>
                                 </div>
 
+
+
                                 <div id="modal-recortar-foto-perfil" class="modal">
-                                    <div class="modalInner">
-                                        <span class="subTituloForm">Redimensione sua imagem!</span>
-                                        <a class="formInputFoto">
-                                            <span id="continuar-crop-foto-perfil" style="padding-block: 10px; padding-inline: 87px;">Confirmar</span>
-                                        </a>
-                                        <div id="upload-demo"></div>
-                                    </div>
+                                    <div class="flex-col">
+                                            <span>Redimensione sua imagem!</span>
+
+                                            <div id="upload-demo"></div>
+
+                                            <a class="btn btn-primary">
+                                                <span id="continuar-crop-foto-perfil" style="padding-block: 10px; padding-inline: 87px;">Confirmar</span>
+                                            </a>
+                                    </div>   
                                 </div>
+
+
+
+
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
