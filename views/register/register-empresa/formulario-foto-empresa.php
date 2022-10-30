@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="formTextFoto">
-                            <span>Será possível alterar a identificação da sua empresa quando sua conta estiver feita.</span>
+                            <span>*Será possível alterar a identificação da sua empresa quando sua conta estiver feita.</span>
                         </div>
 
                         <a id="enviarFoto" href="ramo-empresa" class="formInputFoto"> Continuar</a>

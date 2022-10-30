@@ -526,7 +526,7 @@ body {
 }
 
 .formTextFoto {
-  width: 430px;
+  width: 480px;
   height: 170px;
   margin-block: 50px;
   font-family: "Raleway Bold";
@@ -534,9 +534,8 @@ body {
   font-weight: 700;
   font-size: 24px;
   line-height: 28px;
-  text-align: center;
   text-justify: inter-word;
-  color: #000000;
+  color: gray;
 }
 
 .formInputFoto {
@@ -889,9 +888,7 @@ body {
   padding-top: 50px;
 }
 
-#finalizarCadastroEmpresa div.tituloFormHolder2 {
-  padding-top: 50px;
-}
+
 
 .botaoFinalizar {
   width: 495px;
@@ -934,7 +931,6 @@ body {
 
 .logoPrincipalFinalizarForm {
   margin-top: 30px;
-  padding-bottom: 25px;
 }
 
 /* PAGE FORMULARIO INFO EMPRESA */
@@ -987,9 +983,6 @@ body {
   margin-top: 40px;
 }
 
-#formularioUsuarioEmpresa div.formulario {
-  height: 700px;
-}
 
 .subTituloFormHolderUsuarioEmpresa {
   font-family: "Raleway Bold", sans-serif;
@@ -1090,13 +1083,7 @@ body {
   padding-top: 40px;
 }
 
-#formularioRamoEmpresa div.formulario {
-  height: 650px;
-}
 
-#formularioRamoEmpresa div.tituloFormHolder {
-  margin-top: 70px;
-}
 
 .formInputRamo {
   width: 495px;

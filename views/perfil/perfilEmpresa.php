@@ -278,7 +278,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                                      <h2><?php echo $_SESSION['nome']; ?></h2>
                                 </div>
 
-                                <h4 class="text-muted">(Sou dono(a) do @/nomedopet)</h4>
+                                <h4 class="text-muted">(ramo escolhido)</h4>
                             </div>
 
                             <div class="bio">
@@ -299,7 +299,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
 
                         <div class="userTabs ">
                             <button class="userTabOption userTabOption--ativo " data-for-tab="1">Postagens</button>
-                            <button class="userTabOption" data-for-tab="2">Marcações</button>
+                            <button class="userTabOption" data-for-tab="2">Produtos</button>
                             <button class="userTabOption" data-for-tab="3">Curtidas</button>
                         </div>
                         <!-- fim das tabs de navegacao de usuario -->
@@ -326,13 +326,18 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
 
                         </div>
 
-                        <div class="tabs_content marcacoes" data-tab="2">
+                        <div class="tabs_content produtos" data-tab="2">
+
+                        <div class="adicionarProduto">
+                              <i class="uil uil-plus-circle"></i>
+                        </div>
 
                             <div class="aviso">
-                                <h3>Parece que ninguém te marcou em um post ainda...</h3>
+                                <h3>Você não possui nenhum produto ainda... Clique no quadrado acima para começar a vender seus produtos!</h3>
                             </div>
                         </div>
 
+                        
                         <div class="tabs_content curtidas" data-tab="3">
 
                             <?php

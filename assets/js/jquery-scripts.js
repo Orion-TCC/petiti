@@ -76,12 +76,13 @@ $(document).ready(function () {
       return false;
     }
   });
+
   $("#submitCategoria").click(function () {
     if (input.value == "") {
     } else {
       var categoriaCheck = categorias.push(input.value);
 
-      $("#categoriasChecksHolder").prepend(
+      $(".categoriasChecksHolder").append(
         "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='' value=''> " +
           $(categorias).get(-1)
       );
@@ -106,17 +107,17 @@ $(document).ready(function () {
     if (keycode == "13") {
       if (input.value == "") {
       } else {
-        categorias.push(input.value);
         var categoriaCheck = categorias.push(input.value);
 
-        $("#categoriasChecksHolder").prepend(
-          "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='' value=''> " +
-            $(categorias).get(-1)
-        );
-        console.log(categorias);
-        document.getElementById("categoriasValue").value = categorias;
-        input.value = "";
-        input.focus();
+      $(".categoriasChecksHolder").append(
+        "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='' value=''> " +
+          $(categorias).get(-1)
+      );
+      console.log(categoriaCheck);
+      console.log(categorias);
+      document.getElementById("categoriasValue").value = categorias;
+      input.value = "";
+      input.focus();
       }
     }
   });
