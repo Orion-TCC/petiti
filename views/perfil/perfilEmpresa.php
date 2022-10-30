@@ -278,7 +278,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                                      <h2><?php echo $_SESSION['nome']; ?></h2>
                                 </div>
 
-                                <h4 class="text-muted">(ramo escolhido)</h4>
+                                <h4 class="text-muted"><?php echo($_SESSION['tipo']);?></h4>
                             </div>
 
                             <div class="bio">
