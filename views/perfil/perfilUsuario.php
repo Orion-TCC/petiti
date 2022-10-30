@@ -332,6 +332,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                             <?php
 
                             if ($contagemCurtidas < 1) { ?>
+                            
                                 <div class="aviso">
                                     <h3>Ainda nenhuma postagem curtida. Va para sua <a href="feed">Home</a> ou <a href="#">Para você</a> e curta alguma coisa!</h3>
                                 </div>

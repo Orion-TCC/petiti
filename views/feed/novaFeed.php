@@ -255,9 +255,13 @@ $idUsuarioCurtida = $_SESSION['id'];
 
                             <div class="botoes">
                                 <div class="botoesDeInteracao">
-                                    <span><i class="uil uil-heart"></i></span>
-                                    <span><i class="uil uil-comment"></i></span>
-                                    <span><i class="uil uil-envelope"></i></span>
+
+                                    <button><i class="uil uil-heart"></i></button>
+
+                                    <button><i class="uil uil-comment"></i></button>
+
+                                    <button> <i class="uil uil-envelope"></i></button>
+
                                 </div>
                             </div>
 
