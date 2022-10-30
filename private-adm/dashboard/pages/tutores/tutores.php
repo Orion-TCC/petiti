@@ -4,10 +4,7 @@
 require_once("../objetos.php");
 $listaTutoresAtivos = $usuario->buscaUsuarioAtivo();
 $qtdTutoresAtivos = $usuario->buscaQtdUsuarioAtivo();
-@session_start();
-if ($_SESSION['tipo'] != "Adm") {
-  header("Location: /petiti/feed");
-}
+
 $listaTutoresBloqueados = $usuario->buscaUsuarioBloqueado();
 $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
 ?>
@@ -27,7 +24,7 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/tutores/tutores.css" />
 </head>
 
-<body>
+<body >
   <div class="container">
     <!------------------- começo - aside ------------------->
     <aside>
@@ -89,7 +86,7 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
 
           <!-- Tab links -->
           <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'ativo')">
+            <button class="tablinks active" onclick="openTab(event, 'ativo')">
               Ativos
             </button>
             <button class="tablinks" onclick="openTab(event, 'bloqueado')">
@@ -98,7 +95,7 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
           </div>
 
           <!-- Tab content -->
-          <div id="ativo" class="tabcontent">
+          <div id="ativo" class="tabcontent" style="display: block;">
             <h3 id="total-qtd">Total (<?php echo $qtdTutoresAtivos ?>)</h3>
             <div class="cards">
               <?php
@@ -118,7 +115,6 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
                 $tipo = $linha['tipoUsuario'];
                 $foto = $linha['caminhoFoto']; ?>
 
-
                 <div class="card">
                   <div class="badges">
                     <p class="badge ativo">Ativo</p>
@@ -129,7 +125,8 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
                     <img class="foto-info" src="<?php echo $foto ?>">
                     <div class="perfil-info">
                       <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
-                      <p><?php echo $bio ?></p>
+                      <p><span style="font-weight: 900;">@<?php echo $login ?></span></p>
+                      <p><span style="font-weight: 900;">Pets: </span><?php echo $bio ?></p>
                     </div>
                   </div>
 
@@ -139,9 +136,7 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
                     </span>
                     <p> Entrou em: <?php echo $dataCompleta ?></p>
                   </div>
-                  <div class="card-perfil">
-                    <a href="">Ver perfil</a>
-                  </div>
+                
                   <a class="botao bloquear" href="/petiti/api/bloquear-tutor/<?php echo $id ?>">Bloquear tutor</a>
                 </div>
               <?php  }
@@ -181,7 +176,8 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
                     <img class="foto-info" src="<?php echo $foto ?>">
                     <div class="perfil-info">
                       <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
-                      <p><?php echo $bio ?></p>
+                      <p><span style="font-weight: 900;">@<?php echo $login ?></span></p>
+                      <p><span style="font-weight: 900;">Pets: </span><?php echo $bio ?></p>
                     </div>
                   </div>
 
@@ -191,9 +187,9 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
                     </span>
                     <p> Entrou em: <?php echo $dataCompleta ?></p>
                   </div>
-                  <div class="card-perfil">
+                  <!--<div class="card-perfil">
                     <a href="">Ver perfil</a>
-                  </div>
+                  </div>-->
                   <a class="botao ativar" href="/petiti/api/ativar-tutor/<?php echo $id ?>">Ativar tutor</a>
                 </div>
               <?php  }
