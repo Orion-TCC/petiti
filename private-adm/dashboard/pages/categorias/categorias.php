@@ -101,8 +101,9 @@ $qtdCatBloqueada = $categoria->buscaQtdCategoriaBloqueada();
             <div class="listaCat">
               <?php
               foreach ($listaCat as $linha) { ?>
-                <div class="itemCat"><?php echo $linha['categoria'] ?>
-                  <a href="/petiti/api/bloquear-categoria/<?php echo $linha['idCategoria'] ?>">Desativar</a>
+                <div class="itemCat">
+                 <?php echo $linha['categoria'] ?>
+                  <a class="bloquear" href="/petiti/api/bloquear-categoria/<?php echo $linha['idCategoria'] ?>">Bloquear</a>
                 </div>
 
               <?php  } ?>
@@ -115,7 +116,7 @@ $qtdCatBloqueada = $categoria->buscaQtdCategoriaBloqueada();
               <?php
               foreach ($listaCatBloqueadas as $linha) { ?>
                 <div class="itemCatBloqueada"><?php echo $linha['categoria'] ?>
-                  <a href="/petiti/api/ativar-categoria/<?php echo $linha['idCategoria'] ?>">Ativar</a>
+                  <a class="ativar" href="/petiti/api/ativar-categoria/<?php echo $linha['idCategoria'] ?>">Ativar</a>
                 </div>
 
               <?php  } ?>

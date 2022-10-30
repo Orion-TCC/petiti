@@ -457,35 +457,34 @@ main .info-pets .perfis-pets {
 .listaPets {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 12px;
 }
 .pet {
   display: flex;
+  width: 200px;
+  padding: 15px;
+  gap: 10px;
   flex-direction: column;
   align-items: center;
   border-width: 1px;
-  background-color: #fffb9f;
   border-color: black;
-  border-width: 3px;
+ 
   border-style: solid;
   border-radius: 30px;
 }
 
 .fotoPet {
   margin-top: 10px;
-  background-color: #fffb9f;
 }
 .infoPet {
   width: 100%;
-  margin-left: 27px;
-  margin-right: 27px;
-  padding-bottom: 10px;
-  border-radius: 26px;
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-  background-color: #9998d3;
-  border-top-width: 3px;
+  padding: 5px;
+  border-color: #9998d3;
+  border-radius: 30px;
+  border-width: 2px;
   border-style: solid;
+ 
 }
 .texto-info {
   display: flex;
@@ -493,9 +492,28 @@ main .info-pets .perfis-pets {
   justify-content: center;
   align-items: center;
   gap: 6px;
+  height: 100px;
   font-weight: 900;
-  color: white;
+  color: black;
 }
 .foto {
   width: 150px;
+}
+.bloquear {
+  background-color: #d30c1d;
+  padding: 8px;
+  border-radius: 15px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+
+}
+.ativar {
+  background-color: #7380ec;
+  padding: 8px;
+  border-radius: 15px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+
 }
