@@ -1173,6 +1173,7 @@ font-size: 15px;
   align-items: center;
   justify-content: center;
 
+  height: 2rem;
   width: fit-content;
   border: 1px solid rgba(56, 55, 161, 1);
   border-radius: 18px;
@@ -1195,9 +1196,12 @@ font-size: 15px;
 }
 
 .categoriasChecksHolder{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  width: 100%;
+  height: 10rem;
+  overflow-y:auto ;
 }
 
 
