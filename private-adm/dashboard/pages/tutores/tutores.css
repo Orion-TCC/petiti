@@ -456,9 +456,12 @@ main .info-tutores .perfis-tutores {
 .cards {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
+
+  margin-top: 1rem;
 }
+
 .card {
   display: flex;
   width: 400px;
@@ -470,6 +473,7 @@ main .info-tutores .perfis-tutores {
   padding: 20px;
   gap: 25px;
 }
+
 .badges {
   display: flex;
   flex-direction: row;
@@ -490,18 +494,21 @@ main .info-tutores .perfis-tutores {
   font-weight: 900;
 }
 .bloqueado {
-  background-color: #FBA4C3;
+  background-color: #fd9191;
   color: white;
   font-weight: 900;
 }
+
 .infos-card {
   display: flex;
   flex-direction: row;
   gap: 10px;
 }
+
 .foto-info {
   width: 70px;
 }
+
 .perfil-info {
   display: flex;
   flex-direction: column;
@@ -514,6 +521,7 @@ main .info-tutores .perfis-tutores {
   gap: 5px;
   font-weight: bold;
 }
+
 .card-perfil a {
   text-decoration: none;
   font-weight: bold;
@@ -528,9 +536,11 @@ main .info-tutores .perfis-tutores {
   color: white;
   font-weight: bolder;
 }
+
 .bloquear{
     background-color: #d30c1d;
 }
+
 .ativar{
     background-color: #7380ec;
 }

@@ -3,10 +3,7 @@
 <?php
 require_once("../objetos.php");
 $pet = new Pet();
-@session_start();
-if ($_SESSION['tipo'] != "Adm") {
-  header("Location: /petiti/feed");
-}
+
 $listaPetsAtivos = $pet->buscaPetAtivo();
 $qtdPetsAtivos = $pet->buscaQtdPetAtivo();
 
@@ -25,6 +22,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/pets/pets.css" />
@@ -92,7 +90,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
 
           <!-- Tab links -->
           <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'ativo')">
+            <button class="tablinks active" onclick="openTab(event, 'ativo')">
               Ativos
             </button>
             <button class="tablinks" onclick="openTab(event, 'bloqueado')">
@@ -101,28 +99,44 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
           </div>
 
           <!-- Tab content -->
-          <div id="ativo" class="tabcontent">
+          <div id="ativo" class="tabcontent" style="display: block;">
             <h3 id="total-qtd">Total(<?php echo $qtdPetsAtivos ?>)</h3>
-            <div class="listaPets">
+            <div class="cards">
               <?php foreach ($listaPetsAtivos as $linha) {
                 $foto = $linha['caminhoFotoPet'];
                 $nome = $linha['nomePet'];
                 $usuario = $linha['usuarioPet'];
                 $tutor = $linha['loginUsuario'];
+
+                $dataCompleta = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
+
                 $idPet = $linha['idPet'];
+
+                $tipo = $linha['especiePet'];
               ?>
-                <div class="pet">
-                  <div class="fotoPet">
-                    <img class="foto" src="<?php echo $foto ?>">
+                <div class="card">
+                  <div class="badges">
+                    <p class="badge ativo">Ativo</p>
+                    <p class="badge tipo"><?php echo $tipo ?></p>
                   </div>
-                  <div class="infoPet">
-                    <div class="texto-info">
-                      <p> Nome:<?php echo $nome ?></p>
-                      <p> Usuário:<?php echo $usuario ?></p>
-                      <p> Tutor:<?php echo $tutor ?></p>
+
+                  <div class="infos-card">
+                    <img class="foto-info" src="<?php echo $foto ?>">
+                    <div class="perfil-info">
+                      <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
+                      <p><span style="font-weight: 900;">@<?php echo $usuario ?></span></p>
+                      <p><span style="font-weight: 900;">Tutor: </span><span style="font-weight: 600;">@<?php echo $tutor ?></span></p>
                     </div>
                   </div>
-                  <a class="bloquear" href="/petiti/api/bloquear-pet/<?php echo $idPet ?>">Bloquear</a>
+
+                  <div class="card-data">
+                    <span class="material-symbols-outlined">
+                      date_range
+                    </span>
+                    <p> Entrou em: <?php echo $dataCompleta ?></p>
+                  </div>
+
+                  <a class="botao bloquear" href="/petiti/api/bloquear-pet/<?php echo $idPet?>">Bloquear pet</a>
                 </div>
               <?php  } ?>
             </div>
@@ -130,26 +144,40 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
 
           <div id="bloqueado" class="tabcontent">
             <h3 id="total-qtd">Total(<?php echo $qtdPetsBloqeuados ?>)</h3>
-            <div class="listaPets">
+            <div class="cards">
               <?php foreach ($listaPetsBloquados as $linha) {
                 $foto = $linha['caminhoFotoPet'];
                 $nome = $linha['nomePet'];
                 $usuario = $linha['usuarioPet'];
                 $tutor = $linha['loginUsuario'];
                 $idPet = $linha['idPet'];
+
+                $dataCompleta = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
+                $tipo = $linha['especiePet'];
               ?>
-                <div class="pet">
-                  <div class="fotoPet">
-                    <img class="foto" src="<?php echo $foto ?>">
+                <div class="card">
+                  <div class="badges">
+                    <p class="badge bloqueado">Bloqueado</p>
+                    <p class="badge tipo"><?php echo $tipo ?></p>
                   </div>
-                  <div class="infoPet">
-                    <div class="texto-info">
-                      <p> Nome: <?php echo $nome ?></p>
-                      <p> Usuário: <?php echo $usuario ?></p>
-                      <p> Tutor: <?php echo $tutor ?></p>
+
+                  <div class="infos-card">
+                    <img class="foto-info" src="<?php echo $foto ?>">
+                    <div class="perfil-info">
+                      <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
+                      <p><span style="font-weight: 900;">@<?php echo $usuario ?></span></p>
+                      <p><span style="font-weight: 900;">Tutor: </span><span style="font-weight: 600;">@<?php echo $tutor ?></span></p>
                     </div>
                   </div>
-                  <a class="ativar" href="/petiti/api/ativar-pet/<?php echo $idPet ?>">Ativar</a>
+
+                  <div class="card-data">
+                    <span class="material-symbols-outlined">
+                      date_range
+                    </span>
+                    <p> Entrou em: <?php echo $dataCompleta ?></p>
+                  </div>
+
+                  <a class="botao ativar" href="/petiti/api/ativar-pet/<?php echo $idPet?>">Ativar pet</a>
                 </div>
               <?php  } ?>
             </div>

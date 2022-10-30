@@ -226,11 +226,22 @@ class Pet
     public function buscaPetAtivo()
     {
         $con = Conexao::conexao();
-        $query = "SELECT tbpet.idPet, nomePet, racaPet, especiePet, statusPet, usuarioPet, idadePet, dataCriacaoPet, tbusuario.idUsuario, loginUsuario,caminhoFotoPet
-                    FROM tbpet
-                    INNER JOIN tbfotopet ON tbpet.idPet  = tbfotopet.idPet
-                    INNER JOIN tbusuario ON tbusuario.idUsuario = tbpet.idUsuario
-                    WHERE statusPet = 1";
+        $query = "SELECT tbpet.idPet, 
+            nomePet,
+            racaPet, 
+            especiePet,
+            statusPet, 
+            usuarioPet,
+            DAY(dataCriacaoPet) as dia, MONTHNAME(dataCriacaoPet) as mes, YEAR(dataCriacaoPet) as ano,
+            idadePet, 
+            dataCriacaoPet, 
+            tbusuario.idUsuario, 
+            loginUsuario,
+            caminhoFotoPet
+                FROM tbpet
+                INNER JOIN tbfotopet ON tbpet.idPet  = tbfotopet.idPet
+                INNER JOIN tbusuario ON tbusuario.idUsuario = tbpet.idUsuario
+                WHERE statusPet = 1";
 
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -239,11 +250,21 @@ class Pet
     public function buscaPetBloqueado()
     {
         $con = Conexao::conexao();
-        $query = "SELECT tbpet.idPet, nomePet, racaPet, usuarioPet, especiePet, idadePet, dataCriacaoPet, tbusuario.idUsuario, loginUsuario,caminhoFotoPet
-                    FROM tbpet
-                    INNER JOIN tbfotopet ON tbpet.idPet  = tbfotopet.idPet
-                    INNER JOIN tbusuario ON tbusuario.idUsuario = tbpet.idUsuario
-                    WHERE statusPet = 0";
+        $query = "SELECT tbpet.idPet, 
+            nomePet, 
+            racaPet, 
+            usuarioPet,
+            DAY(dataCriacaoPet) as dia, MONTHNAME(dataCriacaoPet) as mes, YEAR(dataCriacaoPet) as ano,
+            especiePet, 
+            idadePet, 
+            dataCriacaoPet, 
+            tbusuario.idUsuario, 
+            loginUsuario,
+            caminhoFotoPet
+                FROM tbpet
+                INNER JOIN tbfotopet ON tbpet.idPet  = tbfotopet.idPet
+                INNER JOIN tbusuario ON tbusuario.idUsuario = tbpet.idUsuario
+                WHERE statusPet = 0";
 
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
