@@ -1003,11 +1003,20 @@ body {
   margin-inline: 1rem;
   font-family: "Raleway Bold", sans-serif;
   font-size: 1.5rem;
+  width: 20rem;
+
+}
+
+.petUser .nomeEUser span{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 18rem;
 }
 
 .petUser i{
   font-size: 3rem;
-  margin-left: 9.5rem;
+  margin-left: 0.5rem;
   cursor: pointer;
   color: #831111;
 }

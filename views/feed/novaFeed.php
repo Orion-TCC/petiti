@@ -84,7 +84,7 @@ $contagemPets = count($dadosPets['pets']);
 
                 <div class="flex-col borderTop row-gap">
 
-                    <h3>Adicionar conta existente</h3>
+                    <h3 style="width: 15rem;">Adicionar conta existente</h3>
 
                     <h3>Gerenciar contas</h3>
 
