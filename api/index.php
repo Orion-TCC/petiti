@@ -59,7 +59,7 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
     $usuario = new Usuario();
     $tipoUsuario = new TipoUsuario();
     $cookie = new Cookies();
-
+    @session_start();
     // Verficação 
     $email = $_POST['txtEmailUsuario'];
     $email = strtolower($email);
@@ -74,7 +74,6 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
         } else {
             header('location: /petiti/cadastro-usuario');
         }
-       
     } elseif ($senha <> $senhaConfirmacao) {
         $cookie->criarCookie("erro-cadastro", "Senhas não coincindem", 1);
         if ($_SESSION['tipo-usuario'] == "empresa") {
@@ -83,7 +82,6 @@ $app->post('/usuario/add', function (Request $request, Response $response, array
             header('location: /petiti/info-usuario');
         }
         header('location: /petiti/cadastro-usuario');
-
     } else {
         $senha = $_POST['txtPw'];
         $usuario->setNomeUsuario(" ");
@@ -654,10 +652,8 @@ $app->post(
                 $categoriaPublicacao->setCategoria($categoria);
                 $categoriaPublicacao->setPublicacao($publicacao);
                 $categoriaPublicacao->cadastrar($categoriaPublicacao);
-            }else{
-
+            } else {
             }
-           
         }
 
         //$categoriaPublicacao->setIdCategoriaPublicacao();
@@ -688,8 +684,8 @@ $app->post(
             $curtidaPub->delete($curtidaPub);
         }
         $lista = $publicacao->listarPub($idPub);
-        $resultado = 
-        $json = json_encode($lista = $publicacao->listarPub($idPub), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        $resultado =
+            $json = json_encode($lista = $publicacao->listarPub($idPub), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         foreach ($lista as $linha) {
             $itimalias = $linha['itimalias'];
         }
