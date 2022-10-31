@@ -5,6 +5,14 @@ $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 include_once("../../sentinela.php");
 $idUsuarioCurtida = $_SESSION['id'];
+$id = $_SESSION['id'];
+$urlPets = "http://localhost/petiti/api/usuario/$id/pets";
+
+$jsonPets = file_get_contents($urlPets);
+
+$dadosPets = (array) json_decode($jsonPets, true);
+
+$contagemPets = count($dadosPets['pets']);
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
@@ -47,44 +55,45 @@ $idUsuarioCurtida = $_SESSION['id'];
     <nav class="feed">
         <div class="container">
 
-                 <div class="popupOptions" id="popup">
+            <div class="popupOptions" id="popup">
 
-                        <div class="flex-col">
+                <div class="flex-col">
 
-                            <div class="flex-row">
-                                <div class="fotoDePerfil">
-                                    <img src="<?php echo $_SESSION['foto']; ?>" alt="">
-                                </div>
-                                <h3><?php echo $_SESSION['nome']; ?></h3>
-                            </div>
-
-
-                            <div class="flex-row petUser">
-
-                                <div class="fotoDePerfil">
-                                    <img src="#" alt="">  <!--Foto do pet  -->                       
-                                </div>
-
-                                <h3>/nomeDoPet</h3>
-
-                            </div>
-                            
+                    <div class="flex-row">
+                        <div class="fotoDePerfil">
+                            <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                         </div>
+                        <h3><?php echo $_SESSION['nome']; ?></h3>
+                    </div>
 
+                    <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
+                        <div class="flex-row petUser">
+                            <a href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
+                                <div class="fotoDePerfil">
+                                    <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
+                                    <!--Foto do pet  -->
+                                </div>
 
-                        <div class="flex-col borderTop row-gap">
-
-                            <h3>Adicionar conta existente</h3>
-
-                            <h3>Gerenciar contas</h3>
-
-                            <h3>Configurações</h3>
-
-                            <h3><a href="sair"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
-
+                                <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
+                            </a>
                         </div>
+                    <?php    } ?>
+                </div>
+
+
+                <div class="flex-col borderTop row-gap">
+
+                    <h3>Adicionar conta existente</h3>
+
+                    <h3>Gerenciar contas</h3>
+
+                    <h3>Configurações</h3>
+
+                    <h3><a href="sair"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
 
                 </div>
+
+            </div>
 
             <h2 class="logo">
                 <img src="/petiti/assets/images/logo_principal.svg">
@@ -95,10 +104,10 @@ $idUsuarioCurtida = $_SESSION['id'];
             </div>
 
             <script>
-                window.onload=function(){
-                    var hidediv=document.getElementById('popup');
-                    document.onclick=function(div){
-                        if(div.target.id !== 'popup' && div.target.id !== 'opcoes'){
+                window.onload = function() {
+                    var hidediv = document.getElementById('popup');
+                    document.onclick = function(div) {
+                        if (div.target.id !== 'popup' && div.target.id !== 'opcoes') {
                             hidediv.style.display = "none";
                         }
                     };
@@ -106,19 +115,19 @@ $idUsuarioCurtida = $_SESSION['id'];
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <label for="abrir-opcoes"><i class="uil uil-setting" ></i></label>
+                <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
 
-                <div class="fotoDePerfil" id="fotoDePerfil" >
+                <div class="fotoDePerfil" id="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
                 </div>
-                
+
             </div>
 
         </div>
     </nav>
 
     <main class="feed">
-   
+
 
 
         <div class="container">
@@ -241,7 +250,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                     $json = file_get_contents($url);
                     $dados = (array)json_decode($json, true);
                     $contagem = count($dados['publicacoes']);
-                    
+
                     for ($i = 0; $i < $contagem; $i++) {
                         $id =  $dados['publicacoes'][$i]['id'];
 
@@ -360,11 +369,11 @@ $idUsuarioCurtida = $_SESSION['id'];
                             </div>
 
                             <div class="badges">
-                                
+
                                 <?php
-                                    for ($j=0; $j < $contagemCategorias ; $j++) { 
-                                        echo ("<p class='badge'>".$dadosCategorias[$j]['categoria']."</p>");
-                                    }
+                                for ($j = 0; $j < $contagemCategorias; $j++) {
+                                    echo ("<p class='badge'>" . $dadosCategorias[$j]['categoria'] . "</p>");
+                                }
                                 ?>
                             </div>
 

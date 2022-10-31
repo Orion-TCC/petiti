@@ -534,7 +534,7 @@ class Usuario
     public function listarPetsUsuario($id)
     {
         $con = Conexao::conexao();
-        $query = "SELECT tbpet.idPet, nomePet, racaPet, especiePet, idadePet, dataCriacaoPet, idUsuario, caminhoFotoPet
+        $query = "SELECT tbpet.idPet, nomePet, racaPet, especiePet, idadePet, dataCriacaoPet, tbpet.idUsuario, caminhoFotoPet
                 FROM tbpet
                 INNER JOIN tbfotopet ON tbpet.idPet  = tbfotopet.idPet
         INNER JOIN tbusuario ON tbusuario.idUsuario = tbpet.idUsuario

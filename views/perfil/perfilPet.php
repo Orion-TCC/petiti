@@ -2,7 +2,7 @@
 @session_start();
 require('../../api/classes/curtidaPublicacao.php');
 require('../../api/classes/Usuario.php');
-
+@session_start();
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 
@@ -22,8 +22,8 @@ $jsonCurtidas = file_get_contents($urlCurtidas);
 $dadosCurtidas = (array)json_decode($jsonCurtidas, true);
 $contagemCurtidas = count($dadosCurtidas['publicacoes']);
 
-
-$urlPerfil = "http://localhost/petiti/api/pet/7";
+$idPetEscolhido = $_SESSION['pet-escolhido'];
+$urlPerfil = "http://localhost/petiti/api/pet/$idPetEscolhido";
 $jsonPerfil = file_get_contents($urlPerfil);
 
 $dadosPerfil = json_decode($jsonPerfil);
