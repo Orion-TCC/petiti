@@ -511,12 +511,21 @@ $app->get('/ativar-pet/{id}', function (Request $request, Response $response, ar
     header("location: /petiti/pets-dashboard");
 });
 
+
+
 $app->get('/bloquear-pet/{id}', function (Request $request, Response $response, array $args) {
     $pet = new Pet();
     $pet->setStatusPet(0);
     $pet->setIdPet($args['id']);
     $pet->updateStatus($pet);
     header("location: /petiti/pets-dashboard");
+});
+
+$app->get('/excluir-pet-cadastro/{id}', function (Request $request, Response $response, array $args) {
+    $pet = new Pet();
+    $pet->setIdPet($args['id']);
+    $pet->delete($pet);
+    header("location: /petiti/final-usuario");
 });
 
 $app->get('/categorias', function (Request $request, Response $response, array $args) {
@@ -781,11 +790,18 @@ $app->post('/editar-perfil', function (Request $request, Response $response, arr
     }
 
     $usuario->login($_SESSION['login'], $_SESSION['senha']);
-    header('location: /petiti/meu-perfil');
+    if ($_SESSION['tipo'] == "Tutor") {
+        $envio = "tutor-perfil";
+    } else {
+        $envio = "empresa-perfil";
+    }
+    header("location: /petiti/$envio");
 });
+
 $app->get('/escolher-pet/{id}', function (Request $request, Response $response, array $args) {
     @session_start();
     $_SESSION['pet-escolhido'] = $args['id'];
+
     header('location: /petiti/pet-perfil');
 });
 try {
