@@ -590,7 +590,8 @@ $app->get('/comentarios/{id}', function (Request $request, Response $response, a
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
-$app->get('/categoria/pub/{id}', function (Request $request, Response $response, array $args) {
+
+$app->get('/categorias-post/{id}', function (Request $request, Response $response, array $args) {
     $comentario = new Comentario();
     $categoria = new Categoria();
     $id = $args['id'];

@@ -69,7 +69,7 @@ $idUsuarioCurtida = $_SESSION['id'];
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
-                <a href="/petiti/tutor-perfil" class="perfil">
+                <a href="/petiti/decidir-perfil" class="perfil">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
@@ -141,8 +141,6 @@ $idUsuarioCurtida = $_SESSION['id'];
                     $dadosAds = (array)json_decode($jsonAds, true);
                     $contagemAds = count($dadosAds['publicacoes']);
                     for ($i = 0; $i < $contagemAds; $i++) {
-
-
                         $nomeAds = $dadosAds['publicacoes'][$i]['nome'];
                         $loginAds = $dadosAds['publicacoes'][$i]['login'];
                         $fotoAds = $dadosAds['publicacoes'][$i]['caminhoFoto'];
@@ -185,7 +183,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                     $json = file_get_contents($url);
                     $dados = (array)json_decode($json, true);
                     $contagem = count($dados['publicacoes']);
-
+                    
                     for ($i = 0; $i < $contagem; $i++) {
                         $id =  $dados['publicacoes'][$i]['id'];
 
@@ -213,6 +211,14 @@ $idUsuarioCurtida = $_SESSION['id'];
                         $diferencaDias = $intervalo->format('%a');
                         $diferencaHoras = $intervalo->format('%h');
                         $diferencaMinutos = $intervalo->format('%i');
+
+                        $urlCategorias = "http://localhost/petiti/api/categorias-post/" . $id;
+
+                        $jsonCategorias = file_get_contents($urlCategorias);
+
+                        $dadosCategorias = (array)json_decode($jsonCategorias, true);
+
+                        $contagemCategorias = count($dadosCategorias);
 
                         if ($diferencaAnos == 0) {
                             if ($diferencaMeses == 0) {
@@ -269,7 +275,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                                         <!-- nao curtido  -->
                                     <?php }
                                     ?>
-                                    
+
                                     <button class="comentar"></button>
 
                                     <button class="mensagem"></button>
@@ -282,7 +288,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                                 <?php
                                 $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
                                 if ($verificaCurtida['boolean'] == false) { ?>
-                                  <span> <b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b> itimalias</span>
+                                    <span> <b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b> itimalias</span>
                                     <!-- curtido -->
                                 <?php } else { ?>
                                     <span><b><b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b> itimalias</span>
@@ -292,7 +298,16 @@ $idUsuarioCurtida = $_SESSION['id'];
                             </div>
 
                             <div class="caption">
-                               <span class="text-bold"> <?php echo $login; ?></span>  <span class="text-muted"><?php echo $texto ?></span>
+                                <span class="text-bold"> <?php echo $login; ?></span> <span class="text-muted"><?php echo $texto ?></span>
+                            </div>
+
+                            <div class="badges">
+                                
+                                <?php
+                                    for ($j=0; $j < $contagemCategorias ; $j++) { 
+                                        echo ("<p class='badge'>".$dadosCategorias[$j]['categoria']."</p>");
+                                    }
+                                ?>
                             </div>
 
                             <div class="commentArea">

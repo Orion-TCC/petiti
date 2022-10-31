@@ -1356,3 +1356,14 @@ font-size: 15px;
 
 }
 
+.badges {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.badge {
+  border: 1px solid;
+  border-color: #000000;
+  border-radius: 20px;
+  padding: 8px;
+}
