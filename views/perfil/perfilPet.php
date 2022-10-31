@@ -33,6 +33,15 @@ $raca = $dadosPerfil[0]->racaPet;
 $usuarioPet = $dadosPerfil[0]->usuarioPet;
 $especie = $dadosPerfil[0]->especiePet;
 $foto = $dadosPerfil[0]->caminhoFotoPet;
+
+$id = $_SESSION['id'];
+$urlPets = "http://localhost/petiti/api/usuario/$id/pets";
+
+$jsonPets = file_get_contents($urlPets);
+
+$dadosPets = (array) json_decode($jsonPets, true);
+
+$contagemPets = count($dadosPets['pets']);
 ?>
 
 
@@ -84,40 +93,42 @@ $foto = $dadosPerfil[0]->caminhoFotoPet;
         <div class="container">
             <div class="popupOptions" id="popup">
 
-                <div class="flex-col">
+                    <div class="flex-col">
 
-                    <div class="flex-row">
-                        <div class="fotoDePerfil">
-                            <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                        <div class="flex-row">
+                            <div class="fotoDePerfil">
+                                <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                            </div>
+                            <h3><?php echo $_SESSION['nome']; ?></h3>
                         </div>
-                        <h3><?php echo $_SESSION['nome']; ?></h3>
+
+                        <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
+                            <div class="flex-row petUser">
+
+                                <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
+                                    <div class="fotoDePerfil">
+                                        <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
+                                        <!--Foto do pet  -->
+                                    </div>
+
+                                    <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
+                                </a>
+                            </div>
+                        <?php    } ?>
                     </div>
 
 
-                    <div class="flex-row petUser">
+                    <div class="flex-col borderTop row-gap">
 
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">  <!--Foto do pet  -->                       
-                        </div>
+                        <h3>Adicionar conta existente</h3>
 
-                        <h3>/nomeDoPet</h3>
+                        <h3>Gerenciar contas</h3>
+
+                        <h3>Configurações</h3>
+
+                        <h3><a href="sair"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
 
                     </div>
-                    
-                </div>
-
-
-                <div class="flex-col borderTop row-gap">
-
-                    <h3>Adicionar conta existente</h3>
-
-                    <h3>Gerenciar contas</h3>
-
-                    <h3>Configurações</h3>
-
-                    <h3><a href="sair"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
-
-                </div>
 
             </div>
 
@@ -139,7 +150,7 @@ $foto = $dadosPerfil[0]->caminhoFotoPet;
                     };
                 };
             </script>
-            
+
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
                 <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
                 <div class="fotoDePerfil">
@@ -160,9 +171,9 @@ $foto = $dadosPerfil[0]->caminhoFotoPet;
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
                     <div class="handle">
-                        <h4><?php echo $nome; ?></h4>
+                        <h4><?php echo $_SESSION['nome']; ?></h4>
                         <p class="text-muted">
-                            <?php echo "@" . $usuarioPet; ?>
+                              <?php echo "@" . $_SESSION['login']; ?>
                         </p>
                     </div>
                 </a>
@@ -341,18 +352,9 @@ $foto = $dadosPerfil[0]->caminhoFotoPet;
                                     <h2><?php echo $nome?></h2>
                                 </div>
 
-                                <h4 class="text-muted">(Meu dono(a) é @<?php echo $_SESSION['login'] ?>)</h4>
+                                <h4 class="text-muted">(Meu dono(a) é <a href="">@<?php echo $_SESSION['login'] ?></a>)</h4>
                             </div>
 
-                            <div class="bio">
-                                <?php
-                                if ($_SESSION['bio'] == null) { ?>
-                                    <h4 class="text-muted"><?php echo $_SESSION['bio'] ?> Adicione uma biografia! Conte um pouco sobre você :D</h4>
-                                <?php } else { ?>
-                                    <h4 class="text-muted">/biografiaDoPet</h4>
-                                <?php }
-                                ?>
-                            </div>
 
                         </div>
                     </div>
@@ -361,11 +363,12 @@ $foto = $dadosPerfil[0]->caminhoFotoPet;
                     <div class="tabs">
 
                         <div class="userTabs ">
-                            <button class="userTabOption userTabOption--ativo ">Postagens</button>
+                            <button class="userTabOption userTabOption--ativo" data-for-tab="1">Postagens</button>
+                            <button class="userTabOption" data-for-tab="2">Marcações</button>
                         </div>
                         <!-- fim das tabs de navegacao de usuario -->
 
-                        <div class="tabs_content postagens tabAtiva" >
+                        <div class="tabs_content postagens tabAtiva" data-tab="1">
                             <?php
 
                             if ($contagem < 1) { ?>
@@ -387,6 +390,12 @@ $foto = $dadosPerfil[0]->caminhoFotoPet;
 
                         </div>
 
+                        <div class="tabs_content marcacoes" data-tab="2">
+
+                            <div class="aviso">
+                                <h3>Parece que ninguém te marcou em um post ainda...</h3>
+                            </div>
+                        </div>
 
                         
                     </div>

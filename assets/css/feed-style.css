@@ -223,7 +223,13 @@ body.feed{
 
   .popupOptions .flex-col a{
     color: #DB310C;
+    width: 12rem;
+    display: flex;
   }
+  .popupOptions .flex-col .hrefNomePet{
+    color: var(--color-dark);
+  }
+
 
   .popupOptions .flex-col a:hover{
     color: #cb2d0a;

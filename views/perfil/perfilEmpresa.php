@@ -82,15 +82,6 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                     </div>
 
 
-                    <div class="flex-row petUser">
-
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">  <!--Foto do pet  -->                       
-                        </div>
-
-                        <h3>/nomeDoPet</h3>
-
-                    </div>
                     
                 </div>
 
@@ -126,7 +117,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                     };
                 };
             </script>
-            
+
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
                 <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
                 <div class="fotoDePerfil">

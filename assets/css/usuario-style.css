@@ -369,6 +369,9 @@
     padding-top: 0.3rem;
     margin-left: 1rem;
   }
+  .meio .userBaixo .subUserBaixo a{
+    color: var(--color-purple);
+  }
 
   .meio .bio{
     height: fit-content;
