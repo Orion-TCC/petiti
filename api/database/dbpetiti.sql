@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30-Out-2022 às 05:15
+-- Tempo de geração: 31-Out-2022 às 12:11
 -- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.1
+-- versão do PHP: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,15 +43,7 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 (1, 'Perdido', 1),
 (2, 'Animal Perdido', 1),
 (3, 'Pet Perdido', 1),
-(4, 'Desaparecido', 1),
-(5, 'leandro', 1),
-(6, 'cachorro', 1),
-(7, 'categorias', 1),
-(8, 'ka', 1),
-(9, 'Pixel', 1),
-(10, 'aa', 1),
-(11, 'kauansafadus', 1),
-(12, 'kauan safadus', 1);
+(4, 'Desaparecido', 1);
 
 -- --------------------------------------------------------
 
@@ -90,23 +82,6 @@ CREATE TABLE `tbcurtidapublicacao` (
   `idUsuarioCurtida` int(11) NOT NULL,
   `idPublicacaoCurtida` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Acionadores `tbcurtidapublicacao`
---
-DELIMITER $$
-CREATE TRIGGER `tg_curtir` AFTER INSERT ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
-	UPDATE tbpublicacao SET itimalias = itimalias + 1 WHERE idPublicacao = NEW.idPublicacaoCurtida;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `tg_descurtir` AFTER DELETE ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
-	UPDATE tbpublicacao SET itimalias  = itimalias  - 1
-WHERE idPublicacao = OLD.idPublicacaoCurtida;
-END
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
