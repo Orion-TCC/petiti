@@ -68,7 +68,8 @@ $contagemPets = count($dadosPets['pets']);
 
                     <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
                         <div class="flex-row petUser">
-                            <a href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
+
+                            <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
                                 <div class="fotoDePerfil">
                                     <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
                                     <!--Foto do pet  -->
