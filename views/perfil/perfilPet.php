@@ -311,13 +311,11 @@ $foto = $dadosPerfil[0]->caminhoFotoPet;
                     <div class="tabs">
 
                         <div class="userTabs ">
-                            <button class="userTabOption userTabOption--ativo " data-for-tab="1">Postagens</button>
-                            <button class="userTabOption" data-for-tab="2">Marcações</button>
-                            <button class="userTabOption" data-for-tab="3">Curtidas</button>
+                            <button class="userTabOption userTabOption--ativo ">Postagens</button>
                         </div>
                         <!-- fim das tabs de navegacao de usuario -->
 
-                        <div class="tabs_content postagens tabAtiva" data-tab="1">
+                        <div class="tabs_content postagens tabAtiva" >
                             <?php
 
                             if ($contagem < 1) { ?>
@@ -339,35 +337,8 @@ $foto = $dadosPerfil[0]->caminhoFotoPet;
 
                         </div>
 
-                        <div class="tabs_content marcacoes" data-tab="2">
 
-                            <div class="aviso">
-                                <h3>Parece que ninguém te marcou em um post ainda...</h3>
-                            </div>
-                        </div>
-
-                        <div class="tabs_content curtidas" data-tab="3">
-
-                            <?php
-
-                            if ($contagemCurtidas < 1) { ?>
-
-                                <div class="aviso">
-                                    <h3>Ainda nenhuma postagem curtida. Va para sua <a href="feed">Home</a> ou <a href="#">Para você</a> e curta alguma coisa!</h3>
-                                </div>
-
-                                <?php } else {
-
-                                for ($i = 0; $i < $contagemCurtidas; $i++) {
-                                    $fotoCurtidas = $dadosCurtidas['publicacoes'][$i]['caminhoFoto'];
-                                ?>
-                                    <div class="previewPostImage">
-                                        <img src="<?php echo $fotoCurtidas ?>" alt="">
-                                    </div>
-                            <?php }
-                            } ?>
-
-                        </div>
+                        
                     </div>
 
                 </div>
