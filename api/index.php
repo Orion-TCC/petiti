@@ -654,12 +654,10 @@ $app->post(
                 $categoriaPublicacao->setCategoria($categoria);
                 $categoriaPublicacao->setPublicacao($publicacao);
                 $categoriaPublicacao->cadastrar($categoriaPublicacao);
+            }else{
+
             }
-            $idCategoriaPublicacao = $categoria->pesquisarCategoria($categoriaAtual);
-            $categoria->setIdCategoria($idCategoriaPublicacao);
-            $categoriaPublicacao->setCategoria($categoria);
-            $categoriaPublicacao->setPublicacao($publicacao);
-            $categoriaPublicacao->cadastrar($categoriaPublicacao);
+           
         }
 
         //$categoriaPublicacao->setIdCategoriaPublicacao();
