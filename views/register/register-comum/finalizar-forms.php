@@ -3,8 +3,9 @@
 <?php
 @session_start();
 $id = $_SESSION['id-cadastro'];
-$urlPets = "http://localhost/petiti/api/usuario/$id/pets";
-
+for ($a=0; $a < 2; $a++) { 
+    $urlPets = "http://localhost/petiti/api/usuario/$id/pets";
+}
 $jsonPets = file_get_contents($urlPets);
 
 $dadosPets = (array) json_decode($jsonPets, true);
@@ -33,6 +34,7 @@ $contagemPets = count($dadosPets['pets']);
 
     <!--script-->
     <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
+ 
 </head>
 
 <body>
