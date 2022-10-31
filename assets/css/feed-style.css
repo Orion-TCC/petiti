@@ -212,6 +212,10 @@ body.feed{
 
   .popupOptions .flex-col h3{
     cursor: pointer;
+    width: 10rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .popupOptions .flex-col h3:hover{
     color: #1f1e1e;
@@ -425,7 +429,10 @@ body.feed{
   
   main .container .ladoEsquerdo .perfil h4{
     color: var(--color-dark);
-  
+    width: 12rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
 
@@ -460,7 +467,10 @@ body.feed{
   
   main .container .ladoEsquerdo .perfilAtivo h4{
     color: var(--color-dark);
-  
+    width: 12rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   /* SIDE-BAR DO LADO ESQUERDO */
@@ -598,6 +608,7 @@ body.feed{
     height: 12rem;
     width: 100%;
     max-width: 39.8rem;
+    
     gap: 0.5rem;
     overflow-x: auto;
     margin-top: 1rem;
@@ -614,6 +625,7 @@ body.feed{
     font-size: 0.75rem;
     width: 100%;
     max-width: 13rem;
+    min-width: 11rem;
     background: var(--color-purple);
     position: relative;
     background: url("../images/Lontrinhas.svg") no-repeat center center/cover; /*botar a imagem do produto aqui*/
@@ -642,7 +654,7 @@ body.feed{
   }
   
   .meio .ads .ad .adHandler{
-    z-index: 2;
+    z-index: 0;
     width: 100%;
     display: flex;
     align-items: center;
@@ -657,6 +669,10 @@ body.feed{
   
   .meio .ads .ad .adHandler p{
     font-weight: 600;
+    width: 6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   /* feed 1 */
@@ -782,7 +798,7 @@ body.feed{
   
   .meio .caption{
     margin: 0 0.6rem;
-    padding-bottom: 2rem;
+    padding-bottom: 0.5rem;
   }
 
   .meio .caption :nth-child(1){
@@ -793,6 +809,24 @@ body.feed{
   .meio .caption :nth-child(2){
     font-size: 1.1rem;
     font-weight: 400;
+  }
+
+
+  .meio .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    width: 100%;
+    height: fit-content;
+    overflow-y: auto;
+
+    margin-bottom: 0.9rem;
+    
+  }
+  .meio .badge {
+    border:1px solid var(--color-purple) ;
+    border-radius: 20px;
+    padding: 5px 8px;
   }
 
 .meio .commentArea{
@@ -1458,14 +1492,3 @@ font-size: 15px;
 
 }
 
-.badges {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-}
-.badge {
-  border: 1px solid;
-  border-color: #000000;
-  border-radius: 20px;
-  padding: 8px;
-}
