@@ -783,7 +783,11 @@ $app->post('/editar-perfil', function (Request $request, Response $response, arr
     $usuario->login($_SESSION['login'], $_SESSION['senha']);
     header('location: /petiti/meu-perfil');
 });
-
+$app->get('/escolher-pet/{id}', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $_SESSION['pet-escolhido'] = $args['id'];
+    header('location: /petiti/pet-perfil');
+});
 try {
     $app->run();
 } catch (Exception $e) {
