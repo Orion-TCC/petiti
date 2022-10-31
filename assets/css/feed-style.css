@@ -212,6 +212,10 @@ body.feed{
 
   .popupOptions .flex-col h3{
     cursor: pointer;
+    width: 10rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .popupOptions .flex-col h3:hover{
     color: #1f1e1e;
@@ -425,7 +429,10 @@ body.feed{
   
   main .container .ladoEsquerdo .perfil h4{
     color: var(--color-dark);
-  
+    width: 12rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
 
@@ -460,7 +467,10 @@ body.feed{
   
   main .container .ladoEsquerdo .perfilAtivo h4{
     color: var(--color-dark);
-  
+    width: 12rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   /* SIDE-BAR DO LADO ESQUERDO */
@@ -659,6 +669,10 @@ body.feed{
   
   .meio .ads .ad .adHandler p{
     font-weight: 600;
+    width: 6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   /* feed 1 */
