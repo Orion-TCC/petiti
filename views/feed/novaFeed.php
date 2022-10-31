@@ -201,33 +201,41 @@ $contagemPets = count($dadosPets['pets']);
             <div class="Meio">
                 <!-- ads/servicos(passar a limpo depois) -->
                 <span class="adTitulo">Veja o que estão anunciando!</span>
-                <div class="ads">
-                    <?php
-                    $url = "http://localhost/petiti/api/publicacoes/impulsionadas";
 
-                    $jsonAds = file_get_contents($url);
-                    $dadosAds = (array)json_decode($jsonAds, true);
-                    $contagemAds = count($dadosAds['publicacoes']);
-                    for ($i = 0; $i < $contagemAds; $i++) {
-                        $nomeAds = $dadosAds['publicacoes'][$i]['nome'];
-                        $loginAds = $dadosAds['publicacoes'][$i]['login'];
-                        $fotoAds = $dadosAds['publicacoes'][$i]['caminhoFoto'];
-                        $idUsuario = $dadosAds['publicacoes'][$i]['idUsuario'];
-                        $fotoUsuarioAds = $dadosAds['publicacoes'][$i]['fotoUsuario'];
-                    ?>
-                        <div class="ad" style="background: url(<?php echo $fotoAds ?>) no-repeat center center/cover">
-                            <div class="adHandler">
-                                <div class="fotoDePerfil">
-                                    <img src="<?php echo $fotoUsuarioAds; ?>" alt="">
+                <?php
+                $url = "http://localhost/petiti/api/publicacoes/impulsionadas";
+                $jsonAds = file_get_contents($url);
+                $dadosAds = (array)json_decode($jsonAds, true);
+                $contagemAds = count($dadosAds['publicacoes']);
+                if (count($dadosAds['publicacoes']) == 0) {
+                } else {
+                ?>
+                    <div class="ads">
+                        <?php
+                        for ($i = 0; $i < $contagemAds; $i++) {
+                            $nomeAds = $dadosAds['publicacoes'][$i]['nome'];
+                            $loginAds = $dadosAds['publicacoes'][$i]['login'];
+                            $fotoAds = $dadosAds['publicacoes'][$i]['caminhoFoto'];
+                            $idUsuario = $dadosAds['publicacoes'][$i]['idUsuario'];
+                            $fotoUsuarioAds = $dadosAds['publicacoes'][$i]['fotoUsuario'];
+                        ?>
+                            <div class="ad" style="background: url(<?php echo $fotoAds ?>) no-repeat center center/cover">
+                                <div class="adHandler">
+                                    <div class="fotoDePerfil">
+                                        <img src="<?php echo $fotoUsuarioAds; ?>" alt="">
+                                    </div>
+                                    <p class="name">
+                                        <?php echo $loginAds; ?>
+                                    </p>
                                 </div>
-                                <p class="name">
-                                    <?php echo $loginAds; ?>
-                                </p>
                             </div>
-                        </div>
-                    <?php } ?>
+                        <?php }
+                        ?>
+                    </div>
+                <?php   
+                } ?>
 
-                </div>
+
 
                 <div class="criarPost">
                     <img src="assets/images/Lontrinhas.svg" alt="">
