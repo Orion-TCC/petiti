@@ -49,8 +49,9 @@
             <div class="formElementsHolderflexivel">
                     <form action="api/usuario/cadastro/update/ramo" method="post">
                         <input type="hidden" name="campo" value="ramo">
-                        <select name="slRamo" id="slRamo" class="SelectRamo">
-                            <option value="0" disabled selected>Escolha</option>
+                        
+                        <select name="slRamo" id="slRamo" class="SelectRamo" required>
+                            <option disabled selected>Escolha</option>
                             <?php
                             foreach ($listaTipos as $linha) {
                                 if ($linha['tipoUsuario'] != "Adm" && $linha['tipoUsuario'] != "Tutor") { ?>
