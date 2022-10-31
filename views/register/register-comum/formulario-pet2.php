@@ -49,7 +49,7 @@ include_once("sentinela-cadastro.php");
                                 <label class="formText">Nome</label>
                                 <input class="formInput" placeholder="Insira o nome" type="text" name="txtNomePet" required>
 
-                                <label class="formText">Nome de usuário</label>
+                                <label class="formText">Nome de usuário pet</label>
                                 <input class="formInput" placeholder="Insira um username" type="text" name="txtUserPet" required>
 
                                 <label class="formText">Espécie</label>

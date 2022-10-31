@@ -175,3 +175,20 @@ function hidePasswordUm(){
   untoggle.style.display = "block";
 
 }
+
+
+function showPopUp(){
+
+  const popup = document.getElementById ("popup")
+
+  if(popup.style.display == "none" || !popup.style.display ){
+
+    popup.style.display = "flex";
+
+  } else {
+
+    popup.style.display = "none";
+    
+  }
+
+}

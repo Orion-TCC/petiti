@@ -265,7 +265,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                                     </div>
 
                                     <div style="width: 15rem; display: flex; align-items: center;">
-                                           <i class="uil uil-link-alt"></i> <a href="http://<?php echo $_SESSION['site'] ?>"><?php echo $_SESSION['site'] ?> </a>
+                                           <i class="uil uil-link-alt"></i> <a target="_blank" href="http://<?php echo $_SESSION['site'] ?>"><?php echo $_SESSION['site'] ?> </a>
                                     </div>
                                 </div>
                             </div>

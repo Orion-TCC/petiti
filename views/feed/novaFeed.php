@@ -54,17 +54,77 @@ $idUsuarioCurtida = $_SESSION['id'];
                 <input type="search" placeholder="Pesquisar">
             </div>
 
-            <div class="opcoes">
-                <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
-                <div class="fotoDePerfil">
-                    <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+            <script>
+                window.onload=function(){
+                    var hidediv=document.getElementById('popup');
+                    document.onclick=function(div){
+                        if(div.target.id !== 'popup' && div.target.id !== 'opcoes'){
+                            hidediv.style.display = "none";
+                        }
+                    };
+                };
+            </script>
+
+            <div class="opcoes" id="opcoes" onclick="showPopUp()">
+                <label for="abrir-opcoes"><i class="uil uil-setting" ></i></label>
+
+                <div class="fotoDePerfil" id="fotoDePerfil" >
+                    <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
                 </div>
+                
             </div>
+
         </div>
     </nav>
 
     <main class="feed">
+   
+     <div class="popupOptions flex-col" id="popup">
+
+                <div class="flex-col">
+
+                    <div class="flex-row">
+                        <div class="fotoDePerfil">
+                            <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                        </div>
+                        <h3><?php echo $_SESSION['nome']; ?></h3>
+                    </div>
+
+
+                    <div class="flex-row petUser">
+
+                        <div class="fotoDePerfil">
+                            <img src="#" alt="">  <!--Foto do pet  -->                       
+                        </div>
+
+                        <h3>/nomeDoPet</h3>
+
+                    </div>
+                    
+                    <div class="flex-row petUser">
+
+                        <div class="fotoDePerfil">
+                            <img src="#" alt="">  <!--Foto do pet  -->                       
+                        </div>
+
+                        <h3>/nomeDoPet</h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="flex-col borderTop">
+
+                    <div class="flex-row">
+                        
+                    </div>
+
+                </div>
+    </div>
+
         <div class="container">
+
 
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">

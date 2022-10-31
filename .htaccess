@@ -1,6 +1,7 @@
 RewriteEngine On
 
 RewriteRule ^home index.php [NC,L]
+
 RewriteRule ^feed views/feed/novaFeed.php [NC,L]
 
 RewriteRule ^decidir-perfil views/perfil/decidePerfil.php [NC,L]
@@ -11,11 +12,7 @@ RewriteRule ^empresa-perfil views/perfil/perfilEmpresa.php [NC,L]
 RewriteRule ^tutor-perfil views/perfil/perfilUsuario.php [NC,L]
 
 
-RewriteRule ^pet-perfil views/perfil/perfilPet.php [NC,L]
 
-RewriteRule ^empresa-perfil views/perfil/perfilEmpresa.php [NC,L]
-
-RewriteRule ^tutor-perfil views/perfil/perfilUsuario.php [NC,L]
 
 
 RewriteRule ^perfil views/feed/perfil.php [NC,L]

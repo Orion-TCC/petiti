@@ -90,6 +90,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
     <main class="feed">
         <div class="container">
 
+
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
@@ -265,7 +266,7 @@ $contagemCurtidas = count($dadosCurtidas['publicacoes']);
                                     </div>
 
                                     <div style="width: 15rem; display: flex; align-items: center;">
-                                           <i class="uil uil-link-alt"></i> <a href="http://<?php echo $_SESSION['site'] ?>"><?php echo $_SESSION['site'] ?> </a>
+                                           <i class="uil uil-link-alt"></i> <a target="_blank" href="http://<?php echo $_SESSION['site'] ?>"><?php echo $_SESSION['site'] ?> </a>
                                     </div>
                                 </div>
                             </div>
