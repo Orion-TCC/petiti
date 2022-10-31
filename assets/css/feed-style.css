@@ -121,6 +121,10 @@
   border-top: 1px solid gray;
 }
 
+.row-gap{
+  row-gap: 1rem;
+}
+
 .boloDeAniversario{
   background-image: url("../images/boloAniversario.svg");
   background-repeat: no-repeat;
@@ -160,7 +164,7 @@ body.feed{
   }
   
   .popupOptions{
-    width: 15rem;
+    width: 17rem;
     height: fit-content;
     min-height: 15rem;
     background: var(--color-white);
@@ -168,9 +172,11 @@ body.feed{
     box-shadow: 1px 1px 20px 0px #696969c2;
     position: absolute;
     z-index: 10;
-    right: 135px;
-    top: -20px;
+    right: -70px;
+    top: 80px;
     display: none;
+
+    flex-direction: column;
   }
 
   .popupOptions .fotoDePerfil{
@@ -202,6 +208,25 @@ body.feed{
   .popupOptions .flex-col .petUser .fotoDePerfil{
     width: 2rem;
     height: 1.9rem;
+  }
+
+  .popupOptions .flex-col h3{
+    cursor: pointer;
+  }
+  .popupOptions .flex-col h3:hover{
+    color: #1f1e1e;
+  }
+
+  .popupOptions .flex-col a{
+    color: #DB310C;
+  }
+
+  .popupOptions .flex-col a:hover{
+    color: #cb2d0a;
+  }
+
+  .popupOptions .flex-col i{
+    font-size: 1.5rem;
   }
 
 
@@ -282,6 +307,7 @@ body.feed{
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
   }
   
   nav .caixa-de-busca{
