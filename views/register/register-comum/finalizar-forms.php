@@ -14,6 +14,10 @@
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="/petiti/views/assets/css/style.css">
+    <link rel="stylesheet" href="/petiti/assets/css/feed-style.css">
+
+        <!--- iconscout icon --->
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 
     <!-- título da pág e icone (logo) -->
     <title>Pet iti - A rede social para petlovers</title>
@@ -44,9 +48,41 @@
                             <a class="botaoFinalizar" href="/petiti/login">Finalizar</a>
                             <a class="botaoOutroCadastro" href="#">Fazer outro cadastro</a>
                         </div>
-                        <div>
-                            <img class="logoPrincipalFinalizarForm" src="petiti/views/assets/img/logo-principal-achatada.svg" alt="">
+
+                    </div>                    
+                </div>
+
+
+                <div class="formulario">
+                    <div class="formElementsHolderflexivel">
+                        <div class="tituloFormHolder2">
+                            <span>Essas são as contas dos seus pets</span>
                         </div>
+
+                        <div class="petsPerfilHolder">
+
+                            <div class="petUser flex-row">
+
+                                <div class="fotoDePerfil">
+                                    <img src="#" alt="">
+                                </div>
+
+                                <div class="flex-col nomeEUser">
+                                    <span>/nomePet</span>
+                                    <span class="text-muted">@/userPet</span>
+                                </div>
+
+                                <i class="uil uil-times-circle"></i>
+
+                            </div>                              
+                        </div>
+
+
+                        <div>
+                            <a class="botaoFinalizar" href="/petiti/login">Finalizar</a>
+                            <a class="botaoOutroCadastro" href="#">Fazer outro cadastro</a>
+                        </div>
+
                     </div>                    
                 </div>
             </div>
