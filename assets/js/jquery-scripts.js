@@ -79,18 +79,26 @@ $(document).ready(function () {
 
   $("#submitCategoria").click(function () {
     if (input.value == "") {
-    } else {
-      var categoriaCheck = categorias.push(input.value);
-
-      $(".categoriasChecksHolder").append(
-        "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='' value=''> " +
+    }
+    else {
+      if (document.getElementById(input.value) != null){
+        if($('#'+input.value).is(":checked")){
+          $('#'+input.value).prop('checked', false);
+        }else{
+          $('#'+input.value).prop('checked', true);
+        }
+      } else {
+        var categoriaCheck = categorias.push(input.value);
+        $(".categoriasChecksHolder").append(
+          "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='" + $(categorias).get(-1) + "' value=''> " +
           $(categorias).get(-1)
-      );
-      console.log(categoriaCheck);
-      console.log(categorias);
-      document.getElementById("categoriasValue").value = categorias;
-      input.value = "";
-      input.focus();
+        );
+        console.log(categoriaCheck);
+        console.log(categorias);
+        document.getElementById("categoriasValue").value = categorias;
+        input.value = "";
+        input.focus();
+      }
     }
   });
 
@@ -106,18 +114,26 @@ $(document).ready(function () {
     var keycode = event.keyCode ? event.keyCode : event.which;
     if (keycode == "13") {
       if (input.value == "") {
-      } else {
-        var categoriaCheck = categorias.push(input.value);
-
-      $(".categoriasChecksHolder").append(
-        "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='' value=''> " +
-          $(categorias).get(-1)
-      );
-      console.log(categoriaCheck);
-      console.log(categorias);
-      document.getElementById("categoriasValue").value = categorias;
-      input.value = "";
-      input.focus();
+      }
+      else {
+        if (document.getElementById(input.value) != null){
+          if($('#'+input.value).is(":checked")){
+            $('#'+input.value).prop('checked', false);
+          }else{
+            $('#'+input.value).prop('checked', true);
+          }
+        } else {
+          var categoriaCheck = categorias.push(input.value);
+          $(".categoriasChecksHolder").append(
+            "<div class='categoriaSelector'> <input class='checkbox' checked type='checkbox' name='categorias[]' id='" + $(categorias).get(-1) + "' value=''> " +
+            $(categorias).get(-1)
+          );
+          console.log(categoriaCheck);
+          console.log(categorias);
+          document.getElementById("categoriasValue").value = categorias;
+          input.value = "";
+          input.focus();
+        }
       }
     }
   });
