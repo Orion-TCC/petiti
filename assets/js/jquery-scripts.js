@@ -81,11 +81,11 @@ $(document).ready(function () {
     if (input.value == "") {
     }
     else {
-      if (document.getElementById(input.value) != null){
-        if($('#'+input.value).is(":checked")){
-          $('#'+input.value).prop('checked', false);
-        }else{
-          $('#'+input.value).prop('checked', true);
+      if (document.getElementById(input.value) != null) {
+        if ($('#' + input.value).is(":checked")) {
+          $('#' + input.value).prop('checked', false);
+        } else {
+          $('#' + input.value).prop('checked', true);
         }
       } else {
         var categoriaCheck = categorias.push(input.value);
@@ -116,11 +116,19 @@ $(document).ready(function () {
       if (input.value == "") {
       }
       else {
-        if (document.getElementById(input.value) != null){
-          if($('#'+input.value).is(":checked")){
-            $('#'+input.value).prop('checked', false);
-          }else{
-            $('#'+input.value).prop('checked', true);
+        if (document.getElementById(input.value) != null) {
+          if ($('#' + input.value).is(":checked")) {
+            $('#' + input.value).prop('checked', false);
+            categorias.splice(categorias.indexOf(input.value), 1);
+            console.log(categorias);
+            document.getElementById("categoriasValue").value = categorias;
+          } else {
+            $('#' + input.value).prop('checked', true);
+            categorias.push(input.value);
+            console.log(categorias);
+            document.getElementById("categoriasValue").value = categorias;
+            input.value = "";
+            input.focus();
           }
         } else {
           var categoriaCheck = categorias.push(input.value);
@@ -151,3 +159,4 @@ $(document).ready(function () {
     }
   });
 });
+
