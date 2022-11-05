@@ -39,7 +39,7 @@ try {
     $mail->isHTML(true);
     $mail->Subject = "Recuperação de senha | pet iti";
     $mail->Body = "
-    <h1>Você poderá recriar a sua senha no link: http://localhost/petiti/api/recuperar/senha/" . $login . "</h1>    ";
+    <h1>Você poderá recriar a sua senha no link: http://localhost/petiti/api/recuperar/senha/".$login."</h1>    ";
     $mail->AltBody = '';
 
     $mail->send();
