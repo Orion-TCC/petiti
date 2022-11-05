@@ -79,46 +79,46 @@ $contagemPets = count($dadosPets['pets']);
 
     <nav class="feed">
         <div class="container">
-                <div class="popupOptions" id="popup">
+            <div class="popupOptions" id="popup">
 
-                        <div class="flex-col">
+                <div class="flex-col">
 
-                            <div class="flex-row">
+                    <div class="flex-row">
+                        <div class="fotoDePerfil">
+                            <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                        </div>
+                        <h3><?php echo $_SESSION['nome']; ?></h3>
+                    </div>
+
+                    <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
+                        <div class="flex-row petUser">
+
+                            <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
                                 <div class="fotoDePerfil">
-                                    <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                                    <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
+                                    <!--Foto do pet  -->
                                 </div>
-                                <h3><?php echo $_SESSION['nome']; ?></h3>
-                            </div>
 
-                            <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
-                                <div class="flex-row petUser">
-
-                                    <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
-                                        <div class="fotoDePerfil">
-                                            <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
-                                            <!--Foto do pet  -->
-                                        </div>
-
-                                        <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
-                                    </a>
-                                </div>
-                            <?php    } ?>
+                                <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
+                            </a>
                         </div>
+                    <?php    } ?>
+                </div>
 
 
-                        <div class="flex-col borderTop row-gap">
+                <div class="flex-col borderTop row-gap">
 
-                            <h3>Adicionar conta existente</h3>
+                    <h3>Adicionar conta existente</h3>
 
-                            <h3>Gerenciar contas</h3>
+                    <h3>Gerenciar contas</h3>
 
-                            <h3>Configurações</h3>
+                    <h3>Configurações</h3>
 
-                            <h3><a href="sair"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
-
-                        </div>
+                    <h3><a href="sair"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
 
                 </div>
+
+            </div>
 
             <h2 class="logo">
                 <img src="./assets/images/logo_principal.svg">
@@ -129,10 +129,10 @@ $contagemPets = count($dadosPets['pets']);
             </div>
 
             <script>
-                window.onload=function(){
-                    var hidediv=document.getElementById('popup');
-                    document.onclick=function(div){
-                        if(div.target.id !== 'popup' && div.target.id !== 'opcoes'){
+                window.onload = function() {
+                    var hidediv = document.getElementById('popup');
+                    document.onclick = function(div) {
+                        if (div.target.id !== 'popup' && div.target.id !== 'opcoes') {
                             hidediv.style.display = "none";
                         }
                     };
@@ -236,62 +236,62 @@ $contagemPets = count($dadosPets['pets']);
 
 
                                 <div class="modal" id="modal-editar-perfil">
-                                    
-                                    <form class="flex-col" action="/petiti/api/editar-perfil" method="post">
-                                        
-                                            <div class="editPerfilHeader">
-                                                <div class="flex-row" >
-                                                    <a style="display: block !important;" href="#close-modal" rel="modal:close"><i class="uil uil-multiply"></i></i></a>
-                                                    <h2>Editar perfil</h2>
-                                                </div>
 
-                                                <button type="submit" class="btn btn-primary">Salvar</button>
-                                            
+                                    <form class="flex-col" action="/petiti/api/editar-perfil" method="post">
+
+                                        <div class="editPerfilHeader">
+                                            <div class="flex-row">
+                                                <a style="display: block !important;" href="#close-modal" rel="modal:close"><i class="uil uil-multiply"></i></i></a>
+                                                <h2>Editar perfil</h2>
                                             </div>
 
-                                    <div class="editarPerfilForm">
+                                            <button type="submit" class="btn btn-primary">Salvar</button>
 
-                                        <div class="flex-row">
+                                        </div>
 
-                                            <img class="fotoDePerfil" id="preview"  src="<?php echo $_SESSION['foto'] ?>">
+                                        <div class="editarPerfilForm">
 
-                                            <label class="flFotoPerfil">
-                                                <input id="flFotoPerfil" type="file" accept=".jpg, .png">
-                                            </label>
+                                            <div class="flex-row">
 
-                                            <input value="0" id="baseFoto" type="hidden" name="baseFoto">
+                                                <img class="fotoDePerfil" id="preview" src="<?php echo $_SESSION['foto'] ?>">
 
-                                            <h2>
-                                                <label class="flFotoPerfil2">
-                                                    Alterar foto do perfil
+                                                <label class="flFotoPerfil">
                                                     <input id="flFotoPerfil" type="file" accept=".jpg, .png">
                                                 </label>
-                                            </h2>
+
+                                                <input value="0" id="baseFoto" type="hidden" name="baseFoto">
+
+                                                <h2>
+                                                    <label class="flFotoPerfil2">
+                                                        Alterar foto do perfil
+                                                        <input id="flFotoPerfil" type="file" accept=".jpg, .png">
+                                                    </label>
+                                                </h2>
+
+                                            </div>
+
+                                            <div class="flex-col">
+                                                <label class="text-bold" for="">Nome</label>
+                                                <input placeholder="Nome" value="<?php echo $_SESSION['nome'] ?>" type="text" name="txtNome" id="txtNome" autocomplete="off" maxlength="40">
+                                            </div>
+
+                                            <div class="flex-col">
+                                                <label class="text-bold" for="">Local</label>
+                                                <input <?php if ($_SESSION['local'] != null) { ?> value="<?php echo $_SESSION['local'] ?>" <?php } ?> placeholder="Localização" type="text" name="txtLocal" id="txtLocal" autocomplete="off" maxlength="40">
+                                            </div>
+
+                                            <div class="flex-col">
+                                                <label class="text-bold" for="">Site</label>
+                                                <input class="a-text" <?php if ($_SESSION['site'] != null) { ?>value="<?php echo $_SESSION['site'] ?>" <?php } ?> placeholder="URL" type="text" name="txtSite" id="txtSite" autocomplete="off" maxlength="40">
+                                            </div>
+
+                                            <div class="flex-col biografia">
+                                                <label class="text-bold" for="">Biografia</label>
+                                                <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." autocomplete="off" type="text" name="txtBio" id="txtBio" maxlength="200"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
+                                                <h4 class="text-muted">0/200</h3>
+                                            </div>
 
                                         </div>
-
-                                        <div class="flex-col">
-                                            <label class="text-bold" for="">Nome</label>
-                                            <input placeholder="Nome" value="<?php echo $_SESSION['nome'] ?>" type="text" name="txtNome" id="txtNome" autocomplete="off" maxlength="40">
-                                        </div>
-
-                                        <div class="flex-col">
-                                            <label class="text-bold" for="">Local</label>
-                                            <input <?php if ($_SESSION['local'] != null) { ?> value="<?php echo $_SESSION['local'] ?>" <?php } ?> placeholder="Localização" type="text" name="txtLocal" id="txtLocal" autocomplete="off" maxlength="40">
-                                        </div>
-
-                                        <div class="flex-col">
-                                            <label class="text-bold" for="">Site</label>
-                                            <input class="a-text" <?php if ($_SESSION['site'] != null) { ?>value="<?php echo $_SESSION['site'] ?>" <?php } ?> placeholder="URL" type="text" name="txtSite" id="txtSite" autocomplete="off" maxlength="40">
-                                        </div>
-
-                                        <div class="flex-col biografia">
-                                            <label class="text-bold" for="">Biografia</label>
-                                            <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." autocomplete="off" type="text" name="txtBio" id="txtBio" maxlength="200"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
-                                            <h4 class="text-muted">0/200</h3>
-                                        </div>
-
-                                    </div>
 
                                     </form>
                                 </div>
@@ -300,14 +300,14 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <div id="modal-recortar-foto-perfil" class="modal">
                                     <div class="flex-col">
-                                            <span>Redimensione sua imagem!</span>
+                                        <span>Redimensione sua imagem!</span>
 
-                                            <div id="upload-demo"></div>
+                                        <div id="upload-demo"></div>
 
-                                            <a class="btn btn-primary">
-                                                <span id="continuar-crop-foto-perfil" style="padding-block: 10px; padding-inline: 87px;">Confirmar</span>
-                                            </a>
-                                    </div>   
+                                        <a class="btn btn-primary">
+                                            <span id="continuar-crop-foto-perfil" style="padding-block: 10px; padding-inline: 87px;">Confirmar</span>
+                                        </a>
+                                    </div>
                                 </div>
 
 
@@ -322,11 +322,12 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <div class="infoHolder baixo">
                                     <div style="width: 15rem; display: flex; align-items: center;">
-                                          <i class="uil uil-map-marker"></i> <h4><?php echo $_SESSION['local'] ?></h4>
+                                        <i class="uil uil-map-marker"></i>
+                                        <h4><?php echo $_SESSION['local'] ?></h4>
                                     </div>
 
                                     <div style="width: 15rem; display: flex; align-items: center;">
-                                           <i class="uil uil-link-alt"></i> <a target="_blank" href="http://<?php echo $_SESSION['site'] ?>"><?php echo $_SESSION['site'] ?> </a>
+                                        <i class="uil uil-link-alt"></i> <a target="_blank" href="http://<?php echo $_SESSION['site'] ?>"><?php echo $_SESSION['site'] ?> </a>
                                     </div>
                                 </div>
                             </div>
@@ -336,10 +337,24 @@ $contagemPets = count($dadosPets['pets']);
 
                             <div class="subUserBaixo">
                                 <div style="width: fit-content; max-width: 25rem; display: flex; align-items: center;">
-                                     <h2><?php echo $_SESSION['nome']; ?></h2>
+                                    <h2><?php echo $_SESSION['nome']; ?></h2>
                                 </div>
 
-                                <h4 class="text-muted">(Sou dono(a) do @/nomedopet)</h4>
+                                <h4 class="text-muted">(Sou dono(a) do <?php
+                                                                        for ($t = 0; $t < $contagemPets; $t++) {
+                                                                            if ($t == ($contagemPets - 1)) {
+                                                                                echo (" e ");
+                                                                                echo ("@" . $dadosPets['pets'][$t]['usuarioPet']);
+                                                                            } else {
+                                                                                echo ("@" . $dadosPets['pets'][$t]['usuarioPet']);
+                                                                                if ($t != ($contagemPets - 1)) {
+                                                                                    echo (", ");
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        ?>
+
+                                </h4>
                             </div>
 
                             <div class="bio">
