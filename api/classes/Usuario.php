@@ -654,7 +654,7 @@ class Usuario
     public function buscaQtdUsuarioAtivoEmpresa()
     {
         $con = Conexao::conexao();
-        $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 1 AND tbusuario.idTipoUsuario != 1";
+        $query = "SELECT COUNT(idUsuario) as qtd FROM tbusuario WHERE statusUsuario = 1 AND tbusuario.idTipoUsuario != 1 AND tbusuario.idTipoUsuario != 3";
         $resultado = $con->query($query);
         $listaUsuariosQtd = $resultado->fetchAll(PDO::FETCH_ASSOC);
         foreach ($listaUsuariosQtd as $linha) {
@@ -693,7 +693,7 @@ class Usuario
         FROM tbusuario 
         INNER JOIN tbtipousuario ON tbtipousuario.idTipoUsuario = tbusuario.idTipoUsuario
         INNER JOIN tbfotousuario ON tbfotousuario.idUsuario = tbusuario.idUsuario
-        WHERE statusUsuario = 1 AND tbusuario.idTipoUsuario != 1 AND tbfotousuario.idFotoUsuario =(
+        WHERE statusUsuario = 1 AND tbtipousuario.tipoUsuario != 'Tutor' AND tbtipousuario.tipoUsuario != 'Adm' AND tbfotousuario.idFotoUsuario =(
     SELECT
         MAX(tbfotousuario.idFotoUsuario)
     FROM

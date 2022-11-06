@@ -3,7 +3,7 @@
 <?php
 @session_start();
 $id = $_SESSION['id-cadastro'];
-for ($a=0; $a < 2; $a++) { 
+for ($a=0; $a < 10; $a++) { 
     $urlPets = "http://localhost/petiti/api/usuario/$id/pets";
 }
 $jsonPets = file_get_contents($urlPets);

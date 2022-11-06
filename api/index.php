@@ -167,6 +167,20 @@ $app->get('/logins', function (Request $request, Response $response, array $args
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
+$app->get('/logins-pets', function (Request $request, Response $response, array $args) {
+    $pet = new Pet();
+    $lista = $pet->listar();
+    $pets = array();
+
+    foreach ($lista as $linha) {
+        array_push($pets, $linha['usuarioPet']);
+    }
+
+    $response->getBody()->write(json_encode($pets));
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+
 $app->post('/usuario/update/ramo', function (Request $request, Response $response, array $args) {
     @session_start();
     $usuario = new Usuario();
@@ -588,8 +602,16 @@ $app->get('/publicacoes/usuario/{id}', function (Request $request, Response $res
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
-$app->get('/comentarios/{id}', function (Request $request, Response $response, array $args) {
-    $publicacao = new Publicacao();
+$app->get('/comentarios-post/{id}', function (Request $request, Response $response, array $args) {
+    $comentario = new Comentario();
+    $id = $args['id'];
+    $json = "{\"comentarios\":" . json_encode($dadosComentario = $comentario->listarComentarioPublicacao($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+$app->get('/comentario/{id}', function (Request $request, Response $response, array $args) {
     $comentario = new Comentario();
     $id = $args['id'];
     $json = json_encode($dadosComentario = $comentario->listarComentario($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
@@ -599,7 +621,6 @@ $app->get('/comentarios/{id}', function (Request $request, Response $response, a
 });
 
 $app->get('/categorias-post/{id}', function (Request $request, Response $response, array $args) {
-    $comentario = new Comentario();
     $categoria = new Categoria();
     $id = $args['id'];
     $json = json_encode($categoriasPub = $categoria->categoriaPost($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

@@ -98,10 +98,10 @@ class Comentario
     return $lista;
     }
 
-    public function listarComentario($id)
+    public function listarComentarioPublicacao($id)
     {
         $con = Conexao::conexao();
-        $query = "SELECT COUNT(tbcomentario.idComentario) as qtd, idComentario,
+        $query = "SELECT idComentario,
         tbcomentario.idPublicacao,
         nomeUsuario,
         textoComentario,
@@ -111,6 +111,24 @@ class Comentario
         INNER JOIN tbusuario ON tbusuario.idUsuario = tbcomentario.idUsuario
         WHERE tbcomentario.idPublicacao = ". $id;
             
+        $resultado = $con->query($query);
+        $lista =  $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
+    }
+    public function listarComentario($id)
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idComentario,
+        tbcomentario.idPublicacao,
+        nomeUsuario,
+        textoComentario,
+        loginUsuario,
+        qtdcurtidaComentario
+        FROM tbcomentario
+        INNER JOIN tbpublicacao ON tbpublicacao.idPublicacao = tbcomentario.idPublicacao
+        INNER JOIN tbusuario ON tbusuario.idUsuario = tbcomentario.idUsuario
+        WHERE tbcomentario.idComentario = " . $id;
+
         $resultado = $con->query($query);
         $lista =  $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
