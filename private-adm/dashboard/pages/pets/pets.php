@@ -23,6 +23,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/pets/pets.css" />

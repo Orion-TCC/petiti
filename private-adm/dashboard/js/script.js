@@ -60,3 +60,14 @@ function myFunction() {
     }
   }
 }
+
+function hidePopup(){
+  setTimeout(function(){
+    document.querySelector(".toast").classList.add("hide");
+  }, 5000);
+  
+}
+
+function closePopup(){
+  document.querySelector(".toast").classList.add("close");
+}

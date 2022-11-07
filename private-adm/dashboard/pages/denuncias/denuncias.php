@@ -21,6 +21,7 @@ if ($_SESSION['tipo'] != "Adm") {
 
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/denuncias/denuncias.css" />
+  <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 </head>
 
 <body>
