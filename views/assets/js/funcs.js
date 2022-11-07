@@ -16,8 +16,13 @@ $(document).ready(function () {
 
   $(".seguir").on("click", function () {
     id = $(this).val();
-    $.ajax({ type: "POST", url: "/petiti/api/seguir", data: { id: id } });
-    console.log("seguido");
+    $.ajax({
+      type: "POST", url: "/petiti/api/seguir", data: { id: id },
+      success: function (data) {
+            console.log("seguido");
+            console.log(data)
+      },
+    });
   });
 
   $(".comentar").on("click", function () {

@@ -255,6 +255,23 @@ $app->get('/bloquear-tutor/{id}', function (Request $request, Response $response
     $usuario->setIdUsuario($args['id']);
     $usuario->setStatusUsuario(0);
     $usuario->updateStatus($usuario);
+    $cookie = new Cookies;
+
+    $cookie->criarCookie(
+        "usuarioBloqueado",
+        "<div class='popup'></div>
+        <div class='toast'>
+    <div class='toast-content'>
+      <div class='message'>
+        <span class='texto-1'>Usuário bloqueado com sucesso!</span>
+      </div>
+    </div>
+    <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+    <div class='progressbar'></div>
+  </div>
+  ",
+        1
+    );
     header('location:/petiti/tutores-dashboard');
 });
 
@@ -754,7 +771,6 @@ $app->post(
 $app->post('/seguir', function (Request $request, Response $response, array $args) {
     @session_start();
     $usuarioSeguidor = new UsuarioSeguidor();
-    $usuario = new Usuario();
     $idUsuario = $_POST['id'];
     $idSeguidor = $_SESSION['id'];
 
@@ -765,13 +781,15 @@ $app->post('/seguir', function (Request $request, Response $response, array $arg
     if ($verificador == true) {
         $usuarioSeguidor->setIdSeguidor($idSeguidor);
         $usuarioSeguidor->setIdUsuarioSeguido($idUsuario);
-        $idUsuarioSeguidor = $usuarioSeguidor->cadastrar($usuarioSeguidor);
-        $usuarioSeguidor->setIdUsuarioSeguidor($idUsuarioSeguidor);
+        $usuarioSeguidor->cadastrar($usuarioSeguidor);
     } else {
         $idSeguidorExistente = $ver['id'];
         $usuarioSeguidor->setIdUsuarioSeguidor($idSeguidorExistente);
         $usuarioSeguidor->delete($usuarioSeguidor);
+        $response->getBody()->write("$ver[id]");
     }
+    return $response;
+
 });
 
 $app->post('/editar-perfil', function (Request $request, Response $response, array $args) {

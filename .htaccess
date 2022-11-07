@@ -1,5 +1,5 @@
 RewriteEngine On
-
+Options -Indexes
 RewriteRule ^home index.php [NC,L]
 
 RewriteRule ^feed views/feed/novaFeed.php [NC,L]
@@ -51,3 +51,9 @@ RewriteRule ^final-empresa views/register/register-empresa/finalizar-cadastro-em
 
 
 ErrorDocument 404 /petiti/views/erroGeral.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+   
+RewriteRule ^([A-Za-z0-9-]+)/?$    views/perfil/usuario.php?user=$1 [NC,L]    
+
+
