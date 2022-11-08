@@ -35,6 +35,9 @@ foreach ($lista as $linha) {
   $qtdEmpresas = $linha[0];
 }
 //
+$query = "SELECT COUNT(idPublicacao) as qtd, MONTHNAME(dataPublicacao) as mes FROM `tbpublicacao` GROUP BY MONTH(dataPublicacao)";
+$resultado = $con->query($query);
+$listaPostsMes = $resultado->fetchAll();
 
 ?>
 
@@ -47,9 +50,33 @@ foreach ($lista as $linha) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/dashboard/dashboard.css" />
+  <script>
+    const labels = [
+    '<?php foreach ($listaPostsMes as $linha) {
+      echo $linha['mes'];
+    }?>',
+  ];
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'Qtd. de publicações ao mês',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [<?php foreach ($listaPostsMes as $linha) {
+      echo $linha['qtd'];
+      }?>,],
+    }]
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {}
+  };
+  </script>
 </head>
 
 <body>
@@ -147,7 +174,13 @@ foreach ($lista as $linha) {
 
       <div class="informacoes">
         <h2>Informações da Pet Iti</h2>
-        <div class="graficos"></div>
+        <div class="graficos">
+        <canvas id="myChart" width="700" height="300"></canvas>
+
+        <div>
+      </div>
+      
+        </div>
       </div>
     </main>
     <!------------------- final - main ------------------->
@@ -264,6 +297,12 @@ foreach ($lista as $linha) {
   </div>
 
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
+  <script>
+      const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+  </script>
 </body>
 
 </html>

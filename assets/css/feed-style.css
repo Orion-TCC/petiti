@@ -149,7 +149,7 @@
 
 
 body.feed{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway Bold', sans-serif;
     color: var(--color-dark);
     background: var(--color-lightGray);
     overflow-x: hidden;
@@ -549,7 +549,7 @@ body.feed{
     width: 100%;
     text-align: center;
     padding: 1rem 0;
-    box-shadow: 1px 1px 20px 0px #696969c2;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.14)
   
   }
   
@@ -604,7 +604,7 @@ body.feed{
     align-self: flex-end;
     padding: 0.5rem 2rem;
     margin-right:1rem ;
-    box-shadow: 4px 1px 18px 0px #00000057;
+    box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.25);
   
   }
   
@@ -642,7 +642,7 @@ body.feed{
   }
   
   .meio span.adTitulo{
-    font-weight: 600;
+    font-family: "Raleway Extra Bold";
     margin: 1rem 0;
   }
   
@@ -880,11 +880,17 @@ body.feed{
     overflow: hidden;
     width: 100%;
     margin-bottom: 1.5rem;
+    justify-content: space-between;
+  }
+
+  .ladoDireito .sugestoes{
+    margin-bottom: 1rem;
   }
   
   .ladoDireito .whiteBoxHolder .heading h4{
     font-size: 1.1rem;
-    font-weight: 900;
+    font-family: "Raleway Extra Bold";
+    margin-bottom: 1rem;
   }
   
   .ladoDireito .whiteBoxHolder .postsPerdidos{
@@ -894,8 +900,11 @@ body.feed{
     margin: 1.1rem 0;
     width: 100%;
     height: 2.5rem;
+    margin-bottom: 2.5rem;
   }
   
+
+
   .ladoDireito .whiteBoxHolder .postsPerdidos .fotoDePerfil{
     width: 4rem;
     cursor: pointer;
@@ -926,12 +935,12 @@ body.feed{
     margin-top: 0.5rem;
   }
   
-  .ladoDireito .whiteBoxHolder .categorias{
+
+
+  .ladoDireito .categoriasAltaGrid{
     display: grid;
-    margin: 0.5rem 0;
-    grid-template-columns: 9vw 10vw;
-    column-gap: 0.5rem;
-    row-gap: 0.9rem;
+    grid-template-columns: 50% 50%;
+    row-gap: 0.2rem;
   }
   
   .ladoDireito .whiteBoxHolder .categorias .lugar{
@@ -951,6 +960,7 @@ body.feed{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 10rem;
   }
   
   .ladoDireito .whiteBoxHolder .categorias .lugar .infoCategoria{
@@ -987,6 +997,10 @@ body.feed{
     width: 3rem;
   }
   
+  .sugestoes h4 {
+    font-family: "Raleway Extra Bold";
+  }
+
   .sugestoes .whiteBoxHolder .infoSugestoes{
      margin:  0 0.5rem;
      display: flex;
@@ -1000,7 +1014,7 @@ body.feed{
     align-self: center;
     font-weight: 700;
     height: 2.2rem;
-    box-shadow: 1px 4px 19px 0px #696969;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.14);
   }
   
   /* MODAL DO POST */
@@ -1010,10 +1024,10 @@ body.feed{
   border-radius: 20px !important;
 
   width: 790px !important;
-  height: 800px;
+  height: 840px;
 
   max-width: 800px !important;
-  max-height: 810px !important;
+  max-height: 840px !important;
 
   overflow: hidden;
   box-shadow: 1px 1px 40px 1px black !important;

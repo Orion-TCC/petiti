@@ -29,7 +29,7 @@ include_once("sentinela-cadastro.php");
             <div class="holderFormularioPet">
 
                 <div class="formulario">
-                <a class="setaVoltar" href="inicio-pet"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
+                    <a class="setaVoltar" href="inicio-pet"><img src="/petiti/views/assets/img/seta - voltar.svg" alt=""></a>
                     <div class="tituloFormHolder">
                         <span>
                             Vamos conhecer seu pet!
@@ -50,7 +50,9 @@ include_once("sentinela-cadastro.php");
                                 <input class="formInput" placeholder="Insira o nome" type="text" name="txtNomePet" required>
 
                                 <label class="formText">Nome de usuário pet</label>
-                                <input class="formInput" placeholder="Insira um username" type="text" name="txtUserPet" required>
+                                <input class="formInput" placeholder="Insira um username" type="text" name="txtUserPet" id="txtUserPet" required>
+                                <p class="avisoNomeUsuarioValidacao"></p>
+                                <p class="avisoNomeUsuarioQtd"></p>
 
                                 <label class="formText">Espécie</label>
                                 <select name="slEspecie" id="slEspecie" required class="SelectEspecie">

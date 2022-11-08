@@ -22,9 +22,11 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/tutores/tutores.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 </head>
 
-<body >
+<body onload="hidePopup()">
   <div class="container">
     <!------------------- começo - aside ------------------->
     <aside>
@@ -136,8 +138,8 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
                     </span>
                     <p> Entrou em: <?php echo $dataCompleta ?></p>
                   </div>
-                
-                  <a class="botao bloquear" href="/petiti/api/bloquear-tutor/<?php echo $id ?>">Bloquear tutor</a>
+
+                  <a class="botao bloquear" onclick="popUpAcao()" href="/petiti/api/bloquear-tutor/<?php echo $id ?>">Bloquear tutor</a>
                 </div>
               <?php  }
               ?>
@@ -314,6 +316,14 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
   <!--.container-->
 
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
+
+  <?php
+    if(isset($_COOKIE["usuarioBloqueado"])){
+      echo($_COOKIE["usuarioBloqueado"]);
+    }
+  ?>
 </body>
+
+
 
 </html>

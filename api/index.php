@@ -167,6 +167,20 @@ $app->get('/logins', function (Request $request, Response $response, array $args
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
+$app->get('/logins-pets', function (Request $request, Response $response, array $args) {
+    $pet = new Pet();
+    $lista = $pet->listar();
+    $pets = array();
+
+    foreach ($lista as $linha) {
+        array_push($pets, $linha['usuarioPet']);
+    }
+
+    $response->getBody()->write(json_encode($pets));
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+
 $app->post('/usuario/update/ramo', function (Request $request, Response $response, array $args) {
     @session_start();
     $usuario = new Usuario();
@@ -241,6 +255,23 @@ $app->get('/bloquear-tutor/{id}', function (Request $request, Response $response
     $usuario->setIdUsuario($args['id']);
     $usuario->setStatusUsuario(0);
     $usuario->updateStatus($usuario);
+    $cookie = new Cookies;
+
+    $cookie->criarCookie(
+        "usuarioBloqueado",
+        "<div class='popup'></div>
+        <div class='toast'>
+    <div class='toast-content'>
+      <div class='message'>
+        <span class='texto-1'>Usuário bloqueado com sucesso!</span>
+      </div>
+    </div>
+    <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+    <div class='progressbar'></div>
+  </div>
+  ",
+        1
+    );
     header('location:/petiti/tutores-dashboard');
 });
 
@@ -588,8 +619,16 @@ $app->get('/publicacoes/usuario/{id}', function (Request $request, Response $res
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
-$app->get('/comentarios/{id}', function (Request $request, Response $response, array $args) {
-    $publicacao = new Publicacao();
+$app->get('/comentarios-post/{id}', function (Request $request, Response $response, array $args) {
+    $comentario = new Comentario();
+    $id = $args['id'];
+    $json = "{\"comentarios\":" . json_encode($dadosComentario = $comentario->listarComentarioPublicacao($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+$app->get('/comentario/{id}', function (Request $request, Response $response, array $args) {
     $comentario = new Comentario();
     $id = $args['id'];
     $json = json_encode($dadosComentario = $comentario->listarComentario($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
@@ -599,7 +638,6 @@ $app->get('/comentarios/{id}', function (Request $request, Response $response, a
 });
 
 $app->get('/categorias-post/{id}', function (Request $request, Response $response, array $args) {
-    $comentario = new Comentario();
     $categoria = new Categoria();
     $id = $args['id'];
     $json = json_encode($categoriasPub = $categoria->categoriaPost($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
@@ -733,7 +771,6 @@ $app->post(
 $app->post('/seguir', function (Request $request, Response $response, array $args) {
     @session_start();
     $usuarioSeguidor = new UsuarioSeguidor();
-    $usuario = new Usuario();
     $idUsuario = $_POST['id'];
     $idSeguidor = $_SESSION['id'];
 
@@ -744,13 +781,15 @@ $app->post('/seguir', function (Request $request, Response $response, array $arg
     if ($verificador == true) {
         $usuarioSeguidor->setIdSeguidor($idSeguidor);
         $usuarioSeguidor->setIdUsuarioSeguido($idUsuario);
-        $idUsuarioSeguidor = $usuarioSeguidor->cadastrar($usuarioSeguidor);
-        $usuarioSeguidor->setIdUsuarioSeguidor($idUsuarioSeguidor);
+        $usuarioSeguidor->cadastrar($usuarioSeguidor);
     } else {
         $idSeguidorExistente = $ver['id'];
         $usuarioSeguidor->setIdUsuarioSeguidor($idSeguidorExistente);
         $usuarioSeguidor->delete($usuarioSeguidor);
+        $response->getBody()->write("$ver[id]");
     }
+    return $response;
+
 });
 
 $app->post('/editar-perfil', function (Request $request, Response $response, array $args) {

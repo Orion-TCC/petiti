@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30-Out-2022 às 05:15
--- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.1
+-- Tempo de geração: 05-Nov-2022 às 20:59
+-- Versão do servidor: 10.4.17-MariaDB
+-- versão do PHP: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,15 +43,7 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 (1, 'Perdido', 1),
 (2, 'Animal Perdido', 1),
 (3, 'Pet Perdido', 1),
-(4, 'Desaparecido', 1),
-(5, 'leandro', 1),
-(6, 'cachorro', 1),
-(7, 'categorias', 1),
-(8, 'ka', 1),
-(9, 'Pixel', 1),
-(10, 'aa', 1),
-(11, 'kauansafadus', 1),
-(12, 'kauan safadus', 1);
+(4, 'Desaparecido', 1);
 
 -- --------------------------------------------------------
 
@@ -224,6 +216,20 @@ CREATE TABLE `tbpet` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `tbproduto`
+--
+
+CREATE TABLE `tbproduto` (
+  `idProduto` int(11) NOT NULL,
+  `textoProduto` varchar(100) NOT NULL,
+  `descProduto` varchar(150) NOT NULL,
+  `valorProduto` double NOT NULL,
+  `idUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `tbpublicacao`
 --
 
@@ -234,6 +240,20 @@ CREATE TABLE `tbpublicacao` (
   `localPub` text DEFAULT NULL,
   `itimalias` int(11) DEFAULT 0,
   `pubImpulso` int(11) NOT NULL DEFAULT 0,
+  `idUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tbservico`
+--
+
+CREATE TABLE `tbservico` (
+  `idServico` int(11) NOT NULL,
+  `textoServico` varchar(50) NOT NULL,
+  `descServico` varchar(150) NOT NULL,
+  `valorServico` double NOT NULL,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -403,11 +423,24 @@ ALTER TABLE `tbpet`
   ADD KEY `idUsuario` (`idUsuario`);
 
 --
+-- Índices para tabela `tbproduto`
+--
+ALTER TABLE `tbproduto`
+  ADD PRIMARY KEY (`idProduto`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
 -- Índices para tabela `tbpublicacao`
 --
 ALTER TABLE `tbpublicacao`
   ADD PRIMARY KEY (`idPublicacao`),
   ADD KEY `idUsuario` (`idUsuario`);
+
+--
+-- Índices para tabela `tbservico`
+--
+ALTER TABLE `tbservico`
+  ADD PRIMARY KEY (`idServico`);
 
 --
 -- Índices para tabela `tbtipousuario`
@@ -514,10 +547,22 @@ ALTER TABLE `tbpet`
   MODIFY `idPet` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `tbproduto`
+--
+ALTER TABLE `tbproduto`
+  MODIFY `idProduto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `tbpublicacao`
 --
 ALTER TABLE `tbpublicacao`
   MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tbservico`
+--
+ALTER TABLE `tbservico`
+  MODIFY `idServico` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tbtipousuario`
@@ -619,6 +664,12 @@ ALTER TABLE `tbmensagem`
 --
 ALTER TABLE `tbpet`
   ADD CONSTRAINT `tbpet_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `tbproduto`
+--
+ALTER TABLE `tbproduto`
+  ADD CONSTRAINT `tbproduto_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `tbpublicacao`

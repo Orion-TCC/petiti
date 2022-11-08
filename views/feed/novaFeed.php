@@ -255,12 +255,12 @@ $contagemPets = count($dadosPets['pets']);
                     for ($i = 0; $i < $contagem; $i++) {
                         $id =  $dados['publicacoes'][$i]['id'];
 
-                        $urlComentarios = "http://localhost/petiti/api/comentarios/" . $id;
+                        $urlComentarios = "http://localhost/petiti/api/comentarios-post/" . $id;
 
                         $jsonComentarios = file_get_contents($urlComentarios);
 
                         $dadosComentarios = (array)json_decode($jsonComentarios, true);
-                        $qtdComentarios = $dadosComentarios[0]['qtd'];
+
 
                         $nome = $dados['publicacoes'][$i]['nome'];
                         $login = $dados['publicacoes'][$i]['login'];
@@ -316,7 +316,7 @@ $contagemPets = count($dadosPets['pets']);
                                         <img src="<?php echo $fotoUsuario; ?>" alt="">
                                     </div>
                                     <div class="info">
-                                        <h3><?php echo $nome ?></h3>
+                                        <h3><a href="/petiti/<?php echo $login?>"> <?php echo $nome ?></a></h3>
                                         <small><?php echo $local ?> - há <?php echo $diferencaFinal ?></small>
                                     </div>
 
@@ -369,6 +369,11 @@ $contagemPets = count($dadosPets['pets']);
                                 <span class="text-bold"> <?php echo $login; ?></span> <span class="text-muted"><?php echo $texto ?></span>
                             </div>
 
+                            <div class="caption comentarios">
+
+                            </div>
+
+
                             <div class="badges">
 
                                 <?php
@@ -380,7 +385,10 @@ $contagemPets = count($dadosPets['pets']);
 
                             <div class="commentArea">
                                 <i class="uil uil-heart"></i>
-                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200"></textarea>
+                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+                                <button value="<?php echo $id ?>" class="comentar" value="">
+                                    <i class="uil uil-message"></i>
+                                </button>
                                 <span class="text-muted">0/200</span>
                             </div>
 
@@ -394,39 +402,156 @@ $contagemPets = count($dadosPets['pets']);
 
             <div class="ladoDireito">
                 <!-- posts de pets perdidos -->
-                <div class="whiteBoxHolder">
-                    <div class="heading">
+                <div class="whiteBoxHolder postsPerdidosHolder">
+
+                    <div class="heading tituloPetsPerdidos">
                         <h4>Ajude alguém a encontrar seu pet</h4>
                     </div>
 
                     <div class="postsPerdidos">
                         <div class="fotoDePerfil">
-                            <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                            <img src="#" alt="">
                         </div>
                         <div class="infoPostPerdidos">
                             <h4>Minha cachorrinha fugiu de casa!</h4>
                             <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
                         </div>
                     </div>
+
+                    <div class="postsPerdidos">
+                        <div class="fotoDePerfil">
+                            <img src="#" alt="">
+                        </div>
+                        <div class="infoPostPerdidos">
+                            <h4>Minha cachorrinha fugiu de casa!</h4>
+                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
+                        </div>
+                    </div>
+
+                    <div class="postsPerdidos">
+                        <div class="fotoDePerfil">
+                            <img src="#" alt="">
+                        </div>
+                        <div class="infoPostPerdidos">
+                            <h4>Minha cachorrinha fugiu de casa!</h4>
+                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
+                        </div>
+                    </div>
+
+
                 </div>
                 <!-- fim de posts de pets perdidos -->
 
                 <div class="categoriasEmAlta">
-                    <div class="whiteBoxHolder">
+                    <div class="whiteBoxHolder ">
                         <div class="heading">
                             <h4>Categorias em alta</h4>
                         </div>
 
-                        <div class="categorias">
+                        <div class="categoriasAltaGrid">
 
-                            <div class="Lugar">
-                                <div class="fotoDePerfil">
-                                    <img src="/petiti/assets/images/caixa.svg" alt="">
-                                </div>
-                                <div class="infoCategoria">
-                                    <h4>tamandua</h4>
+                            <div class="categorias">
+
+                                <div class="Lugar">
+                                    <div class="fotoDePerfil">
+                                        <img src="/petiti/views/assets/img/position1.svg" alt="">
+                                    </div>
+                                    <div class="infoCategoria">
+                                        <h4>tamandua</h4>
+                                    </div>
                                 </div>
                             </div>
+
+                            <div class="categorias">
+
+                                <div class="Lugar">
+                                    <div class="fotoDePerfil">
+                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
+                                    </div>
+                                    <div class="infoCategoria">
+                                        <h4>tamandua</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="categorias">
+
+                                <div class="Lugar">
+                                    <div class="fotoDePerfil">
+                                        <img src="/petiti/views/assets/img/position2.svg" alt="">
+                                    </div>
+                                    <div class="infoCategoria">
+                                        <h4>tamandua</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="categorias">
+
+                                <div class="Lugar">
+                                    <div class="fotoDePerfil">
+                                        <img src="/petiti/views/assets/img/position6.svg" alt="">
+                                    </div>
+                                    <div class="infoCategoria">
+                                        <h4>tamandua</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="categorias">
+
+                                <div class="Lugar">
+                                    <div class="fotoDePerfil">
+                                        <img src="/petiti/views/assets/img/position3.svg" alt="">
+                                    </div>
+                                    <div class="infoCategoria">
+                                        <h4>tamandua</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="categorias">
+
+                                <div class="Lugar">
+                                    <div class="fotoDePerfil">
+                                        <img src="/petiti/views/assets/img/position7.svg" alt="">
+                                    </div>
+                                    <div class="infoCategoria">
+                                        <h4>tamandua</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="categorias">
+
+                                <div class="Lugar">
+                                    <div class="fotoDePerfil">
+                                        <img src="/petiti/views/assets/img/position4.svg" alt="">
+                                    </div>
+                                    <div class="infoCategoria">
+                                        <h4>tamandua</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="categorias">
+
+                                <div class="Lugar">
+                                    <div class="fotoDePerfil">
+                                        <img src="/petiti/views/assets/img/position8.svg" alt="">
+                                    </div>
+                                    <div class="infoCategoria">
+                                        <h4>tamandua</h4>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -437,13 +562,48 @@ $contagemPets = count($dadosPets['pets']);
                     <h4>Sugestões para você</h4>
 
                     <div class="whiteBoxHolder">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
+
+                        <div class="flex-row">
+                            <div class="fotoDePerfil">
+                                <img src="#" alt="">
+                            </div>
+
+                            <div class="infoSugestoes">
+                                <h4>nome de usuario</h4>
+                                <h5 class="text-muted">@username</h5>
+                            </div>
                         </div>
 
-                        <div class="infoSugestoes">
-                            <h4>nome de usuario</h4>
-                            <h5 class="text-muted">@username</h5>
+                        <button class="btn btn-primary">Seguir</button>
+                    </div>
+
+                    <div class="whiteBoxHolder">
+
+                        <div class="flex-row">
+                            <div class="fotoDePerfil">
+                                <img src="#" alt="">
+                            </div>
+
+                            <div class="infoSugestoes">
+                                <h4>nome de usuario</h4>
+                                <h5 class="text-muted">@username</h5>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary">Seguir</button>
+                    </div>
+
+                    <div class="whiteBoxHolder">
+
+                        <div class="flex-row">
+                            <div class="fotoDePerfil">
+                                <img src="#" alt="">
+                            </div>
+
+                            <div class="infoSugestoes">
+                                <h4>nome de usuario</h4>
+                                <h5 class="text-muted">@username</h5>
+                            </div>
                         </div>
 
                         <button class="btn btn-primary">Seguir</button>

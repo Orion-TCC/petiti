@@ -26,6 +26,7 @@ $qtdCatBloqueada = $categoria->buscaQtdCategoriaBloqueada();
 
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/categorias/categorias.css" />
+  <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 </head>
 
 <body>

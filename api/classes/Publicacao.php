@@ -130,7 +130,7 @@ WHERE
         tbfotousuario
     WHERE
         tbfotousuario.idUsuario = tbpublicacao.idUsuario
-)";
+) ORDER BY dataPublicacao DESC";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -145,7 +145,8 @@ WHERE
         INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario 
         INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
         INNER JOIN tbcurtidapublicacao ON tbpublicacao.idPublicacao = tbcurtidapublicacao.idPublicacaoCurtida
-        WHERE tbcurtidapublicacao.idUsuarioCurtida = $id AND statusUsuario = 1";
+        WHERE tbcurtidapublicacao.idUsuarioCurtida = $id AND statusUsuario = 1
+        ORDER BY dataPublicacao DESC";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
@@ -168,7 +169,7 @@ WHERE
         tbfotousuario
      WHERE
         tbfotousuario.idUsuario = tbpublicacao.idUsuario
-)";
+) ORDER BY dataPublicacao DESC";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -207,7 +208,7 @@ WHERE
         tbfotousuario
      WHERE
         tbfotousuario.idUsuario = tbpublicacao.idUsuario
-)";
+) ORDER BY dataPublicacao DESC";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);

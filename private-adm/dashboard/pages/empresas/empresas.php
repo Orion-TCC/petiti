@@ -28,6 +28,7 @@ $qtdEmpresasBloqueadas = $usuario->buscaQtdUsuarioBloqueadoEmpresa();
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/empresas/empresas.css" />
+  <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 </head>
 
 <body>
