@@ -1,131 +1,138 @@
 /* FONTES */
 @font-face {
-    font-family: "Raleway Bold";
-    src: url("../fonts/Raleway-Bold.ttf");
-  }
-  @font-face {
-    font-family: "Raleway Medium";
-    src: url("../fonts/Raleway-Medium.ttf");
-  }
-  @font-face {
-    font-family: "Raleway Regular";
-    src: url("../fonts/Raleway-Regular.ttf");
-  }
-  @font-face {
-    font-family: "Raleway Thin";
-    src: url("../fonts/Raleway-Thin.ttf");
-  }
-  @font-face {
-    font-family: "Raleway Extra Bold";
-    src: url("../fonts/Raleway-ExtraBold.ttf");
-  }
-  
-  @font-face {
-    font-family: "Public Sans Extra Bold";
-    src: url("../fonts/PublicSans-ExtraBold.ttf");
-  }
-  
-  @font-face {
-    font-family: "Public Sans Medium";
-    src: url("../fonts/PublicSans-Medium.ttf");
-  }
-  
-  @font-face {
-    font-family: "Public Sans Regular";
-    src: url("../fonts/PublicSans-Regular.ttf");
-  }
-  
-  @font-face {
-    font-family: "Public Sans Thin";
-    src: url("../fonts/PublicSans-Thin.ttf");
-  }
-  
-  @font-face {
-    font-family: "Public Sans Bold";
-    src: url("../fonts/PublicSans-Bold.ttf");
-  }
-  
-  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
-  
-  
-  
-  
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button,
-  input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration {
-    display: none;
-  }
-  
-  input[type="search"]::-ms-clear {
-    display: none;
-    width: 0;
-    height: 0;
-  }
-  input[type="search"]::-ms-reveal {
-    display: none;
-    width: 0;
-    height: 0;
-  }
+  font-family: "Raleway Bold";
+  src: url("../fonts/Raleway-Bold.ttf");
+}
 
-  :root{
-    --color-white: #FFFFFF;
-    --color-dark: rgba(0, 0, 0, 1);
-    --color-pastelDark: #202225;
-    --color-lightGray: #f5f5f5;
-    --color-extraLightGray: rgba(245, 245, 245, 1);
-    --color-gray: rgba(86, 86, 86, 1);
-    --color-light: rgba(224, 224, 224, 1);
-  
-    --color-purple: rgba(56, 55, 161, 1);
-    --color-lightBlue: rgba(186, 213, 219, 1);
-    --color-pastelYellow: rgba(255, 251, 159, 1);
-    --color-pastelOrange: rgba(251, 211, 164, 1);
-   
-    --border-radius: 2rem;
-    --card-border-radius: 1rem;
-    --btn-padding: 0.6rem 1rem;
-    --search-padding: 0.6rem 1rem;
-    --card-padding: 1rem; 
-  
-    --sticky-top-left: 5.4rem;
-    --sticky-top-right: -18rem;
-  }
+@font-face {
+  font-family: "Raleway Medium";
+  src: url("../fonts/Raleway-Medium.ttf");
+}
 
-  a {
-    text-decoration: none;
-  }
-  
-  html,
-  body {
-    scroll-behavior: smooth;
-    max-width: 100%;
-  }
-  
-  
-  *, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    text-decoration: none;
-    box-sizing: border-box;
-    list-style: none;
-    border: none;
-  }
+@font-face {
+  font-family: "Raleway Regular";
+  src: url("../fonts/Raleway-Regular.ttf");
+}
 
-.icon{
+@font-face {
+  font-family: "Raleway Thin";
+  src: url("../fonts/Raleway-Thin.ttf");
+}
+
+@font-face {
+  font-family: "Raleway Extra Bold";
+  src: url("../fonts/Raleway-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Public Sans Extra Bold";
+  src: url("../fonts/PublicSans-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Public Sans Medium";
+  src: url("../fonts/PublicSans-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Public Sans Regular";
+  src: url("../fonts/PublicSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Public Sans Thin";
+  src: url("../fonts/PublicSans-Thin.ttf");
+}
+
+@font-face {
+  font-family: "Public Sans Bold";
+  src: url("../fonts/PublicSans-Bold.ttf");
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+
+
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+input[type="search"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+:root {
+  --color-white: #FFFFFF;
+  --color-dark: rgba(0, 0, 0, 1);
+  --color-pastelDark: #202225;
+  --color-lightGray: #f5f5f5;
+  --color-extraLightGray: rgba(245, 245, 245, 1);
+  --color-gray: rgba(86, 86, 86, 1);
+  --color-light: rgba(224, 224, 224, 1);
+
+  --color-purple: rgba(56, 55, 161, 1);
+  --color-lightBlue: rgba(186, 213, 219, 1);
+  --color-pastelYellow: rgba(255, 251, 159, 1);
+  --color-pastelOrange: rgba(251, 211, 164, 1);
+
+  --border-radius: 2rem;
+  --card-border-radius: 1rem;
+  --btn-padding: 0.6rem 1rem;
+  --search-padding: 0.6rem 1rem;
+  --card-padding: 1rem;
+
+  --sticky-top-left: 5.4rem;
+  --sticky-top-right: -18rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+  max-width: 100%;
+}
+
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  list-style: none;
+  border: none;
+}
+
+.icon {
   margin: 0 0.7rem;
 }
 
-.borderTop{
+.borderTop {
   border-top: 1px solid gray;
 }
 
-.row-gap{
+.row-gap {
   row-gap: 1rem;
 }
 
-.boloDeAniversario{
+.boloDeAniversario {
   background-image: url("../images/boloAniversario.svg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -135,7 +142,7 @@
   margin-bottom: 11px;
 }
 
-.enciclopedia{
+.enciclopedia {
   background-image: url("../images/enciclopedia.svg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -145,704 +152,709 @@
 }
 
 
-  /* NOVA FEED */
+/* NOVA FEED */
 
 
-body.feed{
-    font-family: 'Raleway Bold', sans-serif;
-    color: var(--color-dark);
-    background: var(--color-lightGray);
-    overflow-x: hidden;
+body.feed {
+  font-family: 'Raleway Bold', sans-serif;
+  color: var(--color-dark);
+  background: var(--color-lightGray);
+  overflow-x: hidden;
 
-    position: relative;
-  }
-  
-  
-  .container {
-    width: 80%;
-    margin: 0 auto;
-  }
-  
-  .popupOptions{
-    width: 17rem;
-    height: fit-content;
-    min-height: 15rem;
-    background: var(--color-white);
-    border-radius: var(--card-border-radius);
-    box-shadow: 1px 1px 20px 0px #696969c2;
-    position: absolute;
-    z-index: 10;
-    right: -70px;
-    top: 80px;
-    display: none;
-
-    flex-direction: column;
-  }
-
-  .popupOptions .fotoDePerfil{
-    width: 3rem;
-    height: 3rem;
-  }
- 
-  .popupOptions .flex-row{
-    align-items: center;
-  }
-
-  .popupOptions .flex-row h3 {
-    margin-left: 0.5rem;
-  }
+  position: relative;
+}
 
 
-  .popupOptions .flex-col{
-    height: fit-content;
-    padding: var(--card-padding);
-  }
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
 
-  .popupOptions .flex-col .petUser{
-    padding: var(--card-padding);
-    padding-left: 2.1rem;
-    
-    padding-bottom: 0.1rem;
-  }
+.popupOptions {
+  width: 17rem;
+  height: fit-content;
+  min-height: 15rem;
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  box-shadow: 1px 1px 20px 0px #696969c2;
+  position: absolute;
+  z-index: 10;
+  right: -70px;
+  top: 80px;
+  display: none;
 
-  .popupOptions .flex-col .petUser .fotoDePerfil{
-    width: 2rem;
-    height: 1.9rem;
-  }
+  flex-direction: column;
+}
 
-  .popupOptions .flex-col h3{
-    cursor: pointer;
-    width: 10rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .popupOptions .flex-col h3:hover{
-    color: #1f1e1e;
-  }
+.popupOptions .fotoDePerfil {
+  width: 3rem;
+  height: 3rem;
+}
 
-  .popupOptions .flex-col a{
-    color: #DB310C;
-    width: 12rem;
-    display: flex;
-  }
-  .popupOptions .flex-col .hrefNomePet{
-    color: var(--color-dark);
-  }
+.popupOptions .flex-row {
+  align-items: center;
+}
+
+.popupOptions .flex-row h3 {
+  margin-left: 0.5rem;
+}
 
 
-  .popupOptions .flex-col a:hover{
-    color: #cb2d0a;
-  }
+.popupOptions .flex-col {
+  height: fit-content;
+  padding: var(--card-padding);
+}
 
-  .popupOptions .flex-col i{
-    font-size: 1.5rem;
-  }
+.popupOptions .flex-col .petUser {
+  padding: var(--card-padding);
+  padding-left: 2.1rem;
+
+  padding-bottom: 0.1rem;
+}
+
+.popupOptions .flex-col .petUser .fotoDePerfil {
+  width: 2rem;
+  height: 1.9rem;
+}
+
+.popupOptions .flex-col h3 {
+  cursor: pointer;
+  width: 10rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.popupOptions .flex-col h3:hover {
+  color: #1f1e1e;
+}
+
+.popupOptions .flex-col a {
+  color: #DB310C;
+  width: 12rem;
+  display: flex;
+}
+
+.popupOptions .flex-col .hrefNomePet {
+  color: var(--color-dark);
+}
 
 
-  
-  .fotoDePerfil{
-    width: 3.5rem;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 1px solid var(--color-purple);
-    user-select: none;
-  }
-  
-  img{
-    display: block;
-    width: 100%;
-  }
-  
-  .btn {
-    display: inline-block;
-    padding: var(--btn-padding);
-    font-weight: 500;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: all 300ms ease;
-    font-size: 0.9rem;
-  }
-  
-  .btn:hover{
-    opacity: 0.8;
-  }
-  
-  
-  .btn-primary{
-    background: var(--color-pastelYellow);
-    color: white;
-  }
-  
-.flex-row{
+.popupOptions .flex-col a:hover {
+  color: #cb2d0a;
+}
+
+.popupOptions .flex-col i {
+  font-size: 1.5rem;
+}
+
+
+
+.fotoDePerfil {
+  width: 3.5rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--color-purple);
+  user-select: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.btn {
+  display: inline-block;
+  padding: var(--btn-padding);
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 300ms ease;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+
+.btn-primary {
+  background: var(--color-pastelYellow);
+  color: white;
+}
+
+.flex-row {
   display: flex;
   flex-direction: row;
 }
 
-.flex-col{
+.flex-col {
   display: flex;
   flex-direction: column;
 }
 
-  .text-bold{
-    font-weight: 500;
-  }
-  
-  .text-muted{
-    color: var(--color-gray);
-  }
-  
-  .a-text{
-    color: var(--color-purple);
-  }
+.text-bold {
+  font-weight: 500;
+}
+
+.text-muted {
+  color: var(--color-gray);
+}
+
+.a-text {
+  color: var(--color-purple);
+}
 
 
-  
-   /* NavFeed */
-  nav.feed{
-    width: 100%;
-    background: var(--color-white);
-    padding: 0.7rem 0;
-    position: fixed;
-    top: 0;
-    z-index: 1;
-  }
-  
-  nav .logo {
-    width: 9.5rem;
-  }
-  
-  nav .container{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-  }
-  
-  nav .caixa-de-busca{
-    background: var(--color-extraLightGray);
-    border-radius: var(--border-radius);
-    padding: var(--search-padding);
-    color: var(--color-dark);
-    
-  }
-  
-  nav .caixa-de-busca input[type="search"]{
-    background: transparent;
-    width: 30vw;
-    margin-left: 1rem;
-    font-size: 0.9rem;
-    color: var(--color-dark);
-  }
-  
-  nav .caixa-de-busca input[type="search"]::placeholder{
-    color: var(--color-gray);
-  }
-  
-  nav .opcoes {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    width: 9rem;
-    height: 4rem;
-    border-radius: var(--border-radius);
-    padding-inline: 1rem;
-    cursor: pointer;
-    transition: all 300ms ease;
 
-  }
+/* NavFeed */
+nav.feed {
+  width: 100%;
+  background: var(--color-white);
+  padding: 0.7rem 0;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
 
-  nav .opcoes  label{
-    cursor: pointer;
-  }
+nav .logo {
+  width: 9.5rem;
+}
 
+nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
 
-  nav .opcoes .fotoDePerfil{
-    width: 2.9rem;
-    user-select: none;
-  }
+nav .caixa-de-busca {
+  background: var(--color-extraLightGray);
+  border-radius: var(--border-radius);
+  padding: var(--search-padding);
+  color: var(--color-dark);
 
-  nav .opcoes:hover{
-    background: rgba(4, 4, 4, 0.078);
-  }
+}
 
-  
-  nav .opcoes label{
-    font-size: 1.7rem;
-  }
-  
-  /* main */
-  
-  main.feed{
-    position: relative;
-    top: 7rem;
-  }
-  
-  main .container{
-    display: grid;
-    grid-template-columns: 18vw auto 20vw;
-    column-gap: 2rem;
-    position: relative;
-  }
-  
-  
-  
-  /* LADO ESQUERDO */
-  
-  main .container .ladoEsquerdo{
-    height: max-content;
-    position: sticky;
-    top: var(--sticky-top-left);
-  }
-  
-  main .container .ladoEsquerdo .perfil{
-    padding: var(--card-padding);
-    background: var(--color-white);
-    border-radius: var(--card-border-radius);
-  
-    display: flex;
-    align-items: center;
-    column-gap: 1rem;
-    width: 100%;
-  
-    position: relative;
-    overflow-x: hidden;
+nav .caixa-de-busca input[type="search"] {
+  background: transparent;
+  width: 30vw;
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  color: var(--color-dark);
+}
 
-  }
-  
-  main .container .ladoEsquerdo .perfil::after{
-    content: "";
-    display: block;
-    width: 100%;
-    height: 0.4rem;
-    position: absolute;
-    background: var(--color-purple);
-    bottom: 0;
-    left: 0;
-  
-  
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.20s ease-out;
-  }
-  
-  main .container .ladoEsquerdo .perfil:hover::after{
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-  
-  main .container .ladoEsquerdo .perfil h4{
-    color: var(--color-dark);
-    width: 12rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+nav .caixa-de-busca input[type="search"]::placeholder {
+  color: var(--color-gray);
+}
+
+nav .opcoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 9rem;
+  height: 4rem;
+  border-radius: var(--border-radius);
+  padding-inline: 1rem;
+  cursor: pointer;
+  transition: all 300ms ease;
+
+}
+
+nav .opcoes label {
+  cursor: pointer;
+}
 
 
-  
-  main .container .ladoEsquerdo .perfilAtivo{
-    padding: var(--card-padding);
-    background: var(--color-white);
-    border-radius: var(--card-border-radius);
-  
-    display: flex;
-    align-items: center;
-    column-gap: 1rem;
-    width: 100%;
-  
-    position: relative;
-    overflow-x: hidden;
+nav .opcoes .fotoDePerfil {
+  width: 2.9rem;
+  user-select: none;
+}
 
-  }
-  
-  main .container .ladoEsquerdo .perfilAtivo::after{
-    content: "";
-    display: block;
-    width: 100%;
-    height: 0.4rem;
-    position: absolute;
-    background: var(--color-purple);
-    bottom: 0;
-    left: 0;
+nav .opcoes:hover {
+  background: rgba(4, 4, 4, 0.078);
+}
 
-  }
-  
-  
-  main .container .ladoEsquerdo .perfilAtivo h4{
-    color: var(--color-dark);
-    width: 12rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  /* SIDE-BAR DO LADO ESQUERDO */
-  
-  .ladoEsquerdo .sidebar{
-    margin-top: 1rem;
-    background: var(--color-white);
-    border-radius: var(--card-border-radius);
-  }
-  
-  .ladoEsquerdo .sidebar .menu-item{
-    display: flex; 
-     align-items: center;
-     height: 4rem;
-     cursor: pointer;
-     transition: all 300ms ease;
-     position: relative;
-  }
-  
-  .ladoEsquerdo .sidebar .menu-item:hover{
-    background-color: var(--color-lightGray) ;
-  }
-  
-  .ladoEsquerdo .sidebar i{
-    font-size: 1.4rem;
-    color: var(--color-dark);
-    margin-left: 2rem;
-    position: relative;
-  }
-  
-  .ladoEsquerdo .sidebar a{
-    color: var(--color-dark);
-  }
-  
-  .ladoEsquerdo .sidebar h3{
-    margin-left: 1.5rem;
-    font-size: 1rem;
-  }
-  
-  .ladoEsquerdo .sidebar .ativo{
-    background-color: var(--color-lightGray);
-  }
-  
-  .ladoEsquerdo .sidebar .ativo i, .ladoEsquerdo .sidebar .ativo h3{
-    color:  var(--color-purple);
-  }
-  
-  .ladoEsquerdo .sidebar .ativo::before{
-    content: "";
-    display: block;
-    width: 0.5rem;
-    height: 100%;
-    position: absolute;
-    background: var(--color-purple);
-  }
-  
-  
-  .ladoEsquerdo .sidebar .menu-item:first-child.ativo{
-    border-top-left-radius: var(--card-border-radius);
-    overflow: hidden;
-  }
-  
-  .ladoEsquerdo .sidebar .menu-item:last-child.ativo{
-    border-bottom-left-radius: var(--card-border-radius);
-    overflow: hidden;
-  }
-  
-  .ladoEsquerdo .btn{
-    margin-top: 1rem;
-    width: 100%;
-    text-align: center;
-    padding: 1rem 0;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.14)
-  
-  }
-  
-  .ladoESquerdo .btn a{
-    font-family: 'Raleway', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-dark);
-    padding: 1rem 4rem;
-  }
-  
-  
-  /* MEIO */
-  .meio .criarPost{
-    background: var(--color-white);
-    width: 100%;
-    height: 6.4rem;
-    border-radius: var(--card-border-radius);
-    display: flex;
-    overflow: hidden;
-    margin-top: 1rem;
-  }
-  
-  .meio .criarPost img{
-    width: 30rem;
-    aspect-ratio: 1/1;
-  }
-  
-  .meio .criarPost h3 {
-    font-size: 0.9rem;
-  }
-  
-  .meio .criarPost a{
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--color-dark);
-  }
-  
-  .meio .faixaPost {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    padding-top: 1rem;
-    margin-left: -2rem;
-  }
-  
-  .meio .criarPost button {
-    font-size: 0.9rem;
-    align-self: flex-end;
-    padding: 0.5rem 2rem;
-    margin-right:1rem ;
-    box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.25);
-  
-  }
-  
-  .meio .ads{
-    display: flex;
-    justify-content: space-between;
-    height: 12rem;
-    width: 100%;
-    max-width: 39.8rem;
-    
-    gap: 0.5rem;
-    overflow-x: auto;
-    margin-top: 1rem;
-  }
-  
-  .meio .ads .ad{
-    padding: var(--card-padding);
-    border-radius: var(--card-border-radius);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    font-size: 0.75rem;
-    width: 100%;
-    max-width: 13rem;
-    min-width: 11rem;
-    background: var(--color-purple);
-    position: relative;
-    background: url("../images/Lontrinhas.svg") no-repeat center center/cover; /*botar a imagem do produto aqui*/
-  }
-  
-  .meio .ads .ad .name{
-    z-index: 2;
-  }
-  
-  .meio span.adTitulo{
-    font-family: "Raleway Extra Bold";
-    margin: 1rem 0;
-  }
-  
-  .meio .ads .ad::before{
-    content: "";
-    display: block;
-    width: 100%;
-    height: 5rem;
-    background: black;
-    background: linear-gradient(rgba(0, 0, 0, 0.40), transparent);
-    position: absolute;
-    top: 0;
-    border-top-left-radius: var(--card-border-radius);
-    border-top-right-radius: var(--card-border-radius);
-  }
-  
-  .meio .ads .ad .adHandler{
-    z-index: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .meio .ads .ad .fotoDePerfil{
-    width: 2rem;
-    height: 2rem;
-    border: none;
-  }
-  
-  .meio .ads .ad .adHandler p{
-    font-weight: 600;
-    width: 6rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  /* feed 1 */
-  
-  .meio .feeds .feed{
-    background: var(--color-white);
-    border-radius: var(--card-border-radius);
-    padding: var(--card-padding);
-    margin: 1rem 0;
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-  
-  .meio .feed .head{
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .meio .feed .head .edit{
+
+nav .opcoes label {
+  font-size: 1.7rem;
+}
+
+/* main */
+
+main.feed {
+  position: relative;
+  top: 7rem;
+}
+
+main .container {
+  display: grid;
+  grid-template-columns: 18vw auto 20vw;
+  column-gap: 2rem;
+  position: relative;
+}
+
+
+
+/* LADO ESQUERDO */
+
+main .container .ladoEsquerdo {
+  height: max-content;
+  position: sticky;
+  top: var(--sticky-top-left);
+}
+
+main .container .ladoEsquerdo .perfil {
+  padding: var(--card-padding);
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  width: 100%;
+
+  position: relative;
+  overflow-x: hidden;
+
+}
+
+main .container .ladoEsquerdo .perfil::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 0.4rem;
+  position: absolute;
+  background: var(--color-purple);
+  bottom: 0;
+  left: 0;
+
+
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.20s ease-out;
+}
+
+main .container .ladoEsquerdo .perfil:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+main .container .ladoEsquerdo .perfil h4 {
+  color: var(--color-dark);
+  width: 12rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+main .container .ladoEsquerdo .perfilAtivo {
+  padding: var(--card-padding);
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  width: 100%;
+
+  position: relative;
+  overflow-x: hidden;
+
+}
+
+main .container .ladoEsquerdo .perfilAtivo::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 0.4rem;
+  position: absolute;
+  background: var(--color-purple);
+  bottom: 0;
+  left: 0;
+
+}
+
+
+main .container .ladoEsquerdo .perfilAtivo h4 {
+  color: var(--color-dark);
+  width: 12rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* SIDE-BAR DO LADO ESQUERDO */
+
+.ladoEsquerdo .sidebar {
+  margin-top: 1rem;
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+}
+
+.ladoEsquerdo .sidebar .menu-item {
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  cursor: pointer;
+  transition: all 300ms ease;
+  position: relative;
+}
+
+.ladoEsquerdo .sidebar .menu-item:hover {
+  background-color: var(--color-lightGray);
+}
+
+.ladoEsquerdo .sidebar i {
+  font-size: 1.4rem;
+  color: var(--color-dark);
+  margin-left: 2rem;
+  position: relative;
+}
+
+.ladoEsquerdo .sidebar a {
+  color: var(--color-dark);
+}
+
+.ladoEsquerdo .sidebar h3 {
+  margin-left: 1.5rem;
+  font-size: 1rem;
+}
+
+.ladoEsquerdo .sidebar .ativo {
+  background-color: var(--color-lightGray);
+}
+
+.ladoEsquerdo .sidebar .ativo i,
+.ladoEsquerdo .sidebar .ativo h3 {
+  color: var(--color-purple);
+}
+
+.ladoEsquerdo .sidebar .ativo::before {
+  content: "";
+  display: block;
+  width: 0.5rem;
+  height: 100%;
+  position: absolute;
+  background: var(--color-purple);
+}
+
+
+.ladoEsquerdo .sidebar .menu-item:first-child.ativo {
+  border-top-left-radius: var(--card-border-radius);
+  overflow: hidden;
+}
+
+.ladoEsquerdo .sidebar .menu-item:last-child.ativo {
+  border-bottom-left-radius: var(--card-border-radius);
+  overflow: hidden;
+}
+
+.ladoEsquerdo .btn {
+  margin-top: 1rem;
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.14)
+}
+
+.ladoESquerdo .btn a {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  padding: 1rem 4rem;
+}
+
+
+/* MEIO */
+.meio .criarPost {
+  background: var(--color-white);
+  width: 100%;
+  height: 6.4rem;
+  border-radius: var(--card-border-radius);
+  display: flex;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.meio .criarPost img {
+  width: 30rem;
+  aspect-ratio: 1/1;
+}
+
+.meio .criarPost h3 {
+  font-size: 0.9rem;
+}
+
+.meio .criarPost a {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-dark);
+}
+
+.meio .faixaPost {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding-top: 1rem;
+  margin-left: -2rem;
+}
+
+.meio .criarPost button {
+  font-size: 0.9rem;
+  align-self: flex-end;
+  padding: 0.5rem 2rem;
+  margin-right: 1rem;
+  box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.25);
+
+}
+
+.meio .ads {
+  display: flex;
+  justify-content: space-between;
+  height: 12rem;
+  width: 100%;
+  max-width: 39.8rem;
+
+  gap: 0.5rem;
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.meio .ads .ad {
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 0.75rem;
+  width: 100%;
+  max-width: 13rem;
+  min-width: 11rem;
+  background: var(--color-purple);
+  position: relative;
+  background: url("../images/Lontrinhas.svg") no-repeat center center/cover;
+  /*botar a imagem do produto aqui*/
+}
+
+.meio .ads .ad .name {
+  z-index: 2;
+}
+
+.meio span.adTitulo {
+  font-family: "Raleway Extra Bold";
+  margin: 1rem 0;
+}
+
+.meio .ads .ad::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 5rem;
+  background: black;
+  background: linear-gradient(rgba(0, 0, 0, 0.40), transparent);
+  position: absolute;
+  top: 0;
+  border-top-left-radius: var(--card-border-radius);
+  border-top-right-radius: var(--card-border-radius);
+}
+
+.meio .ads .ad .adHandler {
+  z-index: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meio .ads .ad .fotoDePerfil {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+}
+
+.meio .ads .ad .adHandler p {
+  font-weight: 600;
+  width: 6rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* feed 1 */
+
+.meio .feeds .feed {
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.meio .feed .head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.meio .feed .head .edit {
   font-size: 1.5rem;
   display: flex;
   align-items: center;
-  }
-  
-  .meio .feed .usuario{
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .meio .feed .usuario .info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .meio .feed .imagemPost{
-    border-radius: var(--card-border-radius);
-    overflow: hidden;
-    margin: 0.7rem 0;
-  }
+}
 
-  .meio .feed .botoes{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.4rem;
-    margin: 0.6rem 0.6rem 0 0.6rem;
-  }
+.meio .feed .usuario {
+  display: flex;
+  gap: 1rem;
+}
 
+.meio .feed .usuario .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  
-  .meio .feed .botoes .botoesDeInteracao button{
-    cursor: pointer;
-    font-size: 1.5rem;
-    background: none;
-  }
+.meio .feed .imagemPost {
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+  margin: 0.7rem 0;
+}
 
-  .meio .feed .botoes .botoesDeInteracao button.comentar{
-
-    background-image: url("../images/botaoComentar.svg");
-
-    width: 2rem;
-    height: 2rem;
-
-    cursor: pointer;
-
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-left: 1rem;
-  }
-
-  .meio .feed .botoes .botoesDeInteracao button.mensagem{
-    background-image: url("../images/botaoMensagem.svg");
-
- 
-    width: 2.2rem;
-    height: 2rem;
-
-    cursor: pointer;
-
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-left: 1rem;
-  }
-  
-  .meio .feed .botoes .botoesDeInteracao input[type="checkbox"]{
-    appearance: none;
-
-    background-image: url("../images/pataCurtida.svg");
-
-    width: 2.1rem;
-    height: 2rem;
-
-    padding-bottom: 2.1rem;
-
-    cursor: pointer;
-
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-  }
-  .meio .feed .botoes .botoesDeInteracao input[type="checkbox"]:checked{
-    background-image: url("../images/pataCurtidaPreenchida.svg");
-  }
-
-  
-  .meio .curtidoPor{
-    display: flex;
-    width: 10rem;
-    margin: 0 0.6rem;
-  }
-  
-  .meio .curtidoPor span{
-    font-family: "Public Sans Bold";
-    font-size: 1.2rem;
-   
-  }
-
-  
-  .meio .curtidoPor p{
-    margin-left: 0.5rem;
-  }
-  
-  .meio .caption{
-    margin: 0 0.6rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .meio .caption :nth-child(1){
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-
-  .meio .caption :nth-child(2){
-    font-size: 1.1rem;
-    font-weight: 400;
-  }
+.meio .feed .botoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+  margin: 0.6rem 0.6rem 0 0.6rem;
+}
 
 
-  .meio .badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    width: 100%;
-    height: fit-content;
-    overflow-y: auto;
 
-    margin-bottom: 0.9rem;
-    
-  }
-  .meio .badge {
-    border:1px solid var(--color-purple) ;
-    border-radius: 20px;
-    padding: 5px 8px;
-  }
+.meio .feed .botoes .botoesDeInteracao button {
+  cursor: pointer;
+  font-size: 1.5rem;
+  background: none;
+}
 
-.meio .commentArea{
+.meio .feed .botoes .botoesDeInteracao button.comentar {
+
+  background-image: url("../images/botaoComentar.svg");
+
+  width: 2rem;
+  height: 2rem;
+
+  cursor: pointer;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 1rem;
+}
+
+.meio .feed .botoes .botoesDeInteracao button.mensagem {
+  background-image: url("../images/botaoMensagem.svg");
+
+
+  width: 2.2rem;
+  height: 2rem;
+
+  cursor: pointer;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 1rem;
+}
+
+.meio .feed .botoes .botoesDeInteracao input[type="checkbox"] {
+  appearance: none;
+
+  background-image: url("../images/pataCurtida.svg");
+
+  width: 2.1rem;
+  height: 2rem;
+
+  padding-bottom: 2.1rem;
+
+  cursor: pointer;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.meio .feed .botoes .botoesDeInteracao input[type="checkbox"]:checked {
+  background-image: url("../images/pataCurtidaPreenchida.svg");
+}
+
+
+.meio .curtidoPor {
+  display: flex;
+  width: 10rem;
+  margin: 0 0.6rem;
+}
+
+.meio .curtidoPor span {
+  font-family: "Public Sans Bold";
+  font-size: 1.2rem;
+
+}
+
+
+.meio .curtidoPor p {
+  margin-left: 0.5rem;
+}
+
+.meio .caption {
+  margin: 0 0.6rem;
+  padding-bottom: 0.5rem;
+}
+
+.meio .caption :nth-child(1) {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.meio .caption :nth-child(2) {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+
+.meio .badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  width: 100%;
+  height: fit-content;
+  overflow-y: auto;
+
+  margin-bottom: 0.9rem;
+
+}
+
+.meio .badge {
+  border: 1px solid var(--color-purple);
+  border-radius: 20px;
+  padding: 5px 8px;
+}
+
+.meio .commentArea {
   width: 100%;
   height: fit-content;
   position: relative;
   display: flex;
 }
 
-.meio .commentArea textarea{
+.meio .commentArea textarea {
   border-top: 1px solid gray;
   resize: none;
   width: 37rem;
@@ -854,8 +866,8 @@ body.feed{
   overflow: hidden;
 
 }
-  
-.meio .commentArea i{
+
+.meio .commentArea i {
   position: absolute;
   font-size: 1.4rem;
   align-self: center;
@@ -863,161 +875,161 @@ body.feed{
   cursor: pointer;
 }
 
-.meio .commentArea span{
+.meio .commentArea span {
   align-self: flex-end;
   right: 0;
   position: absolute;
   font-weight: 700;
 }
 
-  /* lado direito */
-  .ladoDireito .whiteBoxHolder {
-    background: var(--color-white);
-    border-radius: var(--card-border-radius);
-    padding: var(--card-padding);
-    height: fit-content ;
-    max-height: 17.5rem;
-    overflow: hidden;
-    width: 100%;
-    margin-bottom: 1.5rem;
-    justify-content: space-between;
-  }
+/* lado direito */
+.ladoDireito .whiteBoxHolder {
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  height: fit-content;
+  max-height: 17.5rem;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  justify-content: space-between;
+}
 
-  .ladoDireito .sugestoes{
-    margin-bottom: 1rem;
-  }
-  
-  .ladoDireito .whiteBoxHolder .heading h4{
-    font-size: 1.1rem;
-    font-family: "Raleway Extra Bold";
-    margin-bottom: 1rem;
-  }
-  
-  .ladoDireito .whiteBoxHolder .postsPerdidos{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 1.1rem 0;
-    width: 100%;
-    height: 2.5rem;
-    margin-bottom: 2.5rem;
-  }
-  
+.ladoDireito .sugestoes {
+  margin-bottom: 1rem;
+}
 
+.ladoDireito .whiteBoxHolder .heading h4 {
+  font-size: 1.1rem;
+  font-family: "Raleway Extra Bold";
+  margin-bottom: 1rem;
+}
 
-  .ladoDireito .whiteBoxHolder .postsPerdidos .fotoDePerfil{
-    width: 4rem;
-    cursor: pointer;
-  }
-  
-  .ladoDireito .whiteBoxHolder .postsPerdidos .infoPostPerdidos{
-    margin: 0 0.7rem;
-    width: 100%;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  
-  .ladoDireito .whiteBoxHolder .postsPerdidos h4{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 0.2rem;
-    font-weight: 700;
-    font-size: 0.9rem;
-  }
-  
-  .ladoDireito .whiteBoxHolder .postsPerdidos h5{
-    font-weight: 700;
-    font-size: 0.8rem;
-  }
-  
-  .ladoDireito .whiteBoxHolder .categoriasEmAlta{
-    margin-top: 0.5rem;
-  }
-  
+.ladoDireito .whiteBoxHolder .postsPerdidos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1.1rem 0;
+  width: 100%;
+  height: 2.5rem;
+  margin-bottom: 2.5rem;
+}
 
 
-  .ladoDireito .categoriasAltaGrid{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    row-gap: 0.2rem;
-  }
-  
-  .ladoDireito .whiteBoxHolder .categorias .lugar{
-    display: flex;
-    align-items: center;
-    width: 9.6rem;
-    height: 3.5rem;
-  }
-  
-  .ladoDireito .whiteBoxHolder .categorias .lugar .fotoDePerfil{
-    width: 6.5rem;
-    cursor: pointer;
-    border: none;
-  }
-  
-  .ladoDireito .whiteBoxHolder .categorias .lugar .infoCategoria h4{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 10rem;
-  }
-  
-  .ladoDireito .whiteBoxHolder .categorias .lugar .infoCategoria{
-    margin: 0 0.7rem;
-    width: 100%;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  
-  
-  .ladoDireito .categoriasEmAlta .whiteBoxHolder {
-    background: var(--color-white);
-    border-radius: var(--card-border-radius);
-    padding: var(--card-padding);
-    height: fit-content ;
-    max-height: 20rem;
-    overflow: hidden;
-    width: 100%;
-    margin-bottom: 1.5rem;
-  }
-  
-  .sugestoes{
-    height: fit-content;
-    max-height: 28rem;
-    overflow: hidden;
-  }
-  
-  .sugestoes .whiteBoxHolder {
-    display: flex;
-    margin-top: 1rem 
-  }
-  
-  .sugestoes .whiteBoxHolder .fotoDePerfil{
-    width: 3rem;
-  }
-  
-  .sugestoes h4 {
-    font-family: "Raleway Extra Bold";
-  }
 
-  .sugestoes .whiteBoxHolder .infoSugestoes{
-     margin:  0 0.5rem;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     margin-right: 2.5rem;
-  }
-  
-  .sugestoes .whiteBoxHolder button{
-    color: var(--color-dark);
-    align-self: center;
-    font-weight: 700;
-    height: 2.2rem;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.14);
-  }
-  
-  /* MODAL DO POST */
+.ladoDireito .whiteBoxHolder .postsPerdidos .fotoDePerfil {
+  width: 4rem;
+  cursor: pointer;
+}
+
+.ladoDireito .whiteBoxHolder .postsPerdidos .infoPostPerdidos {
+  margin: 0 0.7rem;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ladoDireito .whiteBoxHolder .postsPerdidos h4 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.2rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.ladoDireito .whiteBoxHolder .postsPerdidos h5 {
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.ladoDireito .whiteBoxHolder .categoriasEmAlta {
+  margin-top: 0.5rem;
+}
+
+
+
+.ladoDireito .categoriasAltaGrid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  row-gap: 0.2rem;
+}
+
+.ladoDireito .whiteBoxHolder .categorias .lugar {
+  display: flex;
+  align-items: center;
+  width: 9.6rem;
+  height: 3.5rem;
+}
+
+.ladoDireito .whiteBoxHolder .categorias .lugar .fotoDePerfil {
+  width: 6.5rem;
+  cursor: pointer;
+  border: none;
+}
+
+.ladoDireito .whiteBoxHolder .categorias .lugar .infoCategoria h4 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 10rem;
+}
+
+.ladoDireito .whiteBoxHolder .categorias .lugar .infoCategoria {
+  margin: 0 0.7rem;
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+
+.ladoDireito .categoriasEmAlta .whiteBoxHolder {
+  background: var(--color-white);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  height: fit-content;
+  max-height: 20rem;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.sugestoes {
+  height: fit-content;
+  max-height: 28rem;
+  overflow: hidden;
+}
+
+.sugestoes .whiteBoxHolder {
+  display: flex;
+  margin-top: 1rem
+}
+
+.sugestoes .whiteBoxHolder .fotoDePerfil {
+  width: 3rem;
+}
+
+.sugestoes h4 {
+  font-family: "Raleway Extra Bold";
+}
+
+.sugestoes .whiteBoxHolder .infoSugestoes {
+  margin: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 2.5rem;
+}
+
+.sugestoes .whiteBoxHolder button {
+  color: var(--color-dark);
+  align-self: center;
+  font-weight: 700;
+  height: 2.2rem;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.14);
+}
+
+/* MODAL DO POST */
 
 .modal {
   padding: 0 0 !important;
@@ -1033,15 +1045,18 @@ body.feed{
   box-shadow: 1px 1px 40px 1px black !important;
 }
 
-.cr-boundary{
+.cr-boundary {
   width: 800px !important;
 }
 
-.croppie-container .cr-image, .croppie-container .cr-overlay, .croppie-container .cr-viewport{
+.croppie-container .cr-image,
+.croppie-container .cr-overlay,
+.croppie-container .cr-viewport {
   border: none !important;
 }
 
-.croppie-container .cr-viewport, .croppie-container .cr-resizer{
+.croppie-container .cr-viewport,
+.croppie-container .cr-resizer {
   margin: 0 !important;
 }
 
@@ -1061,11 +1076,12 @@ body.feed{
   background-color: var(--color-white) !important;
 }
 
-.modal-foto-post .inputArea span{
+.modal-foto-post .inputArea span {
   font-family: "Raleway Bold", sans-serif;
   font-size: 1.5rem;
 
 }
+
 .tituloModalPost {
   display: flex;
   flex-direction: row;
@@ -1128,7 +1144,7 @@ body.feed{
   display: none;
 }
 
-.blocker:before{
+.blocker:before {
   display: none !important;
 }
 
@@ -1166,7 +1182,7 @@ body.feed{
 }
 
 
-#criar-post{
+#criar-post {
   width: 1210px !important;
   max-width: 1210px !important;
 }
@@ -1194,20 +1210,20 @@ body.feed{
 
 }
 
-.criarPostElements{
+.criarPostElements {
   display: grid;
   grid-template-rows: repeat(15, 1fr);
   width: 410px;
 }
 
 
-.parte1CriarPost{
-  grid-row: 6 span ;
+.parte1CriarPost {
+  grid-row: 6 span;
   width: 100%;
   height: 100%;
 }
 
-.parte1CriarPost .userElementos{
+.parte1CriarPost .userElementos {
   width: 100%;
   gap: 15px;
   padding: 20px 0 0 20px !important;
@@ -1216,22 +1232,20 @@ body.feed{
   margin-bottom: 2rem;
 }
 
-.parte1CriarPost .userElementos .fotoDePerfil{
+.parte1CriarPost .userElementos .fotoDePerfil {}
 
+.parte1CriarPost .userElementos:hover {
+  background: none;
+  cursor: default;
 }
 
-.parte1CriarPost .userElementos:hover{
-background: none;
-cursor: default;
+.parte1CriarPost .imagemUser {
+  border: none !important;
+  background-color: none !important;
+  box-shadow: 0px 0px 7px 0px black !important;
 }
 
-.parte1CriarPost .imagemUser{
-    border:none !important;
-    background-color: none !important;
-    box-shadow: 0px 0px 7px 0px black !important;
-}
-
-.parte1CriarPost .textNomeUsuario{
+.parte1CriarPost .textNomeUsuario {
   font-family: "Raleway Bold", sans-serif;
   font-style: normal;
   font-weight: 700;
@@ -1239,7 +1253,7 @@ cursor: default;
   line-height: 23px;
 }
 
-#form-aid textarea{
+#form-aid textarea {
   resize: none;
   width: 410px;
   height: 155px;
@@ -1253,11 +1267,11 @@ cursor: default;
   line-height: 19px;
 }
 
-#form-aid textarea:focus{
+#form-aid textarea:focus {
   outline: none;
 }
 
-#form-aid textarea::placeholder{
+#form-aid textarea::placeholder {
   font-family: 'Raleway Bold';
   font-style: normal;
   font-weight: 600;
@@ -1265,24 +1279,24 @@ cursor: default;
   line-height: 19px;
 }
 
-.letraCont{
- display: flex; 
- width: 95%; 
- justify-content: end; 
- padding: 0px 20px 0 0; 
- font-family: "Raleway Medium";
- color: #777777;
+.letraCont {
+  display: flex;
+  width: 95%;
+  justify-content: end;
+  padding: 0px 20px 0 0;
+  font-family: "Raleway Medium";
+  color: #777777;
 }
 
 
 
 
-.parte2CriarPost{
+.parte2CriarPost {
   display: flex;
   flex-direction: row;
   align-items: center;
- justify-content: space-between;
-  
+  justify-content: space-between;
+
   grid-row: 1 span / 1 span;
   width: 100%;
   height: 100%;
@@ -1290,7 +1304,7 @@ cursor: default;
   border-top: 1px solid gray;
 }
 
-.parte2CriarPost input{
+.parte2CriarPost input {
   height: 98%;
   width: 70%;
   border: none;
@@ -1303,40 +1317,40 @@ cursor: default;
 
 }
 
-.parte2CriarPost input::placeholder{
+.parte2CriarPost input::placeholder {
   font-family: 'Raleway Medium';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 21px;
-  
+
   color: #777777;
-  
+
 }
 
-.parte2CriarPost input:focus{
-  outline:none;
+.parte2CriarPost input:focus {
+  outline: none;
 }
 
-.parte2CriarPost span.material-symbols-outlined{
+.parte2CriarPost span.material-symbols-outlined {
   font-size: 35px !important;
   padding-right: 20px;
 }
 
-.parte2CriarPost i{
+.parte2CriarPost i {
   font-size: 2.3rem;
 }
 
-.parte3CriarPost{
+.parte3CriarPost {
   grid-row: 7 span / 7 span;
   width: 100%;
   height: 100%;
-  
+
 }
 
-#categoriasHolder{
+#categoriasHolder {
   display: flex;
-  
+
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -1345,30 +1359,30 @@ cursor: default;
 
 }
 
-#categoriasHolder span.textPlaceholder{
-line-height: 19px;
-font-size: 15px;
+#categoriasHolder span.textPlaceholder {
+  line-height: 19px;
+  font-size: 15px;
 }
 
 
 
 
 
-.categoriaSelectTitulo{
+.categoriaSelectTitulo {
   width: 100%;
   height: 50px;
 
   display: flex;
   align-items: center;
-  
+
   background: white;
   border-top: 1px solid gray;
-  padding-left: 20px; 
-  
+  padding-left: 20px;
+
 
 }
 
-.categoriaSelectTitulo span{
+.categoriaSelectTitulo span {
   font-family: 'Raleway Medium', sans-serif;
   font-style: normal;
   font-weight: 700;
@@ -1378,18 +1392,18 @@ font-size: 15px;
 
 
 
-#txtCategoria{
+#txtCategoria {
   grid-column: 9 span;
   height: 40px;
-   
-   
+
+
   border: 1px solid #B7B7B7;
   border-radius: 18px;
-   
+
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;
   border-right: none;
-   
+
   padding: 0 10px 0 10px;
 
   font-family: 'Raleway Bold';
@@ -1398,9 +1412,9 @@ font-size: 15px;
   font-size: 15px;
   line-height: 19px;
 
- }
- 
- #txtCategoria::placeholder{
+}
+
+#txtCategoria::placeholder {
   font-family: 'Raleway Bold';
   font-style: normal;
   font-weight: 700;
@@ -1408,41 +1422,41 @@ font-size: 15px;
   line-height: 19px;
 
   color: #B7B7B7;
- }
+}
 
 
- #txtCategoria:focus{
- outline: none;
- }
+#txtCategoria:focus {
+  outline: none;
+}
 
- #categoriasHolder i{
+#categoriasHolder i {
   font-size: 1.5rem;
   color: white;
 }
 
- 
-#submitCategoria{
+
+#submitCategoria {
   grid-column: 1 span;
   display: flex;
   align-items: center;
 
   border: 1px solid gray;
   border-radius: 18px;
-  
+
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px;
-  
+
   background: rgba(56, 55, 161, 1);
 
   cursor: pointer;
- }
+}
 
- #submitCategoria:hover{
+#submitCategoria:hover {
   background: rgba(56, 55, 161, 0.90);
- }
+}
 
 
- .categoriaSelector{
+.categoriaSelector {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1451,7 +1465,7 @@ font-size: 15px;
   width: fit-content;
   border: 1px solid rgba(56, 55, 161, 1);
   border-radius: 18px;
-  
+
   font-family: 'Raleway Medium';
   font-style: normal;
   font-weight: 700;
@@ -1461,7 +1475,7 @@ font-size: 15px;
   text-align: center;
 
   color: #000000;
-  
+
   position: relative;
 
   padding: 1px 25px 1px 15px;
@@ -1469,18 +1483,18 @@ font-size: 15px;
   overflow: hidden;
 }
 
-.categoriasChecksHolder{
+.categoriasChecksHolder {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
   width: 100%;
   height: 10rem;
-  overflow-y:auto ;
+  overflow-y: auto;
 }
 
 
 
-.checkbox{
+.checkbox {
   appearance: none;
   position: absolute;
   top: 40%;
@@ -1489,26 +1503,76 @@ font-size: 15px;
 
 
   height: 35px;
-  width: 20px;  
-  
+  width: 20px;
+
   border: 1px solid gray;
-  
+
   border-bottom: none;
   border-top: none;
   border-right: none;
-  
+
   border-top-right-radius: 18px;
   border-bottom-right-radius: 18px;
 
   margin: 2px 0 0 0;
-  
+
   transition: 50ms;
 
   cursor: pointer;
 }
 
-.checkbox:checked{
+.checkbox:checked {
   background-color: #3837a1;
 
 }
 
+.edit {
+  cursor: pointer;
+}
+
+.menuPost {
+  position: absolute;
+  width: 100%;
+}
+
+.opcoesPost.close{
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 0.3em;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  background-color: white;
+  margin-top: 0.7em;
+  display: none;
+}
+
+.opcoesPost.open{
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 0.3em;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  background-color: white;
+  margin-top: 0.7em;
+}
+
+.opcoesPost li {
+  border-bottom: 1px solid #ccc;
+  font-size: 17;
+  color: #DB310C;
+  padding: 0.6em 1em;
+}
+
+.denunciaPost {
+  padding-left: 0.3em;
+}
+
+.deixSeguir {
+  padding-left: 0.3em;
+}

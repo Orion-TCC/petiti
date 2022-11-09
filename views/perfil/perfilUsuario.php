@@ -344,7 +344,7 @@ $contagemPets = count($dadosPets['pets']);
                                                                         for ($t = 0; $t < $contagemPets; $t++) {
                                                                             if ($t == ($contagemPets - 1)) {
                                                                                 echo (" e ");
-                                                                                echo ("@" . $dadosPets['pets'][$t]['usuarioPet']);
+                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a>");
                                                                             } else {
                                                                                 echo ("@" . $dadosPets['pets'][$t]['usuarioPet']);
                                                                                 if ($t != ($contagemPets - 1)) {

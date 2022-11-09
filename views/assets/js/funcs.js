@@ -171,3 +171,14 @@ function showPopUp() {
     popup.style.display = "none";
   }
 }
+
+function openPostOptions(){
+  const options = document.getElementById("opcoesPost");
+  if(options.classList.contains("close")){
+    options.classList.remove("close");
+    options.classList.add("open");
+  }else{
+    options.classList.remove("open");
+    options.classList.add("close");
+  }
+}

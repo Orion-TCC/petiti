@@ -313,15 +313,22 @@ $contagemPets = count($dadosPets['pets']);
                             <div class="head">
                                 <div class="usuario">
                                     <div class="fotoDePerfil">
-                                        <img src="<?php echo $fotoUsuario; ?>" alt="">
+                                        <a href="/petiti/<?php echo $login ?>"><img src="<?php echo $fotoUsuario; ?>" alt=""></a>
                                     </div>
                                     <div class="info">
-                                        <h3><a href="/petiti/<?php echo $login?>"> <?php echo $nome ?></a></h3>
+                                        <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $nome ?></a></h3>
                                         <small><?php echo $local ?> - há <?php echo $diferencaFinal ?></small>
                                     </div>
 
                                 </div>
-                                <span class="edit"><i class="uil uil-ellipsis-v"></i></span>
+                                <span class="edit" onClick="openPostOptions()"><i class="uil uil-ellipsis-v"></i>
+                                    <div class="menuPost">
+                                        <ul id="opcoesPost" class="opcoesPost close">
+                                            <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixSeguir">Deixar de seguir</span></li>
+                                            <li><i class="fa-solid fa-circle-exclamation"></i><span class="denunciaPost">Denunciar</span></li>
+                                        </ul>
+                                    </div>
+                                </span>
                             </div>
 
                             <div class="imagemPost">
