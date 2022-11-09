@@ -201,33 +201,39 @@ $contagemPets = count($dadosPets['pets']);
             <div class="Meio">
                 <!-- ads/servicos(passar a limpo depois) -->
                 <span class="adTitulo">Veja o que estão anunciando!</span>
-                <div class="ads">
-                    <?php
-                    $url = "http://localhost/petiti/api/publicacoes/impulsionadas";
+                <?php
+                $url = "http://localhost/petiti/api/publicacoes/impulsionadas";
+                $jsonAds = file_get_contents($url);
+                $dadosAds = (array)json_decode($jsonAds, true);
+                $contagemAds = count($dadosAds['publicacoes']);
 
-                    $jsonAds = file_get_contents($url);
-                    $dadosAds = (array)json_decode($jsonAds, true);
-                    $contagemAds = count($dadosAds['publicacoes']);
-                    for ($i = 0; $i < $contagemAds; $i++) {
-                        $nomeAds = $dadosAds['publicacoes'][$i]['nome'];
-                        $loginAds = $dadosAds['publicacoes'][$i]['login'];
-                        $fotoAds = $dadosAds['publicacoes'][$i]['caminhoFoto'];
-                        $idUsuario = $dadosAds['publicacoes'][$i]['idUsuario'];
-                        $fotoUsuarioAds = $dadosAds['publicacoes'][$i]['fotoUsuario'];
-                    ?>
-                        <div class="ad" style="background: url(<?php echo $fotoAds ?>) no-repeat center center/cover">
-                            <div class="adHandler">
-                                <div class="fotoDePerfil">
-                                    <img src="<?php echo $fotoUsuarioAds; ?>" alt="">
+                if ($contagemAds == 0) {
+                } else {
+                ?>
+                    <div class="ads">
+                        <?php
+                        for ($i = 0; $i < $contagemAds; $i++) {
+                            $nomeAds = $dadosAds['publicacoes'][$i]['nome'];
+                            $loginAds = $dadosAds['publicacoes'][$i]['login'];
+                            $fotoAds = $dadosAds['publicacoes'][$i]['caminhoFoto'];
+                            $idUsuario = $dadosAds['publicacoes'][$i]['idUsuario'];
+                            $fotoUsuarioAds = $dadosAds['publicacoes'][$i]['fotoUsuario'];
+                        ?>
+                            <div class="ad" style="background: url(<?php echo $fotoAds ?>) no-repeat center center/cover">
+                                <div class="adHandler">
+                                    <div class="fotoDePerfil">
+                                        <img src="<?php echo $fotoUsuarioAds; ?>" alt="">
+                                    </div>
+                                    <p class="name">
+                                        <?php echo $loginAds; ?>
+                                    </p>
                                 </div>
-                                <p class="name">
-                                    <?php echo $loginAds; ?>
-                                </p>
                             </div>
-                        </div>
-                    <?php } ?>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
 
-                </div>
+
 
                 <div class="criarPost">
                     <img src="assets/images/Lontrinhas.svg" alt="">
@@ -251,7 +257,17 @@ $contagemPets = count($dadosPets['pets']);
                     $json = file_get_contents($url);
                     $dados = (array)json_decode($json, true);
                     $contagem = count($dados['publicacoes']);
+                    if ($contagem == 0) {
+                    ?>
+                        <div class="contagemZero">
 
+                            <div class="semPublicacaoes">
+                                <img src="/petiti/assets/images/semPost.svg">
+                                <p class="textoSemPublicacoes">Parece que não tem nada por aqui... Faça um post ou siga alguém para ver o que eles estão postando!</p>
+                            </div>
+                        </div>
+
+                    <?php }
                     for ($i = 0; $i < $contagem; $i++) {
                         $id =  $dados['publicacoes'][$i]['id'];
 

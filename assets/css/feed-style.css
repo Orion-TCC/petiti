@@ -1576,3 +1576,20 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 .deixSeguir {
   padding-left: 0.3em;
 }
+
+.contagemZero{
+  margin-top: 3em;
+  display: flex;
+  justify-content: center;
+}
+
+.semPublicacaoes{
+  text-align: center;
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+}
+
+.textoSemPublicacoes{
+  font-size: 20;
+}
