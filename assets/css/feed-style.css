@@ -1069,7 +1069,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   flex-direction: column;
 
   width: 800px !important;
-  height: 810px !important;
+  height: 840px !important;
 
   border-radius: 20px;
   box-shadow: 1px 1px 40px 1px black;
