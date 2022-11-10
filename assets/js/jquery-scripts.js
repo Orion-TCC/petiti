@@ -113,7 +113,7 @@ $(document).ready(function () {
   $("#form-aid #txtCategoria").keypress(function (event) {
     var keycode = event.keyCode ? event.keyCode : event.which;
     if (keycode == "13") {
-      if (input.value == "") {
+      if (input.value =="") {
       }
       else {
         if (document.getElementById(input.value) != null) {

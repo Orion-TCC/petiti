@@ -262,7 +262,7 @@ $contagemPets = count($dadosPets['pets']);
                         <div class="contagemZero">
 
                             <div class="semPublicacaoes">
-                                <img src="/petiti/assets/images/semPost.svg">
+                                <img src="/petiti/assets/images/semPost.svg" id="svgSemPost">
                                 <p class="textoSemPublicacoes">Parece que não tem nada por aqui... Faça um post ou siga alguém para ver o que eles estão postando!</p>
                             </div>
                         </div>
@@ -732,7 +732,7 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <textarea name="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!" maxlength="200"></textarea>
 
-                                <input type="hidden" name="categoriasValue" id="categoriasValue" value="categorias">
+                                <input type="text" name="categoriasValue" id="categoriasValue" value="">
 
                                 <input type="hidden" name="baseFoto" id="baseFoto">
 
@@ -779,7 +779,7 @@ $contagemPets = count($dadosPets['pets']);
                                         ?>
 
                                             <div class="categoriaSelector">
-                                                <input class="checkbox" type="checkbox" name="categorias[]" id="<?php $dadosCategoria['categorias'][$i]['idCategoria'] ?>" value="<?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>">
+                                                <input class="checkbox" type="checkbox" name="categorias[]" id="<?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>" value="<?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>">
                                                 <?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>
                                             </div>
                                         <?php

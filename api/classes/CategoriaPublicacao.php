@@ -47,7 +47,7 @@ class categoriaPublicacao
     public function cadastrar($categoriapublicacao){
         $con = Conexao::conexao();
         $stmt = $con->prepare('INSERT INTO tbcategoriapublicacao (idCategoriaPublicacao, idCategoria, idPublicacao) VALUES(default, ?, ?)');
-        $stmt->bindValue(1, $categoriapublicacao->getCategoria()->getIdCategoria());
+        $stmt->bindValue(1, $categoriapublicacao->getCategoria());
         $stmt->bindValue(2, $categoriapublicacao->getPublicacao()->getIdPublicacao());
         $stmt->execute();
         $resultado = $con->query("SELECT MAX(idCategoriaPublicacao) FROM tbcategoriapublicacao");

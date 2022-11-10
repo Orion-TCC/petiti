@@ -696,12 +696,18 @@ $app->post(
                 $categoria->setCategoria($categoriaAtual);
                 $idCategoria = $categoria->cadastrar($categoria);
                 $categoria->setIdCategoria($idCategoria);
-                $categoriaPublicacao->setCategoria($categoria);
+                $idCategoriapPub = $categoria->pesquisarCategoria($categoriaAtual);
+                $categoriaPublicacao->setCategoria($idCategoriapPub);
                 $categoriaPublicacao->setPublicacao($publicacao);
                 $categoriaPublicacao->cadastrar($categoriaPublicacao);
             } else {
+                $idCategoriapPub = $categoria->pesquisarCategoria($categoriaAtual);
+                $categoriaPublicacao->setCategoria($idCategoriapPub);
+                $categoriaPublicacao->setPublicacao($publicacao);
+                $categoriaPublicacao->cadastrar($categoriaPublicacao);
+                echo $categoriaAtual;
             }
-        }
+        } 
 
         //$categoriaPublicacao->setIdCategoriaPublicacao();
         header('location: /petiti/feed');
@@ -789,7 +795,6 @@ $app->post('/seguir', function (Request $request, Response $response, array $arg
         $response->getBody()->write("$ver[id]");
     }
     return $response;
-
 });
 
 $app->post('/editar-perfil', function (Request $request, Response $response, array $args) {

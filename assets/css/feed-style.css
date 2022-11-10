@@ -1581,6 +1581,9 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   margin-top: 3em;
   display: flex;
   justify-content: center;
+  background-color: white;
+  height: 60%;
+  border-radius: 10px;
 }
 
 .semPublicacaoes{
@@ -1588,8 +1591,13 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   display: flex;
   width: 60%;
   flex-direction: column;
+  align-items: center;
 }
 
 .textoSemPublicacoes{
   font-size: 20;
+}
+
+#svgSemPost{
+  width: 300px;
 }
