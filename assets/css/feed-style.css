@@ -1535,7 +1535,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   width: 100%;
 }
 
-.opcoesPost.close{
+.opcoesPost.close {
   cursor: pointer;
   list-style: none;
   margin: 0;
@@ -1549,7 +1549,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   display: none;
 }
 
-.opcoesPost.open{
+.opcoesPost.open {
   cursor: pointer;
   list-style: none;
   margin: 0;
@@ -1577,7 +1577,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   padding-left: 0.3em;
 }
 
-.contagemZero{
+.contagemZero {
   margin-top: 3em;
   display: flex;
   justify-content: center;
@@ -1586,7 +1586,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   border-radius: 10px;
 }
 
-.semPublicacaoes{
+.semPublicacaoes {
   text-align: center;
   display: flex;
   width: 60%;
@@ -1594,10 +1594,21 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   align-items: center;
 }
 
-.textoSemPublicacoes{
+.textoSemPublicacoes {
   font-size: 20;
 }
 
-#svgSemPost{
+#svgSemPost {
   width: 300px;
+}
+
+.contagemChar {
+  display: flex;
+  align-items: flex-start;
+}
+
+#contagemCharInput {
+  text-align: right;
+  font-family: "Raleway Medium";
+  cursor: text;
 }

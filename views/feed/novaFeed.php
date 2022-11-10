@@ -730,7 +730,7 @@ $contagemPets = count($dadosPets['pets']);
                                 </div>
 
 
-                                <textarea name="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!" maxlength="200"></textarea>
+                                <textarea name="txtLegendaPub" id="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!" maxlength="200"></textarea>
 
                                 <input type="text" name="categoriasValue" id="categoriasValue" value="">
 
@@ -738,8 +738,10 @@ $contagemPets = count($dadosPets['pets']);
 
 
                                 <div class="letraCont">
-                                    <span>0</span>
-                                    <span>/200</span>
+                                    <div class="contagemChar">
+                                        <input type="text" value="0" id="contagemCharInput" disabled>
+                                        <span>/200</span>
+                                    </div>
                                 </div>
 
                             </div>

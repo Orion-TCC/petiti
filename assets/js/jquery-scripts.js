@@ -158,5 +158,12 @@ $(document).ready(function () {
       console.log(categorias);
     }
   });
+
+  $("#txtLegendaPub").keyup(function(){
+    $(".spanContagem").remove();
+    console.log($("#txtLegendaPub").val().length);
+    $("#contagemCharInput").val($("#txtLegendaPub").val().length);
+  });
+
 });
 
