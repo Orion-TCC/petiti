@@ -335,8 +335,8 @@ $contagemPets = count($dadosPets['pets']);
                                         <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $nome ?></a></h3>
                                         <small><?php echo $local ?> - há <?php echo $diferencaFinal ?></small>
                                     </div>
-
                                 </div>
+
                                 <span class="edit" onClick="openPostOptions()"><i class="uil uil-ellipsis-v"></i>
                                     <div class="menuPost">
                                         <ul id="opcoesPost" class="opcoesPost close">
@@ -732,7 +732,7 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <textarea name="txtLegendaPub" id="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!" maxlength="200"></textarea>
 
-                                <input type="text" name="categoriasValue" id="categoriasValue" value="">
+                                <input type="hidden" name="categoriasValue" id="categoriasValue" value="">
 
                                 <input type="hidden" name="baseFoto" id="baseFoto">
 
