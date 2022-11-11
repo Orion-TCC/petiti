@@ -14,16 +14,18 @@ $(document).ready(function () {
     });
   });
 
-  $(".seguir").on("click", function () {
-    id = $(this).val();
-    $.ajax({
-      type: "POST", url: "/petiti/api/seguir", data: { id: id },
-      success: function (data) {
-        console.log("seguido");
-        console.log(data)
-      },
-    });
+$(".seguir").on("click", function () {
+  id = $(this).val();
+  $.ajax({
+    type: "POST",
+    url: "/petiti/api/seguir",
+    data: { id: id },
+    success: function (data) {
+      var qtdSeguidores = data[0];
+      $("#seguidores").text(qtdSeguidores);
+    },
   });
+});
 
   $(".comentar").on("click", function () {
     id = $(this).val();

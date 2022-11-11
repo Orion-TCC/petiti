@@ -836,9 +836,23 @@ $app->post('/seguir', function (Request $request, Response $response, array $arg
         $idSeguidorExistente = $ver['id'];
         $usuarioSeguidor->setIdUsuarioSeguidor($idSeguidorExistente);
         $usuarioSeguidor->delete($usuarioSeguidor);
-        $response->getBody()->write("$ver[id]");
     }
-    return $response;
+    $conexao = Conexao::conexao();
+    $query = "SELECT COUNT(idUsuarioSeguidor) as qtdSeguindo FROM tbUsuarioSeguidor WHERE idSeguidor = $idUsuario";
+    $resultado = $conexao->query($query);
+    $lista = $resultado->fetchAll();
+    $qtdSeguindo = $lista[0]['qtdSeguindo'];
+
+    $query = "SELECT COUNT(idUsuarioSeguidor) as qtdSeguidores FROM tbUsuarioSeguidor WHERE idUsuario = $idUsuario";
+    $resultado = $conexao->query($query);
+    $lista = $resultado->fetchAll();
+    $qtdSeguidores = $lista[0]['qtdSeguidores'];
+
+    $arraySeguidores = array($qtdSeguidores, $qtdSeguindo);
+    $json = json_encode($arraySeguidores);
+
+    $response->getBody()->write("$json");
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
 $app->post('/editar-perfil', function (Request $request, Response $response, array $args) {
