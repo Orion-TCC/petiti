@@ -844,7 +844,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 .meio .badge {
   border: 1px solid var(--color-purple);
   border-radius: 20px;
-  padding: 5px 8px;
+  padding: 5px 12px;
 }
 
 .meio .commentArea {
