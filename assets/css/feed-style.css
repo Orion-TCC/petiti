@@ -1647,3 +1647,121 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   font-size: 20;
   height: 40;
 }
+
+.toast-denuncia {
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  border-radius: 12px;
+  background: RGB(186, 213, 219);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 35px 20px 25px;
+  border-left: 6px solid RGB(179, 178, 229);
+  overflow: hidden;
+  animation: popUp 0.2s alternate;
+}
+
+.toast-denuncia.hide{
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  border-radius: 12px;
+  background: RGB(186, 213, 219);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 35px 20px 25px;
+  border-left: 6px solid RGB(179, 178, 229);
+  overflow: hidden;
+  animation: popOut 0.4s alternate;
+  transform: translateX(calc(100% + 250px));
+}
+
+.toast-denuncia.close{
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  border-radius: 12px;
+  background: RGB(186, 213, 219);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 35px 20px 25px;
+  border-left: 6px solid RGB(179, 178, 229);
+  overflow: hidden;
+  animation: popOut 0.4s alternate;
+  transform: translateX(calc(100% + 250px));
+}
+
+@keyframes popOut {
+  0%{
+    transform: translateX(calc(-20px));
+  }100%{
+    transform: translateX(calc(100% + 250px));
+  }
+}
+
+@keyframes popUp {
+  0% {
+    transform: translateX(calc(100% + 250px));
+  }
+}
+
+.toastdenuncia .toast-denuncia-content {
+  display: flex;
+  align-items: center;
+}
+
+.toast-denuncia-content .message-denuncia {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+}
+
+.message-denuncia .texto-1 {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.message-denuncia .texto-2 {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.toast-denuncia #close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  padding: 5px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.toast-denuncia #close:hover {
+  opacity: 1;
+}
+
+.toast-denuncia .progressbardenuncia {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: RGB(179, 178, 229);
+  height: 4px;
+  width: 100%;
+}
+
+.toast-denuncia .progressbardenuncia:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: RGB(186, 213, 219);
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(0%);
+  }
+}

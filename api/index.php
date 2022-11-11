@@ -260,15 +260,15 @@ $app->get('/bloquear-tutor/{id}', function (Request $request, Response $response
     $cookie->criarCookie(
         "usuarioBloqueado",
         "<div class='popup'></div>
-        <div class='toast'>
-    <div class='toast-content'>
-      <div class='message'>
-        <span class='texto-1'>Usuário bloqueado com sucesso!</span>
-      </div>
-    </div>
-    <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
-    <div class='progressbar'></div>
-  </div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Usuário bloqueado com sucesso!</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
   ",
         1
     );
@@ -735,7 +735,18 @@ $app->post('/denunciaPublicacao', function (Request $request, Response $response
 
     $denunciaPublicacao->cadastrar($denunciaPublicacao);
 
-    $cookie->criarCookie('denuncia', 'Denuncia realizada com sucesso', 1);
+    $cookie->criarCookie("denuncia", "
+    <div id='toast-denuncia' class='toast-denuncia'>
+        <div class='toast-denuncia-content'>
+            <div class='message-denuncia'>
+                <span class='texto-1'> Obrigado por sua denúncia </span>
+                <span class='texto-2'> Ela será analisada o mais rápido possível</span>
+            </div>
+        </div>
+        <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+        <div class='progressbardenuncia'></div>
+    </div>
+    ", 1);
 });
 
 $app->get('/publicacao/delete/{id}', function (Request $request, Response $response, array $args) {

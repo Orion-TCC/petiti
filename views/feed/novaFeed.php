@@ -104,6 +104,14 @@ $contagemPets = count($dadosPets['pets']);
                 <input type="search" placeholder="Pesquisar">
             </div>
 
+            <?php
+
+            if (isset($_COOKIE['denuncia'])) {
+                echo $_COOKIE['denuncia'];
+            }
+
+            ?>
+
             <script>
                 window.onload = function() {
                     var hidediv = document.getElementById('popup');
@@ -814,11 +822,10 @@ $contagemPets = count($dadosPets['pets']);
 
         <section>
             <a href="#modal-denuncia" rel="modal:open">
-                <h2>Denunciar</h2< /a>
                     <div id="modal-denuncia" class="modal">
                         <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
-                            <input type="text" id="idPost" name="idPost" value="">
-                            <input type="text" id="idUsuarioPub" name="idUsuarioPub" value="">
+                            <input type="hidden" id="idPost" name="idPost" value="">
+                            <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
                             <span class="spanDenuncia">Denuniar</span>
                             <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
                             <input class="submitDenuncia" type="submit" value="Denunciar">
