@@ -165,5 +165,16 @@ $(document).ready(function () {
     $("#contagemCharInput").val($("#txtLegendaPub").val().length);
   });
 
+  $(".excluirPost").click(function(){
+    var idPub = $(this).attr('id');
+    $.ajax({
+      type: "post",
+      url: "/petiti/api/publicacao/delete/"+idPub,
+      success: function(data){
+        console.log("sim");
+      }
+    });
+  })
+
 });
 

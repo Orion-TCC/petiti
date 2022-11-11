@@ -19,8 +19,8 @@ $(document).ready(function () {
     $.ajax({
       type: "POST", url: "/petiti/api/seguir", data: { id: id },
       success: function (data) {
-            console.log("seguido");
-            console.log(data)
+        console.log("seguido");
+        console.log(data)
       },
     });
   });
@@ -37,7 +37,7 @@ $(document).ready(function () {
       success: function (data) {
         console.log();
         console.log();
-        $("<p style='font-weight: 500 !important'><span style='font-weight: 900 !important'>" +data[0].loginUsuario +"</span> " +data[0].textoComentario +"</p>").appendTo(".comentarios");
+        $("<p style='font-weight: 500 !important'><span style='font-weight: 900 !important'>" + data[0].loginUsuario + "</span> " + data[0].textoComentario + "</p>").appendTo(".comentarios");
         $("#txtComentar" + id).val("");
       },
     });
@@ -172,13 +172,17 @@ function showPopUp() {
   }
 }
 
-function openPostOptions(){
-  const options = document.getElementById("opcoesPost");
-  if(options.classList.contains("close")){
-    options.classList.remove("close");
-    options.classList.add("open");
-  }else{
-    options.classList.remove("open");
-    options.classList.add("close");
-  }
-}
+$(document).ready(function () {
+  $(".edit").click(function () {
+    var idPub = $(this).attr('id');
+    const options = document.getElementById("opcoesPost "+idPub);
+    if (options.classList.contains("close")) {
+      options.classList.remove("close");
+      options.classList.add("open");
+    } else {
+      options.classList.remove("open");
+      options.classList.add("close");
+    }
+  });
+
+});

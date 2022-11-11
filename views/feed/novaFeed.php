@@ -251,6 +251,7 @@ $contagemPets = count($dadosPets['pets']);
 
                 <div class="feeds">
                     <?php
+                    $contadorPostagem = 0;
                     $url = "http://localhost/petiti/api/publicacoes";
 
 
@@ -269,6 +270,7 @@ $contagemPets = count($dadosPets['pets']);
 
                     <?php }
                     for ($i = 0; $i < $contagem; $i++) {
+
                         $id =  $dados['publicacoes'][$i]['id'];
 
                         $urlComentarios = "http://localhost/petiti/api/comentarios-post/" . $id;
@@ -337,11 +339,15 @@ $contagemPets = count($dadosPets['pets']);
                                     </div>
                                 </div>
 
-                                <span class="edit" onClick="openPostOptions()"><i class="uil uil-ellipsis-v"></i>
+                                <span class="edit" id= "<?php echo $id;?>"><i class="uil uil-ellipsis-v"></i>
                                     <div class="menuPost">
-                                        <ul id="opcoesPost" class="opcoesPost close">
-                                            <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixSeguir">Deixar de seguir</span></li>
-                                            <li><i class="fa-solid fa-circle-exclamation"></i><span class="denunciaPost">Denunciar</span></li>
+                                        <ul id="opcoesPost <?php echo $id;?>" class="opcoesPost close">
+                                            <?php if ($login != $_SESSION['login']) { ?>
+                                                <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixSeguir">Deixar de seguir</span></li>
+                                                <li><i class="fa-solid fa-circle-exclamation"></i><span class="denunciaPost">Denunciar</span></li>
+                                            <?php } else { ?>
+                                                <a id="linkDeletePub" href="/petiti/api/publicacao/delete/<?php echo $id;?>"><li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="excluirPost" id="<?php echo $id;?>">Excluir Post</span></li></a>
+                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </span>
@@ -416,7 +422,8 @@ $contagemPets = count($dadosPets['pets']);
                             </div>
 
                         </div>
-                    <?php }
+                    <?php $contadorPostagem++;
+                    }
                     ?>
                 </div>
             </div>

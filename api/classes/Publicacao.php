@@ -81,6 +81,13 @@ class Publicacao
         $this->localPub = $localPub;
     }
 
+    public function delete($delete){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("DELETE FROM tbpublicacao WHERE idPublicacao = ?");
+        $stmt->bindValue(1, $delete->getIdPublicacao());
+
+        $stmt->execute();
+    }
 
     public function cadastrar($publicacao)
     {

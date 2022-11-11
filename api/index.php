@@ -713,6 +713,15 @@ $app->post(
         header('location: /petiti/feed');
     }
 );
+
+$app->get('/publicacao/delete/{id}', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $publicacao =  new Publicacao();
+    $publicacao->setIdPublicacao($id);
+    $publicacao->delete($publicacao);
+    header("Location: /petiti/feed");
+});
+
 $app->post(
     '/curtir',
     function (Request $request, Response $response, array $args) {
@@ -848,6 +857,9 @@ $app->get('/escolher-pet/{id}', function (Request $request, Response $response, 
 
     header('location: /petiti/pet-perfil');
 });
+
+
+
 try {
     $app->run();
 } catch (Exception $e) {

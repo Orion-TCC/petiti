@@ -1577,6 +1577,11 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   padding-left: 0.3em;
 }
 
+.excluirPost{
+  padding-left: 0.3em;
+  color: #DB310C;
+}
+
 .contagemZero {
   margin-top: 3em;
   display: flex;
@@ -1592,6 +1597,10 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   width: 60%;
   flex-direction: column;
   align-items: center;
+}
+
+#linkDeletePub{
+
 }
 
 .textoSemPublicacoes {
