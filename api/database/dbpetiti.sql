@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05-Nov-2022 às 20:59
--- Versão do servidor: 10.4.17-MariaDB
--- versão do PHP: 8.0.2
+-- Tempo de geração: 12-Nov-2022 às 00:32
+-- Versão do servidor: 10.4.22-MariaDB
+-- versão do PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dbpetiti`
 --
-CREATE DATABASE IF NOT EXISTS `dbpetiti` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `dbpetiti`;
 
 -- --------------------------------------------------------
 
@@ -121,10 +119,12 @@ CREATE TABLE `tbdenunciacomentario` (
 --
 
 CREATE TABLE `tbdenunciapublicacao` (
-  `idDenunciaPublicacao` int(11) NOT NULL,
-  `textoDenunciaPublicacao` varchar(200) NOT NULL,
-  `dataDenunciaPublicacao` date NOT NULL,
-  `idUsuario` int(11) NOT NULL,
+  `idDenunciapublicacao` int(11) NOT NULL,
+  `textoDenunciapublicacao` varchar(200) NOT NULL,
+  `statusDenunciapublicacao` int(11) NOT NULL,
+  `dataDenunciaPublicacao` datetime DEFAULT current_timestamp(),
+  `idUsuarioDenunciado` int(11) NOT NULL,
+  `idUsuarioDenunciador` int(11) NOT NULL,
   `idPublicacao` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -374,9 +374,9 @@ ALTER TABLE `tbdenunciacomentario`
 -- Índices para tabela `tbdenunciapublicacao`
 --
 ALTER TABLE `tbdenunciapublicacao`
-  ADD PRIMARY KEY (`idDenunciaPublicacao`),
-  ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idPublicacao` (`idPublicacao`);
+  ADD PRIMARY KEY (`idDenunciapublicacao`),
+  ADD KEY `idUsuarioDenunciado` (`idUsuarioDenunciado`),
+  ADD KEY `idUsuarioDenunciador` (`idUsuarioDenunciador`);
 
 --
 -- Índices para tabela `tbdenunciausuario`
@@ -478,13 +478,13 @@ ALTER TABLE `tbusuarioseguidor`
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriapublicacao`
 --
 ALTER TABLE `tbcategoriapublicacao`
-  MODIFY `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de tabela `tbcomentario`
@@ -508,7 +508,7 @@ ALTER TABLE `tbdenunciacomentario`
 -- AUTO_INCREMENT de tabela `tbdenunciapublicacao`
 --
 ALTER TABLE `tbdenunciapublicacao`
-  MODIFY `idDenunciaPublicacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDenunciapublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `tbdenunciausuario`
@@ -520,19 +520,19 @@ ALTER TABLE `tbdenunciausuario`
 -- AUTO_INCREMENT de tabela `tbfotopet`
 --
 ALTER TABLE `tbfotopet`
-  MODIFY `idFotoPet` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idFotoPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `tbfotopublicacao`
 --
 ALTER TABLE `tbfotopublicacao`
-  MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de tabela `tbfotousuario`
 --
 ALTER TABLE `tbfotousuario`
-  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tbmensagem`
@@ -544,7 +544,7 @@ ALTER TABLE `tbmensagem`
 -- AUTO_INCREMENT de tabela `tbpet`
 --
 ALTER TABLE `tbpet`
-  MODIFY `idPet` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `tbproduto`
@@ -556,7 +556,7 @@ ALTER TABLE `tbproduto`
 -- AUTO_INCREMENT de tabela `tbpublicacao`
 --
 ALTER TABLE `tbpublicacao`
-  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de tabela `tbservico`
@@ -574,7 +574,7 @@ ALTER TABLE `tbtipousuario`
 -- AUTO_INCREMENT de tabela `tbusuario`
 --
 ALTER TABLE `tbusuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuarioendereco`
@@ -624,8 +624,8 @@ ALTER TABLE `tbdenunciacomentario`
 -- Limitadores para a tabela `tbdenunciapublicacao`
 --
 ALTER TABLE `tbdenunciapublicacao`
-  ADD CONSTRAINT `tbdenunciapublicacao_ibfk_1` FOREIGN KEY (`idPublicacao`) REFERENCES `tbpublicacao` (`idPublicacao`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbdenunciapublicacao_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `idUsuarioDenunciado` FOREIGN KEY (`idUsuarioDenunciado`) REFERENCES `tbusuario` (`idUsuario`),
+  ADD CONSTRAINT `idUsuarioDenunciador` FOREIGN KEY (`idUsuarioDenunciador`) REFERENCES `tbusuario` (`idUsuario`);
 
 --
 -- Limitadores para a tabela `tbdenunciausuario`
