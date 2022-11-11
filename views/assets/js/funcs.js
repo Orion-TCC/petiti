@@ -193,3 +193,13 @@ $(document).ready(function () {
   });
 
 });
+
+window.onload = function(){
+  setTimeout(function(){
+    document.querySelector(".toast-denuncia").classList.add("hide");
+  }, 5000);
+}
+
+function closePopup(){
+  document.querySelector(".toast-denuncia").classList.add("close");
+}
