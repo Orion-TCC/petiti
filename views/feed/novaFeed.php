@@ -254,7 +254,6 @@ $contagemPets = count($dadosPets['pets']);
                     $contadorPostagem = 0;
                     $url = "http://localhost/petiti/api/publicacoes";
 
-
                     $json = file_get_contents($url);
                     $dados = (array)json_decode($json, true);
                     $contagem = count($dados['publicacoes']);
@@ -273,12 +272,13 @@ $contagemPets = count($dadosPets['pets']);
 
                         $id =  $dados['publicacoes'][$i]['id'];
 
+                        $idUsuarioPub = $dados['publicacoes'][$i]['idUsuario'];
+
                         $urlComentarios = "http://localhost/petiti/api/comentarios-post/" . $id;
 
                         $jsonComentarios = file_get_contents($urlComentarios);
 
                         $dadosComentarios = (array)json_decode($jsonComentarios, true);
-
 
                         $nome = $dados['publicacoes'][$i]['nome'];
                         $login = $dados['publicacoes'][$i]['login'];
@@ -323,10 +323,7 @@ $contagemPets = count($dadosPets['pets']);
                         } else {
                             $diferencaFinal = $diferencaAnos . " anos";
                         }
-
-
                     ?>
-
                         <div class="feed">
                             <div class="head">
                                 <div class="usuario">
@@ -339,14 +336,28 @@ $contagemPets = count($dadosPets['pets']);
                                     </div>
                                 </div>
 
-                                <span class="edit" id= "<?php echo $id;?>"><i class="uil uil-ellipsis-v"></i>
+                                <span class="edit" id="<?php echo $id; ?>"><i class="uil uil-ellipsis-v"></i>
                                     <div class="menuPost">
-                                        <ul id="opcoesPost <?php echo $id;?>" class="opcoesPost close">
+                                        <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
                                             <?php if ($login != $_SESSION['login']) { ?>
                                                 <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixSeguir">Deixar de seguir</span></li>
-                                                <li><i class="fa-solid fa-circle-exclamation"></i><span class="denunciaPost">Denunciar</span></li>
+                                                <a href="#modal-denuncia" rel="modal:open">
+                                                    <div id="<?php echo $id; ?>" class="postDenunciado">
+                                                        <div id="<?php echo $idUsuarioPub; ?>" class="denunciaPost">
+                                                            <li>
+
+                                                                <i class="fa-solid fa-circle-exclamation">
+                                                                </i>
+                                                                <span>Denunciar</span>
+
+                                                            </li>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             <?php } else { ?>
-                                                <a id="linkDeletePub" href="/petiti/api/publicacao/delete/<?php echo $id;?>"><li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="excluirPost" id="<?php echo $id;?>">Excluir Post</span></li></a>
+                                                <a id="linkDeletePub" href="/petiti/api/publicacao/delete/<?php echo $id; ?>">
+                                                    <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="excluirPost" id="<?php echo $id; ?>">Excluir Post</span></li>
+                                                </a>
                                             <?php } ?>
                                         </ul>
                                     </div>
@@ -404,7 +415,6 @@ $contagemPets = count($dadosPets['pets']);
 
 
                             <div class="badges">
-
                                 <?php
                                 for ($j = 0; $j < $contagemCategorias; $j++) {
                                     echo ("<p class='badge'>" . $dadosCategorias[$j]['categoria'] . "</p>");
@@ -704,8 +714,6 @@ $contagemPets = count($dadosPets['pets']);
             </div>
         </section>
 
-
-
         <section>
             <div id="criar-post" class="modal">
                 <form id="form-aid" method="post" action="./api/publicar">
@@ -723,7 +731,6 @@ $contagemPets = count($dadosPets['pets']);
                         </div>
 
                         <div class="criarPostElements">
-
 
                             <div class="parte1CriarPost">
 
@@ -757,9 +764,6 @@ $contagemPets = count($dadosPets['pets']);
                                 <input placeholder="Adicione uma localização" type="text" name="txtLocalizacao">
                                 <i class="uil uil-map-marker"></i>
                             </div>
-
-
-
 
                             <div class="parte3CriarPost">
 
@@ -807,6 +811,21 @@ $contagemPets = count($dadosPets['pets']);
             </form>
             </div>
         </section>
+
+        <section>
+            <a href="#modal-denuncia" rel="modal:open">
+                <h2>Denunciar</h2< /a>
+                    <div id="modal-denuncia" class="modal">
+                        <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+                            <input type="text" id="idPost" name="idPost" value="">
+                            <input type="text" id="idUsuarioPub" name="idUsuarioPub" value="">
+                            <span class="spanDenuncia">Denuniar</span>
+                            <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
+                            <input class="submitDenuncia" type="submit" value="Denunciar">
+                        </form>
+                    </div>
+        </section>
+
         <!-- fim Modals -->
 
     </main>

@@ -707,14 +707,38 @@ $app->post(
                 $categoriaPublicacao->cadastrar($categoriaPublicacao);
                 echo $categoriaAtual;
             }
-        } 
+        }
 
         //$categoriaPublicacao->setIdCategoriaPublicacao();
         header('location: /petiti/feed');
     }
 );
 
-$app->get('/publicacao/delete/{id}', function (Request $request, Response $response, array $args){
+$app->post('/denunciaPublicacao', function (Request $request, Response $response, array $args) {
+    $denunciaPublicacao = new DenunciaPublicacao();
+    $publicacao = new Publicacao();
+    $usuario = new Usuario();
+    $cookie = new Cookies();
+
+    @session_start();
+
+    $denunciaPublicacao->setUsuarioDenunciador($_SESSION['id']);
+
+    $usuario->setIdUsuario($_POST['idUsuarioPub']);
+    $denunciaPublicacao->setUsuarioDenunciado($usuario);
+
+    $publicacao->setIdPublicacao($_POST['idPost']);
+    $denunciaPublicacao->setPublicacao($publicacao);
+
+    $denunciaPublicacao->setTextoDenunciaPublicacao($_POST['txtDenuncia']);
+    $denunciaPublicacao->setStatusDenunciaPublicacao(0);
+
+    $denunciaPublicacao->cadastrar($denunciaPublicacao);
+
+    $cookie->criarCookie('denuncia', 'Denuncia realizada com sucesso', 1);
+});
+
+$app->get('/publicacao/delete/{id}', function (Request $request, Response $response, array $args) {
     $id = $args['id'];
     $publicacao =  new Publicacao();
     $publicacao->setIdPublicacao($id);

@@ -185,4 +185,11 @@ $(document).ready(function () {
     }
   });
 
+  $(".denunciaPost").click(function(){
+    var idUsu = $(this).attr('id');
+    var idPost = $(".postDenunciado").attr('id');
+    $("#idUsuarioPub").val(idUsu);
+    $("#idPost").val(idPost);
+  });
+
 });

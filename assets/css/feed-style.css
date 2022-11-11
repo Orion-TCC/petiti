@@ -1577,7 +1577,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   padding-left: 0.3em;
 }
 
-.excluirPost{
+.excluirPost {
   padding-left: 0.3em;
   color: #DB310C;
 }
@@ -1599,10 +1599,6 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   align-items: center;
 }
 
-#linkDeletePub{
-
-}
-
 .textoSemPublicacoes {
   font-size: 20;
 }
@@ -1620,4 +1616,34 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   text-align: right;
   font-family: "Raleway Medium";
   cursor: text;
+}
+
+.formDenuncia {
+  display: flex;
+  flex-direction: column;
+}
+
+.spanDenuncia {
+  font-size: 40;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.formDenuncia input {
+  margin-top: 40px;
+}
+
+#txtDenuncia{
+  height: 30px;
+  width: 70%;
+  align-self: center;
+  border: 1px solid #ccc;
+}
+
+.submitDenuncia {
+  width: 20%;
+  align-self: center;
+  background-color: RGB(255, 251, 159);
+  font-size: 20;
+  height: 40;
 }
