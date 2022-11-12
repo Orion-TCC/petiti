@@ -26,6 +26,7 @@ $qtdCatBloqueada = $categoria->buscaQtdCategoriaBloqueada();
 
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/categorias/categorias.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 </head>
 
@@ -242,6 +243,14 @@ $qtdCatBloqueada = $categoria->buscaQtdCategoriaBloqueada();
   </div>
   <!--.container-->
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
+
+  <?php
+    if(isset($_COOKIE["categoriaBloqueada"])){
+      echo($_COOKIE["categoriaBloqueada"]);
+    }else if(isset($_COOKIE["categoriaAtivada"])){
+      echo($_COOKIE["categoriaAtivada"]);
+    }
+  ?>
 </body>
 
 </html>

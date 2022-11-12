@@ -245,9 +245,27 @@ $app->post('/usuario/update/senha/recuperacao', function (Request $request, Resp
 
 $app->get('/ativar-tutor/{id}', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
+    $cookie = new Cookies;
     $usuario->setIdUsuario($args['id']);
     $usuario->setStatusUsuario(1);
     $usuario->updateStatus($usuario);
+
+    $cookie->criarCookie(
+        "usuarioAtivado",
+        "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Usuário Ativado com sucesso!</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+        1
+    );
+
     header('location:/petiti/tutores-dashboard');
 });
 $app->get('/bloquear-tutor/{id}', function (Request $request, Response $response, array $args) {
@@ -277,16 +295,52 @@ $app->get('/bloquear-tutor/{id}', function (Request $request, Response $response
 
 $app->get('/ativar-empresa/{id}', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
+    $cookie = new Cookies;
     $usuario->setIdUsuario($args['id']);
     $usuario->setStatusUsuario(1);
     $usuario->updateStatus($usuario);
+
+    $cookie->criarCookie(
+        "empresaAtivada",
+        "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Empresa ativada com sucesso!</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+        1
+    );
+
     header('location:/petiti/empresas-dashboard');
 });
 $app->get('/bloquear-empresa/{id}', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
+    $cookie = new Cookies;
     $usuario->setIdUsuario($args['id']);
     $usuario->setStatusUsuario(0);
     $usuario->updateStatus($usuario);
+
+    $cookie->criarCookie(
+        "empresaBloqueada",
+        "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Empresa bloqueada com sucesso!</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+        1
+    );
+
     header('location:/petiti/empresas-dashboard');
 });
 
@@ -536,19 +590,54 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
 
 $app->get('/ativar-pet/{id}', function (Request $request, Response $response, array $args) {
     $pet = new Pet();
+    $cookie = new Cookies();
     $pet->setStatusPet(1);
     $pet->setIdPet($args['id']);
     $pet->updateStatus($pet);
     header("location: /petiti/pets-dashboard");
+
+    $cookie->criarCookie(
+        "petAtivado",
+        "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Pet ativado com sucesso!</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+        1
+    );
 });
 
 
 
 $app->get('/bloquear-pet/{id}', function (Request $request, Response $response, array $args) {
     $pet = new Pet();
+    $cookie = new Cookies();
     $pet->setStatusPet(0);
     $pet->setIdPet($args['id']);
     $pet->updateStatus($pet);
+
+    $cookie->criarCookie(
+        "petBloqueado",
+        "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Pet bloqueado com sucesso!</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+        1
+    );
+
     header("location: /petiti/pets-dashboard");
 });
 
@@ -569,17 +658,52 @@ $app->get('/categorias', function (Request $request, Response $response, array $
 
 $app->get('/ativar-categoria/{id}', function (Request $request, Response $response, array $args) {
     $categoria = new categoria();
+    $cookie = new Cookies();
     $categoria->setStatusCategoria(1);
     $categoria->setIdCategoria($args['id']);
     $categoria->updateStatus($categoria);
     header("location: /petiti/categorias-dashboard/");
+
+    $cookie->criarCookie(
+        "categoriaAtivada",
+        "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Categoria ativada com sucesso!</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+        1
+    );
 });
 
 $app->get('/bloquear-categoria/{id}', function (Request $request, Response $response, array $args) {
     $categoria = new categoria();
+    $cookie = new Cookies();
     $categoria->setStatusCategoria(0);
     $categoria->setIdCategoria($args['id']);
     $categoria->updateStatus($categoria);
+
+    $cookie->criarCookie(
+        "categoriaBloqueada",
+        "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Categoria bloqueada com sucesso!</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+        1
+    );
+
     header("location: /petiti/categorias-dashboard/");
 });
 

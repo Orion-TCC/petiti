@@ -320,6 +320,8 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
   <?php
     if(isset($_COOKIE["usuarioBloqueado"])){
       echo($_COOKIE["usuarioBloqueado"]);
+    }else if(isset($_COOKIE["usuarioAtivado"])){
+      echo($_COOKIE["usuarioAtivado"]);
     }
   ?>
 </body>

@@ -457,7 +457,7 @@ main .info-pets .perfis-pets {
 .cards {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 
   margin-top: 1rem;
@@ -545,4 +545,117 @@ main .info-pets .perfis-pets {
 
 .ativar{
     background-color: #7380ec;
+}
+
+.toast {
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  border-radius: 12px;
+  background: RGB(186, 213, 219);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 35px 20px 25px;
+  border-left: 6px solid RGB(179, 178, 229);
+  overflow: hidden;
+  animation: popUp 0.2s alternate;
+}
+
+.toast.hide{
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  border-radius: 12px;
+  background: RGB(186, 213, 219);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 35px 20px 25px;
+  border-left: 6px solid RGB(179, 178, 229);
+  overflow: hidden;
+  animation: popOut 0.4s alternate;
+  transform: translateX(calc(100% + 30px));
+}
+
+.toast.close{
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  border-radius: 12px;
+  background: RGB(186, 213, 219);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 35px 20px 25px;
+  border-left: 6px solid RGB(179, 178, 229);
+  overflow: hidden;
+  animation: popOut 0.4s alternate;
+  transform: translateX(calc(100% + 30px));
+}
+
+@keyframes popOut {
+  0%{
+    transform: translateX(calc(-20px));
+  }100%{
+    transform: translateX(calc(100% + 30px));
+  }
+}
+
+@keyframes popUp {
+  0% {
+    transform: translateX(calc(100% + 30px));
+  }
+}
+
+.toast .toast-content {
+  display: flex;
+  align-items: center;
+}
+
+.toast-content .message {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+}
+
+.message .texto-1 {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.toast #close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  padding: 5px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.toast #close:hover {
+  opacity: 1;
+}
+
+.toast .progressbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: RGB(179, 178, 229);
+  height: 4px;
+  width: 100%;
+}
+
+.toast .progressbar:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-color: RGB(186, 213, 219);
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  0% {
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(0%);
+  }
 }

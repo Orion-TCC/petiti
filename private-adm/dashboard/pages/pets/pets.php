@@ -23,6 +23,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 
   <!--style-->
@@ -30,6 +31,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
 </head>
 
 <body>
+
   <div class="container">
     <!------------------- começo - aside ------------------->
     <aside>
@@ -300,6 +302,14 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
   <!--.container-->
 
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
+
+  <?php
+    if(isset($_COOKIE["petBloqueado"])){
+      echo($_COOKIE["petBloqueado"]);
+    }else if(isset($_COOKIE["petAtivado"])){
+      echo($_COOKIE["petAtivado"]);
+    }
+  ?>
 </body>
 
 </html>

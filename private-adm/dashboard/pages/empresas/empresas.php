@@ -26,6 +26,7 @@ $qtdEmpresasBloqueadas = $usuario->buscaQtdUsuarioBloqueadoEmpresa();
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/empresas/empresas.css" />
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
@@ -321,6 +322,14 @@ $qtdEmpresasBloqueadas = $usuario->buscaQtdUsuarioBloqueadoEmpresa();
   <!--.container-->
 
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
+
+  <?php
+    if(isset($_COOKIE["empresaBloqueada"])){
+      echo($_COOKIE["empresaBloqueada"]);
+    }else if(isset($_COOKIE["empresaAtivada"])){
+      echo($_COOKIE["empresaAtivada"]);
+    }
+  ?>
 </body>
 
 </html>
