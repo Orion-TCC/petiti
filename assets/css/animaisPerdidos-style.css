@@ -51,7 +51,7 @@
 
 .meio .categoriasAnimaisPerdidos{
     width: 100%;
-    height: 11rem;
+    height: 12.5rem;
     display: flex;
     gap: 1rem;
     background: var(--color-white);
@@ -63,7 +63,7 @@
 .meio .categoriasAnimaisPerdidos .esquerdoCAP{
     display: flex;
     flex-direction: column;
-    width: 65%;
+    width: 60%;
     gap: 0.5rem;
 }
 
@@ -89,8 +89,9 @@
 .meio .categoriasAnimaisPerdidos .direitoCAP{
     display: flex;
     flex-wrap: wrap;
-    width: 40%;
-    height: 100%;
+    width: 50%;
+    height: fit-content;
+    max-height: 10rem;
     gap: 0.5rem;
     overflow-y: auto;
     

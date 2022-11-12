@@ -225,15 +225,13 @@ $contagemPets = count($dadosPets['pets']);
 
 
                     <div class="direitoCAP">
-                            <div class="categoriaBadge">Cachorro</div>
-                            <div class="categoriaBadge">Cachorro</div>
-                            <div class="categoriaBadge">Cachorro feio</div>
-                            <div class="categoriaBadge">Cachorro</div>
-                            <div class="categoriaBadge">Cachorro cachorro</div>
-                            <div class="categoriaBadge">Cachorro</div>
-                            <div class="categoriaBadge">Cachorro</div>
-                            <div class="categoriaBadge">Cachorro cachorro</div>
-                    </div>
+                            <div class="categoriaBadge">Perdido</div>
+                            <div class="categoriaBadge">Animal perdido</div>
+                            <div class="categoriaBadge">Pet perdido</div>
+                            <div class="categoriaBadge">Desaparecido</div>
+
+
+                   </div>
 
 
                 </div>

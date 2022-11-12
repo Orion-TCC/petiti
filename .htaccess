@@ -3,6 +3,7 @@ Options -Indexes
 RewriteRule ^home index.php [NC,L]
 
 RewriteRule ^feed views/feed/novaFeed.php [NC,L]
+RewriteRule ^animaisPerdidos views/feed/animaisPerdidos.php [NC,L]
 
 RewriteRule ^decidir-perfil views/perfil/decidePerfil.php [NC,L]
 RewriteRule ^pet-perfil views/perfil/perfilPet.php [NC,L]
