@@ -429,7 +429,7 @@
     grid-template-columns: 33% 33% 33%;
     row-gap: 2rem;
     height: fit-content;
-    min-height: 15rem;
+    min-height: 27.9rem;
 }
 
  .previewPostImage {
@@ -475,7 +475,7 @@
   grid-template-columns: 33% 33% 33%;
   row-gap: 2rem;
   height: fit-content;
-  min-height: 15rem;
+  min-height: 27.9rem;
 }
 
 
@@ -487,7 +487,7 @@
   grid-template-columns: 33% 33% 33%;
   row-gap: 2rem;
   height: fit-content;
-  min-height: 15rem;
+  min-height: 27.9rem;
 }
 
 .serviços{

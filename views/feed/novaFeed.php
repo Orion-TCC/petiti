@@ -344,7 +344,7 @@ $contagemPets = count($dadosPets['pets']);
                                     </div>
                                     <div class="info">
                                         <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $nome ?></a></h3>
-                                        <small><?php echo $local ?> - há <?php echo $diferencaFinal ?></small>
+                                        <small><?php echo $local ?>  há <?php echo $diferencaFinal ?></small>
                                     </div>
                                 </div>
 
