@@ -299,5 +299,14 @@ class Pet
 
         $stmt->execute();
     }
-
+    public function buscaPets($usuarioPet)
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idPet as id FROM tbPet WHERE usuarioPet = '$usuarioPet'";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($lista as $linha) {
+            return $linha['id'];
+        }
+    }
 }

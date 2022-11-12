@@ -14,18 +14,31 @@ $(document).ready(function () {
     });
   });
 
-$(".seguir").on("click", function () {
-  id = $(this).val();
-  $.ajax({
-    type: "POST",
-    url: "/petiti/api/seguir",
-    data: { id: id },
-    success: function (data) {
-      var qtdSeguidores = data[0];
-      $("#seguidores").text(qtdSeguidores);
-    },
+  $(".seguir").on("click", function () {
+    id = $(this).val();
+    $.ajax({
+      type: "POST",
+      url: "/petiti/api/seguir",
+      data: { id: id },
+      success: function (data) {
+        var qtdSeguidores = data[0];
+        $("#seguidores").text(qtdSeguidores);
+      },
+    });
   });
-});
+
+  $(".seguirPet").on("click", function () {
+    id = $(this).val();
+    $.ajax({
+      type: "POST",
+      url: "/petiti/api/seguir-pet",
+      data: { "idPet": id },
+      success: function (data) {
+        var qtdSeguidores = data[0];
+        $("#seguidores").text(qtdSeguidores);
+      },
+    });
+  });
 
   $(".comentar").on("click", function () {
     id = $(this).val();
@@ -39,7 +52,14 @@ $(".seguir").on("click", function () {
       success: function (data) {
         console.log();
         console.log();
-        $("<div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'> <h2 style='font-weight: 900 !important; align-self: start;'>" + data[0].loginUsuario + "</h2> " + "<h3 style='color: rgba(86, 86, 86, 1);'>" + data[0].textoComentario + "</h3> </div>").appendTo(".comentarios");
+        $(
+          "<div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'> <h2 style='font-weight: 900 !important; align-self: start;'>" +
+            data[0].loginUsuario +
+            "</h2> " +
+            "<h3 style='color: rgba(86, 86, 86, 1);'>" +
+            data[0].textoComentario +
+            "</h3> </div>"
+        ).appendTo(".comentarios");
         $("#txtComentar" + id).val("");
       },
     });
@@ -176,8 +196,8 @@ function showPopUp() {
 
 $(document).ready(function () {
   $(".edit").click(function () {
-    var idPub = $(this).attr('id');
-    const options = document.getElementById("opcoesPost "+idPub);
+    var idPub = $(this).attr("id");
+    const options = document.getElementById("opcoesPost " + idPub);
     if (options.classList.contains("close")) {
       options.classList.remove("close");
       options.classList.add("open");
@@ -187,32 +207,30 @@ $(document).ready(function () {
     }
   });
 
-  $(".denunciaPost").click(function(){
-    var idUsu = $(this).attr('id');
-    var idPost = $(".postDenunciado").attr('id');
+  $(".denunciaPost").click(function () {
+    var idUsu = $(this).attr("id");
+    var idPost = $(".postDenunciado").attr("id");
     $("#idUsuarioPub").val(idUsu);
     $("#idPost").val(idPost);
   });
-
 });
 
-window.onload = function() {
-  var hidedivmenupost = document.getElementById('menuPost');
+window.onload = function () {
+  var hidedivmenupost = document.getElementById("menuPost");
 
-  document.onclick = function(div) {
-      if (div.target.id !== 'menuPost') {
-          hidedivmenupost.style.display = "none";
-      }
+  document.onclick = function (div) {
+    if (div.target.id !== "menuPost") {
+      hidedivmenupost.style.display = "none";
+    }
   };
-
 };
 
-window.onload = function(){
-  setTimeout(function(){
+window.onload = function () {
+  setTimeout(function () {
     document.querySelector(".toast-denuncia").classList.add("hide");
   }, 5000);
-}
+};
 
-function closePopup(){
+function closePopup() {
   document.querySelector(".toast-denuncia").classList.add("close");
 }

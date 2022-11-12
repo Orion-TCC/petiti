@@ -979,6 +979,43 @@ $app->post('/seguir', function (Request $request, Response $response, array $arg
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
+$app->post('/seguir-pet', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $petseguidor = new PetSeguidor();
+    $idPet = $_POST['idPet'];
+    $idSeguidor = $_SESSION['id'];
+
+    $ver = $petseguidor->verificarSeguidor($idPet, $idSeguidor);
+
+    $verificador = $ver['boolean'];
+
+    if ($verificador == true) {
+        $petseguidor->setIdSeguidor($idSeguidor);
+        $petseguidor->setIdPetSeguido($idPet);
+        $petseguidor->cadastrar($petseguidor);
+    } else {
+        $idSeguidorExistente = $ver['id'];
+        $petseguidor->setIdPetSeguidor($idSeguidorExistente);
+        $petseguidor->delete($petseguidor);
+    }
+    $conexao = Conexao::conexao();
+    $query = "SELECT COUNT(idPetSeguidor) as qtdSeguindo FROM tbpetSeguidor WHERE idSeguidor = $idPet";
+    $resultado = $conexao->query($query);
+    $lista = $resultado->fetchAll();
+    $qtdSeguindo = $lista[0]['qtdSeguindo'];
+
+    $query = "SELECT COUNT(idPetSeguidor) as qtdSeguidores FROM tbpetseguidor WHERE idPetSeguido = $idPet";
+    $resultado = $conexao->query($query);
+    $lista = $resultado->fetchAll();
+    $qtdSeguidores = $lista[0]['qtdSeguidores'];
+
+    $arraySeguidores = array($qtdSeguidores, $qtdSeguindo);
+    $json = json_encode($arraySeguidores);
+
+    $response->getBody()->write("$json");
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
 $app->post('/editar-perfil', function (Request $request, Response $response, array $args) {
     @session_start();
     $usuario = new Usuario();

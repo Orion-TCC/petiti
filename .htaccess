@@ -1,9 +1,11 @@
 RewriteEngine On
-Options -Indexes
+Options -Indexes -MultiViews
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^home index.php [NC,L]
 
 RewriteRule ^feed views/feed/novaFeed.php [NC,L]
-RewriteRule ^animaisPerdidos views/feed/animaisPerdidos.php [NC,L]
 
 RewriteRule ^decidir-perfil views/perfil/decidePerfil.php [NC,L]
 RewriteRule ^pet-perfil views/perfil/perfilPet.php [NC,L]
@@ -52,9 +54,10 @@ RewriteRule ^final-empresa views/register/register-empresa/finalizar-cadastro-em
 
 
 ErrorDocument 404 /petiti/views/erroGeral.php
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-   
-RewriteRule ^([A-Za-z0-9-]+)/?$    views/perfil/usuario.php?user=$1 [NC,L]    
+
+RewriteRule  ^pet/([A-Za-z0-9-]+)?$  views/perfil/pet.php?pet=$1  [NC]
+
+RewriteRule ^([A-Za-z0-9-]+)/?$  views/perfil/usuario.php?user=$1  [NC]
+
 
 

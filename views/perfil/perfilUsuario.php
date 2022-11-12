@@ -37,6 +37,11 @@ $resultado = $conexao->query($query);
 $lista = $resultado->fetchAll();
 $qtdSeguindo = $lista[0]['qtdSeguindo'];
 
+$query = "SELECT COUNT(idPetSeguidor) as qtdSeguindo FROM tbpetSeguidor WHERE idSeguidor = $id";
+$resultado = $conexao->query($query);
+$lista = $resultado->fetchAll();
+$qtdSeguindo = $qtdSeguindo + $lista[0]['qtdSeguindo'];
+
 $query = "SELECT COUNT(idUsuarioSeguidor) as qtdSeguidores FROM tbUsuarioSeguidor WHERE idUsuario = $id";
 $resultado = $conexao->query($query);
 $lista = $resultado->fetchAll();
@@ -351,20 +356,26 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                                     <h2><?php echo $_SESSION['nome']; ?></h2>
                                 </div>
 
-                                <h4 class="text-muted">(Sou dono(a) do <?php
-                                                                        for ($t = 0; $t < $contagemPets; $t++) {
-                                                                            if($t < ($contagemPets - 2)){
-                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a>, ");
-                                                                            }else if($t == ($contagemPets - 2)){
-                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a> e ");
+                                <?php if ($contagemPets > 0) { ?>
+
+
+                                    <h4 class="text-muted">(Sou dono(a) do <?php
+                                                                            for ($t = 0; $t < $contagemPets; $t++) {
+                                                                                $userPet = $dadosPets['pets'][$t]['usuarioPet'];
+                                                                                if ($t < ($contagemPets - 2)) {
+                                                                                    echo ("<a href='/petiti/pet/$userPet'>@" . $userPet . "</a>, ");
+                                                                                } else if ($t == ($contagemPets - 2)) {
+                                                                                    echo ("<a href='/petiti/pet/$userPet'>@" . $userPet . "</a> e ");
+                                                                                }
+                                                                                if ($t == ($contagemPets - 1)) {
+                                                                                    echo ("<a href='/petiti/pet/$userPet'>@" . $userPet . "</a>");
+                                                                                }
                                                                             }
-                                                                            if ($t == ($contagemPets - 1)) {
-                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a>");
-                                                                            } 
-                                                                        }
-                                                                        ?>
-)
-                                </h4>
+                                                                            ?>
+                                        )
+
+                                    </h4>
+                                <?php } ?>
                             </div>
 
                             <div class="bio">

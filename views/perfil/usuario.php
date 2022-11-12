@@ -7,7 +7,6 @@ require('../../api/classes/curtidaPublicacao.php');
 require('../../api/classes/UsuarioSeguidor.php');
 
 
-
 $usuario = new Usuario();
 $idPerfil = $usuario->procuraId2($_GET['user']);
 if ($idPerfil == "") {
@@ -69,6 +68,11 @@ $query = "SELECT COUNT(idUsuarioSeguidor) as qtdSeguindo FROM tbUsuarioSeguidor 
 $resultado = $conexao->query($query);
 $lista = $resultado->fetchAll();
 $qtdSeguindo = $lista[0]['qtdSeguindo'];
+
+$query = "SELECT COUNT(idPetSeguidor) as qtdSeguindo FROM tbpetSeguidor WHERE idSeguidor = $id";
+$resultado = $conexao->query($query);
+$lista = $resultado->fetchAll();
+$qtdSeguindo = $qtdSeguindo + $lista[0]['qtdSeguindo'];
 
 $query = "SELECT COUNT(idUsuarioSeguidor) as qtdSeguidores FROM tbUsuarioSeguidor WHERE idUsuario = $id";
 $resultado = $conexao->query($query);
@@ -197,7 +201,6 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
-
                 <a href="/petiti/decidir-perfil" class="perfil">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
@@ -286,11 +289,11 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                                 <div class="infoHolder baixo">
                                     <div style="width: 15rem; display: flex; align-items: center;">
                                         <i class="uil uil-map-marker"></i>
-                                        <h4><?php echo $_SESSION['local'] ?></h4>
+                                        <h4><?php echo $localizacao ?></h4>
                                     </div>
 
                                     <div style="width: 15rem; display: flex; align-items: center;">
-                                        <i class="uil uil-link-alt"></i> <a target="_blank" href="http://<?php echo $_SESSION['site'] ?>"><?php echo $_SESSION['site'] ?> </a>
+                                        <i class="uil uil-link-alt"></i> <a target="_blank" href="http://<?php echo $siteUsuario ?>"><?php echo $siteUsuario ?> </a>
                                     </div>
                                 </div>
                             </div>
@@ -300,23 +303,28 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
                             <div class="subUserBaixo">
                                 <div style="width: fit-content; max-width: 25rem; display: flex; align-items: center;">
-                                    <h2><?php echo $_SESSION['nome']; ?></h2>
+                                    <h2><?php echo $nome; ?></h2>
                                 </div>
+                                <?php if ($contagemPets > 0) { ?>
 
-                                <h4 class="text-muted">(Sou dono(a) do <?php
-                                                                        for ($t = 0; $t < $contagemPets; $t++) {
-                                                                            if ($t == ($contagemPets - 1)) {
-                                                                                echo (" e ");
-                                                                                echo ("@" . $dadosPets['pets'][$t]['usuarioPet']);
-                                                                            } else {
-                                                                                echo ("@" . $dadosPets['pets'][$t]['usuarioPet']);
-                                                                                if ($t != ($contagemPets - 1)) {
-                                                                                    echo (", ");
+
+                                    <h4 class="text-muted">(Sou dono(a) do <?php
+                                                                            for ($t = 0; $t < $contagemPets; $t++) {
+                                                                                $userPet = $dadosPets['pets'][$t]['usuarioPet'];
+                                                                                if ($t < ($contagemPets - 2)) {
+                                                                                    echo ("<a href='/petiti/pet/$userPet'>@" . $userPet . "</a>, ");
+                                                                                } else if ($t == ($contagemPets - 2)) {
+                                                                                    echo ("<a href='/petiti/pet/$userPet'>@" . $userPet . "</a> e ");
+                                                                                }
+                                                                                if ($t == ($contagemPets - 1)) {
+                                                                                    echo ("<a href='/petiti/pet/$userPet'>@" . $userPet . "</a>");
                                                                                 }
                                                                             }
-                                                                        }
-                                                                        ?>)
-                                </h4>
+                                                                            ?>
+                                        )
+
+                                    </h4>
+                                <?php } ?>
                             </div>
 
                             <div class="bio">
