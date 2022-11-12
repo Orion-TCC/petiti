@@ -353,18 +353,17 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
                                 <h4 class="text-muted">(Sou dono(a) do <?php
                                                                         for ($t = 0; $t < $contagemPets; $t++) {
-                                                                            if ($t == ($contagemPets - 1)) {
-                                                                                echo (" e ");
-                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a>");
-                                                                            } else {
-                                                                                echo ("@" . $dadosPets['pets'][$t]['usuarioPet']);
-                                                                                if ($t != ($contagemPets - 1)) {
-                                                                                    echo (", ");
-                                                                                }
+                                                                            if($t < ($contagemPets - 2)){
+                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a>, ");
+                                                                            }else if($t == ($contagemPets - 2)){
+                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a> e ");
                                                                             }
+                                                                            if ($t == ($contagemPets - 1)) {
+                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a>");
+                                                                            } 
                                                                         }
                                                                         ?>
-
+)
                                 </h4>
                             </div>
 

@@ -105,15 +105,19 @@ $(document).ready(function () {
     var qtd = 0;
     var qtdPets = 0;
     try {
-      for (let indexPet = 0; indexPet < jsonPets.length; indexPet++) {
-        if (jsonPets[indexPet] == login) {
-          qtdPets++;
-        }
-      }
       for (let index = 0; index < jsonUsers.length; index++) {
         if (jsonUsers[index] == login) {
           qtd++;
         }
+      }
+      try {
+        for (let indexPet = 0; indexPet < jsonPets.length; indexPet++) {
+          if (jsonPets[indexPet] == login) {
+            qtdPets++;
+          }
+        }
+      } catch (e) {
+        console.log(e)
       }
     } catch (e) {
       console.log(e);

@@ -352,7 +352,7 @@ $contagemPets = count($dadosPets['pets']);
                                     <h2><?php echo $nome?></h2>
                                 </div>
 
-                                <h4 class="text-muted">(Meu dono(a) é <a href="">@<?php echo $_SESSION['login'] ?></a>)</h4>
+                                <h4 class="text-muted">(Meu dono(a) é <a href="/petiti/<?php echo $_SESSION['login'] ?>">@<?php echo $_SESSION['login'] ?></a>)</h4>
                             </div>
 
 

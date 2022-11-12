@@ -307,7 +307,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
-                                    <h3> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></h3>
+                                    <h3>  <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></h3>
                                     <h3> <?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></h3>
                                 </div>
 
