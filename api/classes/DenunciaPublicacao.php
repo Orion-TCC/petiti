@@ -1,5 +1,6 @@
 <?php
 require_once('/xampp/htdocs/petiti/api/database/conexao.php');
+
 class DenunciaPublicacao
 {
     private $idDenunciaPublicacao;
@@ -133,7 +134,8 @@ class DenunciaPublicacao
     public function buscaDenunciaPubicacaoEmAnalise(){
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
-        dataDenunciaPublicacao, idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
+        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, 
+        idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
         innerDenunciador.loginUsuario as usuarioDenunciador
         FROM tbDenunciaPublicacao
         INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciado

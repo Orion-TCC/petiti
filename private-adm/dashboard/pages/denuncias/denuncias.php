@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php
+require_once("../objetos.php");
+$denunciaPublicacao = new DenunciaPublicacao();
+
+$listaDenunciasAtivas = $denunciaPublicacao->buscaDenunciaPubicacaoAtiva();
+$listaDenunciasEmAnalise = $denunciaPublicacao->buscaDenunciaPubicacaoEmAnalise();
+$listaDenunciasResolvidas = $denunciaPublicacao->buscaDenunciaPubicacaoResolvida();
+
 require_once("../../../../api/database/conexao.php");
 $con = Conexao::conexao();
 @session_start();
@@ -42,7 +49,7 @@ if ($_SESSION['tipo'] != "Adm") {
         <a class="menu-item" href="/petiti/dashboard">
           <span class="material-icons-round">dashboard</span>
           <h3>Dashboard</h3>
-        </a>  
+        </a>
         <a class="menu-item" href="/petiti/tutores-dashboard">
           <span class="material-icons-round">person_outline</span>
           <h3>Tutores</h3>
@@ -99,8 +106,16 @@ if ($_SESSION['tipo'] != "Adm") {
 
           <!-- Tab content -->
           <div id="nova" class="tabcontent">
+            <?php foreach ($listaDenunciasAtivas as $linha) {
+              $textoDenuncia = $linha['textoDenunciaPublicacao'];
+              $data = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
+              $denunciado = $linha['usuarioDenunciado'];
+              $denunciador = $linha['usuarioDenunciador'];
+            }
+            ?>
             <h3 id="total-qtd">Total(0)</h3>
             <!--php aqui puxando os numeros do banco-->
+
           </div>
 
           <div id="analise" class="tabcontent">

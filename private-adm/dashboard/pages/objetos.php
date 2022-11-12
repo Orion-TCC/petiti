@@ -5,3 +5,4 @@ require_once $filename;
 $usuario = new Usuario();
 $pet = new Pet();
 $categorias = new categoria();
+$denunciaPublicacao = new DenunciaPublicacao();
