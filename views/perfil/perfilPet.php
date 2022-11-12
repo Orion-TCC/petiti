@@ -185,7 +185,7 @@ $contagemPets = count($dadosPets['pets']);
                         <h3>Home</h3>
                     </a>
 
-                    <a href="#" class="menu-item">
+                    <a href="/petiti/animaisPerdidos" class="menu-item">
                         <span><i class="uil uil-heart-break"></i></span>
                         <h3>Animais perdidos</h3>
                     </a>

@@ -93,7 +93,7 @@ input[type="search"]::-ms-reveal {
   --search-padding: 0.6rem 1rem;
   --card-padding: 1rem;
 
-  --sticky-top-left: 5.4rem;
+  --sticky-top-left: 6.4rem;
   --sticky-top-right: -18rem;
 }
 
@@ -131,6 +131,8 @@ body {
 .row-gap {
   row-gap: 1rem;
 }
+
+
 
 .boloDeAniversario {
   background-image: url("../images/boloAniversario.svg");
@@ -315,7 +317,7 @@ nav.feed {
   padding: 0.7rem 0;
   position: fixed;
   top: 0;
-  z-index: 1;
+  z-index: 11;
 }
 
 nav .logo {
@@ -700,18 +702,63 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   margin: 1rem 0;
   font-size: 0.85rem;
   line-height: 1.5;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .meio .feed .head {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .meio .feed .head .edit {
-  font-size: 1.5rem;
-  display: flex;
+  align-self: center;
+}
+
+.meio .feed .head .edit .menuPostHover{
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+
+  background: #464bc9;
+  border-radius: 80px;
+  height: 100%;
+  width: 100%;
+
+  position: absolute;
+
+  opacity: 0; 
+  -moz-opacity: 0;
+}
+
+.editButton{
+  position: relative; 
+  height: 2rem;  
+  width: 2rem; 
+  display: flex; 
   align-items: center;
 }
+
+.editButton:hover{
+  color: #464bc9;
+}
+
+.meio .feed .head .edit .menuPostHover:hover{
+  opacity: 0.4;
+}
+
+.meio .feed .head .edit i{
+  font-size: 1.5rem;
+}
+
+
+
+.meio .feed .head a{
+  color: var(--color-dark);
+}
+
 
 .meio .feed .usuario {
   display: flex;
@@ -735,10 +782,14 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   justify-content: space-between;
   align-items: center;
   font-size: 1.4rem;
-  margin: 0.6rem 0.6rem 0 0.6rem;
+  margin: 0 0.6rem 0 0.6rem;
 }
 
-
+.meio .feed .botoes .botoesDeInteracao {
+  display: flex;
+  height: 2.5rem;
+  align-items: center;
+}
 
 .meio .feed .botoes .botoesDeInteracao button {
   cursor: pointer;
@@ -779,7 +830,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 
   background-image: url("../images/pataCurtida.svg");
 
-  width: 2.1rem;
+  width: 2.2rem;
   height: 2rem;
 
   padding-bottom: 2.1rem;
@@ -815,7 +866,14 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 
 .meio .caption {
   margin: 0 0.6rem;
-  padding-bottom: 0.5rem;
+  
+}
+
+.meio .comentarios{
+  margin: 0 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .meio .caption :nth-child(1) {
@@ -835,9 +893,10 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   gap: 0.6rem;
   width: 100%;
   height: fit-content;
+  
   overflow-y: auto;
 
-  margin-bottom: 0.9rem;
+  margin: 0.8rem 0;
 
 }
 
@@ -845,6 +904,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   border: 1px solid var(--color-purple);
   border-radius: 20px;
   padding: 5px 12px;
+  cursor: pointer;
 }
 
 .meio .commentArea {
@@ -861,6 +921,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   height: 59px;
   padding: var(--card-padding);
   padding-left: 2rem;
+  padding-right: 1.83rem;
   font-family: "Public Sans Bold", sans-serif;
   font-size: 1rem;
   overflow: hidden;
@@ -870,7 +931,8 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 .meio .commentArea i {
   position: absolute;
   font-size: 1.4rem;
-  align-self: center;
+  align-self: start;
+  top: 1rem;
   margin-bottom: 0.4rem;
   cursor: pointer;
 }
@@ -878,11 +940,31 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 .meio .commentArea span {
   align-self: flex-end;
   right: 0;
+  top: 3rem;
   position: absolute;
   font-weight: 700;
 }
 
+.meio .commentArea button.comentar {
+  position: absolute;
+  top: 0;
+  right: 2.2rem;
+}
+
+
 /* lado direito */
+
+.ladoDireito{
+  overflow-y: auto;
+  height: 49.6rem;
+  position: sticky;
+  top: var(--sticky-top-left);
+}
+
+.ladoDireito::-webkit-scrollbar{
+  display: none;
+}
+
 .ladoDireito .whiteBoxHolder {
   background: var(--color-white);
   border-radius: var(--card-border-radius);
@@ -1036,7 +1118,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   border-radius: 20px !important;
 
   width: 790px !important;
-  height: 840px;
+  height: 810px;
 
   max-width: 800px !important;
   max-height: 840px !important;
@@ -1045,6 +1127,9 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   box-shadow: 1px 1px 40px 1px black !important;
 }
 
+.blocker{
+  z-index: 12 !important;
+}
 .cr-boundary {
   width: 800px !important;
 }
@@ -1488,8 +1573,22 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   flex-wrap: wrap;
   gap: 0.6rem;
   width: 100%;
-  height: 10rem;
+  height: 9rem;
   overflow-y: auto;
+}
+
+.categoriasChecksHolder::-webkit-scrollbar {
+  width: 10px;
+}
+
+.categoriasChecksHolder::-webkit-scrollbar-track {
+  background-color: #14526945;
+  border-radius: 20px;
+}
+
+.categoriasChecksHolder::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(56, 55, 161, 0.90);
 }
 
 
@@ -1532,41 +1631,44 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 
 .menuPost {
   position: absolute;
-  width: 100%;
+  top: 2.5rem;
+  right: 0.9rem;
+  width: 11rem;
+  z-index: 10;
 }
 
+
+
+
 .opcoesPost.close {
-  cursor: pointer;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #ccc;
-  border-radius: 0.3em;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  background-color: white;
-  margin-top: 0.7em;
+
+  border-radius: var(--card-border-radius);
+  box-shadow: 1px 1px 20px 0px #696969c2;
+  background: var(--color-white);
   display: none;
 }
 
+
 .opcoesPost.open {
-  cursor: pointer;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #ccc;
-  border-radius: 0.3em;
-  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  background-color: white;
-  margin-top: 0.7em;
+
+
+  border-radius: var(--card-border-radius);
+  box-shadow: 1px 1px 20px 0px #696969c2;
+  background: var(--color-white);
+
 }
 
 .opcoesPost li {
-  border-bottom: 1px solid #ccc;
   font-size: 17;
   color: #DB310C;
-  padding: 0.6em 1em;
+  padding: var(--card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.opcoesPost i{
+  font-size: 1.5rem;
 }
 
 .denunciaPost {
@@ -1587,7 +1689,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   display: flex;
   justify-content: center;
   background-color: white;
-  height: 60%;
+  height: 77%;
   border-radius: 10px;
 }
 
@@ -1610,12 +1712,14 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 .contagemChar {
   display: flex;
   align-items: flex-start;
+  cursor: default;
 }
 
 #contagemCharInput {
   text-align: right;
   font-family: "Raleway Medium";
-  cursor: text;
+  font-size: 1rem;
+  idth: 2rem;
 }
 
 .formDenuncia {

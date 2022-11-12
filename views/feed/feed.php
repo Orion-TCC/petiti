@@ -60,7 +60,7 @@ $idUsuarioCurtida = $_SESSION['id'];
                         <div style="display: flex; flex-direction: column;">
                             <img src="/petiti/assets/images/logo_principal.svg" class="imgLogoFeed">
                             <a href="#" class="enfase ">Home</a>
-                            <a href="#">Animais perdidos</a>
+                            <a href="petiti/animaisPerdidos">Animais perdidos</a>
                             <a href="#">Animais em doação</a>
                             <a href="#">Notificações</a>
                             <a href="#">Mensagens</a>

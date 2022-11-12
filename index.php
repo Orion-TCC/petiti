@@ -49,7 +49,7 @@
         <section id="primeiraPartePage">
             <div class="holderPrimeiraPage">
                     <div class="descHolder">
-                        <span class="desc"> O MELHOR LUGAR PARA PETLOVERS QUE NEM VOCÊ! </span>
+                        <span class="desc"> O MELHOR LUGAR PARA PETLOVERS COMO VOCÊ! </span>
                         <span class="desc2">Uma rede social capaz de ampliar o networking entre petlovers e empresas voltadas para animais.</span>
                     </div>
 
