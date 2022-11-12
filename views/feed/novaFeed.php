@@ -115,12 +115,16 @@ $contagemPets = count($dadosPets['pets']);
             <script>
                 window.onload = function() {
                     var hidediv = document.getElementById('popup');
+
                     document.onclick = function(div) {
                         if (div.target.id !== 'popup' && div.target.id !== 'opcoes') {
                             hidediv.style.display = "none";
                         }
                     };
+
                 };
+
+
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
@@ -344,8 +348,16 @@ $contagemPets = count($dadosPets['pets']);
                                     </div>
                                 </div>
 
-                                <span class="edit" id="<?php echo $id; ?>"><i class="uil uil-ellipsis-v"></i>
-                                    <div class="menuPost">
+
+
+                                <span class="edit" id="<?php echo $id; ?>">
+                                
+                                <div class="editButton">
+                                    <div class="menuPostHover"></div>
+                                    <i class="uil uil-ellipsis-v"></i>
+                                </div>
+
+                                    <div class="menuPost" id="menuPost">
                                         <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
                                             <?php if ($login != $_SESSION['login']) { ?>
                                                 <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixSeguir">Deixar de seguir</span></li>
@@ -358,18 +370,28 @@ $contagemPets = count($dadosPets['pets']);
                                                                 </i>
                                                                 <span>Denunciar</span>
 
+                                                                
                                                             </li>
                                                         </div>
                                                     </div>
                                                 </a>
                                             <?php } else { ?>
                                                 <a id="linkDeletePub" href="/petiti/api/publicacao/delete/<?php echo $id; ?>">
-                                                    <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="excluirPost" id="<?php echo $id; ?>">Excluir Post</span></li>
+                                                    <li>
+                                                        <div style="display: flex; align-items: center;">
+                                                            <i class="uil uil-minus-circle"></i>
+                                                            <span class="excluirPost" id="<?php echo $id; ?>">Excluir Post</span>
+                                                        </div>
+                                                    </li>
                                                 </a>
                                             <?php } ?>
                                         </ul>
                                     </div>
+
                                 </span>
+
+                                
+
                             </div>
 
                             <div class="imagemPost">
@@ -417,10 +439,6 @@ $contagemPets = count($dadosPets['pets']);
                                 <span class="text-bold"> <?php echo $login; ?></span> <span class="text-muted"><?php echo $texto ?></span>
                             </div>
 
-                            <div class="caption comentarios">
-
-                            </div>
-
 
                             <div class="badges">
                                 <?php
@@ -430,9 +448,14 @@ $contagemPets = count($dadosPets['pets']);
                                 ?>
                             </div>
 
+                            <div class=" comentarios">
+
+                            </div>
+
                             <div class="commentArea">
                                 <i class="uil uil-heart"></i>
                                 <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+                                
                                 <button value="<?php echo $id ?>" class="comentar" value="">
                                     <i class="uil uil-message"></i>
                                 </button>

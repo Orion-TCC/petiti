@@ -39,7 +39,7 @@ $(".seguir").on("click", function () {
       success: function (data) {
         console.log();
         console.log();
-        $("<p style='font-weight: 500 !important'><span style='font-weight: 900 !important'>" + data[0].loginUsuario + "</span> " + data[0].textoComentario + "</p>").appendTo(".comentarios");
+        $("<div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'> <h2 style='font-weight: 900 !important; align-self: start;'>" + data[0].loginUsuario + "</h2> " + "<h3 style='color: rgba(86, 86, 86, 1);'>" + data[0].textoComentario + "</h3> </div>").appendTo(".comentarios");
         $("#txtComentar" + id).val("");
       },
     });
@@ -195,6 +195,17 @@ $(document).ready(function () {
   });
 
 });
+
+window.onload = function() {
+  var hidedivmenupost = document.getElementById('menuPost');
+
+  document.onclick = function(div) {
+      if (div.target.id !== 'menuPost') {
+          hidedivmenupost.style.display = "none";
+      }
+  };
+
+};
 
 window.onload = function(){
   setTimeout(function(){

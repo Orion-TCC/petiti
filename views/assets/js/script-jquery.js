@@ -73,7 +73,7 @@ $(document).ready(function () {
       if (regex.test(login)) {
         if (tamanhoUsuario < 4 || tamanhoUsuario == 0) {
           $(".avisoNomeUsuarioQtd").text(
-            "Utilize um login com 4 ou mais caracteres."
+            "Utilize um nome de usuário com 4 ou mais caracteres."
           );
           $(".avisoNomeUsuarioQtd").removeClass("textoCerto");
           $(".avisoNomeUsuarioQtd").addClass("textoErrado");
