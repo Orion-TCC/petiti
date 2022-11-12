@@ -30,6 +30,17 @@ $jsonPets = file_get_contents($urlPets);
 $dadosPets = (array) json_decode($jsonPets, true);
 
 $contagemPets = count($dadosPets['pets']);
+
+$conexao = Conexao::conexao();
+$query = "SELECT COUNT(idUsuarioSeguidor) as qtdSeguindo FROM tbUsuarioSeguidor WHERE idSeguidor = $id";
+$resultado = $conexao->query($query);
+$lista = $resultado->fetchAll();
+$qtdSeguindo = $lista[0]['qtdSeguindo'];
+
+$query = "SELECT COUNT(idUsuarioSeguidor) as qtdSeguidores FROM tbUsuarioSeguidor WHERE idUsuario = $id";
+$resultado = $conexao->query($query);
+$lista = $resultado->fetchAll();
+$qtdSeguidores = $lista[0]['qtdSeguidores'];
 ?>
 
 
@@ -316,8 +327,8 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
-                                    <h3> 0 <span class="text-muted">seguidores</span></h3>
-                                    <h3> 0 <span class="text-muted">Seguindo</span></h3>
+                                    <h3> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></h3>
+                                    <h3> <?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></h3>
                                 </div>
 
                                 <div class="infoHolder baixo">
@@ -342,18 +353,17 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <h4 class="text-muted">(Sou dono(a) do <?php
                                                                         for ($t = 0; $t < $contagemPets; $t++) {
-                                                                            if ($t == ($contagemPets - 1)) {
-                                                                                echo (" e ");
-                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a>");
-                                                                            } else {
-                                                                                echo ("@" . $dadosPets['pets'][$t]['usuarioPet']);
-                                                                                if ($t != ($contagemPets - 1)) {
-                                                                                    echo (", ");
-                                                                                }
+                                                                            if($t < ($contagemPets - 2)){
+                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a>, ");
+                                                                            }else if($t == ($contagemPets - 2)){
+                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a> e ");
                                                                             }
+                                                                            if ($t == ($contagemPets - 1)) {
+                                                                                echo ("<a>@" . $dadosPets['pets'][$t]['usuarioPet'] . "</a>");
+                                                                            } 
                                                                         }
                                                                         ?>
-
+)
                                 </h4>
                             </div>
 

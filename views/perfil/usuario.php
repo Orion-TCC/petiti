@@ -13,7 +13,7 @@ $idPerfil = $usuario->procuraId2($_GET['user']);
 if ($idPerfil == "") {
     header('location: /petiti/feed');
 }
-if ($idPerfil==$_SESSION['id']) {
+if ($idPerfil == $_SESSION['id']) {
     header('location: /petiti/decidir-perfil');
 }
 
@@ -198,7 +198,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
-                <a class="perfilAtivo">
+                <a href="/petiti/decidir-perfil" class="perfil">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
@@ -273,14 +273,14 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
                                 <div class="infoHolder topo">
                                     <h2><?php echo $login; ?></h2>
-                                    <button value="<?php echo $id?>" class="seguir btn btn-primary">Seguir</button>
+                                    <button value="<?php echo $id ?>" class="seguir btn btn-primary">Seguir</button>
                                 </div>
 
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
-                                    <h3> <span id="seguidores"> <?php echo $qtdSeguidores?> </span> <span class="text-muted">seguidores</span></h3>
-                                    <h3> <?php echo $qtdSeguindo?> <span class="text-muted">Seguindo</span></h3>
+                                    <h3> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></h3>
+                                    <h3> <?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></h3>
                                 </div>
 
                                 <div class="infoHolder baixo">

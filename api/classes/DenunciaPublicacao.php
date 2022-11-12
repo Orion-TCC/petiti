@@ -1,5 +1,6 @@
 <?php
 require_once('/xampp/htdocs/petiti/api/database/conexao.php');
+
 class DenunciaPublicacao
 {
     private $idDenunciaPublicacao;
@@ -101,4 +102,49 @@ class DenunciaPublicacao
 
         header("Location: /petiti/feed");
     }
+
+    public function buscaDenunciaPubicacaoAtiva(){
+        $con = Conexao::conexao();
+        $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
+        dataDenunciaPublicacao, idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
+        innerDenunciador.loginUsuario as usuarioDenunciador
+        FROM tbDenunciaPublicacao
+        INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciado
+        INNER JOIN tbusuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciador
+        WHERE statusDenunciaPublicacao = 0";
+
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaDenunciaPubicacaoResolvida(){
+        $con = Conexao::conexao();
+        $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
+        dataDenunciaPublicacao, idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
+        innerDenunciador.loginUsuario as usuarioDenunciador
+        FROM tbDenunciaPublicacao
+        INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciado
+        INNER JOIN tbusuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciador
+        WHERE statusDenunciaPublicacao = 3";
+
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaDenunciaPubicacaoEmAnalise(){
+        $con = Conexao::conexao();
+        $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
+        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, 
+        idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
+        innerDenunciador.loginUsuario as usuarioDenunciador
+        FROM tbDenunciaPublicacao
+        INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciado
+        INNER JOIN tbusuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciador
+        WHERE statusDenunciaPublicacao = 2";
+
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 }

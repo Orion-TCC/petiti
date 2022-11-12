@@ -1,6 +1,9 @@
 <!DOCTYPE php>
 <html lang="pt-br">
-
+<?php
+@session_start();
+session_destroy();
+?>
 <head>
     <!-- HTML base -->
 
