@@ -22,7 +22,17 @@ $(document).ready(function () {
       data: { id: id },
       success: function (data) {
         var qtdSeguidores = data[0];
+        console.log(data);
         $("#seguidores").text(qtdSeguidores);
+        if (data[2] == false) {
+          $(".seguir").addClass("btn-primary");
+          $(".seguir").removeClass("btn-secundary");
+          $(".seguir").text("Seguir");
+        } else {
+          $(".seguir").removeClass("btn-primary");
+          $(".seguir").addClass("btn-secundary");
+          $(".seguir").text("Seguindo");
+        }
       },
     });
   });
@@ -36,6 +46,15 @@ $(document).ready(function () {
       success: function (data) {
         var qtdSeguidores = data[0];
         $("#seguidores").text(qtdSeguidores);
+         if (data[2] == false) {
+           $(".seguirPet").addClass("btn-primary");
+           $(".seguirPet").removeClass("btn-secundary");
+           $(".seguirPet").text("Seguir");
+         } else {
+           $(".seguirPet").removeClass("btn-primary");
+           $(".seguirPet").addClass("btn-secundary");
+           $(".seguirPet").text("Seguindo");
+         }
       },
     });
   });

@@ -3,6 +3,8 @@
 include_once("../../sentinela.php");
 require('../../api/classes/Usuario.php');
 require('../../api/classes/Pet.php');
+require_once('../../api/classes/PetSeguidor.php');
+
 @session_start();
 date_default_timezone_set('America/Sao_Paulo');
 
@@ -50,6 +52,15 @@ $query = "SELECT COUNT(idPetSeguidor) as qtdSeguidores FROM tbpetseguidor WHERE 
 $resultado = $conexao->query($query);
 $lista = $resultado->fetchAll();
 $qtdSeguidores = $lista[0]['qtdSeguidores'];
+
+$petSeguidor = new PetSeguidor();
+$verificarSeguidor = $petSeguidor->verificarSeguidor($idPetEscolhido, $id);
+if ($verificarSeguidor['boolean'] == true) {
+    $jsSeguidor = "true";
+} else {
+    $jsSeguidor = "false";
+}
+
 ?>
 
 
@@ -189,7 +200,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="feed" class="menu-item">
+                    <a href="/petiti/feed" class="menu-item">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
@@ -249,9 +260,13 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                             <div class="userInfo">
 
                                 <div class="infoHolder topo">
+                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
                                     <h2><?php echo $usuarioPet; ?></h2>
-                                    <button value="<?php echo $idPetEscolhido ?>" class="seguirPet btn btn-primary">Seguir</button>
-                                    <button value="<?php echo $id ?>" class="seguir btn btn-secundary">Seguindo</button>
+                                    <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                        <button value="<?php echo $idPetEscolhido ?>" class="seguirPet btn btn-primary">Seguir</button>
+                                    <?php } else { ?>
+                                        <button value="<?php echo $idPetEscolhido ?>" class="seguirPet btn btn-secundary">Seguindo</button>
+                                    <?php } ?>
                                 </div>
 
                                 <div class="infoHolder meio">

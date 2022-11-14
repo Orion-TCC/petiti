@@ -3,8 +3,8 @@
 date_default_timezone_set('America/Sao_Paulo');
 require('../../api/classes/Usuario.php');
 include_once("../../sentinela.php");
-require('../../api/classes/curtidaPublicacao.php');
-require('../../api/classes/UsuarioSeguidor.php');
+require_once('../../api/classes/curtidaPublicacao.php');
+require_once('../../api/classes/UsuarioSeguidor.php');
 
 
 $usuario = new Usuario();
@@ -78,6 +78,16 @@ $query = "SELECT COUNT(idUsuarioSeguidor) as qtdSeguidores FROM tbUsuarioSeguido
 $resultado = $conexao->query($query);
 $lista = $resultado->fetchAll();
 $qtdSeguidores = $lista[0]['qtdSeguidores'];
+
+$usuarioSeguidor  = new UsuarioSeguidor();
+
+$verificarSeguidor = $usuarioSeguidor->verificarSeguidor($id, $meuId);
+if ($verificarSeguidor['boolean']==true) {
+    $jsSeguidor = "true";
+} else {
+    $jsSeguidor = "false";
+}
+
 ?>
 
 
@@ -255,6 +265,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">
                     <p>
+                        <?php echo $verificarSeguidor['boolean'] ?>
                         <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
                     </p>
                 </button>
@@ -275,9 +286,14 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                             <div class="userInfo">
 
                                 <div class="infoHolder topo">
+                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor?>" type="hidden">
                                     <h2><?php echo $login; ?></h2>
-                                    <button value="<?php echo $id ?>" class="seguir btn btn-primary">Seguir</button>
-                                    <button value="<?php echo $id ?>" class="seguir btn btn-secundary">Seguindo</button>
+                                    <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                        <button value="<?php echo $id ?>" class="seguir btn btn-primary">Seguir</button>
+                                    <?php } else { ?>
+                                        <button value="<?php echo $id ?>" class="seguir btn btn-secundary">Seguindo</button>
+                                    <?php } ?>
+
                                 </div>
 
 

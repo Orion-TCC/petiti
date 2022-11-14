@@ -714,6 +714,13 @@ $app->get('/publicacoes', function (Request $request, Response $response, array 
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
+$app->get('/publicacoes/perdidos', function (Request $request, Response $response, array $args) {
+    $publicacao = new Publicacao();
+
+    $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listarPubsPetsPerdidos(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
 $app->get('/publicacoes/impulsionadas', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
 
@@ -972,7 +979,7 @@ $app->post('/seguir', function (Request $request, Response $response, array $arg
     $lista = $resultado->fetchAll();
     $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
-    $arraySeguidores = array($qtdSeguidores, $qtdSeguindo);
+    $arraySeguidores = array($qtdSeguidores, $qtdSeguindo, $verificador);
     $json = json_encode($arraySeguidores);
 
     $response->getBody()->write("$json");
@@ -1009,7 +1016,7 @@ $app->post('/seguir-pet', function (Request $request, Response $response, array 
     $lista = $resultado->fetchAll();
     $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
-    $arraySeguidores = array($qtdSeguidores, $qtdSeguindo);
+    $arraySeguidores = array($qtdSeguidores, $qtdSeguindo, $verificador);
     $json = json_encode($arraySeguidores);
 
     $response->getBody()->write("$json");

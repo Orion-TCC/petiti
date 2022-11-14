@@ -81,7 +81,8 @@ class Publicacao
         $this->localPub = $localPub;
     }
 
-    public function delete($delete){
+    public function delete($delete)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare("DELETE FROM tbpublicacao WHERE idPublicacao = ?");
         $stmt->bindValue(1, $delete->getIdPublicacao());
@@ -138,6 +139,47 @@ WHERE
     WHERE
         tbfotousuario.idUsuario = tbpublicacao.idUsuario
 ) ORDER BY dataPublicacao DESC";
+
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
+    }
+
+
+    public function listarPubsPetsPerdidos()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT
+    tbpublicacao.idPublicacao AS id,
+    itimalias,
+    textoPublicacao AS texto,
+    dataPublicacao AS data,
+    localPub AS local,
+    tbpublicacao.idUsuario AS idUsuario,
+    nomeUsuario AS nome,
+    loginUsuario AS login,
+    tbfotousuario.idFotoUsuario,
+    caminhoFotoPublicacao AS caminhoFoto,
+    caminhoFoto AS fotoUsuario,
+    categoria
+FROM
+    `tbpublicacao`
+INNER JOIN tbcategoriapublicacao ON tbpublicacao.idPublicacao = tbcategoriapublicacao.idPublicacao
+INNER JOIN tbcategoria ON tbcategoriapublicacao.idCategoria = tbcategoria.idCategoria
+INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario
+INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
+INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
+WHERE
+    statusUsuario = 1 AND tbfotousuario.idFotoUsuario =(
+    SELECT
+        MAX(tbfotousuario.idFotoUsuario)
+    FROM
+        tbfotousuario
+    WHERE
+        tbfotousuario.idUsuario = tbpublicacao.idUsuario
+) 
+AND categoria = 'Perdido' OR categoria = 'Animal Perdido' OR categoria = 'Pet Perdido' OR categoria = 'Desaparecido'
+ORDER BY dataPublicacao DESC";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
