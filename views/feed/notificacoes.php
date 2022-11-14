@@ -27,6 +27,7 @@ $contagemPets = count($dadosPets['pets']);
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="/petiti/assets/css/feed-style.css">
+    <link rel="stylesheet" href="/petiti/assets/css/notificacoes-style.css">
     <link rel="stylesheet" href="/petiti/assets/libs/croppie/croppie.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
@@ -34,7 +35,7 @@ $contagemPets = count($dadosPets['pets']);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 
     <!-- título da pág e icone (logo) -->
-    <title>Pet iti - Feed</title>
+    <title>Pet iti - Notificações</title>
     <link rel="icon" href="/petiti/assets/images/logo-icon.svg">
 
     <!--script-->
@@ -163,7 +164,7 @@ $contagemPets = count($dadosPets['pets']);
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="#" class="menu-item ativo">
+                    <a href="feed" class="menu-item ">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
@@ -179,7 +180,7 @@ $contagemPets = count($dadosPets['pets']);
                     </a>
 
 
-                    <a href="notificacoes" class="menu-item">
+                    <a href="notificacoes" class="menu-item ativo">
                         <span><i class="uil uil-bell"></i> </span>
                         <h3>Notificações</h3>
                     </a>
@@ -210,263 +211,41 @@ $contagemPets = count($dadosPets['pets']);
             </div>
             <!-- FIM DO LADO ESQUERDO -->
 
+
             <div class="Meio">
-                <!-- ads/servicos(passar a limpo depois) -->
-                <span class="adTitulo">Veja o que estão anunciando!</span>
-                <?php
-                $url = "http://localhost/petiti/api/publicacoes/impulsionadas";
-                $jsonAds = file_get_contents($url);
-                $dadosAds = (array)json_decode($jsonAds, true);
-                $contagemAds = count($dadosAds['publicacoes']);
+                <span class="adTitulo">Notificações</span>
 
-                if ($contagemAds == 0) {
-                } else {
-                ?>
-                    <div class="ads">
-                        <?php
-                        for ($i = 0; $i < $contagemAds; $i++) {
-                            $nomeAds = $dadosAds['publicacoes'][$i]['nome'];
-                            $loginAds = $dadosAds['publicacoes'][$i]['login'];
-                            $fotoAds = $dadosAds['publicacoes'][$i]['caminhoFoto'];
-                            $idUsuario = $dadosAds['publicacoes'][$i]['idUsuario'];
-                            $fotoUsuarioAds = $dadosAds['publicacoes'][$i]['fotoUsuario'];
-                        ?>
-                            <div class="ad" style="background: url(<?php echo $fotoAds ?>) no-repeat center center/cover">
-                                <div class="adHandler">
-                                    <div class="fotoDePerfil">
-                                        <img src="<?php echo $fotoUsuarioAds; ?>" alt="">
-                                    </div>
-                                    <p class="name">
-                                        <?php echo $loginAds; ?>
-                                    </p>
-                                </div>
+                    <div class="abanotificacoes">
+
+                        <div class="notificacao">
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <img src="" alt="" class="fotoDePerfil">
+                                <h4>@username</h4>
+                                <h4 class="text-muted">começou a seguir você</h4>
+                                <h5 class="text-muted">Há 2 horas</h5>
                             </div>
-                        <?php } ?>
-                    </div>
-                <?php } ?>
-
-
-
-                <div class="criarPost">
-                    <img src="assets/images/Lontrinhas.svg" alt="">
-                    <div class="faixaPost">
-                        <h3>Crie um post anexando uma foto, gif ou video!</h3>
-                        <h3 class="text-muted">Compartilhe seu bichinho dormindo...</h3>
-                        <button class="btn btn-primary">
-                            <p>
-                                <a href="#modal-foto-post" rel="modal:open">Postar</a>
-                            </p>
-                        </button>
-                    </div>
-                </div>
-                <!-- fim da parte de ad -->
-
-                <div class="feeds">
-                    <?php
-                    $contadorPostagem = 0;
-                    $url = "http://localhost/petiti/api/publicacoes";
-
-                    $json = file_get_contents($url);
-                    $dados = (array)json_decode($json, true);
-                    $contagem = count($dados['publicacoes']);
-                    if ($contagem == 0) {
-                    ?>
-                        <div class="contagemZero">
-
-                            <div class="semPublicacaoes">
-                                <img src="/petiti/assets/images/semPost.svg" id="svgSemPost">
-                                <p class="textoSemPublicacoes">Parece que não tem nada por aqui... Faça um post ou siga alguém para ver o que eles estão postando!</p>
-                            </div>
+                                <button class="btn btn-primary">Seguir</button>
                         </div>
 
-                    <?php }
-                    for ($i = 0; $i < $contagem; $i++) {
-
-                        $id =  $dados['publicacoes'][$i]['id'];
-
-                        $idUsuarioPub = $dados['publicacoes'][$i]['idUsuario'];
-
-                        $urlComentarios = "http://localhost/petiti/api/comentarios-post/" . $id;
-
-                        $jsonComentarios = file_get_contents($urlComentarios);
-
-                        $dadosComentarios = (array)json_decode($jsonComentarios, true);
-
-                        $nome = $dados['publicacoes'][$i]['nome'];
-                        $login = $dados['publicacoes'][$i]['login'];
-                        $foto = $dados['publicacoes'][$i]['caminhoFoto'];
-                        $idUsuario = $dados['publicacoes'][$i]['idUsuario'];
-                        $data = $dados['publicacoes'][$i]['data'];
-                        $texto = $dados['publicacoes'][$i]['texto'];
-                        $itimalias = $dados['publicacoes'][$i]['itimalias'];
-                        $fotoUsuario = $dados['publicacoes'][$i]['fotoUsuario'];
-                        $local =  $dados['publicacoes'][$i]['local'];
-                        $hoje = new DateTime();
-                        $dataPost = new DateTime($data);
-                        $intervalo = $hoje->diff($dataPost);
-                        $diferencaAnos = $intervalo->format('%y');
-                        $diferencaMeses = $intervalo->format('%m');
-                        $diferencaDias = $intervalo->format('%a');
-                        $diferencaHoras = $intervalo->format('%h');
-                        $diferencaMinutos = $intervalo->format('%i');
-
-                        $urlCategorias = "http://localhost/petiti/api/categorias-post/" . $id;
-
-                        $jsonCategorias = file_get_contents($urlCategorias);
-
-                        $dadosCategorias = (array)json_decode($jsonCategorias, true);
-
-                        $contagemCategorias = count($dadosCategorias);
-
-                        if ($diferencaAnos == 0) {
-                            if ($diferencaMeses == 0) {
-                                if ($diferencaDias == 0) {
-                                    if ($diferencaHoras == 0) {
-                                        $diferencaFinal = $diferencaMinutos . " minutos";
-                                    } else {
-                                        $diferencaFinal = $diferencaHoras . " horas";
-                                    }
-                                } else {
-                                    $diferencaFinal = $diferencaDias . " dias";
-                                }
-                            } else {
-                                $diferencaFinal = $diferencaMeses . " meses";
-                            }
-                        } else {
-                            $diferencaFinal = $diferencaAnos . " anos";
-                        }
-                    ?>
-                        <div class="feed">
-                            <div class="head">
-                                <div class="usuario">
-                                    <div class="fotoDePerfil">
-                                        <a href="/petiti/<?php echo $login ?>"><img src="<?php echo $fotoUsuario; ?>" alt=""></a>
-                                    </div>
-                                    <div class="info">
-                                        <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $nome ?></a></h3>
-                                        <small><?php echo $local ?>  há <?php echo $diferencaFinal ?></small>
-                                    </div>
-                                </div>
-
-
-
-                                <span class="edit" id="<?php echo $id; ?>">
-                                
-                                <div class="editButton">
-                                    <div class="menuPostHover"></div>
-                                    <i class="uil uil-ellipsis-v"></i>
-                                </div>
-
-                                    <div class="menuPost" id="menuPost">
-                                        <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
-                                            <?php if ($login != $_SESSION['login']) { ?>
-                                                <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixSeguir">Deixar de seguir</span></li>
-                                                <a href="#modal-denuncia" rel="modal:open">
-                                                    <div id="<?php echo $id; ?>" class="postDenunciado">
-                                                        <div id="<?php echo $idUsuarioPub; ?>" class="denunciaPost">
-                                                            <li>
-
-                                                                <i class="fa-solid fa-circle-exclamation">
-                                                                </i>
-                                                                <span>Denunciar</span>
-
-                                                                
-                                                            </li>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            <?php } else { ?>
-                                                <a id="linkDeletePub" href="/petiti/api/publicacao/delete/<?php echo $id; ?>">
-                                                    <li>
-                                                        <div style="display: flex; align-items: center;">
-                                                            <i class="uil uil-minus-circle"></i>
-                                                            <span class="excluirPost" id="<?php echo $id; ?>">Excluir Post</span>
-                                                        </div>
-                                                    </li>
-                                                </a>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
-
-                                </span>
-
-                                
-
+                        <div class="notificacao">
+                            <div style="display: flex; gap: 1rem; align-items: center;">
+                                <img src="" alt="" class="fotoDePerfil">
+                                <h4>@username</h4>
+                                <h4 class="text-muted">Curtiu sua postagem</h4>
+                                <h5 class="text-muted">Há 2 horas</h5>
                             </div>
 
-                            <div class="imagemPost">
-                                <img src="<?php echo $foto ?>" alt="">
-                            </div>
-
-                            <div class="botoes">
-                                <div class="botoesDeInteracao">
-
-
-                                    <?php
-                                    $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
-                                    if ($verificaCurtida['boolean'] == false) { ?>
-                                        <input checked class="curtir" value="<?php echo $id ?>" type="checkbox">
-                                        <!-- curtido -->
-                                    <?php } else { ?>
-
-                                        <input class="curtir" value="<?php echo $id ?>" type="checkbox">
-                                        <!-- nao curtido  -->
-                                    <?php }
-                                    ?>
-
-                                    <button class="comentar"></button>
-
-                                    <button class="mensagem"></button>
-
-                                </div>
-                            </div>
-
-                            <div class="curtidoPor">
-
-                                <?php
-                                $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
-                                if ($verificaCurtida['boolean'] == false) { ?>
-                                    <span> <b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b> itimalias</span>
-                                    <!-- curtido -->
-                                <?php } else { ?>
-                                    <span><b><b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b> itimalias</span>
-                                    <!-- nao curtido  -->
-                                <?php }
-                                ?>
-                            </div>
-
-                            <div class="caption">
-                                <span class="text-bold"> <?php echo $login; ?></span> <span class="text-muted"><?php echo $texto ?></span>
-                            </div>
-
-
-                            <div class="badges">
-                                <?php
-                                for ($j = 0; $j < $contagemCategorias; $j++) {
-                                    echo ("<p class='badge'>" . $dadosCategorias[$j]['categoria'] . "</p>");
-                                }
-                                ?>
-                            </div>
-
-                            <div class=" comentarios">
-
-                            </div>
-
-                            <div class="commentArea">
-                                <i class="uil uil-heart"></i>
-                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
-                                
-                                <button value="<?php echo $id ?>" class="comentar" value="">
-                                    <i class="uil uil-message"></i>
-                                </button>
-                                <span class="text-muted">0/200</span>
-                            </div>
-
+                            <img src="#" alt="" class="previewPostImage">
                         </div>
-                    <?php $contadorPostagem++;
-                    }
-                    ?>
-                </div>
+
+
+                             <button class="btn btn-secundary">Seguindo</button>
+
+
+
+                    </div>
+
+
             </div>
             <!-- fim do meio -->
 

@@ -1,0 +1,78 @@
+
+:root {
+    --color-white: #FFFFFF;
+    --color-dark: rgba(0, 0, 0, 1);
+    --color-pastelDark: #202225;
+    --color-lightGray: #f5f5f5;
+    --color-extraLightGray: rgba(245, 245, 245, 1);
+    --color-gray: rgba(86, 86, 86, 1);
+    --color-lightPastelGray: #C1C1C1;
+    --color-light: rgba(224, 224, 224, 1);
+  
+    --color-purple: rgba(56, 55, 161, 1);
+    --color-lightBlue: rgba(186, 213, 219, 1);
+    --color-pastelYellow: rgba(255, 251, 159, 1);
+    --color-pastelOrange: rgba(251, 211, 164, 1);
+  
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 1rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+  
+    --sticky-top-left: 6.4rem;
+    --sticky-top-right: -18rem;
+  }
+
+  /* PARTE DO MEIO */
+
+.Meio .abanotificacoes{
+    width: 100%;
+    height: fit-content;
+    min-height: 48rem;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    margin-top: 0.5rem;
+}
+
+.Meio .abanotificacoes .notificacao{
+    height: 7.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    border-top:  1.9px solid var(--color-lightPastelGray) ;
+    padding: var(--card-padding);
+    padding-inline: 1.5rem;
+}
+
+.Meio .abanotificacoes :first-child{
+    border-bottom: none ;
+    border-top: none;
+}
+
+
+.Meio .abanotificacoes .notificacao .fotoDePerfil{
+    border: 1px solid var(--color-purple) !important;
+    width: 4rem;
+}
+
+
+.Meio .abanotificacoes .notificacao :nth-child(4){
+    color: #9F9F9F;
+}
+
+.Meio .abanotificacoes .btn{
+    padding-inline: 1.8rem;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.14);
+    font-family: 'Raleway Bold', sans-serif;
+}
+
+.Meio .abanotificacoes .notificacao .previewPostImage{
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 0.7rem;
+}

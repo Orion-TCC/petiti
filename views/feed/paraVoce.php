@@ -34,7 +34,7 @@ $contagemPets = count($dadosPets['pets']);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 
     <!-- título da pág e icone (logo) -->
-    <title>Pet iti - Feed</title>
+    <title>Pet iti - Para você</title>
     <link rel="icon" href="/petiti/assets/images/logo-icon.svg">
 
     <!--script-->
@@ -163,7 +163,7 @@ $contagemPets = count($dadosPets['pets']);
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="#" class="menu-item ativo">
+                    <a href="feed" class="menu-item">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
@@ -194,7 +194,7 @@ $contagemPets = count($dadosPets['pets']);
                         <h3>Produtos e Serviços</h3>
                     </a>
 
-                    <a href="paraVoce" class="menu-item">
+                    <a href="#" class="menu-item ativo">
                         <span><i class="uil uil-coffee"></i> </span>
                         <h3>Para Você</h3>
                     </a>

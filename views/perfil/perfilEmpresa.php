@@ -159,23 +159,23 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="/petiti/feed" class="menu-item">
+                    <a href="feed" class="menu-item">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
 
-                    <a href="/petiti/animaisPerdidos" class="menu-item">
+                    <a href="animaisPerdidos" class="menu-item">
                         <span><i class="uil uil-heart-break"></i></span>
                         <h3>Animais perdidos</h3>
                     </a>
 
-                    <a href="#" class="menu-item">
+                    <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
                         <h3>Animais em doação</h3>
                     </a>
 
 
-                    <a href="#" class="menu-item">
+                    <a href="notificacoes" class="menu-item">
                         <span><i class="uil uil-bell"></i> </span>
                         <h3>Notificações</h3>
                     </a>
@@ -190,7 +190,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                         <h3>Produtos e Serviços</h3>
                     </a>
 
-                    <a href="#" class="menu-item">
+                    <a href="paraVoce" class="menu-item">
                         <span><i class="uil uil-coffee"></i> </span>
                         <h3>Para Você</h3>
                     </a>

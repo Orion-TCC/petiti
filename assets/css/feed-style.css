@@ -80,12 +80,15 @@ input[type="search"]::-ms-reveal {
   --color-lightGray: #f5f5f5;
   --color-extraLightGray: rgba(245, 245, 245, 1);
   --color-gray: rgba(86, 86, 86, 1);
+  --color-lightPastelGray: #C1C1C1;
   --color-light: rgba(224, 224, 224, 1);
 
   --color-purple: rgba(56, 55, 161, 1);
+  --color-lightPurple: #9998D3;
   --color-lightBlue: rgba(186, 213, 219, 1);
   --color-pastelYellow: rgba(255, 251, 159, 1);
   --color-pastelOrange: rgba(251, 211, 164, 1);
+
 
   --border-radius: 2rem;
   --card-border-radius: 1rem;
@@ -283,7 +286,12 @@ img {
 
 .btn-primary {
   background: var(--color-pastelYellow);
-  color: white;
+  color: black;
+}
+
+.btn-secundary {
+  background: var(--color-pastelOrange);
+  color: black;
 }
 
 .flex-row {
@@ -574,6 +582,33 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 
 
 /* MEIO */
+
+.previewPostImage {
+  width: 14.5rem;
+  height: 13.5rem;
+  border: 1px solid gray;
+  position: relative;
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.previewPostImage:hover::before{
+  transition: all 300ms ease;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: black;
+  background: linear-gradient(rgba(0, 0, 0, 0.068), rgba(0, 0, 0, 0.068));
+  position: absolute;
+  top: 0;
+  border-top-left-radius: var(--card-border-radius);
+  border-top-right-radius: var(--card-border-radius);
+}
+
+
 .meio .criarPost {
   background: var(--color-white);
   width: 100%;
@@ -653,10 +688,6 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   z-index: 2;
 }
 
-.meio span.adTitulo {
-  font-family: "Raleway Extra Bold";
-  margin: 1rem 0;
-}
 
 .meio .ads .ad::before {
   content: "";

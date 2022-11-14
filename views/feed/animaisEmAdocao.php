@@ -27,6 +27,8 @@ $contagemPets = count($dadosPets['pets']);
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="/petiti/assets/css/feed-style.css">
+    <link rel="stylesheet" href="/petiti/assets/css/animaisPerdidos-style.css">
+    <link rel="stylesheet" href="/petiti/assets/css/animaisEmAdocao-style.css">
     <link rel="stylesheet" href="/petiti/assets/libs/croppie/croppie.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
@@ -34,7 +36,7 @@ $contagemPets = count($dadosPets['pets']);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 
     <!-- título da pág e icone (logo) -->
-    <title>Pet iti - Feed</title>
+    <title>Pet iti - Animais em adoção</title>
     <link rel="icon" href="/petiti/assets/images/logo-icon.svg">
 
     <!--script-->
@@ -163,7 +165,7 @@ $contagemPets = count($dadosPets['pets']);
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="#" class="menu-item ativo">
+                    <a href="feed" class="menu-item">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
@@ -173,7 +175,7 @@ $contagemPets = count($dadosPets['pets']);
                         <h3>Animais perdidos</h3>
                     </a>
 
-                    <a href="animaisEmAdocao" class="menu-item">
+                    <a href="animaisEmAdocao" class="menu-item ativo">
                         <span><i class="uil uil-archive"></i> </span>
                         <h3>Animais em doação</h3>
                     </a>
@@ -212,46 +214,36 @@ $contagemPets = count($dadosPets['pets']);
 
             <div class="Meio">
                 <!-- ads/servicos(passar a limpo depois) -->
-                <span class="adTitulo">Veja o que estão anunciando!</span>
-                <?php
-                $url = "http://localhost/petiti/api/publicacoes/impulsionadas";
-                $jsonAds = file_get_contents($url);
-                $dadosAds = (array)json_decode($jsonAds, true);
-                $contagemAds = count($dadosAds['publicacoes']);
+                <span class="adTitulo">Veja as categorias incluidas nesse feed</span>
 
-                if ($contagemAds == 0) {
-                } else {
-                ?>
-                    <div class="ads">
-                        <?php
-                        for ($i = 0; $i < $contagemAds; $i++) {
-                            $nomeAds = $dadosAds['publicacoes'][$i]['nome'];
-                            $loginAds = $dadosAds['publicacoes'][$i]['login'];
-                            $fotoAds = $dadosAds['publicacoes'][$i]['caminhoFoto'];
-                            $idUsuario = $dadosAds['publicacoes'][$i]['idUsuario'];
-                            $fotoUsuarioAds = $dadosAds['publicacoes'][$i]['fotoUsuario'];
-                        ?>
-                            <div class="ad" style="background: url(<?php echo $fotoAds ?>) no-repeat center center/cover">
-                                <div class="adHandler">
-                                    <div class="fotoDePerfil">
-                                        <img src="<?php echo $fotoUsuarioAds; ?>" alt="">
-                                    </div>
-                                    <p class="name">
-                                        <?php echo $loginAds; ?>
-                                    </p>
-                                </div>
-                            </div>
-                        <?php } ?>
+                <div class="categoriasFeed">
+
+                    <div class="esquerdoCAP">
+                        <h4>Todos os posts desse feed terão as categorias ao lado para filtrar o feed de animais em adoção e assim facilitar a busca.</h4>
+                        <h4 class="text-muted">*Você poderá inserir categorias, a fim de auxiliar na busca do seu novo pet.</h4>
+                        <input type="text" placeholder="Ex: Cachorro Adoção">
                     </div>
-                <?php } ?>
 
+
+                    <div class="direitoCAP">
+                            <div class="categoriaBadge">Adoção</div>
+                            <div class="categoriaBadge">Adote um amigo</div>
+                            <div class="categoriaBadge">Animal em adoção</div>
+                            <div class="categoriaBadge">Adotar</div>
+                            
+
+
+                   </div>
+
+
+                </div>
 
 
                 <div class="criarPost">
-                    <img src="assets/images/Lontrinhas.svg" alt="">
+                    <img src="assets/images/bixinhos.svg" alt="">
                     <div class="faixaPost">
                         <h3>Crie um post anexando uma foto, gif ou video!</h3>
-                        <h3 class="text-muted">Compartilhe seu bichinho dormindo...</h3>
+                        <h3 class="text-muted">Seu post estará com as categorias acima inclusas.</h3>
                         <button class="btn btn-primary">
                             <p>
                                 <a href="#modal-foto-post" rel="modal:open">Postar</a>

@@ -6,19 +6,18 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^home index.php [NC,L]
 
 RewriteRule ^feed views/feed/novaFeed.php [NC,L]
+RewriteRule ^animaisPerdidos views/feed/animaisPerdidos.php [NC,L]
+RewriteRule ^animaisEmAdocao views/feed/animaisEmAdocao.php [NC,L]
+RewriteRule ^paraVoce views/feed/paraVoce.php [NC,L]
+RewriteRule ^notificacoes views/feed/notificacoes.php [NC,L]
 
 RewriteRule ^decidir-perfil views/perfil/decidePerfil.php [NC,L]
+
 RewriteRule ^pet-perfil views/perfil/perfilPet.php [NC,L]
-
 RewriteRule ^empresa-perfil views/perfil/perfilEmpresa.php [NC,L]
-
 RewriteRule ^tutor-perfil views/perfil/perfilUsuario.php [NC,L]
-
-
-
-
-
 RewriteRule ^perfil views/feed/perfil.php [NC,L]
+
 
 
 RewriteRule ^sair sair.php [NC,L]

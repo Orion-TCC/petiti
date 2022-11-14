@@ -169,18 +169,18 @@ $contagemPets = count($dadosPets['pets']);
                         <h3>Home</h3>
                     </a>
 
-                    <a href="" class="menu-item  ativo">
+                    <a href="#" class="menu-item  ativo">
                         <span><i class="uil uil-heart-break"></i></span>
                         <h3>Animais perdidos</h3>
                     </a>
 
-                    <a href="#" class="menu-item">
+                    <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
                         <h3>Animais em doação</h3>
                     </a>
 
 
-                    <a href="#" class="menu-item">
+                    <a href="notificacoes" class="menu-item">
                         <span><i class="uil uil-bell"></i> </span>
                         <h3>Notificações</h3>
                     </a>
@@ -195,7 +195,7 @@ $contagemPets = count($dadosPets['pets']);
                         <h3>Produtos e Serviços</h3>
                     </a>
 
-                    <a href="#" class="menu-item">
+                    <a href="paraVoce" class="menu-item">
                         <span><i class="uil uil-coffee"></i> </span>
                         <h3>Para Você</h3>
                     </a>
@@ -215,7 +215,7 @@ $contagemPets = count($dadosPets['pets']);
                 <!-- ads/servicos(passar a limpo depois) -->
                 <span class="adTitulo">Veja as categorias incluidas nesse feed</span>
 
-                <div class="categoriasAnimaisPerdidos">
+                <div class="categoriasFeed">
 
                     <div class="esquerdoCAP">
                         <h4>Todos os posts desse feed terão as categorias ao lado para filtrar o feed de animais perdidos e assim facilitar a busca.</h4>
