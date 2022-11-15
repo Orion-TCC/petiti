@@ -293,6 +293,32 @@ $app->get('/bloquear-tutor/{id}', function (Request $request, Response $response
     header('location:/petiti/tutores-dashboard');
 });
 
+$app->get('/passar-denuncia-analise/{id}', function(Request $request, Response $response, array $args){
+    $denunciaPublicacao = new DenunciaPublicacao();
+    $denunciaPublicacao->setIdDenunciaPublicacao($args['id']);
+    $denunciaPublicacao->setStatusDenunciaPublicacao(1);
+    $cookie = new Cookies;
+
+    $denunciaPublicacao->updateStatus($denunciaPublicacao);
+
+    $cookie->criarCookie(
+        "denunciaParaAnalise",
+        "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Denúncia passou para análise</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+        1
+    );
+    header('location:/petiti/denuncias-dashboard');
+});
+
 $app->get('/ativar-empresa/{id}', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
     $cookie = new Cookies;

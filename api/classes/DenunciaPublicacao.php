@@ -12,83 +12,98 @@ class DenunciaPublicacao
     private $statusDenunciaPublicacao;
 
 
-    public function getDataDenunciaPublicacao(){
+    public function getDataDenunciaPublicacao()
+    {
         return $this->dataDenunciaPublicacao;
     }
 
-  
-    public function setDataDenunciaPublicacao($dataDenunciaPublicacao){
+
+    public function setDataDenunciaPublicacao($dataDenunciaPublicacao)
+    {
         $this->dataDenunciaPublicacao = $dataDenunciaPublicacao;
 
         return $this;
     }
 
-    public function getTextoDenunciaPublicacao(){
+    public function getTextoDenunciaPublicacao()
+    {
         return $this->textoDenunciaPublicacao;
     }
 
 
-    public function setTextoDenunciaPublicacao($textoDenunciaPublicacao){
+    public function setTextoDenunciaPublicacao($textoDenunciaPublicacao)
+    {
         $this->textoDenunciaPublicacao = $textoDenunciaPublicacao;
 
         return $this;
     }
 
-  
-    public function getPublicacao(){
+
+    public function getPublicacao()
+    {
         return $this->Publicacao;
     }
 
 
-    public function setPublicacao($Publicacao){
+    public function setPublicacao($Publicacao)
+    {
         $this->Publicacao = $Publicacao;
 
         return $this;
     }
 
- 
-    public function getUsuarioDenunciado(){
+
+    public function getUsuarioDenunciado()
+    {
         return $this->usuarioDenunciado;
     }
 
 
-    public function setUsuarioDenunciado($usuarioDenunciado){
+    public function setUsuarioDenunciado($usuarioDenunciado)
+    {
         $this->usuarioDenunciado = $usuarioDenunciado;
 
         return $this;
     }
 
-    public function getIdDenunciaPublicacao(){
+    public function getIdDenunciaPublicacao()
+    {
         return $this->idDenunciaPublicacao;
     }
 
-    public function setIdDenunciaPublicacao($idDenunciaPublicacao){
+    public function setIdDenunciaPublicacao($idDenunciaPublicacao)
+    {
         $this->idDenunciaPublicacao = $idDenunciaPublicacao;
 
         return $this;
     }
 
-    public function getStatusDenunciaPublicacao(){
+    public function getStatusDenunciaPublicacao()
+    {
         return $this->statusDenunciaPublicacao;
     }
 
-    public function setStatusDenunciaPublicacao($statusDenunciaPublicacao){
+    public function setStatusDenunciaPublicacao($statusDenunciaPublicacao)
+    {
         $this->statusDenunciaPublicacao = $statusDenunciaPublicacao;
 
         return $this;
     }
 
-    public function getUsuarioDenunciador(){
+    public function getUsuarioDenunciador()
+    {
         return $this->usuarioDenunciador;
     }
 
-    public function setUsuarioDenunciador($usuarioDenunciador){
+    public function setUsuarioDenunciador($usuarioDenunciador)
+    {
         $this->usuarioDenunciador = $usuarioDenunciador;
 
         return $this;
     }
 
-    public function cadastrar($denuncia){
+    public function cadastrar($denuncia)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare('INSERT INTO tbDenunciaPublicacao(idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao, idUsuarioDenunciado, idUsuarioDenunciador, idPublicacao)
         VALUES (default, ?, ?, ?, ?, ?)');
@@ -103,12 +118,16 @@ class DenunciaPublicacao
         header("Location: /petiti/feed");
     }
 
-    public function buscaDenunciaPubicacaoAtiva(){
+    public function buscaDenunciaPubicacaoAtiva()
+    {
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
-        dataDenunciaPublicacao, idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
+        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao,
+        idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, tbdenunciapublicacao.idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
         innerDenunciador.loginUsuario as usuarioDenunciador
         FROM tbDenunciaPublicacao
+        INNER JOIN tbpublicacao pub ON pub.idPublicacao = tbdenunciapublicacao.idPublicacao
+        INNER JOIN tbfotopublicacao fotopub ON fotopub.idpublicacao = tbdenunciapublicacao.idpublicacao
         INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciado
         INNER JOIN tbusuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciador
         WHERE statusDenunciaPublicacao = 0";
@@ -117,27 +136,34 @@ class DenunciaPublicacao
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function buscaDenunciaPubicacaoResolvida(){
+    public function buscaDenunciaPubicacaoEmAnalise()
+    {
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
-        dataDenunciaPublicacao, idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
+        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao,
+        idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, tbdenunciapublicacao.idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
         innerDenunciador.loginUsuario as usuarioDenunciador
         FROM tbDenunciaPublicacao
+        INNER JOIN tbpublicacao pub ON pub.idPublicacao = tbdenunciapublicacao.idPublicacao
+        INNER JOIN tbfotopublicacao fotopub ON fotopub.idpublicacao = tbdenunciapublicacao.idpublicacao
         INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciado
         INNER JOIN tbusuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciador
-        WHERE statusDenunciaPublicacao = 3";
+        WHERE statusDenunciaPublicacao = 1";
 
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function buscaDenunciaPubicacaoEmAnalise(){
+    public function buscaDenunciaPubicacaoResolvida()
+    {
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
-        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, 
-        idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
+        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao,
+        idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, tbdenunciapublicacao.idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
         innerDenunciador.loginUsuario as usuarioDenunciador
         FROM tbDenunciaPublicacao
+        INNER JOIN tbpublicacao pub ON pub.idPublicacao = tbdenunciapublicacao.idPublicacao
+        INNER JOIN tbfotopublicacao fotopub ON fotopub.idpublicacao = tbdenunciapublicacao.idpublicacao
         INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciado
         INNER JOIN tbusuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciador
         WHERE statusDenunciaPublicacao = 2";
@@ -146,5 +172,57 @@ class DenunciaPublicacao
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+
+    public function buscaQtdDenunciaPublicacaoAtiva()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idDenunciaPublicacao) as qtd FROM tbDenunciaPublicacao
+        WHERE statusDenunciaPublicacao = 0";
+
+        $resultado = $con->query($query);
+        $listaQtdDenuncia = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($listaQtdDenuncia as $linha) {
+            return $linha['qtd'];
+        }
+    }
+
+    public function buscaQtdDenunciaPublicacaoEmAnalise()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idDenunciaPublicacao) as qtd FROM tbDenunciaPublicacao
+        WHERE statusDenunciaPublicacao = 1";
+
+        $resultado = $con->query($query);
+        $listaQtdDenuncia = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($listaQtdDenuncia as $linha) {
+            return $linha['qtd'];
+        }
+    }
+
+    public function buscaQtdDenunciaPublicacaoResolvida()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idDenunciaPublicacao) as qtd FROM tbDenunciaPublicacao
+        WHERE statusDenunciaPublicacao = 2";
+
+        $resultado = $con->query($query);
+        $listaQtdDenuncia = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($listaQtdDenuncia as $linha) {
+            return $linha['qtd'];
+        }
+    }
+
+    public function updateStatus($update){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbDenunciaPublicacao SET statusDenunciapublicacao = ? WHERE idDenunciaPublicacao = ?");
+        $stmt->bindValue(1, $update->getStatusDenunciaPublicacao());
+        $stmt->bindValue(2, $update->getIdDenunciaPublicacao());
+
+        $stmt->execute();
+    }
 
 }

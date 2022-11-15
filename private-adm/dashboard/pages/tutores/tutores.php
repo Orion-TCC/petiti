@@ -127,7 +127,7 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
                     <img class="foto-info" src="<?php echo $foto ?>">
                     <div class="perfil-info">
                       <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
-                      <p><span style="font-weight: 900;">@<?php echo $login ?></span></p>
+                      <p><span style="font-weight: 900;"><a href="/petiti/<?php echo $login ?>">@<?php echo $login ?></a></span></p>
                       <p><span style="font-weight: 900;">Pets: </span><?php echo $bio ?></p>
                     </div>
                   </div>
@@ -178,7 +178,7 @@ $qtdTutoresBloqueado = $usuario->buscaQtdUsuarioBloqueado();
                     <img class="foto-info" src="<?php echo $foto ?>">
                     <div class="perfil-info">
                       <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
-                      <p><span style="font-weight: 900;">@<?php echo $login ?></span></p>
+                      <p><span style="font-weight: 900;"><a href="/petiti/<?php echo $login ?>">@<?php echo $login ?></a></span></p>
                       <p><span style="font-weight: 900;">Pets: </span><?php echo $bio ?></p>
                     </div>
                   </div>
