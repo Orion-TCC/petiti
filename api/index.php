@@ -293,6 +293,32 @@ $app->get('/bloquear-tutor/{id}', function (Request $request, Response $response
     header('location:/petiti/tutores-dashboard');
 });
 
+$app->get('/passar-denuncia-analise/{id}', function(Request $request, Response $response, array $args){
+    $denunciaPublicacao = new DenunciaPublicacao();
+    $denunciaPublicacao->setIdDenunciaPublicacao($args['id']);
+    $denunciaPublicacao->setStatusDenunciaPublicacao(1);
+    $cookie = new Cookies;
+
+    $denunciaPublicacao->updateStatus($denunciaPublicacao);
+
+    $cookie->criarCookie(
+        "denunciaParaAnalise",
+        "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Denúncia passou para análise</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+        1
+    );
+    header('location:/petiti/denuncias-dashboard');
+});
+
 $app->get('/ativar-empresa/{id}', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
     $cookie = new Cookies;
@@ -707,10 +733,11 @@ $app->get('/bloquear-categoria/{id}', function (Request $request, Response $resp
     header("location: /petiti/categorias-dashboard/");
 });
 
-$app->get('/publicacoes', function (Request $request, Response $response, array $args) {
+$app->get('/publicacoes/personalizadas/{id}', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
+    $id = $args['id'];
 
-    $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listar($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
@@ -718,6 +745,13 @@ $app->get('/publicacoes/perdidos', function (Request $request, Response $respons
     $publicacao = new Publicacao();
 
     $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listarPubsPetsPerdidos(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+$app->get('/publicacoes/adocao', function (Request $request, Response $response, array $args) {
+    $publicacao = new Publicacao();
+
+    $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listarPubsPetsAdoção(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });

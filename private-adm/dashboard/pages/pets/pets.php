@@ -128,7 +128,7 @@ $qtdPetsBloqeuados = $pet->buscaQtdPetBloqueado();
                     <div class="perfil-info">
                       <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
                       <p><span style="font-weight: 900;">@<?php echo $usuario ?></span></p>
-                      <p><span style="font-weight: 900;">Tutor: </span><span style="font-weight: 600;">@<?php echo $tutor ?></span></p>
+                      <p><span style="font-weight: 900;"><a href="/petiti/<?php echo $tutor ?>">@<?php echo $tutor ?></a></span></p>
                     </div>
                   </div>
 

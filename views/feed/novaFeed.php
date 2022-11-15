@@ -265,7 +265,7 @@ $contagemPets = count($dadosPets['pets']);
                 <div class="feeds">
                     <?php
                     $contadorPostagem = 0;
-                    $url = "http://localhost/petiti/api/publicacoes";
+                    $url = "http://localhost/petiti/api/publicacoes/personalizadas/$id";
 
                     $json = file_get_contents($url);
                     $dados = (array)json_decode($json, true);
