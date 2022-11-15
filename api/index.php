@@ -707,10 +707,11 @@ $app->get('/bloquear-categoria/{id}', function (Request $request, Response $resp
     header("location: /petiti/categorias-dashboard/");
 });
 
-$app->get('/publicacoes', function (Request $request, Response $response, array $args) {
+$app->get('/publicacoes/personalizadas/{id}', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
+    $id = $args['id'];
 
-    $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listar(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listar($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
@@ -718,6 +719,13 @@ $app->get('/publicacoes/perdidos', function (Request $request, Response $respons
     $publicacao = new Publicacao();
 
     $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listarPubsPetsPerdidos(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+$app->get('/publicacoes/adocao', function (Request $request, Response $response, array $args) {
+    $publicacao = new Publicacao();
+
+    $json = "{\"publicacoes\":" . json_encode($lista = $publicacao->listarPubsPetsAdoção(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });

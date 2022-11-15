@@ -110,10 +110,12 @@ class Publicacao
         return $id;
     }
 
-    public function listar()
+    public function listar($id)
     {
-        $con = Conexao::conexao();
-        $query = "SELECT
+   
+   
+    $con = Conexao::conexao();
+    $query = "SELECT
     tbpublicacao.idPublicacao AS id,
     itimalias,
     textoPublicacao AS texto,
@@ -125,25 +127,30 @@ class Publicacao
     tbfotousuario.idFotoUsuario,
     caminhoFotoPublicacao AS caminhoFoto,
     caminhoFoto AS fotoUsuario
-FROM
-    tbPublicacao
-INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario
-INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
-INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
-WHERE
-    statusUsuario = 1 AND tbfotousuario.idFotoUsuario =(
-    SELECT
-        MAX(tbfotousuario.idFotoUsuario)
-    FROM
-        tbfotousuario
-    WHERE
-        tbfotousuario.idUsuario = tbpublicacao.idUsuario
-) ORDER BY dataPublicacao DESC";
+        FROM
+            tbPublicacao
+        INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario
+        INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
+        INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
+        LEFT JOIN tbusuarioseguidor ON tbusuarioseguidor.idUsuario = tbusuario.idUsuario 
 
-        $resultado = $con->query($query);
-        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
-        return $lista;
-    }
+        WHERE
+        tbusuarioseguidor.idSeguidor = ". $id ." OR tbpublicacao.idUsuario = ". $id ." AND
+            statusUsuario = 1 AND tbfotousuario.idFotoUsuario =(
+            SELECT
+                MAX(tbfotousuario.idFotoUsuario)
+            FROM
+                tbfotousuario
+            WHERE
+                tbfotousuario.idUsuario = tbpublicacao.idUsuario
+        )
+        GROUP BY tbpublicacao.dataPublicacao
+        ORDER BY RAND ()";
+
+$resultado = $con->query($query);
+$lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+return $lista;
+}
 
 
     public function listarPubsPetsPerdidos()
@@ -179,12 +186,52 @@ WHERE
         tbfotousuario.idUsuario = tbpublicacao.idUsuario
 ) 
 AND categoria = 'Perdido' OR categoria = 'Animal Perdido' OR categoria = 'Pet Perdido' OR categoria = 'Desaparecido'
-ORDER BY dataPublicacao DESC";
+ORDER BY RAND ()";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
+
+    public function listarPubsPetsAdoção()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT
+    tbpublicacao.idPublicacao AS id,
+    itimalias,
+    textoPublicacao AS texto,
+    dataPublicacao AS data,
+    localPub AS local,
+    tbpublicacao.idUsuario AS idUsuario,
+    nomeUsuario AS nome,
+    loginUsuario AS login,
+    tbfotousuario.idFotoUsuario,
+    caminhoFotoPublicacao AS caminhoFoto,
+    caminhoFoto AS fotoUsuario,
+    categoria
+FROM
+    `tbpublicacao`
+INNER JOIN tbcategoriapublicacao ON tbpublicacao.idPublicacao = tbcategoriapublicacao.idPublicacao
+INNER JOIN tbcategoria ON tbcategoriapublicacao.idCategoria = tbcategoria.idCategoria
+INNER JOIN tbusuario ON tbpublicacao.idUsuario = tbusuario.idUsuario
+INNER JOIN tbfotopublicacao ON tbpublicacao.idPublicacao = tbfotopublicacao.idPublicacao
+INNER JOIN tbfotousuario ON tbusuario.idUsuario = tbfotousuario.idUsuario
+WHERE
+    statusUsuario = 1 AND tbfotousuario.idFotoUsuario =(
+    SELECT
+        MAX(tbfotousuario.idFotoUsuario)
+    FROM
+        tbfotousuario
+    WHERE
+        tbfotousuario.idUsuario = tbpublicacao.idUsuario
+) 
+AND categoria = 'Adoção' OR categoria = 'Animal em adoção' OR categoria = 'Adotar' OR categoria = 'Adote um amigo'
+ORDER BY RAND ()";
+
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
+}
 
     public function listarPubsCurtidas($id)
     {
