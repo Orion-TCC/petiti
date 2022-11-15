@@ -81,7 +81,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
     <nav class="feed">
         <div class="container">
-            <div class="popupOptions" id="popup">
+             <div class="popupOptions" id="popup">
 
                 <div class="flex-col">
 
@@ -92,24 +92,35 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                         <h3><?php echo $_SESSION['nome']; ?></h3>
                     </div>
 
+                    <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
+                        <div class="flex-row petUser">
 
+                            <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
+                                <div class="fotoDePerfil">
+                                    <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
+                                    <!--Foto do pet  -->
+                                </div>
 
+                                <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
+                            </a>
+                        </div>
+                    <?php    } ?>
                 </div>
 
 
-                <div class="flex-col borderTop row-gap">
+                <div class="flex-col borderTop row-gap opcoesPopUp">
 
                     <h3 style="width: 15rem;">Adicionar conta existente</h3>
 
                     <h3>Gerenciar contas</h3>
 
-                    <h3>Configurações</h3>
+                    <h3> <a href="opcoes">Configurações</a></h3>
 
-                    <h3><a href="sair"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
+                    <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
 
                 </div>
 
-            </div>
+                </div>
             <h2 class="logo">
                 <img src="./assets/images/logo_principal.svg">
             </h2>
@@ -130,7 +141,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
+                <div id="labelAO"><i class="uil uil-setting" ></i></div>
                 <div class="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                 </div>

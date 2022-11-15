@@ -11,6 +11,8 @@ RewriteRule ^animaisEmAdocao views/feed/animaisEmAdocao.php [NC,L]
 RewriteRule ^paraVoce views/feed/paraVoce.php [NC,L]
 RewriteRule ^notificacoes views/feed/notificacoes.php [NC,L]
 
+RewriteRule ^opcoes views/opcoes/opcoes.php [NC,L]
+
 RewriteRule ^decidir-perfil views/perfil/decidePerfil.php [NC,L]
 
 RewriteRule ^pet-perfil views/perfil/perfilPet.php [NC,L]

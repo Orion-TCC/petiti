@@ -27,7 +27,8 @@ $contagemPets = count($dadosPets['pets']);
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="/petiti/assets/css/feed-style.css">
-    <link rel="stylesheet" href="/petiti/assets/css/notificacoes-style.css">
+    <link rel="stylesheet" href="/petiti/assets/css/opcoes-style.css">
+    <link rel="stylesheet" href="/petiti/assets/css/usuario-style.css">
     <link rel="stylesheet" href="/petiti/assets/libs/croppie/croppie.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 
@@ -35,7 +36,9 @@ $contagemPets = count($dadosPets['pets']);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 
     <!-- título da pág e icone (logo) -->
-    <title>Pet iti - Notificações</title>
+    <title>Pet iti - Feed</title>
+
+
     <link rel="icon" href="/petiti/assets/images/logo-icon.svg">
 
     <!--script-->
@@ -49,6 +52,7 @@ $contagemPets = count($dadosPets['pets']);
     <script src="/petiti/assets/js/jquery-scripts.js"></script>
     <script src="/petiti/assets/js/script.js"></script>
     <script src="/petiti/views/assets/js/funcs.js"></script>
+
 </head>
 
 <body class="feed">
@@ -64,7 +68,7 @@ $contagemPets = count($dadosPets['pets']);
                         <div class="fotoDePerfil">
                             <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                         </div>
-                        <h3><a href="tutor-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
+                        <h3><?php echo $_SESSION['nome']; ?></h3>
                     </div>
 
                     <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
@@ -93,7 +97,6 @@ $contagemPets = count($dadosPets['pets']);
 
                     <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
 
-
                 </div>
 
             </div>
@@ -114,23 +117,9 @@ $contagemPets = count($dadosPets['pets']);
 
             ?>
 
-            <script>
-                window.onload = function() {
-                    var hidediv = document.getElementById('popup');
-
-                    document.onclick = function(div) {
-                        if (div.target.id !== 'popup' && div.target.id !== 'opcoes') {
-                            hidediv.style.display = "none";
-                        }
-                    };
-
-                };
-
-
-            </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <div id="labelAO"><i class="uil uil-setting" ></i></div>
+                <label for="abrir-opcoes" id="labelAO"><i class="uil uil-setting" ></i></label>
 
                 <div class="fotoDePerfil" id="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
@@ -140,6 +129,22 @@ $contagemPets = count($dadosPets['pets']);
 
         </div>
     </nav>
+
+
+    <script>
+                window.onload = function() {
+                    var hidediv = document.getElementById('popup');
+
+                    document.onclick = function(div) {
+                        if (div.target.id !== 'popup' && div.target.id !== 'opcoes' ) {
+                            hidediv.style.display = "none";
+                        }
+                    };
+
+                };
+
+
+            </script>
 
     <main class="feed">
 
@@ -181,7 +186,7 @@ $contagemPets = count($dadosPets['pets']);
                     </a>
 
 
-                    <a href="notificacoes" class="menu-item ativo">
+                    <a href="notificacoes" class="menu-item">
                         <span><i class="uil uil-bell"></i> </span>
                         <h3>Notificações</h3>
                     </a>
@@ -212,259 +217,105 @@ $contagemPets = count($dadosPets['pets']);
             </div>
             <!-- FIM DO LADO ESQUERDO -->
 
+            <div class="meio">
 
-            <div class="Meio">
-                <span class="adTitulo">Notificações</span>
+                <span>Configurações</span>
 
-                    <div class="abanotificacoes">
+                <div class="opcoesHolder">
 
-                        <div class="notificacao">
-                            <div style="display: flex; gap: 1rem; align-items: center;">
-                                <img src="" alt="" class="fotoDePerfil">
-                                <h4>@username</h4>
-                                <h4 class="text-muted">começou a seguir você</h4>
-                                <h5 class="text-muted">Há 2 horas</h5>
+                    <div class="sidebar">
+                        <button class="menu-item" onclick="openTab(event, '1')" id="defaultOpen">Editar perfil</button>
+                        <button class="menu-item" onclick="openTab(event, '2')">Alterar senha</button>
+                        <button class="menu-item" onclick="openTab(event, '3')">Adicionar outro pet</button>
+                        <button class="menu-item" onclick="openTab(event, '4')">Privacidade e segurança</button>
+                    </div>
+
+                 <div class="tabs-conteudo editarPerfil" id="1">
+                    <form action="">
+
+                        <div class="imageHandler">
+
+                            <div class="flex-row">
+                                <div class="fotoDePerfil">
+                                    <img src="#" alt="">
+                                </div>
+
+
+                                <label class="flFotoPerfil">
+                                <input id="flFotoPerfil" type="file" accept=".jpg, .png">
+                                </label>
                             </div>
-                                <button class="btn btn-primary">Seguir</button>
+
+
+                                <div class="flex-col">
+                                    <h2>@username</h2>
+                                    <label class="flFotoPerfil">
+                                        Alterar foto de perfil
+                                        <input id="flFotoPerfil" type="file" accept=".jpg, .png">
+                                    </label>
+                                </div>
+
                         </div>
 
-                        <div class="notificacao">
-                            <div style="display: flex; gap: 1rem; align-items: center;">
-                                <img src="" alt="" class="fotoDePerfil">
-                                <h4>@username</h4>
-                                <h4 class="text-muted">Curtiu sua postagem</h4>
-                                <h5 class="text-muted">Há 2 horas</h5>
+                        <div class="informacoes">
+                            
+                            <div class="infoArea">
+                                <h3>Nome</h3>
+                                <input type="text" placeholder="Nome">
+                                <h5 class="text-muted">*Ajude as pessoas a descobrir sua conta usando o nome pelo qual você é conhecido.</h5>
                             </div>
 
-                            <img src="#" alt="" class="previewPostImage">
+                            <div class="infoArea">
+                                <h3>Nome de Usuario</h3>
+                                <input type="text" placeholder="Nome de usuario">
+                                <h5 class="text-muted">*Você pode mudar quantas vezes você quiser se o nome de usuário desejado estiver disponível para uso.</h5>
+                            </div>
+
+                            <div class="infoArea infoPessoal">
+                                <h3>Informações pessoais</h3>
+                                <h5 class="text-muted">Forneça suas informações pessoais mesmo se o seu perfil for para uso pessoal. Ela não farão parte do seu perfil público.</h5>
+                            </div>
+
+                            <div class="infoArea">
+                                <h3>Email</h3>
+                                <input type="text" placeholder="Email">
+                            </div>
+
+                            <div class="botoesInfoArea">
+                                <button class="btn btn-primary">Salvar</button>
+                                <label class="hover-2">Desativar conta</label>
+                            </div>
+
                         </div>
 
-
-                             <button class="btn btn-secundary">Seguindo</button>
-
+                     </form>
 
 
                     </div>
 
+
+
+
+
+
+
+
+
+
+
+                    <div class="tabs-conteudo" id="2">sexo2</div>
+                    
+                    <div class="tabs-conteudo" id="3">sexo3</div>
+                    
+                    <div class="tabs-conteudo" id="4">sexo4</div>
+
+                </div>
 
             </div>
-            <!-- fim do meio -->
 
-
-            <div class="ladoDireito">
-                <!-- posts de pets perdidos -->
-                <div class="whiteBoxHolder postsPerdidosHolder">
-
-                    <div class="heading tituloPetsPerdidos">
-                        <h4>Ajude alguém a encontrar seu pet</h4>
-                    </div>
-
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-
-                </div>
-                <!-- fim de posts de pets perdidos -->
-
-                <div class="categoriasEmAlta">
-                    <div class="whiteBoxHolder ">
-                        <div class="heading">
-                            <h4>Categorias em alta</h4>
-                        </div>
-
-                        <div class="categoriasAltaGrid">
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position1.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position2.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position6.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position3.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position7.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position4.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position8.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <!-- fim das categorias em alta -->
-
-
-                <div class="sugestoes">
-                    <h4>Sugestões para você</h4>
-
-                    <div class="whiteBoxHolder">
-
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
-                            </div>
-
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary">Seguir</button>
-                    </div>
-
-                    <div class="whiteBoxHolder">
-
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
-                            </div>
-
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary">Seguir</button>
-                    </div>
-
-                    <div class="whiteBoxHolder">
-
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
-                            </div>
-
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary">Seguir</button>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-
+<script>
+    document.getElementById("defaultOpen").click();
+</script>
 
 
         <!-- Modal Post -->

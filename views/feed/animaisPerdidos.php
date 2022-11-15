@@ -64,7 +64,7 @@ $contagemPets = count($dadosPets['pets']);
                         <div class="fotoDePerfil">
                             <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                         </div>
-                        <h3><?php echo $_SESSION['nome']; ?></h3>
+                        <h3><a href="tutor-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
                     </div>
 
                     <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
@@ -83,15 +83,15 @@ $contagemPets = count($dadosPets['pets']);
                 </div>
 
 
-                <div class="flex-col borderTop row-gap">
+                <div class="flex-col borderTop row-gap opcoesPopUp">
 
                     <h3 style="width: 15rem;">Adicionar conta existente</h3>
 
                     <h3>Gerenciar contas</h3>
 
-                    <h3>Configurações</h3>
+                    <h3><a href="opcoes">Configurações</a></h3>
 
-                    <h3><a href="sair"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
+                    <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
 
                 </div>
 
@@ -117,8 +117,8 @@ $contagemPets = count($dadosPets['pets']);
                 window.onload = function() {
                     var hidediv = document.getElementById('popup');
 
-                    document.onclick = function(div) {
-                        if (div.target.id !== 'popup' && div.target.id !== 'opcoes') {
+                    document.onclick = function(div ) {
+                        if (div.target.id !== 'popup' && div.target.id !== 'opcoes' && div.target.id !== 'labelAO' && div.target.id !== 'fotoDePerfil') {
                             hidediv.style.display = "none";
                         }
                     };
@@ -129,7 +129,8 @@ $contagemPets = count($dadosPets['pets']);
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
+
+                <div id="labelAO"><i class="uil uil-setting"></i></div>
 
                 <div class="fotoDePerfil" id="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">

@@ -107,7 +107,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                         <div class="fotoDePerfil">
                             <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                         </div>
-                        <h3><?php echo $_SESSION['nome']; ?></h3>
+                        <h3><a href="tutor-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
                     </div>
 
                     <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
@@ -126,19 +126,19 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                 </div>
 
 
-                <div class="flex-col borderTop row-gap">
+                <div class="flex-col borderTop row-gap opcoesPopUp">
 
                     <h3 style="width: 15rem;">Adicionar conta existente</h3>
 
                     <h3>Gerenciar contas</h3>
 
-                    <h3>Configurações</h3>
+                    <h3> <a href="opcoes">Configurações</a></h3>
 
-                    <h3><a href="sair"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
+                    <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
 
                 </div>
 
-            </div>
+                </div>
 
             <h2 class="logo">
                 <img src="./assets/images/logo_principal.svg">
@@ -160,7 +160,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
+                <div id="labelAO"><i class="uil uil-setting" ></i></div>
                 <div class="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                 </div>
@@ -174,7 +174,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
-                <a class="perfilAtivo">
+                <a href="/petiti/decidir-perfil" class="perfil">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>

@@ -95,44 +95,44 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
     <nav class="feed">
         <div class="container">
-            <div class="popupOptions" id="popup">
+          <div class="popupOptions" id="popup">
 
-                <div class="flex-col">
+            <div class="flex-col">
 
-                    <div class="flex-row">
-                        <div class="fotoDePerfil">
-                            <img src="<?php echo $_SESSION['foto']; ?>" alt="">
-                        </div>
-                        <h3><?php echo $_SESSION['nome']; ?></h3>
+                <div class="flex-row">
+                    <div class="fotoDePerfil">
+                        <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
-
-                    <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
-                        <div class="flex-row petUser">
-
-                            <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
-                                <div class="fotoDePerfil">
-                                    <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
-                                    <!--Foto do pet  -->
-                                </div>
-
-                                <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
-                            </a>
-                        </div>
-                    <?php    } ?>
+                    <h3><?php echo $_SESSION['nome']; ?></h3>
                 </div>
 
+                <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
+                    <div class="flex-row petUser">
 
-                <div class="flex-col borderTop row-gap">
+                        <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
+                            <div class="fotoDePerfil">
+                                <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
+                                <!--Foto do pet  -->
+                            </div>
 
-                    <h3>Adicionar conta existente</h3>
+                            <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
+                        </a>
+                    </div>
+                <?php    } ?>
+            </div>
 
-                    <h3>Gerenciar contas</h3>
 
-                    <h3>Configurações</h3>
+            <div class="flex-col borderTop row-gap opcoesPopUp">
 
-                    <h3><a href="sair"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
+                <h3 style="width: 15rem;">Adicionar conta existente</h3>
 
-                </div>
+                <h3>Gerenciar contas</h3>
+
+                <h3> <a href="opcoes">Configurações</a></h3>
+
+                <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
+
+            </div>
 
             </div>
 
@@ -156,7 +156,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
+                <div id="labelAO"><i class="uil uil-setting" ></i></div>
                 <div class="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                 </div>
@@ -459,7 +459,176 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
         </div>
         <!-- fim do meio -->
 
-        </div>
+        
+        <!-- Modal Post -->
+        <section id="post">
+
+            <div id="modal-foto-post" class="modal">
+                <div class="modal-foto-post">
+                    <div class="tituloModalPost">Criar um post</div>
+                    <div class="inputArea">
+
+                        <div class="fotoSelecionarImagem">
+                            <img src="./assets/images/selectFotoIlustracao.png">
+                        </div>
+
+                        <span class="textPadrao">Arraste fotos, vídeos ou gifs aqui</span>
+
+                        <label class="btn inputButtonEstilo">
+                            <input class="inputForm" type="file" accept="image/*" id="flFoto">
+                            <span>Selecionar no computador</span>
+                            <label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- <script>
+    var holder = document.getElementById('modal-foto-post');
+    holder.ondragover = function() {
+        this.className = 'hover';
+        return false;
+    };
+    holder.ondragend = function() {
+        this.className = '';
+        return false;
+    };
+    holder.ondrop = function(e) {
+        this.className = '';
+        e.preventDefault();
+        readfiles(e.dataTransfer.files);
+    }
+</script> -->
+
+            </div>
+        </section>
+
+
+        <section>
+            <div id="modal-recortar-foto" class="modal">
+                <div class="tituloModalPost">
+
+                    <div style="width: 60%; display: flex; justify-content: end;"><span>Recortar</span></div>
+                    <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> <a id="continuar-post" href="#criar-post" rel="modal:open">Continuar</a> </div>
+
+                </div>
+
+                <div id="upload-demo"></div>
+
+            </div>
+        </section>
+
+        <section>
+            <div id="criar-post" class="modal">
+                <form id="form-aid" method="post" action="./api/publicar">
+                    <div class="tituloModalPost">
+                        <div style="width: 60%; display: flex; justify-content: end;"><span>Criar um post</span></div>
+
+                        <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;">
+                            <input class="submitCriarPost" type="submit" value="Compartilhar">
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: row;">
+                        <div>
+                            <div id="preview-crop-image"></div>
+                        </div>
+
+                        <div class="criarPostElements">
+
+                            <div class="parte1CriarPost">
+
+                                <div class="userElementos">
+
+                                    <div class="fotoDePerfil">
+                                        <img class="imagemUser" src="<?php echo $_SESSION['foto']; ?>" alt="">
+                                    </div>
+
+                                    <span class="textNomeUsuario"><?php echo $_SESSION['nome']; ?></span>
+                                </div>
+
+
+                                <textarea name="txtLegendaPub" id="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!" maxlength="200"></textarea>
+
+                                <input type="hidden" name="categoriasValue" id="categoriasValue" value="">
+
+                                <input type="hidden" name="baseFoto" id="baseFoto">
+
+
+                                <div class="letraCont">
+                                    <div class="contagemChar">
+                                        <input type="text" value="0" id="contagemCharInput" disabled>
+                                        <span>/200</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="parte2CriarPost">
+                                <input placeholder="Adicione uma localização" type="text" name="txtLocalizacao">
+                                <i class="uil uil-map-marker"></i>
+                            </div>
+
+                            <div class="parte3CriarPost">
+
+                                <div class="categoriaSelectTitulo">
+                                    <span>
+                                        Categoria
+                                    </span>
+                                </div>
+                                <div id="categoriasHolder">
+
+                                    <span class="text-muted">
+                                        Insira categorias no seu post e você irá alcançar mais engajamento e até mesmo ajudar a filtrar a “Para você” de outros petlovers/petmigos.
+                                    </span>
+
+                                    <div style="display: grid; grid-template-columns: repeat(10, 1fr); width: 100%;">
+                                        <input type="text" name="txtCategoria" id="txtCategoria" placeholder="Ex: Lhama">
+                                        <p id="submitCategoria"><i class="uil uil-plus"></i></p>
+                                    </div>
+
+                                    <div class="categoriasChecksHolder">
+                                        <?php $urlCategorias = "http://localhost/petiti/api/categorias";
+                                        $jsonCategorias = file_get_contents($urlCategorias);
+                                        $dadosCategoria = (array)json_decode($jsonCategorias, true);
+                                        $contagemCategoria = count($dadosCategoria['categorias']);
+                                        for ($i = 0; $i < $contagemCategoria; $i++) {
+                                        ?>
+
+                                            <div class="categoriaSelector">
+                                                <input class="checkbox" type="checkbox" name="categorias[]" id="<?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>" value="<?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>">
+                                                <?php echo $dadosCategoria['categorias'][$i]['categoria']; ?>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+            </div>
+            </form>
+            </div>
+        </section>
+
+        <section>
+            <a href="#modal-denuncia" rel="modal:open">
+                    <div id="modal-denuncia" class="modal">
+                        <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+                            <input type="hidden" id="idPost" name="idPost" value="">
+                            <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
+                            <span class="spanDenuncia">Denuniar</span>
+                            <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
+                            <input class="submitDenuncia" type="submit" value="Denunciar">
+                        </form>
+                    </div>
+        </section>
+
     </main>
 
 </body>

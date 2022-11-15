@@ -121,6 +121,7 @@ function auto_grow(element) {
   element.style.height = element.scrollHeight + "px";
 }
 
+
 function setupTabs() {
   document.querySelectorAll(".userTabOption").forEach((button) => {
     button.addEventListener("click", () => {
@@ -144,6 +145,26 @@ function setupTabs() {
     });
   });
 }
+
+function openTab(evt, tabNumber) {
+  var i, tabcontent, tablinks;
+
+      tabcontent = document.getElementsByClassName("tabs-conteudo");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
+
+      tablinks = document.getElementsByClassName("menu-item");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" ativo", "");
+      }
+
+      document.getElementById(tabNumber).style.display = "flex";
+      evt.currentTarget.className += " ativo";
+      }
+
+      
+
 
 document.addEventListener("DOMContentLoaded", () => {
   setupTabs();

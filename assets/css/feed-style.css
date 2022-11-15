@@ -189,6 +189,7 @@ body.feed {
   display: none;
 
   flex-direction: column;
+  color: var(--color-dark);
 }
 
 .popupOptions .fotoDePerfil {
@@ -235,19 +236,39 @@ body.feed {
 }
 
 .popupOptions .flex-col a {
-  color: #DB310C;
   width: 12rem;
   display: flex;
+  color: var(--color-dark);
 }
+
+.popupOptions .flex-col a:hover{
+  color: #1f1e1e;
+}
+
+
+.popupOptions .opcoesPopUp .botaoLogout{
+  color: #cb2d0a;
+}
+
+.popupOptions .opcoesPopUp .botaoLogout:hover{
+  color: #cb2d0a;
+}
+
+
+.popupOptions .opcoesPopUp a{
+  color: var(--color-dark);
+}
+
+.popupOptions .opcoesPopUp a:hover{
+  color: #1f1e1e;
+}
+
 
 .popupOptions .flex-col .hrefNomePet {
   color: var(--color-dark);
 }
 
 
-.popupOptions .flex-col a:hover {
-  color: #cb2d0a;
-}
 
 .popupOptions .flex-col i {
   font-size: 1.5rem;
@@ -388,7 +409,7 @@ nav .opcoes:hover {
 }
 
 
-nav .opcoes label {
+nav .opcoes #labelAO {
   font-size: 1.7rem;
 }
 
@@ -1664,8 +1685,10 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   position: absolute;
   top: 2.5rem;
   right: 0.9rem;
-  width: 11rem;
+  width: fit-content;
   z-index: 10;
+  display: flex;
+
 }
 
 
@@ -1694,7 +1717,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   color: #DB310C;
   padding: var(--card-padding);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
 }
 
@@ -1702,13 +1725,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   font-size: 1.5rem;
 }
 
-.denunciaPost {
-  padding-left: 0.3em;
-}
 
-.deixSeguir {
-  padding-left: 0.3em;
-}
 
 .excluirPost {
   padding-left: 0.3em;
