@@ -31,11 +31,11 @@
     box-sizing: border-box;
 }
 
-html{
+html {
     font-size: 14px;
 }
 
-body{
+body {
     width: 100vw;
     height: 100vh;
     font-family: 'Raleway', 'sans-serif';
@@ -45,74 +45,75 @@ body{
     background-position: cover;
 }
 
-.container{
+.container {
     display: grid;
     margin: 0 auto;
     gap: 1.8rem;
-    grid-template-columns:  18rem auto 23rem;
+    grid-template-columns: 18rem auto 23rem;
 }
 
-a{
+a {
     color: var(--color-dark);
 }
 
-h1{
+h1 {
     font-weight: 800;
     font-size: 2rem;
 }
 
-h2{
+h2 {
     font-size: 1.9rem;
     font-weight: 700;
 }
 
-h3{
+h3 {
     font-size: 1.4rem;
 }
 
-h4{
+h4 {
     font-size: 1rem;
 }
 
-h5{
+h5 {
     font-size: 0.9rem;
 }
 
-.sucesso{
+.sucesso {
     color: green;
 }
 
-.perigo{
-    color: #d30c1d;;
+.perigo {
+    color: #d30c1d;
+    ;
 }
 
-.foto-perfil{
+.foto-perfil {
     width: 2.8rem;
     height: 2.8rem;
     border-radius: 50%;
     overflow: hidden;
 }
 
-#img-denuncia{
+#img-denuncia {
     width: 100%;
 }
 
 /* SEÇÃO ASIDE-SIDEBAR */
 
 /* ---- aside */
-aside{
+aside {
     height: 100vh;
 }
 
-aside .nuvem{
+aside .nuvem {
     bottom: 10%;
 }
 
-aside .close{
+aside .close {
     display: none;
 }
 
-aside .top{
+aside .top {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -120,20 +121,20 @@ aside .top{
     margin-left: 2rem;
 }
 
-aside .logo{
+aside .logo {
     display: flex;
     gap: 1rem;
     align-items: center;
 }
 
-aside .logo img{
+aside .logo img {
     width: 5rem;
     height: 5rem
 }
 
 /* ---- sidebar */
 
-aside .sidebar{
+aside .sidebar {
     display: flex;
     flex-direction: column;
     height: 86vh;
@@ -142,11 +143,11 @@ aside .sidebar{
     left: 1rem
 }
 
-aside h3{
+aside h3 {
     font-weight: 700;
 }
 
-aside .sidebar .menu-item{
+aside .sidebar .menu-item {
     display: flex;
     margin-left: 2rem;
     gap: 1rem;
@@ -156,25 +157,25 @@ aside .sidebar .menu-item{
     transition: all 300ms ease;
 }
 
-aside .sidebar .menu-item span{
+aside .sidebar .menu-item span {
     font-size: 1.6rem;
-    transition:  all 300ms ease;
+    transition: all 300ms ease;
 }
 
-aside .sidebar .menu-item:last-child{
+aside .sidebar .menu-item:last-child {
     position: absolute;
     bottom: 6rem;
     width: 100%;
 }
 
-aside .sidebar .menu-item.active{
+aside .sidebar .menu-item.active {
     background: var(--color-light);
     color: var(--roxo-secundario);
     margin-left: 0;
     border-radius: 0 20px 20px 0;
 }
 
-aside .sidebar .menu-item.active:before{
+aside .sidebar .menu-item.active:before {
     content: '';
     width: 6px;
     height: 100%;
@@ -182,40 +183,40 @@ aside .sidebar .menu-item.active:before{
     border-radius: 20px;
 }
 
-aside .sidebar .menu-item.active span{
+aside .sidebar .menu-item.active span {
     color: var(--roxo-secundario);
     margin-left: calc(1rem - 3px);
 }
 
-aside .sidebar .menu-item:hover{
+aside .sidebar .menu-item:hover {
     color: var(--roxo-secundario);
 }
 
-#logout:hover{
+#logout:hover {
     color: #d30c1d;
 }
 
-#logout span{
-    transition:  all 100ms ease;
+#logout span {
+    transition: all 100ms ease;
 }
 
-aside .sidebar .menu-item:hover span{
+aside .sidebar .menu-item:hover span {
     margin-left: 1rem;
 }
 
 
 /* SEÇÃO MAIN */
-#cinza{
+#cinza {
     color: gray;
     font-weight: 500;
     margin-top: 1.8rem;
 }
 
-.info{
+.info {
     margin-top: 1rem;
 }
 
-main{
+main {
     background: var(--color-bg);
     padding-top: 1.4rem;
     padding-left: 1.4rem;
@@ -224,15 +225,15 @@ main{
 
 /* ---- informações - perfis (tutores) */
 
-main .info-pets{
+main .info-pets {
     margin-top: 2rem;
 }
 
-main .info-pets h2{
+main .info-pets h2 {
     margin-bottom: 1rem;
 }
 
-main .info-pets .perfis-pets{
+main .info-pets .perfis-pets {
     background: white;
     width: 100%;
     height: 800px;
@@ -242,7 +243,7 @@ main .info-pets .perfis-pets{
     box-shadow: var(--box-shadow);
 }
 
-.search-bar{
+.search-bar {
     width: 100%;
     background: var(--color-bg);
     display: flex;
@@ -251,7 +252,7 @@ main .info-pets .perfis-pets{
     padding: 0 20px;
 }
 
-.search-bar input{
+.search-bar input {
     background: transparent;
     width: 100%;
     border: 0;
@@ -262,11 +263,11 @@ main .info-pets .perfis-pets{
     border-radius: 30px;
 }
 
-::placeholder{
+::placeholder {
     font-weight: 600;
 }
 
-.search-bar button{
+.search-bar button {
     background: #BAD5DB;
     cursor: pointer;
     border-radius: 50%;
@@ -274,7 +275,7 @@ main .info-pets .perfis-pets{
     height: 40px;
 }
 
-.search-bar button #search-img{
+.search-bar button #search-img {
     width: 25px;
 }
 
@@ -283,10 +284,10 @@ main .info-pets .perfis-pets{
     margin-top: 1rem;
     overflow: hidden;
     border-bottom: 1px solid #ccc;
-  }
-  
-  /* Style the buttons that are used to open the tab content */
-  .tab button {
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
     background-color: inherit;
     float: left;
     border: none;
@@ -298,64 +299,64 @@ main .info-pets .perfis-pets{
     color: #677483;
     font-family: 'Raleway';
     font-weight: 700;
-  }
-  
-  /* Change background color of buttons on hover */
-  .tab button:hover {
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: var(--color-bg-dois);
     border: none;
-  }
-  
-  /* Create an active/current tablink class */
-  .tab button.active {
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
     color: #000000;
     background-color: var(--color-bg-dois);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom: 2px solid var(--roxo-secundario);
-  }
-  
-  /* Style the tab content */
-  .tabcontent {
+}
+
+/* Style the tab content */
+.tabcontent {
     display: none;
     padding: 6px 12px;
     border-top: none;
-  }
+}
 
-  #total-qtd{
+#total-qtd {
     margin-top: 1rem;
-  }
+}
 
 
 /* RIGHT SIDE - MENSAGENS */
-.right-side{
+.right-side {
     padding-top: 1.4rem;
     background: var(--color-bg);
     padding-right: 1rem;
 }
 
-.right-side .top-right{
+.right-side .top-right {
     display: flex;
     justify-content: end;
     gap: 2rem;
 }
 
-.right-side .top-right .perfil{
+.right-side .top-right .perfil {
     display: flex;
     text-align: right;
     margin-right: 1rem;
 }
 
 /*---- denuncias recentes */
-#p-small{
+#p-small {
     color: gray;
     font-weight: 500;
     margin-top: 0.4rem;
 }
 
-.right-side .container-denuncias .denuncias #icon-report{
+.right-side .container-denuncias .denuncias #icon-report {
     background: #FFDCE8;
     padding: 0.5rem;
     border-radius: 50%;
@@ -364,15 +365,15 @@ main .info-pets .perfis-pets{
     margin-bottom: 1.5rem;
 }
 
-.right-side .container-denuncias{
+.right-side .container-denuncias {
     margin-top: 1rem;
 }
 
-.right-side .container-denuncias h2{
-    margin-bottom: 0,8rem;
+.right-side .container-denuncias h2 {
+    margin-bottom: 0, 8rem;
 }
 
-.right-side .container-denuncias .denuncias{
+.right-side .container-denuncias .denuncias {
     margin-top: 1rem;
     background: white;
     padding: var(--card-padding);
@@ -381,11 +382,11 @@ main .info-pets .perfis-pets{
     transition: all 300ms ease;
 }
 
-.right-side .container-denuncias .denuncias:hover{
+.right-side .container-denuncias .denuncias:hover {
     box-shadow: none;
 }
 
-.right-side .container-denuncias .denuncias .msg-denuncia{
+.right-side .container-denuncias .denuncias .msg-denuncia {
     display: grid;
     grid-template-columns: 2.6rem auto;
     gap: 1rem;
@@ -393,15 +394,15 @@ main .info-pets .perfis-pets{
 }
 
 /*----categorias em alta*/
-.right-side .categorias-alta{
+.right-side .categorias-alta {
     margin-top: 2rem;
 }
 
-.right-side .categorias-alta h2{
+.right-side .categorias-alta h2 {
     margin-bottom: 0.8rem;
 }
 
-.right-side .categorias-alta .categoria{
+.right-side .categorias-alta .categoria {
     background: white;
     display: flex;
     align-items: center;
@@ -413,11 +414,11 @@ main .info-pets .perfis-pets{
     transition: all 300ms ease;
 }
 
-.right-side .categorias-alta .categoria:hover{
+.right-side .categorias-alta .categoria:hover {
     box-shadow: none;
 }
 
-.right-side .categorias-alta .categoria .right{
+.right-side .categorias-alta .categoria .right {
     display: flex;
     justify-content: space-between;
     align-items: start;
@@ -425,7 +426,7 @@ main .info-pets .perfis-pets{
     width: 100%;
 }
 
-.right-side .categorias-alta .categoria .icon{
+.right-side .categorias-alta .categoria .icon {
     padding: 0.6rem;
     color: black;
     border-radius: 50%;
@@ -433,7 +434,7 @@ main .info-pets .perfis-pets{
     display: flex;
 }
 
-.right-side .contato{
+.right-side .contato {
     background-image: url(/petiti/private-adm/dashboard/images/fundo-btn.svg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -450,9 +451,216 @@ main .info-pets .perfis-pets{
     transition: all 300ms ease;
 }
 
-.right-side .contato div{
+.right-side .contato div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    margin-top: 1rem;
+}
+
+.card {
+    display: flex;
+    width: 400px;
+    flex-direction: column;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #677483;
+    padding: 20px;
+    gap: 25px;
+}
+
+
+.badges {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.badge {
+    border-radius: 20px;
+    padding: 8px;
+}
+
+.tipo {
+    background-color: #3837a1;
+    color: white;
+    font-weight: 900;
+}
+
+.ativo {
+    background-color: #9998d3;
+    color: white;
+    font-weight: 900;
+}
+
+.bloqueado {
+    background-color: #fd9191;
+    color: white;
+    font-weight: 900;
+}
+
+.foto-info {
+    width: 70px;
+}
+
+.botao {
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    border-radius: 15px;
+    color: white;
+    font-weight: bolder;
+}
+
+.analisar {
+    background-color: #d30c1d;
+}
+
+.analisar-agora {
+    background-color: #7380ec;
+}
+
+.infos-card {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.denuncia-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.card-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+}
+
+.toast {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    border-radius: 12px;
+    background: RGB(186, 213, 219);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 35px 20px 25px;
+    border-left: 6px solid RGB(179, 178, 229);
+    overflow: hidden;
+    animation: popUp 0.2s alternate;
+}
+
+.toast.hide {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    border-radius: 12px;
+    background: RGB(186, 213, 219);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 35px 20px 25px;
+    border-left: 6px solid RGB(179, 178, 229);
+    overflow: hidden;
+    animation: popOut 0.4s alternate;
+    transform: translateX(calc(100% + 30px));
+}
+
+.toast.close {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    border-radius: 12px;
+    background: RGB(186, 213, 219);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 35px 20px 25px;
+    border-left: 6px solid RGB(179, 178, 229);
+    overflow: hidden;
+    animation: popOut 0.4s alternate;
+    transform: translateX(calc(100% + 30px));
+}
+
+@keyframes popOut {
+    0% {
+        transform: translateX(calc(-20px));
+    }
+
+    100% {
+        transform: translateX(calc(100% + 30px));
+    }
+}
+
+@keyframes popUp {
+    0% {
+        transform: translateX(calc(100% + 30px));
+    }
+}
+
+.toast .toast-content {
+    display: flex;
+    align-items: center;
+}
+
+.toast-content .message {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}
+
+.message .texto-1 {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.toast #close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.toast #close:hover {
+    opacity: 1;
+}
+
+.toast .progressbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: RGB(179, 178, 229);
+    height: 4px;
+    width: 100%;
+}
+
+.toast .progressbar:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: RGB(186, 213, 219);
+    animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}

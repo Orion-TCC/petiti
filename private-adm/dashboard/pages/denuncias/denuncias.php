@@ -4,9 +4,9 @@
 require_once("../objetos.php");
 $denunciaPublicacao = new DenunciaPublicacao();
 
-$listaDenunciasAtivas = $denunciaPublicacao->buscaDenunciaPubicacaoAtiva();
-$listaDenunciasEmAnalise = $denunciaPublicacao->buscaDenunciaPubicacaoEmAnalise();
-$listaDenunciasResolvidas = $denunciaPublicacao->buscaDenunciaPubicacaoResolvida();
+$listaDenunciasPublicacaoAtivas = $denunciaPublicacao->buscaDenunciaPubicacaoAtiva();
+$listaDenunciasPublicacaoEmAnalise = $denunciaPublicacao->buscaDenunciaPubicacaoEmAnalise();
+$listaDenunciasPublicacaoResolvidas = $denunciaPublicacao->buscaDenunciaPubicacaoResolvida();
 
 require_once("../../../../api/database/conexao.php");
 $con = Conexao::conexao();
@@ -25,6 +25,8 @@ if ($_SESSION['tipo'] != "Adm") {
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/denuncias/denuncias.css" />
@@ -106,22 +108,81 @@ if ($_SESSION['tipo'] != "Adm") {
 
           <!-- Tab content -->
           <div id="nova" class="tabcontent">
-            <?php foreach ($listaDenunciasAtivas as $linha) {
-              $textoDenuncia = $linha['textoDenunciaPublicacao'];
-              $data = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
-              $denunciado = $linha['usuarioDenunciado'];
-              $denunciador = $linha['usuarioDenunciador'];
-            }
-            ?>
-            <h3 id="total-qtd">Total(0)</h3>
-            <!--php aqui puxando os numeros do banco-->
+            <div class="denunciasPublicacao">
+              <h3 id="total-qtd">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoAtiva(); ?>)</h3>
+              <?php foreach ($listaDenunciasPublicacaoAtivas as $linha) {
+                $idDenunciaPublicacao = $linha['idDenunciaPublicacao'];
+                $textoDenuncia = $linha['textoDenunciaPublicacao'];
+                $data = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
+                $denunciado = $linha['usuarioDenunciado'];
+                $denunciador = $linha['usuarioDenunciador'];
+                $foto = $linha['caminhoFotoPublicacao'];
+              ?>
+                <div class="card">
+                  <div class="badges">
+                    <p class="badge ativo">Ativo</p>
+                  </div>
+                  <div class="infos-card">
+                    <img class="foto-info" src="<?php echo $foto ?>">
+                    <div class="denuncia-info">
+                      <p><span style="font-weight: 900;">Perfil denunciador: </span><span style="font-weight: 600;"><a href="/petiti/<?php echo $denunciador ?>">@<?php echo $denunciador ?></a></span></p>
+                      <p><span style="font-weight: 900;">Perfil denunciado: </span><span style="font-weight: 600;"><a href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
+                    </div>
+                  </div>
+                  <div class="card-data">
+                    <span class="material-symbols-outlined">
+                      date_range
+                    </span>
+                    <p> Denuncia feita em: <?php echo $data; ?></p>
+                  </div>
 
+                  <a href="/petiti/api/passar-denuncia-analise/<?php echo $idDenunciaPublicacao; ?>" class="botao analisar">Passar para análise</a>
+                </div>
+
+              <?php
+              }
+              ?>
+            </div>
           </div>
 
           <div id="analise" class="tabcontent">
-            <h3 id="total-qtd">Total(0)</h3>
-            <!--php aqui puxando os numeros do banco-->
-            <p>teste</p>
+            <div class="denunciasPublicacao">
+              <h3 id="total-qtd">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoAtiva(); ?>)</h3>
+              <?php foreach ($listaDenunciasPublicacaoEmAnalise as $linha) {
+                $idDenunciaPublicacao = $linha['idDenunciaPublicacao'];
+                $textoDenuncia = $linha['textoDenunciaPublicacao'];
+                $data = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
+                $denunciado = $linha['usuarioDenunciado'];
+                $denunciador = $linha['usuarioDenunciador'];
+                $foto = $linha['caminhoFotoPublicacao'];
+              ?>
+                <div class="card">
+                  <div class="badges">
+                    <p class="badge ativo">Ativo</p>
+                  </div>
+                  <div class="infos-card">
+                    <img class="foto-info" src="<?php echo $foto ?>">
+                    <div class="denuncia-info">
+                      <p><span style="font-weight: 900;">Perfil denunciador: </span><span style="font-weight: 600;"><a href="/petiti/<?php echo $denunciador ?>">@<?php echo $denunciador ?></a></span></p>
+                      <p><span style="font-weight: 900;">Perfil denunciado: </span><span style="font-weight: 600;"><a href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
+                    </div>
+                  </div>
+                  <div class="card-data">
+                    <span class="material-symbols-outlined">
+                      date_range
+                    </span>
+                    <p> Denuncia feita em: <?php echo $data; ?></p>
+                  </div>
+
+                  <a href="/petiti/api/passar-denuncia-analise/<?php echo $idDenunciaPublicacao; ?>" class="botao analisar-agora">Analisar agora</a>
+                </div>
+
+              <?php
+              }
+              ?>
+            </div>
           </div>
 
           <div id="resolvida" class="tabcontent">
@@ -244,6 +305,12 @@ if ($_SESSION['tipo'] != "Adm") {
     </div>
   </div>
   <!--.container-->
+  <?php
+    if(isset($_COOKIE["denunciaParaAnalise"])){
+      echo($_COOKIE["denunciaParaAnalise"]);
+    }else{
+    }
+  ?>
 
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 </body>
