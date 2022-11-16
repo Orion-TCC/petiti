@@ -118,6 +118,26 @@ class DenunciaPublicacao
         header("Location: /petiti/feed");
     }
 
+    public function updateDecisao($id, $decisao)
+    {
+        $con = Conexao::conexao();
+
+        $stmt = $con->prepare("UPDATE `tbdenunciapublicacao`
+        SET `textoDenunciapublicacao` = '$decisao'
+        WHERE idDenunciapublicacao = $id");
+
+        $stmt->execute();
+    }
+
+    public function delete($delete)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("DELETE FROM tbDenunciaPublicacao WHERE idDenunciaPublicacao = ?");
+        $stmt->bindValue(1, $delete->getIdDenunciaPublicacao());
+
+        $stmt->execute();
+    }
+
     public function buscaDenunciaPubicacaoAtiva()
     {
         $con = Conexao::conexao();
@@ -141,7 +161,7 @@ class DenunciaPublicacao
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
         DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao, pub.textoPublicacao as texto,
-        idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, tbdenunciapublicacao.idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
+        idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, tbdenunciapublicacao.idPublicacao as idPub, innerDenunciado.loginUsuario as usuarioDenunciado,
         innerDenunciador.loginUsuario as usuarioDenunciador
         FROM tbDenunciaPublicacao
         INNER JOIN tbpublicacao pub ON pub.idPublicacao = tbdenunciapublicacao.idPublicacao
@@ -172,7 +192,22 @@ class DenunciaPublicacao
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function buscaDenunciaPublicacaoApagada()
+    {
+        $con = Conexao::conexao();
 
+        $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
+        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano,
+        idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, innerDenunciado.loginUsuario as usuarioDenunciado,
+        innerDenunciador.loginUsuario as usuarioDenunciador
+        FROM tbDenunciaPublicacao
+        INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciado
+        INNER JOIN tbusuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciador
+        WHERE textoDenunciaPublicacao = 'Publicação excluída'";
+
+        $resoltado = $con->query($query);
+        return $resoltado->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function buscaQtdDenunciaPublicacaoAtiva()
     {
@@ -216,7 +251,8 @@ class DenunciaPublicacao
         }
     }
 
-    public function updateStatus($update){
+    public function updateStatus($update)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare("UPDATE tbDenunciaPublicacao SET statusDenunciapublicacao = ? WHERE idDenunciaPublicacao = ?");
         $stmt->bindValue(1, $update->getStatusDenunciaPublicacao());
@@ -224,5 +260,4 @@ class DenunciaPublicacao
 
         $stmt->execute();
     }
-
 }
