@@ -1767,7 +1767,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   text-align: right;
   font-family: "Raleway Medium";
   font-size: 1rem;
-  idth: 2rem;
+  background: none;
 }
 
 .formDenuncia {
