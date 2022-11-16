@@ -268,6 +268,39 @@ $app->get('/ativar-tutor/{id}', function (Request $request, Response $response, 
 
     header('location:/petiti/tutores-dashboard');
 });
+
+$app->get('/bloquear-tutor-denunciado/{idDenunciado}/{idDenPub}', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($args['idDenunciado']);
+    $usuario->setStatusUsuario(0);
+    $usuario->updateStatus($usuario);
+    $denunciaPublicacao = new DenunciaPublicacao();
+    $cookie = new Cookies;
+
+    $cookie->criarCookie(
+        "usuarioBloqueado",
+        "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Usuário bloqueado com sucesso!</span>
+                        <span class='texto-2'>Denúncia resolvida</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+        1
+    );
+
+    $denunciaPublicacao->setIdDenunciaPublicacao($args['idDenPub']);
+    $denunciaPublicacao->setStatusDenunciaPublicacao(2);
+    $denunciaPublicacao->updateStatus($denunciaPublicacao);
+
+    header('location:/petiti/denuncias-dashboard');
+});
+
 $app->get('/bloquear-tutor/{id}', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
     $usuario->setIdUsuario($args['id']);
