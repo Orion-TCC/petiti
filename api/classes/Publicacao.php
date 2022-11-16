@@ -145,7 +145,7 @@ class Publicacao
                 tbfotousuario.idUsuario = tbpublicacao.idUsuario
         )
         GROUP BY tbpublicacao.dataPublicacao
-        ORDER BY RAND ()";
+        ORDER BY dataPublicacao desc";
 
 $resultado = $con->query($query);
 $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -186,7 +186,7 @@ WHERE
         tbfotousuario.idUsuario = tbpublicacao.idUsuario
 ) 
 AND categoria = 'Perdido' OR categoria = 'Animal Perdido' OR categoria = 'Pet Perdido' OR categoria = 'Desaparecido'
-ORDER BY RAND ()";
+ORDER BY dataPublicacao desc";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -226,7 +226,7 @@ WHERE
         tbfotousuario.idUsuario = tbpublicacao.idUsuario
 ) 
 AND categoria = 'Adoção' OR categoria = 'Animal em adoção' OR categoria = 'Adotar' OR categoria = 'Adote um amigo'
-ORDER BY RAND ()";
+ORDER BY dataPublicacao desc";
 
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);

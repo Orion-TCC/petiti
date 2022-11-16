@@ -3,6 +3,8 @@
 require('../../api/classes/curtidaPublicacao.php');
 require('../../api/classes/Usuario.php');
 
+
+
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 
@@ -46,6 +48,9 @@ $query = "SELECT COUNT(idUsuarioSeguidor) as qtdSeguidores FROM tbUsuarioSeguido
 $resultado = $conexao->query($query);
 $lista = $resultado->fetchAll();
 $qtdSeguidores = $lista[0]['qtdSeguidores'];
+
+$usuario = new Usuario();
+$usuario->login($_SESSION['login'], $_SESSION['senha']);
 ?>
 
 
@@ -275,7 +280,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                                                     <input id="flFotoPerfil" type="file" accept=".jpg, .png">
                                                 </label>
 
-                                                <input value="0" id="baseFoto" type="hidden" name="baseFoto">
+                                                <input value="0" class="baseFoto" id="baseFoto" type="hidden" name="baseFoto">
 
                                                 <h2>
                                                     <label class="flFotoPerfil2">
@@ -552,7 +557,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
                                 <input type="hidden" name="categoriasValue" id="categoriasValue" value="">
 
-                                <input type="hidden" name="baseFoto" id="baseFoto">
+                                <input type="hidden" name="baseFoto" class="baseFoto">
 
 
                                 <div class="letraCont">
