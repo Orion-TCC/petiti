@@ -664,3 +664,36 @@ main .info-pets .perfis-pets {
         transform: translateX(0%);
     }
 }
+
+#modal-analisar-denuncia{
+    padding: 0 0 !important;
+  border-radius: 20px !important;
+
+  width: 790px !important;
+  height: 810px;
+
+  max-width: 800px !important;
+  max-height: 840px !important;
+
+  overflow: hidden;
+  box-shadow: 1px 1px 40px 1px black !important;
+}
+
+.titulo-modal-denuncia{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#span-modal-denuncia{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.textoPubDenuncia{
+    margin-top: 15px;
+}
+
+.foto-analise-denuncia{
+    width: 300px;
+}

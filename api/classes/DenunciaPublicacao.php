@@ -122,7 +122,7 @@ class DenunciaPublicacao
     {
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
-        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao,
+        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao, pub.textoPublicacao as texto,
         idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, tbdenunciapublicacao.idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
         innerDenunciador.loginUsuario as usuarioDenunciador
         FROM tbDenunciaPublicacao
@@ -140,7 +140,7 @@ class DenunciaPublicacao
     {
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
-        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao,
+        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao, pub.textoPublicacao as texto,
         idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, tbdenunciapublicacao.idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
         innerDenunciador.loginUsuario as usuarioDenunciador
         FROM tbDenunciaPublicacao
@@ -158,7 +158,7 @@ class DenunciaPublicacao
     {
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
-        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao,
+        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao, pub.textoPublicacao as texto,
         idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, tbdenunciapublicacao.idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
         innerDenunciador.loginUsuario as usuarioDenunciador
         FROM tbDenunciaPublicacao

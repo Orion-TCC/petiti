@@ -29,7 +29,11 @@ if ($_SESSION['tipo'] != "Adm") {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!--style-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/denuncias/denuncias.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 </head>
 
@@ -117,6 +121,7 @@ if ($_SESSION['tipo'] != "Adm") {
                 $denunciado = $linha['usuarioDenunciado'];
                 $denunciador = $linha['usuarioDenunciador'];
                 $foto = $linha['caminhoFotoPublicacao'];
+                $textoPub = $linha['texto'];
               ?>
                 <div class="card">
                   <div class="badges">
@@ -156,10 +161,11 @@ if ($_SESSION['tipo'] != "Adm") {
                 $denunciado = $linha['usuarioDenunciado'];
                 $denunciador = $linha['usuarioDenunciador'];
                 $foto = $linha['caminhoFotoPublicacao'];
+                $textoPub = $linha['texto'];
               ?>
                 <div class="card">
                   <div class="badges">
-                    <p class="badge ativo">Ativo</p>
+                    <p class="badge ativo">Em análise</p>
                   </div>
                   <div class="infos-card">
                     <img class="foto-info" src="<?php echo $foto ?>">
@@ -176,8 +182,22 @@ if ($_SESSION['tipo'] != "Adm") {
                     <p> Denuncia feita em: <?php echo $data; ?></p>
                   </div>
 
-                  <a href="/petiti/api/passar-denuncia-analise/<?php echo $idDenunciaPublicacao; ?>" class="botao analisar-agora">Analisar agora</a>
+                  <a id="<?php echo $idDenunciaPublicacao; ?>" href="#modal-analisar-denuncia" rel="modal:open" class="botao analisar-agora">Analisar agora</a>
                 </div>
+
+                <section>
+                  <div id="modal-analisar-denuncia" class="modal">
+                    <div class="titulo-modal-denuncia">
+                      <span id="span-modal-denuncia">Análise de denúncia</span>
+                    </div>
+                    <div class="textoPubDenuncia">
+                      <span style="font-weight: 600; font-size: 20px;">Legenda da publicação: </span><span id="texto-pub" style="font-size: 20px;"><?php echo $textoPub; ?></span>
+                    </div>
+                    <div class="fotoPub">
+                      <img class="foto-analise-denuncia" src="<?php echo $foto ?>"></a>
+                    </div>
+                  </div>
+                </section>
 
               <?php
               }
@@ -306,11 +326,15 @@ if ($_SESSION['tipo'] != "Adm") {
   </div>
   <!--.container-->
   <?php
-    if(isset($_COOKIE["denunciaParaAnalise"])){
-      echo($_COOKIE["denunciaParaAnalise"]);
-    }else{
-    }
+  if (isset($_COOKIE["denunciaParaAnalise"])) {
+    echo ($_COOKIE["denunciaParaAnalise"]);
+  } else {
+  }
   ?>
+
+
+
+
 
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
 </body>
