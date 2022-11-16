@@ -113,23 +113,12 @@ $contagemPets = count($dadosPets['pets']);
             ?>
 
             <script>
-                window.onload = function() {
-                    var hidediv = document.getElementById('popup');
-
-                    document.onclick = function(div) {
-                        if (div.target.id !== 'popup' && div.target.id !== 'opcoes') {
-                            hidediv.style.display = "none";
-                        }
-                    };
-
-                };
-
-
+                
             </script>
 
-            <div class="opcoes" id="opcoes" onclick="showPopUp()">
+            <div class="opcoes" id="opcoes">
             
-                <div id="labelAO"><i class="uil uil-setting" ></i></div>
+                <div id="labelAO"><i id="settings-icon" class="uil uil-setting"></i></div>
 
                 <div class="fotoDePerfil" id="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
