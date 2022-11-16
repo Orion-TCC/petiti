@@ -120,11 +120,12 @@ $(document).ready(function () {
             url: "/petiti/assets/libs/croppie/envio.php",
             success: function (data) {
               html = img;
-              $("#baseFoto").val(img);
+              $("#baseFoto").val(html);
               $("#preview").attr("src", "");
               $("#preview").attr("src", html);
               $("#modal-recortar-foto").modal("hide");
               $("#modal-editar-perfil").modal("show");
+              $(".baseFoto").val(html);
               console.log(data);
             },
           });

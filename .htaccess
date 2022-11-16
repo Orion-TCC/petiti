@@ -5,7 +5,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^home index.php [NC,L]
 
-RewriteRule ^feed views/feed/novaFeed.php [NC,L]
+RewriteRule ^feed views/feed/feed.php [NC,L]
 RewriteRule ^animaisPerdidos views/feed/animaisPerdidos.php [NC,L]
 RewriteRule ^animaisEmAdocao views/feed/animaisEmAdocao.php [NC,L]
 RewriteRule ^paraVoce views/feed/paraVoce.php [NC,L]
