@@ -1,5 +1,7 @@
 <?php
 require_once('/xampp/htdocs/petiti/api/database/conexao.php');
+require_once('/xampp/htdocs/petiti/api/classes/Notificacao.php');
+
 class UsuarioSeguidor
 {
     private $idUsuarioSeguidor;
@@ -59,6 +61,17 @@ class UsuarioSeguidor
         $stmt->bindValue(1, $usuarioSeguidor->getIdSeguidor());
         $stmt->bindValue(2, $usuarioSeguidor->getIdUsuarioSeguido());
         $stmt->execute();
+
+        $query = "SELECT MAX(idUsuarioSeguidor) FROM tbusuarioseguidor";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll();
+        foreach ($lista as $linha) {
+            $id = $linha[0];
+        }
+        $notificacao = new Notificacao();
+
+        $notificacao->notificarSeguidor($id);
+
     }
 
     public function verificarSeguidor($idUsuario, $idSeguidor){

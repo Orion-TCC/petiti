@@ -37,6 +37,27 @@ $(document).ready(function () {
     });
   });
 
+    $(".seguirNotif").on("click", function () {
+      id = $(this).val();
+      $.ajax({
+        type: "POST",
+        url: "/petiti/api/seguir",
+        data: { id: id },
+        success: function (data) {
+          console.log(data);
+          if (data[2] == false) {
+            $(".botaoUsuario"+id).addClass("btn-primary");
+            $(".botaoUsuario"+id).removeClass("btn-secundary");
+            $(".botaoUsuario"+id).text("Seguir");
+          } else {
+            $(".botaoUsuario"+id).removeClass("btn-primary");
+            $(".botaoUsuario"+id).addClass("btn-secundary");
+            $(".botaoUsuario"+id).text("Seguindo");
+          }
+        },
+      });
+    });
+
   $(".seguirPet").on("click", function () {
     id = $(this).val();
     $.ajax({

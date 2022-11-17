@@ -3,12 +3,15 @@
 require_once('../../api/classes/curtidaPublicacao.php');
 require_once('../../api/classes/FotoUsuario.php');
 require_once('../../api/classes/Notificacao.php');
+require_once('../../api/classes/UsuarioSeguidor.php');
+
 include_once("../../sentinela.php");
 $notificacao = new Notificacao();
 
 $conexao = Conexao::conexao();
 $fotoUsuario = new FotoUsuario();
 $curtidaPub = new curtidaPublicacao();
+$usuarioSeguidor  = new UsuarioSeguidor();
 date_default_timezone_set('America/Sao_Paulo');
 
 $idUsuarioCurtida = $_SESSION['id'];
@@ -256,15 +259,43 @@ $listaNotif = $notificacao->listarNotif($id);
 
 
                         <?php if ($notificacao['tipoNotificacao'] == "Seguir") {
+                            $query = "SELECT loginUsuario, tbusuario.idUsuario FROM tbusuario INNER JOIN 
+                            tbusuarioseguidor ON tbusuarioseguidor.idSeguidor = tbusuario.idusuario WHERE tbusuarioseguidor.idUsuarioSeguidor = " . $notificacao['idUsuarioSeguidor'];
+                            $consulta = $conexao->query($query);
+                            $listaUsuarioNotif = $consulta->fetchAll();
+
+                            foreach ($listaUsuarioNotif as $linhaUsuarioNotif) {
+                                $loginUsuarioNotif = $linhaUsuarioNotif['loginUsuario'];
+                                $idUsuarioNotif = $linhaUsuarioNotif['idUsuario'];
+                            }
+                            $fotoUsuarioNotif = $fotoUsuario->exibirFotoUsuario($idUsuarioNotif);
                         ?>
                             <div class="notificacao">
                                 <div style="display: flex; gap: 1rem; align-items: center;">
-                                    <img src="" alt="" class="fotoDePerfil">
-                                    <h4>@username</h4>
+                                    <img src="<?php echo $fotoUsuarioNotif ?>" class="fotoDePerfil">
+                                    <a href="/petiti/<?php echo $loginUsuarioNotif ?>">
+                                        <h4>@<?php echo $loginUsuarioNotif ?></h4>
+                                    </a>
                                     <h4 class="text-muted">começou a seguir você</h4>
-                                    <h5 class="text-muted"><?php echo $diferencaFinal?> </h5>
+                                    <h5 class="text-muted"><?php echo $diferencaFinal ?> </h5>
                                 </div>
-                                <button class="btn btn-primary">Seguir</button>
+
+                                <?php
+
+                                $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioNotif, $id);
+                                if ($verificarSeguidor['boolean'] == true) {
+                                    $jsSeguidor = "true";
+                                } else {
+                                    $jsSeguidor = "false";
+                                } ?>
+
+                                <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+
+                                    <button value="<?php echo $idUsuarioNotif ?>" class="seguirNotif botaoUsuario<?php echo $idUsuarioNotif?> btn btn-primary">Seguir</button>
+                                <?php } else { ?>
+                                    <button value="<?php echo $idUsuarioNotif ?>" class="seguirNotif botaoUsuario<?php echo $idUsuarioNotif?> btn btn-secundary">Seguindo</button>
+                                <?php } ?>
                             </div>
                         <?php } ?>
 
@@ -272,33 +303,34 @@ $listaNotif = $notificacao->listarNotif($id);
                         <?php if ($notificacao['tipoNotificacao'] == "Curtida") {
                             $idPubResultado = $curtidaPub->procurarPub($notificacao['idCurtidaPublicacao']);
                             $query = "SELECT loginUsuario, idUsuario FROM tbusuario INNER JOIN 
-                            tbcurtidapublicacao ON tbcurtidapublicacao.idusuariocurtida = tbusuario.idusuario WHERE tbcurtidapublicacao.idcurtidapublicacao = ". $notificacao['idCurtidaPublicacao'];
+                            tbcurtidapublicacao ON tbcurtidapublicacao.idusuariocurtida = tbusuario.idusuario WHERE tbcurtidapublicacao.idcurtidapublicacao = " . $notificacao['idCurtidaPublicacao'];
                             $consulta = $conexao->query($query);
                             $listaUsuarioNotif = $consulta->fetchAll();
-                            
-                            foreach($listaUsuarioNotif as $linhaUsuarioNotif){
-                               $idUsuarioNotif = $linhaUsuarioNotif['idUsuario'];
+
+                            foreach ($listaUsuarioNotif as $linhaUsuarioNotif) {
                                 $loginUsuarioNotif = $linhaUsuarioNotif['loginUsuario'];
-                                
                             }
-                            $fotoUsuarioNotif = $fotoUsuario->exibirFotoUsuario($idUsuarioNotif);
-                           
+                            $fotoUsuarioNotif = $fotoUsuario->exibirFotoUsuario($notificacao['idUsuarioCurtida']);
+
                             //
 
-                            $urlNotif = "http://localhost/petiti/api/publicacao/".$idPubResultado;
+                            $urlNotif = "http://localhost/petiti/api/publicacao/" . $idPubResultado;
                             $jsonPubNotif = file_get_contents($urlNotif);
                             $dadosPubNotif = (array)json_decode($jsonPubNotif, true);
                             $foto = $dadosPubNotif[0]['caminhoFoto'];
-                        ?>  
+                        ?>
                             <div class="notificacao">
                                 <div style="display: flex; gap: 1rem; align-items: center;">
                                     <img src="<?php echo $fotoUsuarioNotif ?>" alt="" class="fotoDePerfil">
-                                    <h4>@<?php echo $loginUsuarioNotif ?></h4>
+                                    <a href="/petiti/<?php echo $loginUsuarioNotif ?>">
+                                        <h4>@<?php echo $loginUsuarioNotif ?></h4>
+                                    </a>
+
                                     <h4 class="text-muted">Curtiu sua postagem</h4>
-                                    <h5 class="text-muted"><?php echo $diferencaFinal?></h5>
+                                    <h5 class="text-muted"><?php echo $diferencaFinal ?></h5>
                                 </div>
 
-                                <img src="<?php echo $foto?>" alt="" class="previewPostImage">
+                                <img src="<?php echo $foto ?>" alt="" class="previewPostImage">
                             </div>
                         <?php } ?>
 
