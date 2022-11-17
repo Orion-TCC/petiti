@@ -165,12 +165,15 @@ $contagemPets = count($dadosPets['pets']);
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais em doação</h3>
+                        <h3>Animais para adoção</h3>
                     </a>
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span><i class="uil uil-bell"></i> </span>
+                        <span style="position: relative;">
+                            <i class="uil uil-bell notificacao"></i> 
+                            <div class="notificacaoContador"><span>1</span></div>
+                        </span>
                         <h3>Notificações</h3>
                     </a>
 
@@ -334,7 +337,7 @@ $contagemPets = count($dadosPets['pets']);
                                     </div>
                                     <div class="info">
                                         <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $nome ?></a></h3>
-                                        <small><?php echo $local ?>  há <?php echo $diferencaFinal ?></small>
+                                        <small><?php echo $local?> há <?php echo $diferencaFinal ?></small>
                                     </div>
                                 </div>
 
@@ -746,7 +749,7 @@ $contagemPets = count($dadosPets['pets']);
                         </div>
                     </div>
 
-                    <div style="display: flex; flex-direction: row;">
+                    <div style="display: flex; flex-direction: row; justify-content: end;">
                         <div>
                             <div id="preview-crop-image"></div>
                         </div>

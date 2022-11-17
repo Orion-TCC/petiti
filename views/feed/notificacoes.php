@@ -177,7 +177,7 @@ $contagemPets = count($dadosPets['pets']);
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais em doação</h3>
+                        <h3>Animais para adoção</h3>
                     </a>
 
 

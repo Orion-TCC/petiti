@@ -466,8 +466,10 @@ a {
   
   .iconeFuncionalidade {
     padding-left: 50px;
-    width: 4vw;
+    width: 7rem;
   }
+
+  /* chupa minha piroca salve deus me livre */
   
   .textoFuncionalidade {
     color: #202225;
@@ -504,6 +506,10 @@ a {
     font-size: 1.2vw;
     display: inline-block;
     padding-top: 10px;
+  }
+
+  .funcionalidadesTextos enfase {
+    color: #5452a0;
   }
   
   .faixaTextoHolder {

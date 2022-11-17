@@ -200,15 +200,18 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais em doação</h3>
+                        <h3>Animais para adoção</h3>
                     </a>
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span><i class="uil uil-bell"></i> </span>
+                        <span style="position: relative;">
+                            <i class="uil uil-bell notificacao"></i> 
+                            <div class="notificacaoContador"><span>1</span></div>
+                        </span>
                         <h3>Notificações</h3>
                     </a>
-
+                    
                     <a href="#" class="menu-item">
                         <span><i class="uil uil-envelope"></i> </span>
                         <h3>Mensagens</h3>
