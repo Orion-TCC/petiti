@@ -655,6 +655,11 @@ main .info-pets .perfis-pets {
     animation: progress 5s linear forwards;
 }
 
+.texto-2{
+    font-size: 12px;
+    font-weight: 400;
+}
+
 @keyframes progress {
     0% {
         transform: translateX(100%);
@@ -663,4 +668,67 @@ main .info-pets .perfis-pets {
     100% {
         transform: translateX(0%);
     }
+}
+
+#modal-analisar-denuncia{
+    padding: 0 0 !important;
+  border-radius: 20px !important;
+
+  width: 790px !important;
+  height: 810px;
+
+  max-width: 800px !important;
+  max-height: 840px !important;
+
+  overflow: hidden;
+  box-shadow: 1px 1px 40px 1px black !important;
+}
+
+.titulo-modal-denuncia{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#span-modal-denuncia{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.modalAnalise{
+    display: flex;
+    flex-direction: column;
+}
+
+.textoPubDenuncia{
+    margin-top: 15px;
+}
+
+.foto-analise-denuncia{
+    width: 300px;
+}
+
+.botoesDecisaoDenuncia{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.linhaBotoesDenuncia{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+.decisao-conta{
+    border: 1px solid black;
+}
+
+#span-decisao-conta{
+    color: #d30c1d;
+}
+
+#span-bloquear-conta{
+    color: black;
 }

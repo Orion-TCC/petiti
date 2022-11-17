@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php
-
+require_once("../objetos.php");
 require_once("../../../../api/database/conexao.php");
 @session_start();
 if ($_SESSION['tipo'] != "Adm") {
@@ -39,6 +39,11 @@ $query = "SELECT COUNT(idPublicacao) as qtd, MONTHNAME(dataPublicacao) as mes FR
 $resultado = $con->query($query);
 $listaPostsMes = $resultado->fetchAll();
 
+$denunciaPublicacao = new DenunciaPublicacao();
+
+$listaDenunciasPublicacaoAtivas = $denunciaPublicacao->buscaDenunciaPubicacaoAtiva();
+$qtdDenunciasPublicacaoesAtivas = $denunciaPublicacao->buscaQtdDenunciaPublicacaoAtiva();
+
 ?>
 
 <head>
@@ -55,27 +60,27 @@ $listaPostsMes = $resultado->fetchAll();
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/dashboard/dashboard.css" />
   <script>
     const labels = [
-    '<?php foreach ($listaPostsMes as $linha) {
-      echo $linha['mes'];
-    }?>',
-  ];
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'Qtd. de publicações ao mês',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: [<?php foreach ($listaPostsMes as $linha) {
-      echo $linha['qtd'];
-      }?>,],
-    }]
-  };
+      '<?php foreach ($listaPostsMes as $linha) {
+          echo $linha['mes'];
+        } ?>',
+    ];
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'Qtd. de publicações ao mês',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [<?php foreach ($listaPostsMes as $linha) {
+                  echo $linha['qtd'];
+                } ?>, ],
+      }]
+    };
 
-  const config = {
-    type: 'bar',
-    data: data,
-    options: {}
-  };
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {}
+    };
   </script>
 </head>
 
@@ -130,6 +135,7 @@ $listaPostsMes = $resultado->fetchAll();
     <main>
       <h1>Dashboard</h1>
 
+
       <div class="info-conteudo">
         <div class="tutores">
           <span class="material-icons-round">person_outline</span>
@@ -175,11 +181,11 @@ $listaPostsMes = $resultado->fetchAll();
       <div class="informacoes">
         <h2>Informações da Pet Iti</h2>
         <div class="graficos">
-        <canvas id="myChart" width="700" height="300"></canvas>
+          <canvas id="myChart" width="700" height="300"></canvas>
 
-        <div>
-      </div>
-      
+          <div>
+          </div>
+
         </div>
       </div>
     </main>
@@ -201,43 +207,30 @@ $listaPostsMes = $resultado->fetchAll();
           <div class="icon-denuncia">
             <span id="icon-report" class="material-icons-outlined">report</span>
           </div>
+          <p>
+            <?php
+            $resultadoUltimaDenuncia = $denunciaPublicacao->ultimaDenuncia();
+            $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
+            for ($p = 1; $p <= 3; $p++) {
+              $qtdDenunciasPublicacaoesAtivas = $denunciaPublicacao->buscaQtdDenunciaPublicacaoAtiva();
+              $arrayDenunciaPublicacao1 = $denunciaPublicacao->buscaDenunciaPublicacao($ultimaDenuncia);
+              $denunciador = $arrayDenunciaPublicacao1['usuarioDenunciador'];
+              $denunciado = $arrayDenunciaPublicacao1['usuarioDenunciado'];
+            ?>
           <div class="msg-denuncia">
             <div class="foto-perfil">
               <img src="/petiti/private-adm/dashboard/images/le.jpg" />
               <!--puxar do banco (pessoa que fez a denuncia)-->
             </div>
             <div class="mensagem">
-              <p>
-                <span style="font-weight: 800">@leandrocoelho</span> denúnciou
-                o post de @kauanmatheus. A causa foi "É spam".
+              <span style="font-weight: 800">@<?php echo $denunciador; ?><?php  ?></span> denúnciou
+              o post de @<?php echo $denunciado; ?>.
               </p>
               <p id="p-small">10 minutos atrás</p>
             </div>
           </div>
-          <div class="msg-denuncia">
-            <div class="foto-perfil">
-              <img src="/petiti/private-adm/dashboard/images/le.jpg" />
-            </div>
-            <div class="mensagem">
-              <p>
-                <span style="font-weight: 800">@cauagustavo</span> denúnciou o
-                post de @camilamartins. A causa foi "Simplesmente não gostei"
-              </p>
-              <p id="p-small">10 minutos atrás</p>
-            </div>
-          </div>
-          <div class="msg-denuncia">
-            <div class="foto-perfil">
-              <img src="/petiti/private-adm/dashboard/images/le.jpg" />
-            </div>
-            <div class="mensagem">
-              <p>
-                <span style="font-weight: 800">@marinaliz</span> denúnciou o
-                post de @kauanmatheus. A causa foi "Bullying ou assédio".
-              </p>
-              <p id="p-small">10 minutos atrás</p>
-            </div>
-          </div>
+        <?php  }
+        ?>
         </div>
       </div>
       <!------------------- final - denuncias recentes ------------------->
@@ -298,10 +291,10 @@ $listaPostsMes = $resultado->fetchAll();
 
   <script src="/petiti/private-adm/dashboard/js/script.js"></script>
   <script>
-      const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
   </script>
 </body>
 
