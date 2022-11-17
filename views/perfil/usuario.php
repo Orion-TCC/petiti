@@ -265,7 +265,6 @@ if ($verificarSeguidor['boolean']==true) {
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">
                     <p>
-                        <?php echo $verificarSeguidor['boolean'] ?>
                         <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
                     </p>
                 </button>
