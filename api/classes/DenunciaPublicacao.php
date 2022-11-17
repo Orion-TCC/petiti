@@ -251,6 +251,33 @@ class DenunciaPublicacao
         }
     }
 
+    public function buscaDenunciaPublicacao($idDenunciaPublicacao){
+        $con = Conexao::conexao();
+
+        $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
+        DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao, pub.textoPublicacao as texto,
+        idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, tbdenunciapublicacao.idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
+        innerDenunciador.loginUsuario as usuarioDenunciador
+        FROM tbDenunciaPublicacao
+        INNER JOIN tbpublicacao pub ON pub.idPublicacao = tbdenunciapublicacao.idPublicacao
+        INNER JOIN tbfotopublicacao fotopub ON fotopub.idpublicacao = tbdenunciapublicacao.idpublicacao
+        INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciado
+        INNER JOIN tbusuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciador
+        WHERE idDenunciaPublicacao = $idDenunciaPublicacao";
+
+        $resoltado = $con->query($query);
+        return $resoltado->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function ultimaDenuncia(){
+        $con = Conexao::conexao();
+
+        $query = "SELECT MAX(idDenunciaPublicacao) as ultimaDenuncia FROM tbDenunciaPublicacao";
+
+        $resultado = $con->query($query);
+        return $resultado->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function updateStatus($update)
     {
         $con = Conexao::conexao();
