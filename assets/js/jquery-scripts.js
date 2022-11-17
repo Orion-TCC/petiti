@@ -113,7 +113,7 @@ $(document).ready(function () {
   $("#form-aid #txtCategoria").keypress(function (event) {
     var keycode = event.keyCode ? event.keyCode : event.which;
     if (keycode == "13") {
-      if (input.value =="") {
+      if (input.value == "") {
       }
       else {
         if (document.getElementById(input.value) != null) {
@@ -159,28 +159,25 @@ $(document).ready(function () {
     }
   });
 
-  $("#txtLegendaPub").keyup(function(){
+  $("#txtLegendaPub").keyup(function () {
     $(".spanContagem").remove();
     console.log($("#txtLegendaPub").val().length);
     $("#contagemCharInput").val($("#txtLegendaPub").val().length);
   });
 
-  $(".excluirPost").click(function(){
-    var idPub = $(this).attr('id');
-    $.ajax({
-      type: "post",
-      url: "/petiti/api/publicacao/delete/"+idPub,
-      success: function(data){
-        console.log("sim");
-      }
-    });
-  })
+  $(".li-ExcluirPost").click(function () {
+    $("#modal-exclui-post").modal('show');
+  });
 
-  $("#opcoes").click(function(){
-    if($(".popupOptions").css("display") == "none"){
+  $(".cancelar-excluir-post").click(function () {
+    $("#modal-exclui-post").modal('hide');
+  });
+
+  $("#opcoes").click(function () {
+    if ($(".popupOptions").css("display") == "none") {
       console.log("sim");
       $(".popupOptions").css("display", "flex");
-    }else{
+    } else {
       $(".popupOptions").css("display", "none");
     }
   });

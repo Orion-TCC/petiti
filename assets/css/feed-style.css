@@ -1917,3 +1917,18 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
     transform: translateX(0%);
   }
 }
+
+.opcoes-certeza-excluir{
+  display: flex;
+  flex-direction: column;
+}
+
+.certeza-excluir-post{
+  color: red;
+  cursor: pointer;
+}
+
+.cancelar-excluir-post{
+  color: black;
+  cursor: pointer;
+}
