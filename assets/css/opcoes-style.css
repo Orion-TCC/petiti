@@ -24,6 +24,60 @@
   }
 
 
+  /* Buzz hover*/
+@-webkit-keyframes hvr-buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+@keyframes hvr-buzz {
+  50% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  100% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+}
+.hvr-buzz {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+.hvr-buzz:hover, .hvr-buzz:focus, .hvr-buzz:active {
+  -webkit-animation-name: hvr-buzz;
+  animation-name: hvr-buzz;
+  -webkit-animation-duration: 0.15s;
+  animation-duration: 0.15s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+/* Shadow */
+.hvr-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow;
+  transition-property: box-shadow;
+}
+.hvr-shadow:hover, .hvr-shadow:focus, .hvr-shadow:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+}
 
   /* PARTE DAS OPCOES */
 
@@ -89,7 +143,7 @@
     border-top-right-radius: 1rem;
   }
 
-  .meio .opcoesHolder .editarPerfil{
+  .meio .opcoesHolder .tabholder{ 
     width: 100%;
     height: 100%;
     flex-direction: column;
@@ -98,32 +152,40 @@
   }
 
 
-  .meio .opcoesHolder .editarPerfil .imageHandler{
+  .meio .opcoesHolder .tabHolder .imageHandler{
     align-items: center;
     gap: 1.5rem;
     display: flex;
     flex: row;
   }
 
-  .meio .opcoesHolder .editarPerfil .imageHandler .fotoDePerfil{
+  .meio .opcoesHolder .tabHolder .imageHandler .fotoDePerfil{
     width: 5rem
   }
 
-  .meio .opcoesHolder .editarPerfil .imageHandler .flex-col{
+  .meio .opcoesHolder .tabholder .imageHandler .flex-col{
     gap: 0.5rem;
   }
 
-.meio .opcoesHolder .editarPerfil .imageHandler input[type="file"] {
+.meio .opcoesHolder .tabholder .imageHandler input[type="file"] {
     display: none;
 }
 
-.meio .opcoesHolder .editarPerfil .imageHandler .flex-col .flFotoPerfil{
+.meio .opcoesHolder .tabholder .imageHandler .flex-col .flFotoPerfil{
   cursor: pointer;
   font-size: 1rem;
 }
   
+.meio .opcoesHolder .adicionarpet .imageHandler .flex-col h3{
+  font-size: 1.4rem;
+} 
 
-.meio .opcoesHolder .editarPerfil .imageHandler .flex-row label.flFotoPerfil{
+.meio .opcoesHolder .adicionarpet .imageHandler .flex-col h5{
+  font-size: 0.9rem;
+} 
+
+
+.meio .opcoesHolder .tabholder .imageHandler .flex-row label.flFotoPerfil{
 position: absolute;
 width: 5rem;
 aspect-ratio: 1/1;
@@ -132,16 +194,16 @@ border-radius: 50%;
 transition: all 300ms ease;
 }
 
-.meio .opcoesHolder .editarPerfil .imageHandler .flex-row label.flFotoPerfil:hover{
+.meio .opcoesHolder .tabholder .imageHandler .flex-row label.flFotoPerfil:hover{
   background: rgb(0 0 0 / 25%);
 }
 
-.meio .opcoesHolder .editarPerfil .imageHandler{
+.meio .opcoesHolder .tabholder .imageHandler{
   position: relative;
 }
 
 
-.meio .opcoesHolder .editarPerfil .informacoes{
+.meio .opcoesHolder .tabholder .informacoes{
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -149,17 +211,17 @@ transition: all 300ms ease;
   width: 28rem;
 }
 
-.meio .opcoesHolder .editarPerfil .informacoes .infoPessoal{
+.meio .opcoesHolder .tabholder .informacoes .infoPessoal{
   margin-block: 1rem;
 }
 
-.meio .opcoesHolder .editarPerfil .informacoes .infoArea{
+.meio .opcoesHolder .tabholder .informacoes .infoArea{
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.meio .opcoesHolder .editarPerfil .informacoes .infoArea input[type="text"]{
+.meio .opcoesHolder .tabholder .informacoes .infoArea input[type="text"]{
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
   font-size: 1rem;
@@ -169,15 +231,36 @@ transition: all 300ms ease;
   padding-inline: 1rem;
 }
 
-.meio .opcoesHolder .editarPerfil .informacoes .infoArea input[type="text"]:focus{
+
+.meio .opcoesHolder .tabholder .informacoes .inputTextIdade input[type="text"]{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  height: 3rem;
+  width: 50%;
+  border-radius: 20px;
+  border: 1px solid gray;
+  padding-inline: 1rem;
+}
+
+.meio .opcoesHolder .tabholder .informacoes .infoArea .inputTextIdade{
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+
+
+
+.meio .opcoesHolder .tabholder .informacoes .infoArea input[type="text"]:focus{
 outline: 1px solid gray;
 }
 
-.meio .opcoesHolder .editarPerfil .informacoes .infoArea input[type="text"]::placeholder{
+.meio .opcoesHolder .tabholder .informacoes .infoArea input[type="text"]::placeholder{
   font-size: 1rem;
 }
 
-.meio .opcoesHolder .editarPerfil .informacoes .botoesInfoArea{
+.meio .opcoesHolder .tabholder .informacoes .botoesInfoArea{
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -206,7 +289,24 @@ outline: 1px solid gray;
 
 }
 
-.meio .opcoesHolder .editarPerfil .informacoes .botoesInfoArea .btn{
+
+.meio .opcoesHolder .alterarSenha .informacoes .botoesInfoArea label{
+  width: 11rem;
+  cursor: pointer;
+
+
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 300ms ease;
+  color: #3837A1;
+}
+
+
+
+
+.meio .opcoesHolder .tabholder .informacoes .botoesInfoArea .btn{
   font-size: 1.1rem;
   width: 10rem;
   font-family: 'Raleway Bold', sans-serif;
@@ -214,32 +314,4 @@ outline: 1px solid gray;
 }
 
 
-  .meio .opcoesHolder .alterarSenha{
-    position: relative;
-    padding: 2rem 0;
-    margin-left: 1.4rem;
-  
-    row-gap: 2rem;
-    height: fit-content;
-    min-height: 27.9rem;
-  }
 
-  .meio .opcoesHolder .adicionarPet{
-    position: relative;
-    padding: 2rem 0;
-    margin-left: 1.4rem;
-    
-    row-gap: 2rem;
-    height: fit-content;
-    min-height: 27.9rem;
-  }
-
-  .meio .opcoesHolder .privSeg{
-    position: relative;
-    padding: 2rem 0;
-    margin-left: 1.4rem;
-
-    row-gap: 2rem;
-    height: fit-content;
-    min-height: 27.9rem;
-  }

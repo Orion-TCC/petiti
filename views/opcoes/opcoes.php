@@ -230,7 +230,9 @@ $contagemPets = count($dadosPets['pets']);
                         <button class="menu-item" onclick="openTab(event, '4')">Privacidade e segurança</button>
                     </div>
 
-                 <div class="tabs-conteudo editarPerfil" id="1">
+
+
+                 <div class="tabs-conteudo tabHolder editarPerfil" id="1">
                     <form action="">
 
                         <div class="imageHandler">
@@ -283,7 +285,7 @@ $contagemPets = count($dadosPets['pets']);
 
                             <div class="botoesInfoArea">
                                 <button class="btn btn-primary">Salvar</button>
-                                <label class="hover-2">Desativar conta</label>
+                                <label class="hover-2 hvr-buzz">Desativar conta</label>
                             </div>
 
                         </div>
@@ -295,19 +297,113 @@ $contagemPets = count($dadosPets['pets']);
 
 
 
+                    <div class="tabs-conteudo tabHolder alterarSenha" id="2">
+                        <form action="">
+                                <div class="imageHandler">
 
+                                    <div class="flex-row">
+                                        <div class="fotoDePerfil">
+                                            <img src="#" alt="">
+                                        </div>
+                                    </div>
+                                        <h2>@username</h2>
+                                    </div>
 
+                                    <div class="informacoes">
 
+                                    <div class="infoArea">
+                                        <h3>Senha antiga</h3>
+                                        <input type="text" placeholder="Senha antiga">
+                                    </div>
 
+                                    <div class="infoArea">
+                                        <h3>Senha nova</h3>
+                                        <input type="text" placeholder="senha nova">
+                                    </div>
 
+                                    <div class="infoArea">
+                                        <h3>Confirmar senha nova</h3>
+                                        <input type="text" placeholder="Confirmar senha nova">
+                                    </div>
 
+                                    <div class="botoesInfoArea">
+                                        <button class="btn btn-primary">Alterar senha</button>
+                                        <label class="hover-2 ">Esqueceu a senha?</label>
+                                   </div>
 
+                                    </div>
 
-                    <div class="tabs-conteudo" id="2">sexo2</div>
+                            </div>
+                        </form>
                     
-                    <div class="tabs-conteudo" id="3">sexo3</div>
                     
-                    <div class="tabs-conteudo" id="4">sexo4</div>
+                    <div class="tabs-conteudo tabHolder adicionarPet" id="3">
+                        <form action="">
+
+                            <div class="imageHandler">
+
+                                <div class="flex-row">
+                                    <div class="fotoDePerfil">
+                                        <img src="#" alt="">
+                                    </div>
+
+
+                                    <label class="flFotoPerfil">
+                                    <input id="flFotoPerfil" type="file" accept=".jpg, .png">
+                                    </label>
+                                </div>
+
+
+                                    <div class="flex-col">
+                                        <h3>Escolha a melhor foto do seu pet</h3>
+                                        <h5 class="text-muted">*Caso não tenha escolhido uma foto, você poderá fazer isso depois</h5>
+                                    </div>
+
+                            </div>
+
+                            <div class="informacoes">
+                                
+                                <div class="infoArea">
+                                    <h3>Nome</h3>
+                                    <input type="text" placeholder="Nome">
+                                </div>
+
+                                <div class="infoArea">
+                                    <h3>Nome de Usuario</h3>
+                                    <input type="text" placeholder="Nome de usuario">
+                                </div>
+
+                                <div class="infoArea">
+                                    <h3>Espécie</h3>
+                                    <input type="text" placeholder="Insira a especie">
+                                </div>
+
+                                <div class="infoArea">
+                                    <h3>Raça</h3>
+                                    <input type="text" placeholder="Insira a raça">
+                                </div>
+
+                                <div class="infoArea idadePet">
+                                    <h3>Idade</h3>
+                                        <div class="inputTextIdade">
+                                            <input type="text" placeholder="Insira a idade">
+                                            <input type="text" placeholder="Ano(s)">
+                                        </div>
+                                </div>
+
+                                <div class="botoesInfoArea">
+                                    <button class="btn btn-primary">Salvar</button>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                    
+                    <div class="tabs-conteudo tabHolder" id="4">
+
+                    </div>
 
                 </div>
 
