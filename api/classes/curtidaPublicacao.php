@@ -1,5 +1,6 @@
 <?php
 require_once('/xampp/htdocs/petiti/api/database/conexao.php');
+require_once('/xampp/htdocs/petiti/api/classes/Notificacao.php');
 class curtidaPublicacao
 {
     private $idCurtidaPublicacao;
@@ -50,6 +51,15 @@ class curtidaPublicacao
         $stmt->bindValue(1, $curtidaPublicacao->getUsuarioCurtida()->getIdUsuario());
         $stmt->bindValue(2, $curtidaPublicacao->getPublicacaoCurtida()->getIdPublicacao());
         $stmt->execute();
+        $query = "SELECT MAX(tbcurtidapublicacao.idcurtidapublicacao) as id FROM tbcurtidapublicacao";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll();
+        foreach ($lista as $linha) {
+            $id = $linha['id'];
+        }
+        $notificacao = new Notificacao();
+
+        $notificacao->notificarCurtida($id);
     }
     public function delete($delete)
     {
@@ -81,6 +91,17 @@ class curtidaPublicacao
 
         }
         
+    }
+    public function procurarPub($idCurtidaPub){
+        $con = Conexao::conexao();
+        $query = "SELECT idPublicacaoCurtida as id
+        FROM tbcurtidapublicacao
+        WHERE idCurtidaPublicacao = $idCurtidaPub";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll();
+        foreach ($lista as $linha) {
+           return $linha['id'];
+        }
     }
 
 }

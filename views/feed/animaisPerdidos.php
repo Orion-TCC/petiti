@@ -1,6 +1,8 @@
 <?php
 @session_start();
 require_once('../../api/classes/curtidaPublicacao.php');
+require_once('../../api/classes/FotoUsuario.php');
+$fotousuario = new FotoUsuario();
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 include_once("../../sentinela.php");
@@ -290,7 +292,7 @@ $contagemPets = count($dadosPets['pets']);
                         $data = $dados['publicacoes'][$i]['data'];
                         $texto = $dados['publicacoes'][$i]['texto'];
                         $itimalias = $dados['publicacoes'][$i]['itimalias'];
-                        $fotoUsuario = $dados['publicacoes'][$i]['fotoUsuario'];
+                        $fotoUsuario = $fotousuario->exibirFotoUsuario($idUsuario);
                         $local =  $dados['publicacoes'][$i]['local'];
                         $hoje = new DateTime();
                         $dataPost = new DateTime($data);
