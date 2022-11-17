@@ -297,6 +297,8 @@ $app->get('/bloquear-tutor-denunciado/{idDenunciado}/{idDenPub}', function (Requ
     $denunciaPublicacao->setIdDenunciaPublicacao($args['idDenPub']);
     $denunciaPublicacao->setStatusDenunciaPublicacao(2);
     $denunciaPublicacao->updateStatus($denunciaPublicacao);
+    $decisao = "Usuario bloqueado";
+    $denunciaPublicacao->updateDecisao($args['idDenPub'], $decisao);
 
     header('location:/petiti/denuncias-dashboard');
 });
@@ -955,6 +957,25 @@ $app->get('/publicacao/delete/{id}', function (Request $request, Response $respo
     header("Location: /petiti/feed");
 });
 
+$app->get('/publicacao-denunciada/delete/{id}/{idDenuncia}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $publicacao =  new Publicacao();
+    $publicacao->setIdPublicacao($id);
+    $publicacao->delete($publicacao);
+
+    $denunciaPublicacao = new DenunciaPublicacao();
+
+    $decisao = "Publicação excluída";
+
+    $denunciaPublicacao->setIdDenunciaPublicacao($args['idDenPub']);
+    $denunciaPublicacao->setStatusDenunciaPublicacao(2);
+    $denunciaPublicacao->updateStatus($denunciaPublicacao);
+    
+    $denunciaPublicacao->updateDecisao($args['idDenuncia'], $decisao);
+
+    header("Location: /petiti/denuncias-dashboard");
+});
+
 $app->post(
     '/curtir',
     function (Request $request, Response $response, array $args) {
@@ -1142,7 +1163,15 @@ $app->get('/escolher-pet/{id}', function (Request $request, Response $response, 
     header('location: /petiti/pet-perfil');
 });
 
+$app->get('/excluir-denuncia/{id}', function (Request $request, Response $response, array $args){
+    $denunciaPublicacao = new DenunciaPublicacao();
 
+    $decisao = "Denúncia Excluída";
+
+    $denunciaPublicacao->updateDecisao($args['id'], $decisao);
+
+    header("location: /petiti/api/denuncias-dashboard");
+});
 
 try {
     $app->run();

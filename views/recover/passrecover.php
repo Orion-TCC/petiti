@@ -30,9 +30,9 @@
         <form class="formRecover" method="post" action="/petiti/api/usuario/update/senha/recuperacao">
             <p class="tituloFormRecover" for="">Crie uma nova senha</p>
             <label class="formTextLogin" for="novaSenha">Sua nova senha</label>
-            <input class="formInputLogin" type="text" id="novaSenha" name="novaSenha">
+            <input class="formInputLogin" type="password" id="novaSenha" name="novaSenha">
             <label style="margin-top: 20px;" class="formTextLogin" for="confirmNovaSenha">Confirme a senha</label>
-            <input class="formInputLogin" type="text" id="confirmNovaSenha" name="confirmNovaSenha">
+            <input class="formInputLogin" type="password" id="confirmNovaSenha" name="confirmNovaSenha">
             <input class="formSubmitLogin" type="submit" value="Atualizar senha">
             <p id="senhaAvisoTamanho"></p>
 
