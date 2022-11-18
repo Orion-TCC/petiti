@@ -1,6 +1,8 @@
 <?php
 @session_start();
 require_once('../../api/classes/curtidaPublicacao.php');
+require_once('../../api/classes/FotoUsuario.php');
+$fotousuario = new FotoUsuario();
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 include_once("../../sentinela.php");
@@ -13,6 +15,7 @@ $jsonPets = file_get_contents($urlPets);
 $dadosPets = (array) json_decode($jsonPets, true);
 
 $contagemPets = count($dadosPets['pets']);
+
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
@@ -113,11 +116,11 @@ $contagemPets = count($dadosPets['pets']);
             ?>
 
             <script>
-                
+
             </script>
 
             <div class="opcoes" id="opcoes">
-            
+
                 <div id="labelAO"><i id="settings-icon" class="uil uil-setting"></i></div>
 
                 <div class="fotoDePerfil" id="fotoDePerfil">
@@ -292,7 +295,7 @@ $contagemPets = count($dadosPets['pets']);
                         $data = $dados['publicacoes'][$i]['data'];
                         $texto = $dados['publicacoes'][$i]['texto'];
                         $itimalias = $dados['publicacoes'][$i]['itimalias'];
-                        $fotoUsuario = $dados['publicacoes'][$i]['fotoUsuario'];
+                        $fotoUsuario = $fotousuario->exibirFotoUsuario($idUsuario);
                         $local =  $dados['publicacoes'][$i]['local'];
                         $hoje = new DateTime();
                         $dataPost = new DateTime($data);
@@ -337,18 +340,18 @@ $contagemPets = count($dadosPets['pets']);
                                     </div>
                                     <div class="info">
                                         <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $nome ?></a></h3>
-                                        <small><?php echo $local?> há <?php echo $diferencaFinal ?></small>
+                                        <small><?php echo $local ?> há <?php echo $diferencaFinal ?></small>
                                     </div>
                                 </div>
 
 
 
                                 <span class="edit" id="<?php echo $id; ?>">
-                                
-                                <div class="editButton">
-                                    <div class="menuPostHover"></div>
-                                    <i class="uil uil-ellipsis-v"></i>
-                                </div>
+
+                                    <div class="editButton">
+                                        <div class="menuPostHover"></div>
+                                        <i class="uil uil-ellipsis-v"></i>
+                                    </div>
 
                                     <div class="menuPost" id="menuPost">
                                         <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
@@ -363,319 +366,325 @@ $contagemPets = count($dadosPets['pets']);
                                                                 </i>
                                                                 <span>Denunciar</span>
 
-                                                                
+
                                                             </li>
                                                         </div>
                                                     </div>
                                                 </a>
                                             <?php } else { ?>
-                                                <a id="linkDeletePub" href="/petiti/api/publicacao/delete/<?php echo $id; ?>">
-                                                    <li>
+                                                    <li class="li-ExcluirPost">
                                                         <div style="display: flex; align-items: center;">
                                                             <i class="uil uil-minus-circle"></i>
-                                                            <span class="excluirPost" id="<?php echo $id; ?>">Excluir Post</span>
-                                                        </div>
-                                                    </li>
-                                                </a>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
-
+                                                            <span class="excluirPost">Excluir Post
                                 </span>
-
-                                
-
-                            </div>
-
-                            <div class="imagemPost">
-                                <img src="<?php echo $foto ?>" alt="">
-                            </div>
-
-                            <div class="botoes">
-                                <div class="botoesDeInteracao">
-
-
-                                    <?php
-                                    $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
-                                    if ($verificaCurtida['boolean'] == false) { ?>
-                                        <input checked class="curtir" value="<?php echo $id ?>" type="checkbox">
-                                        <!-- curtido -->
-                                    <?php } else { ?>
-
-                                        <input class="curtir" value="<?php echo $id ?>" type="checkbox">
-                                        <!-- nao curtido  -->
-                                    <?php }
-                                    ?>
-
-                                    <button class="comentar"></button>
-
-                                    <button class="mensagem"></button>
-
+                                <div id="modal-exclui-post" class="modal certeza-excluir">
+                                    <div class="opcoes-certeza-excluir">
+                                        <a href="/petiti/api/publicacao/delete/<?php echo $id; ?>" class="certeza-excluir-post">Excluir</a>
+                                        <a class="cancelar-excluir-post" rel="modal:close">Cancelar</a>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="curtidoPor">
-
-                                <?php
-                                $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
-                                if ($verificaCurtida['boolean'] == false) { ?>
-                                    <span> <b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b> itimalias</span>
-                                    <!-- curtido -->
-                                <?php } else { ?>
-                                    <span><b><b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b> itimalias</span>
-                                    <!-- nao curtido  -->
-                                <?php }
-                                ?>
-                            </div>
-
-                            <div class="caption">
-                                <span class="text-bold"> <?php echo $login; ?></span> <span class="text-muted"><?php echo $texto ?></span>
-                            </div>
-
-
-                            <div class="badges">
-                                <?php
-                                for ($j = 0; $j < $contagemCategorias; $j++) {
-                                    echo ("<p class='badge'>" . $dadosCategorias[$j]['categoria'] . "</p>");
-                                }
-                                ?>
-                            </div>
-
-                            <div class=" comentarios">
-
-                            </div>
-
-                            <div class="commentArea">
-                                <i class="uil uil-heart"></i>
-                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
-                                
-                                <button value="<?php echo $id ?>" class="comentar" value="">
-                                    <i class="uil uil-message"></i>
-                                </button>
-                                <span class="text-muted">0/200</span>
-                            </div>
-
+                            </li>
+                            </a>
+                        <?php } ?>
+                        </ul>
                         </div>
-                    <?php $contadorPostagem++;
-                    }
+
+                        </span>
+
+
+
+                </div>
+
+                <div class="imagemPost">
+                    <img src="<?php echo $foto ?>" alt="">
+                </div>
+
+                <div class="botoes">
+                    <div class="botoesDeInteracao">
+
+
+                        <?php
+                        $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
+                        if ($verificaCurtida['boolean'] == false) { ?>
+                            <input checked class="curtir" value="<?php echo $id ?>" type="checkbox">
+                            <!-- curtido -->
+                        <?php } else { ?>
+
+                            <input class="curtir" value="<?php echo $id ?>" type="checkbox">
+                            <!-- nao curtido  -->
+                        <?php }
+                        ?>
+
+                        <button class="comentar"></button>
+
+                        <button class="mensagem"></button>
+
+                    </div>
+                </div>
+
+                <div class="curtidoPor">
+
+                    <?php
+                        $verificaCurtida = $curtidaPub->verificarCurtida($id, $idUsuarioCurtida);
+                        if ($verificaCurtida['boolean'] == false) { ?>
+                        <span> <b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b> itimalias</span>
+                        <!-- curtido -->
+                    <?php } else { ?>
+                        <span><b><b id="itimalias<?php echo $id ?>"> <?php echo $itimalias ?></b></b> itimalias</span>
+                        <!-- nao curtido  -->
+                    <?php }
                     ?>
                 </div>
+
+                <div class="caption">
+                    <span class="text-bold"> <?php echo $login; ?></span> <span class="text-muted"><?php echo $texto ?></span>
+                </div>
+
+
+                <div class="badges">
+                    <?php
+                        for ($j = 0; $j < $contagemCategorias; $j++) {
+                            echo ("<p class='badge'>" . $dadosCategorias[$j]['categoria'] . "</p>");
+                        }
+                    ?>
+                </div>
+
+                <div class=" comentarios">
+
+                </div>
+
+                <div class="commentArea">
+                    <i class="uil uil-heart"></i>
+                    <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+
+                    <button value="<?php echo $id ?>" class="comentar" value="">
+                        <i class="uil uil-message"></i>
+                    </button>
+                    <span class="text-muted">0/200</span>
+                </div>
+
             </div>
-            <!-- fim do meio -->
+        <?php $contadorPostagem++;
+                    }
+        ?>
+        </div>
+        </div>
+        <!-- fim do meio -->
 
 
-            <div class="ladoDireito">
-                <!-- posts de pets perdidos -->
-                <div class="whiteBoxHolder postsPerdidosHolder">
+        <div class="ladoDireito">
+            <!-- posts de pets perdidos -->
+            <div class="whiteBoxHolder postsPerdidosHolder">
 
-                    <div class="heading tituloPetsPerdidos">
-                        <h4>Ajude alguém a encontrar seu pet</h4>
-                    </div>
-
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-
+                <div class="heading tituloPetsPerdidos">
+                    <h4>Ajude alguém a encontrar seu pet</h4>
                 </div>
-                <!-- fim de posts de pets perdidos -->
 
-                <div class="categoriasEmAlta">
-                    <div class="whiteBoxHolder ">
-                        <div class="heading">
-                            <h4>Categorias em alta</h4>
-                        </div>
-
-                        <div class="categoriasAltaGrid">
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position1.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position2.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position6.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position3.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position7.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position4.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position8.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                <div class="postsPerdidos">
+                    <div class="fotoDePerfil">
+                        <img src="#" alt="">
+                    </div>
+                    <div class="infoPostPerdidos">
+                        <h4>Minha cachorrinha fugiu de casa!</h4>
+                        <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
                     </div>
                 </div>
-                <!-- fim das categorias em alta -->
+
+                <div class="postsPerdidos">
+                    <div class="fotoDePerfil">
+                        <img src="#" alt="">
+                    </div>
+                    <div class="infoPostPerdidos">
+                        <h4>Minha cachorrinha fugiu de casa!</h4>
+                        <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
+                    </div>
+                </div>
+
+                <div class="postsPerdidos">
+                    <div class="fotoDePerfil">
+                        <img src="#" alt="">
+                    </div>
+                    <div class="infoPostPerdidos">
+                        <h4>Minha cachorrinha fugiu de casa!</h4>
+                        <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
+                    </div>
+                </div>
 
 
-                <div class="sugestoes">
-                    <h4>Sugestões para você</h4>
+            </div>
+            <!-- fim de posts de pets perdidos -->
 
-                    <div class="whiteBoxHolder">
+            <div class="categoriasEmAlta">
+                <div class="whiteBoxHolder ">
+                    <div class="heading">
+                        <h4>Categorias em alta</h4>
+                    </div>
 
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
-                            </div>
+                    <div class="categoriasAltaGrid">
 
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
+                        <div class="categorias">
+
+                            <div class="Lugar">
+                                <div class="fotoDePerfil">
+                                    <img src="/petiti/views/assets/img/position1.svg" alt="">
+                                </div>
+                                <div class="infoCategoria">
+                                    <h4>tamandua</h4>
+                                </div>
                             </div>
                         </div>
 
-                        <button class="btn btn-primary">Seguir</button>
-                    </div>
+                        <div class="categorias">
 
-                    <div class="whiteBoxHolder">
-
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
-                            </div>
-
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
+                            <div class="Lugar">
+                                <div class="fotoDePerfil">
+                                    <img src="/petiti/views/assets/img/position5.svg" alt="">
+                                </div>
+                                <div class="infoCategoria">
+                                    <h4>tamandua</h4>
+                                </div>
                             </div>
                         </div>
 
-                        <button class="btn btn-primary">Seguir</button>
-                    </div>
+                        <div class="categorias">
 
-                    <div class="whiteBoxHolder">
-
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
-                            </div>
-
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
+                            <div class="Lugar">
+                                <div class="fotoDePerfil">
+                                    <img src="/petiti/views/assets/img/position2.svg" alt="">
+                                </div>
+                                <div class="infoCategoria">
+                                    <h4>tamandua</h4>
+                                </div>
                             </div>
                         </div>
 
-                        <button class="btn btn-primary">Seguir</button>
+                        <div class="categorias">
+
+                            <div class="Lugar">
+                                <div class="fotoDePerfil">
+                                    <img src="/petiti/views/assets/img/position6.svg" alt="">
+                                </div>
+                                <div class="infoCategoria">
+                                    <h4>tamandua</h4>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="categorias">
+
+                            <div class="Lugar">
+                                <div class="fotoDePerfil">
+                                    <img src="/petiti/views/assets/img/position3.svg" alt="">
+                                </div>
+                                <div class="infoCategoria">
+                                    <h4>tamandua</h4>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="categorias">
+
+                            <div class="Lugar">
+                                <div class="fotoDePerfil">
+                                    <img src="/petiti/views/assets/img/position7.svg" alt="">
+                                </div>
+                                <div class="infoCategoria">
+                                    <h4>tamandua</h4>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="categorias">
+
+                            <div class="Lugar">
+                                <div class="fotoDePerfil">
+                                    <img src="/petiti/views/assets/img/position4.svg" alt="">
+                                </div>
+                                <div class="infoCategoria">
+                                    <h4>tamandua</h4>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="categorias">
+
+                            <div class="Lugar">
+                                <div class="fotoDePerfil">
+                                    <img src="/petiti/views/assets/img/position8.svg" alt="">
+                                </div>
+                                <div class="infoCategoria">
+                                    <h4>tamandua</h4>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-
-
                 </div>
             </div>
+            <!-- fim das categorias em alta -->
+
+
+            <div class="sugestoes">
+                <h4>Sugestões para você</h4>
+
+                <div class="whiteBoxHolder">
+
+                    <div class="flex-row">
+                        <div class="fotoDePerfil">
+                            <img src="#" alt="">
+                        </div>
+
+                        <div class="infoSugestoes">
+                            <h4>nome de usuario</h4>
+                            <h5 class="text-muted">@username</h5>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary">Seguir</button>
+                </div>
+
+                <div class="whiteBoxHolder">
+
+                    <div class="flex-row">
+                        <div class="fotoDePerfil">
+                            <img src="#" alt="">
+                        </div>
+
+                        <div class="infoSugestoes">
+                            <h4>nome de usuario</h4>
+                            <h5 class="text-muted">@username</h5>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary">Seguir</button>
+                </div>
+
+                <div class="whiteBoxHolder">
+
+                    <div class="flex-row">
+                        <div class="fotoDePerfil">
+                            <img src="#" alt="">
+                        </div>
+
+                        <div class="infoSugestoes">
+                            <h4>nome de usuario</h4>
+                            <h5 class="text-muted">@username</h5>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary">Seguir</button>
+                </div>
+
+
+            </div>
+        </div>
         </div>
 
 
@@ -838,16 +847,18 @@ $contagemPets = count($dadosPets['pets']);
 
         <section>
             <a href="#modal-denuncia" rel="modal:open">
-                    <div id="modal-denuncia" class="modal">
-                        <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
-                            <input type="hidden" id="idPost" name="idPost" value="">
-                            <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
-                            <span class="spanDenuncia">Denuniar</span>
-                            <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
-                            <input class="submitDenuncia" type="submit" value="Denunciar">
-                        </form>
-                    </div>
+                <div id="modal-denuncia" class="modal">
+                    <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+                        <input type="hidden" id="idPost" name="idPost" value="">
+                        <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
+                        <span class="spanDenuncia">Denuniar</span>
+                        <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
+                        <input class="submitDenuncia" type="submit" value="Denunciar">
+                    </form>
+                </div>
         </section>
+
+
 
         <!-- fim Modals -->
 

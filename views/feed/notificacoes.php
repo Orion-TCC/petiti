@@ -1,9 +1,19 @@
 <?php
 @session_start();
 require_once('../../api/classes/curtidaPublicacao.php');
-$curtidaPub = new curtidaPublicacao();
-date_default_timezone_set('America/Sao_Paulo');
+require_once('../../api/classes/FotoUsuario.php');
+require_once('../../api/classes/Notificacao.php');
+require_once('../../api/classes/UsuarioSeguidor.php');
+
 include_once("../../sentinela.php");
+$notificacao = new Notificacao();
+
+$conexao = Conexao::conexao();
+$fotoUsuario = new FotoUsuario();
+$curtidaPub = new curtidaPublicacao();
+$usuarioSeguidor  = new UsuarioSeguidor();
+date_default_timezone_set('America/Sao_Paulo');
+
 $idUsuarioCurtida = $_SESSION['id'];
 $id = $_SESSION['id'];
 $urlPets = "http://localhost/petiti/api/usuario/$id/pets";
@@ -13,6 +23,10 @@ $jsonPets = file_get_contents($urlPets);
 $dadosPets = (array) json_decode($jsonPets, true);
 
 $contagemPets = count($dadosPets['pets']);
+
+
+$listaNotif = $notificacao->listarNotif($id);
+
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
@@ -100,6 +114,7 @@ $contagemPets = count($dadosPets['pets']);
 
             <h2 class="logo">
                 <img src="/petiti/assets/images/logo_principal.svg">
+
             </h2>
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
@@ -107,7 +122,6 @@ $contagemPets = count($dadosPets['pets']);
             </div>
 
             <?php
-
             if (isset($_COOKIE['denuncia'])) {
                 echo $_COOKIE['denuncia'];
             }
@@ -125,12 +139,10 @@ $contagemPets = count($dadosPets['pets']);
                     };
 
                 };
-
-
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <div id="labelAO"><i class="uil uil-setting" ></i></div>
+                <div id="labelAO"><i class="uil uil-setting"></i></div>
 
                 <div class="fotoDePerfil" id="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
@@ -215,36 +227,118 @@ $contagemPets = count($dadosPets['pets']);
 
             <div class="Meio">
                 <span class="adTitulo">Notificações</span>
+                <div class="abanotificacoes">
+                    <?php foreach ($listaNotif as $notificacao) {
+                        $hoje = new DateTime();
+                        $dataPost = new DateTime($notificacao['dataNotificacao']);
+                        $intervalo = $hoje->diff($dataPost);
+                        $diferencaAnos = $intervalo->format('%y');
+                        $diferencaMeses = $intervalo->format('%m');
+                        $diferencaDias = $intervalo->format('%a');
+                        $diferencaHoras = $intervalo->format('%h');
+                        $diferencaMinutos = $intervalo->format('%i');
 
-                    <div class="abanotificacoes">
+                        if ($diferencaAnos == 0) {
+                            if ($diferencaMeses == 0) {
+                                if ($diferencaDias == 0) {
+                                    if ($diferencaHoras == 0) {
+                                        $diferencaFinal = $diferencaMinutos . " minutos";
+                                    } else {
+                                        $diferencaFinal = $diferencaHoras . " horas";
+                                    }
+                                } else {
+                                    $diferencaFinal = $diferencaDias . " dias";
+                                }
+                            } else {
+                                $diferencaFinal = $diferencaMeses . " meses";
+                            }
+                        } else {
+                            $diferencaFinal = $diferencaAnos . " anos";
+                        }
+                    ?>
 
-                        <div class="notificacao">
-                            <div style="display: flex; gap: 1rem; align-items: center;">
-                                <img src="" alt="" class="fotoDePerfil">
-                                <h4>@username</h4>
-                                <h4 class="text-muted">começou a seguir você</h4>
-                                <h5 class="text-muted">Há 2 horas</h5>
+
+                        <?php if ($notificacao['tipoNotificacao'] == "Seguir") {
+                            $query = "SELECT loginUsuario, tbusuario.idUsuario FROM tbusuario INNER JOIN 
+                            tbusuarioseguidor ON tbusuarioseguidor.idSeguidor = tbusuario.idusuario WHERE tbusuarioseguidor.idUsuarioSeguidor = " . $notificacao['idUsuarioSeguidor'];
+                            $consulta = $conexao->query($query);
+                            $listaUsuarioNotif = $consulta->fetchAll();
+
+                            foreach ($listaUsuarioNotif as $linhaUsuarioNotif) {
+                                $loginUsuarioNotif = $linhaUsuarioNotif['loginUsuario'];
+                                $idUsuarioNotif = $linhaUsuarioNotif['idUsuario'];
+                            }
+                            $fotoUsuarioNotif = $fotoUsuario->exibirFotoUsuario($idUsuarioNotif);
+                        ?>
+                            <div class="notificacao">
+                                <div style="display: flex; gap: 1rem; align-items: center;">
+                                    <img src="<?php echo $fotoUsuarioNotif ?>" class="fotoDePerfil">
+                                    <a href="/petiti/<?php echo $loginUsuarioNotif ?>">
+                                        <h4>@<?php echo $loginUsuarioNotif ?></h4>
+                                    </a>
+                                    <h4 class="text-muted">começou a seguir você</h4>
+                                    <h5 class="text-muted"><?php echo $diferencaFinal ?> </h5>
+                                </div>
+
+                                <?php
+
+                                $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioNotif, $id);
+                                if ($verificarSeguidor['boolean'] == true) {
+                                    $jsSeguidor = "true";
+                                } else {
+                                    $jsSeguidor = "false";
+                                } ?>
+
+                                <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+
+                                    <button value="<?php echo $idUsuarioNotif ?>" class="seguirNotif botaoUsuario<?php echo $idUsuarioNotif?> btn btn-primary">Seguir</button>
+                                <?php } else { ?>
+                                    <button value="<?php echo $idUsuarioNotif ?>" class="seguirNotif botaoUsuario<?php echo $idUsuarioNotif?> btn btn-secundary">Seguindo</button>
+                                <?php } ?>
                             </div>
-                                <button class="btn btn-primary">Seguir</button>
-                        </div>
+                        <?php } ?>
 
-                        <div class="notificacao">
-                            <div style="display: flex; gap: 1rem; align-items: center;">
-                                <img src="" alt="" class="fotoDePerfil">
-                                <h4>@username</h4>
-                                <h4 class="text-muted">Curtiu sua postagem</h4>
-                                <h5 class="text-muted">Há 2 horas</h5>
+
+                        <?php if ($notificacao['tipoNotificacao'] == "Curtida") {
+                            $idPubResultado = $curtidaPub->procurarPub($notificacao['idCurtidaPublicacao']);
+                            $query = "SELECT loginUsuario, idUsuario FROM tbusuario INNER JOIN 
+                            tbcurtidapublicacao ON tbcurtidapublicacao.idusuariocurtida = tbusuario.idusuario WHERE tbcurtidapublicacao.idcurtidapublicacao = " . $notificacao['idCurtidaPublicacao'];
+                            $consulta = $conexao->query($query);
+                            $listaUsuarioNotif = $consulta->fetchAll();
+
+                            foreach ($listaUsuarioNotif as $linhaUsuarioNotif) {
+                                $loginUsuarioNotif = $linhaUsuarioNotif['loginUsuario'];
+                            }
+                            $fotoUsuarioNotif = $fotoUsuario->exibirFotoUsuario($notificacao['idUsuarioCurtida']);
+
+                            //
+
+                            $urlNotif = "http://localhost/petiti/api/publicacao/" . $idPubResultado;
+                            $jsonPubNotif = file_get_contents($urlNotif);
+                            $dadosPubNotif = (array)json_decode($jsonPubNotif, true);
+                            $foto = $dadosPubNotif[0]['caminhoFoto'];
+                        ?>
+                            <div class="notificacao">
+                                <div style="display: flex; gap: 1rem; align-items: center;">
+                                    <img src="<?php echo $fotoUsuarioNotif ?>" alt="" class="fotoDePerfil">
+                                    <a href="/petiti/<?php echo $loginUsuarioNotif ?>">
+                                        <h4>@<?php echo $loginUsuarioNotif ?></h4>
+                                    </a>
+
+                                    <h4 class="text-muted">Curtiu sua postagem</h4>
+                                    <h5 class="text-muted"><?php echo $diferencaFinal ?></h5>
+                                </div>
+
+                                <img src="<?php echo $foto ?>" alt="" class="previewPostImage">
                             </div>
+                        <?php } ?>
 
-                            <img src="#" alt="" class="previewPostImage">
-                        </div>
-
-
-                             <button class="btn btn-secundary">Seguindo</button>
+                    <?php } ?>
 
 
 
-                    </div>
+                </div>
 
 
             </div>
@@ -625,15 +719,15 @@ $contagemPets = count($dadosPets['pets']);
 
         <section>
             <a href="#modal-denuncia" rel="modal:open">
-                    <div id="modal-denuncia" class="modal">
-                        <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
-                            <input type="hidden" id="idPost" name="idPost" value="">
-                            <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
-                            <span class="spanDenuncia">Denuniar</span>
-                            <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
-                            <input class="submitDenuncia" type="submit" value="Denunciar">
-                        </form>
-                    </div>
+                <div id="modal-denuncia" class="modal">
+                    <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+                        <input type="hidden" id="idPost" name="idPost" value="">
+                        <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
+                        <span class="spanDenuncia">Denuniar</span>
+                        <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
+                        <input class="submitDenuncia" type="submit" value="Denunciar">
+                    </form>
+                </div>
         </section>
 
         <!-- fim Modals -->
