@@ -143,7 +143,9 @@
                     <div class="textosFuncionalidades">
                         <span class="funcionalidadesTitulo">Funcionalidades especiais </span>
                         <span class="funcionalidadesSubTitulo">Feeds exclusivos</span>
-                        <span class="funcionalidadesTextos">Muitas vezes posts sobre animais perdidos e animas em adoção são ignorados, então, resolvemos fazer feeds exclusivos para esses tópicos, para que eles tenham o engajamento que precisam e merecem.</span>
+                        <span class="funcionalidadesTextos">Muitas vezes posts sobre animais perdidos e animais em 
+                        adoção são ignorados, então, resolvemos fazer <enfase>feeds exclusivos</enfase> para esses tópicos, para que 
+                        eles tenham o <enfase>engajamento</enfase> que precisam e merecem.</span>
                     </div>
                 </div>
 
