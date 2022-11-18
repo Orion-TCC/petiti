@@ -37,28 +37,28 @@ class DenunciaUsuario
     }
 
 
-    public function getUsuarioDenunciado()
+    public function getUsuarioDenunciador()
     {
-        return $this->UsuarioDenunciado;
+        return $this->UsuarioDenunciador;
     }
 
 
-    public function setUsuarioDenunciado($UsuarioDenunciado)
+    public function setUsuarioDenunciador($UsuarioDenunciador)
     {
-        $this->UsuarioDenunciado = $UsuarioDenunciado;
+        $this->UsuarioDenunciador = $UsuarioDenunciador;
 
         return $this;
     }
 
 
-    public function getUsuario()
+    public function getUsuarioDenunciado()
     {
-        return $this->Usuario;
+        return $this->UsuarioDenunciado;
     }
 
-    public function setUsuario($Usuario)
+    public function setUsuarioDenunciado($UsuarioDenunciado)
     {
-        $this->Usuario = $Usuario;
+        $this->UsuarioDenunciado = $UsuarioDenunciado;
 
         return $this;
     }
@@ -75,5 +75,158 @@ class DenunciaUsuario
         $this->idDenunciaUsuario = $idDenunciaUsuario;
 
         return $this;
+    }
+
+    public function getStatusDenunciaUsuario()
+    {
+        return $this->statusDenunciaUsuario;
+    }
+
+    public function setStatusDenunciaUsuario($statusDenunciaUsuario)
+    {
+        $this->statusDenunciaUsuario = $statusDenunciaUsuario;
+
+        return $this;
+    }
+
+    public function cadastrar($denuncia)
+    {
+        $con = Conexao::conexao();
+
+        $stmt = $con->prepare('INSERT INTO tbDenunciaUsuario(idDenunciaUsuario, textoDenunciaUsuario, statusDenunciaUsuario, idUsuarioDenunciado, idUsuarioDenunciador)
+        VALUES (default, ?, ?, ?, ?)
+        ');
+
+        $stmt->bindValue(1, $denuncia->gettextoDenunciaUsuario());
+        $stmt->bindValue(2, $denuncia->getStatusDenunciaUsuario());
+        $stmt->bindValue(3, $denuncia->getUsuarioDenunciado()->getIdUsuario());
+        $stmt->bindValue(4, $denuncia->getUsuarioDenunciador());
+
+        $stmt->execute();
+
+        header('Location: /petiti/feed');
+    }
+
+    public function updateDecisao($id, $decisao)
+    {
+        $con = Conexao::conexao();
+
+        $stmt = $con->prepare("UPDATE `tbDenunciaUsuario`
+    SET `textoDenunciaUsuario` = '$decisao'
+    WHERE idDenunciaUsuario = $id");
+
+        $stmt->execute();
+    }
+
+    public function delete($delete)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("DELETE FROM tbDenunciaUsuario WHERE idDenunciaUsuario = ?");
+        $stmt->bindValue(1, $delete->getIdDenunciaUsuario());
+
+        $stmt->execute();
+    }
+
+    public function buscaDenunciaUsuarioAtiva()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idDenunciaUsuario, textoDenunciaUsuario, statusDenunciaUsuario,
+        DAY(dataDenunciaUsuario) as dia, MONTHNAME(dataDenunciaUsuario) as mes, YEAR(dataDenunciaUsuario) as ano,
+        fotouser.caminhoFoto, idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, innerDenunciado.loginUsuario as usuarioDenunciado, 
+        innerDenunciador.loginUsuario as usuarioDenunciador
+        FROM tbDenunciaUsuario
+        INNER JOIN tbfotousuario fotouser ON fotouser.idUsuario = tbDenunciaUsuario.idUsuarioDenunciado
+        WHERE statusDenunciaUsuario = 0
+        ";
+
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaDenunciaUsuarioEmAnalise()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idDenunciaUsuario, textoDenunciaUsuario, statusDenunciaUsuario,
+        DAY(dataDenunciaUsuario) as dia, MONTHNAME(dataDenunciaUsuario) as mes, YEAR(dataDenunciaUsuario) as ano,
+        fotouser.caminhoFoto, idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, innerDenunciado.loginUsuario as usuarioDenunciado, 
+        innerDenunciador.loginUsuario as usuarioDenunciador
+        FROM tbDenunciaUsuario
+        INNER JOIN tbfotousuario fotouser ON fotouser.idUsuario = tbDenunciaUsuario.idUsuarioDenunciado
+        WHERE statusDenunciaUsuario = 1
+        ";
+
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaDenunciaUsuarioResolvida()
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idDenunciaUsuario, textoDenunciaUsuario, statusDenunciaUsuario,
+        DAY(dataDenunciaUsuario) as dia, MONTHNAME(dataDenunciaUsuario) as mes, YEAR(dataDenunciaUsuario) as ano,
+        fotouser.caminhoFoto, idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, innerDenunciado.loginUsuario as usuarioDenunciado, 
+        innerDenunciador.loginUsuario as usuarioDenunciador
+        FROM tbDenunciaUsuario
+        INNER JOIN tbfotousuario fotouser ON fotouser.idUsuario = tbDenunciaUsuario.idUsuarioDenunciado
+        WHERE statusDenunciaUsuario = 2
+        ";
+
+        $resultado = $con->query($query);
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaQtdDenunciaUsuarioAtiva()
+    {
+        $con = Conexao::conexao();
+
+        $query = "SELECT COUNT(idDenunciaUsuario) as qtd FROM tbDenunciaUsuario
+        WHERE statusDenunciaUsuario = 0";
+
+        $resultado = $con->query($query);
+        $listaQtdDenuncia = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($listaQtdDenuncia as $linha) {
+            return $linha['qtd'];
+        }
+    }
+
+    public function buscaQtdDenunciaUsuarioEmAnalise()
+    {
+        $con = Conexao::conexao();
+
+        $query = "SELECT COUNT(idDenunciaUsuario) as qtd FROM tbDenunciaUsuario
+        WHERE statusDenunciaUsuario = 1";
+
+        $resultado = $con->query($query);
+        $listaQtdDenuncia = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($listaQtdDenuncia as $linha) {
+            return $linha['qtd'];
+        }
+    }
+
+    public function buscaQtdDenunciaUsuarioResolvida()
+    {
+        $con = Conexao::conexao();
+
+        $query = "SELECT COUNT(idDenunciaUsuario) as qtd FROM tbDenunciaUsuario
+        WHERE statusDenunciaUsuario = 2";
+
+        $resultado = $con->query($query);
+        $listaQtdDenuncia = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($listaQtdDenuncia as $linha) {
+            return $linha['qtd'];
+        }
+    }
+
+    public function updateStatus($update){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbDenunciaUsuario SET statusDenunciausuario = ?
+        WHERE idDenunciaUsuario = ?");
+        $stmt->bindValue(1, $update->getStatusDenunciaUsuario());
+        $stmt->bindValue(2, $update->getIdDenunciaUsuario());
+
+        $stmt->execute();
     }
 }

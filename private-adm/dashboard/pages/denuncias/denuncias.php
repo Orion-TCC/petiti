@@ -121,8 +121,9 @@ if ($_SESSION['tipo'] != "Adm") {
 
           <!-- Tab content -->
           <div id="nova" class="tabcontent">
+            <h3> Denúncias de publicações:</h3>
+          <h3 id="total-qtd-publicacoes">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoAtiva(); ?>)</h3>
             <div class="denunciasPublicacao">
-              <h3 id="total-qtd">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoAtiva(); ?>)</h3>
               <?php foreach ($listaDenunciasPublicacaoAtivas as $linha) {
                 $idDenunciaPublicacao = $linha['idDenunciaPublicacao'];
                 $textoDenuncia = $linha['textoDenunciaPublicacao'];
@@ -155,16 +156,26 @@ if ($_SESSION['tipo'] != "Adm") {
                   <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
                   <a href="/petiti/api/passar-denuncia-analise/<?php echo $idDenunciaPublicacao; ?>" class="botao analisar">Passar para análise</a>
                 </div>
-
               <?php
               }
               ?>
             </div>
+
+            <h3> Denúncias de usuários:</h3>
+            <div class="denunciasUsuarios">
+              
+            </div>
+
+            <h3> Denúncias de comentários:</h3>
+            <div class="denunciasComentarios">
+
+            </div>
           </div>
 
           <div id="analise" class="tabcontent">
+          <h3> Denúncias de publicações:</h3>
+          <h3 id="total-qtd-publicacoes">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoEmAnalise(); ?>)</h3>
             <div class="denunciasPublicacao">
-              <h3 id="total-qtd">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoEmAnalise(); ?>)</h3>
               <?php foreach ($listaDenunciasPublicacaoEmAnalise as $linha) {
                 $idDenunciaPublicacao = $linha['idDenunciaPublicacao'];
                 $textoDenuncia = $linha['textoDenunciaPublicacao'];
@@ -233,8 +244,9 @@ if ($_SESSION['tipo'] != "Adm") {
           </div>
 
           <div id="resolvida" class="tabcontent">
+          <h3> Denúncias de publicações:</h3>
+          <h3 id="total-qtd-publicacoes">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoResolvida(); ?>)</h3>
             <div class="denunciasPublicacao">
-              <h3 id="total-qtd">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoResolvida(); ?>)</h3>
               <?php foreach ($listaDenunciasPublicacaoResolvidas as $linha) {
                 $idDenunciaPublicacao = $linha['idDenunciaPublicacao'];
                 $textoDenuncia = $linha['textoDenunciaPublicacao'];

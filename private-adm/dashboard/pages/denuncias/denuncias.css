@@ -732,3 +732,13 @@ main .info-pets .perfis-pets {
 #span-bloquear-conta{
     color: black;
 }
+
+.denunciasPublicacao{
+    margin-top: 10px;
+}
+
+.denunciasPublicacao{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}

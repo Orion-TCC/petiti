@@ -229,7 +229,7 @@ $qtdDenunciasPublicacaoesAtivas = $denunciaPublicacao->buscaQtdDenunciaPublicaca
               <p id="p-small">10 minutos atrás</p>
             </div>
           </div>
-        <?php  }
+        <?php  $ultimaDenuncia--; }
         ?>
         </div>
       </div>
