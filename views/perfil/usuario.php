@@ -82,7 +82,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 $usuarioSeguidor  = new UsuarioSeguidor();
 
 $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($id, $meuId);
-if ($verificarSeguidor['boolean']==true) {
+if ($verificarSeguidor['boolean'] == true) {
     $jsSeguidor = "true";
 } else {
     $jsSeguidor = "false";
@@ -243,7 +243,7 @@ if ($verificarSeguidor['boolean']==true) {
 
                     <a href="notificacoes" class="menu-item">
                         <span style="position: relative;">
-                            <i class="uil uil-bell notificacao"></i> 
+                            <i class="uil uil-bell notificacao"></i>
                             <div class="notificacaoContador"><span>1</span></div>
                         </span>
                         <h3>Notificações</h3>
@@ -288,7 +288,7 @@ if ($verificarSeguidor['boolean']==true) {
                             <div class="userInfo">
 
                                 <div class="infoHolder topo">
-                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor?>" type="hidden">
+                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
                                     <h2><?php echo $login; ?></h2>
                                     <?php if ($verificarSeguidor['boolean'] == true) { ?>
                                         <button value="<?php echo $id ?>" class="seguir btn btn-primary">Seguir</button>
@@ -296,6 +296,7 @@ if ($verificarSeguidor['boolean']==true) {
                                         <button value="<?php echo $id ?>" class="seguir btn btn-secundary">Seguindo</button>
                                     <?php } ?>
 
+                                    <a href="#modal-denuncia-usuario" rel="modal:open" class="denunciar btn btn-primary">Denunciar</a>
                                 </div>
 
 
@@ -413,6 +414,15 @@ if ($verificarSeguidor['boolean']==true) {
         </div>
     </main>
 
+    <div id="modal-denuncia-usuario" class="modal">
+        <form action="/petiti/api/denunciaUsuario" id="formDenunciaUsuario" method="post">
+            <h2 class="h2DenunciaUsuario"> Denunciar usuário </h2>
+            <input type="hidden" name="idDenunciado" value="<?php echo $id; ?>">
+            <label for="textoDenuncia">Motivo: </label>
+            <input type="text" id="textoDenuncia" required name="textoDenuncia" placeholder="Resuma em poucas palavras o motivo de sua denúncia">
+            <input type="submit" value="Denunciar">
+        </form>
+    </div>
 </body>
 
 </html>

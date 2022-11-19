@@ -1949,3 +1949,24 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   color: black;
   cursor: pointer;
 }
+
+.h2DenunciaUsuario{
+  margin-top: 10px;
+}
+
+#formDenunciaUsuario{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#formDenunciaUsuario input[type="text"]{
+  width: 100%;
+}
+
+#formDenunciaUsuario input[type="submit"]{
+  background-color: coral;
+  height: 25px;
+  width: 100px;
+  border-radius: 5px;
+}
