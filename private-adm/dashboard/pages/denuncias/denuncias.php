@@ -479,49 +479,54 @@ if ($_SESSION['tipo'] != "Adm") {
     </div>
 
     <div class="container-denuncias">
-      <h2>Denúncias recentes</h2>
-      <div class="denuncias">
-        <div class="icon-denuncia">
-          <span id="icon-report" class="material-icons-outlined">report</span>
-        </div>
-        <div class="msg-denuncia">
-          <div class="foto-perfil">
-            <img id="img-denuncia" src="/petiti/private-adm/dashboard/images/le.jpg" />
+        <h2>Denúncias recentes</h2>
+        <div class="denuncias">
+          <div class="icon-denuncia">
+            <span id="icon-report" class="material-icons-outlined">report</span>
           </div>
-          <div class="mensagem">
-            <p>
-              <span style="font-weight: 800">@leandrocoelho</span> denúnciou
-              o post de @kauanmatheus. A causa foi "É spam".
-            </p>
-            <p id="p-small">10 minutos atrás</p>
+          <p>
+            <?php
+            $resultadoUltimaDenuncia = $denunciaPublicacao->ultimaDenuncia();
+            $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
+            $arrayDenunciaPublicacao = $denunciaPublicacao->buscaDenunciaPublicacao($ultimaDenuncia);
+            $denunciador = $arrayDenunciaPublicacao['usuarioDenunciador'];
+            $denunciado = $arrayDenunciaPublicacao['usuarioDenunciado'];
+            $foto = $arrayDenunciaPublicacao['fotoDenunciado'];
+            ?>
+
+          <div class="msg-denuncia">
+            <div class="foto-perfil">
+              <img src="<?php echo $foto; ?>" />
+            </div>
+            <div class="mensagem">
+              O post de <span style="color: #DB310C; font-weight: 750;">@<?php echo $denunciado; ?> </span> foi denunciado por <span style="font-weight: 800">@<?php echo $denunciador; ?>
+              
+              </p>
+              <p id="p-small">10 minutos atrás</p>
+            </div>
           </div>
-        </div>
-        <div class="msg-denuncia">
-          <div class="foto-perfil">
-            <img id="img-denuncia" src="/petiti/private-adm/dashboard/images/le.jpg" />
+
+          <?php
+          $resultadoUltimaDenuncia = $denunciaUsuario->ultimaDenuncia();
+          $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
+          $arrayDenunciaUsuario = $denunciaUsuario->buscaDenunciaUsuario($ultimaDenuncia);
+          $denunciador = $arrayDenunciaUsuario['usuarioDenunciador'];
+          $denunciado = $arrayDenunciaUsuario['usuarioDenunciado'];
+          $foto = $arrayDenunciaUsuario['fotoDenunciado'];
+          ?>
+          <div class="msg-denuncia">
+            <div class="foto-perfil">
+              <img src="<?php echo $foto; ?>" />
+            </div>
+            <div class="mensagem">
+              O usuário <span style="color: #DB310C; font-weight: 750;">@<?php echo $denunciado; ?></span> foi denunciado por <span style="font-weight: 800">@<?php echo $denunciador; ?><?php  ?></span> 
+              </p>
+              <p id="p-small">10 minutos atrás</p>
+            </div>
           </div>
-          <div class="mensagem">
-            <p>
-              <span style="font-weight: 800">@cauagustavo</span> denúnciou o
-              post de @camilamartins. A causa foi "Simplesmente não gostei"
-            </p>
-            <p id="p-small">10 minutos atrás</p>
-          </div>
-        </div>
-        <div class="msg-denuncia">
-          <div class="foto-perfil">
-            <img id="img-denuncia" src="/petiti/private-adm/dashboard/images/le.jpg" />
-          </div>
-          <div class="mensagem">
-            <p>
-              <span style="font-weight: 800">@marinaliz</span> denúnciou o
-              post de @kauanmatheus. A causa foi "Bullying ou assédio".
-            </p>
-            <p id="p-small">10 minutos atrás</p>
-          </div>
+
         </div>
       </div>
-    </div>
     <!------------------- final - denuncias recentes ------------------->
 
     <div class="categorias-alta">

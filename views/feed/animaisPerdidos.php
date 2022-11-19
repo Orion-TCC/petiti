@@ -2,6 +2,7 @@
 @session_start();
 require_once('../../api/classes/curtidaPublicacao.php');
 require_once('../../api/classes/FotoUsuario.php');
+require_once('../../api/classes/UsuarioSeguidor.php');
 $fotousuario = new FotoUsuario();
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
@@ -15,6 +16,10 @@ $jsonPets = file_get_contents($urlPets);
 $dadosPets = (array) json_decode($jsonPets, true);
 
 $contagemPets = count($dadosPets['pets']);
+
+$usuarioSeguidor = new UsuarioSeguidor();
+
+
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
@@ -119,15 +124,13 @@ $contagemPets = count($dadosPets['pets']);
                 window.onload = function() {
                     var hidediv = document.getElementById('popup');
 
-                    document.onclick = function(div ) {
+                    document.onclick = function(div) {
                         if (div.target.id !== 'popup' && div.target.id !== 'opcoes' && div.target.id !== 'labelAO' && div.target.id !== 'fotoDePerfil') {
                             hidediv.style.display = "none";
                         }
                     };
 
                 };
-
-
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
@@ -185,7 +188,7 @@ $contagemPets = count($dadosPets['pets']);
 
                     <a href="notificacoes" class="menu-item">
                         <span style="position: relative;">
-                            <i class="uil uil-bell notificacao"></i> 
+                            <i class="uil uil-bell notificacao"></i>
                             <div class="notificacaoContador"><span>1</span></div>
                         </span>
                         <h3>Notificações</h3>
@@ -231,13 +234,13 @@ $contagemPets = count($dadosPets['pets']);
 
 
                     <div class="direitoCAP">
-                            <div class="categoriaBadge">Perdido</div>
-                            <div class="categoriaBadge">Animal perdido</div>
-                            <div class="categoriaBadge">Pet perdido</div>
-                            <div class="categoriaBadge">Desaparecido</div>
+                        <div class="categoriaBadge">Perdido</div>
+                        <div class="categoriaBadge">Animal perdido</div>
+                        <div class="categoriaBadge">Pet perdido</div>
+                        <div class="categoriaBadge">Desaparecido</div>
 
 
-                   </div>
+                    </div>
 
 
                 </div>
@@ -340,23 +343,33 @@ $contagemPets = count($dadosPets['pets']);
                                     </div>
                                     <div class="info">
                                         <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $nome ?></a></h3>
-                                        <small><?php echo $local ?>  há <?php echo $diferencaFinal ?></small>
+                                        <small><?php echo $local ?> há <?php echo $diferencaFinal ?></small>
                                     </div>
                                 </div>
 
 
 
                                 <span class="edit" id="<?php echo $id; ?>">
-                                
-                                <div class="editButton">
-                                    <div class="menuPostHover"></div>
-                                    <i class="uil uil-ellipsis-v"></i>
-                                </div>
+
+                                    <div class="editButton">
+                                        <div class="menuPostHover"></div>
+                                        <i class="uil uil-ellipsis-v"></i>
+                                    </div>
 
                                     <div class="menuPost" id="menuPost">
                                         <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
                                             <?php if ($login != $_SESSION['login']) { ?>
-                                                <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixSeguir">Deixar de seguir</span></li>
+                                                <?php
+                                                $verificadorSeguindo = $usuarioSeguidor->verificarSeguidor($idUsuario, $_SESSION['id']);
+                                                if ($verificadorSeguindo['boolean'] == "false") { ?>
+                                                    <li class="seguir-na-postagem" id="<?php echo $idUsuario ?>" ><i id="icon-seguir-post" class="fa-sharp fa-solid fa-user-plus"></i><span class="deixSeguir">Seguir</span></li>
+                                                <?php
+                                                } else {
+                                                ?><li class="seguir-na-postagem" id="<?php echo $idUsuario ?>"><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixSeguir">Deixar de seguir</span></li>
+                                                <?php
+                                                }
+                                                ?>
+
                                                 <a href="#modal-denuncia" rel="modal:open">
                                                     <div id="<?php echo $id; ?>" class="postDenunciado">
                                                         <div id="<?php echo $idUsuarioPub; ?>" class="denunciaPost">
@@ -366,7 +379,7 @@ $contagemPets = count($dadosPets['pets']);
                                                                 </i>
                                                                 <span>Denunciar</span>
 
-                                                                
+
                                                             </li>
                                                         </div>
                                                     </div>
@@ -386,7 +399,7 @@ $contagemPets = count($dadosPets['pets']);
 
                                 </span>
 
-                                
+
 
                             </div>
 
@@ -451,7 +464,7 @@ $contagemPets = count($dadosPets['pets']);
                             <div class="commentArea">
                                 <i class="uil uil-heart"></i>
                                 <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
-                                
+
                                 <button value="<?php echo $id ?>" class="comentar" value="">
                                     <i class="uil uil-message"></i>
                                 </button>
@@ -841,15 +854,15 @@ $contagemPets = count($dadosPets['pets']);
 
         <section>
             <a href="#modal-denuncia" rel="modal:open">
-                    <div id="modal-denuncia" class="modal">
-                        <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
-                            <input type="hidden" id="idPost" name="idPost" value="">
-                            <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
-                            <span class="spanDenuncia">Denuniar</span>
-                            <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
-                            <input class="submitDenuncia" type="submit" value="Denunciar">
-                        </form>
-                    </div>
+                <div id="modal-denuncia" class="modal">
+                    <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+                        <input type="hidden" id="idPost" name="idPost" value="">
+                        <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
+                        <span class="spanDenuncia">Denuniar</span>
+                        <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
+                        <input class="submitDenuncia" type="submit" value="Denunciar">
+                    </form>
+                </div>
         </section>
 
         <!-- fim Modals -->
