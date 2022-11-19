@@ -81,7 +81,7 @@
 }
 
 .meio .categoriasFeed .esquerdoCAP input[type="text"]::placeholder {
-    font-family: 'Raleway';
+    font-family: 'Raleway Bold', sans-serif;
 }
 
 .meio .categoriasFeed .direitoCAP{

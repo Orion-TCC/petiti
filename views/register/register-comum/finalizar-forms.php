@@ -6,7 +6,10 @@ $id = $_SESSION['id-cadastro'];
 for ($a=0; $a < 100; $a++) { 
     $urlPets = "http://localhost/petiti/api/usuario/$id/pets";
 }
-$jsonPets = file_get_contents($urlPets);
+for ($i=0; $i < 10; $i++) { 
+    $jsonPets = file_get_contents($urlPets);
+}
+
 
 $dadosPets = (array) json_decode($jsonPets, true);
 

@@ -49,6 +49,14 @@
     padding-inline: 1.5rem;
 }
 
+.Meio .abanotificacoes .notificacao a{
+    color: black;
+}
+
+.Meio .abanotificacoes .notificacao a:hover{
+    color: var(--color-pastelDark);
+}
+
 .Meio .abanotificacoes :first-child{
     border-bottom: none ;
     border-top: none;

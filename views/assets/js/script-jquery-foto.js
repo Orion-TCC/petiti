@@ -89,6 +89,7 @@ $(document).ready(function () {
             $("#baseFoto").val(img);
             $("#preview").attr("src", "");
             $("#preview").attr("src", html);
+
             console.log(data);
           },
         });

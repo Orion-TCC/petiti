@@ -59,7 +59,7 @@
 
   .meio .infoHolder a{
 
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway Bold', sans-serif;
     color: var(--color-purple);
     font-weight: 900;
     white-space: nowrap;
@@ -80,9 +80,9 @@
   .meio .topo .btn{
     color: var(--color-dark);
     padding-inline: 1.2rem;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway Bold', sans-serif;
     font-weight: 900;
-    box-shadow: 4px 1px 18px 0px #00000057;
+    box-shadow: 0px 5px 15px rgb(0 0 0 / 14%);
   }
 
   /* modal editar perfil */

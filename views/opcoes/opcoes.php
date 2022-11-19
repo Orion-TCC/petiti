@@ -36,7 +36,7 @@ $contagemPets = count($dadosPets['pets']);
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
 
     <!-- título da pág e icone (logo) -->
-    <title>Pet iti - Feed</title>
+    <title>Pet iti - Configurações</title>
 
 
     <link rel="icon" href="/petiti/assets/images/logo-icon.svg">
@@ -68,7 +68,7 @@ $contagemPets = count($dadosPets['pets']);
                         <div class="fotoDePerfil">
                             <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                         </div>
-                        <h3><?php echo $_SESSION['nome']; ?></h3>
+                        <h3><a href="tutor-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
                     </div>
 
                     <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
@@ -486,7 +486,7 @@ $contagemPets = count($dadosPets['pets']);
                         </div>
                     </div>
 
-                    <div style="display: flex; flex-direction: row;">
+                    <div style="display: flex; flex-direction: row; justify-content: end;">
                         <div>
                             <div id="preview-crop-image"></div>
                         </div>

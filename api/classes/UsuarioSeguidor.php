@@ -93,5 +93,7 @@ class UsuarioSeguidor
             return $array;
         }
     }
+
+    
 }
 ?>

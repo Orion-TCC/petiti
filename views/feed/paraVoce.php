@@ -761,7 +761,7 @@ $contagemPets = count($dadosPets['pets']);
                         </div>
                     </div>
 
-                    <div style="display: flex; flex-direction: row;">
+                    <div style="display: flex; flex-direction: row; justify-content: end;">
                         <div>
                             <div id="preview-crop-image"></div>
                         </div>

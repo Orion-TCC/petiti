@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- título da pág e icone (logo) -->
-    <title>Pet iti - A rede social para petlovers</title>
+    <title>Pet iti - Criar uma nova senha</title>
     <link rel="icon" href="/petiti/views/assets/img/logo-icon.svg">
     <link rel="stylesheet" href="/petiti/views/assets/css/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>

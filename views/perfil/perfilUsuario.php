@@ -142,7 +142,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
             </div>
 
             <h2 class="logo">
-                <img src="./assets/images/logo_principal.svg">
+                <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
             </h2>
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
@@ -483,7 +483,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                         <span class="textPadrao">Arraste fotos, vídeos ou gifs aqui</span>
 
                         <label class="btn inputButtonEstilo">
-                            <input class="inputForm" type="file" accept="image/*" id="flFoto">
+                            <input class="inputForm FotoPostPerfil" type="file" accept="image/*" >
                             <span>Selecionar no computador</span>
                             <label>
                     </div>
@@ -521,14 +521,14 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
 
                 </div>
 
-                <div id="upload-demo"></div>
+                <div id="upload-demo-post-perfil"></div>
 
             </div>
         </section>
 
         <section>
             <div id="criar-post" class="modal">
-                <form id="form-aid" method="post" action="./api/publicar">
+                <form id="form-aid" method="post" action="/petiti/api/publicar">
                     <div class="tituloModalPost">
                         <div style="width: 60%; display: flex; justify-content: end;"><span>Criar um post</span></div>
 
@@ -537,7 +537,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                         </div>
                     </div>
 
-                    <div style="display: flex; flex-direction: row;">
+                    <div style="display: flex; flex-direction: row; justify-content: end;">
                         <div>
                             <div id="preview-crop-image"></div>
                         </div>
@@ -560,7 +560,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
 
                                 <input type="hidden" name="categoriasValue" id="categoriasValue" value="">
 
-                                <input type="hidden" name="baseFoto" class="baseFoto">
+                                <input value="0" type="hidden" name="baseFoto" class="baseFoto">
 
 
                                 <div class="letraCont">

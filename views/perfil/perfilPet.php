@@ -141,7 +141,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                 </div>
 
             <h2 class="logo">
-                <img src="./assets/images/logo_principal.svg">
+                <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
             </h2>
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>

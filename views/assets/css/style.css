@@ -139,6 +139,7 @@ body {
   margin-top: 20px;
 }
 
+
 /* PAGE CADASTRO USUARIO */
 .holderFormularioUsuario {
   height: 100vh;
@@ -371,9 +372,9 @@ body {
   background: #fcf892;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  width: 400px;
+  width: 405px;
   height: 44px;
-  margin: 45px 0 20px 0;
+  margin-top: 1.2rem;
   align-self: center;
   justify-self: center;
   cursor: pointer;
@@ -1279,7 +1280,7 @@ body {
   backdrop-filter: blur(40px);
   border-radius: 20px;
   height: 50px;
-  width: 400px;
+  width: 405px;
   font-family: "Public Sans Bold", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1334,8 +1335,9 @@ body {
   background-size: cover;
   background-image: url("../img/fundoRecover.svg");
 }
+
 .formRecover {
-  width: 465px;
+  width: 420px;
   background-color: #bad5db;
   padding: 50px;
   display: flex;
@@ -1343,12 +1345,14 @@ body {
   border-radius: 50px;
   align-items: center;
 }
+
 .itemsForm {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
 }
+
 .fotoRecover {
   width: 245px;
 }
@@ -1362,19 +1366,22 @@ body {
   margin-left: 18px;
   margin-right: 18px;
 }
+
 .textoFormRecover {
   font-family: "Raleway Bold", sans-serif;
   color: #000000;
   font-size: 20px;
-  text-align: justify;
+  text-align: center;
   margin-bottom: 30px;
 }
+
 .textoFormRecoverEmail {
   font-family: "Raleway Bold", sans-serif;
   color: #db310c;
-  font-size: 20px;
-  margin-top: 30px;
+  font-size: 1rem;
+  margin-top: 1rem;
 }
+
 /* ERRO 404 */
 
 .error404Main{

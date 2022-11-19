@@ -670,6 +670,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--color-dark);
+  padding: 1rem 1.2rem
 }
 
 .meio .faixaPost {
@@ -685,7 +686,6 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 .meio .criarPost button {
   font-size: 0.9rem;
   align-self: flex-end;
-  padding: 0.5rem 2rem;
   margin-right: 1rem;
   box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.25);
 
@@ -899,7 +899,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   background-image: url("../images/pataCurtida.svg");
 
   width: 2.2rem;
-  height: 2rem;
+  height: 2.2rem;
 
   padding-bottom: 2.1rem;
 
@@ -1731,7 +1731,6 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 
 .opcoesPost li {
   font-size: 17;
-  color: #DB310C;
   padding: var(--card-padding);
   display: flex;
   flex-direction: row;
@@ -1742,7 +1741,9 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   font-size: 1.5rem;
 }
 
-
+#denunciarCor{
+  color: #DB310C;
+}
 
 .excluirPost {
   padding-left: 0.3em;
@@ -1935,17 +1936,74 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   }
 }
 
+.certeza-excluir{
+  width: 335px !important;
+  height: 235px;
+  margin-top: 17rem;
+}
+
+.innerCerteza-excluir{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.innerCerteza-excluir h5{
+ width: 18rem;;
+}
+
+.innerCerteza-excluir .btn{
+  font-family: 'Raleway Bold', sans-serif;
+  font-size: 1.1rem;
+  padding: var(--btn-padding);
+  padding-inline: 2rem;
+}
+
 .opcoes-certeza-excluir{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
-.certeza-excluir-post{
-  color: red;
-  cursor: pointer;
+.opcoes-certeza-excluir .cancelar{
+  transition: all 300ms ease;
+  border: 1px var(--color-pastelDark) solid;
+  
+  background: var(--color-white);
+  box-shadow: 4px 3px 10px rgba(0, 0, 0, 0.25);
 }
 
-.cancelar-excluir-post{
-  color: black;
-  cursor: pointer;
+.opcoes-certeza-excluir .cancelar:hover{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.opcoes-certeza-excluir .excluir{
+  transition: all 300ms ease;
+  border: 1px #cb2d0a solid;
+  
+  background: var(--color-white);
+  box-shadow: 4px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.opcoes-certeza-excluir .excluir:hover>a {
+  color: white;
+}
+
+.opcoes-certeza-excluir .excluir:hover{
+  background: #cb2d0a;
+}
+
+
+.opcoes-certeza-excluir .excluir a{
+  color: #cb2d0a ;
+}
+
+.denuncia {
+  
 }

@@ -746,4 +746,16 @@ class Usuario
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function sugestoesSeguidores($id){
+        $con = Conexao::conexao();
+        $query = "SELECT tbusuario.idUsuario, nomeUsuario, loginUsuario FROM tbusuario INNER JOIN tbusuarioseguidor on tbusuarioseguidor.idUsuario = tbusuario.idUsuario 
+        WHERE  tbusuarioseguidor.idSeguidor IN (
+        SELECT tbusuario.idUsuario FROM tbusuario INNER JOIN tbusuarioseguidor on tbusuarioseguidor.idUsuario = tbusuario.idUsuario WHERE tbusuarioseguidor.idSeguidor = $id 
+        ) AND tbusuarioseguidor.idUsuario != $id";
+
+        $resultado = $con->query($query);
+        return $resultado->fetch(PDO::FETCH_ASSOC);
+        
+    }
 }

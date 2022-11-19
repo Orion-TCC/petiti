@@ -100,7 +100,7 @@ $contagemPets = count($dadosPets['pets']);
             </div>
 
             <h2 class="logo">
-                <img src="/petiti/assets/images/logo_principal.svg">
+                <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
             </h2>
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
@@ -174,12 +174,12 @@ $contagemPets = count($dadosPets['pets']);
 
                     <a href="#" class="menu-item  ativo">
                         <span><i class="uil uil-heart-break"></i></span>
-                        <h3>Animais perdidos</h3>
+                        <h3>Animais Perdidos</h3>
                     </a>
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais para adoção</h3>
+                        <h3>Animais para Adoção</h3>
                     </a>
 
 
@@ -360,7 +360,7 @@ $contagemPets = count($dadosPets['pets']);
                                                 <a href="#modal-denuncia" rel="modal:open">
                                                     <div id="<?php echo $id; ?>" class="postDenunciado">
                                                         <div id="<?php echo $idUsuarioPub; ?>" class="denunciaPost">
-                                                            <li>
+                                                            <li id="denunciarcor">
 
                                                                 <i class="fa-solid fa-circle-exclamation">
                                                                 </i>
@@ -752,7 +752,7 @@ $contagemPets = count($dadosPets['pets']);
                         </div>
                     </div>
 
-                    <div style="display: flex; flex-direction: row;">
+                    <div style="display: flex; flex-direction: row; justify-content: end;">
                         <div>
                             <div id="preview-crop-image"></div>
                         </div>
