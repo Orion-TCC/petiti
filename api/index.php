@@ -126,6 +126,7 @@ $app->post('/usuario/info', function (Request $request, Response $response, arra
     $bio = $_POST['txBio'];
     $local = $_POST['txLocal'];
     $site = $_POST['txSite'];
+    
 
 
     $usuario->setIdUsuario($id);

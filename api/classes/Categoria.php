@@ -72,9 +72,8 @@ class categoria
     public function listarCategoriasPopulares()
     {
         $con = Conexao::conexao();
-        $query = "SELECT COUNT(tbcategoriapublicacao.idCategoria), 
-        categoria  FROM tbcategoriapublicacao 
-        INNER JOIN tbcategoria ON tbcategoriapublicacao.idCategoria = tbcategoria.idCategoria";
+        $query = "SELECT count(tbcategoriapublicacao.idCategoria) as qtd, categoria FROM tbcategoriapublicacao INNER JOIN tbcategoria ON tbcategoriapublicacao.idCategoria = tbcategoria.idCategoria
+        GROUP by categoria LIMIT 8";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
@@ -156,7 +155,8 @@ class categoria
             return $linha['qtd'];
         }
     }
-    public function updateStatus($update){
+    public function updateStatus($update)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare("UPDATE tbcategoria SET statusCategoria = ? WHERE idCategoria = ?");
         $stmt->bindValue(1, $update->getStatusCategoria());

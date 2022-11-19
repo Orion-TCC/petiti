@@ -163,7 +163,7 @@ $(document).ready(function () {
             "<h3 style='color: rgba(86, 86, 86, 1);'>" +
             data[0].textoComentario +
             "</h3> </div>"
-        ).appendTo(".comentarios");
+        ).appendTo("#comentarios"+id);
         $("#txtComentar" + id).val("");
       },
     });
