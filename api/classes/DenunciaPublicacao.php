@@ -257,8 +257,9 @@ class DenunciaPublicacao
         $query = "SELECT idDenunciaPublicacao, textoDenunciaPublicacao, statusDenunciaPublicacao,
         DAY(dataDenunciaPublicacao) as dia, MONTHNAME(dataDenunciaPublicacao) as mes, YEAR(dataDenunciaPublicacao) as ano, caminhoFotoPublicacao, pub.textoPublicacao as texto,
         idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, tbdenunciapublicacao.idPublicacao, innerDenunciado.loginUsuario as usuarioDenunciado,
-        innerDenunciador.loginUsuario as usuarioDenunciador
+        innerDenunciador.loginUsuario as usuarioDenunciador, fotouser.caminhoFoto as fotoDenunciado
         FROM tbDenunciaPublicacao
+        INNER JOIN tbfotousuario fotouser ON fotouser.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciado
         INNER JOIN tbpublicacao pub ON pub.idPublicacao = tbdenunciapublicacao.idPublicacao
         INNER JOIN tbfotopublicacao fotopub ON fotopub.idpublicacao = tbdenunciapublicacao.idpublicacao
         INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaPublicacao.idUsuarioDenunciado

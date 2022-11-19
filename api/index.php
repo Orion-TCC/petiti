@@ -269,12 +269,13 @@ $app->get('/ativar-tutor/{id}', function (Request $request, Response $response, 
     header('location:/petiti/tutores-dashboard');
 });
 
-$app->get('/bloquear-tutor-denunciado/{idDenunciado}/{idDenPub}', function (Request $request, Response $response, array $args) {
+$app->get('/bloquear-tutor-denunciado/{tipoDenuncia}/{idDenunciado}/{idDen}', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
     $usuario->setIdUsuario($args['idDenunciado']);
     $usuario->setStatusUsuario(0);
     $usuario->updateStatus($usuario);
     $denunciaPublicacao = new DenunciaPublicacao();
+    $denunciaUsuario = new DenunciaUsuario();
     $cookie = new Cookies;
 
     $cookie->criarCookie(
@@ -294,11 +295,27 @@ $app->get('/bloquear-tutor-denunciado/{idDenunciado}/{idDenPub}', function (Requ
         1
     );
 
-    $denunciaPublicacao->setIdDenunciaPublicacao($args['idDenPub']);
-    $denunciaPublicacao->setStatusDenunciaPublicacao(2);
-    $denunciaPublicacao->updateStatus($denunciaPublicacao);
-    $decisao = "Usuario bloqueado";
-    $denunciaPublicacao->updateDecisao($args['idDenPub'], $decisao);
+    if ($args['tipoDenuncia'] == "publicacao") {
+        $denunciaPublicacao->setIdDenunciaPublicacao($args['idDen']);
+        $denunciaPublicacao->setStatusDenunciaPublicacao(2);
+        $denunciaPublicacao->updateStatus($denunciaPublicacao);
+        $decisao = "Usuario bloqueado";
+        $denunciaPublicacao->updateDecisao($args['idDen'], $decisao);
+    } else if ($args['tipoDenuncia'] == "usuarioDenunciado") {
+        $denunciaUsuario->setIdDenunciaUsuario($args['idDen']);
+        $denunciaUsuario->setStatusDenunciaUsuario(2);
+        $denunciaUsuario->updateStatus($denunciaUsuario);
+        $decisao = "Usuario denunciado bloqueado";
+        $denunciaUsuario->updateDecisao($args['idDen'], $decisao);
+    } else if ($args['tipoDenuncia'] == "usuarioDenunciador") {
+        $denunciaUsuario->setIdDenunciaUsuario($args['idDen']);
+        $denunciaUsuario->setStatusDenunciaUsuario(2);
+        $denunciaUsuario->updateStatus($denunciaUsuario);
+        $decisao = "Usuario denunciador bloqueado";
+        $denunciaUsuario->updateDecisao($args['idDen'], $decisao);
+    } else if ($args['tipoDenuncia'] == "comentario") {
+    }
+
 
     header('location:/petiti/denuncias-dashboard');
 });
@@ -328,17 +345,18 @@ $app->get('/bloquear-tutor/{id}', function (Request $request, Response $response
     header('location:/petiti/tutores-dashboard');
 });
 
-$app->get('/passar-denuncia-analise/{id}', function(Request $request, Response $response, array $args){
-    $denunciaPublicacao = new DenunciaPublicacao();
-    $denunciaPublicacao->setIdDenunciaPublicacao($args['id']);
-    $denunciaPublicacao->setStatusDenunciaPublicacao(1);
-    $cookie = new Cookies;
+$app->get('/passar-denuncia-analise/{tipoDenuncia}/{id}', function (Request $request, Response $response, array $args) {
+    if ($args['tipoDenuncia'] == "publicacao") {
+        $denunciaPublicacao = new DenunciaPublicacao();
+        $denunciaPublicacao->setIdDenunciaPublicacao($args['id']);
+        $denunciaPublicacao->setStatusDenunciaPublicacao(1);
+        $cookie = new Cookies();
 
-    $denunciaPublicacao->updateStatus($denunciaPublicacao);
+        $denunciaPublicacao->updateStatus($denunciaPublicacao);
 
-    $cookie->criarCookie(
-        "denunciaParaAnalise",
-        "<div class='popup'></div>
+        $cookie->criarCookie(
+            "denunciaParaAnalise",
+            "<div class='popup'></div>
             <div class='toast'>
                 <div class='toast-content'>
                     <div class='message'>
@@ -349,9 +367,35 @@ $app->get('/passar-denuncia-analise/{id}', function(Request $request, Response $
                 <div class='progressbar'></div>
             </div>
   ",
-        1
-    );
-    header('location:/petiti/denuncias-dashboard');
+            1
+        );
+        header('location:/petiti/denuncias-dashboard');
+    } else if ($args['tipoDenuncia'] == "usuario") {
+        $denunciaUsuario = new DenunciaUsuario();
+        $denunciaUsuario->setIdDenunciaUsuario($args['id']);
+        $denunciaUsuario->setStatusDenunciaUsuario(1);
+        $cookie = new Cookies();
+
+        $denunciaUsuario->updateStatus($denunciaUsuario);
+
+        $cookie->criarCookie(
+            "denunciaParaAnalise",
+            "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Denúncia passou para análise</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+            1
+        );
+        header('location:/petiti/denuncias-dashboard');
+    } else if ($args['tipoDenuncia'] == "comentario") {
+    }
 });
 
 $app->get('/ativar-empresa/{id}', function (Request $request, Response $response, array $args) {
@@ -970,7 +1014,7 @@ $app->get('/publicacao-denunciada/delete/{id}/{idDenuncia}', function (Request $
     $denunciaPublicacao->setIdDenunciaPublicacao($args['idDenPub']);
     $denunciaPublicacao->setStatusDenunciaPublicacao(2);
     $denunciaPublicacao->updateStatus($denunciaPublicacao);
-    
+
     $denunciaPublicacao->updateDecisao($args['idDenuncia'], $decisao);
 
     header("Location: /petiti/denuncias-dashboard");
@@ -1163,14 +1207,97 @@ $app->get('/escolher-pet/{id}', function (Request $request, Response $response, 
     header('location: /petiti/pet-perfil');
 });
 
-$app->get('/excluir-denuncia/{id}', function (Request $request, Response $response, array $args){
-    $denunciaPublicacao = new DenunciaPublicacao();
+$app->get('/excluir-denuncia/{tipoDenuncia}/{id}', function (Request $request, Response $response, array $args) {
+    $cookie = new Cookies();
+    if ($args['tipoDenuncia'] == "publicacao") {
+        $denunciaPublicacao = new DenunciaPublicacao();
+        $denunciaPublicacao->setIdDenunciaPublicacao($args['id']);
+        $denunciaPublicacao->setStatusDenunciaPublicacao(2);
 
-    $decisao = "Denúncia Excluída";
+        $denunciaPublicacao->updateStatus($denunciaPublicacao);
 
-    $denunciaPublicacao->updateDecisao($args['id'], $decisao);
+        $decisao = "Denúncia Excluída";
 
-    header("location: /petiti/api/denuncias-dashboard");
+        $denunciaPublicacao->updateDecisao($args['id'], $decisao);
+
+        $cookie->criarCookie(
+            "denunciaApagada",
+            "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Denúncia apagada com sucesso</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+            1
+        );
+
+        header("location: /petiti/denuncias-dashboard");
+    } else if ($args['tipoDenuncia'] == "usuario") {
+        $denunciaUsuario = new DenunciaUsuario();
+        $denunciaUsuario->setIdDenunciaUsuario($args['id']);
+        $denunciaUsuario->setStatusDenunciaUsuario(2);
+
+        $denunciaUsuario->updateStatus($denunciaUsuario);
+
+        $decisao = "Denúncia Excluída";
+
+        $denunciaUsuario->updateDecisao($args['id'], $decisao);
+
+        $cookie->criarCookie(
+            "denunciaApagada",
+            "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Denúncia apagada com sucesso</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+            1
+        );
+
+        header("location: /petiti/denuncias-dashboard");
+    } else if ($args['tipoDenuncia'] == "comentario") {
+    }
+});
+
+$app->post('/denunciaUsuario', function (Request $request, Response $response, array $args) {
+    $denunciaUsuario = new DenunciaUsuario();
+    $usuario = new Usuario();
+    $cookie = new Cookies();
+
+    @session_start();
+
+    $denunciaUsuario->setUsuarioDenunciador($_SESSION['id']);
+
+    $usuario->setIdUsuario($_POST['idDenunciado']);
+    $denunciaUsuario->setUsuarioDenunciado($usuario);
+
+    $denunciaUsuario->settextoDenunciaUsuario($_POST['textoDenuncia']);
+    $denunciaUsuario->setStatusDenunciaUsuario(0);
+
+    $denunciaUsuario->cadastrar($denunciaUsuario);
+
+    $cookie->criarCookie("denuncia", "
+    <div id='toast-denuncia' class='toast-denuncia'>
+        <div class='toast-denuncia-content'>
+            <div class='message-denuncia'>
+                <span class='texto-1'> Obrigado por sua denúncia </span>
+                <span class='texto-2'> Ela será analisada o mais rápido possível</span>
+            </div>
+        </div>
+        <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+        <div class='progressbardenuncia'></div>
+    </div>
+    ", 1);
 });
 
 try {

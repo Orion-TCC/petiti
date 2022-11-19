@@ -3,10 +3,11 @@ require_once('/xampp/htdocs/petiti/api/database/conexao.php');
 class DenunciaUsuario
 {
     private $idDenunciaUsuario;
-    private $Usuario;
+    private $UsuarioDenunciador;
     private $UsuarioDenunciado;
     private $textoDenunciaUsuario;
     private $dataDenunciaUsuario;
+    private $statusDenunciaUsuario;
 
 
     public function getDataDenunciaUsuario()
@@ -136,6 +137,8 @@ class DenunciaUsuario
         innerDenunciador.loginUsuario as usuarioDenunciador
         FROM tbDenunciaUsuario
         INNER JOIN tbfotousuario fotouser ON fotouser.idUsuario = tbDenunciaUsuario.idUsuarioDenunciado
+        INNER JOIN tbUsuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaUsuario.idUsuarioDenunciado
+        INNER JOIN tbUsuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaUsuario.idUsuarioDenunciador
         WHERE statusDenunciaUsuario = 0
         ";
 
@@ -152,6 +155,8 @@ class DenunciaUsuario
         innerDenunciador.loginUsuario as usuarioDenunciador
         FROM tbDenunciaUsuario
         INNER JOIN tbfotousuario fotouser ON fotouser.idUsuario = tbDenunciaUsuario.idUsuarioDenunciado
+        INNER JOIN tbUsuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaUsuario.idUsuarioDenunciado
+        INNER JOIN tbUsuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaUsuario.idUsuarioDenunciador
         WHERE statusDenunciaUsuario = 1
         ";
 
@@ -168,6 +173,8 @@ class DenunciaUsuario
         innerDenunciador.loginUsuario as usuarioDenunciador
         FROM tbDenunciaUsuario
         INNER JOIN tbfotousuario fotouser ON fotouser.idUsuario = tbDenunciaUsuario.idUsuarioDenunciado
+        INNER JOIN tbUsuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaUsuario.idUsuarioDenunciado
+        INNER JOIN tbUsuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaUsuario.idUsuarioDenunciador
         WHERE statusDenunciaUsuario = 2
         ";
 
@@ -228,5 +235,32 @@ class DenunciaUsuario
         $stmt->bindValue(2, $update->getIdDenunciaUsuario());
 
         $stmt->execute();
+    }
+
+    public function ultimaDenuncia(){
+        $con = Conexao::conexao();
+
+        $query = "SELECT MAX(idDenunciausuario) as ultimaDenuncia FROM tbDenunciaUsuario";
+
+        $resultado = $con->query($query);
+        return $resultado->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function buscaDenunciaUsuario($idDenunciaUsuario){
+        $con = Conexao::conexao();
+
+        $query = "SELECT idDenunciaUsuario, textoDenunciaUsuario, statusDenunciaUsuario,
+        DAY(dataDenunciaUsuario) as dia, MONTHNAME(dataDenunciaUsuario) as mes, YEAR(dataDenunciaUsuario) as ano,
+        fotouser.caminhoFoto as fotoDenunciado, fotodenunciador.caminhofoto as fotoDenunciador, idUsuarioDenunciado as denunciado, idUsuarioDenunciador as denunciador, innerDenunciado.loginUsuario as usuarioDenunciado, 
+        innerDenunciador.loginUsuario as usuarioDenunciador
+        FROM tbDenunciaUsuario
+        INNER JOIN tbfotousuario fotouser ON fotouser.idUsuario = tbDenunciaUsuario.idUsuarioDenunciado
+        INNER JOIN tbfotousuario fotodenunciador ON fotodenunciador.idUsuario = tbDenunciaUsuario.idUsuarioDenunciador
+        INNER JOIN tbUsuario innerDenunciado ON innerDenunciado.idUsuario = tbDenunciaUsuario.idUsuarioDenunciado
+        INNER JOIN tbUsuario innerDenunciador ON innerDenunciador.idUsuario = tbDenunciaUsuario.idUsuarioDenunciador
+        WHERE idDenunciaUsuario = $idDenunciaUsuario";
+
+        $resoltado = $con->query($query);
+        return $resoltado->fetch(PDO::FETCH_DEFAULT);
     }
 }
