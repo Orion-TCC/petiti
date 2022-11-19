@@ -40,9 +40,13 @@ $resultado = $con->query($query);
 $listaPostsMes = $resultado->fetchAll();
 
 $denunciaPublicacao = new DenunciaPublicacao();
+$denunciaUsuario = new DenunciaUsuario();
 
 $listaDenunciasPublicacaoAtivas = $denunciaPublicacao->buscaDenunciaPubicacaoAtiva();
 $qtdDenunciasPublicacaoesAtivas = $denunciaPublicacao->buscaQtdDenunciaPublicacaoAtiva();
+
+$listaDenunciasUsuarioAtivas = $denunciaUsuario->buscaDenunciaUsuarioAtiva();
+$qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
 
 ?>
 
@@ -211,26 +215,43 @@ $qtdDenunciasPublicacaoesAtivas = $denunciaPublicacao->buscaQtdDenunciaPublicaca
             <?php
             $resultadoUltimaDenuncia = $denunciaPublicacao->ultimaDenuncia();
             $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
-            for ($p = 1; $p <= 3; $p++) {
-              $qtdDenunciasPublicacaoesAtivas = $denunciaPublicacao->buscaQtdDenunciaPublicacaoAtiva();
-              $arrayDenunciaPublicacao1 = $denunciaPublicacao->buscaDenunciaPublicacao($ultimaDenuncia);
-              $denunciador = $arrayDenunciaPublicacao1['usuarioDenunciador'];
-              $denunciado = $arrayDenunciaPublicacao1['usuarioDenunciado'];
+            $arrayDenunciaPublicacao = $denunciaPublicacao->buscaDenunciaPublicacao($ultimaDenuncia);
+            $denunciador = $arrayDenunciaPublicacao['usuarioDenunciador'];
+            $denunciado = $arrayDenunciaPublicacao['usuarioDenunciado'];
+            $foto = $arrayDenunciaPublicacao['fotoDenunciado'];
             ?>
+
           <div class="msg-denuncia">
             <div class="foto-perfil">
-              <img src="/petiti/private-adm/dashboard/images/le.jpg" />
-              <!--puxar do banco (pessoa que fez a denuncia)-->
+              <img src="<?php echo $foto; ?>" />
             </div>
             <div class="mensagem">
-              <span style="font-weight: 800">@<?php echo $denunciador; ?><?php  ?></span> denúnciou
-              o post de @<?php echo $denunciado; ?>.
+              O post de <span style="color: #DB310C; font-weight: 750;">@<?php echo $denunciado; ?> </span> foi denunciado por <span style="font-weight: 800">@<?php echo $denunciador; ?>
+              
               </p>
               <p id="p-small">10 minutos atrás</p>
             </div>
           </div>
-        <?php  $ultimaDenuncia--; }
-        ?>
+
+          <?php
+          $resultadoUltimaDenuncia = $denunciaUsuario->ultimaDenuncia();
+          $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
+          $arrayDenunciaUsuario = $denunciaUsuario->buscaDenunciaUsuario($ultimaDenuncia);
+          $denunciador = $arrayDenunciaUsuario['usuarioDenunciador'];
+          $denunciado = $arrayDenunciaUsuario['usuarioDenunciado'];
+          $foto = $arrayDenunciaUsuario['fotoDenunciado'];
+          ?>
+          <div class="msg-denuncia">
+            <div class="foto-perfil">
+              <img src="<?php echo $foto; ?>" />
+            </div>
+            <div class="mensagem">
+              O usuário <span style="color: #DB310C; font-weight: 750;">@<?php echo $denunciado; ?></span> foi denunciado por <span style="font-weight: 800">@<?php echo $denunciador; ?><?php  ?></span> 
+              </p>
+              <p id="p-small">10 minutos atrás</p>
+            </div>
+          </div>
+
         </div>
       </div>
       <!------------------- final - denuncias recentes ------------------->
