@@ -477,10 +477,10 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 <?php if ($contagemComentarios > 0 ) {
                                 for ($c = 0; $c  < $contagemComentarios; $c++) { ?>
                                 <div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'>
-                                    <h2 style='font-weight: 900 !important; align-self: start;'>
+                                    <h2 style='font-weight: 900 !important; align-self: start; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: fit-content; max-width: 10rem;'>
                                         <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario']?>
                                     </h2>
-                                    <h3 style='color: rgba(86, 86, 86, 1);'>
+                                    <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 25rem;'>
                                         <?php echo $dadosComentarios['comentarios'][$c]['textoComentario']?>
                                     </h3>
                                 </div>
@@ -490,7 +490,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     $c = $contagemComentarios-1;
                                 }    
                             }
-                            echo "Ver mais...";
+                          ?>  
+                             <a href="#modal-post" rel="modal:open" style="color: black; width: fit-content;">Ver mais...</a> <?php 
                         } ?>
                             </div>
 
@@ -945,8 +946,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                         <div class="comentarioInfos">
 
                                             <div class="info">
-                                                <h4>nome</h4>
-                                                <h4 class="text-muted">comentario</h4>
+                                                <div style="  word-break: break-all;">
+                                                    <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
+                                                </div>
                                             </div>
 
                                             <div class="info">

@@ -2155,11 +2155,16 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   display: flex;
   flex-direction: column;
   row-gap: 0.6rem;
+  width: 24rem;
 }
 
 .rightSidePost .comentariosHolder .comentarioHolder .comentarioInfos .info{
   display: flex;
   gap: 0.5rem;
+
+}
+.rightSidePost .comentariosHolder .comentarioHolder .fotoDePerfil{
+  align-self: start;
 }
 
 

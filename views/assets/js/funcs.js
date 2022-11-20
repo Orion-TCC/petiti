@@ -101,34 +101,6 @@ $(document).ready(function () {
     });
   });
 
-<<<<<<< HEAD
-  $(".seguir-na-postagem").on("click", function () {
-    id = $(this).attr("id");
-=======
-  $(".seguirNotif").on("click", function () {
-    id = $(this).val();
->>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
-    $.ajax({
-      type: "POST",
-      url: "/petiti/api/seguir",
-      data: { id: id },
-      success: function (data) {
-<<<<<<< HEAD
-        if (data[2] == true) {
-          $("#icon-seguir-post").removeClass("fa-user-plus");
-          $("#icon-seguir-post").addClass("fa-user-minus");
-          $(".deixSeguir").text("Deixar de seguir")
-        } else {
-          $("#icon-seguir-post").removeClass("fa-user-minus");
-          $("#icon-seguir-post").addClass("fa-user-plus");
-          $(".deixSeguir").text("Seguir")
-        }
-      }
-    });
-  });
-
-
-
   $(".seguirNotif").on("click", function () {
     id = $(this).val();
     $.ajax({
@@ -149,21 +121,6 @@ $(document).ready(function () {
       },
     });
   });
-=======
-        console.log(data);
-        if (data[2] == false) {
-          $(".botaoUsuario" + id).addClass("btn-primary");
-          $(".botaoUsuario" + id).removeClass("btn-secundary");
-          $(".botaoUsuario" + id).text("Seguir");
-        } else {
-          $(".botaoUsuario" + id).removeClass("btn-primary");
-          $(".botaoUsuario" + id).addClass("btn-secundary");
-          $(".botaoUsuario" + id).text("Seguindo");
-        }
-      },
-    });
-  });
->>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
 
   $(".seguirPet").on("click", function () {
     id = $(this).val();
@@ -201,44 +158,17 @@ $(document).ready(function () {
         console.log();
         $(
           "<div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'> <h2 style='font-weight: 900 !important; align-self: start;'>" +
-<<<<<<< HEAD
-          data[0].loginUsuario +
-          "</h2> " +
-          "<h3 style='color: rgba(86, 86, 86, 1);'>" +
-          data[0].textoComentario +
-          "</h3> </div>"
-        ).appendTo(".comentarios");
-=======
             data[0].loginUsuario +
             "</h2> " +
             "<h3 style='color: rgba(86, 86, 86, 1);'>" +
             data[0].textoComentario +
             "</h3> </div>"
         ).appendTo("#comentarios" + id);
->>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
         $("#txtComentar" + id).val("");
       },
     });
   });
 
-<<<<<<< HEAD
-  $(".badge-categoria").on("click", function () {
-    id = $(this).attr("id");
-    $.ajax({
-      type: "POST",
-      url: "/petiti/api/seguir-categoria",
-      data: {id: id},
-      success: function (data){
-        console.log(data);
-        if(data[0] == true){
-          $("#" + id).addClass("seguida");
-        }else{
-          $("#" + id).removeClass("seguida");
-        }
-      }
-    });
-  });
-=======
   $(".edit").click(function () {
     var idPub = $(this).attr("id");
     const options = document.getElementById("opcoesPost " + idPub);
@@ -279,7 +209,6 @@ $(document).ready(function () {
       async: true,
     });
   }
->>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
 });
 
 
@@ -356,15 +285,6 @@ function openTab(evt, tabNumber) {
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" ativo", "");
   }
-<<<<<<< HEAD
-
-  document.getElementById(tabNumber).style.display = "flex";
-  evt.currentTarget.className += " ativo";
-}
-
-
-=======
->>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
 
   document.getElementById(tabNumber).style.display = "flex";
   evt.currentTarget.className += " ativo";
