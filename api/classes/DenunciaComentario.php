@@ -3,10 +3,12 @@ require_once('/xampp/htdocs/petiti/api/database/conexao.php');
 class denunciaComentario
 {
     private $idDenunciaComentario;
-    private $Usuario;
+    private $UsuarioDenunciado;
+    private $UsuarioDenunciador;
     private $Comentario;
     private $textoDenunciaComentario;
     private $dataDenunciaComentario;
+    private $statusDenunciaComentario;
 
  
     public function getDataDenunciaComentario(){
@@ -45,12 +47,12 @@ class denunciaComentario
     }
 
 
-    public function getUsuario(){
-        return $this->Usuario;
+    public function getUsuarioDenunciado(){
+        return $this->UsuarioDenunciado;
     }
 
-    public function setUsuario($Usuario){
-        $this->Usuario = $Usuario;
+    public function setUsuario($UsuarioDenunciado){
+        $this->UsuarioDenunciado = $UsuarioDenunciado;
 
         return $this;
     }
@@ -65,6 +67,35 @@ class denunciaComentario
         $this->idDenunciaComentario = $idDenunciaComentario;
 
         return $this;
+    }
+
+    public function getUsuarioDenunciador()
+    {
+        return $this->UsuarioDenunciador;
+    }
+
+    public function setUsuarioDenunciador($UsuarioDenunciador)
+    {
+        $this->UsuarioDenunciador = $UsuarioDenunciador;
+
+        return $this;
+    }
+
+    public function getStatusDenunciaComentario()
+    {
+        return $this->statusDenunciaComentario;
+    }
+
+    public function setStatusDenunciaComentario($statusDenunciaComentario)
+    {
+        $this->statusDenunciaComentario = $statusDenunciaComentario;
+
+        return $this;
+    }
+
+    public function cadastrar($denuncia){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare('INSERT INTO tbDenunciaComentario(idDenunciaComentario, textoDenunciaComentario) ');
     }
 }
 ?>
