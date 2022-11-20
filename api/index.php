@@ -54,6 +54,15 @@ $app->get('/usuario/{id}', function (Request $request, Response $response, array
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
+$app->get('/qtd-notificacoes', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $id = $_SESSION['id'];
+    $notificacao = new Notificacao();
+    $json = json_encode($qtd = $notificacao->qtdNotificacoesNaoVistas($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
 $app->post('/usuario/add', function (Request $request, Response $response, array $args) {
     $data = $request->getParsedBody();
     $usuario = new Usuario();
@@ -1299,6 +1308,33 @@ $app->post('/denunciaUsuario', function (Request $request, Response $response, a
         <div class='progressbardenuncia'></div>
     </div>
     ", 1);
+});
+
+$app->post('/seguir-categoria', function(Request $request, Response $response, array $args){
+    @session_start();
+    $categoriaSeguida = new categoriaSeguida();
+    $idCategoria = $_POST['id'];
+    $idUsuario = $_SESSION['id'];
+
+    $ver = $categoriaSeguida->verificarSeguida($idUsuario, $idCategoria);
+
+    $verificador = $ver['boolean'];
+
+    if($verificador == true){
+        $categoriaSeguida->setIdCategoria($idCategoria);
+        $categoriaSeguida->setidUsuario($idUsuario);
+        $categoriaSeguida->cadastrar($categoriaSeguida);
+    }else{
+        $idCategoriaJaSeguida = $ver['id'];
+        $categoriaSeguida->setIdCategoriaSeguida($idCategoriaJaSeguida);
+        $categoriaSeguida->delete($categoriaSeguida);
+    }
+
+    $arrayVerificador = array($verificador);
+    $json = json_encode($arrayVerificador);
+
+    $response->getBody()->write("$json");
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
 try {

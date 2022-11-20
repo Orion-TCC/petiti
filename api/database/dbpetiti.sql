@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19-Nov-2022 às 21:22
+-- Tempo de geração: 20-Nov-2022 às 03:07
 -- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.1
+-- versão do PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `dbpetiti`
 --
-CREATE DATABASE IF NOT EXISTS `dbpetiti` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `dbpetiti`;
 
 -- --------------------------------------------------------
 
@@ -29,13 +27,11 @@ USE `dbpetiti`;
 -- Estrutura da tabela `tbcategoria`
 --
 
-DROP TABLE IF EXISTS `tbcategoria`;
-CREATE TABLE IF NOT EXISTS `tbcategoria` (
-  `idCategoria` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbcategoria` (
+  `idCategoria` int(11) NOT NULL,
   `categoria` varchar(200) NOT NULL,
-  `statusCategoria` int(11) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`idCategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4;
+  `statusCategoria` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbcategoria`
@@ -45,11 +41,7 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 (1, 'Perdido', 1),
 (2, 'Animal Perdido', 1),
 (3, 'Pet Perdido', 1),
-(4, 'Desaparecido', 1),
-(53, 'Adoção', 1),
-(54, 'Adote um amigo', 1),
-(55, 'Animal em adoção', 1),
-(56, 'Adotar', 1);
+(4, 'Desaparecido', 1);
 
 -- --------------------------------------------------------
 
@@ -57,15 +49,23 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 -- Estrutura da tabela `tbcategoriapublicacao`
 --
 
-DROP TABLE IF EXISTS `tbcategoriapublicacao`;
-CREATE TABLE IF NOT EXISTS `tbcategoriapublicacao` (
-  `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbcategoriapublicacao` (
+  `idCategoriaPublicacao` int(11) NOT NULL,
   `idCategoria` int(11) NOT NULL,
-  `idPublicacao` int(11) NOT NULL,
-  PRIMARY KEY (`idCategoriaPublicacao`),
-  KEY `idCategoria` (`idCategoria`),
-  KEY `idPublicacao` (`idPublicacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4;
+  `idPublicacao` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tbcategoriaseguida`
+--
+
+CREATE TABLE `tbcategoriaseguida` (
+  `idCategoriaSeguida` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idCategoria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -73,18 +73,13 @@ CREATE TABLE IF NOT EXISTS `tbcategoriapublicacao` (
 -- Estrutura da tabela `tbcomentario`
 --
 
-DROP TABLE IF EXISTS `tbcomentario`;
-CREATE TABLE IF NOT EXISTS `tbcomentario` (
-  `idComentario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbcomentario` (
+  `idComentario` int(11) NOT NULL,
   `textoComentario` varchar(200) NOT NULL,
   `qtdcurtidaComentario` int(11) DEFAULT 0,
-  `dataComentario` datetime DEFAULT current_timestamp(),
   `idUsuario` int(11) NOT NULL,
-  `idPublicacao` int(11) NOT NULL,
-  PRIMARY KEY (`idComentario`),
-  KEY `idUsuario` (`idUsuario`),
-  KEY `idPublicacao` (`idPublicacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+  `idPublicacao` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -92,27 +87,21 @@ CREATE TABLE IF NOT EXISTS `tbcomentario` (
 -- Estrutura da tabela `tbcurtidapublicacao`
 --
 
-DROP TABLE IF EXISTS `tbcurtidapublicacao`;
-CREATE TABLE IF NOT EXISTS `tbcurtidapublicacao` (
-  `idCurtidaPublicacao` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbcurtidapublicacao` (
+  `idCurtidaPublicacao` int(11) NOT NULL,
   `idUsuarioCurtida` int(11) NOT NULL,
-  `idPublicacaoCurtida` int(11) NOT NULL,
-  PRIMARY KEY (`idCurtidaPublicacao`),
-  KEY `idUsuarioCurtida` (`idUsuarioCurtida`),
-  KEY `idPublicacaoCurtida` (`idPublicacaoCurtida`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+  `idPublicacaoCurtida` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Acionadores `tbcurtidapublicacao`
 --
-DROP TRIGGER IF EXISTS `tg_curtir`;
 DELIMITER $$
 CREATE TRIGGER `tg_curtir` AFTER INSERT ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
 	UPDATE tbpublicacao SET itimalias = itimalias + 1 WHERE idPublicacao = NEW.idPublicacaoCurtida;
 END
 $$
 DELIMITER ;
-DROP TRIGGER IF EXISTS `tg_descurtir`;
 DELIMITER $$
 CREATE TRIGGER `tg_descurtir` AFTER DELETE ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
 	UPDATE tbpublicacao SET itimalias  = itimalias  - 1
@@ -127,16 +116,12 @@ DELIMITER ;
 -- Estrutura da tabela `tbdenunciacomentario`
 --
 
-DROP TABLE IF EXISTS `tbdenunciacomentario`;
-CREATE TABLE IF NOT EXISTS `tbdenunciacomentario` (
-  `idDenunciaComentario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbdenunciacomentario` (
+  `idDenunciaComentario` int(11) NOT NULL,
   `textoDenunciaComentario` varchar(200) NOT NULL,
   `dataDenunciaComentario` date NOT NULL,
   `idUsuario` int(11) NOT NULL,
-  `idComentario` int(11) NOT NULL,
-  PRIMARY KEY (`idDenunciaComentario`),
-  KEY `idUsuario` (`idUsuario`),
-  KEY `idComentario` (`idComentario`)
+  `idComentario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -145,19 +130,15 @@ CREATE TABLE IF NOT EXISTS `tbdenunciacomentario` (
 -- Estrutura da tabela `tbdenunciapublicacao`
 --
 
-DROP TABLE IF EXISTS `tbdenunciapublicacao`;
-CREATE TABLE IF NOT EXISTS `tbdenunciapublicacao` (
-  `idDenunciapublicacao` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbdenunciapublicacao` (
+  `idDenunciapublicacao` int(11) NOT NULL,
   `textoDenunciapublicacao` varchar(200) NOT NULL,
   `statusDenunciapublicacao` int(11) NOT NULL,
   `dataDenunciaPublicacao` datetime DEFAULT current_timestamp(),
   `idUsuarioDenunciado` int(11) NOT NULL,
   `idUsuarioDenunciador` int(11) NOT NULL,
-  `idPublicacao` int(11) NOT NULL,
-  PRIMARY KEY (`idDenunciapublicacao`),
-  KEY `idUsuarioDenunciado` (`idUsuarioDenunciado`),
-  KEY `idUsuarioDenunciador` (`idUsuarioDenunciador`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+  `idPublicacao` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -165,16 +146,13 @@ CREATE TABLE IF NOT EXISTS `tbdenunciapublicacao` (
 -- Estrutura da tabela `tbdenunciausuario`
 --
 
-DROP TABLE IF EXISTS `tbdenunciausuario`;
-CREATE TABLE IF NOT EXISTS `tbdenunciausuario` (
-  `idUsuarioPublicacao` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbdenunciausuario` (
+  `idDenunciaUsuario` int(11) NOT NULL,
   `textoDenunciaUsuario` varchar(200) NOT NULL,
-  `dataDenunciaPublicacao` date NOT NULL,
-  `idUsuario` int(11) NOT NULL,
-  `idUsuarioDenuncia` int(11) NOT NULL,
-  PRIMARY KEY (`idUsuarioPublicacao`),
-  KEY `idUsuario` (`idUsuario`),
-  KEY `idUsuarioDenuncia` (`idUsuarioDenuncia`)
+  `statusDenunciaUsuario` int(11) NOT NULL,
+  `dataDenunciaUsuario` datetime NOT NULL DEFAULT current_timestamp(),
+  `idUsuarioDenunciador` int(11) NOT NULL,
+  `idUsuarioDenunciado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -183,15 +161,12 @@ CREATE TABLE IF NOT EXISTS `tbdenunciausuario` (
 -- Estrutura da tabela `tbfotopet`
 --
 
-DROP TABLE IF EXISTS `tbfotopet`;
-CREATE TABLE IF NOT EXISTS `tbfotopet` (
-  `idFotoPet` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbfotopet` (
+  `idFotoPet` int(11) NOT NULL,
   `nomeFotoPet` varchar(200) NOT NULL,
   `caminhoFotoPet` varchar(200) NOT NULL,
-  `idPet` int(11) NOT NULL,
-  PRIMARY KEY (`idFotoPet`),
-  KEY `idPet` (`idPet`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+  `idPet` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -199,15 +174,12 @@ CREATE TABLE IF NOT EXISTS `tbfotopet` (
 -- Estrutura da tabela `tbfotopublicacao`
 --
 
-DROP TABLE IF EXISTS `tbfotopublicacao`;
-CREATE TABLE IF NOT EXISTS `tbfotopublicacao` (
-  `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbfotopublicacao` (
+  `idFotoPublicacao` int(11) NOT NULL,
   `caminhoFotoPublicacao` varchar(500) DEFAULT NULL,
   `nomeFotoPublicacao` varchar(200) NOT NULL,
-  `idPublicacao` int(11) NOT NULL,
-  PRIMARY KEY (`idFotoPublicacao`),
-  KEY `idPublicacao` (`idPublicacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4;
+  `idPublicacao` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -215,15 +187,12 @@ CREATE TABLE IF NOT EXISTS `tbfotopublicacao` (
 -- Estrutura da tabela `tbfotousuario`
 --
 
-DROP TABLE IF EXISTS `tbfotousuario`;
-CREATE TABLE IF NOT EXISTS `tbfotousuario` (
-  `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbfotousuario` (
+  `idFotoUsuario` int(11) NOT NULL,
   `nomeFoto` varchar(200) NOT NULL,
   `caminhoFoto` varchar(100) DEFAULT NULL,
-  `idUsuario` int(11) NOT NULL,
-  PRIMARY KEY (`idFotoUsuario`),
-  KEY `idUsuario` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+  `idUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -231,16 +200,12 @@ CREATE TABLE IF NOT EXISTS `tbfotousuario` (
 -- Estrutura da tabela `tbmensagem`
 --
 
-DROP TABLE IF EXISTS `tbmensagem`;
-CREATE TABLE IF NOT EXISTS `tbmensagem` (
-  `idMensagem` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbmensagem` (
+  `idMensagem` int(11) NOT NULL,
   `idUsuarioOrigem` int(11) NOT NULL,
   `idUsuarioDestino` int(11) NOT NULL,
   `textoMensagem` varchar(2500) NOT NULL,
-  `dataMensagem` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`idMensagem`),
-  KEY `idUsuarioDestino` (`idUsuarioDestino`),
-  KEY `idUsuarioOrigem` (`idUsuarioOrigem`)
+  `dataMensagem` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -249,22 +214,16 @@ CREATE TABLE IF NOT EXISTS `tbmensagem` (
 -- Estrutura da tabela `tbnotificacao`
 --
 
-DROP TABLE IF EXISTS `tbnotificacao`;
-CREATE TABLE IF NOT EXISTS `tbnotificacao` (
-  `idNotificacao` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbnotificacao` (
+  `idNotificacao` int(11) NOT NULL,
   `idCurtidaPublicacao` int(11) DEFAULT NULL,
   `idComentário` int(11) DEFAULT NULL,
   `idUsuarioSeguidor` int(11) DEFAULT NULL,
   `dataNotificacao` datetime DEFAULT current_timestamp(),
   `statusNotificacao` int(11) NOT NULL,
   `idUsuarioNotificado` int(11) NOT NULL,
-  `tipoNotificacao` varchar(20) NOT NULL,
-  PRIMARY KEY (`idNotificacao`),
-  KEY `idCurtidaPublicacao` (`idCurtidaPublicacao`),
-  KEY `idComentário` (`idComentário`),
-  KEY `idUsuarioSeguidor` (`idUsuarioSeguidor`),
-  KEY `idUsuarioNotificado` (`idUsuarioNotificado`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4;
+  `tipoNotificacao` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -272,9 +231,8 @@ CREATE TABLE IF NOT EXISTS `tbnotificacao` (
 -- Estrutura da tabela `tbpet`
 --
 
-DROP TABLE IF EXISTS `tbpet`;
-CREATE TABLE IF NOT EXISTS `tbpet` (
-  `idPet` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbpet` (
+  `idPet` int(11) NOT NULL,
   `nomePet` varchar(200) NOT NULL,
   `racaPet` varchar(200) NOT NULL,
   `especiePet` varchar(200) NOT NULL,
@@ -282,10 +240,8 @@ CREATE TABLE IF NOT EXISTS `tbpet` (
   `idadePet` varchar(30) NOT NULL,
   `dataCriacaoPet` datetime NOT NULL DEFAULT current_timestamp(),
   `idUsuario` int(11) NOT NULL,
-  `usuarioPet` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`idPet`),
-  KEY `idUsuario` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+  `usuarioPet` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -293,15 +249,11 @@ CREATE TABLE IF NOT EXISTS `tbpet` (
 -- Estrutura da tabela `tbpetseguidor`
 --
 
-DROP TABLE IF EXISTS `tbpetseguidor`;
-CREATE TABLE IF NOT EXISTS `tbpetseguidor` (
-  `idPetSeguidor` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbpetseguidor` (
+  `idPetSeguidor` int(11) NOT NULL,
   `idPetSeguido` int(11) NOT NULL,
-  `idSeguidor` int(11) NOT NULL,
-  PRIMARY KEY (`idPetSeguidor`),
-  KEY `idPetSeguido` (`idPetSeguido`),
-  KEY `idSeguidor` (`idSeguidor`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+  `idSeguidor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -309,15 +261,12 @@ CREATE TABLE IF NOT EXISTS `tbpetseguidor` (
 -- Estrutura da tabela `tbproduto`
 --
 
-DROP TABLE IF EXISTS `tbproduto`;
-CREATE TABLE IF NOT EXISTS `tbproduto` (
-  `idProduto` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbproduto` (
+  `idProduto` int(11) NOT NULL,
   `textoProduto` varchar(100) NOT NULL,
   `descProduto` varchar(150) NOT NULL,
   `valorProduto` double NOT NULL,
-  `idUsuario` int(11) NOT NULL,
-  PRIMARY KEY (`idProduto`),
-  KEY `idUsuario` (`idUsuario`)
+  `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -326,18 +275,15 @@ CREATE TABLE IF NOT EXISTS `tbproduto` (
 -- Estrutura da tabela `tbpublicacao`
 --
 
-DROP TABLE IF EXISTS `tbpublicacao`;
-CREATE TABLE IF NOT EXISTS `tbpublicacao` (
-  `idPublicacao` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbpublicacao` (
+  `idPublicacao` int(11) NOT NULL,
   `textoPublicacao` varchar(200) NOT NULL,
   `dataPublicacao` datetime NOT NULL,
   `localPub` text DEFAULT NULL,
   `itimalias` int(11) DEFAULT 0,
   `pubImpulso` int(11) NOT NULL DEFAULT 0,
-  `idUsuario` int(11) NOT NULL,
-  PRIMARY KEY (`idPublicacao`),
-  KEY `idUsuario` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4;
+  `idUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -345,14 +291,12 @@ CREATE TABLE IF NOT EXISTS `tbpublicacao` (
 -- Estrutura da tabela `tbservico`
 --
 
-DROP TABLE IF EXISTS `tbservico`;
-CREATE TABLE IF NOT EXISTS `tbservico` (
-  `idServico` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbservico` (
+  `idServico` int(11) NOT NULL,
   `textoServico` varchar(50) NOT NULL,
   `descServico` varchar(150) NOT NULL,
   `valorServico` double NOT NULL,
-  `idUsuario` int(11) NOT NULL,
-  PRIMARY KEY (`idServico`)
+  `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -361,12 +305,10 @@ CREATE TABLE IF NOT EXISTS `tbservico` (
 -- Estrutura da tabela `tbtipousuario`
 --
 
-DROP TABLE IF EXISTS `tbtipousuario`;
-CREATE TABLE IF NOT EXISTS `tbtipousuario` (
-  `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT,
-  `tipoUsuario` varchar(100) NOT NULL,
-  PRIMARY KEY (`idTipoUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `tbtipousuario` (
+  `idTipoUsuario` int(11) NOT NULL,
+  `tipoUsuario` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbtipousuario`
@@ -383,9 +325,8 @@ INSERT INTO `tbtipousuario` (`idTipoUsuario`, `tipoUsuario`) VALUES
 -- Estrutura da tabela `tbusuario`
 --
 
-DROP TABLE IF EXISTS `tbusuario`;
-CREATE TABLE IF NOT EXISTS `tbusuario` (
-  `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbusuario` (
+  `idUsuario` int(11) NOT NULL,
   `nomeUsuario` varchar(200) NOT NULL,
   `senhaUsuario` varchar(200) NOT NULL,
   `loginUsuario` varchar(200) NOT NULL,
@@ -396,10 +337,8 @@ CREATE TABLE IF NOT EXISTS `tbusuario` (
   `siteUsuario` text DEFAULT NULL,
   `statusUsuario` int(11) NOT NULL DEFAULT 1,
   `idTipoUsuario` int(11) NOT NULL,
-  `dataCriacaoConta` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`idUsuario`),
-  KEY `tipoUsuario` (`idTipoUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+  `dataCriacaoConta` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -407,9 +346,8 @@ CREATE TABLE IF NOT EXISTS `tbusuario` (
 -- Estrutura da tabela `tbusuarioendereco`
 --
 
-DROP TABLE IF EXISTS `tbusuarioendereco`;
-CREATE TABLE IF NOT EXISTS `tbusuarioendereco` (
-  `idUsuarioEndereco` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbusuarioendereco` (
+  `idUsuarioEndereco` int(11) NOT NULL,
   `logradouroUsuario` varchar(200) NOT NULL,
   `numeroEnderecoUsuario` varchar(200) NOT NULL,
   `cepUsuario` char(8) NOT NULL,
@@ -417,9 +355,7 @@ CREATE TABLE IF NOT EXISTS `tbusuarioendereco` (
   `complementoUsuario` varchar(100) NOT NULL,
   `cidadeUsuario` varchar(200) NOT NULL,
   `estadoUsuario` varchar(50) NOT NULL,
-  `idUsuario` int(11) NOT NULL,
-  PRIMARY KEY (`idUsuarioEndereco`),
-  KEY `idUsuario` (`idUsuario`)
+  `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -428,15 +364,315 @@ CREATE TABLE IF NOT EXISTS `tbusuarioendereco` (
 -- Estrutura da tabela `tbusuarioseguidor`
 --
 
-DROP TABLE IF EXISTS `tbusuarioseguidor`;
-CREATE TABLE IF NOT EXISTS `tbusuarioseguidor` (
-  `idUsuarioSeguidor` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tbusuarioseguidor` (
+  `idUsuarioSeguidor` int(11) NOT NULL,
   `idSeguidor` int(11) NOT NULL,
-  `idUsuario` int(11) NOT NULL,
-  PRIMARY KEY (`idUsuarioSeguidor`),
-  KEY `idSeguidor` (`idSeguidor`),
-  KEY `idUsuario` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
+  `idUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `tbcategoria`
+--
+ALTER TABLE `tbcategoria`
+  ADD PRIMARY KEY (`idCategoria`);
+
+--
+-- Índices para tabela `tbcategoriapublicacao`
+--
+ALTER TABLE `tbcategoriapublicacao`
+  ADD PRIMARY KEY (`idCategoriaPublicacao`),
+  ADD KEY `idCategoria` (`idCategoria`),
+  ADD KEY `idPublicacao` (`idPublicacao`);
+
+--
+-- Índices para tabela `tbcategoriaseguida`
+--
+ALTER TABLE `tbcategoriaseguida`
+  ADD PRIMARY KEY (`idCategoriaSeguida`),
+  ADD KEY `foreignUsuario` (`idUsuario`),
+  ADD KEY `foreignCategoria` (`idCategoria`);
+
+--
+-- Índices para tabela `tbcomentario`
+--
+ALTER TABLE `tbcomentario`
+  ADD PRIMARY KEY (`idComentario`),
+  ADD KEY `idUsuario` (`idUsuario`),
+  ADD KEY `idPublicacao` (`idPublicacao`);
+
+--
+-- Índices para tabela `tbcurtidapublicacao`
+--
+ALTER TABLE `tbcurtidapublicacao`
+  ADD PRIMARY KEY (`idCurtidaPublicacao`),
+  ADD KEY `idUsuarioCurtida` (`idUsuarioCurtida`),
+  ADD KEY `idPublicacaoCurtida` (`idPublicacaoCurtida`);
+
+--
+-- Índices para tabela `tbdenunciacomentario`
+--
+ALTER TABLE `tbdenunciacomentario`
+  ADD PRIMARY KEY (`idDenunciaComentario`),
+  ADD KEY `idUsuario` (`idUsuario`),
+  ADD KEY `idComentario` (`idComentario`);
+
+--
+-- Índices para tabela `tbdenunciapublicacao`
+--
+ALTER TABLE `tbdenunciapublicacao`
+  ADD PRIMARY KEY (`idDenunciapublicacao`),
+  ADD KEY `idUsuarioDenunciado` (`idUsuarioDenunciado`),
+  ADD KEY `idUsuarioDenunciador` (`idUsuarioDenunciador`);
+
+--
+-- Índices para tabela `tbdenunciausuario`
+--
+ALTER TABLE `tbdenunciausuario`
+  ADD PRIMARY KEY (`idDenunciaUsuario`),
+  ADD KEY `idUsuario` (`idUsuarioDenunciador`),
+  ADD KEY `idUsuarioDenuncia` (`idUsuarioDenunciado`);
+
+--
+-- Índices para tabela `tbfotopet`
+--
+ALTER TABLE `tbfotopet`
+  ADD PRIMARY KEY (`idFotoPet`),
+  ADD KEY `idPet` (`idPet`);
+
+--
+-- Índices para tabela `tbfotopublicacao`
+--
+ALTER TABLE `tbfotopublicacao`
+  ADD PRIMARY KEY (`idFotoPublicacao`),
+  ADD KEY `idPublicacao` (`idPublicacao`);
+
+--
+-- Índices para tabela `tbfotousuario`
+--
+ALTER TABLE `tbfotousuario`
+  ADD PRIMARY KEY (`idFotoUsuario`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
+-- Índices para tabela `tbmensagem`
+--
+ALTER TABLE `tbmensagem`
+  ADD PRIMARY KEY (`idMensagem`),
+  ADD KEY `idUsuarioDestino` (`idUsuarioDestino`),
+  ADD KEY `idUsuarioOrigem` (`idUsuarioOrigem`);
+
+--
+-- Índices para tabela `tbnotificacao`
+--
+ALTER TABLE `tbnotificacao`
+  ADD PRIMARY KEY (`idNotificacao`),
+  ADD KEY `idCurtidaPublicacao` (`idCurtidaPublicacao`),
+  ADD KEY `idComentário` (`idComentário`),
+  ADD KEY `idUsuarioSeguidor` (`idUsuarioSeguidor`),
+  ADD KEY `idUsuarioNotificado` (`idUsuarioNotificado`);
+
+--
+-- Índices para tabela `tbpet`
+--
+ALTER TABLE `tbpet`
+  ADD PRIMARY KEY (`idPet`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
+-- Índices para tabela `tbpetseguidor`
+--
+ALTER TABLE `tbpetseguidor`
+  ADD PRIMARY KEY (`idPetSeguidor`),
+  ADD KEY `idPetSeguido` (`idPetSeguido`),
+  ADD KEY `idSeguidor` (`idSeguidor`);
+
+--
+-- Índices para tabela `tbproduto`
+--
+ALTER TABLE `tbproduto`
+  ADD PRIMARY KEY (`idProduto`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
+-- Índices para tabela `tbpublicacao`
+--
+ALTER TABLE `tbpublicacao`
+  ADD PRIMARY KEY (`idPublicacao`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
+-- Índices para tabela `tbservico`
+--
+ALTER TABLE `tbservico`
+  ADD PRIMARY KEY (`idServico`);
+
+--
+-- Índices para tabela `tbtipousuario`
+--
+ALTER TABLE `tbtipousuario`
+  ADD PRIMARY KEY (`idTipoUsuario`);
+
+--
+-- Índices para tabela `tbusuario`
+--
+ALTER TABLE `tbusuario`
+  ADD PRIMARY KEY (`idUsuario`),
+  ADD KEY `tipoUsuario` (`idTipoUsuario`);
+
+--
+-- Índices para tabela `tbusuarioendereco`
+--
+ALTER TABLE `tbusuarioendereco`
+  ADD PRIMARY KEY (`idUsuarioEndereco`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
+-- Índices para tabela `tbusuarioseguidor`
+--
+ALTER TABLE `tbusuarioseguidor`
+  ADD PRIMARY KEY (`idUsuarioSeguidor`),
+  ADD KEY `idSeguidor` (`idSeguidor`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `tbcategoria`
+--
+ALTER TABLE `tbcategoria`
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT de tabela `tbcategoriapublicacao`
+--
+ALTER TABLE `tbcategoriapublicacao`
+  MODIFY `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+
+--
+-- AUTO_INCREMENT de tabela `tbcategoriaseguida`
+--
+ALTER TABLE `tbcategoriaseguida`
+  MODIFY `idCategoriaSeguida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `tbcomentario`
+--
+ALTER TABLE `tbcomentario`
+  MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `tbcurtidapublicacao`
+--
+ALTER TABLE `tbcurtidapublicacao`
+  MODIFY `idCurtidaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de tabela `tbdenunciacomentario`
+--
+ALTER TABLE `tbdenunciacomentario`
+  MODIFY `idDenunciaComentario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tbdenunciapublicacao`
+--
+ALTER TABLE `tbdenunciapublicacao`
+  MODIFY `idDenunciapublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT de tabela `tbdenunciausuario`
+--
+ALTER TABLE `tbdenunciausuario`
+  MODIFY `idDenunciaUsuario` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tbfotopet`
+--
+ALTER TABLE `tbfotopet`
+  MODIFY `idFotoPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `tbfotopublicacao`
+--
+ALTER TABLE `tbfotopublicacao`
+  MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+
+--
+-- AUTO_INCREMENT de tabela `tbfotousuario`
+--
+ALTER TABLE `tbfotousuario`
+  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de tabela `tbmensagem`
+--
+ALTER TABLE `tbmensagem`
+  MODIFY `idMensagem` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tbnotificacao`
+--
+ALTER TABLE `tbnotificacao`
+  MODIFY `idNotificacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT de tabela `tbpet`
+--
+ALTER TABLE `tbpet`
+  MODIFY `idPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `tbpetseguidor`
+--
+ALTER TABLE `tbpetseguidor`
+  MODIFY `idPetSeguidor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de tabela `tbproduto`
+--
+ALTER TABLE `tbproduto`
+  MODIFY `idProduto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tbpublicacao`
+--
+ALTER TABLE `tbpublicacao`
+  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+
+--
+-- AUTO_INCREMENT de tabela `tbservico`
+--
+ALTER TABLE `tbservico`
+  MODIFY `idServico` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tbtipousuario`
+--
+ALTER TABLE `tbtipousuario`
+  MODIFY `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `tbusuario`
+--
+ALTER TABLE `tbusuario`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de tabela `tbusuarioendereco`
+--
+ALTER TABLE `tbusuarioendereco`
+  MODIFY `idUsuarioEndereco` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tbusuarioseguidor`
+--
+ALTER TABLE `tbusuarioseguidor`
+  MODIFY `idUsuarioSeguidor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Restrições para despejos de tabelas
@@ -481,8 +717,8 @@ ALTER TABLE `tbdenunciapublicacao`
 -- Limitadores para a tabela `tbdenunciausuario`
 --
 ALTER TABLE `tbdenunciausuario`
-  ADD CONSTRAINT `tbdenunciausuario_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tbdenunciausuario_ibfk_2` FOREIGN KEY (`idUsuarioDenuncia`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tbdenunciausuario_ibfk_1` FOREIGN KEY (`idUsuarioDenunciador`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbdenunciausuario_ibfk_2` FOREIGN KEY (`idUsuarioDenunciado`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `tbfotopet`

@@ -1,6 +1,6 @@
 $(document).ready(function () {
   var id = "";
-    var resize = $("#upload-demo-post-perfil").croppie({
+  var resize = $("#upload-demo-post-perfil").croppie({
     enableExif: true,
     enableOrientation: true,
     viewport: {
@@ -13,8 +13,8 @@ $(document).ready(function () {
       width: 795,
       height: 740,
     },
-    });
-    $(".FotoPostPerfil").on("change", function () {
+  });
+  $(".FotoPostPerfil").on("change", function () {
     var reader = new FileReader();
     reader.onload = function (e) {
       resize
@@ -28,8 +28,8 @@ $(document).ready(function () {
     reader.readAsDataURL(this.files[0]);
     $("#modal-recortar-foto").modal("show");
     $(".FotoPostPerfil").val("");
-    });
-  
+  });
+
   $("#continuar-post").on("click", function (ev) {
     ev.preventDefault();
     var blob;
@@ -101,45 +101,88 @@ $(document).ready(function () {
     });
   });
 
-    $(".seguirNotif").on("click", function () {
-      id = $(this).val();
-      $.ajax({
-        type: "POST",
-        url: "/petiti/api/seguir",
-        data: { id: id },
-        success: function (data) {
-          console.log(data);
-          if (data[2] == false) {
-            $(".botaoUsuario"+id).addClass("btn-primary");
-            $(".botaoUsuario"+id).removeClass("btn-secundary");
-            $(".botaoUsuario"+id).text("Seguir");
-          } else {
-            $(".botaoUsuario"+id).removeClass("btn-primary");
-            $(".botaoUsuario"+id).addClass("btn-secundary");
-            $(".botaoUsuario"+id).text("Seguindo");
-          }
-        },
-      });
+<<<<<<< HEAD
+  $(".seguir-na-postagem").on("click", function () {
+    id = $(this).attr("id");
+=======
+  $(".seguirNotif").on("click", function () {
+    id = $(this).val();
+>>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
+    $.ajax({
+      type: "POST",
+      url: "/petiti/api/seguir",
+      data: { id: id },
+      success: function (data) {
+<<<<<<< HEAD
+        if (data[2] == true) {
+          $("#icon-seguir-post").removeClass("fa-user-plus");
+          $("#icon-seguir-post").addClass("fa-user-minus");
+          $(".deixSeguir").text("Deixar de seguir")
+        } else {
+          $("#icon-seguir-post").removeClass("fa-user-minus");
+          $("#icon-seguir-post").addClass("fa-user-plus");
+          $(".deixSeguir").text("Seguir")
+        }
+      }
     });
+  });
+
+
+
+  $(".seguirNotif").on("click", function () {
+    id = $(this).val();
+    $.ajax({
+      type: "POST",
+      url: "/petiti/api/seguir",
+      data: { id: id },
+      success: function (data) {
+        console.log(data);
+        if (data[2] == false) {
+          $(".botaoUsuario" + id).addClass("btn-primary");
+          $(".botaoUsuario" + id).removeClass("btn-secundary");
+          $(".botaoUsuario" + id).text("Seguir");
+        } else {
+          $(".botaoUsuario" + id).removeClass("btn-primary");
+          $(".botaoUsuario" + id).addClass("btn-secundary");
+          $(".botaoUsuario" + id).text("Seguindo");
+        }
+      },
+    });
+  });
+=======
+        console.log(data);
+        if (data[2] == false) {
+          $(".botaoUsuario" + id).addClass("btn-primary");
+          $(".botaoUsuario" + id).removeClass("btn-secundary");
+          $(".botaoUsuario" + id).text("Seguir");
+        } else {
+          $(".botaoUsuario" + id).removeClass("btn-primary");
+          $(".botaoUsuario" + id).addClass("btn-secundary");
+          $(".botaoUsuario" + id).text("Seguindo");
+        }
+      },
+    });
+  });
+>>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
 
   $(".seguirPet").on("click", function () {
     id = $(this).val();
     $.ajax({
       type: "POST",
       url: "/petiti/api/seguir-pet",
-      data: { "idPet": id },
+      data: { idPet: id },
       success: function (data) {
         var qtdSeguidores = data[0];
         $("#seguidores").text(qtdSeguidores);
-         if (data[2] == false) {
-           $(".seguirPet").addClass("btn-primary");
-           $(".seguirPet").removeClass("btn-secundary");
-           $(".seguirPet").text("Seguir");
-         } else {
-           $(".seguirPet").removeClass("btn-primary");
-           $(".seguirPet").addClass("btn-secundary");
-           $(".seguirPet").text("Seguindo");
-         }
+        if (data[2] == false) {
+          $(".seguirPet").addClass("btn-primary");
+          $(".seguirPet").removeClass("btn-secundary");
+          $(".seguirPet").text("Seguir");
+        } else {
+          $(".seguirPet").removeClass("btn-primary");
+          $(".seguirPet").addClass("btn-secundary");
+          $(".seguirPet").text("Seguindo");
+        }
       },
     });
   });
@@ -158,17 +201,88 @@ $(document).ready(function () {
         console.log();
         $(
           "<div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'> <h2 style='font-weight: 900 !important; align-self: start;'>" +
+<<<<<<< HEAD
+          data[0].loginUsuario +
+          "</h2> " +
+          "<h3 style='color: rgba(86, 86, 86, 1);'>" +
+          data[0].textoComentario +
+          "</h3> </div>"
+        ).appendTo(".comentarios");
+=======
             data[0].loginUsuario +
             "</h2> " +
             "<h3 style='color: rgba(86, 86, 86, 1);'>" +
             data[0].textoComentario +
             "</h3> </div>"
-        ).appendTo("#comentarios"+id);
+        ).appendTo("#comentarios" + id);
+>>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
         $("#txtComentar" + id).val("");
       },
     });
   });
+
+<<<<<<< HEAD
+  $(".badge-categoria").on("click", function () {
+    id = $(this).attr("id");
+    $.ajax({
+      type: "POST",
+      url: "/petiti/api/seguir-categoria",
+      data: {id: id},
+      success: function (data){
+        console.log(data);
+        if(data[0] == true){
+          $("#" + id).addClass("seguida");
+        }else{
+          $("#" + id).removeClass("seguida");
+        }
+      }
+    });
+  });
+=======
+  $(".edit").click(function () {
+    var idPub = $(this).attr("id");
+    const options = document.getElementById("opcoesPost " + idPub);
+    if (options.classList.contains("close")) {
+      options.classList.remove("close");
+      options.classList.add("open");
+    } else {
+      options.classList.remove("open");
+      options.classList.add("close");
+    }
+  });
+
+  $(".denunciaPost").click(function () {
+    var idUsu = $(this).attr("id");
+    var idPost = $(".postDenunciado").attr("id");
+    $("#idUsuarioPub").val(idUsu);
+    $("#idPost").val(idPost);
+  });
+
+  function postProcessing(data) {
+    var myArray = data[0].qtd;
+    $("#notificacaoContadorSpan").text(myArray);
+    if (myArray > 0) {
+      $(".mostrarNotificacoes").append("<div class='notificacaoContador'><span id='notificacaoContadorSpan'>"+myArray+"</span></div>");
+    }
+  }
+
+  //
+  getValues();
+
+  function getValues() {
+    $.ajax({
+      url: "http://localhost/petiti/api/qtd-notificacoes",
+      type: "get",
+      dataType: "json",
+      cache: false,
+      success: postProcessing,
+      async: true,
+    });
+  }
+>>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
 });
+
+
 
 function showHideElement() {
   var x = document.getElementById("categoriasHolder");
@@ -206,7 +320,6 @@ function auto_grow(element) {
   element.style.height = element.scrollHeight + "px";
 }
 
-
 function setupTabs() {
   document.querySelectorAll(".userTabOption").forEach((button) => {
     button.addEventListener("click", () => {
@@ -234,22 +347,28 @@ function setupTabs() {
 function openTab(evt, tabNumber) {
   var i, tabcontent, tablinks;
 
-      tabcontent = document.getElementsByClassName("tabs-conteudo");
-      for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-      }
+  tabcontent = document.getElementsByClassName("tabs-conteudo");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
 
-      tablinks = document.getElementsByClassName("menu-item");
-      for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" ativo", "");
-      }
+  tablinks = document.getElementsByClassName("menu-item");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" ativo", "");
+  }
+<<<<<<< HEAD
 
-      document.getElementById(tabNumber).style.display = "flex";
-      evt.currentTarget.className += " ativo";
-      }
+  document.getElementById(tabNumber).style.display = "flex";
+  evt.currentTarget.className += " ativo";
+}
 
-      
 
+=======
+>>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
+
+  document.getElementById(tabNumber).style.display = "flex";
+  evt.currentTarget.className += " ativo";
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   setupTabs();
@@ -308,28 +427,6 @@ function hidePasswordUm() {
   toggle.style.display = "none";
   untoggle.style.display = "block";
 }
-
-
-$(document).ready(function () {
-  $(".edit").click(function () {
-    var idPub = $(this).attr("id");
-    const options = document.getElementById("opcoesPost " + idPub);
-    if (options.classList.contains("close")) {
-      options.classList.remove("close");
-      options.classList.add("open");
-    } else {
-      options.classList.remove("open");
-      options.classList.add("close");
-    }
-  });
-
-  $(".denunciaPost").click(function () {
-    var idUsu = $(this).attr("id");
-    var idPost = $(".postDenunciado").attr("id");
-    $("#idUsuarioPub").val(idUsu);
-    $("#idPost").val(idPost);
-  });
-});
 
 window.onload = function () {
   var hidedivmenupost = document.getElementById("menuPost");

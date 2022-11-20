@@ -26,7 +26,7 @@ $contagemPets = count($dadosPets['pets']);
 
 
 $listaNotif = $notificacao->listarNotif($id);
-
+$notificacao->limparNotificacoesNaoVistas($id);
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
