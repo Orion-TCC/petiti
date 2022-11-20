@@ -3,8 +3,12 @@
 require_once('../../api/classes/curtidaPublicacao.php');
 require_once('../../api/classes/FotoUsuario.php');
 require_once('../../api/classes/UsuarioSeguidor.php');
+require_once('../../api/classes/Categoria.php');
+require_once('../../api/classes/CategoriaSeguida.php');
 $fotousuario = new FotoUsuario();
 $curtidaPub = new curtidaPublicacao();
+$categoria = new categoria();
+$categoriaSeguida = new CategoriaSeguida();
 date_default_timezone_set('America/Sao_Paulo');
 include_once("../../sentinela.php");
 $idUsuarioCurtida = $_SESSION['id'];
@@ -452,7 +456,14 @@ $usuarioSeguidor = new UsuarioSeguidor();
                             <div class="badges">
                                 <?php
                                 for ($j = 0; $j < $contagemCategorias; $j++) {
-                                    echo ("<p class='badge'>" . $dadosCategorias[$j]['categoria'] . "</p>");
+                                    $idCategoriaAtual = $categoria->pesquisarCategoria($dadosCategorias[$j]['categoria']);
+                                    $verificaCategoriaSeguida = $categoriaSeguida->verificarSeguida($_SESSION['id'], $idCategoriaAtual);
+                                    if($verificaCategoriaSeguida['boolean'] == true){
+                                        echo ("<p class='badge-categoria' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
+                                    }else{
+                                        echo ("<p class='badge-categoria seguida' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
+                                    }
+                                    
                                 }
                                 ?>
                             </div>

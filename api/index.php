@@ -1300,6 +1300,33 @@ $app->post('/denunciaUsuario', function (Request $request, Response $response, a
     ", 1);
 });
 
+$app->post('/seguir-categoria', function(Request $request, Response $response, array $args){
+    @session_start();
+    $categoriaSeguida = new categoriaSeguida();
+    $idCategoria = $_POST['id'];
+    $idUsuario = $_SESSION['id'];
+
+    $ver = $categoriaSeguida->verificarSeguida($idUsuario, $idCategoria);
+
+    $verificador = $ver['boolean'];
+
+    if($verificador == true){
+        $categoriaSeguida->setIdCategoria($idCategoria);
+        $categoriaSeguida->setidUsuario($idUsuario);
+        $categoriaSeguida->cadastrar($categoriaSeguida);
+    }else{
+        $idCategoriaJaSeguida = $ver['id'];
+        $categoriaSeguida->setIdCategoriaSeguida($idCategoriaJaSeguida);
+        $categoriaSeguida->delete($categoriaSeguida);
+    }
+
+    $arrayVerificador = array($verificador);
+    $json = json_encode($arrayVerificador);
+
+    $response->getBody()->write("$json");
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
 try {
     $app->run();
 } catch (Exception $e) {

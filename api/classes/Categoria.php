@@ -38,11 +38,11 @@ class categoria
         return $this->statusCategoria;
     }
 
-
     public function setStatusCategoria($statusCategoria)
     {
         $this->statusCategoria = $statusCategoria;
     }
+
     public function cadastrar($categoria)
     {
         $con = Conexao::conexao();

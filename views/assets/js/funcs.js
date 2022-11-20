@@ -109,16 +109,16 @@ $(document).ready(function () {
       data: { id: id },
       success: function (data) {
         if (data[2] == true) {
-        $("#icon-seguir-post").removeClass("fa-user-plus");
-        $("#icon-seguir-post").addClass("fa-user-minus");
-        $(".deixSeguir").text("Deixar de seguir")
-        }else{
+          $("#icon-seguir-post").removeClass("fa-user-plus");
+          $("#icon-seguir-post").addClass("fa-user-minus");
+          $(".deixSeguir").text("Deixar de seguir")
+        } else {
           $("#icon-seguir-post").removeClass("fa-user-minus");
-        $("#icon-seguir-post").addClass("fa-user-plus");
-        $(".deixSeguir").text("Seguir")
+          $("#icon-seguir-post").addClass("fa-user-plus");
+          $(".deixSeguir").text("Seguir")
         }
-        }
-      });
+      }
+    });
   });
 
 
@@ -190,7 +190,26 @@ $(document).ready(function () {
       },
     });
   });
+
+  $(".badge-categoria").on("click", function () {
+    id = $(this).attr("id");
+    $.ajax({
+      type: "POST",
+      url: "/petiti/api/seguir-categoria",
+      data: {id: id},
+      success: function (data){
+        console.log(data);
+        if(data[0] == true){
+          $("#" + id).addClass("seguida");
+        }else{
+          $("#" + id).removeClass("seguida");
+        }
+      }
+    });
+  });
 });
+
+
 
 function showHideElement() {
   var x = document.getElementById("categoriasHolder");
