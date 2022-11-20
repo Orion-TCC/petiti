@@ -56,7 +56,7 @@ session_destroy();
 
                         </div>
 
-                        <button class="formSubmitLogin" type="submit">Entrar</button>
+                        <button class="formSubmitLogin" type="submit" style="margin-top: 2rem">Entrar</button>
                     </form>
                     <?php
                     ?>
@@ -65,13 +65,16 @@ session_destroy();
                             <?php echo $_COOKIE['retorno-login'] ?>
                         </div>
                     <?php } ?>
-                    <span class="textoLogin">
-                        Não tem uma conta? <a href="/petiti/tipo-usuario" class="textoLoginAhref"> Cadastre-se</a>
-                    </span>
+                    <div style="margin-top: 2rem">
+                        <span class="textoLogin">
+                            Não tem uma conta? <a href="/petiti/tipo-usuario" class="textoLoginAhref"> Cadastre-se</a>
+                        </span>
 
-                    <span class="textoLogin">
-                        Esqueceu sua senha? <a href="/petiti/views/recover/senha-recuperacao.php" class="textoLoginAhref "> Recupere</a>
-                    </span>
+                        <span class="textoLogin">
+                            Esqueceu sua senha? <a href="/petiti/views/recover/senha-recuperacao.php" class="textoLoginAhref "> Recupere</a>
+                        </span>
+                    </div>
+                    
                 </div>
         </section>
     </main>

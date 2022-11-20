@@ -207,6 +207,10 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     </a>
                 </div>
 
+
+
+
+
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">
                     <p>
@@ -384,9 +388,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                             <?php } else { ?>
                                                 <li class="li-ExcluirPost">
                                                     <div style="display: flex; align-items: center;">
-                                                        <i class="uil uil-minus-circle"></i>
-                                                        <span class="excluirPost">Excluir Post
-                                                        </span>
+
+                                                        <i style="color: #DB310C;" class="uil uil-minus-circle"></i>
+                                                        <span class="excluirPost">Excluir Post</span>
 
                                                         <div id="modal-exclui-post" class="modal certeza-excluir">
                                                             <div class="innerCerteza-excluir">
@@ -434,7 +438,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <?php }
                                     ?>
 
-                                    <button class="comentar"></button>
+                                    <a href="#modal-post" rel="modal:open"><button class="comentar"></button></a> 
 
                                     <button class="mensagem"></button>
 
@@ -522,7 +526,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     $jsonPerdidos = file_get_contents($urlPerdidos);
                     $dadosPerdidos = (array)json_decode($jsonPerdidos, true);
                     $contagemPerdidos = count($dadosPerdidos['publicacoes']);
-
+                    if($contagemPerdidos > 0){
                     for ($pp = 0; $pp <= 2; $pp++) {
                         $fotoPerdido = $dadosPerdidos['publicacoes'][$pp]['caminhoFoto'];
                         $dataPerdido = $dadosPerdidos['publicacoes'][$pp]['data'];
@@ -565,7 +569,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                             </div>
                         </div>
                     <?php }
-
+}
                     ?>
                 </div>
                 <!-- fim de posts de pets perdidos -->
@@ -695,6 +699,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($sugestao['idUsuario']);
                         $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($sugestao['idUsuario'], $_SESSION['id']);
                         if ($verificarSeguidor['boolean'] == true) { ?>
+                           
                             <div class="whiteBoxHolder">
 
                                 <div class="flex-row">
@@ -704,12 +709,13 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                     <div class="infoSugestoes">
                                         <h4><?php echo $sugestao['nomeUsuario'] ?></h4>
-                                        <h5 class="text-muted">@username</h5>
+                                        <h5 class="text-muted">@ <?php echo $sugestao['loginUsuario'] ?></h5>
                                     </div>
                                 </div>
 
                                 <button class="btn btn-primary">Seguir</button>
                             </div>
+                          
                     <?php }
                     } ?>
 
@@ -887,11 +893,13 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                         <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
 
-                        <span class="spanDenuncia">Denuniar</span>
+                        <h1>Denuniar</h1>
 
-                        <textarea name="txtDenuncia" id="txtDenuncia" cols="30" rows="10"></textarea>
+                        <h5 class="text-muted">Você está denunciando o post de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
 
-                        <input class="submitDenuncia" type="submit" value="Denunciar">
+                        <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200" ></textarea>
+
+                        <input class="btn btn-primary" type="submit" value="Denunciar">
 
                     </form>
 
@@ -900,6 +908,22 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
         </section>
 
 
+        <section>
+            <div id="modal-post" class="modal post">
+                <div style="display: flex; width: 100%; height: 100%;">
+
+                    <div id="preview-crop-image">
+                            <img src="#" alt="">
+                    </div>
+
+
+                    <div class="r">
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
         <!-- fim Modals -->
 

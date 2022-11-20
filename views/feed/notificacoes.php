@@ -276,8 +276,8 @@ $notificacao->limparNotificacoesNaoVistas($id);
                                     <a href="/petiti/<?php echo $loginUsuarioNotif ?>">
                                         <h4>@<?php echo $loginUsuarioNotif ?></h4>
                                     </a>
-                                    <h4 class="text-muted">começou a seguir você</h4>
-                                    <h5 class="text-muted"><?php echo $diferencaFinal ?> </h5>
+                                    <h4 class="text-muted">começou a seguir você.</h4>
+                                    <h5 class="text-muted">Há <?php echo $diferencaFinal ?> </h5>
                                 </div>
 
                                 <?php
@@ -326,8 +326,8 @@ $notificacao->limparNotificacoesNaoVistas($id);
                                         <h4>@<?php echo $loginUsuarioNotif ?></h4>
                                     </a>
 
-                                    <h4 class="text-muted">Curtiu sua postagem</h4>
-                                    <h5 class="text-muted"><?php echo $diferencaFinal ?></h5>
+                                    <h4 class="text-muted">curtiu sua postagem.</h4>
+                                    <h5 class="text-muted">Há <?php echo $diferencaFinal ?></h5>
                                 </div>
 
                                 <img src="<?php echo $foto ?>" alt="" class="previewPostImage">
