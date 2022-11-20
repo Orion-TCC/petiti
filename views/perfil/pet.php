@@ -1,8 +1,8 @@
 <?php
 @session_start();
 include_once("../../sentinela.php");
-require('../../api/classes/Usuario.php');
-require('../../api/classes/Pet.php');
+require_once('../../api/classes/Usuario.php');
+require_once('../../api/classes/Pet.php');
 require_once('../../api/classes/PetSeguidor.php');
 
 @session_start();

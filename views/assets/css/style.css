@@ -1346,6 +1346,16 @@ body {
   align-items: center;
 }
 
+.formEmailEnviado {
+  width: 350px;
+  background-color: #bad5db;
+  padding: 2.8rem 2.8rem 1rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 50px;
+  align-items: center;
+}
+
 .itemsForm {
   display: flex;
   flex-direction: column;

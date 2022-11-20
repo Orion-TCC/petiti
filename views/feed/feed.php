@@ -4,6 +4,7 @@ require_once('../../api/classes/curtidaPublicacao.php');
 require_once('../../api/classes/FotoUsuario.php');
 require_once('../../api/classes/UsuarioSeguidor.php');
 require_once('../../api/classes/Usuario.php');
+require_once('../../api/classes/Categoria.php');
 $fotousuario = new FotoUsuario();
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
@@ -21,6 +22,10 @@ $contagemPets = count($dadosPets['pets']);
 $usuarioSeguidor = new UsuarioSeguidor();
 
 $usuario = new Usuario();
+
+$categoria = new Categoria;
+$listaCategorias  = $categoria->listarCategoriasPopulares();
+
 
 ?>
 <!DOCTYPE php>
@@ -179,9 +184,9 @@ $usuario = new Usuario();
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span style="position: relative;">
+                        <span class="mostrarNotificacoes" style="position: relative;">
                             <i class="uil uil-bell notificacao"></i>
-                            <div class="notificacaoContador"><span>1</span></div>
+                          
                         </span>
                         <h3>Notificações</h3>
                     </a>
@@ -201,6 +206,10 @@ $usuario = new Usuario();
                         <h3>Para Você</h3>
                     </a>
                 </div>
+
+
+
+
 
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">
@@ -293,6 +302,7 @@ $usuario = new Usuario();
                         $jsonComentarios = file_get_contents($urlComentarios);
 
                         $dadosComentarios = (array)json_decode($jsonComentarios, true);
+                        $contagemComentarios = count($dadosComentarios['comentarios']);
 
                         $nome = $dados['publicacoes'][$i]['nome'];
                         $login = $dados['publicacoes'][$i]['login'];
@@ -378,9 +388,9 @@ $usuario = new Usuario();
                                             <?php } else { ?>
                                                 <li class="li-ExcluirPost">
                                                     <div style="display: flex; align-items: center;">
-                                                        <i class="uil uil-minus-circle"></i>
-                                                        <span class="excluirPost">Excluir Post
-                                                        </span>
+
+                                                        <i style="color: #DB310C;" class="uil uil-minus-circle"></i>
+                                                        <span class="excluirPost">Excluir Post</span>
 
                                                         <div id="modal-exclui-post" class="modal certeza-excluir">
                                                             <div class="innerCerteza-excluir">
@@ -428,7 +438,7 @@ $usuario = new Usuario();
                                     <?php }
                                     ?>
 
-                                    <button class="comentar"></button>
+                                    <a href="#modal-post" rel="modal:open"><button class="comentar"></button></a> 
 
                                     <button class="mensagem"></button>
 
@@ -462,8 +472,26 @@ $usuario = new Usuario();
                                 ?>
                             </div>
 
-                            <div class=" comentarios">
+                            <div id="comentarios<?php echo$id?>" class="comentarios">
 
+                                <?php if ($contagemComentarios > 0 ) {
+                                for ($c = 0; $c  < $contagemComentarios; $c++) { ?>
+                                <div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'>
+                                    <h2 style='font-weight: 900 !important; align-self: start;'>
+                                        <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario']?>
+                                    </h2>
+                                    <h3 style='color: rgba(86, 86, 86, 1);'>
+                                        <?php echo $dadosComentarios['comentarios'][$c]['textoComentario']?>
+                                    </h3>
+                                </div>
+
+                                <?php 
+                                if($c == 2){
+                                    $c = $contagemComentarios-1;
+                                }    
+                            }
+                            echo "Ver mais...";
+                        } ?>
                             </div>
 
                             <div class="commentArea">
@@ -492,38 +520,57 @@ $usuario = new Usuario();
                     <div class="heading tituloPetsPerdidos">
                         <h4>Ajude alguém a encontrar seu pet</h4>
                     </div>
+                    <?php
+                    $contadorPostagemPerdidos = 0;
+                    $urlPerdidos = "http://localhost/petiti/api/publicacoes/perdidos";
+                    $jsonPerdidos = file_get_contents($urlPerdidos);
+                    $dadosPerdidos = (array)json_decode($jsonPerdidos, true);
+                    $contagemPerdidos = count($dadosPerdidos['publicacoes']);
+                    if($contagemPerdidos > 0){
+                    for ($pp = 0; $pp <= 2; $pp++) {
+                        $fotoPerdido = $dadosPerdidos['publicacoes'][$pp]['caminhoFoto'];
+                        $dataPerdido = $dadosPerdidos['publicacoes'][$pp]['data'];
+                        $localPerdido =  $dadosPerdidos['publicacoes'][$pp]['local'];
+                        $textoPerdido = $dadosPerdidos['publicacoes'][$pp]['texto'];
+                        $hoje = new DateTime();
+                        $dataPost = new DateTime($dataPerdido);
+                        $intervalo = $hoje->diff($dataPost);
+                        $diferencaAnos = $intervalo->format('%y');
+                        $diferencaMeses = $intervalo->format('%m');
+                        $diferencaDias = $intervalo->format('%a');
+                        $diferencaHoras = $intervalo->format('%h');
+                        $diferencaMinutos = $intervalo->format('%i');
 
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
+                        if ($diferencaAnos == 0) {
+                            if ($diferencaMeses == 0) {
+                                if ($diferencaDias == 0) {
+                                    if ($diferencaHoras == 0) {
+                                        $diferencaFinal = $diferencaMinutos . " minutos";
+                                    } else {
+                                        $diferencaFinal = $diferencaHoras . " horas";
+                                    }
+                                } else {
+                                    $diferencaFinal = $diferencaDias . " dias";
+                                }
+                            } else {
+                                $diferencaFinal = $diferencaMeses . " meses";
+                            }
+                        } else {
+                            $diferencaFinal = $diferencaAnos . " anos";
+                        }
+                    ?>
+                        <div class="postsPerdidos">
+                            <div class="fotoDePerfil">
+                                <img src="<?php echo $fotoPerdido ?>" alt="">
+                            </div>
+                            <div class="infoPostPerdidos">
+                                <h4><?php echo $textoPerdido ?></h4>
+                                <h5 class="text-Muted">Há <span><?php echo $diferencaFinal ?></span> - <span>Localização: <?php echo $localPerdido ?></span></h5>
+                            </div>
                         </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-
+                    <?php }
+}
+                    ?>
                 </div>
                 <!-- fim de posts de pets perdidos -->
 
@@ -536,13 +583,13 @@ $usuario = new Usuario();
                         <div class="categoriasAltaGrid">
 
                             <div class="categorias">
-
                                 <div class="Lugar">
                                     <div class="fotoDePerfil">
                                         <img src="/petiti/views/assets/img/position1.svg" alt="">
                                     </div>
                                     <div class="infoCategoria">
-                                        <h4>tamandua</h4>
+                                        <h4>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
@@ -648,29 +695,29 @@ $usuario = new Usuario();
                     <?php
 
                     $sugestoes = $usuario->sugestoesSeguidores($_SESSION['id']);
-
                     foreach ($sugestoes as $sugestao) {
-                        if($usuarioSeguidor->verificarSeguidor($sugestao, $_SESSION['id']) == true){
+                        $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($sugestao['idUsuario']);
+                        $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($sugestao['idUsuario'], $_SESSION['id']);
+                        if ($verificarSeguidor['boolean'] == true) { ?>
+                           
+                            <div class="whiteBoxHolder">
 
-                        }else{
-                    ?>
-                        <div class="whiteBoxHolder">
+                                <div class="flex-row">
+                                    <div class="fotoDePerfil">
+                                        <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
+                                    </div>
 
-                            <div class="flex-row">
-                                <div class="fotoDePerfil">
-                                    <img src="#" alt="">
+                                    <div class="infoSugestoes">
+                                        <h4><?php echo $sugestao['nomeUsuario'] ?></h4>
+                                        <h5 class="text-muted">@ <?php echo $sugestao['loginUsuario'] ?></h5>
+                                    </div>
                                 </div>
 
-                                <div class="infoSugestoes">
-                                    <h4>nome de usuario</h4>
-                                    <h5 class="text-muted">@username</h5>
-                                </div>
+                                <button class="btn btn-primary">Seguir</button>
                             </div>
-
-                            <button class="btn btn-primary">Seguir</button>
-                        </div>
+                          
                     <?php }
-                } ?>
+                    } ?>
 
                 </div>
             </div>
@@ -841,16 +888,18 @@ $usuario = new Usuario();
                 <div id="modal-denuncia" class="modal denuncia">
 
                     <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
-                       
-                    <input type="hidden" id="idPost" name="idPost" value="">
+
+                        <input type="hidden" id="idPost" name="idPost" value="">
 
                         <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
 
-                        <span class="spanDenuncia">Denuniar</span>
+                        <h1>Denuniar</h1>
 
-                        <textarea name="txtDenuncia" id="txtDenuncia" cols="30" rows="10"></textarea>
+                        <h5 class="text-muted">Você está denunciando o post de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
 
-                        <input class="submitDenuncia" type="submit" value="Denunciar">
+                        <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200" ></textarea>
+
+                        <input class="btn btn-primary" type="submit" value="Denunciar">
 
                     </form>
 
@@ -859,6 +908,22 @@ $usuario = new Usuario();
         </section>
 
 
+        <section>
+            <div id="modal-post" class="modal post">
+                <div style="display: flex; width: 100%; height: 100%;">
+
+                    <div id="preview-crop-image">
+                            <img src="#" alt="">
+                    </div>
+
+
+                    <div class="r">
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
         <!-- fim Modals -->
 

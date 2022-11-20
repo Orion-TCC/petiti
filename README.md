@@ -1,6 +1,8 @@
 <div align="center">
   <img src="https://img.shields.io/github/languages/count/Orion-TCC/petiti?style=for-the-badge">
   <img src="https://img.shields.io/github/repo-size/Orion-TCC/petiti?style=for-the-badge">
+  <img src="https://img.shields.io/github/last-commit/Orion-TCC/petiti?color=blue&style=for-the-badge">
+
 </div>
 
 ##

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Nov-2022 às 05:09
+-- Tempo de geração: 19-Nov-2022 às 21:22
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.1
 
@@ -29,12 +29,13 @@ USE `dbpetiti`;
 -- Estrutura da tabela `tbcategoria`
 --
 
+DROP TABLE IF EXISTS `tbcategoria`;
 CREATE TABLE IF NOT EXISTS `tbcategoria` (
   `idCategoria` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` varchar(200) NOT NULL,
   `statusCategoria` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`idCategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `tbcategoria`
@@ -56,6 +57,7 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 -- Estrutura da tabela `tbcategoriapublicacao`
 --
 
+DROP TABLE IF EXISTS `tbcategoriapublicacao`;
 CREATE TABLE IF NOT EXISTS `tbcategoriapublicacao` (
   `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT,
   `idCategoria` int(11) NOT NULL,
@@ -63,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `tbcategoriapublicacao` (
   PRIMARY KEY (`idCategoriaPublicacao`),
   KEY `idCategoria` (`idCategoria`),
   KEY `idPublicacao` (`idPublicacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -71,16 +73,18 @@ CREATE TABLE IF NOT EXISTS `tbcategoriapublicacao` (
 -- Estrutura da tabela `tbcomentario`
 --
 
+DROP TABLE IF EXISTS `tbcomentario`;
 CREATE TABLE IF NOT EXISTS `tbcomentario` (
   `idComentario` int(11) NOT NULL AUTO_INCREMENT,
   `textoComentario` varchar(200) NOT NULL,
   `qtdcurtidaComentario` int(11) DEFAULT 0,
+  `dataComentario` datetime DEFAULT current_timestamp(),
   `idUsuario` int(11) NOT NULL,
   `idPublicacao` int(11) NOT NULL,
   PRIMARY KEY (`idComentario`),
   KEY `idUsuario` (`idUsuario`),
   KEY `idPublicacao` (`idPublicacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -88,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `tbcomentario` (
 -- Estrutura da tabela `tbcurtidapublicacao`
 --
 
+DROP TABLE IF EXISTS `tbcurtidapublicacao`;
 CREATE TABLE IF NOT EXISTS `tbcurtidapublicacao` (
   `idCurtidaPublicacao` int(11) NOT NULL AUTO_INCREMENT,
   `idUsuarioCurtida` int(11) NOT NULL,
@@ -95,17 +100,19 @@ CREATE TABLE IF NOT EXISTS `tbcurtidapublicacao` (
   PRIMARY KEY (`idCurtidaPublicacao`),
   KEY `idUsuarioCurtida` (`idUsuarioCurtida`),
   KEY `idPublicacaoCurtida` (`idPublicacaoCurtida`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Acionadores `tbcurtidapublicacao`
 --
+DROP TRIGGER IF EXISTS `tg_curtir`;
 DELIMITER $$
 CREATE TRIGGER `tg_curtir` AFTER INSERT ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
 	UPDATE tbpublicacao SET itimalias = itimalias + 1 WHERE idPublicacao = NEW.idPublicacaoCurtida;
 END
 $$
 DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_descurtir`;
 DELIMITER $$
 CREATE TRIGGER `tg_descurtir` AFTER DELETE ON `tbcurtidapublicacao` FOR EACH ROW BEGIN
 	UPDATE tbpublicacao SET itimalias  = itimalias  - 1
@@ -120,6 +127,7 @@ DELIMITER ;
 -- Estrutura da tabela `tbdenunciacomentario`
 --
 
+DROP TABLE IF EXISTS `tbdenunciacomentario`;
 CREATE TABLE IF NOT EXISTS `tbdenunciacomentario` (
   `idDenunciaComentario` int(11) NOT NULL AUTO_INCREMENT,
   `textoDenunciaComentario` varchar(200) NOT NULL,
@@ -137,6 +145,7 @@ CREATE TABLE IF NOT EXISTS `tbdenunciacomentario` (
 -- Estrutura da tabela `tbdenunciapublicacao`
 --
 
+DROP TABLE IF EXISTS `tbdenunciapublicacao`;
 CREATE TABLE IF NOT EXISTS `tbdenunciapublicacao` (
   `idDenunciapublicacao` int(11) NOT NULL AUTO_INCREMENT,
   `textoDenunciapublicacao` varchar(200) NOT NULL,
@@ -156,6 +165,7 @@ CREATE TABLE IF NOT EXISTS `tbdenunciapublicacao` (
 -- Estrutura da tabela `tbdenunciausuario`
 --
 
+DROP TABLE IF EXISTS `tbdenunciausuario`;
 CREATE TABLE IF NOT EXISTS `tbdenunciausuario` (
   `idUsuarioPublicacao` int(11) NOT NULL AUTO_INCREMENT,
   `textoDenunciaUsuario` varchar(200) NOT NULL,
@@ -173,6 +183,7 @@ CREATE TABLE IF NOT EXISTS `tbdenunciausuario` (
 -- Estrutura da tabela `tbfotopet`
 --
 
+DROP TABLE IF EXISTS `tbfotopet`;
 CREATE TABLE IF NOT EXISTS `tbfotopet` (
   `idFotoPet` int(11) NOT NULL AUTO_INCREMENT,
   `nomeFotoPet` varchar(200) NOT NULL,
@@ -188,6 +199,7 @@ CREATE TABLE IF NOT EXISTS `tbfotopet` (
 -- Estrutura da tabela `tbfotopublicacao`
 --
 
+DROP TABLE IF EXISTS `tbfotopublicacao`;
 CREATE TABLE IF NOT EXISTS `tbfotopublicacao` (
   `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT,
   `caminhoFotoPublicacao` varchar(500) DEFAULT NULL,
@@ -195,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `tbfotopublicacao` (
   `idPublicacao` int(11) NOT NULL,
   PRIMARY KEY (`idFotoPublicacao`),
   KEY `idPublicacao` (`idPublicacao`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -203,6 +215,7 @@ CREATE TABLE IF NOT EXISTS `tbfotopublicacao` (
 -- Estrutura da tabela `tbfotousuario`
 --
 
+DROP TABLE IF EXISTS `tbfotousuario`;
 CREATE TABLE IF NOT EXISTS `tbfotousuario` (
   `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `nomeFoto` varchar(200) NOT NULL,
@@ -218,6 +231,7 @@ CREATE TABLE IF NOT EXISTS `tbfotousuario` (
 -- Estrutura da tabela `tbmensagem`
 --
 
+DROP TABLE IF EXISTS `tbmensagem`;
 CREATE TABLE IF NOT EXISTS `tbmensagem` (
   `idMensagem` int(11) NOT NULL AUTO_INCREMENT,
   `idUsuarioOrigem` int(11) NOT NULL,
@@ -235,6 +249,7 @@ CREATE TABLE IF NOT EXISTS `tbmensagem` (
 -- Estrutura da tabela `tbnotificacao`
 --
 
+DROP TABLE IF EXISTS `tbnotificacao`;
 CREATE TABLE IF NOT EXISTS `tbnotificacao` (
   `idNotificacao` int(11) NOT NULL AUTO_INCREMENT,
   `idCurtidaPublicacao` int(11) DEFAULT NULL,
@@ -249,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `tbnotificacao` (
   KEY `idComentário` (`idComentário`),
   KEY `idUsuarioSeguidor` (`idUsuarioSeguidor`),
   KEY `idUsuarioNotificado` (`idUsuarioNotificado`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -257,6 +272,7 @@ CREATE TABLE IF NOT EXISTS `tbnotificacao` (
 -- Estrutura da tabela `tbpet`
 --
 
+DROP TABLE IF EXISTS `tbpet`;
 CREATE TABLE IF NOT EXISTS `tbpet` (
   `idPet` int(11) NOT NULL AUTO_INCREMENT,
   `nomePet` varchar(200) NOT NULL,
@@ -277,6 +293,7 @@ CREATE TABLE IF NOT EXISTS `tbpet` (
 -- Estrutura da tabela `tbpetseguidor`
 --
 
+DROP TABLE IF EXISTS `tbpetseguidor`;
 CREATE TABLE IF NOT EXISTS `tbpetseguidor` (
   `idPetSeguidor` int(11) NOT NULL AUTO_INCREMENT,
   `idPetSeguido` int(11) NOT NULL,
@@ -292,6 +309,7 @@ CREATE TABLE IF NOT EXISTS `tbpetseguidor` (
 -- Estrutura da tabela `tbproduto`
 --
 
+DROP TABLE IF EXISTS `tbproduto`;
 CREATE TABLE IF NOT EXISTS `tbproduto` (
   `idProduto` int(11) NOT NULL AUTO_INCREMENT,
   `textoProduto` varchar(100) NOT NULL,
@@ -308,6 +326,7 @@ CREATE TABLE IF NOT EXISTS `tbproduto` (
 -- Estrutura da tabela `tbpublicacao`
 --
 
+DROP TABLE IF EXISTS `tbpublicacao`;
 CREATE TABLE IF NOT EXISTS `tbpublicacao` (
   `idPublicacao` int(11) NOT NULL AUTO_INCREMENT,
   `textoPublicacao` varchar(200) NOT NULL,
@@ -318,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `tbpublicacao` (
   `idUsuario` int(11) NOT NULL,
   PRIMARY KEY (`idPublicacao`),
   KEY `idUsuario` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -326,6 +345,7 @@ CREATE TABLE IF NOT EXISTS `tbpublicacao` (
 -- Estrutura da tabela `tbservico`
 --
 
+DROP TABLE IF EXISTS `tbservico`;
 CREATE TABLE IF NOT EXISTS `tbservico` (
   `idServico` int(11) NOT NULL AUTO_INCREMENT,
   `textoServico` varchar(50) NOT NULL,
@@ -341,6 +361,7 @@ CREATE TABLE IF NOT EXISTS `tbservico` (
 -- Estrutura da tabela `tbtipousuario`
 --
 
+DROP TABLE IF EXISTS `tbtipousuario`;
 CREATE TABLE IF NOT EXISTS `tbtipousuario` (
   `idTipoUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `tipoUsuario` varchar(100) NOT NULL,
@@ -362,6 +383,7 @@ INSERT INTO `tbtipousuario` (`idTipoUsuario`, `tipoUsuario`) VALUES
 -- Estrutura da tabela `tbusuario`
 --
 
+DROP TABLE IF EXISTS `tbusuario`;
 CREATE TABLE IF NOT EXISTS `tbusuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `nomeUsuario` varchar(200) NOT NULL,
@@ -385,6 +407,7 @@ CREATE TABLE IF NOT EXISTS `tbusuario` (
 -- Estrutura da tabela `tbusuarioendereco`
 --
 
+DROP TABLE IF EXISTS `tbusuarioendereco`;
 CREATE TABLE IF NOT EXISTS `tbusuarioendereco` (
   `idUsuarioEndereco` int(11) NOT NULL AUTO_INCREMENT,
   `logradouroUsuario` varchar(200) NOT NULL,
@@ -405,6 +428,7 @@ CREATE TABLE IF NOT EXISTS `tbusuarioendereco` (
 -- Estrutura da tabela `tbusuarioseguidor`
 --
 
+DROP TABLE IF EXISTS `tbusuarioseguidor`;
 CREATE TABLE IF NOT EXISTS `tbusuarioseguidor` (
   `idUsuarioSeguidor` int(11) NOT NULL AUTO_INCREMENT,
   `idSeguidor` int(11) NOT NULL,
@@ -412,7 +436,7 @@ CREATE TABLE IF NOT EXISTS `tbusuarioseguidor` (
   PRIMARY KEY (`idUsuarioSeguidor`),
   KEY `idSeguidor` (`idSeguidor`),
   KEY `idUsuario` (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Restrições para despejos de tabelas

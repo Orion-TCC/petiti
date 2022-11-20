@@ -54,6 +54,15 @@ $app->get('/usuario/{id}', function (Request $request, Response $response, array
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
+$app->get('/qtd-notificacoes', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $id = $_SESSION['id'];
+    $notificacao = new Notificacao();
+    $json = json_encode($qtd = $notificacao->qtdNotificacoesNaoVistas($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
 $app->post('/usuario/add', function (Request $request, Response $response, array $args) {
     $data = $request->getParsedBody();
     $usuario = new Usuario();
@@ -126,6 +135,7 @@ $app->post('/usuario/info', function (Request $request, Response $response, arra
     $bio = $_POST['txBio'];
     $local = $_POST['txLocal'];
     $site = $_POST['txSite'];
+    
 
 
     $usuario->setIdUsuario($id);

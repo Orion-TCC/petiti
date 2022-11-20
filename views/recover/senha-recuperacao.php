@@ -23,9 +23,9 @@ $status = @$_GET['emailenviado'];
             <div class="fundoRecuperarSenha">
                 <img class="fotoRecover" src="/petiti/assets/images/logo_principal.svg" /></a>
 
-                <div class="formRecover">
+                <div class="formEmailEnviado">
                     <img src="/petiti/views/assets/img/emailEnviado.svg" alt="">
-                    <p class="tituloFormRecover" for="">Email enviado!</p>
+                    <p class="tituloFormRecover" style="margin: 1rem 0 1rem 0" for="">Email enviado!</p>
                     <p class="textoFormRecover" for="">Um link foi enviado para o seu email de cadastro para 
                     a recuperação da sua senha. Você pode <span class="enfaseTexto">fechar</span> essa página agora.</p>
                 </div>

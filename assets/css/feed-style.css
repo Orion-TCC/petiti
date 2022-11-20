@@ -1802,32 +1802,35 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 .formDenuncia {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: var(--card-padding);
 }
 
-.spanDenuncia {
-  font-size: 40;
+
+
+.denuncia .formDenuncia .btn{
+  font-size: 1.1rem;
+  font-family: 'Raleway Bold', sans-serif;
+  background: var(--color-white);
+  border: 1px #cb2d0a solid;
+  color: #cb2d0a;
+  box-shadow: 4px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+
+.denuncia .formDenuncia .btn:hover{
+  background: #cb2d0a;
+  color: var(--color-white);
+}
+
+.denuncia .formDenuncia h5{
+  width: 20rem;
   text-align: center;
-  padding-top: 30px;
 }
 
-.formDenuncia input {
-  margin-top: 40px;
-}
-
-#txtDenuncia{
-  height: 30px;
-  width: 70%;
-  align-self: center;
-  border: 1px solid #ccc;
-}
-
-.submitDenuncia {
-  width: 20%;
-  align-self: center;
-  background-color: RGB(255, 251, 159);
-  font-size: 20;
-  height: 40;
-}
 
 .toast-denuncia {
   position: absolute;
@@ -2015,11 +2018,34 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   color: #cb2d0a ;
 }
 
+.denuncia{
+  width: 540px !important;
+  height: 325px;
+  margin-top: 16rem;
+  
+}
 
   
 .h2DenunciaUsuario{
   margin-top: 10px;
 }
+
+.denuncia .formDenuncia textarea{
+  padding: var(--card-padding);
+  font-family: 'Raleway Bold', sans-serif;
+  font-size: 1rem;
+  resize: none;
+  width: 100%;
+  height: 115px;
+  border-radius: 10px;
+  border: 1px var(--color-gray) solid;
+}
+
+.denuncia .formDenuncia textarea::placeholder{
+  font-size: 1rem;
+  
+}
+
 
 #formDenunciaUsuario{
   display: flex;
@@ -2036,4 +2062,20 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   height: 25px;
   width: 100px;
   border-radius: 5px;
+}
+
+
+
+
+
+/* MODAL DE POST PROPRIO */
+
+.post{
+  width: 1210px !important;
+  max-width: 1210px !important;
+}
+
+#preview-crop-image{
+  width: 60%;
+  height: 100%;
 }

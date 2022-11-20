@@ -128,6 +128,8 @@ class Usuario
 
     public function setSiteUsuario($siteUsuario)
     {
+        $siteUsuario = str_replace("https://", "", $siteUsuario);
+        $siteUsuario = str_replace(" ", "", $siteUsuario);
         $this->siteUsuario = $siteUsuario;
     }
 
@@ -749,13 +751,10 @@ class Usuario
 
     public function sugestoesSeguidores($id){
         $con = Conexao::conexao();
-        $query = "SELECT tbusuario.idUsuario, nomeUsuario, loginUsuario FROM tbusuario INNER JOIN tbusuarioseguidor on tbusuarioseguidor.idUsuario = tbusuario.idUsuario 
-        WHERE  tbusuarioseguidor.idSeguidor IN (
-        SELECT tbusuario.idUsuario FROM tbusuario INNER JOIN tbusuarioseguidor on tbusuarioseguidor.idUsuario = tbusuario.idUsuario WHERE tbusuarioseguidor.idSeguidor = $id 
-        ) AND tbusuarioseguidor.idUsuario != $id";
+        $query = "SELECT tbusuario.idUsuario, tbusuario.nomeUsuario, tbusuario.loginUsuario as loginUsuario FROM tbusuario  INNER JOIN tbusuarioseguidor on tbusuarioseguidor.idUsuario = tbusuario.idUsuario WHERE tbusuarioseguidor.idSeguidor IN (
+        SELECT tbusuario.idUsuario as usuarioSeguido FROM tbusuario INNER JOIN tbusuarioseguidor on tbusuarioseguidor.idUsuario = tbusuario.idUsuario WHERE tbusuarioseguidor.idSeguidor = ".$id.") AND tbusuarioseguidor.idUsuario != ".$id. " LIMIT 3";
 
         $resultado = $con->query($query);
-        return $resultado->fetch(PDO::FETCH_ASSOC);
-        
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 }

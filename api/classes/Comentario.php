@@ -105,11 +105,14 @@ class Comentario
         tbcomentario.idPublicacao,
         nomeUsuario,
         textoComentario,
-        qtdcurtidaComentario
+        loginUsuario,
+        qtdcurtidaComentario,
+        dataComentario
         FROM tbcomentario
         INNER JOIN tbpublicacao ON tbpublicacao.idPublicacao = tbcomentario.idPublicacao
         INNER JOIN tbusuario ON tbusuario.idUsuario = tbcomentario.idUsuario
-        WHERE tbcomentario.idPublicacao = ". $id;
+        WHERE tbcomentario.idPublicacao = ". $id." 
+        ORDER BY dataComentario DESC";
             
         $resultado = $con->query($query);
         $lista =  $resultado->fetchAll(PDO::FETCH_ASSOC);
