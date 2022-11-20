@@ -95,7 +95,7 @@ $qtdCatBloqueada = $categoria->buscaQtdCategoriaBloqueada();
 
           <!-- Tab links -->
           <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'ativo')">
+            <button class="tablinks active" onclick="openTab(event, 'ativo')">
               Ativas
             </button>
             <button class="tablinks" onclick="openTab(event, 'bloqueado')">
@@ -104,7 +104,7 @@ $qtdCatBloqueada = $categoria->buscaQtdCategoriaBloqueada();
           </div>
 
           <!-- Tab content -->
-          <div id="ativo" class="tabcontent">
+          <div id="ativo" class="tabcontent" style="display: block">
             <h3 id="total-qtd">Total(<?php echo $qtdCat ?>)</h3>
             <div class="listaCat">
               <?php

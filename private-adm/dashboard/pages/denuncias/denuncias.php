@@ -115,7 +115,7 @@ if ($_SESSION['tipo'] != "Adm") {
 
           <!-- Tab links -->
           <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'nova')">
+            <button class="tablinks active" onclick="openTab(event, 'nova')">
               Novas
             </button>
             <button class="tablinks" onclick="openTab(event, 'analise')">
@@ -127,8 +127,8 @@ if ($_SESSION['tipo'] != "Adm") {
           </div>
 
           <!-- Tab content -->
-          <div id="nova" class="tabcontent">
-            <h3> Denúncias de publicações:</h3>
+          <div id="nova" class="tabcontent" style="display: block;">
+            <h3 style="margin-bottom: 0.5rem;"> Denúncias de Postagens</h3>
             <h3 id="total-qtd-publicacoes">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoAtiva(); ?>)</h3>
             <div class="denunciasPublicacao">
               <?php foreach ($listaDenunciasPublicacaoAtivas as $linha) {
@@ -160,15 +160,17 @@ if ($_SESSION['tipo'] != "Adm") {
                     </div>
                   </div>
                   <p><span style="font-weight: 900;font-size: 15px;">Denunciado por: </span><span style="font-weight: 600;font-size: 15px;"><a target="_blank" href="/petiti/<?php echo $denunciador ?>">@<?php echo $denunciador ?></a></span></p>
-                  <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
-                  <a href="/petiti/api/passar-denuncia-analise/publicacao/<?php echo $idDenunciaPublicacao; ?>" class="botao analisar">Passar para análise</a>
+                  <p><span style="font-weight: 900; color: #d30c1d">Causa: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
+                  <a href="/petiti/api/passar-denuncia-analise/publicacao/<?php echo $idDenunciaPublicacao; ?>" class="botao analisar" style="color: black">Passar para análise</a>
                 </div>
               <?php
               }
               ?>
             </div>
 
-            <h3> Denúncias de usuários:</h3>
+            <div style="margin-top: 1rem; border-bottom: 1px solid #c1c1c1"></div>
+
+            <h3 style="margin-top: 1rem; margin-bottom: 0.5rem;""> Denúncias de Usuários</h3>
             <h3 id="total-qtd-usuarios">Total(<?php echo $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva(); ?>)</h3>
             <div class="denunciasUsuarios">
               <?php foreach ($listaDenunciasUsuarioAtivas as $linha) {

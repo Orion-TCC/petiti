@@ -96,7 +96,7 @@ $qtdEmpresasBloqueadas = $usuario->buscaQtdUsuarioBloqueadoEmpresa();
 
           <!-- Tab links -->
           <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'ativo')">
+            <button class="tablinks active" onclick="openTab(event, 'ativo')">
               Ativos
             </button>
             <button class="tablinks" onclick="openTab(event, 'bloqueado')">
