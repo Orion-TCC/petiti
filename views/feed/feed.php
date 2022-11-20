@@ -184,9 +184,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span style="position: relative;">
+                        <span class="mostrarNotificacoes" style="position: relative;">
                             <i class="uil uil-bell notificacao"></i>
-                            <div class="notificacaoContador"><span>1</span></div>
+                          
                         </span>
                         <h3>Notificações</h3>
                     </a>

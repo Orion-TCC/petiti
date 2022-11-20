@@ -62,9 +62,17 @@ class Notificacao
         $con->query($query);
     }
 
-    public function limparNotificacoes($id){
+    public function limparNotificacoesNaoVistas($id){
         $con = Conexao::conexao();
         $query = "UPDATE tbnotificacao SET statusNotificacao = 1 WHERE idUsuarioNotificado = $id";
         $con->query($query);
+    }
+    public function qtdNotificacoesNaoVistas($id){
+        $con = Conexao::conexao();
+        $query = "SELECT COUNT(idNotificacao) as qtd FROM tbnotificacao WHERE statusNotificacao = 0 and idUsuarioNotificado = $id";
+        $con->query($query);
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
     }
 }
