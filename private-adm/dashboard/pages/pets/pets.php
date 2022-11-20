@@ -131,7 +131,7 @@ $denunciaUsuario = new DenunciaUsuario();
                     <div class="perfil-info">
                       <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
                       <p><span style="font-weight: 900;">@<?php echo $usuario ?></span></p>
-                      <p><span style="font-weight: 900;"><a href="/petiti/<?php echo $tutor ?>">@<?php echo $tutor ?></a></span></p>
+                      <p><span style="font-weight: 900;">Tutor: <a href="/petiti/<?php echo $tutor ?>">@<?php echo $tutor ?></a></span></p>
                     </div>
                   </div>
 

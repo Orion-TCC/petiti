@@ -2079,3 +2079,198 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   width: 60%;
   height: 100%;
 }
+
+.rightSidePost{
+  display: flex;
+  width: 40%;
+  flex-direction: column;
+  border: 1px #c0c0c0 solid;
+}
+
+
+.rightSidePost .userElementosHolder{
+    width: 100%;
+    gap: 15px;
+    padding: var(--card-padding);
+    display: flex;
+    align-items: center;
+
+    border-bottom: 1px #c0c0c0 solid;
+}
+
+.rightSidePost .userElementos{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 15px;
+}
+
+.rightSidePost .userElementosHolder  .menuPostHover{
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+
+  background: #464bc9;
+  border-radius: 80px;
+  height: 90%;
+  width: 97%;
+
+  position: absolute;
+
+  opacity: 0; 
+  -moz-opacity: 0;
+}
+
+.rightSidePost .userElementosHolder  .menuPostHover:hover{
+  opacity: 0.4;
+}
+
+
+.rightSidePost .userElementosHolder .editButton{
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+
+.rightSidePost .comentariosHolder{
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px #c1c1c1 solid;
+  overflow-y: auto;
+}
+
+.rightSidePost .comentariosHolder .comentarioHolder{
+  display: flex;
+  gap: 1rem;
+  padding: var(--card-padding);
+  height: fit-content;
+  width: 100%;
+  align-items: center;
+}
+
+.rightSidePost .comentariosHolder .comentarioHolder .comentarioInfos{
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.6rem;
+}
+
+.rightSidePost .comentariosHolder .comentarioHolder .comentarioInfos .info{
+  display: flex;
+  gap: 0.5rem;
+}
+
+
+.rightSidePost .botoesInteracao{
+  display: flex;
+  gap: 0.5rem;
+  padding:var(--card-padding) ;
+  height: fit-content;
+  width: 100%;
+}
+
+
+
+.rightSidePost .botoesInteracao button.comentar {
+
+  background-image: url("../images/botaoComentar.svg");
+
+  width: 2rem;
+  height: 2rem;
+
+  cursor: pointer;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 1rem;
+}
+
+.rightSidePost .botoesInteracao button.mensagem {
+  background-image: url("../images/botaoMensagem.svg");
+
+
+  width: 2.2rem;
+  height: 2rem;
+
+  cursor: pointer;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 1rem;
+}
+
+.rightSidePost .botoesInteracao input[type="checkbox"] {
+  appearance: none;
+
+  background-image: url("../images/pataCurtida.svg");
+
+  width: 2.2rem;
+  height: 2.2rem;
+
+  padding-bottom: 2.1rem;
+
+  cursor: pointer;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.rightSidePost .botoesInteracao input[type="checkbox"]:checked {
+  background-image: url("../images/pataCurtidaPreenchida.svg");
+}
+
+
+.rightSidePost .curtidas{
+  display: flex;
+  flex-direction: column;
+  padding: var(--card-padding);
+  padding-top: 0;
+  gap: 0.5rem;
+}
+
+.rightSidePost .commentArea {
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  display: flex;
+}
+
+.rightSidePost .commentArea textarea {
+  border-top: 1px solid #c1c1c1;
+  resize: none;
+  width: 100%;
+  height: 59px;
+  padding: var(--card-padding);
+  padding-left: 2rem;
+  padding-right: 1.83rem;
+  font-family: "Public Sans Bold", sans-serif;
+  font-size: 1rem;
+  overflow: hidden;
+
+}
+
+.rightSidePost .commentArea i {
+  position: absolute;
+  font-size: 1.4rem;
+  align-self: start;
+  top: 1rem;
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+}
+
+.rightSidePost .commentArea span {
+  align-self: flex-end;
+  right: 0;
+  top: 3rem;
+  position: absolute;
+  font-weight: 700;
+}
+
+.rightSidePost .commentArea button.comentar {
+  position: absolute;
+  top: 0;
+  right: 1.9rem;
+}

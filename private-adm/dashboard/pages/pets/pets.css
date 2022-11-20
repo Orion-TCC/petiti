@@ -455,17 +455,15 @@ main .info-pets .perfis-pets {
 
 
 .cards {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
   margin-top: 1rem;
 }
 
 .card {
   display: flex;
-  width: 400px;
+  width: 370px;
   flex-direction: column;
   border-radius: 25px;
   border-style: solid;

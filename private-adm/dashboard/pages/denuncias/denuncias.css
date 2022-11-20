@@ -522,7 +522,7 @@ main .info-pets .perfis-pets {
 }
 
 .analisar {
-    background-color: #d30c1d;
+    background-color: #FBD3A4;
 }
 
 .analisar-agora {
@@ -741,4 +741,14 @@ main .info-pets .perfis-pets {
     display: flex;
     gap: 10px;
     justify-content: center;
+}
+
+.modal a.close-modal{
+    background-color: #9998d3;
+    background-image: url(/petiti/private-adm/dashboard/images/fecharModal.svg);
+    border-radius: 2rem;
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
