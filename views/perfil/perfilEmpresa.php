@@ -6,6 +6,7 @@ require('../../api/classes/Usuario.php');
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 
+$id = $_SESSION['id'];
 
 include_once("../../sentinela.php");
 $idUsuarioCurtida = $_SESSION['id'];
@@ -56,6 +57,15 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
     <!--- iconscout icon --->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
+    <script src="https://kit.fontawesome.com/e08c13fee8.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    <script src="/petiti/assets/libs/croppie/croppie.js"></script>
+    <script src="/petiti/assets/js/jquery-scripts.js"></script>
+    <script src="/petiti/assets/js/script.js"></script>
+    <script src="/petiti/views/assets/js/funcs.js"></script>
 
     <!-- título da pág e icone (logo) -->
 
@@ -91,20 +101,6 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                         </div>
                         <h3><?php echo $_SESSION['nome']; ?></h3>
                     </div>
-
-                    <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
-                        <div class="flex-row petUser">
-
-                            <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
-                                <div class="fotoDePerfil">
-                                    <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
-                                    <!--Foto do pet  -->
-                                </div>
-
-                                <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
-                            </a>
-                        </div>
-                    <?php    } ?>
                 </div>
 
 

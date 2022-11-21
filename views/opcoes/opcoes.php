@@ -229,7 +229,11 @@ $contagemPets = count($dadosPets['pets']);
                     <div class="sidebar">
                         <button class="menu-item" onclick="openTab(event, '1')" id="defaultOpen">Editar perfil</button>
                         <button class="menu-item" onclick="openTab(event, '2')">Alterar senha</button>
-                        <button class="menu-item" onclick="openTab(event, '3')">Adicionar outro pet</button>
+                        <?php 
+                        if ($_SESSION['tipo'] == "Tutor"){ ?>
+                            <button class="menu-item" onclick="openTab(event, '3')">Adicionar outro pet</button>
+                        <?php }
+                        ?>
                         <button class="menu-item" onclick="openTab(event, '4')">Privacidade e segurança</button>
                     </div>
 

@@ -146,11 +146,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
     </nav>
 
     <main class="feed">
-
-
-
         <div class="container">
-
 
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
