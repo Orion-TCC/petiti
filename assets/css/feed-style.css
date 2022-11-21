@@ -1453,8 +1453,14 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   color: #777777;
 }
 
-
-
+.letraContComent {
+  display: flex;
+  width: 95%;
+  justify-content: end;
+  padding: 0px 20px 0 0;
+  font-family: "Raleway Medium";
+  color: #777777;
+}
 
 .parte2CriarPost {
   display: flex;
@@ -1792,7 +1798,20 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   cursor: default;
 }
 
-#contagemCharInput {
+.contagemCharComent {
+  display: flex;
+  align-items: flex-start;
+  cursor: default;
+}
+
+.contagemCharInput {
+  text-align: right;
+  font-family: "Raleway Medium";
+  font-size: 1rem;
+  background: none;
+}
+
+#contagemCharComentInput {
   text-align: right;
   font-family: "Raleway Medium";
   font-size: 1rem;
