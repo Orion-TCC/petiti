@@ -1,8 +1,11 @@
 <?php
 @session_start();
 require_once('../../api/classes/curtidaPublicacao.php');
-                                        require_once('../../api/classes/FotoUsuario.php');
-                                        $fotousuario = new FotoUsuario();
+require_once('../../api/classes/FotoUsuario.php');
+require_once('../../api/classes/Categoria.php');
+$fotousuario = new FotoUsuario();
+require_once('../../api/classes/CategoriaSeguida.php');
+$categoriaSeguida = new categoriaSeguida();
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 include_once("../../sentinela.php");
@@ -15,6 +18,7 @@ $jsonPets = file_get_contents($urlPets);
 $dadosPets = (array) json_decode($jsonPets, true);
 
 $contagemPets = count($dadosPets['pets']);
+$categoria = new Categoria;
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
@@ -125,12 +129,10 @@ $contagemPets = count($dadosPets['pets']);
                     };
 
                 };
-
-
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <div id="labelAO"><i class="uil uil-setting" ></i></div>
+                <div id="labelAO"><i class="uil uil-setting"></i></div>
 
                 <div class="fotoDePerfil" id="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
@@ -183,7 +185,7 @@ $contagemPets = count($dadosPets['pets']);
 
                     <a href="notificacoes" class="menu-item">
                         <span style="position: relative;">
-                            <i class="uil uil-bell notificacao"></i> 
+                            <i class="uil uil-bell notificacao"></i>
                             <div class="notificacaoContador"><span>1</span></div>
                         </span>
                         <h3>Notificações</h3>
@@ -269,7 +271,8 @@ $contagemPets = count($dadosPets['pets']);
                 <div class="feeds">
                     <?php
                     $contadorPostagem = 0;
-                    $url = "http://localhost/petiti/api/publicacoes";
+                    $id = $_SESSION['id'];
+                    $url = "http://localhost/petiti/api/publicacoes/paraVoce/$id";
 
                     $json = file_get_contents($url);
                     $dados = (array)json_decode($json, true);
@@ -277,17 +280,19 @@ $contagemPets = count($dadosPets['pets']);
                     if ($contagem == 0) {
                     ?>
                         <div class="contagemZero">
-
                             <div class="semPublicacaoes">
                                 <img src="/petiti/assets/images/semPost.svg" id="svgSemPost">
                                 <p class="textoSemPublicacoes">Parece que não tem nada por aqui... Faça um post ou siga alguém para ver o que eles estão postando!</p>
+                                <?php
+                                
+                                ?>
                             </div>
                         </div>
 
                     <?php }
                     for ($i = 0; $i < $contagem; $i++) {
 
-                        $id =  $dados['publicacoes'][$i]['id'];
+                        $id =  $dados['publicacoes'][$i]['idPublicacao'];
 
                         $idUsuarioPub = $dados['publicacoes'][$i]['idUsuario'];
 
@@ -297,15 +302,15 @@ $contagemPets = count($dadosPets['pets']);
 
                         $dadosComentarios = (array)json_decode($jsonComentarios, true);
 
-                        $nome = $dados['publicacoes'][$i]['nome'];
-                        $login = $dados['publicacoes'][$i]['login'];
-                        $foto = $dados['publicacoes'][$i]['caminhoFoto'];
+                        $nome = $dados['publicacoes'][$i]['nomeUsuario'];
+                        $login = $dados['publicacoes'][$i]['loginUsuario'];
+                        $foto = $dados['publicacoes'][$i]['caminhoFotoPublicacao'];
                         $idUsuario = $dados['publicacoes'][$i]['idUsuario'];
-                        $data = $dados['publicacoes'][$i]['data'];
-                        $texto = $dados['publicacoes'][$i]['texto'];
+                        $data = $dados['publicacoes'][$i]['dataPublicacao'];
+                        $texto = $dados['publicacoes'][$i]['textoPublicacao'];
                         $itimalias = $dados['publicacoes'][$i]['itimalias'];
                         $fotoUsuario = $fotousuario->exibirFotoUsuario($idUsuario);
-                        $local =  $dados['publicacoes'][$i]['local'];
+                        $local =  $dados['publicacoes'][$i]['localPub'];
                         $hoje = new DateTime();
                         $dataPost = new DateTime($data);
                         $intervalo = $hoje->diff($dataPost);
@@ -349,18 +354,18 @@ $contagemPets = count($dadosPets['pets']);
                                     </div>
                                     <div class="info">
                                         <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $nome ?></a></h3>
-                                        <small><?php echo $local ?>  há <?php echo $diferencaFinal ?></small>
+                                        <small><?php echo $local ?> há <?php echo $diferencaFinal ?></small>
                                     </div>
                                 </div>
 
 
 
                                 <span class="edit" id="<?php echo $id; ?>">
-                                
-                                <div class="editButton">
-                                    <div class="menuPostHover"></div>
-                                    <i class="uil uil-ellipsis-v"></i>
-                                </div>
+
+                                    <div class="editButton">
+                                        <div class="menuPostHover"></div>
+                                        <i class="uil uil-ellipsis-v"></i>
+                                    </div>
 
                                     <div class="menuPost" id="menuPost">
                                         <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
@@ -375,7 +380,7 @@ $contagemPets = count($dadosPets['pets']);
                                                                 </i>
                                                                 <span>Denunciar</span>
 
-                                                                
+
                                                             </li>
                                                         </div>
                                                     </div>
@@ -395,7 +400,7 @@ $contagemPets = count($dadosPets['pets']);
 
                                 </span>
 
-                                
+
 
                             </div>
 
@@ -419,7 +424,7 @@ $contagemPets = count($dadosPets['pets']);
                                     <?php }
                                     ?>
 
-                                    <a href="#modal-post" rel="modal:open"><button class="comentar"></button></a> 
+                                    <a href="#modal-post" rel="modal:open"><button class="comentar"></button></a>
 
                                     <button class="mensagem"></button>
 
@@ -448,7 +453,13 @@ $contagemPets = count($dadosPets['pets']);
                             <div class="badges">
                                 <?php
                                 for ($j = 0; $j < $contagemCategorias; $j++) {
-                                    echo ("<p class='badge'>" . $dadosCategorias[$j]['categoria'] . "</p>");
+                                    $idCategoriaAtual = $categoria->pesquisarCategoria($dadosCategorias[$j]['categoria']);
+                                    $verificaCategoriaSeguida = $categoriaSeguida->verificarSeguida($_SESSION['id'], $idCategoriaAtual);
+                                    if ($verificaCategoriaSeguida['boolean'] == true) {
+                                        echo ("<p class='badge-categoria' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
+                                    } else {
+                                        echo ("<p class='badge-categoria seguida' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
+                                    }
                                 }
                                 ?>
                             </div>
@@ -457,15 +468,19 @@ $contagemPets = count($dadosPets['pets']);
 
                             </div>
 
-                            <div class="commentArea">
+                            <div class="commentArea" id="<?php echo $id; ?>">
                                 <i class="uil uil-heart"></i>
-                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
-                                
+                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>" class="TAComentario<?php echo $id; ?>"></textarea>
+
                                 <button value="<?php echo $id ?>" class="comentar" value="">
                                     <i class="uil uil-message"></i>
                                 </button>
-                                <span class="text-muted">0/200</span>
                             </div>
+                                    
+                                    <div class="contagemChar">
+                                        <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
+                                        <span>/200</span>
+                                    </div>
 
                         </div>
                     <?php $contadorPostagem++;
@@ -850,15 +865,15 @@ $contagemPets = count($dadosPets['pets']);
 
         <section>
             <a href="#modal-denuncia" rel="modal:open">
-                    <div id="modal-denuncia" class="modal">
-                        <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
-                            <input type="hidden" id="idPost" name="idPost" value="">
-                            <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
-                            <span class="spanDenuncia">Denuniar</span>
-                            <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
-                            <input class="submitDenuncia" type="submit" value="Denunciar">
-                        </form>
-                    </div>
+                <div id="modal-denuncia" class="modal">
+                    <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+                        <input type="hidden" id="idPost" name="idPost" value="">
+                        <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
+                        <span class="spanDenuncia">Denuniar</span>
+                        <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
+                        <input class="submitDenuncia" type="submit" value="Denunciar">
+                    </form>
+                </div>
         </section>
 
         <section>
@@ -866,84 +881,84 @@ $contagemPets = count($dadosPets['pets']);
                 <div style="display: flex; width: 100%; height: 100%;">
 
                     <div id="preview-crop-image">
-                            <img src="#" alt="">
+                        <img src="#" alt="">
                     </div>
 
 
                     <div class="rightSidePost">
 
-                            <div class="userElementosHolder">
-                                <div class="userElementos">
-                                 <img src="#" alt="" class="fotoDePerfil">
-                                 <div>
+                        <div class="userElementosHolder">
+                            <div class="userElementos">
+                                <img src="#" alt="" class="fotoDePerfil">
+                                <div>
                                     <span class="textNomeUsuario">nome</span>
-                                    <h5 class="text-muted">data</h5>    
-                                 </div>
-                                </div>
-
-                                <div class="editButton">
-                                    <div class="menuPostHover"></div>
-                                    <i class="uil uil-ellipsis-v"></i>
+                                    <h5 class="text-muted">data</h5>
                                 </div>
                             </div>
 
-                            <div class="comentariosHolder">
+                            <div class="editButton">
+                                <div class="menuPostHover"></div>
+                                <i class="uil uil-ellipsis-v"></i>
+                            </div>
+                        </div>
 
-                                    <div class="comentarioHolder">
+                        <div class="comentariosHolder">
 
-                                        <div class="fotoDePerfil">
-                                            <img src="#" alt="">
-                                        </div>
+                            <div class="comentarioHolder">
 
-                                        <div class="comentarioInfos">
+                                <div class="fotoDePerfil">
+                                    <img src="#" alt="">
+                                </div>
 
-                                            <div class="info">
-                                                <div style="  word-break: break-all;">
-                                                    <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
-                                                </div>
-                                            </div>
+                                <div class="comentarioInfos">
 
-                                            <div class="info">
-                                                <h5 class="text-muted">tempo</h5>
-                                            </div>
+                                    <div class="info">
+                                        <div style="  word-break: break-all;">
+                                            <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
                                         </div>
                                     </div>
+
+                                    <div class="info">
+                                        <h5 class="text-muted">tempo</h5>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="botoesInteracao">
-                                
-                                <input class="curtir" value="<?php echo $id ?>" type="checkbox">
-                                
-                                <button class="comentar"></button>
-                                
-                                <button class="mensagem"></button>
-                                
-                            </div>
+                        <div class="botoesInteracao">
 
-                            <div class="curtidas">
-                                <h4>0 itimalias</h4>
-            
-                            </div>
+                            <input class="curtir" value="<?php echo $id ?>" type="checkbox">
 
-                            <div class="commentArea">
+                            <button class="comentar"></button>
 
-                                <i class="uil uil-heart"></i>
+                            <button class="mensagem"></button>
 
-                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+                        </div>
 
-                                <button value="<?php echo $id ?>" class="comentar" value="">
-                                    <i class="uil uil-message"></i>
-                                </button>
+                        <div class="curtidas">
+                            <h4>0 itimalias</h4>
 
-                              
+                        </div>
 
-                            </div>
+                        <div class="commentArea">
 
-                            </div>
+                            <i class="uil uil-heart"></i>
+
+                            <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+
+                            <button value="<?php echo $id ?>" class="comentar" value="">
+                                <i class="uil uil-message"></i>
+                            </button>
+
+
+
+                        </div>
 
                     </div>
 
                 </div>
+
+            </div>
             </div>
         </section>
 

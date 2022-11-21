@@ -179,12 +179,12 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="feed" class="menu-item">
+                    <a href="feed" class="menu-item ">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
 
-                    <a href="#" class="menu-item  ativo">
+                    <a href="animaisPerdidos " class="menu-item ativo">
                         <span><i class="uil uil-heart-break"></i></span>
                         <h3>Animais Perdidos</h3>
                     </a>
@@ -196,9 +196,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span style="position: relative;">
+                        <span class="mostrarNotificacoes" style="position: relative;">
                             <i class="uil uil-bell notificacao"></i>
-                            <div class="notificacaoContador"><span>1</span></div>
+
                         </span>
                         <h3>Notificações</h3>
                     </a>
@@ -219,14 +219,18 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     </a>
                 </div>
 
-                <!-- Botao de criar post -->
-                <button class="btn btn-primary">
-                    <p>
-                        <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
-                    </p>
-                </button>
 
-            </div>
+
+
+
+<!-- Botao de criar post -->
+<button class="btn btn-primary">
+    <p>
+        <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
+    </p>
+</button>
+
+</div>
             <!-- FIM DO LADO ESQUERDO -->
 
             <div class="Meio">
@@ -741,6 +745,14 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
                                 <textarea name="txtLegendaPub" id="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!" maxlength="200"></textarea>
+
+                                <?php if ($_SESSION['tipo'] != "Tutor") {
+                                ?>
+
+                                    <label for="checkImp">Impulsionar</label>
+                                    <input type="checkbox" name="checkImp" id="checkImp">
+
+                                <?php } ?>
 
                                 <input type="hidden" name="categoriasValue" id="categoriasValue" value="">
 

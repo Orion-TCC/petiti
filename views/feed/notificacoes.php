@@ -4,9 +4,12 @@ require_once('../../api/classes/curtidaPublicacao.php');
 require_once('../../api/classes/FotoUsuario.php');
 require_once('../../api/classes/Notificacao.php');
 require_once('../../api/classes/UsuarioSeguidor.php');
+require_once('../../api/classes/Categoria.php');
+require_once('../../api/classes/CategoriaSeguida.php');
 
 include_once("../../sentinela.php");
 $notificacao = new Notificacao();
+$categoriaSeguida = new CategoriaSeguida();
 
 $conexao = Conexao::conexao();
 $fotoUsuario = new FotoUsuario();
@@ -25,7 +28,10 @@ $dadosPets = (array) json_decode($jsonPets, true);
 $contagemPets = count($dadosPets['pets']);
 
 
+$categoria = new Categoria;
+$listaCategorias  = $categoria->listarCategoriasPopulares();
 $listaNotif = $notificacao->listarNotif($id);
+$contagemNotif = count($listaNotif);
 $notificacao->limparNotificacoesNaoVistas($id);
 ?>
 <!DOCTYPE php>
@@ -189,12 +195,15 @@ $notificacao->limparNotificacoesNaoVistas($id);
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais para adoção</h3>
+                        <h3>Animais para Adoção</h3>
                     </a>
 
 
                     <a href="notificacoes" class="menu-item ativo">
-                        <span><i class="uil uil-bell"></i> </span>
+                        <span class="mostrarNotificacoes" style="position: relative;">
+                            <i class="uil uil-bell notificacao"></i>
+
+                        </span>
                         <h3>Notificações</h3>
                     </a>
 
@@ -214,6 +223,10 @@ $notificacao->limparNotificacoesNaoVistas($id);
                     </a>
                 </div>
 
+
+
+
+
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">
                     <p>
@@ -228,113 +241,123 @@ $notificacao->limparNotificacoesNaoVistas($id);
             <div class="Meio">
                 <span class="adTitulo">Notificações</span>
                 <div class="abanotificacoes">
-                    <?php foreach ($listaNotif as $notificacao) {
-                        $hoje = new DateTime();
-                        $dataPost = new DateTime($notificacao['dataNotificacao']);
-                        $intervalo = $hoje->diff($dataPost);
-                        $diferencaAnos = $intervalo->format('%y');
-                        $diferencaMeses = $intervalo->format('%m');
-                        $diferencaDias = $intervalo->format('%a');
-                        $diferencaHoras = $intervalo->format('%h');
-                        $diferencaMinutos = $intervalo->format('%i');
+                    <?php
+                    if ($contagemNotif < 1) { ?>
+                        <div class="svgSemNot">
+                        <img id="svgSemNot" src="/petiti/views/assets/img/semNot.svg">
+                        <span id="spanSemNot">Suas notificações vão aparecer aqui, mas por enquanto você não tem nenhuma...</span>
+                        </div>
+                        
+                        <?php } else {
 
-                        if ($diferencaAnos == 0) {
-                            if ($diferencaMeses == 0) {
-                                if ($diferencaDias == 0) {
-                                    if ($diferencaHoras == 0) {
-                                        $diferencaFinal = $diferencaMinutos . " minutos";
+                        foreach ($listaNotif as $notificacao) {
+                            $hoje = new DateTime();
+                            $dataPost = new DateTime($notificacao['dataNotificacao']);
+                            $intervalo = $hoje->diff($dataPost);
+                            $diferencaAnos = $intervalo->format('%y');
+                            $diferencaMeses = $intervalo->format('%m');
+                            $diferencaDias = $intervalo->format('%a');
+                            $diferencaHoras = $intervalo->format('%h');
+                            $diferencaMinutos = $intervalo->format('%i');
+
+                            if ($diferencaAnos == 0) {
+                                if ($diferencaMeses == 0) {
+                                    if ($diferencaDias == 0) {
+                                        if ($diferencaHoras == 0) {
+                                            $diferencaFinal = $diferencaMinutos . " minutos";
+                                        } else {
+                                            $diferencaFinal = $diferencaHoras . " horas";
+                                        }
                                     } else {
-                                        $diferencaFinal = $diferencaHoras . " horas";
+                                        $diferencaFinal = $diferencaDias . " dias";
                                     }
                                 } else {
-                                    $diferencaFinal = $diferencaDias . " dias";
+                                    $diferencaFinal = $diferencaMeses . " meses";
                                 }
                             } else {
-                                $diferencaFinal = $diferencaMeses . " meses";
+                                $diferencaFinal = $diferencaAnos . " anos";
                             }
-                        } else {
-                            $diferencaFinal = $diferencaAnos . " anos";
-                        }
-                    ?>
+                        ?>
 
 
-                        <?php if ($notificacao['tipoNotificacao'] == "Seguir") {
-                            $query = "SELECT loginUsuario, tbusuario.idUsuario FROM tbusuario INNER JOIN 
+                            <?php if ($notificacao['tipoNotificacao'] == "Seguir") {
+                                $query = "SELECT loginUsuario, tbusuario.idUsuario FROM tbusuario INNER JOIN 
                             tbusuarioseguidor ON tbusuarioseguidor.idSeguidor = tbusuario.idusuario WHERE tbusuarioseguidor.idUsuarioSeguidor = " . $notificacao['idUsuarioSeguidor'];
-                            $consulta = $conexao->query($query);
-                            $listaUsuarioNotif = $consulta->fetchAll();
+                                $consulta = $conexao->query($query);
+                                $listaUsuarioNotif = $consulta->fetchAll();
 
-                            foreach ($listaUsuarioNotif as $linhaUsuarioNotif) {
-                                $loginUsuarioNotif = $linhaUsuarioNotif['loginUsuario'];
-                                $idUsuarioNotif = $linhaUsuarioNotif['idUsuario'];
-                            }
-                            $fotoUsuarioNotif = $fotoUsuario->exibirFotoUsuario($idUsuarioNotif);
-                        ?>
-                            <div class="notificacao">
-                                <div style="display: flex; gap: 1rem; align-items: center;">
-                                    <img src="<?php echo $fotoUsuarioNotif ?>" class="fotoDePerfil">
-                                    <a href="/petiti/<?php echo $loginUsuarioNotif ?>">
-                                        <h4>@<?php echo $loginUsuarioNotif ?></h4>
-                                    </a>
-                                    <h4 class="text-muted">começou a seguir você.</h4>
-                                    <h5 class="text-muted">Há <?php echo $diferencaFinal ?> </h5>
+                                foreach ($listaUsuarioNotif as $linhaUsuarioNotif) {
+                                    $loginUsuarioNotif = $linhaUsuarioNotif['loginUsuario'];
+                                    $idUsuarioNotif = $linhaUsuarioNotif['idUsuario'];
+                                }
+                                $fotoUsuarioNotif = $fotoUsuario->exibirFotoUsuario($idUsuarioNotif);
+                            ?>
+                                <div class="notificacao">
+                                    <div style="display: flex; gap: 1rem; align-items: center;">
+                                        <img src="<?php echo $fotoUsuarioNotif ?>" class="fotoDePerfil">
+                                        <a href="/petiti/<?php echo $loginUsuarioNotif ?>">
+                                            <h4>@<?php echo $loginUsuarioNotif ?></h4>
+                                        </a>
+                                        <h4 class="text-muted">começou a seguir você.</h4>
+                                        <h5 class="text-muted">Há <?php echo $diferencaFinal ?> </h5>
+                                    </div>
+
+                                    <?php
+
+                                    $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioNotif, $id);
+                                    if ($verificarSeguidor['boolean'] == true) {
+                                        $jsSeguidor = "true";
+                                    } else {
+                                        $jsSeguidor = "false";
+                                    } ?>
+
+                                    <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                        <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+
+                                        <button value="<?php echo $idUsuarioNotif ?>" class="seguirNotif botaoUsuario<?php echo $idUsuarioNotif ?> btn btn-primary">Seguir</button>
+                                    <?php } else { ?>
+                                        <button value="<?php echo $idUsuarioNotif ?>" class="seguirNotif botaoUsuario<?php echo $idUsuarioNotif ?> btn btn-secundary">Seguindo</button>
+                                    <?php } ?>
                                 </div>
-
-                                <?php
-
-                                $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioNotif, $id);
-                                if ($verificarSeguidor['boolean'] == true) {
-                                    $jsSeguidor = "true";
-                                } else {
-                                    $jsSeguidor = "false";
-                                } ?>
-
-                                <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
-
-                                    <button value="<?php echo $idUsuarioNotif ?>" class="seguirNotif botaoUsuario<?php echo $idUsuarioNotif?> btn btn-primary">Seguir</button>
-                                <?php } else { ?>
-                                    <button value="<?php echo $idUsuarioNotif ?>" class="seguirNotif botaoUsuario<?php echo $idUsuarioNotif?> btn btn-secundary">Seguindo</button>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
+                            <?php } ?>
 
 
-                        <?php if ($notificacao['tipoNotificacao'] == "Curtida") {
-                            $idPubResultado = $curtidaPub->procurarPub($notificacao['idCurtidaPublicacao']);
-                            $query = "SELECT loginUsuario, idUsuario FROM tbusuario INNER JOIN 
+                            <?php if ($notificacao['tipoNotificacao'] == "Curtida") {
+                                $idPubResultado = $curtidaPub->procurarPub($notificacao['idCurtidaPublicacao']);
+                                $query = "SELECT loginUsuario, idUsuario FROM tbusuario INNER JOIN 
                             tbcurtidapublicacao ON tbcurtidapublicacao.idusuariocurtida = tbusuario.idusuario WHERE tbcurtidapublicacao.idcurtidapublicacao = " . $notificacao['idCurtidaPublicacao'];
-                            $consulta = $conexao->query($query);
-                            $listaUsuarioNotif = $consulta->fetchAll();
+                                $consulta = $conexao->query($query);
+                                $listaUsuarioNotif = $consulta->fetchAll();
 
-                            foreach ($listaUsuarioNotif as $linhaUsuarioNotif) {
-                                $loginUsuarioNotif = $linhaUsuarioNotif['loginUsuario'];
-                            }
-                            $fotoUsuarioNotif = $fotoUsuario->exibirFotoUsuario($notificacao['idUsuarioCurtida']);
+                                foreach ($listaUsuarioNotif as $linhaUsuarioNotif) {
+                                    $loginUsuarioNotif = $linhaUsuarioNotif['loginUsuario'];
+                                }
+                                $fotoUsuarioNotif = $fotoUsuario->exibirFotoUsuario($notificacao['idUsuarioCurtida']);
 
-                            //
+                                //
 
-                            $urlNotif = "http://localhost/petiti/api/publicacao/" . $idPubResultado;
-                            $jsonPubNotif = file_get_contents($urlNotif);
-                            $dadosPubNotif = (array)json_decode($jsonPubNotif, true);
-                            $foto = $dadosPubNotif[0]['caminhoFoto'];
-                        ?>
-                            <div class="notificacao">
-                                <div style="display: flex; gap: 1rem; align-items: center;">
-                                    <img src="<?php echo $fotoUsuarioNotif ?>" alt="" class="fotoDePerfil">
-                                    <a href="/petiti/<?php echo $loginUsuarioNotif ?>">
-                                        <h4>@<?php echo $loginUsuarioNotif ?></h4>
-                                    </a>
+                                $urlNotif = "http://localhost/petiti/api/publicacao/" . $idPubResultado;
+                                $jsonPubNotif = file_get_contents($urlNotif);
+                                $dadosPubNotif = (array)json_decode($jsonPubNotif, true);
+                                $foto = $dadosPubNotif[0]['caminhoFoto'];
+                            ?>
+                                <div class="notificacao">
+                                    <div style="display: flex; gap: 1rem; align-items: center;">
+                                        <img src="<?php echo $fotoUsuarioNotif ?>" alt="" class="fotoDePerfil">
+                                        <a href="/petiti/<?php echo $loginUsuarioNotif ?>">
+                                            <h4>@<?php echo $loginUsuarioNotif ?></h4>
+                                        </a>
 
-                                    <h4 class="text-muted">curtiu sua postagem.</h4>
-                                    <h5 class="text-muted">Há <?php echo $diferencaFinal ?></h5>
+                                        <h4 class="text-muted">curtiu sua postagem.</h4>
+                                        <h5 class="text-muted">Há <?php echo $diferencaFinal ?></h5>
+                                    </div>
+
+                                    <img src="<?php echo $foto ?>" alt="" class="previewPostImage">
                                 </div>
+                            <?php } ?>
 
-                                <img src="<?php echo $foto ?>" alt="" class="previewPostImage">
-                            </div>
-                        <?php } ?>
-
-                    <?php } ?>
+                    <?php }
+                    } ?>
 
 
 
@@ -352,38 +375,60 @@ $notificacao->limparNotificacoesNaoVistas($id);
                     <div class="heading tituloPetsPerdidos">
                         <h4>Ajude alguém a encontrar seu pet</h4>
                     </div>
+                    <?php
+                    $contadorPostagemPerdidos = 0;
+                    $urlPerdidos = "http://localhost/petiti/api/publicacoes/perdidos";
+                    $jsonPerdidos = file_get_contents($urlPerdidos);
+                    $dadosPerdidos = (array)json_decode($jsonPerdidos, true);
+                    $contagemPerdidos = count($dadosPerdidos['publicacoes']);
+                    if ($contagemPerdidos > 0) {
+                        for ($pp = 0; $pp < $contagemPerdidos and $pp <= 2; $pp++) {
+                            $fotoPerdido = $dadosPerdidos['publicacoes'][$pp]['caminhoFoto'];
+                            $dataPerdido = $dadosPerdidos['publicacoes'][$pp]['data'];
+                            $localPerdido =  $dadosPerdidos['publicacoes'][$pp]['local'];
+                            $textoPerdido = $dadosPerdidos['publicacoes'][$pp]['texto'];
+                            $hoje = new DateTime();
+                            $dataPost = new DateTime($dataPerdido);
+                            $intervalo = $hoje->diff($dataPost);
+                            $diferencaAnos = $intervalo->format('%y');
+                            $diferencaMeses = $intervalo->format('%m');
+                            $diferencaDias = $intervalo->format('%a');
+                            $diferencaHoras = $intervalo->format('%h');
+                            $diferencaMinutos = $intervalo->format('%i');
 
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
+                            if ($diferencaAnos == 0) {
+                                if ($diferencaMeses == 0) {
+                                    if ($diferencaDias == 0) {
+                                        if ($diferencaHoras == 0) {
+                                            $diferencaFinal = $diferencaMinutos . " minutos";
+                                        } else {
+                                            $diferencaFinal = $diferencaHoras . " horas";
+                                        }
+                                    } else {
+                                        $diferencaFinal = $diferencaDias . " dias";
+                                    }
+                                } else {
+                                    $diferencaFinal = $diferencaMeses . " meses";
+                                }
+                            } else {
+                                $diferencaFinal = $diferencaAnos . " anos";
+                            }
+                    ?>
+                            <div class="postsPerdidos">
+                                <div class="fotoDePerfil">
+                                    <img src="<?php echo $fotoPerdido ?>" alt="">
+                                </div>
+                                <div class="infoPostPerdidos">
+                                    <h4><?php echo $textoPerdido ?></h4>
+                                    <h5 class="text-Muted">Há <span><?php echo $diferencaFinal ?></span> - <span>Localização: <?php echo $localPerdido ?></span></h5>
+                                </div>
+                            </div>
+                    <?php }
+                    }else{ ?>
+                        <h4 style="margin-top: 5px;" class="text-muted">Não tem nenhuma postagem com as categorias do feed exclusivo de animais perdidos...</h4>
 
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-
+                    <?php }
+                    ?>
                 </div>
                 <!-- fim de posts de pets perdidos -->
 
@@ -394,108 +439,24 @@ $notificacao->limparNotificacoesNaoVistas($id);
                         </div>
 
                         <div class="categoriasAltaGrid">
-
+                        <?php 
+                        $contategmCategoriasPopulares = count($listaCategorias);
+                        for($a = 0; $a < $contategmCategoriasPopulares; $a++) {?>
+                            
                             <div class="categorias">
-
                                 <div class="Lugar">
                                     <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position1.svg" alt="">
+                                        <img src="/petiti/views/assets/img/position<?php echo ($a+1); ?>.svg" alt="">
                                     </div>
                                     <div class="infoCategoria">
-                                        <h4>tamandua</h4>
+                                        <h4>
+                                            <?php echo $listaCategorias[$a]['categoria']; ?>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position2.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position6.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position3.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position7.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position4.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position8.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?>
 
                         </div>
                     </div>
@@ -505,55 +466,51 @@ $notificacao->limparNotificacoesNaoVistas($id);
 
                 <div class="sugestoes">
                     <h4>Sugestões para você</h4>
+                    <?php
 
-                    <div class="whiteBoxHolder">
+                    $sugestoes = $usuario->sugestoesSeguidores($_SESSION['id']);
+                    $contagemSugestoes = count($sugestoes);
+                    if($contagemSugestoes>0){
+                        
+                    
+                    foreach ($sugestoes as $sugestao) {
+                        $idUsuarioSugerido = $sugestao['idUsuario'];
+                        $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
+                        $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
+                        if ($verificarSeguidor['boolean'] == true) { ?>
+                            <div class="whiteBoxHolder">
+                                <a href="/petiti/<?php echo $sugestao['loginUsuario'] ?>">
+                                    <div class="flex-row">
+                                        <div class="fotoDePerfil">
+                                            <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
+                                        </div>
 
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
+                                        <div class="infoSugestoes">
+                                            <h4 style="color: black; margin-bottom: 0.2rem"><?php echo $sugestao['nomeUsuario'] ?></h4>
+                                            <h5 class="text-muted">@<?php echo $sugestao['loginUsuario'] ?></h5>
+                                        </div>
+                                    </div>
+                                </a>
+                                <?php
+                                $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
+                                if ($verificarSeguidor['boolean'] == true) {
+                                    $jsSeguidor = "true";
+                                } else {
+                                    $jsSeguidor = "false";
+                                } ?>
+
+                                <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+
+                                    <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
+                                <?php } else { ?>
+                                    <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
+                                <?php } ?>
                             </div>
-
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary">Seguir</button>
-                    </div>
-
-                    <div class="whiteBoxHolder">
-
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
-                            </div>
-
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary">Seguir</button>
-                    </div>
-
-                    <div class="whiteBoxHolder">
-
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
-                            </div>
-
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary">Seguir</button>
-                    </div>
-
+                    <?php }
+                    } }else{ ?>
+                        <h4 style="margin-top: 5px;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
+                   <?php } ?>
 
                 </div>
             </div>
@@ -737,84 +694,84 @@ $notificacao->limparNotificacoesNaoVistas($id);
                 <div style="display: flex; width: 100%; height: 100%;">
 
                     <div id="preview-crop-image">
-                            <img src="#" alt="">
+                        <img src="#" alt="">
                     </div>
 
 
                     <div class="rightSidePost">
 
-                            <div class="userElementosHolder">
-                                <div class="userElementos">
-                                 <img src="#" alt="" class="fotoDePerfil">
-                                 <div>
+                        <div class="userElementosHolder">
+                            <div class="userElementos">
+                                <img src="#" alt="" class="fotoDePerfil">
+                                <div>
                                     <span class="textNomeUsuario">nome</span>
-                                    <h5 class="text-muted">data</h5>    
-                                 </div>
-                                </div>
-
-                                <div class="editButton">
-                                    <div class="menuPostHover"></div>
-                                    <i class="uil uil-ellipsis-v"></i>
+                                    <h5 class="text-muted">data</h5>
                                 </div>
                             </div>
 
-                            <div class="comentariosHolder">
+                            <div class="editButton">
+                                <div class="menuPostHover"></div>
+                                <i class="uil uil-ellipsis-v"></i>
+                            </div>
+                        </div>
 
-                                    <div class="comentarioHolder">
+                        <div class="comentariosHolder">
 
-                                        <div class="fotoDePerfil">
-                                            <img src="#" alt="">
-                                        </div>
+                            <div class="comentarioHolder">
 
-                                        <div class="comentarioInfos">
+                                <div class="fotoDePerfil">
+                                    <img src="#" alt="">
+                                </div>
 
-                                            <div class="info">
-                                                <div style="  word-break: break-all;">
-                                                    <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
-                                                </div>
-                                            </div>
+                                <div class="comentarioInfos">
 
-                                            <div class="info">
-                                                <h5 class="text-muted">tempo</h5>
-                                            </div>
+                                    <div class="info">
+                                        <div style="  word-break: break-all;">
+                                            <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
                                         </div>
                                     </div>
+
+                                    <div class="info">
+                                        <h5 class="text-muted">tempo</h5>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="botoesInteracao">
-                                
-                                <input class="curtir" value="<?php echo $id ?>" type="checkbox">
-                                
-                                <button class="comentar"></button>
-                                
-                                <button class="mensagem"></button>
-                                
-                            </div>
+                        <div class="botoesInteracao">
 
-                            <div class="curtidas">
-                                <h4>0 itimalias</h4>
-            
-                            </div>
+                            <input class="curtir" value="<?php echo $id ?>" type="checkbox">
 
-                            <div class="commentArea">
+                            <button class="comentar"></button>
 
-                                <i class="uil uil-heart"></i>
+                            <button class="mensagem"></button>
 
-                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+                        </div>
 
-                                <button value="<?php echo $id ?>" class="comentar" value="">
-                                    <i class="uil uil-message"></i>
-                                </button>
+                        <div class="curtidas">
+                            <h4>0 itimalias</h4>
 
-                              
+                        </div>
 
-                            </div>
+                        <div class="commentArea">
 
-                            </div>
+                            <i class="uil uil-heart"></i>
+
+                            <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+
+                            <button value="<?php echo $id ?>" class="comentar" value="">
+                                <i class="uil uil-message"></i>
+                            </button>
+
+
+
+                        </div>
 
                     </div>
 
                 </div>
+
+            </div>
             </div>
         </section>
 
