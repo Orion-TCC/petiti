@@ -165,6 +165,15 @@ $(document).ready(function () {
     $("#contagemCharInput").val($("#txtLegendaPub").val().length);
   });
 
+  $(".commentArea").click(function () {
+    idContagemCharComent = $(this).attr("id");
+    $(".TAComentario" + idContagemCharComent).keyup(function () {
+      console.log(idContagemCharComent);
+      console.log($(".TAComentario").val().length)
+      $("#contagemCharInput" + idContagemCharComent).val($(".TAComentario" + idContagemCharComent).val().length);
+    });
+  })
+
   $(".li-ExcluirPost").click(function () {
     $("#modal-exclui-post").modal('show');
   });

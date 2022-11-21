@@ -6,8 +6,6 @@ require('../../api/classes/Usuario.php');
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 
-$usuario = new Usuario();
-
 $id = $_SESSION['id'];
 
 include_once("../../sentinela.php");
