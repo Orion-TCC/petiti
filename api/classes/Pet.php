@@ -309,4 +309,38 @@ class Pet
             return $linha['id'];
         }
     }
+
+    public function updateNomePet($update)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbpet SET nomePet = ? WHERE idPet = ?");
+        $stmt->bindValue(1, $update->getNomePet());
+        $stmt->bindValue(2, $update->getIdPet());
+        $stmt->execute();
+    }
+    public function updateRacaPet($update)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbpet SET racaPet = ? WHERE idPet = ?");
+        $stmt->bindValue(1, $update->getRacaPet());
+        $stmt->bindValue(2, $update->getIdPet());
+        $stmt->execute();
+    }
+    public function updateEspeciePet($update)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbpet SET especiePet = ? WHERE idPet = ?");
+        $stmt->bindValue(1, $update->getEspeciePet());
+        $stmt->bindValue(2, $update->getIdPet());
+        $stmt->execute();
+    }
+    public function updateIdadePet($update)
+    {
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("UPDATE tbpet SET idadePet = ? WHERE idPet = ?");
+        $stmt->bindValue(1, $update->getIdadePet());
+        $stmt->bindValue(2, $update->getIdPet());
+        $stmt->execute();
+    }
+
 }
