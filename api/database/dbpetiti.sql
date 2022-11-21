@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20-Nov-2022 às 03:07
+-- Tempo de geração: 21-Nov-2022 às 02:01
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -77,6 +77,7 @@ CREATE TABLE `tbcomentario` (
   `idComentario` int(11) NOT NULL,
   `textoComentario` varchar(200) NOT NULL,
   `qtdcurtidaComentario` int(11) DEFAULT 0,
+  `dataComentario` datetime NOT NULL DEFAULT current_timestamp(),
   `idUsuario` int(11) NOT NULL,
   `idPublicacao` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -119,8 +120,10 @@ DELIMITER ;
 CREATE TABLE `tbdenunciacomentario` (
   `idDenunciaComentario` int(11) NOT NULL,
   `textoDenunciaComentario` varchar(200) NOT NULL,
-  `dataDenunciaComentario` date NOT NULL,
-  `idUsuario` int(11) NOT NULL,
+  `dataDenunciaComentario` datetime NOT NULL DEFAULT current_timestamp(),
+  `statusDenunciaComentario` int(11) NOT NULL,
+  `idUsuarioDenunciador` int(11) NOT NULL,
+  `idUsuarioDenunciado` int(11) NOT NULL,
   `idComentario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -417,8 +420,9 @@ ALTER TABLE `tbcurtidapublicacao`
 --
 ALTER TABLE `tbdenunciacomentario`
   ADD PRIMARY KEY (`idDenunciaComentario`),
-  ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idComentario` (`idComentario`);
+  ADD KEY `idUsuario` (`idUsuarioDenunciador`),
+  ADD KEY `idComentario` (`idComentario`),
+  ADD KEY `idUsuarioDenunciado` (`idUsuarioDenunciado`);
 
 --
 -- Índices para tabela `tbdenunciapublicacao`
@@ -546,19 +550,19 @@ ALTER TABLE `tbusuarioseguidor`
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriapublicacao`
 --
 ALTER TABLE `tbcategoriapublicacao`
-  MODIFY `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriaseguida`
 --
 ALTER TABLE `tbcategoriaseguida`
-  MODIFY `idCategoriaSeguida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idCategoriaSeguida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `tbcomentario`
@@ -600,13 +604,13 @@ ALTER TABLE `tbfotopet`
 -- AUTO_INCREMENT de tabela `tbfotopublicacao`
 --
 ALTER TABLE `tbfotopublicacao`
-  MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT de tabela `tbfotousuario`
 --
 ALTER TABLE `tbfotousuario`
-  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `tbmensagem`
@@ -642,7 +646,7 @@ ALTER TABLE `tbproduto`
 -- AUTO_INCREMENT de tabela `tbpublicacao`
 --
 ALTER TABLE `tbpublicacao`
-  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT de tabela `tbservico`
@@ -660,7 +664,7 @@ ALTER TABLE `tbtipousuario`
 -- AUTO_INCREMENT de tabela `tbusuario`
 --
 ALTER TABLE `tbusuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuarioendereco`
@@ -703,7 +707,7 @@ ALTER TABLE `tbcurtidapublicacao`
 -- Limitadores para a tabela `tbdenunciacomentario`
 --
 ALTER TABLE `tbdenunciacomentario`
-  ADD CONSTRAINT `tbdenunciacomentario_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbdenunciacomentario_ibfk_1` FOREIGN KEY (`idUsuarioDenunciador`) REFERENCES `tbusuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tbdenunciacomentario_ibfk_2` FOREIGN KEY (`idComentario`) REFERENCES `tbcomentario` (`idComentario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
