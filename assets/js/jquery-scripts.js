@@ -172,7 +172,10 @@ $(document).ready(function () {
       console.log($(".TAComentario"+idContagemCharComent).val().length)
       $("#contagemCharInput" + idContagemCharComent).val($(".TAComentario" + idContagemCharComent).val().length);
     });
-  })
+    $(".comentar").click(function (){
+      $("#contagemCharInput" + idContagemCharComent).val(0);
+    });
+  });
 
   $("#txtBio").keyup(function () {
     console.log($("#txtBio").val().length);
@@ -186,6 +189,7 @@ $(document).ready(function () {
   $(".cancelar-excluir-post").click(function () {
     $("#modal-exclui-post").modal('hide');
   });
+
 
   $("#opcoes").click(function () {
     if ($(".popupOptions").css("display") == "none") {
