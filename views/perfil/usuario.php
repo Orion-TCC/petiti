@@ -289,14 +289,34 @@ if ($verificarSeguidor['boolean'] == true) {
 
                                 <div class="infoHolder topo">
                                     <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
-                                    <h2><?php echo $login; ?></h2>
-                                    <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                        <button value="<?php echo $id ?>" class="seguir btn btn-primary">Seguir</button>
-                                    <?php } else { ?>
-                                        <button value="<?php echo $id ?>" class="seguir btn btn-secundary">Seguindo</button>
-                                    <?php } ?>
+                                    <div class="flex-row" style="gap: 2rem;">
+                                        <h2><?php echo $login; ?></h2>
+                                        <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                            <button value="<?php echo $id ?>" class="seguir btn btn-primary">Seguir</button>
+                                        <?php } else { ?>
+                                            <button value="<?php echo $id ?>" class="seguir btn btn-secundary">Seguindo</button>
+                                        <?php } ?>
+                                    </div>
+                                    
+                                    <span class="edit" id="<?php echo $id; ?>">
 
-                                    <a href="#modal-denuncia-usuario" rel="modal:open" class="denunciar btn btn-primary">Denunciar</a>
+                                        <div class="editButton">
+                                            <div class="menuPostHover"></div>
+                                            <i class="uil uil-ellipsis-h"></i>
+                                        </div>
+
+                                        <div class="menuPost" id="menuPost">
+                                            <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
+                                                    
+                                                <li>
+                                                  <a href="#modal-denuncia-usuario" rel="modal:open"> <i class="fa-solid fa-circle-exclamation"></i> <span>Denunciar</span> </a>  
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
+                                    </span>
+                                
                                 </div>
 
 
@@ -414,15 +434,149 @@ if ($verificarSeguidor['boolean'] == true) {
         </div>
     </main>
 
-    <div id="modal-denuncia-usuario" class="modal">
-        <form action="/petiti/api/denunciaUsuario" id="formDenunciaUsuario" method="post">
-            <h2 class="h2DenunciaUsuario"> Denunciar usuário </h2>
+    <div id="modal-denuncia-usuario" class="modal denuncia">
+
+        <form class="formDenuncia" action="/petiti/api/denunciaUsuario" id="formDenunciaUsuario" method="post">
+
+            <h1>Denunciar</h1>
+
+            <h5>Você está denunciando a conta de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
+            <h5 class="text-muted">Exemplo: Está fingindo ser outra pessoa; está publicando conteúdo que não deveria estar na pet iti </h5>
+
+
             <input type="hidden" name="idDenunciado" value="<?php echo $id; ?>">
-            <label for="textoDenuncia">Motivo: </label>
-            <input type="text" id="textoDenuncia" required name="textoDenuncia" placeholder="Resuma em poucas palavras o motivo de sua denúncia">
-            <input type="submit" value="Denunciar">
+
+            <div style="width: 99%;">
+                <h4>Causa:</h4>
+                <textarea required name="textoDenuncia" id="textoDenuncia" maxlength="200" ></textarea>
+            </div>
+
+            <input class="btn btn-primary" type="submit" value="Denunciar">
         </form>
     </div>
+
+
+
+
+<!-- <section>
+
+<a href="#modal-denuncia" rel="modal:open">
+
+    <div id="modal-denuncia" class="modal denuncia">
+
+        <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+
+            <input type="hidden" id="idPost" name="idPost" value="">
+
+            <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
+
+            <h1>Denunciar</h1>
+
+            <h5>Você está denunciando o post de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
+            <h5 class="text-muted">Exemplos: É spam; discurdo de ódio; bullying ou assédio; golpe ou fraude etc. </h5>
+
+            <div style="width: 99%;">
+                <h4>Causa:</h4>
+                <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200" ></textarea>
+            </div>
+            
+            <input class="btn btn-primary" type="submit" value="Denunciar">
+
+        </form>
+
+    </div>
+
+</section> -->
+
+
+    
+    <section>
+            <div id="modal-post" class="modal post">
+                <div style="display: flex; width: 100%; height: 100%;">
+
+                    <div id="preview-crop-image">
+                            <img src="#" alt="">
+                    </div>
+
+
+                    <div class="rightSidePost">
+
+                            <div class="userElementosHolder">
+                                <div class="userElementos">
+                                 <img src="#" alt="" class="fotoDePerfil">
+                                 <div>
+                                    <span class="textNomeUsuario">nome</span>
+                                    <h5 class="text-muted">data</h5>    
+                                 </div>
+                                </div>
+
+                                <div class="editButton">
+                                    <div class="menuPostHover"></div>
+                                    <i class="uil uil-ellipsis-v"></i>
+                                </div>
+                            </div>
+
+                            <div class="comentariosHolder">
+
+                                    <div class="comentarioHolder">
+
+                                        <div class="fotoDePerfil">
+                                            <img src="#" alt="">
+                                        </div>
+
+                                        <div class="comentarioInfos">
+
+                                            <div class="info">
+                                                <div style="  word-break: break-all;">
+                                                    <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="info">
+                                                <h5 class="text-muted">tempo</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="botoesInteracao">
+                                
+                                <input class="curtir" value="<?php echo $id ?>" type="checkbox">
+                                
+                                <button class="comentar"></button>
+                                
+                                <button class="mensagem"></button>
+                                
+                            </div>
+
+                            <div class="curtidas">
+                                <h4>0 itimalias</h4>
+            
+                            </div>
+
+                            <div class="commentArea">
+
+                                <i class="uil uil-heart"></i>
+
+                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+
+                                <button value="<?php echo $id ?>" class="comentar" value="">
+                                    <i class="uil uil-message"></i>
+                                </button>
+
+                              
+
+                            </div>
+
+                            </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
 </body>
 
 </html>

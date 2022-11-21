@@ -111,17 +111,15 @@ $(document).ready(function () {
         if (data[2] == true) {
           $("#icon-seguir-post").removeClass("fa-user-plus");
           $("#icon-seguir-post").addClass("fa-user-minus");
-          $(".deixSeguir").text("Deixar de seguir")
+          $(".deixSeguir").text("Deixar de seguir");
         } else {
           $("#icon-seguir-post").removeClass("fa-user-minus");
           $("#icon-seguir-post").addClass("fa-user-plus");
-          $(".deixSeguir").text("Seguir")
+          $(".deixSeguir").text("Seguir");
         }
-      }
+      },
     });
   });
-
-
 
   $(".seguirNotif").on("click", function () {
     id = $(this).val();
@@ -196,20 +194,18 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       url: "/petiti/api/seguir-categoria",
-      data: {id: id},
-      success: function (data){
+      data: { id: id },
+      success: function (data) {
         console.log(data);
-        if(data[0] == true){
+        if (data[0] == true) {
           $("#" + id).addClass("seguida");
-        }else{
+        } else {
           $("#" + id).removeClass("seguida");
         }
-      }
+      },
     });
   });
 });
-
-
 
 function showHideElement() {
   var x = document.getElementById("categoriasHolder");
@@ -345,6 +341,27 @@ function hidePasswordUm() {
   toggle.style.display = "none";
   untoggle.style.display = "block";
 }
+
+$(document).ready(function () {
+  $(".edit").click(function () {
+    var idPub = $(this).attr("id");
+    const options = document.getElementById("opcoesPost " + idPub);
+    if (options.classList.contains("close")) {
+      options.classList.remove("close");
+      options.classList.add("open");
+    } else {
+      options.classList.remove("open");
+      options.classList.add("close");
+    }
+  });
+
+  $(".denunciaPost").click(function () {
+    var idUsu = $(this).attr("id");
+    var idPost = $(".postDenunciado").attr("id");
+    $("#idUsuarioPub").val(idUsu);
+    $("#idPost").val(idPost);
+  });
+});
 
 window.onload = function () {
   var hidedivmenupost = document.getElementById("menuPost");
