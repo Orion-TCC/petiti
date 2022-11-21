@@ -92,6 +92,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
     <script src="/petiti/assets/js/jquery-scripts.js"></script>
+    <script src="/petiti/assets/js/jquery-scripts.js"></script>
     <script src="/petiti/views/assets/js/script-jquery-foto.js"></script>
     <script src="/petiti/assets/js/script.js"></script>
     <script src="/petiti/views/assets/js/funcs.js"></script>
@@ -259,9 +260,9 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                             <div class="userInfo">
 
                                 <div class="infoHolder topo">
-                                   <div class="flex-row" style="gap: 2rem;">
-                                       <h2><?php echo $_SESSION['login']; ?></h2>
-                                       <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
+                                    <div class="flex-row" style="gap: 2rem;">
+                                        <h2><?php echo $_SESSION['login']; ?></h2>
+                                        <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
                                     </div>
                                 </div>
 
@@ -321,7 +322,12 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                                             <div class="flex-col biografia">
                                                 <label class="text-bold" for="">Biografia</label>
                                                 <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." autocomplete="off" type="text" name="txtBio" id="txtBio" maxlength="200"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
-                                                <h4 class="text-muted">0/200</h3>
+                                                <div class="letraCont">
+                                                    <div class="contagemChar">
+                                                        <input type="text" class="contagemCharBioInput" value="0" id="contagemCharBioInput" disabled>
+                                                        <span>/200</span>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                         </div>

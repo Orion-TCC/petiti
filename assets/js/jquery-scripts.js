@@ -174,6 +174,11 @@ $(document).ready(function () {
     });
   })
 
+  $("#txtBio").keyup(function () {
+    console.log($("#txtBio").val().length);
+    $("#contagemCharBioInput").val($("#txtBio").val().length);
+  });
+
   $(".li-ExcluirPost").click(function () {
     $("#modal-exclui-post").modal('show');
   });

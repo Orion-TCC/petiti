@@ -291,7 +291,12 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                                             <div class="flex-col biografia">
                                                 <label class="text-bold" for="">Biografia</label>
                                                 <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." autocomplete="off" type="text" name="txtBio" id="txtBio" maxlength="200"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
-                                                <h4 class="text-muted">0/200</h3>
+                                                <div class="letraCont">
+                                                    <div class="contagemChar">
+                                                        <input type="text" class="contagemCharBioInput" value="0" id="contagemCharBioInput" disabled>
+                                                        <span>/200</span>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                         </div>
