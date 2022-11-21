@@ -1,4 +1,25 @@
 $(document).ready(function () {
+
+
+  $.each(this, function(k, v) {
+    getValues();
+  });
+ 
+  
+
+  function getValues() {
+    $.getJSON("/petiti/api/qtd-notificacoes", { get_param: "value" }, function (data) {
+      $.each(data, function (index) {
+          var myArray = data[0].qtd;
+          $("#notificacaoContadorSpan").text(myArray);
+          if (myArray > 0) {
+            $(".mostrarNotificacoes").append("<div class='notificacaoContador'><span id='notificacaoContadorSpan'>"+myArray+"</span></div>");
+          }
+      });
+    });
+  }
+
+
   var id = "";
   var resize = $("#upload-demo-post-perfil").croppie({
     enableExif: true,
@@ -205,6 +226,7 @@ $(document).ready(function () {
       },
     });
   });
+
 });
 
 function showHideElement() {
