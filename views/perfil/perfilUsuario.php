@@ -196,12 +196,12 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
 
                     <a href="animaisPerdidos" class="menu-item">
                         <span><i class="uil uil-heart-break"></i></span>
-                        <h3>Animais perdidos</h3>
+                        <h3>Animais Perdidos</h3>
                     </a>
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais para adoção</h3>
+                        <h3>Animais para Adoção</h3>
                     </a>
 
 

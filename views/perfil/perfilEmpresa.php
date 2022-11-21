@@ -16,7 +16,7 @@ if ($idPerfil == "") {
     header('location: /petiti/decidir-perfil');
 }
 if ($idPerfil == $_SESSION['id']) {
-    header('location: /petiti/decidir-perfil');
+    header('location: /petiti/feed');
 }
 
 $id = $idPerfil;
