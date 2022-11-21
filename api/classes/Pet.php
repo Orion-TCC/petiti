@@ -145,7 +145,8 @@ class Pet
                     FROM tbpet
                     INNER JOIN tbfotopet ON tbpet.idPet  = tbfotopet.idPet
                     INNER JOIN tbusuario ON tbusuario.idUsuario = tbpet.idUsuario 
-                    WHERE tbpet.idPet = '$id'";
+                    WHERE tbpet.idPet = '$id'
+                    ORDER BY idFotoPet DESC";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;

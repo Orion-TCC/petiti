@@ -1226,6 +1226,7 @@ $app->post('/editar-perfil', function (Request $request, Response $response, arr
 });
 $app->post('/editar-perfil-pet/{id}', function (Request $request, Response $response, array $args) {
     @session_start();
+    $usuario = new Usuario();
     $pet = new Pet();
     $id = $args['id'];
     $pet->setIdPet($id);
@@ -1245,6 +1246,24 @@ $app->post('/editar-perfil-pet/{id}', function (Request $request, Response $resp
         $pet->setIdadePet($_POST['txtIdade']);
         $pet->updateIdadePet($pet);
     }
+    if ($_POST['baseFoto'] != 0) {
+        $fotoPet = new FotoPet();
+        $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-pet/";
+
+        $nomeArquivo = time() . ".png";
+        $arquivoCompleto = $caminhoSalvar . $nomeArquivo;
+        $caminhoBanco = "private-user/fotos-pet/" . $nomeArquivo;
+
+        $fotoPet->setPet($pet);
+        $fotoPet->setNomeFotoPet($nomeArquivo);
+        $fotoPet->setCaminhoFotoPet($caminhoBanco);
+        $fotoPet->cadastrar($fotoPet);
+        file_put_contents($arquivoCompleto, file_get_contents($_POST['baseFoto']));
+        echo $arquivoCompleto;
+    }
+
+
+    $usuario->login($_SESSION['login'], $_SESSION['senha']);
     header("location: /petiti/pet-perfil");
 });
 
