@@ -199,6 +199,5 @@ $(document).ready(function () {
       $(".popupOptions").css("display", "none");
     }
   });
-
 });
 
