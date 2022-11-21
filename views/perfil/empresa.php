@@ -81,7 +81,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
     <nav class="feed">
         <div class="container">
-             <div class="popupOptions" id="popup">
+            <div class="popupOptions" id="popup">
 
                 <div class="flex-col">
 
@@ -120,7 +120,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
                 </div>
 
-                </div>
+            </div>
             <h2 class="logo">
                 <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
             </h2>
@@ -141,7 +141,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <div id="labelAO"><i class="uil uil-setting" ></i></div>
+                <div id="labelAO"><i class="uil uil-setting"></i></div>
                 <div class="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                 </div>
@@ -156,7 +156,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
-                <a class="perfilAtivo">
+                <a href="/petiti/decidir-perfil" class="perfil">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
@@ -170,26 +170,26 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="feed" class="menu-item">
+                    <a href="home" class="menu-item ">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
 
                     <a href="animaisPerdidos" class="menu-item">
                         <span><i class="uil uil-heart-break"></i></span>
-                        <h3>Animais perdidos</h3>
+                        <h3>Animais Perdidos</h3>
                     </a>
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais para adoção</h3>
+                        <h3>Animais para Adoção</h3>
                     </a>
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span style="position: relative;">
-                            <i class="uil uil-bell notificacao"></i> 
-                            <div class="notificacaoContador"><span>1</span></div>
+                        <span class="mostrarNotificacoes" style="position: relative;">
+                            <i class="uil uil-bell notificacao"></i>
+
                         </span>
                         <h3>Notificações</h3>
                     </a>
@@ -209,6 +209,10 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                         <h3>Para Você</h3>
                     </a>
                 </div>
+
+
+
+
 
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">
@@ -321,7 +325,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
-                                    <h3>  <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></h3>
+                                    <h3> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></h3>
                                     <h3> <?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></h3>
                                 </div>
 
@@ -421,92 +425,92 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
         </div>
 
-        
+
         <!-- MODALS -->
-        
+
         <section>
             <div id="modal-post" class="modal post">
                 <div style="display: flex; width: 100%; height: 100%;">
 
                     <div id="preview-crop-image">
-                            <img src="#" alt="">
+                        <img src="#" alt="">
                     </div>
 
 
                     <div class="rightSidePost">
 
-                            <div class="userElementosHolder">
-                                <div class="userElementos">
-                                 <img src="#" alt="" class="fotoDePerfil">
-                                 <div>
+                        <div class="userElementosHolder">
+                            <div class="userElementos">
+                                <img src="#" alt="" class="fotoDePerfil">
+                                <div>
                                     <span class="textNomeUsuario">nome</span>
-                                    <h5 class="text-muted">data</h5>    
-                                 </div>
-                                </div>
-
-                                <div class="editButton">
-                                    <div class="menuPostHover"></div>
-                                    <i class="uil uil-ellipsis-v"></i>
+                                    <h5 class="text-muted">data</h5>
                                 </div>
                             </div>
 
-                            <div class="comentariosHolder">
+                            <div class="editButton">
+                                <div class="menuPostHover"></div>
+                                <i class="uil uil-ellipsis-v"></i>
+                            </div>
+                        </div>
 
-                                    <div class="comentarioHolder">
+                        <div class="comentariosHolder">
 
-                                        <div class="fotoDePerfil">
-                                            <img src="#" alt="">
-                                        </div>
+                            <div class="comentarioHolder">
 
-                                        <div class="comentarioInfos">
+                                <div class="fotoDePerfil">
+                                    <img src="#" alt="">
+                                </div>
 
-                                            <div class="info">
-                                                <div style="  word-break: break-all;">
-                                                    <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
-                                                </div>
-                                            </div>
+                                <div class="comentarioInfos">
 
-                                            <div class="info">
-                                                <h5 class="text-muted">tempo</h5>
-                                            </div>
+                                    <div class="info">
+                                        <div style="  word-break: break-all;">
+                                            <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
                                         </div>
                                     </div>
+
+                                    <div class="info">
+                                        <h5 class="text-muted">tempo</h5>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="botoesInteracao">
-                                
-                                <input class="curtir" value="<?php echo $id ?>" type="checkbox">
-                                
-                                <button class="comentar"></button>
-                                
-                                <button class="mensagem"></button>
-                                
-                            </div>
+                        <div class="botoesInteracao">
 
-                            <div class="curtidas">
-                                <h4>0 itimalias</h4>
-            
-                            </div>
+                            <input class="curtir" value="<?php echo $id ?>" type="checkbox">
 
-                            <div class="commentArea">
+                            <button class="comentar"></button>
 
-                                <i class="uil uil-heart"></i>
+                            <button class="mensagem"></button>
 
-                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+                        </div>
 
-                                <button value="<?php echo $id ?>" class="comentar" value="">
-                                    <i class="uil uil-message"></i>
-                                </button>
+                        <div class="curtidas">
+                            <h4>0 itimalias</h4>
 
-                              
+                        </div>
 
-                            </div>
+                        <div class="commentArea">
 
-                            </div>
+                            <i class="uil uil-heart"></i>
+
+                            <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+
+                            <button value="<?php echo $id ?>" class="comentar" value="">
+                                <i class="uil uil-message"></i>
+                            </button>
+
+
+
+                        </div>
 
                     </div>
 
                 </div>
+
+            </div>
             </div>
         </section>
 

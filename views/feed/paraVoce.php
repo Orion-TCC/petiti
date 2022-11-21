@@ -2,13 +2,15 @@
 @session_start();
 require_once('../../api/classes/curtidaPublicacao.php');
 require_once('../../api/classes/FotoUsuario.php');
+require_once('../../api/classes/Usuario.php');
+require_once('../../api/classes/UsuarioSeguidor.php');
 require_once('../../api/classes/Categoria.php');
-$fotousuario = new FotoUsuario();
 require_once('../../api/classes/CategoriaSeguida.php');
+include_once("../../sentinela.php");
 $categoriaSeguida = new categoriaSeguida();
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
-include_once("../../sentinela.php");
+$fotousuario = new FotoUsuario();
 $idUsuarioCurtida = $_SESSION['id'];
 $id = $_SESSION['id'];
 $urlPets = "http://localhost/petiti/api/usuario/$id/pets";
@@ -19,6 +21,13 @@ $dadosPets = (array) json_decode($jsonPets, true);
 
 $contagemPets = count($dadosPets['pets']);
 $categoria = new Categoria;
+
+$usuarioSeguidor = new UsuarioSeguidor();
+
+$usuario = new Usuario();
+
+$categoria = new Categoria;
+$listaCategorias  = $categoria->listarCategoriasPopulares();
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
@@ -167,7 +176,7 @@ $categoria = new Categoria;
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="feed" class="menu-item">
+                    <a href="feed" class="menu-item ">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
@@ -179,14 +188,14 @@ $categoria = new Categoria;
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais para adoção</h3>
+                        <h3>Animais para Adoção</h3>
                     </a>
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span style="position: relative;">
+                        <span class="mostrarNotificacoes" style="position: relative;">
                             <i class="uil uil-bell notificacao"></i>
-                            <div class="notificacaoContador"><span>1</span></div>
+
                         </span>
                         <h3>Notificações</h3>
                     </a>
@@ -201,11 +210,15 @@ $categoria = new Categoria;
                         <h3>Produtos e Serviços</h3>
                     </a>
 
-                    <a href="#" class="menu-item ativo">
+                    <a href="paraVoce" class="menu-item ativo">
                         <span><i class="uil uil-coffee"></i> </span>
                         <h3>Para Você</h3>
                     </a>
                 </div>
+
+
+
+
 
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">
@@ -284,7 +297,7 @@ $categoria = new Categoria;
                                 <img src="/petiti/assets/images/semPost.svg" id="svgSemPost">
                                 <p class="textoSemPublicacoes">Parece que não tem nada por aqui... Faça um post ou siga alguém para ver o que eles estão postando!</p>
                                 <?php
-                                
+
                                 ?>
                             </div>
                         </div>
@@ -476,11 +489,11 @@ $categoria = new Categoria;
                                     <i class="uil uil-message"></i>
                                 </button>
                             </div>
-                                    
-                                    <div class="contagemChar">
-                                        <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
-                                        <span>/200</span>
-                                    </div>
+
+                            <div class="contagemChar">
+                                <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
+                                <span>/200</span>
+                            </div>
 
                         </div>
                     <?php $contadorPostagem++;
@@ -498,38 +511,60 @@ $categoria = new Categoria;
                     <div class="heading tituloPetsPerdidos">
                         <h4>Ajude alguém a encontrar seu pet</h4>
                     </div>
+                    <?php
+                    $contadorPostagemPerdidos = 0;
+                    $urlPerdidos = "http://localhost/petiti/api/publicacoes/perdidos";
+                    $jsonPerdidos = file_get_contents($urlPerdidos);
+                    $dadosPerdidos = (array)json_decode($jsonPerdidos, true);
+                    $contagemPerdidos = count($dadosPerdidos['publicacoes']);
+                    if ($contagemPerdidos > 0) {
+                        for ($pp = 0; $pp < $contagemPerdidos and $pp <= 2; $pp++) {
+                            $fotoPerdido = $dadosPerdidos['publicacoes'][$pp]['caminhoFoto'];
+                            $dataPerdido = $dadosPerdidos['publicacoes'][$pp]['data'];
+                            $localPerdido =  $dadosPerdidos['publicacoes'][$pp]['local'];
+                            $textoPerdido = $dadosPerdidos['publicacoes'][$pp]['texto'];
+                            $hoje = new DateTime();
+                            $dataPost = new DateTime($dataPerdido);
+                            $intervalo = $hoje->diff($dataPost);
+                            $diferencaAnos = $intervalo->format('%y');
+                            $diferencaMeses = $intervalo->format('%m');
+                            $diferencaDias = $intervalo->format('%a');
+                            $diferencaHoras = $intervalo->format('%h');
+                            $diferencaMinutos = $intervalo->format('%i');
 
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
+                            if ($diferencaAnos == 0) {
+                                if ($diferencaMeses == 0) {
+                                    if ($diferencaDias == 0) {
+                                        if ($diferencaHoras == 0) {
+                                            $diferencaFinal = $diferencaMinutos . " minutos";
+                                        } else {
+                                            $diferencaFinal = $diferencaHoras . " horas";
+                                        }
+                                    } else {
+                                        $diferencaFinal = $diferencaDias . " dias";
+                                    }
+                                } else {
+                                    $diferencaFinal = $diferencaMeses . " meses";
+                                }
+                            } else {
+                                $diferencaFinal = $diferencaAnos . " anos";
+                            }
+                    ?>
+                            <div class="postsPerdidos">
+                                <div class="fotoDePerfil">
+                                    <img src="<?php echo $fotoPerdido ?>" alt="">
+                                </div>
+                                <div class="infoPostPerdidos">
+                                    <h4><?php echo $textoPerdido ?></h4>
+                                    <h5 class="text-Muted">Há <span><?php echo $diferencaFinal ?></span> - <span>Localização: <?php echo $localPerdido ?></span></h5>
+                                </div>
+                            </div>
+                        <?php }
+                    } else { ?>
+                        <h4 style="margin-top: 5px;" class="text-muted">Não tem nenhuma postagem com as categorias do feed exclusivo de animais perdidos...</h4>
 
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-                    <div class="postsPerdidos">
-                        <div class="fotoDePerfil">
-                            <img src="#" alt="">
-                        </div>
-                        <div class="infoPostPerdidos">
-                            <h4>Minha cachorrinha fugiu de casa!</h4>
-                            <h5 class="text-Muted">Há <span>3 meses</span> - <span>Localização: Centro de guaianases</span></h5>
-                        </div>
-                    </div>
-
-
+                    <?php }
+                    ?>
                 </div>
                 <!-- fim de posts de pets perdidos -->
 
@@ -540,108 +575,24 @@ $categoria = new Categoria;
                         </div>
 
                         <div class="categoriasAltaGrid">
+                            <?php
+                            $contategmCategoriasPopulares = count($listaCategorias);
+                            for ($a = 0; $a < $contategmCategoriasPopulares; $a++) { ?>
 
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position1.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
+                                <div class="categorias">
+                                    <div class="Lugar">
+                                        <div class="fotoDePerfil">
+                                            <img src="/petiti/views/assets/img/position<?php echo ($a + 1); ?>.svg" alt="">
+                                        </div>
+                                        <div class="infoCategoria">
+                                            <h4>
+                                                <?php echo $listaCategorias[$a]['categoria']; ?>
+                                            </h4>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position2.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position6.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position3.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position7.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position4.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position8.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?>
 
                         </div>
                     </div>
@@ -651,55 +602,52 @@ $categoria = new Categoria;
 
                 <div class="sugestoes">
                     <h4>Sugestões para você</h4>
+                    <?php
 
-                    <div class="whiteBoxHolder">
+                    $sugestoes = $usuario->sugestoesSeguidores($_SESSION['id']);
+                    $contagemSugestoes = count($sugestoes);
+                    if ($contagemSugestoes > 0) {
 
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
-                            </div>
 
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
-                            </div>
-                        </div>
+                        foreach ($sugestoes as $sugestao) {
+                            $idUsuarioSugerido = $sugestao['idUsuario'];
+                            $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
+                            $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
+                            if ($verificarSeguidor['boolean'] == true) { ?>
+                                <div class="whiteBoxHolder">
+                                    <a href="/petiti/<?php echo $sugestao['loginUsuario'] ?>">
+                                        <div class="flex-row">
+                                            <div class="fotoDePerfil">
+                                                <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
+                                            </div>
 
-                        <button class="btn btn-primary">Seguir</button>
-                    </div>
+                                            <div class="infoSugestoes">
+                                                <h4 style="color: black; margin-bottom: 0.2rem"><?php echo $sugestao['nomeUsuario'] ?></h4>
+                                                <h5 class="text-muted">@<?php echo $sugestao['loginUsuario'] ?></h5>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <?php
+                                    $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
+                                    if ($verificarSeguidor['boolean'] == true) {
+                                        $jsSeguidor = "true";
+                                    } else {
+                                        $jsSeguidor = "false";
+                                    } ?>
 
-                    <div class="whiteBoxHolder">
+                                    <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                        <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
 
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
-                            </div>
-
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary">Seguir</button>
-                    </div>
-
-                    <div class="whiteBoxHolder">
-
-                        <div class="flex-row">
-                            <div class="fotoDePerfil">
-                                <img src="#" alt="">
-                            </div>
-
-                            <div class="infoSugestoes">
-                                <h4>nome de usuario</h4>
-                                <h5 class="text-muted">@username</h5>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-primary">Seguir</button>
-                    </div>
-
+                                        <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
+                                    <?php } else { ?>
+                                        <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
+                                    <?php } ?>
+                                </div>
+                        <?php }
+                        }
+                    } else { ?>
+                        <h4 style="margin-top: 5px;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
+                    <?php } ?>
 
                 </div>
             </div>

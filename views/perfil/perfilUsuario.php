@@ -183,7 +183,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
-                <a class="perfilAtivo">
+                <a href="/petiti/decidir-perfil" class="perfilAtivo">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
@@ -197,7 +197,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="feed" class="menu-item">
+                    <a href="#" class="menu-item">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
@@ -214,9 +214,9 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span style="position: relative;">
+                        <span class="mostrarNotificacoes" style="position: relative;">
                             <i class="uil uil-bell notificacao"></i>
-                            <div class="notificacaoContador"><span>1</span></div>
+
                         </span>
                         <h3>Notificações</h3>
                     </a>
@@ -236,6 +236,10 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                         <h3>Para Você</h3>
                     </a>
                 </div>
+
+
+
+
 
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">

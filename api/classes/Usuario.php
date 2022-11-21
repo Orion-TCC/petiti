@@ -545,11 +545,10 @@ class Usuario
     public function listarPetsUsuario($id)
     {
         $con = Conexao::conexao();
-        $query = "SELECT tbpet.idPet, nomePet, racaPet, usuarioPet,especiePet, idadePet, dataCriacaoPet, tbpet.idUsuario, caminhoFotoPet
+        $query = "SELECT tbpet.idPet, nomePet, racaPet, usuarioPet,especiePet, idadePet, dataCriacaoPet, caminhoFotoPet
                 FROM tbpet
                 INNER JOIN tbfotopet ON tbpet.idPet  = tbfotopet.idPet
-        INNER JOIN tbusuario ON tbusuario.idUsuario = tbpet.idUsuario
-        WHERE tbusuario.idUsuario = $id
+        WHERE tbpet.idUsuario = $id AND idFotoPet = (SELECT MAX(idFotoPet) from tbfotopet WHERE idPet = tbpet.idPet)
         ";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
