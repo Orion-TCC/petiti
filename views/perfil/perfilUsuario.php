@@ -91,6 +91,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
+    <script src="/petiti/assets/js/jquery-scripts.js"></script>
     <script src="/petiti/views/assets/js/script-jquery-foto.js"></script>
     <script src="/petiti/assets/js/script.js"></script>
     <script src="/petiti/views/assets/js/funcs.js"></script>
@@ -100,44 +101,45 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
 
     <nav class="feed">
         <div class="container">
-          <div class="popupOptions" id="popup">
 
-            <div class="flex-col">
+            <div class="popupOptions" id="popup">
 
-                <div class="flex-row">
-                    <div class="fotoDePerfil">
-                        <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                <div class="flex-col">
+
+                    <div class="flex-row">
+                        <div class="fotoDePerfil">
+                            <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                        </div>
+                        <h3><a href="tutor-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
                     </div>
-                    <h3><?php echo $_SESSION['nome']; ?></h3>
+
+                    <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
+                        <div class="flex-row petUser">
+
+                            <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
+                                <div class="fotoDePerfil">
+                                    <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
+                                    <!--Foto do pet  -->
+                                </div>
+
+                                <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
+                            </a>
+                        </div>
+                    <?php    } ?>
                 </div>
 
-                <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
-                    <div class="flex-row petUser">
 
-                        <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
-                            <div class="fotoDePerfil">
-                                <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
-                                <!--Foto do pet  -->
-                            </div>
+                <div class="flex-col borderTop row-gap opcoesPopUp">
 
-                            <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
-                        </a>
-                    </div>
-                <?php    } ?>
-            </div>
+                    <h3 style="width: 15rem;">Adicionar conta existente</h3>
 
+                    <h3>Gerenciar contas</h3>
 
-            <div class="flex-col borderTop row-gap opcoesPopUp">
+                    <h3> <a href="opcoes">Configurações</a></h3>
 
-                <h3 style="width: 15rem;">Adicionar conta existente</h3>
+                    <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
 
-                <h3>Gerenciar contas</h3>
-
-                <h3> <a href="opcoes">Configurações</a></h3>
-
-                <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
-
-            </div>
+                </div>
 
             </div>
 
@@ -149,23 +151,28 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                 <input type="search" placeholder="Pesquisar">
             </div>
 
+            <?php
+
+            if (isset($_COOKIE['denuncia'])) {
+                echo $_COOKIE['denuncia'];
+            }
+
+            ?>
+
             <script>
-                window.onload = function() {
-                    var hidediv = document.getElementById('popup');
-                    document.onclick = function(div) {
-                        if (div.target.id !== 'popup' && div.target.id !== 'opcoes') {
-                            hidediv.style.display = "none";
-                        }
-                    };
-                };
+
             </script>
 
-            <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <div id="labelAO"><i class="uil uil-setting" ></i></div>
-                <div class="fotoDePerfil">
-                    <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+            <div class="opcoes" id="opcoes">
+
+                <div id="labelAO"><i id="settings-icon" class="uil uil-setting"></i></div>
+
+                <div class="fotoDePerfil" id="fotoDePerfil">
+                    <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
                 </div>
+
             </div>
+
         </div>
     </nav>
 
@@ -207,7 +214,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
 
                     <a href="notificacoes" class="menu-item">
                         <span style="position: relative;">
-                            <i class="uil uil-bell notificacao"></i> 
+                            <i class="uil uil-bell notificacao"></i>
                             <div class="notificacaoContador"><span>1</span></div>
                         </span>
                         <h3>Notificações</h3>
@@ -467,7 +474,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
         </div>
         <!-- fim do meio -->
 
-        
+
         <!-- Modal Post -->
         <section id="post">
 
@@ -483,7 +490,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                         <span class="textPadrao">Arraste fotos, vídeos ou gifs aqui</span>
 
                         <label class="btn inputButtonEstilo">
-                            <input class="inputForm FotoPostPerfil" type="file" accept="image/*" >
+                            <input class="inputForm FotoPostPerfil" type="file" accept="image/*">
                             <span>Selecionar no computador</span>
                             <label>
                     </div>
@@ -626,15 +633,15 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
 
         <section>
             <a href="#modal-denuncia" rel="modal:open">
-                    <div id="modal-denuncia" class="modal">
-                        <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
-                            <input type="hidden" id="idPost" name="idPost" value="">
-                            <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
-                            <span class="spanDenuncia">Denuniar</span>
-                            <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
-                            <input class="submitDenuncia" type="submit" value="Denunciar">
-                        </form>
-                    </div>
+                <div id="modal-denuncia" class="modal">
+                    <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+                        <input type="hidden" id="idPost" name="idPost" value="">
+                        <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
+                        <span class="spanDenuncia">Denuniar</span>
+                        <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
+                        <input class="submitDenuncia" type="submit" value="Denunciar">
+                    </form>
+                </div>
         </section>
 
 
@@ -643,84 +650,84 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                 <div style="display: flex; width: 100%; height: 100%;">
 
                     <div id="preview-crop-image">
-                            <img src="#" alt="">
+                        <img src="#" alt="">
                     </div>
 
 
                     <div class="rightSidePost">
 
-                            <div class="userElementosHolder">
-                                <div class="userElementos">
-                                 <img src="#" alt="" class="fotoDePerfil">
-                                 <div>
+                        <div class="userElementosHolder">
+                            <div class="userElementos">
+                                <img src="#" alt="" class="fotoDePerfil">
+                                <div>
                                     <span class="textNomeUsuario">nome</span>
-                                    <h5 class="text-muted">data</h5>    
-                                 </div>
-                                </div>
-
-                                <div class="editButton">
-                                    <div class="menuPostHover"></div>
-                                    <i class="uil uil-ellipsis-v"></i>
+                                    <h5 class="text-muted">data</h5>
                                 </div>
                             </div>
 
-                            <div class="comentariosHolder">
+                            <div class="editButton">
+                                <div class="menuPostHover"></div>
+                                <i class="uil uil-ellipsis-v"></i>
+                            </div>
+                        </div>
 
-                                    <div class="comentarioHolder">
+                        <div class="comentariosHolder">
 
-                                        <div class="fotoDePerfil">
-                                            <img src="#" alt="">
-                                        </div>
+                            <div class="comentarioHolder">
 
-                                        <div class="comentarioInfos">
+                                <div class="fotoDePerfil">
+                                    <img src="#" alt="">
+                                </div>
 
-                                            <div class="info">
-                                                <div style="  word-break: break-all;">
-                                                    <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
-                                                </div>
-                                            </div>
+                                <div class="comentarioInfos">
 
-                                            <div class="info">
-                                                <h5 class="text-muted">tempo</h5>
-                                            </div>
+                                    <div class="info">
+                                        <div style="  word-break: break-all;">
+                                            <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
                                         </div>
                                     </div>
+
+                                    <div class="info">
+                                        <h5 class="text-muted">tempo</h5>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="botoesInteracao">
-                                
-                                <input class="curtir" value="<?php echo $id ?>" type="checkbox">
-                                
-                                <button class="comentar"></button>
-                                
-                                <button class="mensagem"></button>
-                                
-                            </div>
+                        <div class="botoesInteracao">
 
-                            <div class="curtidas">
-                                <h4>0 itimalias</h4>
-            
-                            </div>
+                            <input class="curtir" value="<?php echo $id ?>" type="checkbox">
 
-                            <div class="commentArea">
+                            <button class="comentar"></button>
 
-                                <i class="uil uil-heart"></i>
+                            <button class="mensagem"></button>
 
-                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+                        </div>
 
-                                <button value="<?php echo $id ?>" class="comentar" value="">
-                                    <i class="uil uil-message"></i>
-                                </button>
+                        <div class="curtidas">
+                            <h4>0 itimalias</h4>
 
-                              
+                        </div>
 
-                            </div>
+                        <div class="commentArea">
 
-                            </div>
+                            <i class="uil uil-heart"></i>
+
+                            <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+
+                            <button value="<?php echo $id ?>" class="comentar" value="">
+                                <i class="uil uil-message"></i>
+                            </button>
+
+
+
+                        </div>
 
                     </div>
 
                 </div>
+
+            </div>
             </div>
         </section>
 
