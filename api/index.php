@@ -830,6 +830,16 @@ $app->get('/publicacoes/personalizadas/{id}', function (Request $request, Respon
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
+
+$app->get('/publicacoes/paraVoce/{id}', function (Request $request, Response $response, array $args) {
+    $categoriaSeguida = new categoriaSeguida();
+    $id = $args['id'];
+
+    $json = "{\"publicacoes\":" . json_encode($lista = $categoriaSeguida->buscarCategoriasSeguidas($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
 $app->get('/publicacoes/perdidos', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
 
@@ -929,6 +939,11 @@ $app->post(
         $usuario->setIdUsuario($_SESSION['id']);
         $publicacao->setUsuario($usuario);
         $publicacao->setDataPublicacao($DateAndTime);
+        if(isset($_POST['checkImp'])){
+            $publicacao->setImpulsoPub(1);
+        }else{
+            $publicacao->setImpulsoPub(0);
+        }
         $id = $publicacao->cadastrar($publicacao);
 
         $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-publicacao/";
@@ -1209,6 +1224,30 @@ $app->post('/editar-perfil', function (Request $request, Response $response, arr
     }
     header("location: /petiti/$envio");
 });
+$app->post('/editar-perfil-pet/{id}', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $pet = new Pet();
+    $id = $args['id'];
+    $pet->setIdPet($id);
+    if (isset($_POST['txtNome'])) {
+        $pet->setNomePet($_POST['txtNome']);
+        $pet->updateNomePet($pet);
+    }
+    if (isset($_POST['txtRaca'])) {
+        $pet->setRacaPet($_POST['txtRaca']);
+        $pet->updateRacaPet($pet);
+    }
+    if (isset($_POST['txtEspecie'])) {
+        $pet->setEspeciePet($_POST['txtEspecie']);
+        $pet->updateEspeciePet($pet);
+    }
+    if (isset($_POST['txtIdade'])) {
+        $pet->setIdadePet($_POST['txtIdade']);
+        $pet->updateIdadePet($pet);
+    }
+    header("location: /petiti/pet-perfil");
+});
+
 
 $app->post('/config-conta', function (Request $request, Response $response, array $args) {
     @session_start();
