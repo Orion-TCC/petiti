@@ -92,80 +92,87 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
     <script src="/petiti/views/assets/js/script-jquery-foto.js"></script>
     <script src="/petiti/assets/js/script.js"></script>
+    <script src="/petiti/assets/js/jquery-scripts.js"></script>
     <script src="/petiti/views/assets/js/funcs.js"></script>
 </head>
 
 <body class="feed perfilUsuario">
 
     <nav class="feed">
-        <div class="container">
-            <div class="popupOptions" id="popup">
+    <div class="container">
 
-                <div class="flex-col">
+<div class="popupOptions" id="popup">
 
-                    <div class="flex-row">
-                        <div class="fotoDePerfil">
-                            <img src="<?php echo $_SESSION['foto']; ?>" alt="">
-                        </div>
-                        <h3><a href="tutor-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
+    <div class="flex-col">
+
+        <div class="flex-row">
+            <div class="fotoDePerfil">
+                <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+            </div>
+            <h3><a href="tutor-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
+        </div>
+
+        <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
+            <div class="flex-row petUser">
+
+                <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
+                    <div class="fotoDePerfil">
+                        <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
+                        <!--Foto do pet  -->
                     </div>
 
-                    <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
-                        <div class="flex-row petUser">
-
-                            <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
-                                <div class="fotoDePerfil">
-                                    <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
-                                    <!--Foto do pet  -->
-                                </div>
-
-                                <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
-                            </a>
-                        </div>
-                    <?php    } ?>
-                </div>
-
-
-                <div class="flex-col borderTop row-gap opcoesPopUp">
-
-                    <h3 style="width: 15rem;">Adicionar conta existente</h3>
-
-                    <h3>Gerenciar contas</h3>
-
-                    <h3> <a href="opcoes">Configurações</a></h3>
-
-                    <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
-
-                </div>
-
-                </div>
-
-            <h2 class="logo">
-                <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
-            </h2>
-            <div class="caixa-de-busca">
-                <i class="uil uil-search"></i>
-                <input type="search" placeholder="Pesquisar">
+                    <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
+                </a>
             </div>
+        <?php    } ?>
+    </div>
 
-            <script>
-                window.onload = function() {
-                    var hidediv = document.getElementById('popup');
-                    document.onclick = function(div) {
-                        if (div.target.id !== 'popup' && div.target.id !== 'opcoes') {
-                            hidediv.style.display = "none";
-                        }
-                    };
-                };
-            </script>
 
-            <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <div id="labelAO"><i class="uil uil-setting" ></i></div>
-                <div class="fotoDePerfil">
-                    <img src="<?php echo $_SESSION['foto']; ?>" alt="">
-                </div>
-            </div>
-        </div>
+    <div class="flex-col borderTop row-gap opcoesPopUp">
+
+        <h3 style="width: 15rem;">Adicionar conta existente</h3>
+
+        <h3>Gerenciar contas</h3>
+
+        <h3> <a href="opcoes">Configurações</a></h3>
+
+        <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
+
+    </div>
+
+</div>
+
+<h2 class="logo">
+    <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
+</h2>
+<div class="caixa-de-busca">
+    <i class="uil uil-search"></i>
+    <input type="search" placeholder="Pesquisar">
+</div>
+
+<?php
+
+if (isset($_COOKIE['denuncia'])) {
+    echo $_COOKIE['denuncia'];
+}
+
+?>
+
+<script>
+
+</script>
+
+<div class="opcoes" id="opcoes">
+
+    <div id="labelAO"><i id="settings-icon" class="uil uil-setting"></i></div>
+
+    <div class="fotoDePerfil" id="fotoDePerfil">
+        <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
+    </div>
+
+</div>
+
+</div>
     </nav>
 
     <main class="feed">
