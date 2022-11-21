@@ -186,7 +186,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     <a href="notificacoes" class="menu-item">
                         <span class="mostrarNotificacoes" style="position: relative;">
                             <i class="uil uil-bell notificacao"></i>
-                          
+
                         </span>
                         <h3>Notificações</h3>
                     </a>
@@ -438,7 +438,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <?php }
                                     ?>
 
-                                    <a href="#modal-post" rel="modal:open"><button class="comentar"></button></a> 
+                                    <a href="#modal-post" rel="modal:open"><button class="comentar"></button></a>
 
                                     <button class="mensagem"></button>
 
@@ -472,26 +472,26 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 ?>
                             </div>
 
-                            <div id="comentarios<?php echo$id?>" class="comentarios">
+                            <div id="comentarios<?php echo $id ?>" class="comentarios">
 
-                                <?php if ($contagemComentarios > 0 ) {
-                                for ($c = 0; $c  < $contagemComentarios; $c++) { ?>
-                                <div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'>
-                                    <h2 style='font-weight: 900 !important; align-self: start;'>
-                                        <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario']?>
-                                    </h2>
-                                    <h3 style='color: rgba(86, 86, 86, 1);'>
-                                        <?php echo $dadosComentarios['comentarios'][$c]['textoComentario']?>
-                                    </h3>
-                                </div>
+                                <?php if ($contagemComentarios > 0) {
+                                    for ($c = 0; $c  < $contagemComentarios; $c++) { ?>
+                                        <div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'>
+                                            <h2 style='font-weight: 900 !important; align-self: start;'>
+                                                <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
+                                            </h2>
+                                            <h3 style='color: rgba(86, 86, 86, 1);'>
+                                                <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
+                                            </h3>
+                                        </div>
 
-                                <?php 
-                                if($c == 2){
-                                    $c = $contagemComentarios-1;
-                                }    
-                            }
-                            echo "Ver mais...";
-                        } ?>
+                                <?php
+                                        if ($c == 2) {
+                                            $c = $contagemComentarios - 1;
+                                        }
+                                    }
+                                    echo "Ver mais...";
+                                } ?>
                             </div>
 
                             <div class="commentArea">
@@ -526,50 +526,50 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     $jsonPerdidos = file_get_contents($urlPerdidos);
                     $dadosPerdidos = (array)json_decode($jsonPerdidos, true);
                     $contagemPerdidos = count($dadosPerdidos['publicacoes']);
-                    if($contagemPerdidos > 0){
-                    for ($pp = 0; $pp <= 2; $pp++) {
-                        $fotoPerdido = $dadosPerdidos['publicacoes'][$pp]['caminhoFoto'];
-                        $dataPerdido = $dadosPerdidos['publicacoes'][$pp]['data'];
-                        $localPerdido =  $dadosPerdidos['publicacoes'][$pp]['local'];
-                        $textoPerdido = $dadosPerdidos['publicacoes'][$pp]['texto'];
-                        $hoje = new DateTime();
-                        $dataPost = new DateTime($dataPerdido);
-                        $intervalo = $hoje->diff($dataPost);
-                        $diferencaAnos = $intervalo->format('%y');
-                        $diferencaMeses = $intervalo->format('%m');
-                        $diferencaDias = $intervalo->format('%a');
-                        $diferencaHoras = $intervalo->format('%h');
-                        $diferencaMinutos = $intervalo->format('%i');
+                    if ($contagemPerdidos > 0) {
+                        for ($pp = 0; $pp <= 2; $pp++) {
+                            $fotoPerdido = $dadosPerdidos['publicacoes'][$pp]['caminhoFoto'];
+                            $dataPerdido = $dadosPerdidos['publicacoes'][$pp]['data'];
+                            $localPerdido =  $dadosPerdidos['publicacoes'][$pp]['local'];
+                            $textoPerdido = $dadosPerdidos['publicacoes'][$pp]['texto'];
+                            $hoje = new DateTime();
+                            $dataPost = new DateTime($dataPerdido);
+                            $intervalo = $hoje->diff($dataPost);
+                            $diferencaAnos = $intervalo->format('%y');
+                            $diferencaMeses = $intervalo->format('%m');
+                            $diferencaDias = $intervalo->format('%a');
+                            $diferencaHoras = $intervalo->format('%h');
+                            $diferencaMinutos = $intervalo->format('%i');
 
-                        if ($diferencaAnos == 0) {
-                            if ($diferencaMeses == 0) {
-                                if ($diferencaDias == 0) {
-                                    if ($diferencaHoras == 0) {
-                                        $diferencaFinal = $diferencaMinutos . " minutos";
+                            if ($diferencaAnos == 0) {
+                                if ($diferencaMeses == 0) {
+                                    if ($diferencaDias == 0) {
+                                        if ($diferencaHoras == 0) {
+                                            $diferencaFinal = $diferencaMinutos . " minutos";
+                                        } else {
+                                            $diferencaFinal = $diferencaHoras . " horas";
+                                        }
                                     } else {
-                                        $diferencaFinal = $diferencaHoras . " horas";
+                                        $diferencaFinal = $diferencaDias . " dias";
                                     }
                                 } else {
-                                    $diferencaFinal = $diferencaDias . " dias";
+                                    $diferencaFinal = $diferencaMeses . " meses";
                                 }
                             } else {
-                                $diferencaFinal = $diferencaMeses . " meses";
+                                $diferencaFinal = $diferencaAnos . " anos";
                             }
-                        } else {
-                            $diferencaFinal = $diferencaAnos . " anos";
-                        }
                     ?>
-                        <div class="postsPerdidos">
-                            <div class="fotoDePerfil">
-                                <img src="<?php echo $fotoPerdido ?>" alt="">
+                            <div class="postsPerdidos">
+                                <div class="fotoDePerfil">
+                                    <img src="<?php echo $fotoPerdido ?>" alt="">
+                                </div>
+                                <div class="infoPostPerdidos">
+                                    <h4><?php echo $textoPerdido ?></h4>
+                                    <h5 class="text-Muted">Há <span><?php echo $diferencaFinal ?></span> - <span>Localização: <?php echo $localPerdido ?></span></h5>
+                                </div>
                             </div>
-                            <div class="infoPostPerdidos">
-                                <h4><?php echo $textoPerdido ?></h4>
-                                <h5 class="text-Muted">Há <span><?php echo $diferencaFinal ?></span> - <span>Localização: <?php echo $localPerdido ?></span></h5>
-                            </div>
-                        </div>
                     <?php }
-}
+                    }
                     ?>
                 </div>
                 <!-- fim de posts de pets perdidos -->
@@ -696,26 +696,39 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                     $sugestoes = $usuario->sugestoesSeguidores($_SESSION['id']);
                     foreach ($sugestoes as $sugestao) {
-                        $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($sugestao['idUsuario']);
-                        $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($sugestao['idUsuario'], $_SESSION['id']);
+                        $idUsuarioSugerido = $sugestao['idUsuario'];
+                        $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
+                        $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
                         if ($verificarSeguidor['boolean'] == true) { ?>
-                           
                             <div class="whiteBoxHolder">
+                                <a href="/petiti/<?php echo $sugestao['loginUsuario'] ?>">
+                                    <div class="flex-row">
+                                        <div class="fotoDePerfil">
+                                            <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
+                                        </div>
 
-                                <div class="flex-row">
-                                    <div class="fotoDePerfil">
-                                        <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
+                                        <div class="infoSugestoes">
+                                            <h4><?php echo $sugestao['nomeUsuario'] ?></h4>
+                                            <h5 class="text-muted">@ <?php echo $sugestao['loginUsuario'] ?></h5>
+                                        </div>
                                     </div>
+                                </a>
+                                <?php
+                                $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
+                                if ($verificarSeguidor['boolean'] == true) {
+                                    $jsSeguidor = "true";
+                                } else {
+                                    $jsSeguidor = "false";
+                                } ?>
 
-                                    <div class="infoSugestoes">
-                                        <h4><?php echo $sugestao['nomeUsuario'] ?></h4>
-                                        <h5 class="text-muted">@ <?php echo $sugestao['loginUsuario'] ?></h5>
-                                    </div>
-                                </div>
+                                <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
 
-                                <button class="btn btn-primary">Seguir</button>
+                                    <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
+                                <?php } else { ?>
+                                    <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
+                                <?php } ?>
                             </div>
-                          
                     <?php }
                     } ?>
 
@@ -897,7 +910,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                         <h5 class="text-muted">Você está denunciando o post de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
 
-                        <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200" ></textarea>
+                        <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200"></textarea>
 
                         <input class="btn btn-primary" type="submit" value="Denunciar">
 
@@ -913,83 +926,83 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                 <div style="display: flex; width: 100%; height: 100%;">
 
                     <div id="preview-crop-image">
-                            <img src="#" alt="">
+                        <img src="#" alt="">
                     </div>
 
 
                     <div class="rightSidePost">
 
-                            <div class="userElementosHolder">
-                                <div class="userElementos">
-                                 <img src="#" alt="" class="fotoDePerfil">
-                                 <div>
+                        <div class="userElementosHolder">
+                            <div class="userElementos">
+                                <img src="#" alt="" class="fotoDePerfil">
+                                <div>
                                     <span class="textNomeUsuario">nome</span>
-                                    <h5 class="text-muted">data</h5>    
-                                 </div>
-                                </div>
-
-                                <div class="editButton">
-                                    <div class="menuPostHover"></div>
-                                    <i class="uil uil-ellipsis-v"></i>
+                                    <h5 class="text-muted">data</h5>
                                 </div>
                             </div>
 
-                            <div class="comentariosHolder">
+                            <div class="editButton">
+                                <div class="menuPostHover"></div>
+                                <i class="uil uil-ellipsis-v"></i>
+                            </div>
+                        </div>
 
-                                    <div class="comentarioHolder">
+                        <div class="comentariosHolder">
 
-                                        <div class="fotoDePerfil">
-                                            <img src="#" alt="">
-                                        </div>
+                            <div class="comentarioHolder">
 
-                                        <div class="comentarioInfos">
+                                <div class="fotoDePerfil">
+                                    <img src="#" alt="">
+                                </div>
 
-                                            <div class="info">
-                                                <h4>nome</h4>
-                                                <h4 class="text-muted">comentario</h4>
-                                            </div>
+                                <div class="comentarioInfos">
 
-                                            <div class="info">
-                                                <h5 class="text-muted">tempo</h5>
-                                            </div>
-                                        </div>
+                                    <div class="info">
+                                        <h4>nome</h4>
+                                        <h4 class="text-muted">comentario</h4>
                                     </div>
-                            </div>
 
-                            <div class="botoesInteracao">
-                                
-                                <input class="curtir" value="<?php echo $id ?>" type="checkbox">
-                                
-                                <button class="comentar"></button>
-                                
-                                <button class="mensagem"></button>
-                                
-                            </div>
+                                    <div class="info">
+                                        <h5 class="text-muted">tempo</h5>
+                                    </div>
+                                    v>
+                                    v>
+                                </div>
 
-                            <div class="curtidas">
+                                <div class="botoesInteracao">
+
+                                    <input crtir" value="<?php echo $id ?>" type="checkbox">
+
+                                    <buts="comentar"></button>
+
+                                        <buts="mensagem"></button>
+
+                                </div>
+
+                                ss="curtidas">
                                 <h4>0 itimalias</h4>
-            
-                            </div>
-
-                            <div class="commentArea">
-
-                                <i class="uil uil-heart"></i>
-
-                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
-
-                                <button value="<?php echo $id ?>" class="comentar" value="">
-                                    <i class="uil uil-message"></i>
-                                </button>
-
-                              
 
                             </div>
 
-                            </div>
+                            class="commentArea">
+
+                            <i class="uil uil-heart"></i>
+
+                            <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+
+                            <button value="<?php echo $id ?>" class="comentar" value="">
+                                <i class="uil uil-message"></i>
+                            </button>
+
+
+
+                        </div>
 
                     </div>
 
                 </div>
+
+            </div>
             </div>
         </section>
 
