@@ -169,7 +169,7 @@ $(document).ready(function () {
     idContagemCharComent = $(this).attr("id");
     $(".TAComentario" + idContagemCharComent).keyup(function () {
       console.log(idContagemCharComent);
-      console.log($(".TAComentario").val().length)
+      console.log($(".TAComentario"+idContagemCharComent).val().length)
       $("#contagemCharInput" + idContagemCharComent).val($(".TAComentario" + idContagemCharComent).val().length);
     });
   })
