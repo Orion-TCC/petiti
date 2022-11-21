@@ -1,7 +1,8 @@
 <?php
 require_once('/xampp/htdocs/petiti/api/database/conexao.php');
 
-class categoriaSeguida{
+class categoriaSeguida
+{
     private $idCategoriaSeguida;
     private $idCategoria;
     private $idUsuario;
@@ -42,18 +43,20 @@ class categoriaSeguida{
         return $this;
     }
 
-    public function cadastrar($categoriaSeguida){
+    public function cadastrar($categoriaSeguida)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare("INSERT INTO tbCategoriaSeguida
         (idCategoriaSeguida, idUsuario, idCategoria) 
         VALUES (default, ?, ?)");
         $stmt->bindValue(1, $categoriaSeguida->getIdUsuario());
         $stmt->bindValue(2, $categoriaSeguida->getIdCategoria());
-        
+
         $stmt->execute();
     }
 
-    public function delete($delete){
+    public function delete($delete)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare("DELETE FROM tbCategoriaSeguida WHERE idCategoriaSeguida = ?");
         $stmt->bindValue(1, $delete->getIdCategoriaSeguida());
@@ -61,7 +64,8 @@ class categoriaSeguida{
         $stmt->execute();
     }
 
-    public function verificarSeguida($idUsuario, $idCategoria){
+    public function verificarSeguida($idUsuario, $idCategoria)
+    {
         $con = Conexao::conexao();
         $query = "SELECT COUNT(idCategoriaSeguida), idCategoriaSeguida FROM tbCategoriaSeguida
         WHERE idUsuario = $idUsuario AND idCategoria = $idCategoria";
@@ -71,14 +75,29 @@ class categoriaSeguida{
             $qtd = $linha[0];
             $id = $linha[1];
         }
-        if($qtd>0){
+        if ($qtd > 0) {
             $array = array("boolean" => false, "id" => "$id");
             return $array;
-        }else{
+        } else {
             $array = array("boolean" => true);
             return $array;
         }
     }
-}
 
-?>
+    public function buscarCategoriasSeguidas($idUsuario)
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT *, tbfotopublicacao.caminhoFotoPublicacao, tbUsuario.* from tbpublicacao 
+        INNER JOIN tbfotopublicacao  ON tbfotopublicacao.idPublicacao = tbpublicacao.idPublicacao 
+        INNER JOIN tbUsuario ON tbUsuario.idUsuario = tbPublicacao.idUsuario
+        WHERE tbpublicacao.idPublicacao IN(
+        SELECT tbcategoriapublicacao.idPublicacao FROM tbcategoriapublicacao WHERE idCategoria IN(
+        SELECT idCategoria as id FROM tbCategoriaSeguida
+                WHERE idUsuario = $idUsuario)
+        GROUP BY tbcategoriapublicacao.idPublicacao
+        )";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
+    }
+}
