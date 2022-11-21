@@ -118,4 +118,18 @@ class FotoPet
 
                 return $lista;
         }
+
+        public function exibirFotopet($id)
+        {
+                $con = Conexao::conexao();
+
+                $query = "SELECT caminhoFotoPet FROM `tbfotopet` WHERE idFotopet = (SELECT MAX(idFotopet) FROM tbfotopet WHERE idpet = $id)";
+
+                $resultado = $con->query($query);
+                $lista = $resultado->fetchAll();
+                foreach ($lista as $linha) {
+                        $caminhoFoto = $linha[0];
+                }
+                return $caminhoFoto;
+        }
 }
