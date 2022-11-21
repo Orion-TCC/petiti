@@ -498,9 +498,10 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                             $c = $contagemComentarios - 1;
                                         }
                                     }  ?>
-                                    <a href="#modal-post" rel="modal:open" style="color: black; width: fit-content;">Ver mais...</a> <?php
+                                     <?php
                                                                                                                                     } ?>
                             </div>
+                            <a href="#modal-post" rel="modal:open" style="color: black; width: fit-content;">Ver mais...</a>
 
                             <div class="commentArea" id="<?php echo $id; ?>">
                                 <i class="uil uil-heart"></i>
