@@ -27,16 +27,21 @@
         @session_start();
         $nome = $_SESSION['nome-recuperacao'];
         ?>
-        <form class="formRecover" method="post" action="/petiti/api/usuario/update/senha/recuperacao">
-            <p class="tituloFormRecover" for="">Crie uma nova senha</p>
-            <label class="formTextLogin" for="novaSenha">Sua nova senha</label>
-            <input class="formInputLogin" type="password" id="novaSenha" name="novaSenha">
-            <label style="margin-top: 20px;" class="formTextLogin" for="confirmNovaSenha">Confirme a senha</label>
-            <input class="formInputLogin" type="password" id="confirmNovaSenha" name="confirmNovaSenha">
-            <input class="formSubmitLogin" type="submit" value="Atualizar senha">
-            <p id="senhaAvisoTamanho"></p>
+        <form class="formPassRecover" method="post" action="/petiti/api/usuario/update/senha/recuperacao">
+            <div class="formRecoverHolder">
+                <span class="tituloFormRecover" for="">Crie uma nova senha</span>
 
-            <p id="senhaAvisoVerificacao"></p>
+                <label class="formTextLogin" for="novaSenha">Insira sua nova senha</label>
+                <input class="formInputLogin" type="password" id="novaSenha" name="novaSenha">
+
+                <label style="margin-top: 20px;" class="formTextLogin" for="confirmNovaSenha">Confirme a senha</label>
+                <input class="formInputLogin" type="password" id="confirmNovaSenha" name="confirmNovaSenha">
+                <input class="formSubmitLogin" type="submit" value="Atualizar senha">
+                <p id="senhaAvisoTamanho"></p>
+
+                <p id="senhaAvisoVerificacao"></p>
+            </div>
+            
         </form>
 
     </div>

@@ -6,21 +6,9 @@ require('../../api/classes/Usuario.php');
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 
-<<<<<<< HEAD
-$id = $_SESSION['id'];
-=======
 $usuario = new Usuario();
 
-$idPerfil = $usuario->procuraId2($_GET['user']);
-if ($idPerfil == "") {
-    header('location: /petiti/decidir-perfil');
-}
-if ($idPerfil == $_SESSION['id']) {
-    header('location: /petiti/feed');
-}
-
-$id = $idPerfil;
->>>>>>> e9cf3552531673fa1825c1e1bd4946c9b3e743d9
+$id = $_SESSION['id'];
 
 include_once("../../sentinela.php");
 $idUsuarioCurtida = $_SESSION['id'];
@@ -243,8 +231,10 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                             <div class="userInfo">
 
                                 <div class="infoHolder topo">
-                                    <h2><?php echo $_SESSION['login']; ?></h2>
-                                    <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
+                                   <div class="flex-row" style="gap: 2rem;">
+                                        <h2><?php echo $_SESSION['login']; ?></h2>
+                                        <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
+                                    </div>
                                 </div>
 
 

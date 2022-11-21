@@ -1260,17 +1260,12 @@ body {
 }
 
 .formTextLogin {
-  font-family: "Raleway Bold";
+  font-family: "Raleway Bold", sans-serif;
   font-style: normal;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 21px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 6px;
-  padding-left: 5px;
-  color: #000000;
+  font-size: 20px;
+  line-height: 23px;
+  margin: 15px 0 7px 0;
 }
 
 .formInputLogin {
@@ -1280,13 +1275,13 @@ body {
   backdrop-filter: blur(40px);
   border-radius: 20px;
   height: 50px;
-  width: 405px;
+  width: 100%;
+  padding: 0 20px 0 20px;
   font-family: "Public Sans Bold", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  padding-left: 20px;
 }
 
 .loginInputHolder {
@@ -1346,6 +1341,26 @@ body {
   align-items: center;
 }
 
+.formPassRecover {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 550px;
+    height: 420px;
+    background-color: #bad5db;
+    border-radius: 30px;
+    margin: 20px;
+    padding-block: 20px;
+}
+
+.formRecoverHolder {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: 0 90px 15px 50px;
+}
+
 .formEmailEnviado {
   width: 350px;
   background-color: #bad5db;
@@ -1371,7 +1386,7 @@ body {
   font-family: "Raleway Bold", sans-serif;
   color: #000000;
   text-align: center;
-  font-size: 40px;
+  font-size: 3rem;
   margin-bottom: 10px;
   margin-left: 18px;
   margin-right: 18px;

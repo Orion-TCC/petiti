@@ -1210,6 +1210,44 @@ $app->post('/editar-perfil', function (Request $request, Response $response, arr
     header("location: /petiti/$envio");
 });
 
+$app->post('/config-conta', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($_SESSION['id']);
+    if (isset($_POST['txtNome'])) {
+        $usuario->setNomeUsuario($_POST['txtNome']);
+        $usuario->updateNome($usuario);
+    }
+    if (isset($_POST['txtLogin'])) {
+        $usuario->setLoginUsuario($_POST['txtLogin']);
+        $usuario->updateLogin($usuario);
+    }
+    if (isset($_POST['txtEmail'])) {
+        $usuario->setEmailUsuario($_POST['txtEmail']);
+        $usuario->updateEmail($usuario);
+    }
+
+
+    if ($_POST['baseFoto'] != 0) {
+        $fotoUsuario = new FotoUsuario();
+        $image = $_POST['baseFoto'];
+        $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-perfil/";
+        $nomeArquivo = time() . ".png";
+        $arquivoCompleto = $caminhoSalvar . $nomeArquivo;
+        $fotoUsuario->setUsuario($usuario);
+        $fotoUsuario->setNomeFoto($nomeArquivo);
+        $caminhoBanco = "private-user/fotos-perfil/" . $nomeArquivo;
+        $fotoUsuario->setCaminhoFoto($caminhoBanco);
+        $fotoUsuario->cadastrar($fotoUsuario);
+        file_put_contents($arquivoCompleto, file_get_contents($image));
+        echo $arquivoCompleto;
+    }
+
+    $usuario->login($_SESSION['login'], $_SESSION['senha']);
+
+    header("location: /petiti/opcoes");
+});
+
 $app->get('/escolher-pet/{id}', function (Request $request, Response $response, array $args) {
     @session_start();
     $_SESSION['pet-escolhido'] = $args['id'];

@@ -251,8 +251,10 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                             <div class="userInfo">
 
                                 <div class="infoHolder topo">
-                                    <h2><?php echo $usuarioPet; ?></h2>
-                                    <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
+                                     <div class="flex-row" style="gap: 2rem;">
+                                         <h2><?php echo $usuarioPet; ?></h2>
+                                         <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
+                                    </div>
                                 </div>
 
 
@@ -298,20 +300,20 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                                             </div>
 
                                             <div class="flex-col">
-                                                <label class="text-bold" for="">Local</label>
+                                                <label class="text-bold" for="">Raça</label>
                                                 <input <?php if ($_SESSION['local'] != null) { ?> value="<?php echo $_SESSION['local'] ?>" <?php } ?> placeholder="Localização" type="text" name="txtLocal" id="txtLocal" autocomplete="off" maxlength="40">
                                             </div>
 
                                             <div class="flex-col">
-                                                <label class="text-bold" for="">Site</label>
-                                                <input class="a-text" <?php if ($_SESSION['site'] != null) { ?>value="<?php echo $_SESSION['site'] ?>" <?php } ?> placeholder="URL" type="text" name="txtSite" id="txtSite" autocomplete="off" maxlength="40">
+                                                <label class="text-bold" for="">Especie</label>
+                                                <input <?php if ($_SESSION['local'] != null) { ?> value="<?php echo $_SESSION['local'] ?>" <?php } ?> placeholder="Localização" type="text" name="txtLocal" id="txtLocal" autocomplete="off" maxlength="40">
                                             </div>
 
-                                            <div class="flex-col biografia">
-                                                <label class="text-bold" for="">Biografia</label>
-                                                <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." autocomplete="off" type="text" name="txtBio" id="txtBio" maxlength="200"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
-                                                <h4 class="text-muted">0/200</h3>
+                                            <div class="flex-col">
+                                                <label class="text-bold" for="">Idade</label>
+                                                <input <?php if ($_SESSION['site'] != null) { ?>value="<?php echo $_SESSION['site'] ?>" <?php } ?> placeholder="URL" type="text" name="txtSite" id="txtSite" autocomplete="off" maxlength="40">
                                             </div>
+
 
                                         </div>
 

@@ -198,7 +198,7 @@ if ($verificarSeguidor['boolean'] == true) {
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
+                <div id="labelAO"><i class="uil uil-setting" ></i></div>
                 <div class="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                 </div>
@@ -289,6 +289,7 @@ if ($verificarSeguidor['boolean'] == true) {
 
                                 <div class="infoHolder topo">
                                     <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+                                    
                                     <div class="flex-row" style="gap: 2rem;">
                                         <h2><?php echo $login; ?></h2>
                                         <?php if ($verificarSeguidor['boolean'] == true) { ?>

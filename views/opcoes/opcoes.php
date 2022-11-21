@@ -240,7 +240,7 @@ $contagemPets = count($dadosPets['pets']);
 
 
                  <div class="tabs-conteudo tabHolder editarPerfil" id="1">
-                    <form action="">
+                    <form method="post" action="/petiti/config-conta">
 
                         <div class="imageHandler">
 
@@ -270,13 +270,13 @@ $contagemPets = count($dadosPets['pets']);
                             
                             <div class="infoArea">
                                 <h3>Nome</h3>
-                                <input type="text" placeholder="Nome">
+                                <input value="<?php echo $_SESSION['nome']?>" name="txtNome" type="text" placeholder="Nome">
                                 <h5 class="text-muted">*Ajude as pessoas a descobrir sua conta usando o nome pelo qual você é conhecido.</h5>
                             </div>
 
                             <div class="infoArea">
                                 <h3>Nome de Usuario</h3>
-                                <input type="text" placeholder="Nome de usuario">
+                                <input value="<?php echo $_SESSION['login']?>" name="txtLogin" type="text" placeholder="Nome de usuario">
                                 <h5 class="text-muted">*Você pode mudar quantas vezes você quiser se o nome de usuário desejado estiver disponível para uso.</h5>
                             </div>
 
@@ -287,7 +287,7 @@ $contagemPets = count($dadosPets['pets']);
 
                             <div class="infoArea">
                                 <h3>Email</h3>
-                                <input type="text" placeholder="Email">
+                                <input value="<?php echo $_SESSION['email']?>" name="txtEmail" type="text" placeholder="Email">
                             </div>
 
                             <div class="botoesInfoArea">

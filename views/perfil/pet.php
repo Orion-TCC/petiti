@@ -172,7 +172,7 @@ if ($verificarSeguidor['boolean'] == true) {
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
+                <div id="labelAO"><i class="uil uil-setting" ></i></div>
                 <div class="fotoDePerfil">
                     <img src="../<?php echo $_SESSION['foto']; ?>" alt="">
                 </div>
@@ -264,12 +264,15 @@ if ($verificarSeguidor['boolean'] == true) {
 
                                 <div class="infoHolder topo">
                                     <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
-                                    <h2><?php echo $usuarioPet; ?></h2>
-                                    <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                        <button value="<?php echo $idPetEscolhido ?>" class="seguirPet btn btn-primary">Seguir</button>
-                                    <?php } else { ?>
-                                        <button value="<?php echo $idPetEscolhido ?>" class="seguirPet btn btn-secundary">Seguindo</button>
-                                    <?php } ?>
+                                    
+                                    <div class="flex-row" style="gap: 2rem;">
+                                         <h2><?php echo $usuarioPet; ?></h2>
+                                         <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                             <button value="<?php echo $idPetEscolhido ?>" class="seguirPet btn btn-primary">Seguir</button>
+                                           <?php } else { ?>
+                                               <button value="<?php echo $idPetEscolhido ?>" class="seguirPet btn btn-secundary">Seguindo</button>
+                                           <?php } ?>
+                                    </div>
                                 </div>
 
                                 <div class="infoHolder meio">
