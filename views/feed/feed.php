@@ -471,12 +471,11 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 for ($j = 0; $j < $contagemCategorias; $j++) {
                                     $idCategoriaAtual = $categoria->pesquisarCategoria($dadosCategorias[$j]['categoria']);
                                     $verificaCategoriaSeguida = $categoriaSeguida->verificarSeguida($_SESSION['id'], $idCategoriaAtual);
-                                    if($verificaCategoriaSeguida['boolean'] == true){
+                                    if ($verificaCategoriaSeguida['boolean'] == true) {
                                         echo ("<p class='badge-categoria' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
-                                    }else{
+                                    } else {
                                         echo ("<p class='badge-categoria seguida' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
                                     }
-                                    
                                 }
                                 ?>
                             </div>
@@ -535,20 +534,20 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     $jsonPerdidos = file_get_contents($urlPerdidos);
                     $dadosPerdidos = (array)json_decode($jsonPerdidos, true);
                     $contagemPerdidos = count($dadosPerdidos['publicacoes']);
-                    if($contagemPerdidos > 0){
-                    for ($pp = 0; $pp < $contagemPerdidos and $pp <= 2; $pp++) {
-                        $fotoPerdido = $dadosPerdidos['publicacoes'][$pp]['caminhoFoto'];
-                        $dataPerdido = $dadosPerdidos['publicacoes'][$pp]['data'];
-                        $localPerdido =  $dadosPerdidos['publicacoes'][$pp]['local'];
-                        $textoPerdido = $dadosPerdidos['publicacoes'][$pp]['texto'];
-                        $hoje = new DateTime();
-                        $dataPost = new DateTime($dataPerdido);
-                        $intervalo = $hoje->diff($dataPost);
-                        $diferencaAnos = $intervalo->format('%y');
-                        $diferencaMeses = $intervalo->format('%m');
-                        $diferencaDias = $intervalo->format('%a');
-                        $diferencaHoras = $intervalo->format('%h');
-                        $diferencaMinutos = $intervalo->format('%i');
+                    if ($contagemPerdidos > 0) {
+                        for ($pp = 0; $pp < $contagemPerdidos and $pp <= 2; $pp++) {
+                            $fotoPerdido = $dadosPerdidos['publicacoes'][$pp]['caminhoFoto'];
+                            $dataPerdido = $dadosPerdidos['publicacoes'][$pp]['data'];
+                            $localPerdido =  $dadosPerdidos['publicacoes'][$pp]['local'];
+                            $textoPerdido = $dadosPerdidos['publicacoes'][$pp]['texto'];
+                            $hoje = new DateTime();
+                            $dataPost = new DateTime($dataPerdido);
+                            $intervalo = $hoje->diff($dataPost);
+                            $diferencaAnos = $intervalo->format('%y');
+                            $diferencaMeses = $intervalo->format('%m');
+                            $diferencaDias = $intervalo->format('%a');
+                            $diferencaHoras = $intervalo->format('%h');
+                            $diferencaMinutos = $intervalo->format('%i');
 
                             if ($diferencaAnos == 0) {
                                 if ($diferencaMeses == 0) {
@@ -923,9 +922,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                         <div style="width: 99%;">
                             <h4>Causa:</h4>
-                            <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200" ></textarea>
+                            <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200"></textarea>
                         </div>
-                        
+
                         <input class="btn btn-primary" type="submit" value="Denunciar">
 
                     </form>
@@ -939,7 +938,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
             <div id="modal-post" class="modal post">
                 <div style="display: flex; width: 100%; height: 100%;">
 
-                    <div id="preview-crop-image">
+                    <div id="imagemPost">
                         <img src="#" alt="">
                     </div>
 
@@ -979,26 +978,26 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <div class="info">
                                         <h5 class="text-muted">tempo</h5>
                                     </div>
-                                    v>
-                                    v>
                                 </div>
-
-                                <div class="botoesInteracao">
-
-                                    <input crtir" value="<?php echo $id ?>" type="checkbox">
-
-                                    <buts="comentar"></button>
-
-                                        <buts="mensagem"></button>
-
-                                </div>
-
-                                ss="curtidas">
-                                <h4>0 itimalias</h4>
-
                             </div>
+                        </div>
 
-                            class="commentArea">
+                        <div class="botoesInteracao">
+
+                            <input class="curtir" value="<?php echo $id ?>" type="checkbox">
+
+                            <button class="comentar"></button>
+
+                            <button class="mensagem"></button>
+
+                        </div>
+
+                        <div class="curtidas">
+                            <h4>0 itimalias</h4>
+
+                        </div>
+
+                        <div class="commentArea">
 
                             <i class="uil uil-heart"></i>
 
@@ -1019,7 +1018,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
             </div>
             </div>
         </section>
-
         <!-- fim Modals -->
 
     </main>
