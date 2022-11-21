@@ -93,12 +93,13 @@ class Publicacao
     public function cadastrar($publicacao)
     {
         $con = Conexao::conexao();
-        $stmt = $con->prepare('INSERT INTO tbpublicacao(idPublicacao, textoPublicacao, dataPublicacao, idUsuario, localPub)
-        VALUES (default, ?, ?, ?, ?)');
+        $stmt = $con->prepare('INSERT INTO tbpublicacao(idPublicacao, textoPublicacao, dataPublicacao, idUsuario, localPub, pubImpulso)
+        VALUES (default, ?, ?, ?, ?, ?)');
         $stmt->bindValue(1, $publicacao->getTextoPublicacao());
         $stmt->bindValue(2, $publicacao->getDataPublicacao());
         $stmt->bindValue(3, $publicacao->getUsuario()->getIdUsuario());
         $stmt->bindValue(4, $publicacao->getLocalPub());
+        $stmt->bindValue(5, $publicacao->getImpulsoPub());
 
         $stmt->execute();
         $resultado = $con->query("SELECT MAX(idPublicacao) FROM tbpublicacao");
