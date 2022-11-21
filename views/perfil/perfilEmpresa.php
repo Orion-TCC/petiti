@@ -6,7 +6,21 @@ require('../../api/classes/Usuario.php');
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 
+<<<<<<< HEAD
 $id = $_SESSION['id'];
+=======
+$usuario = new Usuario();
+
+$idPerfil = $usuario->procuraId2($_GET['user']);
+if ($idPerfil == "") {
+    header('location: /petiti/decidir-perfil');
+}
+if ($idPerfil == $_SESSION['id']) {
+    header('location: /petiti/decidir-perfil');
+}
+
+$id = $idPerfil;
+>>>>>>> e9cf3552531673fa1825c1e1bd4946c9b3e743d9
 
 include_once("../../sentinela.php");
 $idUsuarioCurtida = $_SESSION['id'];
