@@ -894,12 +894,16 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                         <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
 
-                        <h1>Denuniar</h1>
+                        <h1>Denunciar</h1>
 
-                        <h5 class="text-muted">Você está denunciando o post de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
+                        <h5>Você está denunciando o post de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
+                        <h5 class="text-muted">Exemplos: É spam; discurdo de ódio; bullying ou assédio; golpe ou fraude etc. </h5>
 
-                        <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200" ></textarea>
-
+                        <div style="width: 99%;">
+                            <h4>Causa:</h4>
+                            <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200" ></textarea>
+                        </div>
+                        
                         <input class="btn btn-primary" type="submit" value="Denunciar">
 
                     </form>

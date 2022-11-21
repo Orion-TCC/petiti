@@ -1,63 +1,22 @@
 <?php
 @session_start();
-date_default_timezone_set('America/Sao_Paulo');
+require('../../api/classes/curtidaPublicacao.php');
 require('../../api/classes/Usuario.php');
+
+$curtidaPub = new curtidaPublicacao();
+date_default_timezone_set('America/Sao_Paulo');
+
+
 include_once("../../sentinela.php");
-require_once('../../api/classes/curtidaPublicacao.php');
-require_once('../../api/classes/UsuarioSeguidor.php');
+$idUsuarioCurtida = $_SESSION['id'];
 
-
-$usuario = new Usuario();
-$idPerfil = $usuario->procuraId2($_GET['user']);
-if ($idPerfil == "") {
-    header('location: /petiti/feed');
-}
-if ($idPerfil == $_SESSION['id']) {
-    header('location: /petiti/decidir-perfil');
-}
-
-$url = "http://localhost/petiti/api/publicacoes/usuario/" . $idPerfil;
+$url = "http://localhost/petiti/api/publicacoes/usuario/" . $_SESSION['id'];
 
 $json = file_get_contents($url);
 $dados = (array)json_decode($json, true);
 $contagem = count($dados['publicacoes']);
 
-//Pets Perfil
-$id = $idPerfil;
-$urlPets = "http://localhost/petiti/api/usuario/$id/pets";
-
-$jsonPets = file_get_contents($urlPets);
-
-$dadosPets = (array) json_decode($jsonPets, true);
-
-$contagemPets = count($dadosPets['pets']);
-
-
-//Meus pets
-$meuId = $_SESSION['id'];
-$urlMeusPets = "http://localhost/petiti/api/usuario/$meuId/pets";
-
-$jsonMeusPets = file_get_contents($urlMeusPets);
-
-$dadosMeusPets = (array) json_decode($jsonMeusPets, true);
-$contagemMeusPets = count($dadosMeusPets['pets']);
-
-
-$urlPerfil = "http://localhost/petiti/api/usuario/$id";
-$jsonPerfil = file_get_contents($urlPerfil);
-$dadosPerfil = json_decode($jsonPerfil);
-
-$nome = $dadosPerfil[0]->nomeUsuario;
-$login = $dadosPerfil[0]->loginUsuario;
-$tipoUsuario = $dadosPerfil[0]->tipoUsuario;
-$bioUsuario = $dadosPerfil[0]->bioUsuario;
-$foto = $dadosPerfil[0]->caminhoFoto;
-$siteUsuario = $dadosPerfil[0]->siteUsuario;
-$localizacao = $dadosPerfil[0]->localizacaoUsuario;
-
-
-
-$urlCurtidas = "http://localhost/petiti/api/publicacoes/curtidas/" . $id;
+$urlCurtidas = "http://localhost/petiti/api/publicacoes/curtidas/" . $_SESSION['id'];
 
 $jsonCurtidas = file_get_contents($urlCurtidas);
 $dadosCurtidas = (array)json_decode($jsonCurtidas, true);
@@ -69,25 +28,10 @@ $resultado = $conexao->query($query);
 $lista = $resultado->fetchAll();
 $qtdSeguindo = $lista[0]['qtdSeguindo'];
 
-$query = "SELECT COUNT(idPetSeguidor) as qtdSeguindo FROM tbpetSeguidor WHERE idSeguidor = $id";
-$resultado = $conexao->query($query);
-$lista = $resultado->fetchAll();
-$qtdSeguindo = $qtdSeguindo + $lista[0]['qtdSeguindo'];
-
 $query = "SELECT COUNT(idUsuarioSeguidor) as qtdSeguidores FROM tbUsuarioSeguidor WHERE idUsuario = $id";
 $resultado = $conexao->query($query);
 $lista = $resultado->fetchAll();
 $qtdSeguidores = $lista[0]['qtdSeguidores'];
-
-$usuarioSeguidor  = new UsuarioSeguidor();
-
-$verificarSeguidor = $usuarioSeguidor->verificarSeguidor($id, $meuId);
-if ($verificarSeguidor['boolean'] == true) {
-    $jsSeguidor = "true";
-} else {
-    $jsSeguidor = "false";
-}
-
 ?>
 
 
@@ -115,7 +59,7 @@ if ($verificarSeguidor['boolean'] == true) {
 
     <!-- título da pág e icone (logo) -->
 
-    <title><?php echo $login ?></title>
+    <title>Pet iti - meu perfil </title>
 
 
     <link rel="icon" href="/petiti/assets/images/logo-icon.svg">
@@ -137,7 +81,7 @@ if ($verificarSeguidor['boolean'] == true) {
 
     <nav class="feed">
         <div class="container">
-            <div class="popupOptions" id="popup">
+             <div class="popupOptions" id="popup">
 
                 <div class="flex-col">
 
@@ -148,38 +92,37 @@ if ($verificarSeguidor['boolean'] == true) {
                         <h3><?php echo $_SESSION['nome']; ?></h3>
                     </div>
 
-                    <?php for ($p = 0; $p < $contagemMeusPets; $p++) { ?>
+                    <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
                         <div class="flex-row petUser">
 
-                            <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosMeusPets['pets'][$p]['idPet'] ?>">
+                            <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
                                 <div class="fotoDePerfil">
-                                    <img src="<?php echo $dadosMeusPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
+                                    <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
                                     <!--Foto do pet  -->
                                 </div>
 
-                                <h3><?php echo $dadosMeusPets['pets'][$p]['nomePet'] ?></h3>
+                                <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
                             </a>
                         </div>
                     <?php    } ?>
                 </div>
 
 
-                <div class="flex-col borderTop row-gap">
+                <div class="flex-col borderTop row-gap opcoesPopUp">
 
-                    <h3>Adicionar conta existente</h3>
+                    <h3 style="width: 15rem;">Adicionar conta existente</h3>
 
                     <h3>Gerenciar contas</h3>
 
-                    <h3>Configurações</h3>
+                    <h3> <a href="opcoes">Configurações</a></h3>
 
-                    <h3><a href="sair"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
+                    <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
 
                 </div>
 
-            </div>
-
+                </div>
             <h2 class="logo">
-                <img src="./assets/images/logo_principal.svg">
+                <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
             </h2>
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
@@ -198,7 +141,7 @@ if ($verificarSeguidor['boolean'] == true) {
             </script>
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <label for="abrir-opcoes"><i class="uil uil-setting"></i></label>
+                <div id="labelAO"><i class="uil uil-setting" ></i></div>
                 <div class="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                 </div>
@@ -209,9 +152,11 @@ if ($verificarSeguidor['boolean'] == true) {
     <main class="feed">
         <div class="container">
 
+
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
-                <a href="/petiti/decidir-perfil" class="perfil">
+
+                <a class="perfilAtivo">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
@@ -243,7 +188,7 @@ if ($verificarSeguidor['boolean'] == true) {
 
                     <a href="notificacoes" class="menu-item">
                         <span style="position: relative;">
-                            <i class="uil uil-bell notificacao"></i>
+                            <i class="uil uil-bell notificacao"></i> 
                             <div class="notificacaoContador"><span>1</span></div>
                         </span>
                         <h3>Notificações</h3>
@@ -282,58 +227,112 @@ if ($verificarSeguidor['boolean'] == true) {
 
                         <div class="userCima">
                             <div class="fotoDePerfil">
-                                <img src="<?php echo $foto; ?>" alt="">
+                                <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                             </div>
 
                             <div class="userInfo">
 
                                 <div class="infoHolder topo">
-                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
-                                    <div class="flex-row" style="gap: 2rem;">
-                                        <h2><?php echo $login; ?></h2>
-                                        <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                            <button value="<?php echo $id ?>" class="seguir btn btn-primary">Seguir</button>
-                                        <?php } else { ?>
-                                            <button value="<?php echo $id ?>" class="seguir btn btn-secundary">Seguindo</button>
-                                        <?php } ?>
-                                    </div>
-                                    
-                                    <span class="edit" id="<?php echo $id; ?>">
-
-                                        <div class="editButton">
-                                            <div class="menuPostHover"></div>
-                                            <i class="uil uil-ellipsis-h"></i>
-                                        </div>
-
-                                        <div class="menuPost" id="menuPost">
-                                            <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
-                                                    
-                                                <li>
-                                                  <a href="#modal-denuncia-usuario" rel="modal:open"> <i class="fa-solid fa-circle-exclamation"></i> <span>Denunciar</span> </a>  
-                                                </li>
-
-                                            </ul>
-                                        </div>
-
-                                    </span>
-                                
+                                    <h2><?php echo $_SESSION['login']; ?></h2>
+                                    <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
                                 </div>
+
+
+
+
+                                <div class="modal" id="modal-editar-perfil">
+
+                                    <form class="flex-col" action="/petiti/api/editar-perfil" method="post">
+
+                                        <div class="editPerfilHeader">
+                                            <div class="flex-row">
+                                                <a style="display: block !important;" href="#close-modal" rel="modal:close"><i class="uil uil-multiply"></i></i></a>
+                                                <h2>Editar perfil</h2>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Salvar</button>
+
+                                        </div>
+
+                                        <div class="editarPerfilForm">
+
+                                            <div class="flex-row">
+
+                                                <img class="fotoDePerfil" id="preview" src="<?php echo $_SESSION['foto'] ?>">
+
+                                                <label class="flFotoPerfil">
+                                                    <input id="flFotoPerfil" type="file" accept=".jpg, .png">
+                                                </label>
+
+                                                <input value="0" id="baseFoto" type="hidden" name="baseFoto">
+
+                                                <h2>
+                                                    <label class="flFotoPerfil2">
+                                                        Alterar foto do perfil
+                                                        <input id="flFotoPerfil" type="file" accept=".jpg, .png">
+                                                    </label>
+                                                </h2>
+
+                                            </div>
+
+                                            <div class="flex-col">
+                                                <label class="text-bold" for="">Nome</label>
+                                                <input placeholder="Nome" value="<?php echo $_SESSION['nome'] ?>" type="text" name="txtNome" id="txtNome" autocomplete="off" maxlength="40">
+                                            </div>
+
+                                            <div class="flex-col">
+                                                <label class="text-bold" for="">Local</label>
+                                                <input <?php if ($_SESSION['local'] != null) { ?> value="<?php echo $_SESSION['local'] ?>" <?php } ?> placeholder="Localização" type="text" name="txtLocal" id="txtLocal" autocomplete="off" maxlength="40">
+                                            </div>
+
+                                            <div class="flex-col">
+                                                <label class="text-bold" for="">Site</label>
+                                                <input class="a-text" <?php if ($_SESSION['site'] != null) { ?>value="<?php echo $_SESSION['site'] ?>" <?php } ?> placeholder="URL" type="text" name="txtSite" id="txtSite" autocomplete="off" maxlength="40">
+                                            </div>
+
+                                            <div class="flex-col biografia">
+                                                <label class="text-bold" for="">Biografia</label>
+                                                <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." autocomplete="off" type="text" name="txtBio" id="txtBio" maxlength="200"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
+                                                <h4 class="text-muted">0/200</h3>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+                                </div>
+
+
+
+                                <div id="modal-recortar-foto-perfil" class="modal">
+                                    <div class="flex-col">
+                                        <span>Redimensione sua imagem!</span>
+
+                                        <div id="upload-demo"></div>
+
+                                        <a class="btn btn-primary">
+                                            <span id="continuar-crop-foto-perfil" style="padding-block: 10px; padding-inline: 87px;">Confirmar</span>
+                                        </a>
+                                    </div>
+                                </div>
+
+
+
 
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
-                                    <h3> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></h3>
+                                    <h3>  <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></h3>
                                     <h3> <?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></h3>
                                 </div>
 
                                 <div class="infoHolder baixo">
                                     <div style="width: 15rem; display: flex; align-items: center;">
                                         <i class="uil uil-map-marker"></i>
-                                        <h4><?php echo $localizacao ?></h4>
+                                        <h4><?php echo $_SESSION['local'] ?></h4>
                                     </div>
 
                                     <div style="width: 15rem; display: flex; align-items: center;">
-                                        <i class="uil uil-link-alt"></i> <a target="_blank" href="http://<?php echo $siteUsuario ?>"><?php echo $siteUsuario ?> </a>
+                                        <i class="uil uil-link-alt"></i> <a target="_blank" href="http://<?php echo $_SESSION['site'] ?>"><?php echo $_SESSION['site'] ?> </a>
                                     </div>
                                 </div>
                             </div>
@@ -343,35 +342,20 @@ if ($verificarSeguidor['boolean'] == true) {
 
                             <div class="subUserBaixo">
                                 <div style="width: fit-content; max-width: 25rem; display: flex; align-items: center;">
-                                    <h2><?php echo $nome; ?></h2>
+                                    <h2><?php echo $_SESSION['nome']; ?></h2>
                                 </div>
-                                <?php if ($contagemPets > 0) { ?>
 
-
-                                    <h4 class="text-muted">(Sou dono(a) do <?php
-                                                                            for ($t = 0; $t < $contagemPets; $t++) {
-                                                                                $userPet = $dadosPets['pets'][$t]['usuarioPet'];
-                                                                                if ($t < ($contagemPets - 2)) {
-                                                                                    echo ("<a href='/petiti/pet/$userPet'>@" . $userPet . "</a>, ");
-                                                                                } else if ($t == ($contagemPets - 2)) {
-                                                                                    echo ("<a href='/petiti/pet/$userPet'>@" . $userPet . "</a> e ");
-                                                                                }
-                                                                                if ($t == ($contagemPets - 1)) {
-                                                                                    echo ("<a href='/petiti/pet/$userPet'>@" . $userPet . "</a>");
-                                                                                }
-                                                                            }
-                                                                            ?>
-                                        )
-
-                                    </h4>
-                                <?php } ?>
+                                <h4 class="text-muted"><?php echo ($_SESSION['tipo']); ?></h4>
                             </div>
 
                             <div class="bio">
-
-
-                                <h4 class="text-muted"><?php echo $bioUsuario; ?></h4>
-
+                                <?php
+                                if ($_SESSION['bio'] == null) { ?>
+                                    <h4 class="text-muted"><?php echo $_SESSION['bio'] ?> Adicione uma biografia! Conte um pouco sobre você :D</h4>
+                                <?php } else { ?>
+                                    <h4 class="text-muted"><?php echo $_SESSION['bio'] ?></h4>
+                                <?php }
+                                ?>
                             </div>
 
                         </div>
@@ -381,47 +365,51 @@ if ($verificarSeguidor['boolean'] == true) {
                     <div class="tabs">
 
                         <div class="userTabs ">
-                            <button class="userTabOption userTabOption--ativo" data-for-tab="1">Postagens</button>
-                            <button class="userTabOption" data-for-tab="2">Marcações</button>
-                            <button class="userTabOption" data-for-tab="3">Curtidas</button>
+                            <button class="userTabOption userTabOption--ativo " data-for-tab="1">Postagens</button>
+                            <button class="userTabOption" data-for-tab="2">Produtos</button>
+                            <button class="userTabOption" data-for-tab="3">Serviços</button>
                         </div>
                         <!-- fim das tabs de navegacao de usuario -->
 
                         <div class="tabs_content postagens tabAtiva" data-tab="1">
                             <?php
 
-                            for ($i = 0; $i < $contagem; $i++) {
-                                $foto = $dados['publicacoes'][$i]['caminhoFoto'];
-                            ?>
-                                <div class="previewPostImage">
-                                    <img src="<?php echo $foto ?>" alt="">
+                            if ($contagem < 1) { ?>
+                                <div class="aviso">
+                                    <h3>Não há postagens ainda. Faça uma clicando no botão “Criar um post”!</h3>
                                 </div>
 
-                            <?php } ?>
+                                <?php } else {
+
+                                for ($i = 0; $i < $contagem; $i++) {
+                                    $foto = $dados['publicacoes'][$i]['caminhoFoto'];
+                                ?>
+                                    <div class="previewPostImage">
+                                        <img src="<?php echo $foto ?>" alt="">
+                                    </div>
+
+                            <?php }
+                            } ?>
 
                         </div>
 
-                        <div class="tabs_content marcacoes" data-tab="2">
+                        <div class="tabs_content produtos" data-tab="2">
+
+                            <div class="adicionarProduto">
+                                <i class="uil uil-plus-circle"></i>
+                            </div>
 
                             <div class="aviso">
-                                <h3>Esse usuário ainda não foi marcado em nenhum post...</h3>
+                                <h3>Você não possui nenhum produto ainda... Clique no quadrado acima para começar a vender seus produtos!</h3>
                             </div>
                         </div>
 
-                        <div class="tabs_content curtidas" data-tab="3">
 
-                            <?php
+                        <div class="tabs_content serviços" data-tab="3">
 
-
-
-
-                            for ($i = 0; $i < $contagemCurtidas; $i++) {
-                                $fotoCurtidas = $dadosCurtidas['publicacoes'][$i]['caminhoFoto'];
-                            ?>
-                                <div class="previewPostImage">
-                                    <img src="<?php echo $fotoCurtidas ?>" alt="">
-                                </div>
-                            <?php } ?>
+                            <div class="aviso">
+                                <h3>Ainda nenhum serviço... eu imagino oque o dono desse perfil esta fazendo...</h3>
+                            </div>
 
                         </div>
                     </div>
@@ -432,65 +420,11 @@ if ($verificarSeguidor['boolean'] == true) {
         <!-- fim do meio -->
 
         </div>
-    </main>
 
-    <div id="modal-denuncia-usuario" class="modal denuncia">
-
-        <form class="formDenuncia" action="/petiti/api/denunciaUsuario" id="formDenunciaUsuario" method="post">
-
-            <h1>Denunciar</h1>
-
-            <h5>Você está denunciando a conta de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
-            <h5 class="text-muted">Exemplo: Está fingindo ser outra pessoa; está publicando conteúdo que não deveria estar na pet iti </h5>
-
-
-            <input type="hidden" name="idDenunciado" value="<?php echo $id; ?>">
-
-            <div style="width: 99%;">
-                <h4>Causa:</h4>
-                <textarea required name="textoDenuncia" id="textoDenuncia" maxlength="200" ></textarea>
-            </div>
-
-            <input class="btn btn-primary" type="submit" value="Denunciar">
-        </form>
-    </div>
-
-
-
-
-<!-- <section>
-
-<a href="#modal-denuncia" rel="modal:open">
-
-    <div id="modal-denuncia" class="modal denuncia">
-
-        <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
-
-            <input type="hidden" id="idPost" name="idPost" value="">
-
-            <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
-
-            <h1>Denunciar</h1>
-
-            <h5>Você está denunciando o post de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
-            <h5 class="text-muted">Exemplos: É spam; discurdo de ódio; bullying ou assédio; golpe ou fraude etc. </h5>
-
-            <div style="width: 99%;">
-                <h4>Causa:</h4>
-                <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200" ></textarea>
-            </div>
-            
-            <input class="btn btn-primary" type="submit" value="Denunciar">
-
-        </form>
-
-    </div>
-
-</section> -->
-
-
-    
-    <section>
+        
+        <!-- MODALS -->
+        
+        <section>
             <div id="modal-post" class="modal post">
                 <div style="display: flex; width: 100%; height: 100%;">
 
@@ -577,6 +511,13 @@ if ($verificarSeguidor['boolean'] == true) {
         </section>
 
 
+    </main>
+
 </body>
 
 </html>
+
+
+
+
+<!-- <button class="seguir" value="1">seguir</button> -->
