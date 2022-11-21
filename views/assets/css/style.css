@@ -48,6 +48,34 @@
   display: none;
 }
 
+:root {
+  --color-white: #FFFFFF;
+  --color-dark: rgba(0, 0, 0, 1);
+  --color-pastelDark: #202225;
+  --color-lightGray: #f5f5f5;
+  --color-extraLightGray: rgba(245, 245, 245, 1);
+  --color-gray: rgba(86, 86, 86, 1);
+  --color-lightPastelGray: #C1C1C1;
+  --color-light: rgba(224, 224, 224, 1);
+
+  --color-purple: rgba(56, 55, 161, 1);
+  --color-lightPurple: #9998D3;
+  --color-lightBlue: rgba(186, 213, 219, 1);
+  --color-pastelYellow: rgba(255, 251, 159, 1);
+  --color-pastelOrange: rgba(251, 211, 164, 1);
+
+
+  --border-radius: 2rem;
+  --card-border-radius: 1rem;
+  --btn-padding: 0.6rem 1rem;
+  --search-padding: 0.6rem 1rem;
+  --card-padding: 1rem;
+
+  --sticky-top-left: 6.4rem;
+  --sticky-top-right: -18rem;
+}
+
+
 /* GERAL */
 .container-content {
   width: 100vw;
@@ -94,6 +122,25 @@ body {
 }
 
 
+.btn {
+  display: inline-block;
+  padding: var(--btn-padding);
+  font-weight: 500;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 300ms ease;
+  font-size: 0.9rem;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+
+.btn-primary {
+  background: var(--color-pastelYellow);
+  color: black;
+}
 
 /* PAGE ESCOLHA TIPO USUARIO */
 
@@ -328,7 +375,7 @@ body {
   transform: translateY(-50%);
 
   position: absolute;
-  top: 55%;
+  top: 69%;
   right: 5px;
 
   cursor: pointer;
@@ -343,7 +390,7 @@ body {
   transform: translateY(-50%);
 
   position: absolute;
-  top: 55%;
+  top: 69%;
   right: 5px;
 
   cursor: pointer;
@@ -372,11 +419,10 @@ body {
   background: #fcf892;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  width: 405px;
+  width: 70%;
   height: 44px;
-  margin-top: 1.2rem;
-  align-self: center;
-  justify-self: center;
+
+
   cursor: pointer;
 
   font-family: "Raleway Bold", sans-serif;
@@ -1252,12 +1298,56 @@ body {
   margin-bottom: 30px;
 }
 
+.Login{
+
+}
+
 .formLogin {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+  width: 25rem;
 }
+
+.Login .loginElement input{
+  appearance: none;
+  width: 100%;
+  border: none;
+  height: 3rem;
+  padding: var(--card-padding);
+  border-radius: 20px;
+  font-size: 1rem;
+  font-family: 'Raleway Bold', sans-serif;
+}
+
+.Login .loginElement input::placeholder{
+  font-family: 'Raleway Bold', sans-serif;
+}
+
+.Login .loginElement input:focus{
+  outline: 1px gray solid;
+}
+
+.Login .loginElement{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-family: 'Raleway Bold',sans-serif ;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.Login .btn{
+  width: 100%;
+  height: 3rem;
+  border: none;
+  font-family: 'Raleway Bold', sans-serif;
+  font-size: 1rem;
+  box-shadow: 1px 1px 20px 0px #696969c2;
+}
+
 
 .formTextLogin {
   font-family: "Raleway Bold", sans-serif;
@@ -1275,7 +1365,7 @@ body {
   backdrop-filter: blur(40px);
   border-radius: 20px;
   height: 50px;
-  width: 100%;
+  width: 87%;
   padding: 0 20px 0 20px;
   font-family: "Public Sans Bold", sans-serif;
   font-style: normal;
@@ -1333,33 +1423,66 @@ body {
 
 .formRecover {
   width: 420px;
+  height: 26rem;
   background-color: #bad5db;
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
+
   border-radius: 50px;
   align-items: center;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: var(--card-padding);
 }
 
-.formPassRecover {
+.formRecoverHolderPass{
+  width: 100%;
+  height: 100% ;
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 550px;
-    height: 420px;
-    background-color: #bad5db;
-    border-radius: 30px;
-    margin: 20px;
-    padding-block: 20px;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--card-padding);
+
+  font-family: 'Raleway Bold', sans-serif;
+  gap: 1rem;
+}
+
+.formRecoverHolderPass .btn{
+  width: 100%;
+  height: 3rem;
+  font-family: 'Raleway Bold', sans-serif;
+  font-size: 1rem;
+  border: none;
+  box-shadow: 1px 1px 20px 0px #696969c2;
+margin-top: 1rem;
+}
+
+
+.formRecoverHolderPass input[type="password"]{
+  appearance: none;
+  border-radius: 20px;
+  height: 1rem;
+  padding: var(--card-padding);
+  border: none;
+}
+
+.formRecoverHolderPass input:focus{
+  outline: 1px gray solid;
 }
 
 .formRecoverHolder {
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   height: fit-content;
-  padding: 0 90px 15px 50px;
+  width: 26rem;
+  gap: 2rem;
+  
+  font-family: 'Raleway Bold', sans-serif;
+  
 }
+
+
 
 .formEmailEnviado {
   width: 350px;
@@ -1378,19 +1501,64 @@ body {
   gap: 20px;
 }
 
+
+.fundoRecuperarSenha .formRecoverHolder{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fundoRecuperarSenha .formRecoverHolder input{
+  appearance: none;
+  width: 90%;
+  height: 3rem;
+  padding: var(--card-padding);
+  border-radius: 20px;
+  border: none;
+
+  font-family: 'Raleway Bold', sans-serif;
+  font-size: 1rem;
+}
+
+.fundoRecuperarSenha .formRecoverHolder input:focus{
+  outline: 1px gray solid;
+}
+
+
+.fundoRecuperarSenha .formRecoverHolder h3{
+width: 21rem;
+text-align: justify;
+}
+
+.fundoRecuperarSenha .formRecoverHolder .btn{
+  width: 90%;
+  height: 3rem;
+  border: none;
+  font-family: 'Raleway Bold', sans-serif;
+  font-size: 1rem;
+  box-shadow: 1px 1px 20px 0px #696969c2;
+  margin-top: 1rem;
+}
+
 .fotoRecover {
   width: 245px;
 }
 
-.tituloFormRecover {
-  font-family: "Raleway Bold", sans-serif;
-  color: #000000;
-  text-align: center;
-  font-size: 3rem;
-  margin-bottom: 10px;
-  margin-left: 18px;
-  margin-right: 18px;
+.formRecover .formRecoverHolderElement{
+  width: 100%;
+  height: 3rem;
 }
+
+.formRecover .formRecoverHolderElementPass{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem
+}
+
+
 
 .textoFormRecover {
   font-family: "Raleway Bold", sans-serif;

@@ -357,7 +357,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                         <a href="/petiti/<?php echo $login ?>"><img src="<?php echo $fotoUsuario; ?>" alt=""></a>
                                     </div>
                                     <div class="info">
-                                        <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $nome ?></a></h3>
+                                        <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $login ?></a></h3>
                                         <small><?php echo $local ?> - há <?php echo $diferencaFinal ?></small>
                                     </div>
                                 </div>
@@ -462,7 +462,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                             </div>
 
                             <div class="caption">
-                                <span class="text-bold"> <?php echo $login; ?></span> <span class="text-muted"><?php echo $texto ?></span>
+                                <h4> <?php echo $login; ?></h4> 
+                                <h5 class="text-muted"><?php echo $texto ?></h5>
                             </div>
 
 
@@ -510,14 +511,15 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <i class="uil uil-message"></i>
                                 </button>
 
-                                <div class="letraCont">
+
+
+
+                            </div>
+                                    
                                     <div class="contagemChar">
                                         <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
                                         <span>/200</span>
                                     </div>
-                                </div>
-                            </div>
-
                         </div>
                     <?php $contadorPostagem++;
                     }
@@ -612,18 +614,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                 <div class="Lugar">
                                     <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
                                         <img src="/petiti/views/assets/img/position2.svg" alt="">
                                     </div>
                                     <div class="infoCategoria">
@@ -636,20 +626,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                 <div class="Lugar">
                                     <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position6.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
                                         <img src="/petiti/views/assets/img/position3.svg" alt="">
                                     </div>
                                     <div class="infoCategoria">
@@ -657,20 +633,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position7.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
 
                             <div class="categorias">
 
@@ -690,7 +652,43 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                 <div class="Lugar">
                                     <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position8.svg" alt="">
+                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
+                                    </div>
+                                    <div class="infoCategoria">
+                                        <h4>tamandua</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="categorias">
+
+                                <div class="Lugar">
+                                    <div class="fotoDePerfil">
+                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
+                                    </div>
+                                    <div class="infoCategoria">
+                                        <h4>tamandua</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="categorias">
+
+                                <div class="Lugar">
+                                    <div class="fotoDePerfil">
+                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
+                                    </div>
+                                    <div class="infoCategoria">
+                                        <h4>tamandua</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="categorias">
+
+                                <div class="Lugar">
+                                    <div class="fotoDePerfil">
+                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
                                     </div>
                                     <div class="infoCategoria">
                                         <h4>tamandua</h4>
@@ -722,8 +720,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                         </div>
 
                                         <div class="infoSugestoes">
-                                            <h4><?php echo $sugestao['nomeUsuario'] ?></h4>
-                                            <h5 class="text-muted">@ <?php echo $sugestao['loginUsuario'] ?></h5>
+                                            <h4 style="color: black; margin-bottom: 0.2rem"><?php echo $sugestao['nomeUsuario'] ?></h4>
+                                            <h5 class="text-muted">@<?php echo $sugestao['loginUsuario'] ?></h5>
                                         </div>
                                     </div>
                                 </a>
@@ -847,12 +845,11 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 <input type="hidden" name="baseFoto" id="baseFoto">
 
 
-                                <div class="letraCont">
                                     <div class="contagemChar">
                                         <input type="text" value="0" id="contagemCharInput" disabled>
                                         <span>/200</span>
                                     </div>
-                                </div>
+
 
                             </div>
 
@@ -903,6 +900,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
                     </div>
+
+
+
             </div>
             </form>
             </div>
@@ -944,7 +944,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
             <div id="modal-post" class="modal post">
                 <div style="display: flex; width: 100%; height: 100%;">
 
-                    <div id="preview-crop-image">
+                    <div id="imagepost">
                         <img src="#" alt="">
                     </div>
 

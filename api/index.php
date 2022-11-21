@@ -1224,7 +1224,13 @@ $app->post('/config-conta', function (Request $request, Response $response, arra
     }
     if (isset($_POST['txtEmail'])) {
         $usuario->setEmailUsuario($_POST['txtEmail']);
-        $usuario->updateEmail($usuario);
+        $emailVerificacao=$usuario->verificarEmail($_POST['txtEmail']);
+        if ($emailVerificacao == true) {
+            $usuario->updateEmail($usuario);
+        }else{
+            $cookie=new Cookies();
+            $cookie->criarCookie("erro-email", "Email inválido", 5);
+        }
     }
 
 
@@ -1246,6 +1252,31 @@ $app->post('/config-conta', function (Request $request, Response $response, arra
     $usuario->login($_SESSION['login'], $_SESSION['senha']);
 
     header("location: /petiti/opcoes");
+});
+
+
+
+$app->post('/update-senha', function (Request $request, Response $response, array $args) {
+    @session_start();
+    $usuario = new Usuario();
+    $usuario->setIdUsuario($_SESSION['id']);
+   
+    
+    if($_POST['txtSenhaAntiga'] != $_SESSION['senha']){
+        $cookie=new Cookies();
+        $cookie->criarCookie("erro-senha", "Senha inválida", 5);
+        $cookie->criarCookie("abrir-senha", "openTab(event, '2')", 5);     
+        header("location: /petiti/opcoes");
+    }else{
+        $cookie=new Cookies();
+        $usuario->setSenhaUsuario($_POST['txtSenhaNova1']);
+        $usuario->updateSenha($usuario);
+        $usuario->login($_SESSION['login'], $_SESSION['senha']);
+        $cookie->criarCookie("abrir-senha", "openTab(event, '2')", 5);     
+
+        header("location: /petiti/opcoes");
+    }
+  
 });
 
 $app->get('/escolher-pet/{id}', function (Request $request, Response $response, array $args) {

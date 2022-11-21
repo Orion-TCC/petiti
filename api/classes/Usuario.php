@@ -757,4 +757,20 @@ class Usuario
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function verificarEmail($email){
+        $con = Conexao::conexao();
+        $query = "SELECT emailUsuario from tbusuario WHERE emailUsuario = '$email'";
+        $resultado = $con->query($query);
+        $listaObject = $resultado->fetchAll();
+        $listaArray = (array) $listaObject;
+        $contagemEmail = count($listaArray);
+
+        if ($contagemEmail>0) {
+           return false;
+        } else {
+           return true;
+        }
+        
+    }
 }

@@ -39,24 +39,25 @@ session_destroy();
                 <div class="Login">
                     <a href="/petiti/index.php"><img class="loginLogo" src="/petiti/views/assets/img/logo_principal.svg" alt=""></a>
                     <form class="formLogin" action="/petiti/api/login" method="POST">
-                        <div class="loginInputHolder">
-                            <label class="formTextLogin">Nome de usúario ou email</label>
-                            <input class="formInputLogin" name="txtLoginEmail" placeholder="Nome de usuário ou email" required minlength="4">
+
+                        <div class="loginElement">
+                            <label >Nome de usúario ou email</label>
+                            <input  name="txtLoginEmail" placeholder="Nome de usuário ou email" required minlength="4">
                         </div>
 
-                        <div class="loginInputHolder">
-                            <label class="formTextLogin">Senha</label>
+                    
                             
-                            <div style="position: relative;">
-                                <input class="formInputLogin" id="txtPw" type="password" name="pw" placeholder="Senha" required minlength="4">
-                                
+                            
+                            <div class="loginElement">
+                            <label>Senha</label>
+                                <input id="txtPw" type="password" name="pw" placeholder="Senha" required minlength="4">
                                 <i id="revealPassword" onclick="hidePasswordUm()" class="uil uil-eye"></i>
                                 <i id="hidePassword" onclick="showPasswordUm()" class="uil uil-eye-slash"></i>
                             </div>
 
-                        </div>
+                        
 
-                        <button class="formSubmitLogin" type="submit" style="margin-top: 2rem">Entrar</button>
+                        <button class="btn btn-primary" type="submit" style="margin-top: 2rem">Entrar</button>
                     </form>
                     <?php
                     ?>

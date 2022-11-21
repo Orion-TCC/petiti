@@ -691,6 +691,10 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 
 }
 
+.meio .adTitulo{
+  font-family: "Raleway Extra Bold", sans-serif;
+}
+
 .meio .ads {
   display: flex;
   justify-content: space-between;
@@ -764,6 +768,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 /* feed 1 */
 
 .meio .feeds .feed {
+  position: relative;
   background: var(--color-white);
   border-radius: var(--card-border-radius);
   padding: var(--card-padding);
@@ -934,7 +939,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 
 .meio .caption {
   margin: 0 0.6rem;
-  
+  width: 38rem;
 }
 
 .meio .comentarios{
@@ -952,6 +957,9 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 .meio .caption :nth-child(2) {
   font-size: 1.1rem;
   font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
@@ -994,6 +1002,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 }
 
 .meio .commentArea textarea {
+  position: relative;
   border-top: 1.5px solid #CCCCCC;
   resize: none;
   width: 100%;
@@ -1020,7 +1029,6 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   align-self: flex-end;
   right: 0;
   top: 3rem;
-  position: absolute;
   font-weight: 700;
 }
 
@@ -1113,7 +1121,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 .ladoDireito .categoriasAltaGrid {
   display: grid;
   grid-template-columns: 50% 50%;
-  row-gap: 0.2rem;
+  row-gap: 0.5rem;
 }
 
 .ladoDireito .whiteBoxHolder .categorias .lugar {
@@ -1149,7 +1157,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   border-radius: var(--card-border-radius);
   padding: var(--card-padding);
   height: fit-content;
-  max-height: 20rem;
+  max-height: 25rem;
   overflow: hidden;
   width: 100%;
   margin-bottom: 1.5rem;
@@ -1349,7 +1357,10 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 #criar-post {
   width: 1210px !important;
   max-width: 1210px !important;
+  position: relative;
 }
+
+
 
 .submitCriarPost {
 
@@ -1386,6 +1397,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   grid-row: 6 span;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .parte1CriarPost .userElementos {
@@ -1397,7 +1409,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   margin-bottom: 2rem;
 }
 
-.parte1CriarPost .userElementos .fotoDePerfil {}
+
 
 .parte1CriarPost .userElementos:hover {
   background: none;
@@ -1793,10 +1805,21 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 }
 
 .contagemChar {
+  right: 0.8rem;
+  bottom: 0.5rem;
   display: flex;
   align-items: flex-start;
+  position: absolute;
   cursor: default;
 }
+
+.parte1CriarPost .contagemChar input{
+  width: 1.9rem;
+  background: none;
+  font-family: 'Raleway Bold', sans-serif;
+  font-size: 1rem;
+}
+
 
 .contagemCharComent {
   display: flex;
@@ -1804,10 +1827,12 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   cursor: default;
 }
 
-.contagemCharInput {
-  text-align: right;
+.contagemCharInput {  
+  width: 0.8rem;
+  right: 0;
+  top: 3rem;
+  font-weight: 700;
   font-family: "Raleway Medium";
-  font-size: 1rem;
   background: none;
 }
 

@@ -52,11 +52,14 @@ $contagemPets = count($dadosPets['pets']);
     <script src="/petiti/assets/js/jquery-scripts.js"></script>
     <script src="/petiti/assets/js/script.js"></script>
     <script src="/petiti/views/assets/js/funcs.js"></script>
+    <script src="/petiti/views/assets/js/opcoes.js"></script>
+   
 
 </head>
 
 <body class="feed">
-
+ 
+ 
     <nav class="feed">
         <div class="container">
 
@@ -238,15 +241,15 @@ $contagemPets = count($dadosPets['pets']);
                     </div>
 
 
-
+ 
                  <div class="tabs-conteudo tabHolder editarPerfil" id="1">
-                    <form method="post" action="/petiti/config-conta">
+                    <form action="/petiti/api/config-conta" method="POST">
 
                         <div class="imageHandler">
 
                             <div class="flex-row">
                                 <div class="fotoDePerfil">
-                                    <img src="#" alt="">
+                                    <img src="<?php echo $_SESSION['foto']?>" alt="">
                                 </div>
 
 
@@ -257,7 +260,7 @@ $contagemPets = count($dadosPets['pets']);
 
 
                                 <div class="flex-col">
-                                    <h2>@username</h2>
+                                    <h2>@<?php echo $_SESSION['login']?></h2>
                                     <label class="flFotoPerfil">
                                         Alterar foto de perfil
                                         <input id="flFotoPerfil" type="file" accept=".jpg, .png">
@@ -276,7 +279,10 @@ $contagemPets = count($dadosPets['pets']);
 
                             <div class="infoArea">
                                 <h3>Nome de Usuario</h3>
-                                <input value="<?php echo $_SESSION['login']?>" name="txtLogin" type="text" placeholder="Nome de usuario">
+                                <input id="txtLoginUsuario" value="<?php echo $_SESSION['login']?>" name="txtLogin" type="text" placeholder="Nome de usuario">
+                            <p class="avisoNomeUsuarioValidacao"></p>
+                            <p class="avisoNomeUsuarioQtd"></p>
+
                                 <h5 class="text-muted">*Você pode mudar quantas vezes você quiser se o nome de usuário desejado estiver disponível para uso.</h5>
                             </div>
 
@@ -288,10 +294,12 @@ $contagemPets = count($dadosPets['pets']);
                             <div class="infoArea">
                                 <h3>Email</h3>
                                 <input value="<?php echo $_SESSION['email']?>" name="txtEmail" type="text" placeholder="Email">
+                                <span class="textoErrado" style="align-self: center;"> <?php echo @$_COOKIE["erro-email"];?></span>
+
                             </div>
 
                             <div class="botoesInfoArea">
-                                <button class="btn btn-primary">Salvar</button>
+                                <button id="submitUsuario" class="btn btn-primary">Salvar</button>
                                 <label class="hover-2 hvr-buzz">Desativar conta</label>
                             </div>
 
@@ -305,32 +313,33 @@ $contagemPets = count($dadosPets['pets']);
 
 
                     <div class="tabs-conteudo tabHolder alterarSenha" id="2">
-                        <form action="">
+                        <form action="/petiti/api/update-senha" method="POST">
                                 <div class="imageHandler">
 
                                     <div class="flex-row">
                                         <div class="fotoDePerfil">
-                                            <img src="#" alt="">
+                                            <img src="<?php echo $_SESSION['foto']?>" alt="">
                                         </div>
                                     </div>
-                                        <h2>@username</h2>
+                                        <h2><?php echo $_SESSION['login']?></h2>
                                     </div>
 
                                     <div class="informacoes">
 
                                     <div class="infoArea">
                                         <h3>Senha antiga</h3>
-                                        <input type="text" placeholder="Senha antiga">
+                                        <input name="txtSenhaAntiga"  type="text" placeholder="Senha antiga">
+                                        <span class="textoErrado" style="align-self: center;"> <?php echo @$_COOKIE["erro-senha"];?></span>
                                     </div>
 
                                     <div class="infoArea">
                                         <h3>Senha nova</h3>
-                                        <input type="text" placeholder="senha nova">
+                                        <input name="txtSenhaNova1" type="text" placeholder="senha nova">
                                     </div>
 
                                     <div class="infoArea">
                                         <h3>Confirmar senha nova</h3>
-                                        <input type="text" placeholder="Confirmar senha nova">
+                                        <input name="txtSenhaNova2" type="text" placeholder="Confirmar senha nova">
                                     </div>
 
                                     <div class="botoesInfoArea">
@@ -595,5 +604,5 @@ $contagemPets = count($dadosPets['pets']);
     </main>
 
 </body>
-
+<script>console.log(<?php echo @$_COOKIE["abrir-senha"]?>)</script>
 </html>
