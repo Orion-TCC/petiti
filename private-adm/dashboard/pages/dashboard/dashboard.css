@@ -42,7 +42,7 @@ body{
     overflow-x: hidden;
     background-image: url(/petiti/private-adm/dashboard/images/dashboard-bg.svg);
     background-repeat: no-repeat;
-    background-position: cover;
+    background-size: cover;
 }
 
 .container{
