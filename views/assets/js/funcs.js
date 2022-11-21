@@ -101,19 +101,13 @@ $(document).ready(function () {
     });
   });
 
-<<<<<<< HEAD
   $(".seguir-na-postagem").on("click", function () {
     id = $(this).attr("id");
-=======
-  $(".seguirNotif").on("click", function () {
-    id = $(this).val();
->>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
     $.ajax({
       type: "POST",
       url: "/petiti/api/seguir",
       data: { id: id },
       success: function (data) {
-<<<<<<< HEAD
         if (data[2] == true) {
           $("#icon-seguir-post").removeClass("fa-user-plus");
           $("#icon-seguir-post").addClass("fa-user-minus");
@@ -149,21 +143,6 @@ $(document).ready(function () {
       },
     });
   });
-=======
-        console.log(data);
-        if (data[2] == false) {
-          $(".botaoUsuario" + id).addClass("btn-primary");
-          $(".botaoUsuario" + id).removeClass("btn-secundary");
-          $(".botaoUsuario" + id).text("Seguir");
-        } else {
-          $(".botaoUsuario" + id).removeClass("btn-primary");
-          $(".botaoUsuario" + id).addClass("btn-secundary");
-          $(".botaoUsuario" + id).text("Seguindo");
-        }
-      },
-    });
-  });
->>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
 
   $(".seguirPet").on("click", function () {
     id = $(this).val();
@@ -201,27 +180,17 @@ $(document).ready(function () {
         console.log();
         $(
           "<div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'> <h2 style='font-weight: 900 !important; align-self: start;'>" +
-<<<<<<< HEAD
           data[0].loginUsuario +
           "</h2> " +
           "<h3 style='color: rgba(86, 86, 86, 1);'>" +
           data[0].textoComentario +
           "</h3> </div>"
         ).appendTo(".comentarios");
-=======
-            data[0].loginUsuario +
-            "</h2> " +
-            "<h3 style='color: rgba(86, 86, 86, 1);'>" +
-            data[0].textoComentario +
-            "</h3> </div>"
-        ).appendTo("#comentarios" + id);
->>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
         $("#txtComentar" + id).val("");
       },
     });
   });
 
-<<<<<<< HEAD
   $(".badge-categoria").on("click", function () {
     id = $(this).attr("id");
     $.ajax({
@@ -238,48 +207,6 @@ $(document).ready(function () {
       }
     });
   });
-=======
-  $(".edit").click(function () {
-    var idPub = $(this).attr("id");
-    const options = document.getElementById("opcoesPost " + idPub);
-    if (options.classList.contains("close")) {
-      options.classList.remove("close");
-      options.classList.add("open");
-    } else {
-      options.classList.remove("open");
-      options.classList.add("close");
-    }
-  });
-
-  $(".denunciaPost").click(function () {
-    var idUsu = $(this).attr("id");
-    var idPost = $(".postDenunciado").attr("id");
-    $("#idUsuarioPub").val(idUsu);
-    $("#idPost").val(idPost);
-  });
-
-  function postProcessing(data) {
-    var myArray = data[0].qtd;
-    $("#notificacaoContadorSpan").text(myArray);
-    if (myArray > 0) {
-      $(".mostrarNotificacoes").append("<div class='notificacaoContador'><span id='notificacaoContadorSpan'>"+myArray+"</span></div>");
-    }
-  }
-
-  //
-  getValues();
-
-  function getValues() {
-    $.ajax({
-      url: "http://localhost/petiti/api/qtd-notificacoes",
-      type: "get",
-      dataType: "json",
-      cache: false,
-      success: postProcessing,
-      async: true,
-    });
-  }
->>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
 });
 
 
@@ -356,15 +283,6 @@ function openTab(evt, tabNumber) {
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" ativo", "");
   }
-<<<<<<< HEAD
-
-  document.getElementById(tabNumber).style.display = "flex";
-  evt.currentTarget.className += " ativo";
-}
-
-
-=======
->>>>>>> ee163d667e77d2f18c0854a0a722bf9327bc467b
 
   document.getElementById(tabNumber).style.display = "flex";
   evt.currentTarget.className += " ativo";

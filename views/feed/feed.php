@@ -5,8 +5,10 @@ require_once('../../api/classes/FotoUsuario.php');
 require_once('../../api/classes/UsuarioSeguidor.php');
 require_once('../../api/classes/Usuario.php');
 require_once('../../api/classes/Categoria.php');
+require_once('../../api/classes/CategoriaSeguida.php');
 $fotousuario = new FotoUsuario();
 $curtidaPub = new curtidaPublicacao();
+$categoriaSeguida = new CategoriaSeguida();
 date_default_timezone_set('America/Sao_Paulo');
 include_once("../../sentinela.php");
 $idUsuarioCurtida = $_SESSION['id'];
@@ -467,7 +469,14 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                             <div class="badges">
                                 <?php
                                 for ($j = 0; $j < $contagemCategorias; $j++) {
-                                    echo ("<p class='badge'>" . $dadosCategorias[$j]['categoria'] . "</p>");
+                                    $idCategoriaAtual = $categoria->pesquisarCategoria($dadosCategorias[$j]['categoria']);
+                                    $verificaCategoriaSeguida = $categoriaSeguida->verificarSeguida($_SESSION['id'], $idCategoriaAtual);
+                                    if($verificaCategoriaSeguida['boolean'] == true){
+                                        echo ("<p class='badge-categoria' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
+                                    }else{
+                                        echo ("<p class='badge-categoria seguida' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
+                                    }
+                                    
                                 }
                                 ?>
                             </div>
@@ -527,7 +536,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     $dadosPerdidos = (array)json_decode($jsonPerdidos, true);
                     $contagemPerdidos = count($dadosPerdidos['publicacoes']);
                     if($contagemPerdidos > 0){
-                    for ($pp = 0; $pp <= 2; $pp++) {
+                    for ($pp = 0; $pp < $contagemPerdidos and $pp <= 2; $pp++) {
                         $fotoPerdido = $dadosPerdidos['publicacoes'][$pp]['caminhoFoto'];
                         $dataPerdido = $dadosPerdidos['publicacoes'][$pp]['data'];
                         $localPerdido =  $dadosPerdidos['publicacoes'][$pp]['local'];
