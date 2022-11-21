@@ -171,7 +171,7 @@ if ($_SESSION['tipo'] != "Adm") {
             <div style="margin-top: 1rem; border-bottom: 1px solid #c1c1c1"></div>
 
             <h3 style="margin-top: 1rem; margin-bottom: 0.5rem;""> Denúncias de Usuários</h3>
-            <h3 id="total-qtd-usuarios">Total(<?php echo $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva(); ?>)</h3>
+            <h3 id=" total-qtd-usuarios">Total(<?php echo $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva(); ?>)</h3>
             <div class="denunciasUsuarios">
               <?php foreach ($listaDenunciasUsuarioAtivas as $linha) {
                 $idDenunciaUsuario = $linha['idDenunciaUsuario'];
@@ -206,150 +206,150 @@ if ($_SESSION['tipo'] != "Adm") {
               } ?>
 
           </div>
-        </div>
 
-        <div id="analise" class="tabcontent">
-          <h3> Denúncias de publicações:</h3>
-          <h3 id="total-qtd-publicacoes">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoEmAnalise(); ?>)</h3>
-          <div class="denunciasPublicacao">
-            <?php foreach ($listaDenunciasPublicacaoEmAnalise as $linha) {
-              $idDenunciaPublicacao = $linha['idDenunciaPublicacao'];
-              $textoDenuncia = $linha['textoDenunciaPublicacao'];
-              $data = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
-              $denunciado = $linha['usuarioDenunciado'];
-              $denunciador = $linha['usuarioDenunciador'];
-              $foto = $linha['caminhoFotoPublicacao'];
-              $textoPub = $linha['texto'];
-              $idDenunciado = $linha['denunciado'];
-              $idPub = $linha['idPub'];
-            ?>
-              <div class="card">
-                <div class="badges">
-                  <p class="badge ativo">Em análise</p>
-                </div>
-                <div class="infos-card">
-                  <img class="foto-info" src="<?php echo $foto ?>">
-                  <div class="denuncia-info">
-                    <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+
+          <div id="analise" class="tabcontent">
+            <h3> Denúncias de publicações:</h3>
+            <h3 id="total-qtd-publicacoes">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoEmAnalise(); ?>)</h3>
+            <div class="denunciasPublicacao">
+              <?php foreach ($listaDenunciasPublicacaoEmAnalise as $linha) {
+                $idDenunciaPublicacao = $linha['idDenunciaPublicacao'];
+                $textoDenuncia = $linha['textoDenunciaPublicacao'];
+                $data = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
+                $denunciado = $linha['usuarioDenunciado'];
+                $denunciador = $linha['usuarioDenunciador'];
+                $foto = $linha['caminhoFotoPublicacao'];
+                $textoPub = $linha['texto'];
+                $idDenunciado = $linha['denunciado'];
+                $idPub = $linha['idPub'];
+              ?>
+                <div class="card">
+                  <div class="badges">
+                    <p class="badge ativo">Em análise</p>
                   </div>
-                </div>
-                <div class="card-data">
-                  <span class="material-symbols-outlined">
-                    date_range
-                  </span>
-                  <div class="data-denunciador">
-                    <p> Denuncia feita em: <?php echo $data; ?></p>
+                  <div class="infos-card">
+                    <img class="foto-info" src="<?php echo $foto ?>">
+                    <div class="denuncia-info">
+                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                    </div>
                   </div>
+                  <div class="card-data">
+                    <span class="material-symbols-outlined">
+                      date_range
+                    </span>
+                    <div class="data-denunciador">
+                      <p> Denuncia feita em: <?php echo $data; ?></p>
+                    </div>
+                  </div>
+                  <p><span style="font-weight: 900;font-size: 15px;">Denunciado por: </span><span style="font-weight: 600;font-size: 15px;"><a target="_blank" href="/petiti/<?php echo $denunciador ?>">@<?php echo $denunciador ?></a></span></p>
+                  <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
+
+
+                  <a id="<?php echo $idDenunciaPublicacao; ?>" href="#modal-analisar-denuncia-publicacao<?php echo $idDenunciaPublicacao; ?>" rel="modal:open" class="botao analisar-agora">Analisar agora</a>
                 </div>
-                <p><span style="font-weight: 900;font-size: 15px;">Denunciado por: </span><span style="font-weight: 600;font-size: 15px;"><a target="_blank" href="/petiti/<?php echo $denunciador ?>">@<?php echo $denunciador ?></a></span></p>
-                <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
 
-
-                <a id="<?php echo $idDenunciaPublicacao; ?>" href="#modal-analisar-denuncia-publicacao<?php echo $idDenunciaPublicacao; ?>" rel="modal:open" class="botao analisar-agora">Analisar agora</a>
-              </div>
-
-              <section>
-                <div id="modal-analisar-denuncia-publicacao<?php echo $idDenunciaPublicacao; ?>" class="modal">
-                  <div class="modalAnalise">
-                    <div class="titulo-modal-denuncia">
-                      <span id="span-modal-denuncia">Análise de denúncia</span>
-                    </div>
-                    <div class="textoPubDenuncia">
-                      <span style="font-weight: 600; font-size: 15px;">Legenda da publicação: </span><span id="texto-pub" style="font-size: 15px;"><?php echo $textoPub; ?></span>
-                    </div>
-                    <div class="fotoPub">
-                      <img class="foto-analise-denuncia" src="<?php echo $foto; ?>">
-                    </div>
-                    <div class="motivo-denuncia-modal">
-                      <span style="font-size: 15px; font-weight:600;">Motivo apontado: </span><span style="font-size: 15px; font-weight:400;"> <?php echo $textoDenuncia; ?></span>
-                    </div>
-                    <div class="denunciador-modal">
-                      <span style="font-size: 15px; font-weight:600;">Denunciado por: </span> <a target="_blank" href="/petiti/<?php echo $denunciador; ?>"><span style="font-size: 15px; font-weight:400;">@<?php echo $denunciador; ?></span></a>
-                    </div>
-                    <div class="botoesDecisaoDenuncia">
-                      <div class="linhaBotoesDenuncia">
-                        <a class="botao decisao-conta" href="/petiti/api/bloquear-tutor-denunciado/publicacao/<?php echo $idDenunciado; ?>/<?php echo $idDenunciaPublicacao; ?>"><span id="span-bloquear-conta">Bloquear conta</span></a>
-                        <a class="botao decisao-conta" href="/petiti/api/publicacao-denunciada/delete/<?php echo $idPub; ?>/<?php echo $idDenunciaPublicacao; ?>"><span id="span-decisao-conta">Excluir publicação</span></a>
+                <section>
+                  <div id="modal-analisar-denuncia-publicacao<?php echo $idDenunciaPublicacao; ?>" class="modal">
+                    <div class="modalAnalise">
+                      <div class="titulo-modal-denuncia">
+                        <span id="span-modal-denuncia">Análise de denúncia</span>
                       </div>
-                      <div class="linhaBotoesDenuncia">
-                        <a class="botao decisao-conta" href="/petiti/api/excluir-denuncia/publicacao/<?php echo $idDenunciaPublicacao; ?>"><span id="span-decisao-conta">Excluir denúncia</span></a>
+                      <div class="textoPubDenuncia">
+                        <span style="font-weight: 600; font-size: 15px;">Legenda da publicação: </span><span id="texto-pub" style="font-size: 15px;"><?php echo $textoPub; ?></span>
+                      </div>
+                      <div class="fotoPub">
+                        <img class="foto-analise-denuncia" src="<?php echo $foto; ?>">
+                      </div>
+                      <div class="motivo-denuncia-modal">
+                        <span style="font-size: 15px; font-weight:600;">Motivo apontado: </span><span style="font-size: 15px; font-weight:400;"> <?php echo $textoDenuncia; ?></span>
+                      </div>
+                      <div class="denunciador-modal">
+                        <span style="font-size: 15px; font-weight:600;">Denunciado por: </span> <a target="_blank" href="/petiti/<?php echo $denunciador; ?>"><span style="font-size: 15px; font-weight:400;">@<?php echo $denunciador; ?></span></a>
+                      </div>
+                      <div class="botoesDecisaoDenuncia">
+                        <div class="linhaBotoesDenuncia">
+                          <a class="botao decisao-conta" href="/petiti/api/bloquear-tutor-denunciado/publicacao/<?php echo $idDenunciado; ?>/<?php echo $idDenunciaPublicacao; ?>"><span id="span-bloquear-conta">Bloquear conta</span></a>
+                          <a class="botao decisao-conta" href="/petiti/api/publicacao-denunciada/delete/<?php echo $idPub; ?>/<?php echo $idDenunciaPublicacao; ?>"><span id="span-decisao-conta">Excluir publicação</span></a>
+                        </div>
+                        <div class="linhaBotoesDenuncia">
+                          <a class="botao decisao-conta" href="/petiti/api/excluir-denuncia/publicacao/<?php echo $idDenunciaPublicacao; ?>"><span id="span-decisao-conta">Excluir denúncia</span></a>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </section>
+                </section>
 
-            <?php
-            }
-            ?>
+              <?php
+              }
+              ?>
+            </div>
+
+            <h3> Denúncias de usuários:</h3>
+            <h3 id="total-qtd-usuarios">Total(<?php echo $denunciaUsuario->buscaQtdDenunciaUsuarioEmAnalise(); ?>)</h3>
+            <div class="denunciasUsuarios">
+              <?php foreach ($listaDenunciasUsuarioEmAnalise as $linha) {
+                $idDenunciaUsuario = $linha['idDenunciaUsuario'];
+                $idDenunciado = $linha['denunciado'];
+                $idDenunciador = $linha['denunciador'];
+                $textoDenuncia = $linha['textoDenunciaUsuario'];
+                $data = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
+                $denunciado = $linha['usuarioDenunciado'];
+                $denunciador = $linha['usuarioDenunciador'];
+                $foto = $linha['caminhoFoto'];
+              ?>
+                <div class="card">
+                  <div class="badges">
+                    <p class="badge ativo">Ativo</p>
+                  </div>
+                  <div class="infos-card">
+                    <img class="foto-info" src="<?php echo $foto; ?>">
+                    <div class="denuncia-info">
+                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                    </div>
+                  </div>
+                  <div class="card-data">
+                    <span class="material-symbols-outlined">date_range</span>
+                    <div class="data-denunciador">
+                      <p> Denuncia feita em: <?php echo $data; ?></p>
+                    </div>
+                  </div>
+                  <p><span style="font-weight: 900;font-size: 15px;">Denunciado por: </span><span style="font-weight: 600;font-size: 15px;"><a target="_blank" href="/petiti/<?php echo $denunciador ?>">@<?php echo $denunciador ?></a></span></p>
+                  <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
+                  <a href="#modal-analisar-denuncia-usuario<?php echo $idDenunciaUsuario; ?>" rel="modal:open" class="botao analisar-agora">Passar para análise</a>
+                </div>
+
+                <section>
+                  <div id="modal-analisar-denuncia-usuario<?php echo $idDenunciaUsuario; ?>" class="modal">
+                    <div class="modalAnalise">
+                      <div class="titulo-modal-denuncia">
+                        <span id="span-modal-denuncia">Análise de denúncia</span>
+                      </div>
+                      <div class="fotoDenunciado">
+                        <a target="_blank" href="/petiti/<?php echo $denunciado; ?>"><img class="foto-analise-denuncia" src="<?php echo $foto; ?>"></a>
+                      </div>
+                      <div class="motivo-denuncia-modal">
+                        <span style="font-size: 20px; font-weight:600;">Motivo apontado: </span><span style="font-size: 20px; font-weight:400;"> <?php echo $textoDenuncia; ?></span>
+                      </div>
+                      <div class="denunciador-modal">
+                        <span style="font-size: 15px; font-weight:600;">Denunciado por: </span> <a target="_blank" href="/petiti/<?php echo $denunciador; ?>"><span style="font-size: 15px; font-weight:400;">@<?php echo $denunciador; ?></span></a>
+                      </div>
+                      <div class="botoesDecisaoDenuncia">
+                        <div class="linhaBotoesDenuncia">
+                          <a class="botao decisao-conta" href="/petiti/api/bloquear-tutor-denunciado/usuarioDenunciado/<?php echo $idDenunciado; ?>/<?php echo $idDenunciaUsuario; ?>"><span id="span-decisao-conta">Bloquear denunciado (<?php echo $denunciado; ?>)</span></a>
+                          <a class="botao decisao-conta" href="/petiti/api/bloquear-tutor-denunciado/usuarioDenunciador/<?php echo $idDenunciador; ?>/<?php echo $idDenunciaUsuario; ?>"><span id="span-decisao-conta">Bloquear denunciador (<?php echo $denunciador; ?>)</span></a>
+                        </div>
+                        <div class="linhaBotoesDenuncia">
+                          <a class="botao decisao-conta" href="/petiti/api/excluir-denuncia/usuario/<?php echo $idDenunciaUsuario; ?>"><span id="span-decisao-conta">Excluir denúncia</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+              <?php
+              } ?>
+            </div>
           </div>
-
-          <h3> Denúncias de usuários:</h3>
-          <h3 id="total-qtd-usuarios">Total(<?php echo $denunciaUsuario->buscaQtdDenunciaUsuarioEmAnalise(); ?>)</h3>
-          <div class="denunciasUsuarios">
-            <?php foreach ($listaDenunciasUsuarioEmAnalise as $linha) {
-              $idDenunciaUsuario = $linha['idDenunciaUsuario'];
-              $idDenunciado = $linha['denunciado'];
-              $idDenunciador = $linha['denunciador'];
-              $textoDenuncia = $linha['textoDenunciaUsuario'];
-              $data = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
-              $denunciado = $linha['usuarioDenunciado'];
-              $denunciador = $linha['usuarioDenunciador'];
-              $foto = $linha['caminhoFoto'];
-            ?>
-              <div class="card">
-                <div class="badges">
-                  <p class="badge ativo">Ativo</p>
-                </div>
-                <div class="infos-card">
-                  <img class="foto-info" src="<?php echo $foto; ?>">
-                  <div class="denuncia-info">
-                    <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
-                  </div>
-                </div>
-                <div class="card-data">
-                  <span class="material-symbols-outlined">date_range</span>
-                  <div class="data-denunciador">
-                    <p> Denuncia feita em: <?php echo $data; ?></p>
-                  </div>
-                </div>
-                <p><span style="font-weight: 900;font-size: 15px;">Denunciado por: </span><span style="font-weight: 600;font-size: 15px;"><a target="_blank" href="/petiti/<?php echo $denunciador ?>">@<?php echo $denunciador ?></a></span></p>
-                <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
-                <a href="#modal-analisar-denuncia-usuario<?php echo $idDenunciaUsuario; ?>" rel="modal:open" class="botao analisar-agora">Passar para análise</a>
-              </div>
-
-              <section>
-                <div id="modal-analisar-denuncia-usuario<?php echo $idDenunciaUsuario; ?>" class="modal">
-                  <div class="modalAnalise">
-                    <div class="titulo-modal-denuncia">
-                      <span id="span-modal-denuncia">Análise de denúncia</span>
-                    </div>
-                    <div class="fotoDenunciado">
-                      <a target="_blank" href="/petiti/<?php echo $denunciado; ?>"><img class="foto-analise-denuncia" src="<?php echo $foto; ?>"></a>
-                    </div>
-                    <div class="motivo-denuncia-modal">
-                      <span style="font-size: 20px; font-weight:600;">Motivo apontado: </span><span style="font-size: 20px; font-weight:400;"> <?php echo $textoDenuncia; ?></span>
-                    </div>
-                    <div class="denunciador-modal">
-                      <span style="font-size: 15px; font-weight:600;">Denunciado por: </span> <a target="_blank" href="/petiti/<?php echo $denunciador; ?>"><span style="font-size: 15px; font-weight:400;">@<?php echo $denunciador; ?></span></a>
-                    </div>
-                    <div class="botoesDecisaoDenuncia">
-                      <div class="linhaBotoesDenuncia">
-                        <a class="botao decisao-conta" href="/petiti/api/bloquear-tutor-denunciado/usuarioDenunciado/<?php echo $idDenunciado; ?>/<?php echo $idDenunciaUsuario; ?>"><span id="span-decisao-conta">Bloquear denunciado (<?php echo $denunciado; ?>)</span></a>
-                        <a class="botao decisao-conta" href="/petiti/api/bloquear-tutor-denunciado/usuarioDenunciador/<?php echo $idDenunciador; ?>/<?php echo $idDenunciaUsuario; ?>"><span id="span-decisao-conta">Bloquear denunciador (<?php echo $denunciador; ?>)</span></a>
-                      </div>
-                      <div class="linhaBotoesDenuncia">
-                        <a class="botao decisao-conta" href="/petiti/api/excluir-denuncia/usuario/<?php echo $idDenunciaUsuario; ?>"><span id="span-decisao-conta">Excluir denúncia</span></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-            <?php
-            } ?>
-          </div>
-
         </div>
 
         <div id="resolvida" class="tabcontent">
@@ -431,7 +431,7 @@ if ($_SESSION['tipo'] != "Adm") {
           <h3> Denúncias de usuários:</h3>
           <h3 id="total-qtd-usuarios">Total(<?php echo $denunciaUsuario->buscaQtdDenunciaUsuarioResolvida(); ?>)</h3>
           <div class="denunciasUsuarios">
-          <?php foreach ($listaDenunciasUsuarioResolvidas as $linha) {
+            <?php foreach ($listaDenunciasUsuarioResolvidas as $linha) {
               $idDenunciaUsuario = $linha['idDenunciaUsuario'];
               $idDenunciado = $linha['denunciado'];
               $idDenunciador = $linha['denunciador'];
@@ -443,7 +443,7 @@ if ($_SESSION['tipo'] != "Adm") {
             ?>
               <div class="card">
                 <div class="badges">
-                <p class="badge ativo">Resolvido</p>
+                  <p class="badge ativo">Resolvido</p>
                 </div>
                 <div class="infos-card">
                   <img class="foto-info" src="<?php echo $foto; ?>">
@@ -461,7 +461,7 @@ if ($_SESSION['tipo'] != "Adm") {
                 <p><span style="font-weight: 900;">Decisão da administração: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
                 <a href="/petiti/api/passar-denuncia-analise/usuario/<?php echo $idDenunciaUsuario; ?>" class="botao analisar">Passar para análise novamente</a>
               </div>
-              <?php
+            <?php
             } ?>
           </div>
         </div>
@@ -481,54 +481,54 @@ if ($_SESSION['tipo'] != "Adm") {
     </div>
 
     <div class="container-denuncias">
-        <h2>Denúncias recentes</h2>
-        <div class="denuncias">
-          <div class="icon-denuncia">
-            <span id="icon-report" class="material-icons-outlined">report</span>
-          </div>
-          <p>
-            <?php
-            $resultadoUltimaDenuncia = $denunciaPublicacao->ultimaDenuncia();
-            $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
-            $arrayDenunciaPublicacao = $denunciaPublicacao->buscaDenunciaPublicacao($ultimaDenuncia);
-            $denunciador = $arrayDenunciaPublicacao['usuarioDenunciador'];
-            $denunciado = $arrayDenunciaPublicacao['usuarioDenunciado'];
-            $foto = $arrayDenunciaPublicacao['fotoDenunciado'];
-            ?>
-
-          <div class="msg-denuncia">
-            <div class="foto-perfil">
-              <img src="<?php echo $foto; ?>" />
-            </div>
-            <div class="mensagem">
-              O post de <span style="color: #DB310C; font-weight: 750;">@<?php echo $denunciado; ?> </span> foi denunciado por <span style="font-weight: 800">@<?php echo $denunciador; ?>
-              
-              </p>
-              <p id="p-small">10 minutos atrás</p>
-            </div>
-          </div>
-
-          <?php
-          $resultadoUltimaDenuncia = $denunciaUsuario->ultimaDenuncia();
-          $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
-          $arrayDenunciaUsuario = $denunciaUsuario->buscaDenunciaUsuario($ultimaDenuncia);
-          $denunciador = $arrayDenunciaUsuario['usuarioDenunciador'];
-          $denunciado = $arrayDenunciaUsuario['usuarioDenunciado'];
-          $foto = $arrayDenunciaUsuario['fotoDenunciado'];
-          ?>
-          <div class="msg-denuncia">
-            <div class="foto-perfil">
-              <img src="<?php echo $foto; ?>" />
-            </div>
-            <div class="mensagem">
-              O usuário <span style="color: #DB310C; font-weight: 750;">@<?php echo $denunciado; ?></span> foi denunciado por <span style="font-weight: 800">@<?php echo $denunciador; ?><?php  ?></span> 
-              </p>
-              <p id="p-small">10 minutos atrás</p>
-            </div>
-          </div>
-
+      <h2>Denúncias recentes</h2>
+      <div class="denuncias">
+        <div class="icon-denuncia">
+          <span id="icon-report" class="material-icons-outlined">report</span>
         </div>
+        <p>
+          <?php
+          $resultadoUltimaDenuncia = $denunciaPublicacao->ultimaDenuncia();
+          $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
+          $arrayDenunciaPublicacao = $denunciaPublicacao->buscaDenunciaPublicacao($ultimaDenuncia);
+          $denunciador = $arrayDenunciaPublicacao['usuarioDenunciador'];
+          $denunciado = $arrayDenunciaPublicacao['usuarioDenunciado'];
+          $foto = $arrayDenunciaPublicacao['fotoDenunciado'];
+          ?>
+
+        <div class="msg-denuncia">
+          <div class="foto-perfil">
+            <img src="<?php echo $foto; ?>" />
+          </div>
+          <div class="mensagem">
+            O post de <span style="color: #DB310C; font-weight: 750;">@<?php echo $denunciado; ?> </span> foi denunciado por <span style="font-weight: 800">@<?php echo $denunciador; ?>
+
+              </p>
+              <p id="p-small">10 minutos atrás</p>
+          </div>
+        </div>
+
+        <?php
+        $resultadoUltimaDenuncia = $denunciaUsuario->ultimaDenuncia();
+        $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
+        $arrayDenunciaUsuario = $denunciaUsuario->buscaDenunciaUsuario($ultimaDenuncia);
+        $denunciador = $arrayDenunciaUsuario['usuarioDenunciador'];
+        $denunciado = $arrayDenunciaUsuario['usuarioDenunciado'];
+        $foto = $arrayDenunciaUsuario['fotoDenunciado'];
+        ?>
+        <div class="msg-denuncia">
+          <div class="foto-perfil">
+            <img src="<?php echo $foto; ?>" />
+          </div>
+          <div class="mensagem">
+            O usuário <span style="color: #DB310C; font-weight: 750;">@<?php echo $denunciado; ?></span> foi denunciado por <span style="font-weight: 800">@<?php echo $denunciador; ?><?php  ?></span>
+            </p>
+            <p id="p-small">10 minutos atrás</p>
+          </div>
+        </div>
+
       </div>
+    </div>
     <!------------------- final - denuncias recentes ------------------->
 
     <div class="categorias-alta">
