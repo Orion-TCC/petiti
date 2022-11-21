@@ -181,7 +181,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais para doção</h3>
+                        <h3>Animais para Adoção</h3>
                     </a>
 
 
@@ -497,8 +497,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                         if ($c == 2) {
                                             $c = $contagemComentarios - 1;
                                         }
-                                    }
-                                    echo "Ver mais...";
+                                    }  ?>  
+                                    <a href="#modal-post" rel="modal:open" style="color: black; width: fit-content;">Ver mais...</a> <?php 
                                 } ?>
                             </div>
 
@@ -938,86 +938,88 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
             <div id="modal-post" class="modal post">
                 <div style="display: flex; width: 100%; height: 100%;">
 
-                    <div id="imagemPost">
-                        <img src="#" alt="">
+                    <div id="preview-crop-image">
+                            <img src="#" alt="">
                     </div>
 
 
                     <div class="rightSidePost">
 
-                        <div class="userElementosHolder">
-                            <div class="userElementos">
-                                <img src="#" alt="" class="fotoDePerfil">
-                                <div>
+                            <div class="userElementosHolder">
+                                <div class="userElementos">
+                                 <img src="#" alt="" class="fotoDePerfil">
+                                 <div>
                                     <span class="textNomeUsuario">nome</span>
-                                    <h5 class="text-muted">data</h5>
+                                    <h5 class="text-muted">data</h5>    
+                                 </div>
+                                </div>
+
+                                <div class="editButton">
+                                    <div class="menuPostHover"></div>
+                                    <i class="uil uil-ellipsis-v"></i>
                                 </div>
                             </div>
 
-                            <div class="editButton">
-                                <div class="menuPostHover"></div>
-                                <i class="uil uil-ellipsis-v"></i>
-                            </div>
-                        </div>
+                            <div class="comentariosHolder">
 
-                        <div class="comentariosHolder">
+                                    <div class="comentarioHolder">
 
-                            <div class="comentarioHolder">
+                                        <div class="fotoDePerfil">
+                                            <img src="#" alt="">
+                                        </div>
 
-                                <div class="fotoDePerfil">
-                                    <img src="#" alt="">
-                                </div>
+                                        <div class="comentarioInfos">
 
-                                <div class="comentarioInfos">
+                                            <div class="info">
+                                                <div style="  word-break: break-all;">
+                                                    <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
+                                                </div>
+                                            </div>
 
-                                    <div class="info">
-                                        <h4>nome</h4>
-                                        <h4 class="text-muted">comentario</h4>
+                                            <div class="info">
+                                                <h5 class="text-muted">tempo</h5>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <div class="info">
-                                        <h5 class="text-muted">tempo</h5>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
 
-                        <div class="botoesInteracao">
+                            <div class="botoesInteracao">
+                                
+                                <input class="curtir" value="<?php echo $id ?>" type="checkbox">
+                                
+                                <button class="comentar"></button>
+                                
+                                <button class="mensagem"></button>
+                                
+                            </div>
 
-                            <input class="curtir" value="<?php echo $id ?>" type="checkbox">
+                            <div class="curtidas">
+                                <h4>0 itimalias</h4>
+            
+                            </div>
 
-                            <button class="comentar"></button>
+                            <div class="commentArea">
 
-                            <button class="mensagem"></button>
+                                <i class="uil uil-heart"></i>
 
-                        </div>
+                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
 
-                        <div class="curtidas">
-                            <h4>0 itimalias</h4>
+                                <button value="<?php echo $id ?>" class="comentar" value="">
+                                    <i class="uil uil-message"></i>
+                                </button>
 
-                        </div>
+                              
 
-                        <div class="commentArea">
+                            </div>
 
-                            <i class="uil uil-heart"></i>
-
-                            <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
-
-                            <button value="<?php echo $id ?>" class="comentar" value="">
-                                <i class="uil uil-message"></i>
-                            </button>
-
-
-
-                        </div>
+                            </div>
 
                     </div>
 
                 </div>
-
-            </div>
             </div>
         </section>
+
         <!-- fim Modals -->
 
     </main>
