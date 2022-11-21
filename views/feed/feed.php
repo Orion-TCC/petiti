@@ -586,7 +586,10 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 </div>
                             </div>
                     <?php }
-                    }
+                    }else{ ?>
+                        <h4 style="margin-top: 5px;" class="text-muted">Não tem nenhuma postagem com as categorias do feed exclusivo de animais perdidos...</h4>
+
+                    <?php }
                     ?>
                 </div>
                 <!-- fim de posts de pets perdidos -->
@@ -598,104 +601,24 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         </div>
 
                         <div class="categoriasAltaGrid">
-
+                        <?php 
+                        $contategmCategoriasPopulares = count($listaCategorias);
+                        for($a = 0; $a < $contategmCategoriasPopulares; $a++) {?>
+                            
                             <div class="categorias">
                                 <div class="Lugar">
                                     <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position1.svg" alt="">
+                                        <img src="/petiti/views/assets/img/position<?php echo ($a+1); ?>.svg" alt="">
                                     </div>
                                     <div class="infoCategoria">
                                         <h4>
+                                            <?php echo $listaCategorias[$a]['categoria']; ?>
                                         </h4>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position2.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position3.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position4.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="categorias">
-
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position5.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>tamandua</h4>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?>
 
                         </div>
                     </div>
@@ -708,6 +631,10 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     <?php
 
                     $sugestoes = $usuario->sugestoesSeguidores($_SESSION['id']);
+                    $contagemSugestoes = count($sugestoes);
+                    if($contagemSugestoes>0){
+                        
+                    
                     foreach ($sugestoes as $sugestao) {
                         $idUsuarioSugerido = $sugestao['idUsuario'];
                         $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
@@ -743,7 +670,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 <?php } ?>
                             </div>
                     <?php }
-                    } ?>
+                    } }else{ ?>
+                        <h4 style="margin-top: 5px;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
+                   <?php } ?>
 
                 </div>
             </div>
