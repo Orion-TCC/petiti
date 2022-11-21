@@ -270,12 +270,15 @@ if (isset($_COOKIE['denuncia'])) {
 
                                 <div class="infoHolder topo">
                                     <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
-                                    <h2><?php echo $usuarioPet; ?></h2>
-                                    <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                        <button value="<?php echo $idPetEscolhido ?>" class="seguirPet btn btn-primary">Seguir</button>
-                                    <?php } else { ?>
-                                        <button value="<?php echo $idPetEscolhido ?>" class="seguirPet btn btn-secundary">Seguindo</button>
-                                    <?php } ?>
+                                    
+                                    <div class="flex-row" style="gap: 2rem;">
+                                         <h2><?php echo $usuarioPet; ?></h2>
+                                         <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                             <button value="<?php echo $idPetEscolhido ?>" class="seguirPet btn btn-primary">Seguir</button>
+                                           <?php } else { ?>
+                                               <button value="<?php echo $idPetEscolhido ?>" class="seguirPet btn btn-secundary">Seguindo</button>
+                                           <?php } ?>
+                                    </div>
                                 </div>
 
                                 <div class="infoHolder meio">

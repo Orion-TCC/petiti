@@ -283,6 +283,7 @@ if ($verificarSeguidor['boolean'] == true) {
 
                                 <div class="infoHolder topo">
                                     <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+                                    
                                     <div class="flex-row" style="gap: 2rem;">
                                         <h2><?php echo $login; ?></h2>
                                         <?php if ($verificarSeguidor['boolean'] == true) { ?>

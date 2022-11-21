@@ -229,8 +229,10 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                             <div class="userInfo">
 
                                 <div class="infoHolder topo">
-                                    <h2><?php echo $_SESSION['login']; ?></h2>
-                                    <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
+                                   <div class="flex-row" style="gap: 2rem;">
+                                        <h2><?php echo $_SESSION['login']; ?></h2>
+                                        <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
+                                    </div>
                                 </div>
 
 
