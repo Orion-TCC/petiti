@@ -135,7 +135,7 @@ $app->post('/usuario/info', function (Request $request, Response $response, arra
     $bio = $_POST['txBio'];
     $local = $_POST['txLocal'];
     $site = $_POST['txSite'];
-    
+
 
 
     $usuario->setIdUsuario($id);
@@ -939,9 +939,9 @@ $app->post(
         $usuario->setIdUsuario($_SESSION['id']);
         $publicacao->setUsuario($usuario);
         $publicacao->setDataPublicacao($DateAndTime);
-        if(isset($_POST['checkImp'])){
+        if (isset($_POST['checkImp'])) {
             $publicacao->setImpulsoPub(1);
-        }else{
+        } else {
             $publicacao->setImpulsoPub(0);
         }
         $id = $publicacao->cadastrar($publicacao);
@@ -1263,11 +1263,11 @@ $app->post('/config-conta', function (Request $request, Response $response, arra
     }
     if (isset($_POST['txtEmail'])) {
         $usuario->setEmailUsuario($_POST['txtEmail']);
-        $emailVerificacao=$usuario->verificarEmail($_POST['txtEmail']);
+        $emailVerificacao = $usuario->verificarEmail($_POST['txtEmail']);
         if ($emailVerificacao == true) {
             $usuario->updateEmail($usuario);
-        }else{
-            $cookie=new Cookies();
+        } else {
+            $cookie = new Cookies();
             $cookie->criarCookie("erro-email", "Email inválido", 5);
         }
     }
@@ -1299,23 +1299,22 @@ $app->post('/update-senha', function (Request $request, Response $response, arra
     @session_start();
     $usuario = new Usuario();
     $usuario->setIdUsuario($_SESSION['id']);
-   
-    
-    if($_POST['txtSenhaAntiga'] != $_SESSION['senha']){
-        $cookie=new Cookies();
+
+
+    if ($_POST['txtSenhaAntiga'] != $_SESSION['senha']) {
+        $cookie = new Cookies();
         $cookie->criarCookie("erro-senha", "Senha inválida", 5);
-        $cookie->criarCookie("abrir-senha", "openTab(event, '2')", 5);     
+        $cookie->criarCookie("abrir-senha", "openTab(event, '2')", 5);
         header("location: /petiti/opcoes");
-    }else{
-        $cookie=new Cookies();
+    } else {
+        $cookie = new Cookies();
         $usuario->setSenhaUsuario($_POST['txtSenhaNova1']);
         $usuario->updateSenha($usuario);
         $usuario->login($_SESSION['login'], $_SESSION['senha']);
-        $cookie->criarCookie("abrir-senha", "openTab(event, '2')", 5);     
+        $cookie->criarCookie("abrir-senha", "openTab(event, '2')", 5);
 
         header("location: /petiti/opcoes");
     }
-  
 });
 
 $app->get('/escolher-pet/{id}', function (Request $request, Response $response, array $args) {
@@ -1418,7 +1417,7 @@ $app->post('/denunciaUsuario', function (Request $request, Response $response, a
     ", 1);
 });
 
-$app->post('/seguir-categoria', function(Request $request, Response $response, array $args){
+$app->post('/seguir-categoria', function (Request $request, Response $response, array $args) {
     @session_start();
     $categoriaSeguida = new categoriaSeguida();
     $idCategoria = $_POST['id'];
@@ -1428,11 +1427,11 @@ $app->post('/seguir-categoria', function(Request $request, Response $response, a
 
     $verificador = $ver['boolean'];
 
-    if($verificador == true){
+    if ($verificador == true) {
         $categoriaSeguida->setIdCategoria($idCategoria);
         $categoriaSeguida->setidUsuario($idUsuario);
         $categoriaSeguida->cadastrar($categoriaSeguida);
-    }else{
+    } else {
         $idCategoriaJaSeguida = $ver['id'];
         $categoriaSeguida->setIdCategoriaSeguida($idCategoriaJaSeguida);
         $categoriaSeguida->delete($categoriaSeguida);
@@ -1443,6 +1442,144 @@ $app->post('/seguir-categoria', function(Request $request, Response $response, a
 
     $response->getBody()->write("$json");
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+$app->post('/pesquisar', function (Request $request, Response $response, array $args) {
+    if (isset($_POST['val'])) {
+        error_reporting(0);
+        $con = Conexao::conexao();
+        $fotoUsuario = new FotoUsuario();
+        $fotoPet = new FotoPet();
+        $fotoPublicacao = new FotoPublicacao();
+
+        $pesquisa = $_POST['val'];
+
+        $queryQtdPesquisa = "SELECT tbusuario.idUsuario, loginUsuario, innerfotousuario.caminhoFoto as foto
+        FROM tbUsuario 
+        INNER JOIN tbfotousuario innerfotousuario ON innerfotousuario.idusuario = tbusuario.idusuario
+        WHERE loginUsuario LIKE '$pesquisa%' 
+        UNION
+        SELECT tbpet.idPet, usuarioPet, innerfotopet.caminhofotopet as foto FROM tbPet
+        INNER JOIN tbfotopet innerfotopet ON innerfotopet.idpet = tbpet.idpet
+        WHERE usuarioPet LIKE '$pesquisa%'
+        UNION
+        SELECT tbpublicacao.idPublicacao, textoPublicacao, innerfotopub.caminhoFotoPublicacao as foto FROM tbPublicacao
+        INNER JOIN tbfotopublicacao innerfotopub ON innerfotopub.idPublicacao = tbpublicacao.idpublicacao
+        WHERE textoPublicacao LIKE '$pesquisa%'
+        ";
+
+        $resultadoQtd = $con->query($queryQtdPesquisa);
+        $listaQtd = $resultadoQtd->fetchAll(PDO::FETCH_ASSOC);
+        $countQtdResultado = count($listaQtd);
+
+        if ($countQtdResultado > 0) {
+            echo("<div>");
+            //Usuarios
+            echo ("<div class='cardsResultadoPesquisaUsuarios cardResultadoPesquisa'>");
+            echo ("<span class='spanUsuariosEncontrados'>Usuarios encontrados: </span>");
+
+            $queryUsuarios = "SELECT tbusuario.idUsuario, loginUsuario, idTipoUsuario
+            FROM tbUsuario
+            INNER JOIN tbfotousuario innerfotousuario ON innerfotousuario.idusuario = tbusuario.idusuario
+            WHERE loginUsuario LIKE '$pesquisa%' ";
+
+            $resultadoUsuarios = $con->query($queryUsuarios);
+            $listaUsuarios = $resultadoUsuarios->fetchAll(PDO::FETCH_ASSOC);
+            $countResultadoUsuarios = count($listaUsuarios);
+
+            for ($r = 0; $r < $countResultadoUsuarios; $r++) {
+                $caminhoFotoUsuario = $fotoUsuario->exibirFotoUsuario($listaUsuarios[$r]['idUsuario']);
+                $resultadoBuscaAtual = $listaUsuarios[$r]['loginUsuario'];
+                if($listaUsuarios[$r]['idTipoUsuario'] != 1){
+                    $icon = "fa-building";
+                }else{
+                    $icon = "fa-user";
+                }
+                echo ("
+                    <div class='cardResultadoPesquisa'>
+                        <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
+                            <img id='fotoUsuarioPesquisado' src='$caminhoFotoUsuario'>     
+                            <span style='padding-left: 10px;'>$resultadoBuscaAtual</span>
+                            <div class='icon-tipo-pesquisa'>
+                                <i class='fa-solid $icon'></i>
+                            </div>
+                        </a>
+                    </div>
+            ");
+            }
+            echo ("</div");
+
+            //Pets
+            echo ("<div class='cardsResultadoPesquisaPets cardResultadoPesquisa'>");
+            echo ("<span class='spanUsuariosEncontrados'>Pets encontrados: </span>");
+
+            $queryPets = "SELECT tbpet.idPet, usuarioPet FROM tbPet
+            INNER JOIN tbfotopet innerfotopet ON innerfotopet.idpet = tbpet.idpet
+            WHERE usuarioPet LIKE '$pesquisa%'";
+
+            $resultadoPets = $con->query($queryPets);
+            $listaPets = $resultadoPets->fetchAll(PDO::FETCH_ASSOC);
+            $countResultadoPets = count($listaPets);
+
+            for ($r = 0; $r < $countResultadoPets; $r++) {
+                $caminhoFotoPet = $fotoPet->exibirFotopet($listaPets[$r]['idPet']);
+                $resultadoBuscaAtual = $listaPets[$r]['usuarioPet'];
+
+                echo ("
+                    <div class='cardResultadoPesquisa'>
+                        <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
+                            <img id='fotoUsuarioPesquisado' src='$caminhoFotoPet'>     
+                            <span style='padding-left: 10px;'>$resultadoBuscaAtual</span>
+                            <div class='icon-tipo-pesquisa'>
+                                <i class='fa-regular fa-paw-simple'></i>
+                            </div>
+                        </a>
+                    </div>
+            ");
+            }
+            echo ("</div");
+
+            //Publicacacoes
+            echo ("<div class='cardsResultadoPesquisaPubs cardResultadoPesquisa'>");
+            echo ("<span class='spanUsuariosEncontrados'>Publicações encontrados: </span>");
+
+            $querypubs = "SELECT tbpublicacao.idPublicacao, textoPublicacao FROM tbPublicacao
+            INNER JOIN tbfotopublicacao innerfotopub ON innerfotopub.idPublicacao = tbpublicacao.idpublicacao
+            WHERE textoPublicacao LIKE '$pesquisa%'";
+
+            $resultadopubs = $con->query($querypubs);
+            $listapubs = $resultadopubs->fetchAll(PDO::FETCH_ASSOC);
+            $countResultadopubs = count($listapubs);
+
+            for ($r = 0; $r < $countResultadopubs; $r++) {
+                $caminhoFotoPublicacao = $fotoPublicacao->exibirFotopublicacao($listapubs[$r]['idPublicacao']);
+                $resultadoBuscaAtual = $listapubs[$r]['textoPublicacao'];
+
+                echo ("
+                    <div class='cardResultadoPesquisa'>
+                        <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
+                            <img id='fotoUsuarioPesquisado' src='$caminhoFotoPet'>     
+                            <span style='padding-left: 10px;'>$resultadoBuscaAtual</span>
+                            <div class='icon-tipo-pesquisa'>
+                                <i class='fa-regular fa-paw-simple'></i>
+                            </div>
+                        </a>
+                    </div>
+            ");
+            }
+            echo ("</div");
+            echo("</div>");
+
+        } else {
+            echo ("
+            <div class='divSemResultadoPesquisa'>
+                <span class='semResultadoPesquisa'>
+                    Usuario, publicação ou pet não encontrado :(
+                </span>
+            </div>
+            ");
+        }
+    }
 });
 
 try {

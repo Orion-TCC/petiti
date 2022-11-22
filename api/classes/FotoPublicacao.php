@@ -60,5 +60,18 @@ class FotoPublicacao
         $stmt->bindValue(3, $fotoPublicacao->getPublicacao()->getIdPublicacao());
         $stmt->execute();
     }
+
+    public function exibirFotoPublicacao($id)
+        {
+                $con = Conexao::conexao();
+                $query = "SELECT caminhoFotoPublicacao FROM `tbfotoPublicacao` WHERE idFotoPublicacao = (SELECT MAX(idFotoPublicacao) FROM tbfotoPublicacao WHERE idPublicacao = $id)";
+
+                $resultado = $con->query($query);
+                $lista = $resultado->fetchAll();
+                foreach ($lista as $linha) {
+                        $caminhoFoto = $linha[0];
+                }
+                return $caminhoFoto;
+        }
     
 }

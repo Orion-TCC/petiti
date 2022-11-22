@@ -117,7 +117,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
             </h2>
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
-                <input type="search" placeholder="Pesquisar">
+                <input class="inputSearch" autocomplete="off" id="inputSearch" type="search" placeholder="Pesquisar">
+                <div id="resultadoPesquisa" class="resultadoPesquisa">
+                </div>
             </div>
 
             <?php
@@ -388,6 +390,12 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                                     </div>
                                                 </a>
                                             <?php } else { ?>
+                                                <li class="li-EditarPost">
+                                                    <div style="display: flex; align-items: center;">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                        <span class="editarPost"> Editar Post </span>
+                                                    </div>
+                                                </li>
                                                 <li class="li-ExcluirPost">
                                                     <div style="display: flex; align-items: center;">
 
@@ -484,66 +492,66 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                             <div id="comentarios<?php echo $id ?>" class="comentarios">
 
 
-                            
+
 
                                 <?php if ($contagemComentarios > 0) {
                                     for ($c = 0; $c  < $contagemComentarios; $c++) { ?>
                                         <div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem; position: relative;'>
-                                <span class="edit" id="<?php echo $id; ?>">
+                                            <span class="edit" id="<?php echo $id; ?>">
 
-                                    <div class="editButton">
-                                        <div class="menuPostHover"></div>
-                                        <i class="uil uil-ellipsis-v"></i>
-                                    </div>
+                                                <div class="editButton">
+                                                    <div class="menuPostHover"></div>
+                                                    <i class="uil uil-ellipsis-v"></i>
+                                                </div>
 
-                                    <div class="menuPost" id="menuPost">
-                                        <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
-                                            <?php if ($login != $_SESSION['login']) { ?>
-                                                <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixaSeguir">Deixar de seguir</span></li>
-                                                <a href="#modal-denuncia" rel="modal:open">
-                                                    <div id="<?php echo $id; ?>" class="postDenunciado">
-                                                        <div id="<?php echo $idUsuarioPub; ?>" class="denunciaPost">
-                                                            <li id="denunciarCor">
+                                                <div class="menuPost" id="menuPost">
+                                                    <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
+                                                        <?php if ($login != $_SESSION['login']) { ?>
+                                                            <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixaSeguir">Deixar de seguir</span></li>
+                                                            <a href="#modal-denuncia" rel="modal:open">
+                                                                <div id="<?php echo $id; ?>" class="postDenunciado">
+                                                                    <div id="<?php echo $idUsuarioPub; ?>" class="denunciaPost">
+                                                                        <li id="denunciarCor">
 
-                                                                <i class="fa-solid fa-circle-exclamation"></i>
-                                                                <span>Denunciar</span>
+                                                                            <i class="fa-solid fa-circle-exclamation"></i>
+                                                                            <span>Denunciar</span>
 
-                                                            </li>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            <?php } else { ?>
-                                                <li class="li-ExcluirPost">
-                                                    <div style="display: flex; align-items: center;">
-
-                                                        <i style="color: #DB310C;" class="uil uil-minus-circle"></i>
-                                                        <span class="excluirPost">Excluir Post</span>
-
-                                                        <div id="modal-exclui-post" class="modal certeza-excluir">
-                                                            <div class="innerCerteza-excluir">
-
-                                                                <h2 style="font-family: 'Raleway Extra Bold';">Excluir post?</h2>
-                                                                <h5>Após excluir, essa ação não poderá ser desfeita, e o post será removido do seu perfil, da timeline de outras contas e dos resultados de busca.</h5>
-
-                                                                <div class="opcoes-certeza-excluir">
-                                                                    <button class="btn btn-primary excluir"> <a href="/petiti/api/publicacao/delete/<?php echo $id; ?>">Excluir</a></button>
-                                                                    <button class="btn btn-primary cancelar"> <a rel="modal:close">Cancelar</a></button>
+                                                                        </li>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
+                                                            </a>
+                                                        <?php } else { ?>
+                                                            <li class="li-ExcluirPost">
+                                                                <div style="display: flex; align-items: center;">
 
-                                                    </div>
-                                                </li>
-                                                </a>
-                                            <?php } ?>
-                                        </ul>
-                                    </div>
+                                                                    <i style="color: #DB310C;" class="uil uil-minus-circle"></i>
+                                                                    <span class="excluirPost">Excluir Post</span>
 
-                                </span>
+                                                                    <div id="modal-exclui-post" class="modal certeza-excluir">
+                                                                        <div class="innerCerteza-excluir">
+
+                                                                            <h2 style="font-family: 'Raleway Extra Bold';">Excluir post?</h2>
+                                                                            <h5>Após excluir, essa ação não poderá ser desfeita, e o post será removido do seu perfil, da timeline de outras contas e dos resultados de busca.</h5>
+
+                                                                            <div class="opcoes-certeza-excluir">
+                                                                                <button class="btn btn-primary excluir"> <a href="/petiti/api/publicacao/delete/<?php echo $id; ?>">Excluir</a></button>
+                                                                                <button class="btn btn-primary cancelar"> <a rel="modal:close">Cancelar</a></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </li>
+                                                            </a>
+                                                        <?php } ?>
+                                                    </ul>
+                                                </div>
+
+                                            </span>
                                             <h2 style='font-weight: 900 !important; align-self: start;'>
                                                 <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
                                             </h2>
-                                            <h3 style='color: rgba(86, 86, 86, 1);   white-space: nowrap;overflow: hidden; text-overflow: ellipsis; width: 30rem;' >
+                                            <h3 style='color: rgba(86, 86, 86, 1);   white-space: nowrap;overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
                                                 <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
                                             </h3>
                                         </div>

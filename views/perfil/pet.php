@@ -157,9 +157,11 @@ if ($verificarSeguidor['boolean'] == true) {
     <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
 </h2>
 <div class="caixa-de-busca">
-    <i class="uil uil-search"></i>
-    <input type="search" placeholder="Pesquisar">
-</div>
+                <i class="uil uil-search"></i>
+                <input class="inputSearch" autocomplete="off" id="inputSearch" type="search" placeholder="Pesquisar">
+                <div id="resultadoPesquisa" class="resultadoPesquisa">
+                </div>
+            </div>
 
 <?php
 
