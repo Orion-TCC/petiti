@@ -355,8 +355,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                         <a href="/petiti/<?php echo $login ?>"><img src="<?php echo $fotoUsuario; ?>" alt=""></a>
                                     </div>
                                     <div class="info">
-                                        <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $nome ?></a></h3>
-                                        <small><?php echo $local ?> há <?php echo $diferencaFinal ?></small>
+                                        <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $login ?></a></h3>
+                                        <small><?php echo $local ?>- há <?php echo $diferencaFinal ?></small>
                                     </div>
                                 </div>
 

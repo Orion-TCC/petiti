@@ -42,7 +42,8 @@ body {
   overflow-x: hidden;
   background-image: url(/petiti/private-adm/dashboard/images/dashboard-bg.svg);
   background-repeat: no-repeat;
-  background-position: cover;
+  background-size: cover;
+  position: relative;
 }
 
 .container {
@@ -604,4 +605,13 @@ main .info-pets .perfis-pets {
   100%{
     transform: translateX(0%);
   }
+}
+
+.nuvemHolder{
+  width: 19.8rem;
+  height: 12%;
+  position: absolute;
+  background-image: url(/petiti/private-adm/dashboard/images/nuvem.svg);
+  background-repeat: no-repeat;
+  bottom: 0;
 }

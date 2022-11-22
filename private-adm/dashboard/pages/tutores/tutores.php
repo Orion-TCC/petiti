@@ -34,6 +34,9 @@ $denunciaUsuario = new DenunciaUsuario();
   <div class="container">
     <!------------------- começo - aside ------------------->
     <aside>
+  
+      <div class="nuvemHolder"></div>
+
       <div class="top">
         <div class="logo">
           <img src="/petiti/private-adm/dashboard/images/logo-petiti.svg" />

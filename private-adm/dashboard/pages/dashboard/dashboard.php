@@ -92,6 +92,9 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
   <div class="container">
     <!------------------- começo - aside ------------------->
     <aside>
+
+      <div class="nuvemHolder"></div>
+
       <div class="top">
         <div class="logo">
           <img src="/petiti/private-adm/dashboard/images/logo-petiti.svg" />
@@ -103,9 +106,6 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
       </div>
 
       <div class="sidebar">
-
-        <div class="nuvemHolder"></div>
-
         <a class="menu-item active" href="/petiti/dashboard">
           <span class="material-icons-round">dashboard</span>
           <h3>Dashboard</h3>

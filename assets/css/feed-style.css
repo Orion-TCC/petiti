@@ -951,6 +951,8 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   
 }
 
+
+
 .meio .caption :nth-child(1) {
   font-size: 1.2rem;
   font-weight: 700;
@@ -1736,11 +1738,46 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   width: fit-content;
   z-index: 10;
   display: flex;
+}
 
+.menuComent{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: -15px;
+  right: -135px;
+  width: fit-content;
+  height: fit-content;
+  box-shadow: 1px 1px 20px 0px #696969c2;
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  background: var(--color-white);
+  z-index: 1;
+  gap: 0.6rem;
+}
+
+.menuComentElement{
+width: fit-content;
+display: flex;
+gap: 0.5rem;
+align-items: center;
+justify-content: start;
+width: 100%;
+font-size: 1rem;
+cursor: pointer;
+z-index: 1;
 }
 
 
 
+
+.comentarios .commentEllipsis{
+  cursor: pointer;
+}
+
+.comentarios .commentEllipsis:hover{
+  color: #464bc9;
+}
 
 .opcoesPost.close {
 

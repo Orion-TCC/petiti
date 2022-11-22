@@ -43,6 +43,7 @@ body{
     background-image: url(/petiti/private-adm/dashboard/images/dashboard-bg.svg);
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
 }
 
 .container{
@@ -437,3 +438,11 @@ main .informacoes .graficos{
     align-items: center;
 }
 
+.nuvemHolder{
+    width: 19.8rem;
+    height: 12%;
+    position: absolute;
+    background-image: url(/petiti/private-adm/dashboard/images/nuvem.svg);
+    background-repeat: no-repeat;
+    bottom: 0;
+}

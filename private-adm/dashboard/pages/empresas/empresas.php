@@ -38,6 +38,9 @@ $qtdEmpresasBloqueadas = $usuario->buscaQtdUsuarioBloqueadoEmpresa();
   <div class="container">
     <!------------------- começo - aside ------------------->
     <aside>
+
+      <div class="nuvemHolder"></div>
+
       <div class="top">
         <div class="logo">
           <img src="/petiti/private-adm/dashboard/images/logo-petiti.svg" />
@@ -105,7 +108,7 @@ $qtdEmpresasBloqueadas = $usuario->buscaQtdUsuarioBloqueadoEmpresa();
           </div>
 
           <!-- Tab content -->
-          <div id="ativo" class="tabcontent">
+          <div id="ativo" class="tabcontent" style="display: block;">
             <h3 id="total-qtd">Total (<?php echo $qtdEmpresasAtivas ?>)</h3>
             <div class="cards">
               <?php

@@ -42,7 +42,8 @@ body {
     overflow-x: hidden;
     background-image: url(/petiti/private-adm/dashboard/images/dashboard-bg.svg);
     background-repeat: no-repeat;
-    background-position: cover;
+    background-size: cover;
+    position: relative;
 }
 
 .container {
@@ -458,11 +459,9 @@ main .info-pets .perfis-pets {
 }
 
 .cards {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
     margin-top: 1rem;
 }
 
@@ -752,3 +751,12 @@ main .info-pets .perfis-pets {
     background-repeat: no-repeat;
     background-position: center center;
 }
+
+.nuvemHolder{
+    width: 19.8rem;
+    height: 12%;
+    position: absolute;
+    background-image: url(/petiti/private-adm/dashboard/images/nuvem.svg);
+    background-repeat: no-repeat;
+    bottom: 0;
+  }
