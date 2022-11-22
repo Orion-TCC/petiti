@@ -61,7 +61,7 @@ $(document).ready(function () {
             $("#baseFoto").val(img);
             html = '<img src="' + img + '" />';
             $("#preview-crop-image").html(html);
-
+            
             console.log(data);
           },
         });

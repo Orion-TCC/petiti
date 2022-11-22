@@ -536,7 +536,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                 <div class="tituloModalPost">
 
                     <div style="width: 60%; display: flex; justify-content: end;"><span>Recortar</span></div>
-                    <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> <a id="continuar-post" href="#criar-post" rel="modal:open">Continuar</a> </div>
+                    <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> <a id="continuar-post-perfil" href="#criar-post" rel="modal:open">Continuar</a> </div>
 
                 </div>
 
@@ -579,7 +579,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
 
                                 <input type="hidden" name="categoriasValue" id="categoriasValue" value="">
 
-                                <input value="0" type="hidden" name="baseFoto" class="baseFoto">
+                                <input value="0" type="hidden" name="baseFoto" id="baseFotoPost">
 
 
                                 <div class="letraCont">
@@ -661,7 +661,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
             <div id="modal-post" class="modal post">
                 <div style="display: flex; width: 100%; height: 100%;">
 
-                    <div id="preview-crop-image">
+                    <div id="preview-crop-imagePost">
                         <img src="#" alt="">
                     </div>
 
