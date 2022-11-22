@@ -1492,11 +1492,8 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
         $countQtdResultado = count($listaQtd);
 
         if ($countQtdResultado > 0) {
-            echo("<div>");
+            echo ("<div>");
             //Usuarios
-            echo ("<div class='cardsResultadoPesquisaUsuarios cardResultadoPesquisa'>");
-            echo ("<span class='spanUsuariosEncontrados'>Usuarios encontrados: </span>");
-
             $queryUsuarios = "SELECT tbusuario.idUsuario, loginUsuario, idTipoUsuario
             FROM tbUsuario
             INNER JOIN tbfotousuario innerfotousuario ON innerfotousuario.idusuario = tbusuario.idusuario
@@ -1506,32 +1503,33 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
             $listaUsuarios = $resultadoUsuarios->fetchAll(PDO::FETCH_ASSOC);
             $countResultadoUsuarios = count($listaUsuarios);
 
-            for ($r = 0; $r < $countResultadoUsuarios; $r++) {
-                $caminhoFotoUsuario = $fotoUsuario->exibirFotoUsuario($listaUsuarios[$r]['idUsuario']);
-                $resultadoBuscaAtual = $listaUsuarios[$r]['loginUsuario'];
-                if($listaUsuarios[$r]['idTipoUsuario'] != 1){
-                    $icon = "fa-building";
-                }else{
-                    $icon = "fa-user";
+            if ($countResultadoUsuarios != 0) {
+                echo ("<div class='cardsResultadoPesquisaUsuarios cardResultadoPesquisa'>");
+                echo ("<span class='spanUsuariosEncontrados'>Usuarios encontrados: </span>");
+
+                for ($r = 0; $r < $countResultadoUsuarios; $r++) {
+                    $caminhoFotoUsuario = $fotoUsuario->exibirFotoUsuario($listaUsuarios[$r]['idUsuario']);
+                    $resultadoBuscaAtual = $listaUsuarios[$r]['loginUsuario'];
+                    if ($listaUsuarios[$r]['idTipoUsuario'] != 1) {
+                        $icon = "fa-building";
+                    } else {
+                        $icon = "fa-user";
+                    }
+                    echo ("
+                        <div class='cardResultadoPesquisa'>
+                            <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
+                                <img id='fotoUsuarioPesquisado' src='$caminhoFotoUsuario'>     
+                                <span style='padding-left: 10px;'>$resultadoBuscaAtual</span>
+                                <div class='icon-tipo-pesquisa'>
+                                    <i class='fa-solid $icon'></i>
+                                </div>
+                            </a>
+                        </div>
+                ");
                 }
-                echo ("
-                    <div class='cardResultadoPesquisa'>
-                        <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
-                            <img id='fotoUsuarioPesquisado' src='$caminhoFotoUsuario'>     
-                            <span style='padding-left: 10px;'>$resultadoBuscaAtual</span>
-                            <div class='icon-tipo-pesquisa'>
-                                <i class='fa-solid $icon'></i>
-                            </div>
-                        </a>
-                    </div>
-            ");
+                echo ("</div");
             }
-            echo ("</div");
-
             //Pets
-            echo ("<div class='cardsResultadoPesquisaPets cardResultadoPesquisa'>");
-            echo ("<span class='spanUsuariosEncontrados'>Pets encontrados: </span>");
-
             $queryPets = "SELECT tbpet.idPet, usuarioPet FROM tbPet
             INNER JOIN tbfotopet innerfotopet ON innerfotopet.idpet = tbpet.idpet
             WHERE usuarioPet LIKE '$pesquisa%'";
@@ -1540,28 +1538,31 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
             $listaPets = $resultadoPets->fetchAll(PDO::FETCH_ASSOC);
             $countResultadoPets = count($listaPets);
 
-            for ($r = 0; $r < $countResultadoPets; $r++) {
-                $caminhoFotoPet = $fotoPet->exibirFotopet($listaPets[$r]['idPet']);
-                $resultadoBuscaAtual = $listaPets[$r]['usuarioPet'];
+            if ($countResultadoPets != 0) {
+                echo ("<div class='cardsResultadoPesquisaPets cardResultadoPesquisa'>");
+                echo ("<span class='spanUsuariosEncontrados'>Pets encontrados: </span>");
 
-                echo ("
-                    <div class='cardResultadoPesquisa'>
-                        <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
-                            <img id='fotoUsuarioPesquisado' src='$caminhoFotoPet'>     
-                            <span style='padding-left: 10px;'>$resultadoBuscaAtual</span>
-                            <div class='icon-tipo-pesquisa'>
-                                <i class='fa-regular fa-paw-simple'></i>
-                            </div>
-                        </a>
-                    </div>
-            ");
+
+                for ($r = 0; $r < $countResultadoPets; $r++) {
+                    $caminhoFotoPet = $fotoPet->exibirFotopet($listaPets[$r]['idPet']);
+                    $resultadoBuscaAtual = $listaPets[$r]['usuarioPet'];
+
+                    echo ("
+                        <div class='cardResultadoPesquisa'>
+                            <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
+                                <img id='fotoUsuarioPesquisado' src='$caminhoFotoPet'>     
+                                <span style='padding-left: 10px;'>$resultadoBuscaAtual</span>
+                                <div class='icon-tipo-pesquisa'>
+                                    <i class='fa-regular fa-paw-simple'></i>
+                                </div>
+                            </a>
+                        </div>
+                ");
+                }
+                echo ("</div");
             }
-            echo ("</div");
 
             //Publicacacoes
-            echo ("<div class='cardsResultadoPesquisaPubs cardResultadoPesquisa'>");
-            echo ("<span class='spanUsuariosEncontrados'>Publicações encontrados: </span>");
-
             $querypubs = "SELECT tbpublicacao.idPublicacao, textoPublicacao FROM tbPublicacao
             INNER JOIN tbfotopublicacao innerfotopub ON innerfotopub.idPublicacao = tbpublicacao.idpublicacao
             WHERE textoPublicacao LIKE '$pesquisa%'";
@@ -1570,25 +1571,29 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
             $listapubs = $resultadopubs->fetchAll(PDO::FETCH_ASSOC);
             $countResultadopubs = count($listapubs);
 
-            for ($r = 0; $r < $countResultadopubs; $r++) {
-                $caminhoFotoPublicacao = $fotoPublicacao->exibirFotopublicacao($listapubs[$r]['idPublicacao']);
-                $resultadoBuscaAtual = $listapubs[$r]['textoPublicacao'];
+            if ($countResultadopubs != 0) {
+                echo ("<div class='cardsResultadoPesquisaPubs cardResultadoPesquisa'>");
+                echo ("<span class='spanUsuariosEncontrados'>Publicações encontrados: </span>");
 
-                echo ("
-                    <div class='cardResultadoPesquisa'>
-                        <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
-                            <img id='fotoUsuarioPesquisado' src='$caminhoFotoPet'>     
-                            <span style='padding-left: 10px;'>$resultadoBuscaAtual</span>
-                            <div class='icon-tipo-pesquisa'>
-                                <i class='fa-regular fa-paw-simple'></i>
-                            </div>
-                        </a>
-                    </div>
-            ");
+                for ($r = 0; $r < $countResultadopubs; $r++) {
+                    $caminhoFotoPublicacao = $fotoPublicacao->exibirFotopublicacao($listapubs[$r]['idPublicacao']);
+                    $resultadoBuscaAtual = $listapubs[$r]['textoPublicacao'];
+
+                    echo ("
+                        <div class='cardResultadoPesquisa'>
+                            <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
+                                <img id='fotoUsuarioPesquisado' src='$caminhoFotoPublicacao'>     
+                                <span style='padding-left: 10px;'>$resultadoBuscaAtual</span>
+                                <div class='icon-tipo-pesquisa'>
+                                    <i class='fa-regular fa-paw-simple'></i>
+                                </div>
+                            </a>
+                        </div>
+                ");
+                }
+                echo ("</div");
+                echo ("</div>");
             }
-            echo ("</div");
-            echo("</div>");
-
         } else {
             echo ("
             <div class='divSemResultadoPesquisa'>
