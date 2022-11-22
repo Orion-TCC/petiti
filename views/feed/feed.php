@@ -117,7 +117,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
             </h2>
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
-                <input type="search" placeholder="Pesquisar">
+                <input class="inputSearch" autocomplete="off" id="inputSearch" type="search" placeholder="Pesquisar">
+                <div id="resultadoPesquisa" class="resultadoPesquisa">
+                </div>
             </div>
 
             <?php
@@ -388,6 +390,12 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                                     </div>
                                                 </a>
                                             <?php } else { ?>
+                                                <li class="li-EditarPost">
+                                                    <div style="display: flex; align-items: center;">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                        <span class="editarPost"> Editar Post </span>
+                                                    </div>
+                                                </li>
                                                 <li class="li-ExcluirPost">
                                                     <div style="display: flex; align-items: center;">
 
@@ -466,25 +474,23 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 <h5 class="text-muted"><?php echo $texto ?></h5>
                             </div>
 
-
                             <div class="badges">
                                 <?php
                                 for ($j = 0; $j < $contagemCategorias; $j++) {
-                                    $idCategoriaAtual = $categoria->pesquisarCategoria($dadosCategorias[$j]['categoria']);
-                                    $verificaCategoriaSeguida = $categoriaSeguida->verificarSeguida($_SESSION['id'], $idCategoriaAtual);
-                                    if ($verificaCategoriaSeguida['boolean'] == true) {
-                                        echo ("<p class='badge-categoria' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
-                                    } else {
-                                        echo ("<p class='badge-categoria seguida' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
+                                    if ($dadosCategorias[$j]['categoria'] != "") {
+                                        $idCategoriaAtual = $categoria->pesquisarCategoria($dadosCategorias[$j]['categoria']);
+                                        $verificaCategoriaSeguida = $categoriaSeguida->verificarSeguida($_SESSION['id'], $idCategoriaAtual);
+                                        if ($verificaCategoriaSeguida['boolean'] == true) {
+                                            echo ("<p class='badge-categoria' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
+                                        } else {
+                                            echo ("<p class='badge-categoria seguida' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
+                                        }
                                     }
                                 }
                                 ?>
                             </div>
 
                             <div id="comentarios<?php echo $id ?>" class="comentarios">
-
-
-
 
                                 <?php if ($contagemComentarios > 0) {
                                     for ($c = 0; $c  < $contagemComentarios; $c++) { ?>
@@ -798,7 +804,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                 <?php } ?>
 
-                                <input type="hidden" name="categoriasValue" id="categoriasValue" value="">
+                                <input type="hidden" name="categoriasValue" id="categoriasValue">
 
                                 <input type="hidden" name="baseFoto" id="baseFoto">
 
@@ -855,11 +861,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                             </div>
                         </div>
 
-
-
                     </div>
-
-
 
             </div>
             </form>
@@ -897,7 +899,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
         </section>
 
-
         <section>
             <div id="modal-post" class="modal post">
                 <div style="display: flex; width: 100%; height: 100%;">
@@ -905,7 +906,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     <div id="imagepost">
                         <img src="#" alt="">
                     </div>
-
 
                     <div class="rightSidePost">
 

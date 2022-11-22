@@ -226,6 +226,25 @@ $(document).ready(function () {
     });
   });
 
+  $("#inputSearch").keyup(function(){
+    var val = $(this).val();
+    
+    if(val != ""){
+      $.ajax({
+        url: "/petiti/api/pesquisar",
+        method: "POST",
+        data: {val:val},
+        success:function(data){
+          console.log(val);
+          $("#resultadoPesquisa").css("display", "flex");
+          $("#resultadoPesquisa").html(data);
+        }
+      });
+    }else{
+      $("#resultadoPesquisa").css("display", "none");
+    }
+  });
+
 });
 
 function showHideElement() {

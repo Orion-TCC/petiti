@@ -183,7 +183,9 @@ if ($verificarSeguidor['boolean'] == true) {
             </h2>
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
-                <input type="search" placeholder="Pesquisar">
+                <input class="inputSearch" autocomplete="off" id="inputSearch" type="search" placeholder="Pesquisar">
+                <div id="resultadoPesquisa" class="resultadoPesquisa">
+                </div>
             </div>
 
 
