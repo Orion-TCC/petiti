@@ -50,16 +50,17 @@ $contagemPets = count($dadosPets['pets']);
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
     <script src="/petiti/assets/js/jquery-scripts.js"></script>
+    <script src="/petiti/views/assets/js/script-jquery-foto.js"></script>
     <script src="/petiti/assets/js/script.js"></script>
     <script src="/petiti/views/assets/js/funcs.js"></script>
     <script src="/petiti/views/assets/js/opcoes.js"></script>
-   
+
 
 </head>
 
 <body class="feed">
- 
- 
+
+
     <nav class="feed">
         <div class="container">
 
@@ -124,7 +125,7 @@ $contagemPets = count($dadosPets['pets']);
 
 
             <div class="opcoes" id="opcoes" onclick="showPopUp()">
-                <label for="abrir-opcoes" id="labelAO"><i class="uil uil-setting" ></i></label>
+                <label for="abrir-opcoes" id="labelAO"><i class="uil uil-setting"></i></label>
 
                 <div class="fotoDePerfil" id="fotoDePerfil">
                     <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
@@ -137,19 +138,17 @@ $contagemPets = count($dadosPets['pets']);
 
 
     <script>
-                window.onload = function() {
-                    var hidediv = document.getElementById('popup');
+        window.onload = function() {
+            var hidediv = document.getElementById('popup');
 
-                    document.onclick = function(div) {
-                        if (div.target.id !== 'popup' && div.target.id !== 'opcoes' ) {
-                            hidediv.style.display = "none";
-                        }
-                    };
+            document.onclick = function(div) {
+                if (div.target.id !== 'popup' && div.target.id !== 'opcoes') {
+                    hidediv.style.display = "none";
+                }
+            };
 
-                };
-
-
-            </script>
+        };
+    </script>
 
     <main class="feed">
 
@@ -193,7 +192,7 @@ $contagemPets = count($dadosPets['pets']);
 
                     <a href="notificacoes" class="menu-item">
                         <span style="position: relative;">
-                            <i class="uil uil-bell notificacao"></i> 
+                            <i class="uil uil-bell notificacao"></i>
                             <div class="notificacaoContador"><span>1</span></div>
                         </span>
                         <h3>Notificações</h3>
@@ -234,8 +233,8 @@ $contagemPets = count($dadosPets['pets']);
                     <div class="sidebar">
                         <button class="menu-item" onclick="openTab(event, '1')" id="defaultOpen">Editar perfil</button>
                         <button class="menu-item" onclick="openTab(event, '2')">Alterar senha</button>
-                        <?php 
-                        if ($_SESSION['tipo'] == "Tutor"){ ?>
+                        <?php
+                        if ($_SESSION['tipo'] == "Tutor") { ?>
                             <button class="menu-item" onclick="openTab(event, '3')">Adicionar outro pet</button>
                         <?php }
                         ?>
@@ -243,118 +242,116 @@ $contagemPets = count($dadosPets['pets']);
                     </div>
 
 
- 
-                 <div class="tabs-conteudo tabHolder editarPerfil" id="1">
-                    <form action="/petiti/api/config-conta" method="POST">
 
-                        <div class="imageHandler">
+                    <div class="tabs-conteudo tabHolder editarPerfil" id="1">
+                        <form action="/petiti/api/config-conta" method="POST">
+                            <input value="0" class="baseFotoPerfil" id="baseFotoPerfil" type="hidden" name="baseFoto">
 
-                            <div class="flex-row">
-                                <div class="fotoDePerfil">
-                                    <img src="<?php echo $_SESSION['foto']?>" alt="">
-                                </div>
+                            <div class="imageHandler">
 
-
-                                <label class="flFotoPerfil">
-                                <input id="flFotoPerfil" type="file" accept=".jpg, .png">
-                                </label>
-                            </div>
+                                <div class="flex-row">
+                                    <div class="fotoDePerfil">
+                                        <img src="<?php echo $_SESSION['foto'] ?>" alt="">
+                                    </div>
 
 
-                                <div class="flex-col">
-                                    <h2>@<?php echo $_SESSION['login']?></h2>
                                     <label class="flFotoPerfil">
-                                        Alterar foto de perfil
                                         <input id="flFotoPerfil" type="file" accept=".jpg, .png">
                                     </label>
                                 </div>
 
-                        </div>
 
-                        <div class="informacoes">
-                            
-                            <div class="infoArea">
-                                <h3>Nome</h3>
-                                <input value="<?php echo $_SESSION['nome']?>" name="txtNome" type="text" placeholder="Nome">
-                                <h5 class="text-muted">*Ajude as pessoas a descobrir sua conta usando o nome pelo qual você é conhecido.</h5>
-                            </div>
-
-                            <div class="infoArea">
-                                <h3>Nome de Usuario</h3>
-                                <input id="txtLoginUsuario" value="<?php echo $_SESSION['login']?>" name="txtLogin" type="text" placeholder="Nome de usuario">
-                            <p class="avisoNomeUsuarioValidacao"></p>
-                            <p class="avisoNomeUsuarioQtd"></p>
-
-                                <h5 class="text-muted">*Você pode mudar quantas vezes você quiser se o nome de usuário desejado estiver disponível para uso.</h5>
-                            </div>
-
-                            <div class="infoArea infoPessoal">
-                                <h3>Informações pessoais</h3>
-                                <h5 class="text-muted">Forneça suas informações pessoais mesmo se o seu perfil for para uso pessoal. Ela não farão parte do seu perfil público.</h5>
-                            </div>
-
-                            <div class="infoArea">
-                                <h3>Email</h3>
-                                <input value="<?php echo $_SESSION['email']?>" name="txtEmail" type="text" placeholder="Email">
-                                <span class="textoErrado" style="align-self: center;"> <?php echo @$_COOKIE["erro-email"];?></span>
+                                <div class="flex-col">
+                                    <h2>@<?php echo $_SESSION['login'] ?></h2>
+                                    <label class="flFotoPerfil">
+                                        Alterar foto de perfil
+                                    </label>
+                                </div>
 
                             </div>
 
-                            <div class="botoesInfoArea">
-                                <button id="submitUsuario" class="btn btn-primary">Salvar</button>
-                                <label class="hover-2 hvr-buzz">Desativar conta</label>
+                            <div class="informacoes">
+
+                                <div class="infoArea">
+                                    <h3>Nome</h3>
+                                    <input value="<?php echo $_SESSION['nome'] ?>" name="txtNome" type="text" placeholder="Nome">
+                                    <h5 class="text-muted">*Ajude as pessoas a descobrir sua conta usando o nome pelo qual você é conhecido.</h5>
+                                </div>
+
+                                <div class="infoArea">
+                                    <h3>Nome de Usuario</h3>
+                                    <input id="txtLoginUsuario" value="<?php echo $_SESSION['login'] ?>" name="txtLogin" type="text" placeholder="Nome de usuario">
+                                    <p class="avisoNomeUsuarioValidacao"></p>
+                                    <p class="avisoNomeUsuarioQtd"></p>
+
+                                    <h5 class="text-muted">*Você pode mudar quantas vezes você quiser se o nome de usuário desejado estiver disponível para uso.</h5>
+                                </div>
+
+                                <div class="infoArea infoPessoal">
+                                    <h3>Informações pessoais</h3>
+                                    <h5 class="text-muted">Forneça suas informações pessoais mesmo se o seu perfil for para uso pessoal. Ela não farão parte do seu perfil público.</h5>
+                                </div>
+
+                                <div class="infoArea">
+                                    <h3>Email</h3>
+                                    <input value="<?php echo $_SESSION['email'] ?>" name="txtEmail" type="text" placeholder="Email">
+                                    <span class="textoErrado" style="align-self: center;"> <?php echo @$_COOKIE["erro-email"]; ?></span>
+
+                                </div>
+
+                                <div class="botoesInfoArea">
+                                    <button id="submitUsuario" class="btn btn-primary">Salvar</button>
+                                    <label class="hover-2 hvr-buzz">Desativar conta</label>
+                                </div>
+
                             </div>
 
-                        </div>
-
-                     </form>
-
-
+                        </form>
                     </div>
 
 
 
                     <div class="tabs-conteudo tabHolder alterarSenha" id="2">
                         <form action="/petiti/api/update-senha" method="POST">
-                                <div class="imageHandler">
+                            <div class="imageHandler">
 
-                                    <div class="flex-row">
-                                        <div class="fotoDePerfil">
-                                            <img src="<?php echo $_SESSION['foto']?>" alt="">
-                                        </div>
+                                <div class="flex-row">
+                                    <div class="fotoDePerfil">
+                                        <img src="<?php echo $_SESSION['foto'] ?>" alt="">
                                     </div>
-                                        <h2><?php echo $_SESSION['login']?></h2>
-                                    </div>
+                                </div>
+                                <h2><?php echo $_SESSION['login'] ?></h2>
+                            </div>
 
-                                    <div class="informacoes">
+                            <div class="informacoes">
 
-                                    <div class="infoArea">
-                                        <h3>Senha antiga</h3>
-                                        <input name="txtSenhaAntiga"  type="text" placeholder="Senha antiga">
-                                        <span class="textoErrado" style="align-self: center;"> <?php echo @$_COOKIE["erro-senha"];?></span>
-                                    </div>
+                                <div class="infoArea">
+                                    <h3>Senha antiga</h3>
+                                    <input name="txtSenhaAntiga" type="text" placeholder="Senha antiga">
+                                    <span class="textoErrado" style="align-self: center;"> <?php echo @$_COOKIE["erro-senha"]; ?></span>
+                                </div>
 
-                                    <div class="infoArea">
-                                        <h3>Senha nova</h3>
-                                        <input name="txtSenhaNova1" type="text" placeholder="senha nova">
-                                    </div>
+                                <div class="infoArea">
+                                    <h3>Senha nova</h3>
+                                    <input name="txtSenhaNova1" type="text" placeholder="senha nova">
+                                </div>
 
-                                    <div class="infoArea">
-                                        <h3>Confirmar senha nova</h3>
-                                        <input name="txtSenhaNova2" type="text" placeholder="Confirmar senha nova">
-                                    </div>
+                                <div class="infoArea">
+                                    <h3>Confirmar senha nova</h3>
+                                    <input name="txtSenhaNova2" type="text" placeholder="Confirmar senha nova">
+                                </div>
 
-                                    <div class="botoesInfoArea">
-                                        <button class="btn btn-primary">Alterar senha</button>
-                                        <label class="hover-2 ">Esqueceu a senha?</label>
-                                   </div>
-
-                                    </div>
+                                <div class="botoesInfoArea">
+                                    <button class="btn btn-primary">Alterar senha</button>
+                                    <label class="hover-2 ">Esqueceu a senha?</label>
+                                </div>
 
                             </div>
-                        </form>
-                    
-                    
+
+                    </div>
+                    </form>
+
+
                     <div class="tabs-conteudo tabHolder adicionarPet" id="3">
                         <form action="">
 
@@ -367,20 +364,20 @@ $contagemPets = count($dadosPets['pets']);
 
 
                                     <label class="flFotoPerfil">
-                                    <input id="flFotoPerfil" type="file" accept=".jpg, .png">
+                                        <input id="flFotoPerfilPet" type="file" accept=".jpg, .png">
                                     </label>
                                 </div>
 
 
-                                    <div class="flex-col">
-                                        <h3>Escolha a melhor foto do seu pet</h3>
-                                        <h5 class="text-muted">*Caso não tenha escolhido uma foto, você poderá fazer isso depois</h5>
-                                    </div>
+                                <div class="flex-col">
+                                    <h3>Escolha a melhor foto do seu pet</h3>
+                                    <h5 class="text-muted">*Caso não tenha escolhido uma foto, você poderá fazer isso depois</h5>
+                                </div>
 
                             </div>
 
                             <div class="informacoes">
-                                
+
                                 <div class="infoArea">
                                     <h3>Nome</h3>
                                     <input type="text" placeholder="Nome">
@@ -403,10 +400,10 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <div class="infoArea idadePet">
                                     <h3>Idade</h3>
-                                        <div class="inputTextIdade">
-                                            <input type="text" placeholder="Insira a idade">
-                                            <input type="text" placeholder="Ano(s)">
-                                        </div>
+                                    <div class="inputTextIdade">
+                                        <input type="text" placeholder="Insira a idade">
+                                        <input type="text" placeholder="Ano(s)">
+                                    </div>
                                 </div>
 
                                 <div class="botoesInfoArea">
@@ -418,7 +415,7 @@ $contagemPets = count($dadosPets['pets']);
                         </form>
 
                     </div>
-                    
+
                     <div class="tabs-conteudo tabHolder" id="4">
 
                     </div>
@@ -427,35 +424,35 @@ $contagemPets = count($dadosPets['pets']);
 
             </div>
 
-<script>
-    document.getElementById("defaultOpen").click();
-</script>
+            <script>
+                document.getElementById("defaultOpen").click();
+            </script>
 
 
-        <!-- Modal Post -->
-        <section id="post">
+            <!-- Modal Post -->
+            <section id="post">
 
-            <div id="modal-foto-post" class="modal">
-                <div class="modal-foto-post">
-                    <div class="tituloModalPost">Criar um post</div>
-                    <div class="inputArea">
+                <div id="modal-foto-post" class="modal">
+                    <div class="modal-foto-post">
+                        <div class="tituloModalPost">Criar um post</div>
+                        <div class="inputArea">
 
-                        <div class="fotoSelecionarImagem">
-                            <img src="./assets/images/selectFotoIlustracao.png">
+                            <div class="fotoSelecionarImagem">
+                                <img src="./assets/images/selectFotoIlustracao.png">
+                            </div>
+
+                            <span class="textPadrao">Arraste fotos, vídeos ou gifs aqui</span>
+
+                            <label class="btn inputButtonEstilo">
+                                <input class="inputForm" type="file" accept="image/*" id="flFoto">
+                                <span>Selecionar no computador</span>
+                                <label>
                         </div>
-
-                        <span class="textPadrao">Arraste fotos, vídeos ou gifs aqui</span>
-
-                        <label class="btn inputButtonEstilo">
-                            <input class="inputForm" type="file" accept="image/*" id="flFoto">
-                            <span>Selecionar no computador</span>
-                            <label>
                     </div>
+
                 </div>
 
-            </div>
-
-            <!-- <script>
+                <!-- <script>
     var holder = document.getElementById('modal-foto-post');
     holder.ondragover = function() {
         this.className = 'hover';
@@ -472,7 +469,7 @@ $contagemPets = count($dadosPets['pets']);
     }
 </script> -->
 
-            </div>
+        </div>
         </section>
 
 
@@ -590,15 +587,15 @@ $contagemPets = count($dadosPets['pets']);
 
         <section>
             <a href="#modal-denuncia" rel="modal:open">
-                    <div id="modal-denuncia" class="modal">
-                        <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
-                            <input type="hidden" id="idPost" name="idPost" value="">
-                            <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
-                            <span class="spanDenuncia">Denuniar</span>
-                            <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
-                            <input class="submitDenuncia" type="submit" value="Denunciar">
-                        </form>
-                    </div>
+                <div id="modal-denuncia" class="modal">
+                    <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+                        <input type="hidden" id="idPost" name="idPost" value="">
+                        <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
+                        <span class="spanDenuncia">Denuniar</span>
+                        <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
+                        <input class="submitDenuncia" type="submit" value="Denunciar">
+                    </form>
+                </div>
         </section>
 
         <!-- fim Modals -->
@@ -606,5 +603,8 @@ $contagemPets = count($dadosPets['pets']);
     </main>
 
 </body>
-<script>console.log(<?php echo @$_COOKIE["abrir-senha"]?>)</script>
+<script>
+    console.log(<?php echo @$_COOKIE["abrir-senha"] ?>)
+</script>
+
 </html>

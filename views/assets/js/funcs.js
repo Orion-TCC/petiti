@@ -35,6 +35,38 @@ $(document).ready(function () {
       height: 740,
     },
   });
+      $("#continuar-post-perfil").on("click", function (ev) {
+        ev.preventDefault();
+        var blob;
+        resize
+          .croppie("result", {
+            type: "blob",
+          })
+          .then(function (resp) {
+            blob = resp;
+          });
+
+        resize
+          .croppie("result", {
+            type: "canvas",
+            size: "viewport",
+          })
+          .then(function (img) {
+            $.ajax({
+              type: "POST",
+              enctype: "multipart/form-data",
+              data: { image: img },
+              url: "/petiti/assets/libs/croppie/envio.php",
+              success: function (data) {
+                html = img;
+                $("#baseFotoPost").val(img);
+              
+                $("#preview-crop-image").html( "<img src='" + img + "' />");
+                console.log(data);
+              },
+            });
+          });
+      });
   $(".FotoPostPerfil").on("change", function () {
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -51,39 +83,6 @@ $(document).ready(function () {
     $(".FotoPostPerfil").val("");
   });
 
-  $("#continuar-post").on("click", function (ev) {
-    ev.preventDefault();
-    var blob;
-    resize
-      .croppie("result", {
-        type: "blob",
-      })
-      .then(function (resp) {
-        blob = resp;
-      });
-
-    resize
-      .croppie("result", {
-        type: "canvas",
-        size: "viewport",
-      })
-      .then(function (img) {
-        $.ajax({
-          type: "POST",
-          enctype: "multipart/form-data",
-          data: { image: img },
-          url: "/petiti/assets/libs/croppie/envio.php",
-          success: function (data) {
-            html = img;
-            $(".baseFoto").val(img);
-            html = '<img src="' + img + '" />';
-            $("#preview-crop-image").html(html);
-
-            console.log(data);
-          },
-        });
-      });
-  });
 
   $(".curtir").on("click", function () {
     id = $(this).val();
