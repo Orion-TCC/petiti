@@ -99,48 +99,72 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 <body class="feed perfilUsuario">
 
     <nav class="feed">
-    <div class="container">
+        <div class="container">
 
-<div class="popupOptions" id="popup">
+            <div class="popupOptions" id="popup">
 
-    <div class="flex-col">
+                <div class="flex-col">
 
-        <div class="flex-row">
-            <div class="fotoDePerfil">
-                <img src="<?php echo $_SESSION['foto']; ?>" alt="">
-            </div>
-            <h3><a href="tutor-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
-        </div>
-
-        <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
-            <div class="flex-row petUser">
-
-                <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
-                    <div class="fotoDePerfil">
-                        <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
-                        <!--Foto do pet  -->
+                    <div class="flex-row">
+                        <div class="fotoDePerfil">
+                            <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                        </div>
+                        <h3><a href="tutor-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
                     </div>
 
-                    <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
-                </a>
+                    <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
+                        <div class="flex-row petUser">
+
+                            <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
+                                <div class="fotoDePerfil">
+                                    <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
+                                    <!--Foto do pet  -->
+                                </div>
+
+                                <h3><?php echo $dadosPets['pets'][$p]['nomePet'] ?></h3>
+                            </a>
+                        </div>
+                    <?php    } ?>
+                </div>
+
+
+                <div class="flex-col borderTop row-gap opcoesPopUp">
+
+                    <h3 style="width: 15rem;">Adicionar conta existente</h3>
+
+                    <h3>Gerenciar contas</h3>
+
+                    <h3> <a href="opcoes">Configurações</a></h3>
+
+                    <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
+
+                </div>
+
             </div>
-        <?php    } ?>
-    </div>
 
+            <h2 class="logo">
+                <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
+            </h2>
+            <div class="caixa-de-busca">
+                <i class="uil uil-search"></i>
+                <input type="search" placeholder="Pesquisar">
+            </div>
 
-    <div class="flex-col borderTop row-gap opcoesPopUp">
+            <?php
 
-        <h3 style="width: 15rem;">Adicionar conta existente</h3>
+            if (isset($_COOKIE['denuncia'])) {
+                echo $_COOKIE['denuncia'];
+            }
 
-        <h3>Gerenciar contas</h3>
+            ?>
 
-        <h3> <a href="opcoes">Configurações</a></h3>
+            <script>
 
-        <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
+            </script>
 
-    </div>
+            <div class="opcoes" id="opcoes">
 
-</div>
+                <div id="labelAO"><i id="settings-icon" class="uil uil-setting"></i></div>
 
 <h2 class="logo">
     <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
@@ -152,29 +176,9 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                 </div>
             </div>
 
-<?php
+            </div>
 
-if (isset($_COOKIE['denuncia'])) {
-    echo $_COOKIE['denuncia'];
-}
-
-?>
-
-<script>
-
-</script>
-
-<div class="opcoes" id="opcoes">
-
-    <div id="labelAO"><i id="settings-icon" class="uil uil-setting"></i></div>
-
-    <div class="fotoDePerfil" id="fotoDePerfil">
-        <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
-    </div>
-
-</div>
-
-</div>
+        </div>
     </nav>
 
     <main class="feed">
@@ -183,7 +187,7 @@ if (isset($_COOKIE['denuncia'])) {
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
 
-                <a href="/petiti/decidir-perfil" class="perfil">
+                <a href="/petiti/decidir-perfil" class="perfilAtivo">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
@@ -204,23 +208,23 @@ if (isset($_COOKIE['denuncia'])) {
 
                     <a href="animaisPerdidos" class="menu-item">
                         <span><i class="uil uil-heart-break"></i></span>
-                        <h3>Animais perdidos</h3>
+                        <h3>Animais Perdidos</h3>
                     </a>
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais para adoção</h3>
+                        <h3>Animais para Adoção</h3>
                     </a>
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span style="position: relative;">
-                            <i class="uil uil-bell notificacao"></i> 
-                            <div class="notificacaoContador"><span>1</span></div>
+                        <span class="mostrarNotificacoes" style="position: relative;">
+                            <i class="uil uil-bell notificacao"></i>
+
                         </span>
                         <h3>Notificações</h3>
                     </a>
-                    
+
                     <a href="#" class="menu-item">
                         <span><i class="uil uil-envelope"></i> </span>
                         <h3>Mensagens</h3>
@@ -236,6 +240,10 @@ if (isset($_COOKIE['denuncia'])) {
                         <h3>Para Você</h3>
                     </a>
                 </div>
+
+
+
+
 
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">
@@ -260,9 +268,9 @@ if (isset($_COOKIE['denuncia'])) {
                             <div class="userInfo">
 
                                 <div class="infoHolder topo">
-                                     <div class="flex-row" style="gap: 2rem;">
-                                         <h2><?php echo $usuarioPet; ?></h2>
-                                         <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
+                                    <div class="flex-row" style="gap: 2rem;">
+                                        <h2><?php echo $usuarioPet; ?></h2>
+                                        <a rel="modal:open" href="#modal-editar-perfil" class="btn btn-primary">Editar perfil</a>
                                     </div>
                                 </div>
 
@@ -271,7 +279,7 @@ if (isset($_COOKIE['denuncia'])) {
 
                                 <div class="modal" id="modal-editar-perfil">
 
-                                    <form class="flex-col" action="/petiti/api/editar-perfil" method="post">
+                                    <form class="flex-col" action="/petiti/api/editar-perfil-pet/<?php echo $idPetEscolhido ?>" method="post">
 
                                         <div class="editPerfilHeader">
                                             <div class="flex-row">
@@ -305,22 +313,22 @@ if (isset($_COOKIE['denuncia'])) {
 
                                             <div class="flex-col">
                                                 <label class="text-bold" for="">Nome</label>
-                                                <input placeholder="Nome" value="<?php echo $usuarioPet ?>" type="text" name="txtNome" id="txtNome" autocomplete="off" maxlength="40">
+                                                <input placeholder="Nome" value="<?php echo $nome ?>" type="text" name="txtNome" id="txtNome" autocomplete="off" maxlength="40">
                                             </div>
 
                                             <div class="flex-col">
                                                 <label class="text-bold" for="">Raça</label>
-                                                <input <?php if ($_SESSION['local'] != null) { ?> value="<?php echo $_SESSION['local'] ?>" <?php } ?> placeholder="Localização" type="text" name="txtLocal" id="txtLocal" autocomplete="off" maxlength="40">
+                                                <input value="<?php echo $raca ?>" placeholder="Raça" type="text" name="txtRaca" id="txtRaca" autocomplete="off" maxlength="40">
                                             </div>
 
                                             <div class="flex-col">
                                                 <label class="text-bold" for="">Especie</label>
-                                                <input <?php if ($_SESSION['local'] != null) { ?> value="<?php echo $_SESSION['local'] ?>" <?php } ?> placeholder="Localização" type="text" name="txtLocal" id="txtLocal" autocomplete="off" maxlength="40">
+                                                <input value="<?php echo $especie ?>" placeholder="Espécie" type="text" name="txtEspecie" id="txtEspecie" autocomplete="off" maxlength="40">
                                             </div>
 
                                             <div class="flex-col">
                                                 <label class="text-bold" for="">Idade</label>
-                                                <input <?php if ($_SESSION['site'] != null) { ?>value="<?php echo $_SESSION['site'] ?>" <?php } ?> placeholder="URL" type="text" name="txtSite" id="txtSite" autocomplete="off" maxlength="40">
+                                                <input value="<?php echo $idade ?>" placeholder="Idade" type="text" name="txtIdade" id="txtIdade" autocomplete="off" maxlength="40">
                                             </div>
 
 
@@ -429,90 +437,90 @@ if (isset($_COOKIE['denuncia'])) {
         </div>
 
         <!-- MODALS -->
-        
+
         <section>
             <div id="modal-post" class="modal post">
                 <div style="display: flex; width: 100%; height: 100%;">
 
                     <div id="preview-crop-image">
-                            <img src="#" alt="">
+                        <img src="#" alt="">
                     </div>
 
 
                     <div class="rightSidePost">
 
-                            <div class="userElementosHolder">
-                                <div class="userElementos">
-                                 <img src="#" alt="" class="fotoDePerfil">
-                                 <div>
+                        <div class="userElementosHolder">
+                            <div class="userElementos">
+                                <img src="#" alt="" class="fotoDePerfil">
+                                <div>
                                     <span class="textNomeUsuario">nome</span>
-                                    <h5 class="text-muted">data</h5>    
-                                 </div>
-                                </div>
-
-                                <div class="editButton">
-                                    <div class="menuPostHover"></div>
-                                    <i class="uil uil-ellipsis-v"></i>
+                                    <h5 class="text-muted">data</h5>
                                 </div>
                             </div>
 
-                            <div class="comentariosHolder">
+                            <div class="editButton">
+                                <div class="menuPostHover"></div>
+                                <i class="uil uil-ellipsis-v"></i>
+                            </div>
+                        </div>
 
-                                    <div class="comentarioHolder">
+                        <div class="comentariosHolder">
 
-                                        <div class="fotoDePerfil">
-                                            <img src="#" alt="">
-                                        </div>
+                            <div class="comentarioHolder">
 
-                                        <div class="comentarioInfos">
+                                <div class="fotoDePerfil">
+                                    <img src="#" alt="">
+                                </div>
 
-                                            <div class="info">
-                                                <div style="  word-break: break-all;">
-                                                    <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
-                                                </div>
-                                            </div>
+                                <div class="comentarioInfos">
 
-                                            <div class="info">
-                                                <h5 class="text-muted">tempo</h5>
-                                            </div>
+                                    <div class="info">
+                                        <div style="  word-break: break-all;">
+                                            <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
                                         </div>
                                     </div>
+
+                                    <div class="info">
+                                        <h5 class="text-muted">tempo</h5>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="botoesInteracao">
-                                
-                                <input class="curtir" value="<?php echo $id ?>" type="checkbox">
-                                
-                                <button class="comentar"></button>
-                                
-                                <button class="mensagem"></button>
-                                
-                            </div>
+                        <div class="botoesInteracao">
 
-                            <div class="curtidas">
-                                <h4>0 itimalias</h4>
-            
-                            </div>
+                            <input class="curtir" value="<?php echo $id ?>" type="checkbox">
 
-                            <div class="commentArea">
+                            <button class="comentar"></button>
 
-                                <i class="uil uil-heart"></i>
+                            <button class="mensagem"></button>
 
-                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+                        </div>
 
-                                <button value="<?php echo $id ?>" class="comentar" value="">
-                                    <i class="uil uil-message"></i>
-                                </button>
+                        <div class="curtidas">
+                            <h4>0 itimalias</h4>
 
-                              
+                        </div>
 
-                            </div>
+                        <div class="commentArea">
 
-                            </div>
+                            <i class="uil uil-heart"></i>
+
+                            <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+
+                            <button value="<?php echo $id ?>" class="comentar" value="">
+                                <i class="uil uil-message"></i>
+                            </button>
+
+
+
+                        </div>
 
                     </div>
 
                 </div>
+
+            </div>
             </div>
         </section>
 

@@ -207,7 +207,8 @@ if ($verificarSeguidor['boolean'] == true) {
 
             <!-- LADO ESQUERDO -->
             <div class="ladoEsquerdo">
-                <a href="/petiti/decidir-perfil" class="perfil">
+
+                <a href="/petiti/decidir-perfil" class="perfilAtivo">
                     <div class="fotoDePerfil">
                         <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
@@ -221,26 +222,26 @@ if ($verificarSeguidor['boolean'] == true) {
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="feed" class="menu-item">
+                    <a href="#" class="menu-item">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
 
                     <a href="animaisPerdidos" class="menu-item">
                         <span><i class="uil uil-heart-break"></i></span>
-                        <h3>Animais perdidos</h3>
+                        <h3>Animais Perdidos</h3>
                     </a>
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais para adoção</h3>
+                        <h3>Animais para Adoção</h3>
                     </a>
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span style="position: relative;">
+                        <span class="mostrarNotificacoes" style="position: relative;">
                             <i class="uil uil-bell notificacao"></i>
-                            <div class="notificacaoContador"><span>1</span></div>
+
                         </span>
                         <h3>Notificações</h3>
                     </a>
@@ -260,6 +261,10 @@ if ($verificarSeguidor['boolean'] == true) {
                         <h3>Para Você</h3>
                     </a>
                 </div>
+
+
+
+
 
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">
@@ -285,7 +290,7 @@ if ($verificarSeguidor['boolean'] == true) {
 
                                 <div class="infoHolder topo">
                                     <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
-                                    
+
                                     <div class="flex-row" style="gap: 2rem;">
                                         <h2><?php echo $login; ?></h2>
                                         <?php if ($verificarSeguidor['boolean'] == true) { ?>
