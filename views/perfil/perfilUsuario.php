@@ -91,9 +91,9 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
-    <script src="/petiti/assets/js/jquery-scripts.js"></script>
-    <script src="/petiti/assets/js/jquery-scripts.js"></script>
     <script src="/petiti/views/assets/js/script-jquery-foto.js"></script>
+    <script src="/petiti/assets/js/jquery-scripts.js"></script>
+ 
     <script src="/petiti/assets/js/script.js"></script>
     <script src="/petiti/views/assets/js/funcs.js"></script>
 </head>
@@ -199,7 +199,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="feed" class="menu-item">
+                    <a href="#" class="menu-item">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
