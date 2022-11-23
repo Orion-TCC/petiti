@@ -136,4 +136,11 @@ class Comentario
         $lista =  $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
+    public function delete($delete){
+        $con = Conexao::conexao();
+        $stmt = $con->prepare("DELETE FROM tbComentario WHERE idComentario = ?");
+        $stmt->bindValue(1, $delete->getIdComentario());
+
+        $stmt->execute();
+    }
 } 

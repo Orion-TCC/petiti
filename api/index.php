@@ -1463,23 +1463,22 @@ $app->post('/seguir-categoria', function (Request $request, Response $response, 
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
-$app->post('/pesquisa-seguindo', function(Request $request, Response $response, array $args){
+$app->post('/pesquisa-seguindo', function (Request $request, Response $response, array $args) {
     error_reporting(0);
     $fotoUsuario = new FotoUsuario();
     $usuarioSeguidor = new UsuarioSeguidor();
 
     $arraySeguindo = $usuarioSeguidor->pesquisaSeguindo($_POST['idUsuario']);
     $countSeguidores = count($arraySeguindo);
-
+    echo ("<div>
+            <h2>Seguindo</h2>
+         </div>");
     for ($r = 0; $r < $countSeguidores; $r++) {
         $idUsuario = $arraySeguindo[$r]['idUsuario'];
         $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idUsuario);
         $loginUsuario = $arraySeguindo[$r]['loginUsuario'];
         $nomeUsuario = $arraySeguindo[$r]['nomeUsuario'];
         echo ("
-        <div>
-            <h2>Seguindo</ha>
-        </div>
         <a href='/petiti/$loginUsuario' target='_blank' style='color:black;'>
             <div class='seguidores-row'>
                 <div class='seguidor'>
@@ -1501,15 +1500,17 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
     $arraySeguidores = $usuarioSeguidor->pesquisaSeguidores($_POST['idUsuario']);
     $countSeguidores = count($arraySeguidores);
 
+    echo("<div>
+            <h2>Seguidores</ha>
+        </div>");
+
     for ($t = 0; $t < $countSeguidores; $t++) {
         $idSeguidor = $arraySeguidores[$t]['idSeguidor'];
         $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idSeguidor);
         $loginUsuario = $arraySeguidores[$t]['loginUsuario'];
         $nomeUsuario = $arraySeguidores[$t]['nomeUsuario'];
         echo ("
-        <div>
-            <h2>Seguidores</ha>
-        </div>
+        
         <a href='/petiti/$loginUsuario' target='_blank' style='color:black;'>
             <div class='seguidores-row'>
                 <div class='seguidor'>
@@ -1672,6 +1673,28 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
             ");
         }
     }
+});
+
+$app->get('/comentario/delete/{id}', function (Request $request, Response $response, array $args) {
+    $id = $args['id'];
+    $comentario =  new Comentario();
+    $cookie = new Cookies();
+    $comentario->setIdComentario($id);
+    $comentario->delete($comentario);
+    
+    $cookie->criarCookie("comentarioDeletado", "
+    <div id='toast-denuncia' class='toast-denuncia'>
+        <div class='toast-denuncia-content'>
+            <div class='message-denuncia'>
+                <span class='texto-1'> Comentário excluído </span>
+            </div>
+        </div>
+        <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+        <div class='progressbardenuncia'></div>
+    </div>
+    ", 1);
+
+    header("Location: /petiti/feed");
 });
 
 try {

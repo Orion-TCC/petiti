@@ -302,11 +302,13 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                         $idUsuarioPub = $dados['publicacoes'][$i]['idUsuario'];
 
+                        
                         $urlComentarios = "http://localhost/petiti/api/comentarios-post/" . $id;
 
                         $jsonComentarios = file_get_contents($urlComentarios);
 
                         $dadosComentarios = (array)json_decode($jsonComentarios, true);
+                        $contagemComentarios = count($dadosComentarios['comentarios']);
 
                         $nome = $dados['publicacoes'][$i]['nome'];
                         $login = $dados['publicacoes'][$i]['login'];
@@ -470,8 +472,58 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 ?>
                             </div>
 
-                            <div class=" comentarios">
+                            <div id="comentarios<?php echo $id ?>" class="comentarios">
 
+                                <?php if ($contagemComentarios > 0) {
+                                    for ($c = 0; $c  < $contagemComentarios; $c++) { ?>
+                                        <?php 
+                                        $idComentarioAtual = $dadosComentarios['comentarios'][$c]['idComentario']
+                                        ?>
+                                        
+                                        <div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem; position: relative;'>
+
+                                            <h2 style='font-weight: 900 !important; align-self: start;'>
+                                                <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
+                                            </h2>
+
+                                            <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap;overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
+                                                <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
+                                            </h3>
+
+                                            <div class="optionsDenunciaComent" id="<?php echo "$c"; ?>">
+                                                <i class="uil uil-ellipsis-h commentEllipsis"></i>
+                                            </div>
+
+                                            <div class="menuComent" id="menuComent<?php echo "$c"; ?>" style="display: none;">
+
+                                                <div id="denunciarCor" class="menuComentElement">
+                                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                                    <span>Denunciar</span>
+                                                </div>
+
+                                                <?php
+                                                if (($_SESSION['login'] == $login) || ($dadosComentarios['comentarios'][$c]['loginUsuario'] == $_SESSION['login'])) { ?>
+                                                    <a style="color:black;" href="/petiti/api/comentario/delete/<?php echo $idComentarioAtual;?>"><div class="menuComentElement">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                        <span>Excluir</span>
+                                                    </div>
+                                                    </a>
+                                                <?php }
+                                                ?>
+
+
+                                            </div>
+
+
+                                        </div>
+
+                                    <?php
+                                        if ($c == 2) {
+                                            $c = $contagemComentarios - 1;
+                                        }
+                                    }  ?>
+                                <?php
+                                } ?>
                             </div>
 
                             <div class="commentArea" id="<?php echo $id; ?>">

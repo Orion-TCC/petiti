@@ -126,6 +126,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
             if (isset($_COOKIE['denuncia'])) {
                 echo $_COOKIE['denuncia'];
+            }else if(isset($_COOKIE['comentarioDeletado'])){
+                echo $_COOKIE['comentarioDeletado'];
             }
 
             ?>
@@ -409,7 +411,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                                                 <h5>Após excluir, essa ação não poderá ser desfeita, e o post será removido do seu perfil, da timeline de outras contas e dos resultados de busca.</h5>
 
                                                                 <div class="opcoes-certeza-excluir">
-                                                                    <button class="btn btn-primary excluir"> <a href="/petiti/api/publicacao/delete/<?php echo $id; ?>">Excluir</a></button>
+                                                                    <a href="/petiti/api/publicacao/delete/<?php echo $id; ?>"><button class="btn btn-primary excluir">Excluir</button></a>
                                                                     <button class="btn btn-primary cancelar"> <a rel="modal:close">Cancelar</a></button>
                                                                 </div>
                                                             </div>
@@ -494,32 +496,45 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                 <?php if ($contagemComentarios > 0) {
                                     for ($c = 0; $c  < $contagemComentarios; $c++) { ?>
+                                        <?php 
+                                        $idComentarioAtual = $dadosComentarios['comentarios'][$c]['idComentario']
+                                        ?>
+                                        
                                         <div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem; position: relative;'>
-                                            
-                                        <h2 style='font-weight: 900 !important; align-self: start;'>
-                                            <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
-                                        </h2>
-                                            
-                                        <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap;overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
-                                            <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
-                                        </h3>
 
-                                        <i class="uil uil-ellipsis-h commentEllipsis"></i>
+                                            <h2 style='font-weight: 900 !important; align-self: start;'>
+                                                <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
+                                            </h2>
 
-                                        <div class="menuComent">
+                                            <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap;overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
+                                                <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
+                                            </h3>
 
-                                            <div id="denunciarCor" class="menuComentElement" >
-                                              <i class="fa-solid fa-circle-exclamation"></i> 
-                                              <span> Denunciar</span>
+                                            <div class="optionsDenunciaComent" id="<?php echo "$c"; ?>">
+                                                <i class="uil uil-ellipsis-h commentEllipsis"></i>
                                             </div>
 
-                                            <div class="menuComentElement" >
-                                               <i class="fa-solid fa-trash"></i>
-                                              <span>Excluir</span>
+                                            <div class="menuComent" id="menuComent<?php echo "$c"; ?>" style="display: none;">
+
+                                                <div id="denunciarCor" class="menuComentElement">
+                                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                                    <span>Denunciar</span>
+                                                </div>
+
+                                                <?php
+                                                if (($_SESSION['login'] == $login) || ($dadosComentarios['comentarios'][$c]['loginUsuario'] == $_SESSION['login'])) { ?>
+                                                    <a style="color:black;" href="/petiti/api/comentario/delete/<?php echo $idComentarioAtual;?>"><div class="menuComentElement">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                        <span>Excluir</span>
+                                                    </div>
+                                                    </a>
+                                                <?php }
+                                                ?>
+
+
                                             </div>
-                                        </div>
-                                            
-                                            
+
+
                                         </div>
 
                                     <?php
@@ -883,8 +898,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         <h1>Denunciar</h1>
 
                         <h5 class="text-muted">Você está denunciando o post de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
-
-                        <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200"></textarea>
 
                         <div style="width: 99%;">
                             <h4>Causa:</h4>

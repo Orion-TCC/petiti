@@ -125,9 +125,11 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
             <?php
 
-            if (isset($_COOKIE['denuncia'])) {
-                echo $_COOKIE['denuncia'];
-            }
+if (isset($_COOKIE['denuncia'])) {
+    echo $_COOKIE['denuncia'];
+}else if(isset($_COOKIE['comentarioDeletado'])){
+    echo $_COOKIE['comentarioDeletado'];
+}
 
             ?>
 
@@ -225,14 +227,14 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
 
-<!-- Botao de criar post -->
-<button class="btn btn-primary">
-    <p>
-        <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
-    </p>
-</button>
+                <!-- Botao de criar post -->
+                <button class="btn btn-primary">
+                    <p>
+                        <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
+                    </p>
+                </button>
 
-</div>
+            </div>
             <!-- FIM DO LADO ESQUERDO -->
 
             <div class="Meio">
@@ -305,6 +307,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         $jsonComentarios = file_get_contents($urlComentarios);
 
                         $dadosComentarios = (array)json_decode($jsonComentarios, true);
+                        $contagemComentarios = count($dadosComentarios['comentarios']);
 
                         $nome = $dados['publicacoes'][$i]['nome'];
                         $login = $dados['publicacoes'][$i]['login'];
@@ -377,7 +380,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                                 <?php
                                                 $verificadorSeguindo = $usuarioSeguidor->verificarSeguidor($idUsuario, $_SESSION['id']);
                                                 if ($verificadorSeguindo['boolean'] == "false") { ?>
-                                                    <li class="seguir-na-postagem" id="<?php echo $idUsuario ?>" ><i id="icon-seguir-post" class="fa-sharp fa-solid fa-user-plus"></i><span class="deixSeguir">Seguir</span></li>
+                                                    <li class="seguir-na-postagem" id="<?php echo $idUsuario ?>"><i id="icon-seguir-post" class="fa-sharp fa-solid fa-user-plus"></i><span class="deixSeguir">Seguir</span></li>
                                                 <?php
                                                 } else {
                                                 ?><li class="seguir-na-postagem" id="<?php echo $idUsuario ?>"><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixSeguir">Deixar de seguir</span></li>
@@ -438,7 +441,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <?php }
                                     ?>
 
-                                    <a href="#modal-post" rel="modal:open"><button class="comentar"></button></a> 
+                                    <a href="#modal-post" rel="modal:open"><button class="comentar"></button></a>
 
                                     <button class="mensagem"></button>
 
@@ -469,18 +472,68 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 for ($j = 0; $j < $contagemCategorias; $j++) {
                                     $idCategoriaAtual = $categoria->pesquisarCategoria($dadosCategorias[$j]['categoria']);
                                     $verificaCategoriaSeguida = $categoriaSeguida->verificarSeguida($_SESSION['id'], $idCategoriaAtual);
-                                    if($verificaCategoriaSeguida['boolean'] == true){
+                                    if ($verificaCategoriaSeguida['boolean'] == true) {
                                         echo ("<p class='badge-categoria' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
-                                    }else{
+                                    } else {
                                         echo ("<p class='badge-categoria seguida' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
                                     }
-                                    
                                 }
                                 ?>
                             </div>
 
-                            <div class=" comentarios">
+                            <div id="comentarios<?php echo $id ?>" class="comentarios">
 
+                                <?php if ($contagemComentarios > 0) {
+                                    for ($c = 0; $c  < $contagemComentarios; $c++) { ?>
+                                        <?php
+                                        $idComentarioAtual = $dadosComentarios['comentarios'][$c]['idComentario']
+                                        ?>
+
+                                        <div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem; position: relative;'>
+
+                                            <h2 style='font-weight: 900 !important; align-self: start;'>
+                                                <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
+                                            </h2>
+
+                                            <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap;overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
+                                                <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
+                                            </h3>
+
+                                            <div class="optionsDenunciaComent" id="<?php echo "$c"; ?>">
+                                                <i class="uil uil-ellipsis-h commentEllipsis"></i>
+                                            </div>
+
+                                            <div class="menuComent" id="menuComent<?php echo "$c"; ?>" style="display: none;">
+
+                                                <div id="denunciarCor" class="menuComentElement">
+                                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                                    <span>Denunciar</span>
+                                                </div>
+
+                                                <?php
+                                                if (($_SESSION['login'] == $login) || ($dadosComentarios['comentarios'][$c]['loginUsuario'] == $_SESSION['login'])) { ?>
+                                                    <a style="color:black;" href="/petiti/api/comentario/delete/<?php echo $idComentarioAtual; ?>">
+                                                        <div class="menuComentElement">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                            <span>Excluir</span>
+                                                        </div>
+                                                    </a>
+                                                <?php }
+                                                ?>
+
+
+                                            </div>
+
+
+                                        </div>
+
+                                    <?php
+                                        if ($c == 2) {
+                                            $c = $contagemComentarios - 1;
+                                        }
+                                    }  ?>
+                                <?php
+                                } ?>
                             </div>
 
                             <div class="commentArea" id="<?php echo $id; ?>">
@@ -563,8 +616,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <h5 class="text-Muted">Há <span><?php echo $diferencaFinal ?></span> - <span>Localização: <?php echo $localPerdido ?></span></h5>
                                 </div>
                             </div>
-                    <?php }
-                    }else{ ?>
+                        <?php }
+                    } else { ?>
                         <h4 style="margin-top: 5px;" class="text-muted">Não tem nenhuma postagem com as categorias do feed exclusivo de animais perdidos...</h4>
 
                     <?php }
@@ -579,22 +632,22 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         </div>
 
                         <div class="categoriasAltaGrid">
-                        <?php 
-                        $contategmCategoriasPopulares = count($listaCategorias);
-                        for($a = 0; $a < $contategmCategoriasPopulares; $a++) {?>
-                            
-                            <div class="categorias">
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position<?php echo ($a+1); ?>.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>
-                                            <?php echo $listaCategorias[$a]['categoria']; ?>
-                                        </h4>
+                            <?php
+                            $contategmCategoriasPopulares = count($listaCategorias);
+                            for ($a = 0; $a < $contategmCategoriasPopulares; $a++) { ?>
+
+                                <div class="categorias">
+                                    <div class="Lugar">
+                                        <div class="fotoDePerfil">
+                                            <img src="/petiti/views/assets/img/position<?php echo ($a + 1); ?>.svg" alt="">
+                                        </div>
+                                        <div class="infoCategoria">
+                                            <h4>
+                                                <?php echo $listaCategorias[$a]['categoria']; ?>
+                                            </h4>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
                             <?php } ?>
 
@@ -610,47 +663,48 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                     $sugestoes = $usuario->sugestoesSeguidores($_SESSION['id']);
                     $contagemSugestoes = count($sugestoes);
-                    if($contagemSugestoes>0){
-                        
-                    
-                    foreach ($sugestoes as $sugestao) {
-                        $idUsuarioSugerido = $sugestao['idUsuario'];
-                        $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
-                        $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
-                        if ($verificarSeguidor['boolean'] == true) { ?>
-                            <div class="whiteBoxHolder">
-                                <a href="/petiti/<?php echo $sugestao['loginUsuario'] ?>">
-                                    <div class="flex-row">
-                                        <div class="fotoDePerfil">
-                                            <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
+                    if ($contagemSugestoes > 0) {
+
+
+                        foreach ($sugestoes as $sugestao) {
+                            $idUsuarioSugerido = $sugestao['idUsuario'];
+                            $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
+                            $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
+                            if ($verificarSeguidor['boolean'] == true) { ?>
+                                <div class="whiteBoxHolder">
+                                    <a href="/petiti/<?php echo $sugestao['loginUsuario'] ?>">
+                                        <div class="flex-row">
+                                            <div class="fotoDePerfil">
+                                                <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
+                                            </div>
+
+                                            <div class="infoSugestoes">
+                                                <h4 style="color: black; margin-bottom: 0.2rem"><?php echo $sugestao['nomeUsuario'] ?></h4>
+                                                <h5 class="text-muted">@<?php echo $sugestao['loginUsuario'] ?></h5>
+                                            </div>
                                         </div>
+                                    </a>
+                                    <?php
+                                    $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
+                                    if ($verificarSeguidor['boolean'] == true) {
+                                        $jsSeguidor = "true";
+                                    } else {
+                                        $jsSeguidor = "false";
+                                    } ?>
 
-                                        <div class="infoSugestoes">
-                                            <h4 style="color: black; margin-bottom: 0.2rem"><?php echo $sugestao['nomeUsuario'] ?></h4>
-                                            <h5 class="text-muted">@<?php echo $sugestao['loginUsuario'] ?></h5>
-                                        </div>
-                                    </div>
-                                </a>
-                                <?php
-                                $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
-                                if ($verificarSeguidor['boolean'] == true) {
-                                    $jsSeguidor = "true";
-                                } else {
-                                    $jsSeguidor = "false";
-                                } ?>
+                                    <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                        <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
 
-                                <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
-
-                                    <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
-                                <?php } else { ?>
-                                    <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
-                                <?php } ?>
-                            </div>
-                    <?php }
-                    } }else{ ?>
+                                        <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
+                                    <?php } else { ?>
+                                        <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
+                                    <?php } ?>
+                                </div>
+                        <?php }
+                        }
+                    } else { ?>
                         <h4 style="margin-top: 5px;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
-                   <?php } ?>
+                    <?php } ?>
 
                 </div>
             </div>
@@ -842,84 +896,84 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                 <div style="display: flex; width: 100%; height: 100%;">
 
                     <div id="preview-crop-image">
-                            <img src="#" alt="">
+                        <img src="#" alt="">
                     </div>
 
 
                     <div class="rightSidePost">
 
-                            <div class="userElementosHolder">
-                                <div class="userElementos">
-                                 <img src="#" alt="" class="fotoDePerfil">
-                                 <div>
+                        <div class="userElementosHolder">
+                            <div class="userElementos">
+                                <img src="#" alt="" class="fotoDePerfil">
+                                <div>
                                     <span class="textNomeUsuario">nome</span>
-                                    <h5 class="text-muted">data</h5>    
-                                 </div>
-                                </div>
-
-                                <div class="editButton">
-                                    <div class="menuPostHover"></div>
-                                    <i class="uil uil-ellipsis-v"></i>
+                                    <h5 class="text-muted">data</h5>
                                 </div>
                             </div>
 
-                            <div class="comentariosHolder">
+                            <div class="editButton">
+                                <div class="menuPostHover"></div>
+                                <i class="uil uil-ellipsis-v"></i>
+                            </div>
+                        </div>
 
-                                    <div class="comentarioHolder">
+                        <div class="comentariosHolder">
 
-                                        <div class="fotoDePerfil">
-                                            <img src="#" alt="">
-                                        </div>
+                            <div class="comentarioHolder">
 
-                                        <div class="comentarioInfos">
+                                <div class="fotoDePerfil">
+                                    <img src="#" alt="">
+                                </div>
 
-                                            <div class="info">
-                                                <div style="  word-break: break-all;">
-                                                    <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
-                                                </div>
-                                            </div>
+                                <div class="comentarioInfos">
 
-                                            <div class="info">
-                                                <h5 class="text-muted">tempo</h5>
-                                            </div>
+                                    <div class="info">
+                                        <div style="  word-break: break-all;">
+                                            <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
                                         </div>
                                     </div>
+
+                                    <div class="info">
+                                        <h5 class="text-muted">tempo</h5>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="botoesInteracao">
-                                
-                                <input class="curtir" value="<?php echo $id ?>" type="checkbox">
-                                
-                                <button class="comentar"></button>
-                                
-                                <button class="mensagem"></button>
-                                
-                            </div>
+                        <div class="botoesInteracao">
 
-                            <div class="curtidas">
-                                <h4>0 itimalias</h4>
-            
-                            </div>
+                            <input class="curtir" value="<?php echo $id ?>" type="checkbox">
 
-                            <div class="commentArea">
+                            <button class="comentar"></button>
 
-                                <i class="uil uil-heart"></i>
+                            <button class="mensagem"></button>
 
-                                <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+                        </div>
 
-                                <button value="<?php echo $id ?>" class="comentar" value="">
-                                    <i class="uil uil-message"></i>
-                                </button>
+                        <div class="curtidas">
+                            <h4>0 itimalias</h4>
 
-                              
+                        </div>
 
-                            </div>
+                        <div class="commentArea">
 
-                            </div>
+                            <i class="uil uil-heart"></i>
+
+                            <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
+
+                            <button value="<?php echo $id ?>" class="comentar" value="">
+                                <i class="uil uil-message"></i>
+                            </button>
+
+
+
+                        </div>
 
                     </div>
 
                 </div>
+
+            </div>
             </div>
         </section>
 

@@ -273,6 +273,15 @@ $(document).ready(function () {
     });
   });
 
+  $(".optionsDenunciaComent").click(function () {
+    var id = $(this).attr("id");
+    if ($("#menuComent" + id).css("display") == "none") {
+      $("#menuComent" + id).css("display", "flex");
+    } else {
+      $("#menuComent" + id).css("display", "none");
+    }
+  });
+
 });
 
 function showHideElement() {
