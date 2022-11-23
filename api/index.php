@@ -1463,6 +1463,66 @@ $app->post('/seguir-categoria', function (Request $request, Response $response, 
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
+$app->post('/pesquisa-seguindo', function(Request $request, Response $response, array $args){
+    error_reporting(0);
+    $fotoUsuario = new FotoUsuario();
+    $usuarioSeguidor = new UsuarioSeguidor();
+
+    $arraySeguindo = $usuarioSeguidor->pesquisaSeguindo($_POST['idUsuario']);
+    $countSeguidores = count($arraySeguindo);
+
+    for ($r = 0; $r < $countSeguidores; $r++) {
+        $idUsuario = $arraySeguindo[$r]['idUsuario'];
+        $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idUsuario);
+        $loginUsuario = $arraySeguindo[$r]['loginUsuario'];
+        $nomeUsuario = $arraySeguindo[$r]['nomeUsuario'];
+        echo ("
+        <div>
+            <h2>Seguindo</ha>
+        </div>
+        <a href='/petiti/$loginUsuario' target='_blank' style='color:black;'>
+            <div class='seguidores-row'>
+                <div class='seguidor'>
+                <img src='$caminhoFoto' id='fotoSeguidor'>
+                    <span>$nomeUsuario</span>
+                    <span>@$loginUsuario</span>
+                </div>
+            </div>
+        </a>
+        ");
+    }
+});
+
+$app->post('/pesquisa-seguidores', function (Request $request, Response $response, array $args) {
+    error_reporting(0);
+    $fotoUsuario = new FotoUsuario();
+    $usuarioSeguidor = new UsuarioSeguidor();
+
+    $arraySeguidores = $usuarioSeguidor->pesquisaSeguidores($_POST['idUsuario']);
+    $countSeguidores = count($arraySeguidores);
+
+    for ($t = 0; $t < $countSeguidores; $t++) {
+        $idSeguidor = $arraySeguidores[$t]['idSeguidor'];
+        $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idSeguidor);
+        $loginUsuario = $arraySeguidores[$t]['loginUsuario'];
+        $nomeUsuario = $arraySeguidores[$t]['nomeUsuario'];
+        echo ("
+        <div>
+            <h2>Seguidores</ha>
+        </div>
+        <a href='/petiti/$loginUsuario' target='_blank' style='color:black;'>
+            <div class='seguidores-row'>
+                <div class='seguidor'>
+                <img src='$caminhoFoto' id='fotoSeguidor'>
+                    <span>$nomeUsuario</span>
+                    <span>@$loginUsuario</span>
+                </div>
+            </div>
+        </a>
+        ");
+    }
+});
+
 $app->post('/pesquisar', function (Request $request, Response $response, array $args) {
     if (isset($_POST['val'])) {
         error_reporting(0);
