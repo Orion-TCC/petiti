@@ -341,8 +341,6 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                                     </form>
                                 </div>
 
-
-
                                 <div id="modal-recortar-foto-perfil" class="modal">
                                     <div class="flex-col">
                                         <span>Redimensione sua imagem!</span>
@@ -354,10 +352,6 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                                         </a>
                                     </div>
                                 </div>
-
-
-
-
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
