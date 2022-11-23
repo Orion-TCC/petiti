@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21-Nov-2022 às 02:01
+-- Tempo de geração: 23-Nov-2022 às 12:16
 -- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.2
+-- versão do PHP: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,11 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 (1, 'Perdido', 1),
 (2, 'Animal Perdido', 1),
 (3, 'Pet Perdido', 1),
-(4, 'Desaparecido', 1);
+(4, 'Desaparecido', 1),
+(5, 'Adoção', 1),
+(6, 'Adote um amigo', 1),
+(7, 'Animal em adoção', 1),
+(8, 'Adotar', 1);
 
 -- --------------------------------------------------------
 
@@ -550,7 +554,7 @@ ALTER TABLE `tbusuarioseguidor`
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriapublicacao`
@@ -598,7 +602,7 @@ ALTER TABLE `tbdenunciausuario`
 -- AUTO_INCREMENT de tabela `tbfotopet`
 --
 ALTER TABLE `tbfotopet`
-  MODIFY `idFotoPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idFotoPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `tbfotopublicacao`
@@ -610,7 +614,7 @@ ALTER TABLE `tbfotopublicacao`
 -- AUTO_INCREMENT de tabela `tbfotousuario`
 --
 ALTER TABLE `tbfotousuario`
-  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `tbmensagem`
@@ -628,7 +632,7 @@ ALTER TABLE `tbnotificacao`
 -- AUTO_INCREMENT de tabela `tbpet`
 --
 ALTER TABLE `tbpet`
-  MODIFY `idPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `tbpetseguidor`
@@ -664,7 +668,7 @@ ALTER TABLE `tbtipousuario`
 -- AUTO_INCREMENT de tabela `tbusuario`
 --
 ALTER TABLE `tbusuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuarioendereco`
