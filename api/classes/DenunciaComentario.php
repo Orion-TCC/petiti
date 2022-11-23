@@ -142,12 +142,12 @@ class denunciaComentario
     public function buscaDenunciaComentarioAtiva()
     {
         $con = Conexao::conexao();
-        $query = "SELECT idDenunciaComentario, textoDenunciaComentario, DAY(dataDenunciaComentario) as dia, MONTHNAME(dataDenunciaComentario) as mes, YEAR(dataDenunciaComentario) as ano, statusDenunciaComentario,
-        idUsuarioDenunciador, idUsuarioDenunciado, idComentario, innerDenunciado.loginUsuario as usuarioDenunciado, innerDenunciador.loginUsuario as usuarioDenunciador
-        innerComentario.textoComentario, innerFotoUsuario.caminhoFoto
-        INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbdenunciacomentario.idUsuarioDenunciado
+        $query = "SELECT idDenunciaComentario, textoDenunciaComentario, DAY(dataDenunciaComentario) as dia, MONTHNAME(dataDenunciaComentario) as mes, YEAR(dataDenunciaComentario) as ano, 
+        statusDenunciaComentario, idUsuarioDenunciador, idUsuarioDenunciado, innercomentario.idComentario, innerDenunciado.loginUsuario as usuarioDenunciado, innerDenunciador.loginUsuario as usuarioDenunciador, 
+        innerComentario.textoComentario, innerFotoUsuario.caminhoFoto FROM tbdenunciacomentario
+		INNER JOIN tbcomentario innerComentario ON innerComentario.idComentario = tbdenunciacomentario.idComentario
+        INNER JOIN tbusuario innerdenunciado ON innerdenunciado.idUsuario = tbdenunciacomentario.idUsuarioDenunciado
         INNER JOIN tbusuario innerDenunciador ON innerDenunciador.idUsuario = tbdenunciacomentario.idUsuarioDenunciador
-        INNER JOIN tbcomentario innerComentario ON innerComentario.idComentario = tbdenunciacomentario.idComentario
         INNER JOIN tbfotousuario innerFotoUsuario ON innerFotoUsuario.idUsuario = tbdenunciacomentario.idUsuarioDenunciado
         WHERE statusDenunciaComentario = 0";
 
@@ -158,12 +158,12 @@ class denunciaComentario
     public function buscaDenunciaComentarioEmAnalise()
     {
         $con = Conexao::conexao();
-        $query = "SELECT idDenunciaComentario, textoDenunciaComentario, DAY(dataDenunciaComentario) as dia, MONTHNAME(dataDenunciaComentario) as mes, YEAR(dataDenunciaComentario) as ano, statusDenunciaComentario,
-        idUsuarioDenunciador, idUsuarioDenunciado, idComentario, innerDenunciado.loginUsuario as usuarioDenunciado, innerDenunciador.loginUsuario as usuarioDenunciador
-        innerComentario.textoComentario, innerFotoUsuario.caminhoFoto
-        INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbdenunciacomentario.idUsuarioDenunciado
+        $query = "SELECT idDenunciaComentario, textoDenunciaComentario, DAY(dataDenunciaComentario) as dia, MONTHNAME(dataDenunciaComentario) as mes, YEAR(dataDenunciaComentario) as ano, 
+        statusDenunciaComentario, idUsuarioDenunciador, idUsuarioDenunciado, innercomentario.idComentario, 
+        innerDenunciado.loginUsuario as usuarioDenunciado, innerDenunciador.loginUsuario as usuarioDenunciador, innerComentario.textoComentario, innerFotoUsuario.caminhoFoto FROM tbdenunciacomentario
+		INNER JOIN tbcomentario innerComentario ON innerComentario.idComentario = tbdenunciacomentario.idComentario
+        INNER JOIN tbusuario innerdenunciado ON innerdenunciado.idUsuario = tbdenunciacomentario.idUsuarioDenunciado
         INNER JOIN tbusuario innerDenunciador ON innerDenunciador.idUsuario = tbdenunciacomentario.idUsuarioDenunciador
-        INNER JOIN tbcomentario innerComentario ON innerComentario.idComentario = tbdenunciacomentario.idComentario
         INNER JOIN tbfotousuario innerFotoUsuario ON innerFotoUsuario.idUsuario = tbdenunciacomentario.idUsuarioDenunciado
         WHERE statusDenunciaComentario = 1";
 
@@ -174,12 +174,12 @@ class denunciaComentario
     public function buscaDenunciaComentarioResolvida()
     {
         $con = Conexao::conexao();
-        $query = "SELECT idDenunciaComentario, textoDenunciaComentario, DAY(dataDenunciaComentario) as dia, MONTHNAME(dataDenunciaComentario) as mes, YEAR(dataDenunciaComentario) as ano, statusDenunciaComentario,
-        idUsuarioDenunciador, idUsuarioDenunciado, idComentario, innerDenunciado.loginUsuario as usuarioDenunciado, innerDenunciador.loginUsuario as usuarioDenunciador
-        innerComentario.textoComentario, innerFotoUsuario.caminhoFoto
-        INNER JOIN tbusuario innerDenunciado ON innerDenunciado.idUsuario = tbdenunciacomentario.idUsuarioDenunciado
+        $query = "SELECT idDenunciaComentario, textoDenunciaComentario, DAY(dataDenunciaComentario) as dia, MONTHNAME(dataDenunciaComentario) as mes, YEAR(dataDenunciaComentario) as ano, 
+        statusDenunciaComentario, idUsuarioDenunciador, idUsuarioDenunciado, innercomentario.idComentario, 
+        innerDenunciado.loginUsuario as usuarioDenunciado, innerDenunciador.loginUsuario as usuarioDenunciador, innerComentario.textoComentario, innerFotoUsuario.caminhoFoto FROM tbdenunciacomentario
+		INNER JOIN tbcomentario innerComentario ON innerComentario.idComentario = tbdenunciacomentario.idComentario
+        INNER JOIN tbusuario innerdenunciado ON innerdenunciado.idUsuario = tbdenunciacomentario.idUsuarioDenunciado
         INNER JOIN tbusuario innerDenunciador ON innerDenunciador.idUsuario = tbdenunciacomentario.idUsuarioDenunciador
-        INNER JOIN tbcomentario innerComentario ON innerComentario.idComentario = tbdenunciacomentario.idComentario
         INNER JOIN tbfotousuario innerFotoUsuario ON innerFotoUsuario.idUsuario = tbdenunciacomentario.idUsuarioDenunciado
         WHERE statusDenunciaComentario = 2";
 
@@ -191,7 +191,7 @@ class denunciaComentario
     {
         $con = Conexao::conexao();
         $query = "SELECT COUNT(idDenunciaComentario) as qtd FROM tbdenunciacomentario
-        WHERE statusDenunciaUsuario = 0";
+        WHERE statusDenunciaComentario = 0";
 
         $resultado = $con->query($query);
         $listaQtdDenuncia = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -205,7 +205,7 @@ class denunciaComentario
     {
         $con = Conexao::conexao();
         $query = "SELECT COUNT(idDenunciaComentario) as qtd FROM tbdenunciacomentario
-        WHERE statusDenunciaUsuario = 1";
+        WHERE statusDenunciaComentario = 1";
 
         $resultado = $con->query($query);
         $listaQtdDenuncia = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -219,7 +219,7 @@ class denunciaComentario
     {
         $con = Conexao::conexao();
         $query = "SELECT COUNT(idDenunciaComentario) as qtd FROM tbdenunciacomentario
-        WHERE statusDenunciaUsuario = 2";
+        WHERE statusDenunciaComentario = 2";
 
         $resultado = $con->query($query);
         $listaQtdDenuncia = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -257,9 +257,9 @@ class denunciaComentario
     public function updateStatus($update)
     {
         $con = Conexao::conexao();
-        $stmt = $con->prepare("UPDATE tbDenunciaUsuario SET statusDenunciaUsuario = ? WHERE idDenunciaUsuario = ?");
-        $stmt->bindValue(1, $update->getStatusDenunciaUsuario());
-        $stmt->bindValue(2, $update->getIdDenunciaUsuario());
+        $stmt = $con->prepare("UPDATE tbDenunciaComentario SET statusDenunciaComentario = ? WHERE idDenunciaComentario = ?");
+        $stmt->bindValue(1, $update->getStatusDenunciaComentario());
+        $stmt->bindValue(2, $update->getIdDenunciaComentario());
 
         $stmt->execute();
     }

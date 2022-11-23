@@ -405,6 +405,29 @@ $app->get('/passar-denuncia-analise/{tipoDenuncia}/{id}', function (Request $req
         );
         header('location:/petiti/denuncias-dashboard');
     } else if ($args['tipoDenuncia'] == "comentario") {
+        $denunciaComentario = new denunciaComentario();
+        $denunciaComentario->setIdDenunciaComentario($args['id']);
+        $denunciaComentario->setStatusDenunciaComentario(1);
+        $cookie = new Cookies();
+
+        $denunciaComentario->updateStatus($denunciaComentario);
+
+        $cookie->criarCookie(
+            "denunciaParaAnalise",
+            "<div class='popup'></div>
+            <div class='toast'>
+                <div class='toast-content'>
+                    <div class='message'>
+                        <span class='texto-1'>Denúncia passou para análise</span>
+                    </div>
+                </div>
+                 <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+                <div class='progressbar'></div>
+            </div>
+  ",
+            1
+        );
+        header('location:/petiti/denuncias-dashboard');
     }
 });
 
