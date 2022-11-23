@@ -255,7 +255,7 @@ if ($_SESSION['tipo'] != "Adm") {
           </div>
         </div>
 
-        <div id="analise" class="tabcontent" style="display: block;">
+        <div id="analise" class="tabcontent" >
           <h3> Denúncias de publicações:</h3>
           <h3 id="total-qtd-publicacoes">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoEmAnalise(); ?>)</h3>
           <div class="denunciasPublicacao">
