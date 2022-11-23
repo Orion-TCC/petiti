@@ -195,4 +195,13 @@ $(document).ready(function () {
         });
       });
   });
+
+  $("#opcoes").click(function () {
+    if ($(".popupOptions").css("display") == "none") {
+      console.log("sim");
+      $(".popupOptions").css("display", "flex");
+    } else {
+      $(".popupOptions").css("display", "none");
+    }
+  });
 });
