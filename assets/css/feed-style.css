@@ -2443,3 +2443,13 @@ z-index: 1;
   display: flex;
   flex-direction: column;
 }
+
+.seguidor{
+  display: flex;
+  flex-direction: column;
+  margin: 15;
+}
+
+#fotoSeguidor{
+  width: 100px;
+}
