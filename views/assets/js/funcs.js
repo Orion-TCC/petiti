@@ -280,7 +280,15 @@ $(document).ready(function () {
     } else {
       $("#menuComent" + id).css("display", "none");
     }
+      $("#denunciarCor"+id).click(function () {
+          var idComentador = $(this).attr("name");
+          console.log(idComentador);
+          $("#txtDenunciado").val(idComentador);
+          $("#txtidComentario").val(id);
+      });
   });
+
+  
 
 });
 
@@ -440,6 +448,9 @@ $(document).ready(function () {
     $("#idUsuarioPub").val(idUsu);
     $("#idPost").val(idPost);
   });
+
+  
+
 });
 
 window.onload = function () {

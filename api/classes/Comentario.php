@@ -102,6 +102,7 @@ class Comentario
     {
         $con = Conexao::conexao();
         $query = "SELECT idComentario,
+        tbcomentario.idUsuario as idComentador,
         tbcomentario.idPublicacao,
         nomeUsuario,
         textoComentario,

@@ -126,7 +126,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
             if (isset($_COOKIE['denuncia'])) {
                 echo $_COOKIE['denuncia'];
-            }else if(isset($_COOKIE['comentarioDeletado'])){
+            } else if (isset($_COOKIE['comentarioDeletado'])) {
                 echo $_COOKIE['comentarioDeletado'];
             }
 
@@ -496,10 +496,10 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                 <?php if ($contagemComentarios > 0) {
                                     for ($c = 0; $c  < $contagemComentarios; $c++) { ?>
-                                        <?php 
+                                        <?php
                                         $idComentarioAtual = $dadosComentarios['comentarios'][$c]['idComentario']
                                         ?>
-                                        
+
                                         <div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem; position: relative;'>
 
                                             <h2 style='font-weight: 900 !important; align-self: start;'>
@@ -510,23 +510,26 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                                 <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
                                             </h3>
 
-                                            <div class="optionsDenunciaComent" id="<?php echo "$c"; ?>">
+                                            <div class="optionsDenunciaComent" id="<?php echo "$idComentarioAtual"; ?>">
                                                 <i class="uil uil-ellipsis-h commentEllipsis"></i>
                                             </div>
 
-                                            <div class="menuComent" id="menuComent<?php echo "$c"; ?>" style="display: none;">
+                                            <div class="menuComent" id="menuComent<?php echo "$idComentarioAtual"; ?>" style="display: none;">
 
-                                                <div id="denunciarCor" class="menuComentElement">
-                                                    <i class="fa-solid fa-circle-exclamation"></i>
-                                                    <span>Denunciar</span>
-                                                </div>
+                                                <a href="#modal-denuncia-comentario" rel="modal:open">
+                                                    <div style="color: #DB310C;" id="denunciarCor<?php echo "$idComentarioAtual"; ?>" name="<?php echo $dadosComentarios['comentarios'][$c]['idComentador']; ?>" class="menuComentElement">
+                                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                                        <span>Denunciar</span>
+                                                    </div>
+                                                </a>
 
                                                 <?php
                                                 if (($_SESSION['login'] == $login) || ($dadosComentarios['comentarios'][$c]['loginUsuario'] == $_SESSION['login'])) { ?>
-                                                    <a style="color:black;" href="/petiti/api/comentario/delete/<?php echo $idComentarioAtual;?>"><div class="menuComentElement">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                        <span>Excluir</span>
-                                                    </div>
+                                                    <a style="color:black;" href="/petiti/api/comentario/delete/<?php echo $idComentarioAtual; ?>">
+                                                        <div class="menuComentElement">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                            <span>Excluir</span>
+                                                        </div>
                                                     </a>
                                                 <?php }
                                                 ?>
@@ -992,6 +995,24 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                 </div>
 
             </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="modal" id="modal-denuncia-comentario">
+                <div class="modal-denuncia-comentario-elements">
+                    <div class="titulo-denuncia-comentario">
+                        <h2>Denunciar Comentário</h2>
+                    </div>
+                    <div class="form-denuncia-comentario">
+                        <form action="/petiti/api/denunciaComentario" method="post">
+                            <input type="hidden" id="txtDenunciado" name="txtDenunciado" value="">
+                            <input type="hidden" name="txtidComentario" id="txtidComentario" value="">
+                            <input type="text" required placeholder="Motivo da denuncia: " name="txtMotivoDenunciaComentario" id="txtMotivoDenunciaComentario">
+                            <input type="submit" value="Denunciar">
+                        </form>
+                    </div>
+                </div>
             </div>
         </section>
 

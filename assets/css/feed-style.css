@@ -2452,3 +2452,17 @@ z-index: 1;
 #fotoSeguidor{
   width: 100px;
 }
+
+.modal-denuncia-comentario-elements{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-denuncia-comentario-elements form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

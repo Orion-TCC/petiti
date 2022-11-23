@@ -58,7 +58,7 @@ class denunciaComentario
         return $this->UsuarioDenunciado;
     }
 
-    public function setUsuario($UsuarioDenunciado)
+    public function setUsuarioDenunciado($UsuarioDenunciado)
     {
         $this->UsuarioDenunciado = $UsuarioDenunciado;
 
@@ -139,7 +139,7 @@ class denunciaComentario
         $stmt->execute();
     }
 
-    public function buscaDenunciaPubicacaoAtiva()
+    public function buscaDenunciaComentarioAtiva()
     {
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaComentario, textoDenunciaComentario, DAY(dataDenunciaComentario) as dia, MONTHNAME(dataDenunciaComentario) as mes, YEAR(dataDenunciaComentario) as ano, statusDenunciaComentario,
@@ -155,7 +155,7 @@ class denunciaComentario
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function buscaDenunciaPubicacaoEmAnalise()
+    public function buscaDenunciaComentarioEmAnalise()
     {
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaComentario, textoDenunciaComentario, DAY(dataDenunciaComentario) as dia, MONTHNAME(dataDenunciaComentario) as mes, YEAR(dataDenunciaComentario) as ano, statusDenunciaComentario,
@@ -171,7 +171,7 @@ class denunciaComentario
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function buscaDenunciaPubicacaoResolvida()
+    public function buscaDenunciaComentarioResolvida()
     {
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaComentario, textoDenunciaComentario, DAY(dataDenunciaComentario) as dia, MONTHNAME(dataDenunciaComentario) as mes, YEAR(dataDenunciaComentario) as ano, statusDenunciaComentario,
@@ -187,7 +187,7 @@ class denunciaComentario
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function buscaQtdDenunciaPublicacaoAtiva()
+    public function buscaQtdDenunciaComentarioAtiva()
     {
         $con = Conexao::conexao();
         $query = "SELECT COUNT(idDenunciaComentario) as qtd FROM tbdenunciacomentario
@@ -201,7 +201,7 @@ class denunciaComentario
         }
     }
 
-    public function buscaQtdDenunciaPublicacaoEmAnalise()
+    public function buscaQtdDenunciaComentarioEmAnalise()
     {
         $con = Conexao::conexao();
         $query = "SELECT COUNT(idDenunciaComentario) as qtd FROM tbdenunciacomentario
@@ -215,7 +215,7 @@ class denunciaComentario
         }
     }
 
-    public function buscaQtdDenunciaPublicacaoResolvida()
+    public function buscaQtdDenunciaComentarioResolvida()
     {
         $con = Conexao::conexao();
         $query = "SELECT COUNT(idDenunciaComentario) as qtd FROM tbdenunciacomentario
@@ -229,7 +229,7 @@ class denunciaComentario
         }
     }
 
-    public function buscaDenunciaPubicacao($idDenunciaComentario)
+    public function buscaDenunciaComentario($idDenunciaComentario)
     {
         $con = Conexao::conexao();
         $query = "SELECT idDenunciaComentario, textoDenunciaComentario, DAY(dataDenunciaComentario) as dia, MONTHNAME(dataDenunciaComentario) as mes, YEAR(dataDenunciaComentario) as ano, statusDenunciaComentario,

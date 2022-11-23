@@ -983,6 +983,36 @@ $app->post(
     }
 );
 
+$app->post('/denunciaComentario', function (Request $request, Response $response, array $args){
+    $denunciaComentario = new denunciaComentario();
+    $usuario = new Usuario();
+    $cookie = new Cookies();
+
+    @session_start();
+
+    $denunciaComentario->setTextoDenunciaComentario($_POST['txtMotivoDenunciaComentario']);
+    $denunciaComentario->setStatusDenunciaComentario(0);
+    $denunciaComentario->setUsuarioDenunciador($_SESSION['id']);
+    $denunciaComentario->setUsuarioDenunciado($_POST['txtDenunciado']);
+    $denunciaComentario->setIdComentario($_POST['txtidComentario']);
+
+    $denunciaComentario->cadastrar($denunciaComentario);
+
+    $cookie->criarCookie("denuncia", "
+    <div id='toast-denuncia' class='toast-denuncia'>
+        <div class='toast-denuncia-content'>
+            <div class='message-denuncia'>
+                <span class='texto-1'> Obrigado por sua denúncia </span>
+                <span class='texto-2'> Ela será analisada o mais rápido possível</span>
+            </div>
+        </div>
+        <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+        <div class='progressbardenuncia'></div>
+    </div>
+    ", 1);
+
+});
+
 $app->post('/denunciaPublicacao', function (Request $request, Response $response, array $args) {
     $denunciaPublicacao = new DenunciaPublicacao();
     $publicacao = new Publicacao();
