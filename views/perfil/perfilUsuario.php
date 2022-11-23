@@ -199,7 +199,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="#" class="menu-item">
+                    <a href="feed" class="menu-item">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
