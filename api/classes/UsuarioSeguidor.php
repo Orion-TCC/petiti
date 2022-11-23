@@ -94,6 +94,25 @@ class UsuarioSeguidor
         }
     }
 
+    public function pesquisaSeguidores($idUsuario){
+        $con = Conexao::conexao();
+        $query = "SELECT tbusuarioseguidor.idUsuario, idSeguidor, innerseguidor.loginUsuario, innerseguidor.nomeUsuario FROM tbusuarioseguidor
+        INNER JOIN tbUsuario innerseguidor ON innerseguidor.idusuario = tbusuarioseguidor.idseguidor
+        WHERE tbusuarioseguidor.idUsuario = $idUsuario";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll();
+        return $lista;
+    }
+
+    public function pesquisaSeguindo($idSeguindo){
+        $con = Conexao::conexao();
+        $query = "SELECT tbusuarioseguidor.idUsuario, idSeguidor, innerseguidor.loginUsuario, innerseguidor.nomeUsuario FROM tbusuarioseguidor
+        INNER JOIN tbUsuario innerseguidor ON innerseguidor.idusuario = tbusuarioseguidor.idusuario
+        WHERE tbusuarioseguidor.idSeguidor = $idSeguindo";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll();
+        return $lista;
+    }
     
 }
 ?>
