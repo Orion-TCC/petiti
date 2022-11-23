@@ -1494,7 +1494,7 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
         if ($countQtdResultado > 0) {
             echo ("<div>");
             //Usuarios
-            $queryUsuarios = "SELECT tbusuario.idUsuario, loginUsuario, idTipoUsuario
+            $queryUsuarios = "SELECT tbusuario.idUsuario, loginUsuario, idTipoUsuario, nomeUsuario
             FROM tbUsuario
             INNER JOIN tbfotousuario innerfotousuario ON innerfotousuario.idusuario = tbusuario.idusuario
             WHERE loginUsuario LIKE '$pesquisa%' ";
@@ -1510,6 +1510,7 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
                 for ($r = 0; $r < $countResultadoUsuarios; $r++) {
                     $caminhoFotoUsuario = $fotoUsuario->exibirFotoUsuario($listaUsuarios[$r]['idUsuario']);
                     $resultadoBuscaAtual = $listaUsuarios[$r]['loginUsuario'];
+                    $nomeUsuario = $listaUsuarios[$r]['nomeUsuario'];
                     if ($listaUsuarios[$r]['idTipoUsuario'] != 1) {
                         $icon = "fa-building";
                     } else {
@@ -1518,8 +1519,11 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
                     echo ("
                         <div class='cardResultadoPesquisa'>
                             <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
-                                <img id='fotoUsuarioPesquisado' src='$caminhoFotoUsuario'>     
-                                <span style='padding-left: 10px;'>$resultadoBuscaAtual</span>
+                                <img id='fotoUsuarioPesquisado' src='$caminhoFotoUsuario'>
+                                <div id='infoResultadoUsuarios'>
+                                    <span style='padding-left: 10px;'>$nomeUsuario</span>
+                                    <span style='padding-left: 10px; padding-top; 5px;'>@$resultadoBuscaAtual</span>
+                                </div>
                                 <div class='icon-tipo-pesquisa'>
                                     <i class='fa-solid $icon'></i>
                                 </div>
@@ -1530,7 +1534,7 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
                 echo ("</div");
             }
             //Pets
-            $queryPets = "SELECT tbpet.idPet, usuarioPet FROM tbPet
+            $queryPets = "SELECT tbpet.idPet, usuarioPet, nomePet FROM tbPet
             INNER JOIN tbfotopet innerfotopet ON innerfotopet.idpet = tbpet.idpet
             WHERE usuarioPet LIKE '$pesquisa%'";
 
@@ -1546,14 +1550,18 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
                 for ($r = 0; $r < $countResultadoPets; $r++) {
                     $caminhoFotoPet = $fotoPet->exibirFotopet($listaPets[$r]['idPet']);
                     $resultadoBuscaAtual = $listaPets[$r]['usuarioPet'];
+                    $nomePet = $listaPets[$r]['nomePet'];
 
                     echo ("
                         <div class='cardResultadoPesquisa'>
                             <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
                                 <img id='fotoUsuarioPesquisado' src='$caminhoFotoPet'>     
-                                <span style='padding-left: 10px;'>$resultadoBuscaAtual</span>
+                                <div id='infoResultadoUsuarios'>
+                                    <span style='padding-left: 10px;'>$nomePet</span>
+                                    <span style='padding-left: 10px; padding-top; 5px;'>@$resultadoBuscaAtual</span>
+                                </div>
                                 <div class='icon-tipo-pesquisa'>
-                                    <i class='fa-regular fa-paw-simple'></i>
+                                    <i class='fa-regular fa-paw'></i>
                                 </div>
                             </a>
                         </div>
