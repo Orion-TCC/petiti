@@ -1,20 +1,20 @@
 $(document).ready(function () {
 
 
-  $.each(this, function(k, v) {
+  $.each(this, function (k, v) {
     getValues();
   });
- 
-  
+
+
 
   function getValues() {
     $.getJSON("/petiti/api/qtd-notificacoes", { get_param: "value" }, function (data) {
       $.each(data, function (index) {
-          var myArray = data[0].qtd;
-          $("#notificacaoContadorSpan").text(myArray);
-          if (myArray > 0) {
-            $(".mostrarNotificacoes").append("<div class='notificacaoContador'><span id='notificacaoContadorSpan'>"+myArray+"</span></div>");
-          }
+        var myArray = data[0].qtd;
+        $("#notificacaoContadorSpan").text(myArray);
+        if (myArray > 0) {
+          $(".mostrarNotificacoes").append("<div class='notificacaoContador'><span id='notificacaoContadorSpan'>" + myArray + "</span></div>");
+        }
       });
     });
   }
@@ -35,38 +35,38 @@ $(document).ready(function () {
       height: 740,
     },
   });
-      $("#continuar-post-perfil").on("click", function (ev) {
-        ev.preventDefault();
-        var blob;
-        resize
-          .croppie("result", {
-            type: "blob",
-          })
-          .then(function (resp) {
-            blob = resp;
-          });
-
-        resize
-          .croppie("result", {
-            type: "canvas",
-            size: "viewport",
-          })
-          .then(function (img) {
-            $.ajax({
-              type: "POST",
-              enctype: "multipart/form-data",
-              data: { image: img },
-              url: "/petiti/assets/libs/croppie/envio.php",
-              success: function (data) {
-                html = img;
-                $("#baseFotoPost").val(img);
-              
-                $("#preview-crop-image").html( "<img src='" + img + "' />");
-                console.log(data);
-              },
-            });
-          });
+  $("#continuar-post-perfil").on("click", function (ev) {
+    ev.preventDefault();
+    var blob;
+    resize
+      .croppie("result", {
+        type: "blob",
+      })
+      .then(function (resp) {
+        blob = resp;
       });
+
+    resize
+      .croppie("result", {
+        type: "canvas",
+        size: "viewport",
+      })
+      .then(function (img) {
+        $.ajax({
+          type: "POST",
+          enctype: "multipart/form-data",
+          data: { image: img },
+          url: "/petiti/assets/libs/croppie/envio.php",
+          success: function (data) {
+            html = img;
+            $("#baseFotoPost").val(img);
+
+            $("#preview-crop-image").html("<img src='" + img + "' />");
+            console.log(data);
+          },
+        });
+      });
+  });
   $(".FotoPostPerfil").on("change", function () {
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -226,23 +226,51 @@ $(document).ready(function () {
     });
   });
 
-  $("#inputSearch").keyup(function(){
+  $("#inputSearch").keyup(function () {
     var val = $(this).val();
-    
-    if(val != ""){
+
+    if (val != "") {
       $.ajax({
         url: "/petiti/api/pesquisar",
         method: "POST",
-        data: {val:val},
-        success:function(data){
+        data: { val: val },
+        success: function (data) {
           console.log(val);
           $("#resultadoPesquisa").css("display", "flex");
           $("#resultadoPesquisa").html(data);
         }
       });
-    }else{
+    } else {
       $("#resultadoPesquisa").css("display", "none");
     }
+  });
+
+  $(".hSeguidores").click(function () {
+    var idUsuario = $(this).attr("id");
+    console.log(idUsuario);
+    $.ajax({
+      url: "/petiti/api/pesquisa-seguidores",
+      method: "POST",
+      data: { idUsuario: idUsuario },
+      success: function (data) {
+        console.log(idUsuario);
+        $('#modal-seguidores').html(data);
+      }
+    });
+  });
+
+  $(".hSeguindo").click(function () {
+    var idUsuario = $(this).attr("id");
+    console.log(idUsuario);
+    $.ajax({
+      url: "/petiti/api/pesquisa-seguindo",
+      method: "POST",
+      data: { idUsuario: idUsuario },
+      success: function (data) {
+        console.log(idUsuario);
+        $('#modal-seguindo').html(data);
+      }
+    });
   });
 
 });
@@ -305,6 +333,8 @@ function setupTabs() {
       tabToActivate.classList.add("tabAtiva");
     });
   });
+
+
 }
 
 function openTab(evt, tabNumber) {
