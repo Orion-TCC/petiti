@@ -250,12 +250,14 @@ if ($_SESSION['tipo'] != "Adm") {
                 <a href="/petiti/api/passar-denuncia-analise/comentario/<?php echo $idDenunciaComentario; ?>" class="botao analisar">Passar para análise</a>
               </div>
           </div>
+        </div>
         <?php } ?>
 
           </div>
         </div>
+  </div>
 
-        <div id="analise" class="tabcontent" >
+  <div id="analise" class="tabcontent" >
           <h3> Denúncias de publicações:</h3>
           <h3 id="total-qtd-publicacoes">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoEmAnalise(); ?>)</h3>
           <div class="denunciasPublicacao">
@@ -270,6 +272,8 @@ if ($_SESSION['tipo'] != "Adm") {
               $idDenunciado = $linha['denunciado'];
               $idPub = $linha['idPub'];
             ?>
+
+            
               <div class="card">
                 <div class="badges">
                   <p class="badge ativo">Em análise</p>
@@ -522,7 +526,6 @@ if ($_SESSION['tipo'] != "Adm") {
           </div>
         </div>
       </div>
-  </div>
 
   </main>
   <!------------------- final - main ------------------->

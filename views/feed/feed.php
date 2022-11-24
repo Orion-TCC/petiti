@@ -45,6 +45,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
     <link rel="stylesheet" href="/petiti/assets/css/feed-style.css">
     <link rel="stylesheet" href="/petiti/assets/libs/croppie/croppie.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
 
     <!--- iconscout icon --->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
@@ -561,8 +562,11 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                             </div>
 
                             <div class="contagemChar">
-                                <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
-                                <span>/200</span>
+
+                                <div class="flex-row" style="width: 100%; justify-content: end;">
+                                    <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
+                                    <span>/200</span>
+                                </div>
                             </div>
                         </div>
                     <?php $contadorPostagem++;
@@ -805,7 +809,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 <div class="userElementos">
 
                                     <div class="fotoDePerfil">
-                                        <img class="imagemUser" src="<?php echo $_SESSION['foto']; ?>" alt="">
+                                        <img class="imagemUser hvr-icon-up" src="<?php echo $_SESSION['foto']; ?>" alt="">
                                     </div>
 
                                     <span class="textNomeUsuario"><?php echo $_SESSION['nome']; ?></span>
@@ -814,13 +818,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                 <textarea name="txtLegendaPub" id="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!" maxlength="200"></textarea>
 
-                                <?php if ($_SESSION['tipo'] != "Tutor") {
-                                ?>
-
-                                    <label for="checkImp">Impulsionar</label>
-                                    <input type="checkbox" name="checkImp" id="checkImp">
-
-                                <?php } ?>
 
                                 <input type="hidden" name="categoriasValue" id="categoriasValue">
 
@@ -828,8 +825,15 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
                                 <div class="contagemChar">
+                                                                <?php if ($_SESSION['tipo'] != "Tutor") {
+                                ?>
+                                    <input type="checkbox" name="checkImp" id="checkImp">
+                                    <label for="checkImp" class="hvr-bob "></label>
+                                    <?php } ?>
+                                <div>
                                     <input type="text" value="0" id="contagemCharInput" disabled>
                                     <span>/200</span>
+                                </div>
                                 </div>
 
 
