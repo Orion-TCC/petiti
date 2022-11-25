@@ -1618,8 +1618,9 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
             $countResultadoUsuarios = count($listaUsuarios);
 
             if ($countResultadoUsuarios != 0) {
+                echo ("<span class='spanUsuariosEncontrados'> <i class='uil uil-search'></i> Usuarios encontrados: </span>");
                 echo ("<div class='cardsResultadoPesquisaUsuarios cardResultadoPesquisa'>");
-                echo ("<span class='spanUsuariosEncontrados'>Usuarios encontrados: </span>");
+                
 
                 for ($r = 0; $r < $countResultadoUsuarios; $r++) {
                     $caminhoFotoUsuario = $fotoUsuario->exibirFotoUsuario($listaUsuarios[$r]['idUsuario']);
@@ -1633,14 +1634,22 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
                     echo ("
                         <div class='cardResultadoPesquisa'>
                             <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
+                                
                                 <img id='fotoUsuarioPesquisado' src='$caminhoFotoUsuario'>
-                                <div id='infoResultadoUsuarios'>
-                                    <span style='padding-left: 10px;'>$nomeUsuario</span>
-                                    <span style='padding-left: 10px; padding-top; 5px;'>@$resultadoBuscaAtual</span>
+                                    
+                                <div id='infoResultadoUsuarios' >
+                                        <div style='display: flex; gap: 0.5rem; align-items: center;'>
+                                            <span>$nomeUsuario</span>
+                                             <div class='icon-tipo-pesquisa'>
+                                              <i class='fa-solid $icon'></i>
+                                             </div>
+                                        </div>
+
+                                        <span class='text-muted' style='font-size: 0.8rem; '>@$resultadoBuscaAtual</span>
+                                        <span class='text-muted' style='font-size: 0.8rem; width: 28rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>biografia biografia biografia biografia biografia biografia biografia biografiabiografiabiografia</span>
                                 </div>
-                                <div class='icon-tipo-pesquisa'>
-                                    <i class='fa-solid $icon'></i>
-                                </div>
+
+
                             </a>
                         </div>
                 ");
@@ -1720,7 +1729,7 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
             echo ("
             <div class='divSemResultadoPesquisa'>
                 <span class='semResultadoPesquisa'>
-                    Usuario, publicação ou pet não encontrado :(
+                    Nenhum resultado encontrado D:
                 </span>
             </div>
             ");

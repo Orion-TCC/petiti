@@ -501,15 +501,17 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                         $idComentarioAtual = $dadosComentarios['comentarios'][$c]['idComentario']
                                         ?>
 
-                                        <div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem; position: relative;'>
+                                        <div style='display: flex; flex-direction: row; align-items: center; position: relative; justify-content: space-between;'>
 
+                                        <div class="flex-row" style="align-items: center; gap: 0.6rem;">
                                             <h2 style='font-weight: 900 !important; align-self: start;'>
                                                 <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
                                             </h2>
 
-                                            <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap;overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
+                                            <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
                                                 <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
                                             </h3>
+                                        </div>
 
                                             <div class="optionsDenunciaComent" id="<?php echo "$idComentarioAtual"; ?>">
                                                 <i class="uil uil-ellipsis-h commentEllipsis"></i>

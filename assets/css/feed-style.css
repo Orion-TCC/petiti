@@ -365,7 +365,7 @@ nav .caixa-de-busca {
   border-radius: var(--border-radius);
   padding: var(--search-padding);
   color: var(--color-dark);
-
+  position: relative;
 }
 
 nav .caixa-de-busca input[type="search"] {
@@ -1850,7 +1850,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   display: flex;
   flex-direction: column;
   top: -15px;
-  right: -135px;
+  right: -145px;
   width: fit-content;
   height: fit-content;
   box-shadow: 1px 1px 20px 0px #696969c2;
@@ -2492,14 +2492,17 @@ z-index: 1;
 }
 
 .resultadoPesquisa {
-  height: 400px;
+  height: 25rem;
   width: 33vw;
   position: absolute;
   display: none;
+  flex-direction: column;
   background-color: RGB(245, 245, 245);
-  border-radius: 20px;
-  margin-top: 15px;
+  border-radius: var(--card-border-radius);
+  padding: var(--card-padding);
+  margin-top: 20px;
   box-shadow: 1px 1px 10px 0px #696969c2;
+  overflow-y: auto;
 }
 
 #resultadoBuscaAtual {
@@ -2507,6 +2510,8 @@ z-index: 1;
   display: flex;
   align-items: center;
   border: 1px;
+  padding: var(--card-padding);
+  border-radius: var(--border-radius);
 }
 
 .divSemResultadoPesquisa {
@@ -2526,18 +2531,14 @@ z-index: 1;
   text-align: center;
 }
 
-.cardResultadoPesquisa {
-  width: 100%;
-  margin-top: 10px;
-  padding: 0 10;
-}
+
 
 .spanUsuariosEncontrados {
-  margin: 10 10 10 10;
+font-size: 1.1rem;
+margin-bottom: 0.5rem;
 }
 
 .icon-tipo-pesquisa {
-  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -2547,6 +2548,27 @@ z-index: 1;
 .cardResultadoPesquisa{
   display: flex;
   flex-direction: column;
+  height: 21rem;
+  width: 100%;
+}
+
+.cardResultadoPesquisa:last-child{
+  padding-bottom: 1rem;
+}
+
+.cardResultadoPesquisa:first-child{
+  padding-top: 1rem;
+}
+
+#resultadoBuscaAtual:hover{
+  background: rgba(0, 0, 0, 0.068);
+}
+
+#infoResultadoUsuarios{
+  padding-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 .seguidor{
