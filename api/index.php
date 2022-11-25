@@ -1729,7 +1729,7 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
         if ($countQtdResultado > 0) {
             echo ("<div>");
             //Usuarios
-            $queryUsuarios = "SELECT tbusuario.idUsuario, loginUsuario, idTipoUsuario, nomeUsuario
+            $queryUsuarios = "SELECT tbusuario.idUsuario, loginUsuario, idTipoUsuario, nomeUsuario, tbusuario.bioUsuario
             FROM tbUsuario
             INNER JOIN tbfotousuario innerfotousuario ON innerfotousuario.idusuario = tbusuario.idusuario
             WHERE loginUsuario LIKE '$pesquisa%' ";
@@ -1747,6 +1747,7 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
                     $caminhoFotoUsuario = $fotoUsuario->exibirFotoUsuario($listaUsuarios[$r]['idUsuario']);
                     $resultadoBuscaAtual = $listaUsuarios[$r]['loginUsuario'];
                     $nomeUsuario = $listaUsuarios[$r]['nomeUsuario'];
+                    $bioUsuario = $listaUsuarios[$r]['bioUsuario'];
                     if ($listaUsuarios[$r]['idTipoUsuario'] != 1) {
                         $icon = "fa-building";
                     } else {
@@ -1767,7 +1768,7 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
                                         </div>
 
                                         <span class='text-muted' style='font-size: 0.8rem; '>@$resultadoBuscaAtual</span>
-                                        <span class='text-muted' style='font-size: 0.8rem; width: 28rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>biografia biografia biografia biografia biografia biografia biografia biografiabiografiabiografia</span>
+                                        <span class='text-muted' style='font-size: 0.8rem; width: 28rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>$bioUsuario</span>
                                 </div>
 
 
