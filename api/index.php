@@ -899,6 +899,127 @@ $app->get('/publicacao/{id}', function (Request $request, Response $response, ar
     $response->getBody()->write($json);
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
+$app->get('/publicacao/{id}/modal', function (Request $request, Response $response, array $args) {
+    $publicacao = new Publicacao();
+    $fotoUsuario = new FotoUsuario();
+    $id = $args['id'];
+    $lista = $publicacao->listarPub($id);
+    foreach ($lista as $linha) {
+        $idPub = $linha['id'];
+        $itimalias = $linha['itimalias'];
+        $texto = $linha['texto'];
+        $data = $linha['data'];
+        $local = $linha['local'];
+        $idUsuario = $linha['idUsuario'];
+        $nome = $linha['nome'];
+        $login = $linha['login'];
+        $caminhoFoto = $linha['caminhoFoto'];
+    }
+    $fotoUser = $fotoUsuario->exibirFotoUsuario($idUsuario);
+    $hoje = new DateTime();
+    $dataPost = new DateTime($data);
+    $intervalo = $hoje->diff($dataPost);
+    $diferencaAnos = $intervalo->format('%y');
+    $diferencaMeses = $intervalo->format('%m');
+    $diferencaDias = $intervalo->format('%a');
+    $diferencaHoras = $intervalo->format('%h');
+    $diferencaMinutos = $intervalo->format('%i');
+    if ($diferencaAnos == 0) {
+        if ($diferencaMeses == 0) {
+            if ($diferencaDias == 0) {
+                if ($diferencaHoras == 0) {
+                    $diferencaFinal = $diferencaMinutos . " minutos";
+                } else {
+                    $diferencaFinal = $diferencaHoras . " horas";
+                }
+            } else {
+                $diferencaFinal = $diferencaDias . " dias";
+            }
+        } else {
+            $diferencaFinal = $diferencaMeses . " meses";
+        }
+    } else {
+        $diferencaFinal = $diferencaAnos . " anos";
+    }
+    $modalPub = "
+                    <div style='display: flex; width: 100%; height: 100%;'>
+
+                    <div style='width: 100%;height: 100%;'>
+                        <img src='".$caminhoFoto."' alt=''>
+                    </div>
+
+                    <div class='rightSidePost'>
+
+                        <div class='userElementosHolder'>
+                            <div class='userElementos'>
+                                <img src='".$fotoUser."' alt='' class='fotoDePerfil'>
+                                <div>
+                                    <span class='textNomeUsuario'>$nome</span>
+                                    <h5 class='text-muted'>$diferencaFinal</h5>
+                                </div>
+                            </div>
+
+                            <div class='editButton'>
+                                <div class='menuPostHover'></div>
+                                <i class='uil uil-ellipsis-v'></i>
+                            </div>
+                        </div>
+
+                        <div class='comentariosHolder'>
+                        
+                            <div class='comentarioHolder'>
+
+                                <div class='fotoDePerfil'>
+                                    <img src='#' alt=''>
+                                </div>
+
+                                <div class='comentarioInfos'>
+
+                                    <div class='info'>
+                                        <div style='  word-break: break-all;'>
+                                            <h4 class='text-muted'><span style='color: black;'>Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class='info'>
+                                        <h5 class='text-muted'>tempo</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='botoesInteracao'>
+
+                            <input class='curtir' value='". $idPub."' type='checkbox'>
+
+                            <button class='comentar'></button>
+
+                            <button class='mensagem'></button>
+
+                        </div>
+
+                        <div class='curtidas'>
+                            <h4>".$itimalias." itimalias</h4>
+
+                        </div>
+
+                        <div class='commentArea'>
+
+                            <i class='uil uil-heart'></i>
+
+                            <textarea class='TAComentario' oninput='auto_grow(this)' cols='30' rows='10' placeholder='Adicione um comentário!' maxlength='200' name='txtComentar".$idPub."' id='txtComentar".$idPub."'></textarea>
+
+                            <button value='". $idPub."' class='comentar' value=''>
+                                <i class='uil uil-message'></i>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>";
+    $response->getBody()->write("$modalPub");
+    return $response;
+  
+});
 $app->get('/publicacoes/usuario/{id}', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
     $id = $args['id'];

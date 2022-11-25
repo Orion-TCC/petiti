@@ -451,7 +451,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <?php }
                                     ?>
 
-                                    <a href="#modal-post" rel="modal:open"><button class="comentar"></button></a>
+                                    <a href="#modal-post" rel="modal:open"><button class="abrirComentarios" value="<?php echo $id?>"></button></a>
 
                                     <button class="mensagem"></button>
 
@@ -550,7 +550,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 } ?>
                             </div>
 
-                            <a href="#modal-post" rel="modal:open" style="color: black; width: fit-content;">Ver mais...</a>
+                            <a href="#modal-post" rel="modal:open" style="color: black; width: fit-content;"><button class="abrirComentarios" value="<?php echo $id?>"> Ver mais...</button></a>
 
                             <div class="commentArea" id="<?php echo $id; ?>">
                                 <i class="uil uil-heart"></i>
@@ -924,7 +924,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                 <div style="display: flex; width: 100%; height: 100%;">
 
                     <div id="imagepost">
-                        <img src="#" alt="">
+                        <img src="" alt="">
                     </div>
 
                     <div class="rightSidePost">
@@ -997,8 +997,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     </div>
 
                 </div>
-
-            </div>
             </div>
         </section>
 

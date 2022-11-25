@@ -885,7 +885,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
   background: none;
 }
 
-.meio .feed .botoes .botoesDeInteracao button.comentar {
+.meio .feed .botoes .botoesDeInteracao button.abrirComentarios {
 
   background-image: url("../images/botaoComentar.svg");
 
