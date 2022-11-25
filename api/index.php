@@ -1787,9 +1787,14 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
             $countResultadoPets = count($listaPets);
 
             if ($countResultadoPets != 0) {
-                echo ("<div class='cardsResultadoPesquisaPets cardResultadoPesquisa'>");
-                echo ("<span class='spanUsuariosEncontrados'>Pets encontrados: </span>");
 
+                
+                echo ("<div class='cardsResultadoPesquisaPets cardResultadoPesquisa'>");
+                echo ("
+                <div style='margin-top: 1rem;'>
+                  <i class='uil uil-search'></i>
+                  <span class='spanUsuariosEncontrados'> Pets encontrados: </span>
+                </div>");
 
                 for ($r = 0; $r < $countResultadoPets; $r++) {
                     $caminhoFotoPet = $fotoPet->exibirFotopet($listaPets[$r]['idPet']);
@@ -1800,13 +1805,20 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
                         <div class='cardResultadoPesquisa'>
                             <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
                                 <img id='fotoUsuarioPesquisado' src='$caminhoFotoPet'>     
+                                
                                 <div id='infoResultadoUsuarios'>
-                                    <span style='padding-left: 10px;'>$nomePet</span>
-                                    <span style='padding-left: 10px; padding-top; 5px;'>@$resultadoBuscaAtual</span>
+                                  <div style='display: flex; gap: 0.5rem; align-items: center;'>
+                                    <span>$nomePet</span>
+                                    <div class='icon-tipo-pesquisa'>
+                                    <i class='fa-solid fa-paw'></i>
+                                    </div>
+                                  </div>
+                                    
+                                  <span class='text-muted' style='font-size: 0.8rem;'>@$resultadoBuscaAtual</span>
+                                  <span class='text-muted' style='font-size: 0.8rem; width: 28rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>biografia biografia biografia biografia biografia biografia biografia biografiabiografiabiografia</span>
+
                                 </div>
-                                <div class='icon-tipo-pesquisa'>
-                                    <i class='fa-regular fa-paw'></i>
-                                </div>
+
                             </a>
                         </div>
                 ");

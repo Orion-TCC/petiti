@@ -2556,9 +2556,7 @@ margin-bottom: 0.5rem;
   padding-bottom: 1rem;
 }
 
-.cardResultadoPesquisa:first-child{
-  padding-top: 1rem;
-}
+
 
 #resultadoBuscaAtual:hover{
   background: rgba(0, 0, 0, 0.068);
