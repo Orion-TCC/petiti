@@ -259,6 +259,7 @@ $(document).ready(function () {
     });
   });
 
+
   $(".hSeguindo").click(function () {
     var idUsuario = $(this).attr("id");
     console.log(idUsuario);
@@ -272,6 +273,18 @@ $(document).ready(function () {
       }
     });
   });
+
+  
+    $(".abrirComentarios").click(function () {
+      var idPost = $(this).val();
+      $.ajax({
+        url: "/petiti/api/publicacao/"+idPost+"/modal",
+        method: "GET",
+        success: function (data) {
+          $("#modal-post").html(data);
+        },
+      });
+    });
 
   $(".optionsDenunciaComent").click(function () {
     var id = $(this).attr("id");

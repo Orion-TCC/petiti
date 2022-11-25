@@ -40,11 +40,14 @@ class Notificacao
         foreach ($lista as $linha) {
             $id = $linha['id'];
         }
-
-        $query = ("
+        @session_start();
+        $idUsuarioSession = $_SESSION['id'];
+        if($id != $idUsuarioSession){
+            $query = ("
             INSERT INTO tbnotificacao (idCurtidaPublicacao, idUsuarioNotificado, tipoNotificacao, statusNotificacao)
             VALUES($idCurtidaPublicacao, $id, 'Curtida', 0)");
-        $con->query($query);
+            $con->query($query);
+        }
     }
     public function notificarSeguidor($idUsuarioSeguidor){
         $con = Conexao::conexao();
