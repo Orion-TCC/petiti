@@ -226,17 +226,8 @@ $(document).ready(function () {
   });
 
   //Limitar com base no select a idade do pet
-  $(".SelectDiaMesAno").on("change", function () {
-    switch (this.value) {
-      case "d":
-        $("#txtIdadePet").attr("max", "59");
-        break;
-      case "m":
-        $("#txtIdadePet").attr("max", "11");
-        break;
-      case "y":
-        $("#txtIdadePet").attr("max", "2022");
-        break;
-    }
+
+  $("#txtIdadePet").on("input", function (event) {
+    this.value = this.value.replace(/[^0-9]/g, "");
   });
 });

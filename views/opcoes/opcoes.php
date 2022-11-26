@@ -26,11 +26,12 @@ $contagemPets = count($dadosPets['pets']);
 
     <!-- styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <link rel="stylesheet" href="/petiti/assets/css/feed-style.css">
     <link rel="stylesheet" href="/petiti/assets/css/opcoes-style.css">
-    <link rel="stylesheet" href="/petiti/assets/css/usuario-style.css">
     <link rel="stylesheet" href="/petiti/assets/libs/croppie/croppie.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link rel="stylesheet" href="/petiti/assets/css/usuario-style.css">
 
     <!--- iconscout icon --->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.6/css/unicons.css">
@@ -49,8 +50,9 @@ $contagemPets = count($dadosPets['pets']);
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
-    <script src="/petiti/assets/js/jquery-scripts.js"></script>
     <script src="/petiti/views/assets/js/script-jquery-foto.js"></script>
+    <script src="/petiti/assets/js/jquery-scripts.js"></script>
+
     <script src="/petiti/assets/js/script.js"></script>
     <script src="/petiti/views/assets/js/funcs.js"></script>
     <script src="/petiti/views/assets/js/opcoes.js"></script>
@@ -359,7 +361,7 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <div class="flex-row">
                                     <div class="fotoDePerfil">
-                                        <img src="#" alt="">
+                                        <img src="/petiti/private-user/fotos-pet/padrao.png" alt="">
                                     </div>
 
 
@@ -380,18 +382,25 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <div class="infoArea">
                                     <h3>Nome</h3>
-                                    <input type="text" placeholder="Nome">
+                                    <input name="txtNomePet" type="text" placeholder="Nome">
                                 </div>
 
                                 <div class="infoArea">
                                     <h3>Nome de Usuario</h3>
-                                    <input type="text" placeholder="Nome de usuario">
+                                    <input id="txtLoginPet" type="text" placeholder="Nome de usuario">
+                                    <p class="avisoNomeUsuarioValidacao"></p>
+                                    <p class="avisoNomeUsuarioQtd"></p>
                                 </div>
 
-                                <div class="infoArea">
-                                    <h3>Espécie</h3>
-                                    <input type="text" placeholder="Insira a especie">
-                                </div>
+                                <select name="slEspecie" id="slEspecie" required class="SelectEspecie">
+                                    <option selected disabled style="color: #000000; font-family: 'Raleway Bold';" value="0">Escolha</option>
+
+                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="1">Cachorro</option>
+                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="2">Gato</option>
+                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="3">Roedor</option>
+                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="4">Ave</option>
+                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="5">Exótico</option>
+                                </select>
 
                                 <div class="infoArea">
                                     <h3>Raça</h3>
@@ -401,8 +410,13 @@ $contagemPets = count($dadosPets['pets']);
                                 <div class="infoArea idadePet">
                                     <h3>Idade</h3>
                                     <div class="inputTextIdade">
-                                        <input type="text" placeholder="Insira a idade">
-                                        <input type="text" placeholder="Ano(s)">
+                                        <input min="1" class="formInput" placeholder="Insira a idade" type="number" name="txtIdadePet" id="txtIdadePet" required>
+                                        <select class="SelectDiaMesAno" name="slIdade" id="slIdade" required>
+                                            <option value="n" selected disabled>Escolha</option>
+                                            <option value="d">Dia (Dias)</option>
+                                            <option value="m">Mês (Meses)</option>
+                                            <option value="y">Ano(s)</option>
+                                        </select>
                                     </div>
                                 </div>
 
