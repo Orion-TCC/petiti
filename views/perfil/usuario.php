@@ -324,8 +324,8 @@ if ($verificarSeguidor['boolean'] == true) {
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
-                                    <h3 class="hSeguidores" id="<?php echo $id; ?>"><a href="#modal-seguidores" rel="modal:open"> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></a></h3>
-                                    <h3 class="hSeguindo" id="<?php echo $id?>"><a href="#modal-seguindo" rel="modal:open"><?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></a></h3>
+                                    <h3 class="hSeguidores" id="<?php echo $id; ?>"><a href="#modal-seguidores" rel="modal:open" style="color: black;"> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></a></h3>
+                                    <h3 class="hSeguindo" id="<?php echo $id?>"><a href="#modal-seguindo" rel="modal:open" style="color: black;"><?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></a></h3>
                                 </div>
 
                                 <div class="infoHolder baixo">

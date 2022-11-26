@@ -1727,26 +1727,58 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
 
     $arraySeguindo = $usuarioSeguidor->pesquisaSeguindo($_POST['idUsuario']);
     $countSeguidores = count($arraySeguindo);
-    echo ("<div>
+    echo ("<div class='segueTitulo'>
             <h2>Seguindo</h2>
-         </div>");
+         </div>
+         
+         <div class='segueHolder'>");
+ 
     for ($r = 0; $r < $countSeguidores; $r++) {
         $idUsuario = $arraySeguindo[$r]['idUsuario'];
         $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idUsuario);
         $loginUsuario = $arraySeguindo[$r]['loginUsuario'];
         $nomeUsuario = $arraySeguindo[$r]['nomeUsuario'];
         echo ("
-        <a href='/petiti/$loginUsuario' target='_blank' style='color:black;'>
-            <div class='seguidores-row'>
-                <div class='seguidor'>
-                <img src='$caminhoFoto' id='fotoSeguidor'>
-                    <span>$nomeUsuario</span>
-                    <span>@$loginUsuario</span>
+        
+            <a href='/petiti/$loginUsuario' target='_blank' '>
+                <div class='seguidores-row usuarioSegue'>
+                    <div class='seguidor'>
+
+                        <div class='fotoDePerfil'>
+                           <img src='$caminhoFoto' id='fotoSeguidor' >
+                        </div>
+
+                        <div style='display: flex; flex-direction: column; gap: 0.8rem; width: 100%'>
+
+                            <div style='display: flex; justify-content: space-between'>
+
+                                <div class='loginEUser'>
+
+                                <div style='display: flex; gap: 0.5rem'>
+                                    <h3>$nomeUsuario</h3> 
+                                    <i class='fa-solid fa-building'></i>
+                                </div>
+
+                                <h4 class='text-muted'>@$loginUsuario</h4>
+
+                                </div>
+
+                                
+                                
+                                <button class='btn btn-secundary'>Seguindo</button>
+                            </div>
+
+                            <h5>Segue você</h5>
+                        
+                        
+                          </div>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        
         ");
-    }
+    }// botão seguir pra quem for mexer nisso >>> <button class='btn btn-primary'>Seguir</button>
+    echo("</div>");
 });
 
 $app->post('/pesquisa-seguidores', function (Request $request, Response $response, array $args) {
@@ -1757,9 +1789,11 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
     $arraySeguidores = $usuarioSeguidor->pesquisaSeguidores($_POST['idUsuario']);
     $countSeguidores = count($arraySeguidores);
 
-    echo("<div>
-            <h2>Seguidores</ha>
-        </div>");
+    echo ("<div class='segueTitulo'>
+            <h2>Seguidores</h2>
+         </div>
+         
+         <div class='segueHolder'>");
 
     for ($t = 0; $t < $countSeguidores; $t++) {
         $idSeguidor = $arraySeguidores[$t]['idSeguidor'];
@@ -1768,17 +1802,45 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
         $nomeUsuario = $arraySeguidores[$t]['nomeUsuario'];
         echo ("
         
-        <a href='/petiti/$loginUsuario' target='_blank' style='color:black;'>
-            <div class='seguidores-row'>
-                <div class='seguidor'>
-                <img src='$caminhoFoto' id='fotoSeguidor'>
-                    <span>$nomeUsuario</span>
-                    <span>@$loginUsuario</span>
+            <a href='/petiti/$loginUsuario' target='_blank' '>
+                <div class='seguidores-row usuarioSegue'>
+                    <div class='seguidor'>
+
+                        <div class='fotoDePerfil'>
+                           <img src='$caminhoFoto' id='fotoSeguidor' >
+                        </div>
+
+                        <div style='display: flex; flex-direction: column; gap: 0.8rem; width: 100%'>
+
+                            <div style='display: flex; justify-content: space-between'>
+
+                                <div class='loginEUser'>
+
+                                <div style='display: flex; gap: 0.5rem'>
+                                    <h3>$nomeUsuario <i class='fa-solid fa-building'></i></h3> 
+
+                                </div>
+
+                                <h4 class='text-muted'>@$loginUsuario</h4>
+
+                                </div>
+
+                                
+                                
+                                <button class='btn btn-secundary'>Seguindo</button>
+                            </div>
+
+                            <h5>Segue você</h5>
+                        
+                        
+                          </div>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        
         ");
-    }
+    }// botão seguir pra quem for mexer nisso >>> <button class='btn btn-primary'>Seguir</button>
+    echo("</div>");
 });
 
 $app->post('/pesquisar', function (Request $request, Response $response, array $args) {
