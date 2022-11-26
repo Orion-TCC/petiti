@@ -1,24 +1,27 @@
 $(document).ready(function () {
-
-
   $.each(this, function (k, v) {
     getValues();
   });
 
-
-
   function getValues() {
-    $.getJSON("/petiti/api/qtd-notificacoes", { get_param: "value" }, function (data) {
-      $.each(data, function (index) {
-        var myArray = data[0].qtd;
-        $("#notificacaoContadorSpan").text(myArray);
-        if (myArray > 0) {
-          $(".mostrarNotificacoes").append("<div class='notificacaoContador'><span id='notificacaoContadorSpan'>" + myArray + "</span></div>");
-        }
-      });
-    });
+    $.getJSON(
+      "/petiti/api/qtd-notificacoes",
+      { get_param: "value" },
+      function (data) {
+        $.each(data, function (index) {
+          var myArray = data[0].qtd;
+          $("#notificacaoContadorSpan").text(myArray);
+          if (myArray > 0) {
+            $(".mostrarNotificacoes").append(
+              "<div class='notificacaoContador'><span id='notificacaoContadorSpan'>" +
+                myArray +
+                "</span></div>"
+            );
+          }
+        });
+      }
+    );
   }
-
 
   var id = "";
   var resize = $("#upload-demo-post-perfil").croppie({
@@ -83,7 +86,6 @@ $(document).ready(function () {
     $(".FotoPostPerfil").val("");
   });
 
-
   $(".curtir").on("click", function () {
     id = $(this).val();
     $.ajax({
@@ -94,6 +96,7 @@ $(document).ready(function () {
         console.log("post de id " + id + " foi curtido");
         console.log(data);
         $("#itimalias" + id).text(data);
+        $(".itimalias" + id).text(data);
       },
     });
   });
@@ -198,11 +201,11 @@ $(document).ready(function () {
         console.log();
         $(
           "<div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'> <h2 style='font-weight: 900 !important; align-self: start;'>" +
-          data[0].loginUsuario +
-          "</h2> " +
-          "<h3 style='color: rgba(86, 86, 86, 1);'>" +
-          data[0].textoComentario +
-          "</h3> </div>"
+            data[0].loginUsuario +
+            "</h2> " +
+            "<h3 style='color: rgba(86, 86, 86, 1);'>" +
+            data[0].textoComentario +
+            "</h3> </div>"
         ).appendTo(".comentarios");
         $("#txtComentar" + id).val("");
       },
@@ -238,7 +241,7 @@ $(document).ready(function () {
           console.log(val);
           $("#resultadoPesquisa").css("display", "flex");
           $("#resultadoPesquisa").html(data);
-        }
+        },
       });
     } else {
       $("#resultadoPesquisa").css("display", "none");
@@ -254,11 +257,10 @@ $(document).ready(function () {
       data: { idUsuario: idUsuario },
       success: function (data) {
         console.log(idUsuario);
-        $('#modal-seguidores').html(data);
-      }
+        $("#modal-seguidores").html(data);
+      },
     });
   });
-
 
   $(".hSeguindo").click(function () {
     var idUsuario = $(this).attr("id");
@@ -269,22 +271,25 @@ $(document).ready(function () {
       data: { idUsuario: idUsuario },
       success: function (data) {
         console.log(idUsuario);
-        $('#modal-seguindo').html(data);
-      }
+        $("#modal-seguindo").html(data);
+      },
     });
   });
 
-  
-    $(".abrirComentarios").click(function () {
-      var idPost = $(this).val();
-      $.ajax({
-        url: "/petiti/api/publicacao/"+idPost+"/modal",
-        method: "GET",
-        success: function (data) {
-          $("#modal-post").html(data);
-        },
-      });
+  $(".abrirComentarios").click(function () {
+    var idPost = $(this).val();
+    $.ajax({
+      url: "/petiti/api/publicacao/" + idPost + "/modal",
+      method: "GET",
+      success: function (data) {
+        $("#modal-post").html(data);
+      },
     });
+  });
+
+  $(".testeModal").click(function () {
+    console.log("alo");
+  });
 
   $(".optionsDenunciaComent").click(function () {
     var id = $(this).attr("id");
@@ -293,16 +298,13 @@ $(document).ready(function () {
     } else {
       $("#menuComent" + id).css("display", "none");
     }
-      $("#denunciarCor"+id).click(function () {
-          var idComentador = $(this).attr("name");
-          console.log(idComentador);
-          $("#txtDenunciado").val(idComentador);
-          $("#txtidComentario").val(id);
-      });
+    $("#denunciarCor" + id).click(function () {
+      var idComentador = $(this).attr("name");
+      console.log(idComentador);
+      $("#txtDenunciado").val(idComentador);
+      $("#txtidComentario").val(id);
+    });
   });
-
-  
-
 });
 
 function showHideElement() {
@@ -363,8 +365,6 @@ function setupTabs() {
       tabToActivate.classList.add("tabAtiva");
     });
   });
-
-
 }
 
 function openTab(evt, tabNumber) {
@@ -461,9 +461,6 @@ $(document).ready(function () {
     $("#idUsuarioPub").val(idUsu);
     $("#idPost").val(idPost);
   });
-
-  
-
 });
 
 window.onload = function () {

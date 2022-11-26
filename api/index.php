@@ -900,9 +900,14 @@ $app->get('/publicacao/{id}', function (Request $request, Response $response, ar
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 $app->get('/publicacao/{id}/modal', function (Request $request, Response $response, array $args) {
+    error_reporting(0);
+    @session_start();
     $publicacao = new Publicacao();
     $fotoUsuario = new FotoUsuario();
+    $comentarios = new Comentario();
+    $curtidaPub = new curtidaPublicacao();
     $id = $args['id'];
+    $listaComentarios = $comentarios->listarComentarioPublicacao($id);
     $lista = $publicacao->listarPub($id);
     foreach ($lista as $linha) {
         $idPub = $linha['id'];
@@ -941,7 +946,7 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
     } else {
         $diferencaFinal = $diferencaAnos . " anos";
     }
-    $modalPub = "
+   echo "
                     <div style='display: flex; width: 100%; height: 100%;'>
 
                     <div style='width: 100%;height: 100%;'>
@@ -965,19 +970,30 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
                             </div>
                         </div>
 
-                        <div class='comentariosHolder'>
-                        
-                            <div class='comentarioHolder'>
+                        <div class='comentariosHolder'>";
+                        foreach ($listaComentarios as $comentario) {
+                        $fotoUsuarioComentario = $fotoUsuario->exibirFotoUsuario($comentario['idComentador']);
+                        $nomeUsuarioComentario = $comentario['nomeUsuario'];
+                        $loginUsuarioComentario = $comentario['loginUsuario'];
+                        $textoComentario = $comentario['textoComentario'];
 
+                           echo "<div class='comentarioHolder'>
                                 <div class='fotoDePerfil'>
-                                    <img src='#' alt=''>
+                                    <img src='$fotoUsuarioComentario' alt=''>
                                 </div>
 
                                 <div class='comentarioInfos'>
-
+                                    <div class=info>
+                                       <div style=word-break: break-all;>
+                                            <h4><span style=color: black;></span> $nome   
+                                            </h4>
+                                        </div>
+                                    </div>
                                     <div class='info'>
-                                        <div style='  word-break: break-all;'>
-                                            <h4 class='text-muted'><span style='color: black;'>Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
+                                        <div style='word-break: break-all;'>
+                                            <h4 class='text-muted'><span style='color: black;'></span> 
+                                            $textoComentario
+                                            </h4>
                                         </div>
                                     </div>
 
@@ -985,13 +1001,23 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
                                         <h5 class='text-muted'>tempo</h5>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>";
+                        }
+
+                       echo "</div>
 
                         <div class='botoesInteracao'>
 
-                            <input class='curtir' value='". $idPub."' type='checkbox'>
-
+                            ";
+                            
+                            $verificaCurtida = $curtidaPub->verificarCurtida($idPub, $_SESSION['id']);
+                            if ($verificaCurtida['boolean'] == false) { 
+                                echo "<input checked class='curtirModal' value='$idPub' type='checkbox'>";
+                            } else{     
+                                echo "<input class='curtirModal' value='$idPub' type='checkbox'>";
+                            }
+                                    
+                        echo "
                             <button class='comentar'></button>
 
                             <button class='mensagem'></button>
@@ -999,26 +1025,83 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
                         </div>
 
                         <div class='curtidas'>
-                            <h4>".$itimalias." itimalias</h4>
-
+                            <h4><b class='itimalias$idPub'>".$itimalias."</b> itimalias</h4>
                         </div>
 
                         <div class='commentArea'>
 
                             <i class='uil uil-heart'></i>
 
-                            <textarea class='TAComentario' oninput='auto_grow(this)' cols='30' rows='10' placeholder='Adicione um comentário!' maxlength='200' name='txtComentar".$idPub."' id='txtComentar".$idPub."'></textarea>
+                            <textarea class='TAComentario' oninput='auto_grow(this)' cols='30' rows='10' placeholder='Adicione um comentário!' maxlength='200' name='txtComentarModal".$idPub. "' id='txtComentarModal".$idPub."'></textarea>
 
-                            <button value='". $idPub."' class='comentar' value=''>
+                            <button value='".$idPub."' class='comentar comentarModal'>
                                 <i class='uil uil-message'></i>
                             </button>
 
                         </div>
                     </div>
+                    <script>
+                      $('.curtirModal').on('click', function () {
+                        id = $(this).val();
+                        $.ajax({
+                        type: 'POST',
+                        url: '/petiti/api/curtir',
+                        data: { idPub: id },
+                        success: function (data) {
+                            console.log('post de id ' + id + ' foi curtido');
+                            console.log(data);
+                            $('#itimalias' + id).text(data);
+                            $('.itimalias' + id).text(data);
+                        },
+                        });
+                    });
+
+                      $('.comentarModal').on('click', function () {
+                        id = $(this).val();
+                        console.log(id);
+                        var texto = $('#txtComentarModal' + id).val();
+                        console.log(texto);
+                        $.ajax({
+                        type: 'POST',
+                        url: '/petiti/api/comentar',
+                        data: { id: id, texto: texto },
+                        success: function (data) {
+                            console.log();
+                            console.log();
+                            $('<div class=comentarioHolder>'+
+                                '<div class=fotoDePerfil>'+
+                                    '<img src=$fotoUsuarioComentario alt=>'+
+                                '</div>'+
+
+                               ' <div class=comentarioInfos>'+
+
+                                   ' <div class=info>'+
+                                       '<div style=word-break: break-all;>'+
+                                            '<h4><span style=color: black;></span> $nome'   +
+                                            '</h4>'+
+                                        '</div>'+
+                                    '</div>'+
+
+                                   ' <div class=info>'+
+                                       '<div style=word-break: break-all;>'+
+                                            '<h4 class=text-muted><span style=color: black;></span>' + data[0].textoComentario +
+                                            '</h4>'+
+                                        '</div>'+
+                                    '</div>'+
+
+                                    '<div class=info>'+
+                                        '<h5 class=text-muted>tempo</h5>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'
+                            ).appendTo('.comentariosHolder');
+                            $('#txtComentarModal' + id).val('');
+                        },
+                        });
+                    });
+
+                    </script>
                 </div>";
-    $response->getBody()->write("$modalPub");
-    return $response;
-  
 });
 $app->get('/publicacoes/usuario/{id}', function (Request $request, Response $response, array $args) {
     $publicacao = new Publicacao();
