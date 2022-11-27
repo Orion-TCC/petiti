@@ -2,7 +2,7 @@
 @session_start();
 require('../../api/classes/curtidaPublicacao.php');
 require('../../api/classes/Usuario.php');
-
+require_once('../../api/classes/UsuarioSeguidor.php');
 
 
 $curtidaPub = new curtidaPublicacao();
@@ -51,6 +51,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
 $usuario = new Usuario();
 $usuario->login($_SESSION['login'], $_SESSION['senha']);
+$usuarioSeguidor  = new UsuarioSeguidor();
 ?>
 
 
@@ -355,7 +356,7 @@ $usuario->login($_SESSION['login'], $_SESSION['senha']);
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
-                                      <h3 class="hSeguidores" id="<?php echo $id; ?>"><a href="#modal-seguidores" rel="modal:open" style="color: black;"> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></a></h3>
+                                    <h3 class="hSeguidores" id="<?php echo $id; ?>"><a href="#modal-seguidores" rel="modal:open" style="color: black;"> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></a></h3>
                                     <h3 class="hSeguindo" id="<?php echo $id?>"><a href="#modal-seguindo" rel="modal:open" style="color: black;"><?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></a></h3>
                                 </div>
 

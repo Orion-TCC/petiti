@@ -694,7 +694,7 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
                 $idade = intdiv($idade, 30);
                 $arrayData[$slDiaMesAno] = "meses";
             }
-        }else if($arrayData[$slDiaMesAno] == "meses" && $idade >= 12){
+        } else if ($arrayData[$slDiaMesAno] == "meses" && $idade >= 12) {
             $idade = intdiv($idade, 12);
             $arrayData[$slDiaMesAno] = "anos";
         }
@@ -793,7 +793,7 @@ $app->post('add-pet-config', function (Request $request, Response $response, arr
     $pet->setUsuario($usuario);
 
     $pet->cadastrar($pet);
-    
+
 
     header('location: /petiti/opcoes');
 });
@@ -1857,6 +1857,8 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
     error_reporting(0);
     $fotoUsuario = new FotoUsuario();
     $usuarioSeguidor = new UsuarioSeguidor();
+    @session_start();
+    $idSession = $_SESSION['id'];
 
     $arraySeguidores = $usuarioSeguidor->pesquisaSeguidores($_POST['idUsuario']);
     $countSeguidores = count($arraySeguidores);
@@ -1872,6 +1874,15 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
         $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idSeguidor);
         $loginUsuario = $arraySeguidores[$t]['loginUsuario'];
         $nomeUsuario = $arraySeguidores[$t]['nomeUsuario'];
+        $seSegue = $usuarioSeguidor->verificarSeguidor($idSeguidor, $idSession);
+        if ($seSegue['boolean'] == true) {
+            $resultSeSegue = "";
+            $seguirOuSeguindo = "<button value='$idSeguidor' class='seguir btn btn-primary'>Seguir</button>";
+        } else {
+            $resultSeSegue = "<h5>Seguindo</h5>";
+            $seguirOuSeguindo = "<button value='$idSeguidor' class='seguir btn btn-secundary'>Seguindo</button>";
+        }
+
         echo ("
         
             <a href='/petiti/$loginUsuario' target='_blank' '>
@@ -1896,14 +1907,11 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
                                 <h4 class='text-muted'>@$loginUsuario</h4>
 
                                 </div>
-
-                                
-                                
-                                <button class='btn btn-secundary'>Seguindo</button>
+ 
+                                $seguirOuSeguindo
                             </div>
 
-                            <h5>Segue você</h5>
-                        
+                            $resultSeSegue
                         
                           </div>
                     </div>
