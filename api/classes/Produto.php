@@ -104,10 +104,10 @@ class Produto
         return $id;
     }
 
-    public function listar()
+    public function listar($id)
     {
         $con = Conexao::conexao();
-        $query = "SELECT idProduto, textoProduto, descProduto, valorProduto, statusProduto, idUsuario FROM tbProduto";
+        $query = "SELECT idProduto, textoProduto, descProduto, valorProduto, statusProduto, idUsuario, dataProduto FROM tbProduto WHERE idUsuario = $id ORDER BY dataProduto desc";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
 

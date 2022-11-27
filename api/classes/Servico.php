@@ -104,9 +104,9 @@ class Servico{
         return $id;
     }
 
-    public function listar(){
+    public function listar($id){
         $con = Conexao::conexao();
-        $query = "SELECT idServico, textoServico, descServico, valorServico, statusServico, idUsuario FROM tbServico";
+        $query = "SELECT idServico, textoServico, descServico, valorServico, statusServico, idUsuario, dataServico FROM tbServico WHERE idUsuario = $id ORDER BY dataServico desc";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
 

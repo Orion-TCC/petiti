@@ -318,7 +318,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         $data = $dados['publicacoes'][$i]['data'];
                         $texto = $dados['publicacoes'][$i]['texto'];
                         $itimalias = $dados['publicacoes'][$i]['itimalias'];
-                        $tipoPub = $dados['publicacoes'][$i]['tipoPub'];
                         $fotoUsuario = $fotousuario->exibirFotoUsuario($idUsuario);
                         $local =  $dados['publicacoes'][$i]['local'];
                         $hoje = new DateTime();
@@ -366,10 +365,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                         <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $login ?></a></h3>
                                         <small><?php echo $local ?> - há <?php echo $diferencaFinal ?></small>
                                     </div>
-                                </div>
-
-                                <div class="tipoPub">
-                                    <span id="spanTipoPub"><?php echo $tipoPub; ?></span>
                                 </div>
 
                                 <span class="edit" id="<?php echo $id; ?>">
@@ -839,13 +834,6 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                         <span>/200</span>
                                     </div>
                                 </div>
-
-                                <?php if ($_SESSION['tipo'] != "Tutor") { ?>
-                                    <select name="selProdOuServ" id="selProdOuServ">
-                                        <option value="produto">Produto</option>
-                                        <option value="servico">Serviço</option>
-                                    </select>
-                                <?php } ?>
 
                             </div>
 

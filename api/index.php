@@ -960,6 +960,24 @@ $app->get('/publicacoes/personalizadas/{id}', function (Request $request, Respon
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
+$app->get('/produtos/{id}', function (Request $request, Response $response, array $args){
+    $produto = new Produto();
+    $id = $args['id'];
+
+    $json = "{\"produtos\":" . json_encode($lista = $produto->listar($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
+$app->get('/servicos/{id}', function (Request $request, Response $response, array $args){
+    $servico = new Servico();
+    $id = $args['id'];
+
+    $json = "{\"servicos\":" . json_encode($lista = $servico->listar($id), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . "}";
+    $response->getBody()->write($json);
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+});
+
 $app->get('/publicacoes/paraVoce/{id}', function (Request $request, Response $response, array $args) {
     $categoriaSeguida = new categoriaSeguida();
     $id = $args['id'];

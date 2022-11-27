@@ -17,6 +17,18 @@ $json = file_get_contents($url);
 $dados = (array)json_decode($json, true);
 $contagem = count($dados['publicacoes']);
 
+$urlProdutos = "http://localhost/petiti/api/produtos/". $_SESSION['id'];
+
+$jsonProdutos = file_get_contents($urlProdutos);
+$dadosProdutos = (array)json_decode($jsonProdutos, true);
+$contagemProdutos = count($dadosProdutos['produtos']);
+
+$urlServicos = "http://localhost/petiti/api/servicos/". $_SESSION['id'];
+
+$jsonServicos = file_get_contents($urlServicos);
+$dadosServicos = (array)json_decode($jsonServicos, true);
+$contagemServicos = count($dadosServicos['servicos']);
+
 $urlCurtidas = "http://localhost/petiti/api/publicacoes/curtidas/" . $_SESSION['id'];
 
 $jsonCurtidas = file_get_contents($urlCurtidas);
@@ -33,10 +45,12 @@ $query = "SELECT COUNT(idUsuarioSeguidor) as qtdSeguidores FROM tbUsuarioSeguido
 $resultado = $conexao->query($query);
 $lista = $resultado->fetchAll();
 $qtdSeguidores = $lista[0]['qtdSeguidores'];
+
+$query = "SELECT COUNT(idProduto) as qtdProdutos FROM tbProduto WHERE idUsuario = $id";
+$resultado = $conexao->query($query);
+$lista = $resultado->fetchAll();
+$qtdProduto = $lista[0]['qtdProdutos'];
 ?>
-
-
-
 
 <!DOCTYPE php>
 <html lang="pt-br">
@@ -405,10 +419,17 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                             <div class="adicionarProduto">
                                 <i class="uil uil-plus-circle"></i>
                             </div>
-
+                            <?php if($contagemProdutos <1){ ?>
                             <div class="aviso">
                                 <h3>Você não possui nenhum produto ainda... Clique no quadrado acima para começar a vender seus produtos!</h3>
                             </div>
+                            <?php } else{
+                                for($p=0; $p < $contagemProdutos; $p++){
+
+                                }
+                            }
+                            
+                            ?>
                         </div>
 
 
