@@ -686,6 +686,17 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
             "m" => "meses",
             "y" => "anos",
         );
+        if ($arrayData[$slDiaMesAno] == "dias" && $idade >= 31) {
+            if ($idade >= 365) {
+                $idade = intdiv($idade, 12);
+            } else {
+                $idade = intdiv($idade, 30);
+                $arrayData[$slDiaMesAno] = "meses";
+            }
+        }else if($arrayData[$slDiaMesAno] == "meses" && $idade >= 12){
+            $idade = intdiv($idade, 12);
+            $arrayData[$slDiaMesAno] = "anos";
+        }
         $idadeCompleta = $idade . " " . $arrayData[$slDiaMesAno];
     } else {
         $arrayData = array(
@@ -1007,18 +1018,18 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
     } else {
         $diferencaFinal = $diferencaAnos . " anos";
     }
-   echo "
+    echo "
                     <div style='display: flex; width: 100%; height: 100%;'>
 
                     <div style='width: 100%;height: 100%;'>
-                        <img src='".$caminhoFoto."' alt=''>
+                        <img src='" . $caminhoFoto . "' alt=''>
                     </div>
 
                     <div class='rightSidePost'>
 
                         <div class='userElementosHolder'>
                             <div class='userElementos'>
-                                <img src='".$fotoUser."' alt='' class='fotoDePerfil'>
+                                <img src='" . $fotoUser . "' alt='' class='fotoDePerfil'>
                                 <div>
                                     <span class='textNomeUsuario'>$nome</span>
                                     <h5 class='text-muted'>$diferencaFinal</h5>
@@ -1032,13 +1043,13 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
                         </div>
 
                         <div class='comentariosHolder'>";
-                        foreach ($listaComentarios as $comentario) {
-                        $fotoUsuarioComentario = $fotoUsuario->exibirFotoUsuario($comentario['idComentador']);
-                        $nomeUsuarioComentario = $comentario['nomeUsuario'];
-                        $loginUsuarioComentario = $comentario['loginUsuario'];
-                        $textoComentario = $comentario['textoComentario'];
+    foreach ($listaComentarios as $comentario) {
+        $fotoUsuarioComentario = $fotoUsuario->exibirFotoUsuario($comentario['idComentador']);
+        $nomeUsuarioComentario = $comentario['nomeUsuario'];
+        $loginUsuarioComentario = $comentario['loginUsuario'];
+        $textoComentario = $comentario['textoComentario'];
 
-                           echo "<div class='comentarioHolder'>
+        echo "<div class='comentarioHolder'>
                                 <div class='fotoDePerfil'>
                                     <img src='$fotoUsuarioComentario' alt=''>
                                 </div>
@@ -1063,22 +1074,22 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
                                     </div>
                                 </div>
                             </div>";
-                        }
+    }
 
-                       echo "</div>
+    echo "</div>
 
                         <div class='botoesInteracao'>
 
                             ";
-                            
-                            $verificaCurtida = $curtidaPub->verificarCurtida($idPub, $_SESSION['id']);
-                            if ($verificaCurtida['boolean'] == false) { 
-                                echo "<input checked class='curtirModal' value='$idPub' type='checkbox'>";
-                            } else{     
-                                echo "<input class='curtirModal' value='$idPub' type='checkbox'>";
-                            }
-                                    
-                        echo "
+
+    $verificaCurtida = $curtidaPub->verificarCurtida($idPub, $_SESSION['id']);
+    if ($verificaCurtida['boolean'] == false) {
+        echo "<input checked class='curtirModal' value='$idPub' type='checkbox'>";
+    } else {
+        echo "<input class='curtirModal' value='$idPub' type='checkbox'>";
+    }
+
+    echo "
                             <button class='comentar'></button>
 
                             <button class='mensagem'></button>
@@ -1086,16 +1097,16 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
                         </div>
 
                         <div class='curtidas'>
-                            <h4><b class='itimalias$idPub'>".$itimalias."</b> itimalias</h4>
+                            <h4><b class='itimalias$idPub'>" . $itimalias . "</b> itimalias</h4>
                         </div>
 
                         <div class='commentArea'>
 
                             <i class='uil uil-heart'></i>
 
-                            <textarea class='TAComentario' oninput='auto_grow(this)' cols='30' rows='10' placeholder='Adicione um comentário!' maxlength='200' name='txtComentarModal".$idPub. "' id='txtComentarModal".$idPub."'></textarea>
+                            <textarea class='TAComentario' oninput='auto_grow(this)' cols='30' rows='10' placeholder='Adicione um comentário!' maxlength='200' name='txtComentarModal" . $idPub . "' id='txtComentarModal" . $idPub . "'></textarea>
 
-                            <button value='".$idPub."' class='comentar comentarModal'>
+                            <button value='" . $idPub . "' class='comentar comentarModal'>
                                 <i class='uil uil-message'></i>
                             </button>
 
@@ -1271,7 +1282,7 @@ $app->post(
     }
 );
 
-$app->post('/denunciaComentario', function (Request $request, Response $response, array $args){
+$app->post('/denunciaComentario', function (Request $request, Response $response, array $args) {
     $denunciaComentario = new denunciaComentario();
     $usuario = new Usuario();
     $cookie = new Cookies();
@@ -1298,7 +1309,6 @@ $app->post('/denunciaComentario', function (Request $request, Response $response
         <div class='progressbardenuncia'></div>
     </div>
     ", 1);
-
 });
 
 $app->post('/denunciaPublicacao', function (Request $request, Response $response, array $args) {
@@ -1793,7 +1803,7 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
          </div>
          
          <div class='segueHolder'>");
- 
+
     for ($r = 0; $r < $countSeguidores; $r++) {
         $idUsuario = $arraySeguindo[$r]['idUsuario'];
         $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idUsuario);
@@ -1838,8 +1848,8 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
             </a>
         
         ");
-    }// botão seguir pra quem for mexer nisso >>> <button class='btn btn-primary'>Seguir</button>
-    echo("</div>");
+    } // botão seguir pra quem for mexer nisso >>> <button class='btn btn-primary'>Seguir</button>
+    echo ("</div>");
 });
 
 $app->post('/pesquisa-seguidores', function (Request $request, Response $response, array $args) {
@@ -1900,8 +1910,8 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
             </a>
         
         ");
-    }// botão seguir pra quem for mexer nisso >>> <button class='btn btn-primary'>Seguir</button>
-    echo("</div>");
+    } // botão seguir pra quem for mexer nisso >>> <button class='btn btn-primary'>Seguir</button>
+    echo ("</div>");
 });
 
 $app->post('/pesquisar', function (Request $request, Response $response, array $args) {
@@ -1947,7 +1957,7 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
             if ($countResultadoUsuarios != 0) {
                 echo ("<span class='spanUsuariosEncontrados'> <i class='uil uil-search'></i> Usuarios encontrados: </span>");
                 echo ("<div class='cardsResultadoPesquisaUsuarios cardResultadoPesquisa'>");
-                
+
 
                 for ($r = 0; $r < $countResultadoUsuarios; $r++) {
                     $caminhoFotoUsuario = $fotoUsuario->exibirFotoUsuario($listaUsuarios[$r]['idUsuario']);
@@ -1995,7 +2005,7 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
 
             if ($countResultadoPets != 0) {
 
-                
+
                 echo ("<div class='cardsResultadoPesquisaPets cardResultadoPesquisa'>");
                 echo ("
                 <div style='margin-top: 1rem;'>
@@ -2083,7 +2093,7 @@ $app->get('/comentario/delete/{id}', function (Request $request, Response $respo
     $cookie = new Cookies();
     $comentario->setIdComentario($id);
     $comentario->delete($comentario);
-    
+
     $cookie->criarCookie("comentarioDeletado", "
     <div id='toast-denuncia' class='toast-denuncia'>
         <div class='toast-denuncia-content'>
