@@ -1795,7 +1795,9 @@ $app->post('/seguir-categoria', function (Request $request, Response $response, 
 $app->post('/pesquisa-seguindo', function (Request $request, Response $response, array $args) {
     error_reporting(0);
     $fotoUsuario = new FotoUsuario();
+    @session_start();
     $usuarioSeguidor = new UsuarioSeguidor();
+    $idSession = $_SESSION['id'];
 
     $arraySeguindo = $usuarioSeguidor->pesquisaSeguindo($_POST['idUsuario']);
     $countSeguidores = count($arraySeguindo);
@@ -1810,6 +1812,19 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
         $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idUsuario);
         $loginUsuario = $arraySeguindo[$r]['loginUsuario'];
         $nomeUsuario = $arraySeguindo[$r]['nomeUsuario'];
+        $seSegue = $usuarioSeguidor->verificarSeguidor($idSession, $idUsuario);
+        if ($idUsuario == $idSession) {
+            $resultSeSegue = "";
+            $seguirOuSeguindo = "";
+        } else {
+            if ($seSegue['boolean'] == true) {
+                $resultSeSegue = "";
+                $seguirOuSeguindo = "<button value='$idUsuario' class='seguir btn btn-primary'>Seguir</button>";
+            } else {
+                $resultSeSegue = "<h5>Segue vocë</h5>";
+                $seguirOuSeguindo = "<button value='$idUsuario' class='seguir btn btn-secundary'>Seguindo</button>";
+            }
+        }
         echo ("
         
             <a href='/petiti/$loginUsuario' target='_blank' '>
@@ -1835,12 +1850,10 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
 
                                 </div>
 
-                                
-                                
-                                <button class='btn btn-secundary'>Seguindo</button>
+                                $seguirOuSeguindo
                             </div>
 
-                            <h5>Segue você</h5>
+                            $resultSeSegue
                         
                         
                           </div>
@@ -1875,12 +1888,17 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
         $loginUsuario = $arraySeguidores[$t]['loginUsuario'];
         $nomeUsuario = $arraySeguidores[$t]['nomeUsuario'];
         $seSegue = $usuarioSeguidor->verificarSeguidor($idSeguidor, $idSession);
-        if ($seSegue['boolean'] == true) {
+        if ($idSeguidor == $idSession) {
             $resultSeSegue = "";
-            $seguirOuSeguindo = "<button value='$idSeguidor' class='seguir btn btn-primary'>Seguir</button>";
+            $seguirOuSeguindo = "";
         } else {
-            $resultSeSegue = "<h5>Seguindo</h5>";
-            $seguirOuSeguindo = "<button value='$idSeguidor' class='seguir btn btn-secundary'>Seguindo</button>";
+            if ($seSegue['boolean'] == true) {
+                $resultSeSegue = "";
+                $seguirOuSeguindo = "<button value='$idSeguidor' class='seguir btn btn-primary'>Seguir</button>";
+            } else {
+                $resultSeSegue = "<h5>Seguindo</h5>";
+                $seguirOuSeguindo = "<button value='$idSeguidor' class='seguir btn btn-secundary'>Seguindo</button>";
+            }
         }
 
         echo ("
