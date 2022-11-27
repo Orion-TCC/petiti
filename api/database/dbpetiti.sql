@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23-Nov-2022 às 12:16
+-- Tempo de geração: 28-Nov-2022 às 00:06
 -- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.0.13
+-- versão do PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,7 +45,9 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 (5, 'Adoção', 1),
 (6, 'Adote um amigo', 1),
 (7, 'Animal em adoção', 1),
-(8, 'Adotar', 1);
+(8, 'Adotar', 1),
+(66, 'branca', 1),
+(67, 'pastor alemao', 1);
 
 -- --------------------------------------------------------
 
@@ -178,6 +180,19 @@ CREATE TABLE `tbfotopet` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `tbfotoproduto`
+--
+
+CREATE TABLE `tbfotoproduto` (
+  `idFotoProduto` int(11) NOT NULL,
+  `caminhoFotoProduto` varchar(500) NOT NULL,
+  `nomeFotoProduto` varchar(200) NOT NULL,
+  `idProduto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `tbfotopublicacao`
 --
 
@@ -186,6 +201,19 @@ CREATE TABLE `tbfotopublicacao` (
   `caminhoFotoPublicacao` varchar(500) DEFAULT NULL,
   `nomeFotoPublicacao` varchar(200) NOT NULL,
   `idPublicacao` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tbfotoservico`
+--
+
+CREATE TABLE `tbfotoservico` (
+  `idFotoServico` int(11) NOT NULL,
+  `caminhoFotoServico` varchar(500) NOT NULL,
+  `nomeFotoServico` varchar(200) NOT NULL,
+  `idServico` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -273,6 +301,7 @@ CREATE TABLE `tbproduto` (
   `textoProduto` varchar(100) NOT NULL,
   `descProduto` varchar(150) NOT NULL,
   `valorProduto` double NOT NULL,
+  `statusProduto` int(1) NOT NULL,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -303,8 +332,16 @@ CREATE TABLE `tbservico` (
   `textoServico` varchar(50) NOT NULL,
   `descServico` varchar(150) NOT NULL,
   `valorServico` double NOT NULL,
+  `statusServico` int(1) NOT NULL,
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `tbservico`
+--
+
+INSERT INTO `tbservico` (`idServico`, `textoServico`, `descServico`, `valorServico`, `statusServico`, `idUsuario`) VALUES
+(1, 'melissa', 'melissa', 132132131, 0, 14);
 
 -- --------------------------------------------------------
 
@@ -452,11 +489,25 @@ ALTER TABLE `tbfotopet`
   ADD KEY `idPet` (`idPet`);
 
 --
+-- Índices para tabela `tbfotoproduto`
+--
+ALTER TABLE `tbfotoproduto`
+  ADD PRIMARY KEY (`idFotoProduto`),
+  ADD KEY `idProduto` (`idProduto`);
+
+--
 -- Índices para tabela `tbfotopublicacao`
 --
 ALTER TABLE `tbfotopublicacao`
   ADD PRIMARY KEY (`idFotoPublicacao`),
   ADD KEY `idPublicacao` (`idPublicacao`);
+
+--
+-- Índices para tabela `tbfotoservico`
+--
+ALTER TABLE `tbfotoservico`
+  ADD PRIMARY KEY (`idFotoServico`),
+  ADD KEY `idServico` (`idServico`);
 
 --
 -- Índices para tabela `tbfotousuario`
@@ -554,7 +605,7 @@ ALTER TABLE `tbusuarioseguidor`
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriapublicacao`
@@ -602,7 +653,13 @@ ALTER TABLE `tbdenunciausuario`
 -- AUTO_INCREMENT de tabela `tbfotopet`
 --
 ALTER TABLE `tbfotopet`
-  MODIFY `idFotoPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idFotoPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de tabela `tbfotoproduto`
+--
+ALTER TABLE `tbfotoproduto`
+  MODIFY `idFotoProduto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tbfotopublicacao`
@@ -611,10 +668,16 @@ ALTER TABLE `tbfotopublicacao`
   MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
+-- AUTO_INCREMENT de tabela `tbfotoservico`
+--
+ALTER TABLE `tbfotoservico`
+  MODIFY `idFotoServico` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `tbfotousuario`
 --
 ALTER TABLE `tbfotousuario`
-  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `tbmensagem`
@@ -632,7 +695,7 @@ ALTER TABLE `tbnotificacao`
 -- AUTO_INCREMENT de tabela `tbpet`
 --
 ALTER TABLE `tbpet`
-  MODIFY `idPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `tbpetseguidor`
@@ -644,7 +707,7 @@ ALTER TABLE `tbpetseguidor`
 -- AUTO_INCREMENT de tabela `tbproduto`
 --
 ALTER TABLE `tbproduto`
-  MODIFY `idProduto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tbpublicacao`
@@ -656,7 +719,7 @@ ALTER TABLE `tbpublicacao`
 -- AUTO_INCREMENT de tabela `tbservico`
 --
 ALTER TABLE `tbservico`
-  MODIFY `idServico` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idServico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tbtipousuario`
@@ -668,13 +731,13 @@ ALTER TABLE `tbtipousuario`
 -- AUTO_INCREMENT de tabela `tbusuario`
 --
 ALTER TABLE `tbusuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuarioendereco`
 --
 ALTER TABLE `tbusuarioendereco`
-  MODIFY `idUsuarioEndereco` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuarioEndereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuarioseguidor`
@@ -735,10 +798,22 @@ ALTER TABLE `tbfotopet`
   ADD CONSTRAINT `tbfotopet_ibfk_1` FOREIGN KEY (`idPet`) REFERENCES `tbpet` (`idPet`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Limitadores para a tabela `tbfotoproduto`
+--
+ALTER TABLE `tbfotoproduto`
+  ADD CONSTRAINT `idProduto` FOREIGN KEY (`idProduto`) REFERENCES `tbproduto` (`idProduto`);
+
+--
 -- Limitadores para a tabela `tbfotopublicacao`
 --
 ALTER TABLE `tbfotopublicacao`
   ADD CONSTRAINT `tbfotopublicacao_ibfk_1` FOREIGN KEY (`idPublicacao`) REFERENCES `tbpublicacao` (`idPublicacao`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `tbfotoservico`
+--
+ALTER TABLE `tbfotoservico`
+  ADD CONSTRAINT `idServico` FOREIGN KEY (`idServico`) REFERENCES `tbservico` (`idServico`);
 
 --
 -- Limitadores para a tabela `tbfotousuario`

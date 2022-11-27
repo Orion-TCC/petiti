@@ -2242,6 +2242,41 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
     }
 });
 
+$app->post('/cadastrar-produto-servico', function (Request $request, Response $response, array $args){
+    $produto = new Produto();
+    $servico = new Servico();
+    $usuario = new Usuario();
+    @session_start();
+
+    if($_POST['tipoCad'] == "produto"){
+        $textoProduto = $_POST['titulo'];
+        $descProduto = $_POST['descricao'];
+        $valorProduto = $_POST['valor'];
+
+        $produto->setTextoProduto($textoProduto);
+        $produto->setDescProduto($descProduto);
+        $produto->setValorProduto($valorProduto);
+        $produto->setStatusProduto(0);
+        $usuario->setIdUsuario($_SESSION['id']);
+        $produto->setUsuario($usuario);
+        $produto->cadastrar($produto);
+        header('location: /petiti/decidir-perfil');
+    }else{
+        $textoServico = $_POST['titulo'];
+        $descServico = $_POST['descricao'];
+        $valorServico = $_POST['valor'];
+
+        $servico->setTextoServico($textoServico);
+        $servico->setDescServico($descServico);
+        $servico->setValorServico($valorServico);
+        $servico->setStatusServico(0);
+        $usuario->setIdUsuario($_SESSION['id']);
+        $servico->setUsuario($usuario);
+        $servico->cadastrar($servico);
+        header('location: /petiti/decidir-perfil');
+    }
+});
+
 $app->get('/comentario/delete/{id}', function (Request $request, Response $response, array $args) {
     $id = $args['id'];
     $comentario =  new Comentario();

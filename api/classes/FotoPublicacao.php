@@ -7,41 +7,49 @@ class FotoPublicacao
     private $nomeFotoPublicacao;
     private $publicacao;
 
-    public function getPublicacao(){
+    public function getPublicacao()
+    {
         return $this->publicacao;
     }
 
-    public function setPublicacao($Publicacao){
+    public function setPublicacao($Publicacao)
+    {
         $this->publicacao = $Publicacao;
 
         return $this;
     }
 
-    public function getNomeFotoPublicacao(){
+    public function getNomeFotoPublicacao()
+    {
         return $this->nomeFotoPublicacao;
     }
 
-    public function setNomeFotoPublicacao($nomeFotoPublicacao){
+    public function setNomeFotoPublicacao($nomeFotoPublicacao)
+    {
         $this->nomeFotoPublicacao = $nomeFotoPublicacao;
 
         return $this;
     }
 
-    public function getCaminhoFotoPublicacao(){
+    public function getCaminhoFotoPublicacao()
+    {
         return $this->caminhoFotoPublicacao;
     }
 
-    public function setCaminhoFotoPublicacao($caminhoFotoPublicacao){
+    public function setCaminhoFotoPublicacao($caminhoFotoPublicacao)
+    {
         $this->caminhoFotoPublicacao = $caminhoFotoPublicacao;
 
         return $this;
     }
 
-    public function getIdFotoPublicacao(){
+    public function getIdFotoPublicacao()
+    {
         return $this->idFotoPublicacao;
     }
 
-    public function setIdFotoPublicacao($idFotoPublicacao){
+    public function setIdFotoPublicacao($idFotoPublicacao)
+    {
         $this->idFotoPublicacao = $idFotoPublicacao;
 
         return $this;
@@ -62,16 +70,15 @@ class FotoPublicacao
     }
 
     public function exibirFotoPublicacao($id)
-        {
-                $con = Conexao::conexao();
-                $query = "SELECT caminhoFotoPublicacao FROM `tbfotoPublicacao` WHERE idFotoPublicacao = (SELECT MAX(idFotoPublicacao) FROM tbfotoPublicacao WHERE idPublicacao = $id)";
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT caminhoFotoPublicacao FROM `tbfotoPublicacao` WHERE idFotoPublicacao = (SELECT MAX(idFotoPublicacao) FROM tbfotoPublicacao WHERE idPublicacao = $id)";
 
-                $resultado = $con->query($query);
-                $lista = $resultado->fetchAll();
-                foreach ($lista as $linha) {
-                        $caminhoFoto = $linha[0];
-                }
-                return $caminhoFoto;
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll();
+        foreach ($lista as $linha) {
+            $caminhoFoto = $linha[0];
         }
-    
+        return $caminhoFoto;
+    }
 }
