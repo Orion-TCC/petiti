@@ -688,8 +688,7 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
         );
         if ($arrayData[$slDiaMesAno] == "dias" && $idade >= 31) {
             if ($idade >= 365) {
-                $idade = intdiv($idade, 30);
-                $idade = intdiv($idade, 12);
+                $idade = intdiv($idade, 365);
                 $arrayData[$slDiaMesAno] = "anos";
             } else {
                 $idade = intdiv($idade, 30);
