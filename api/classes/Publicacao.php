@@ -125,7 +125,6 @@ class Publicacao
     textoPublicacao AS texto,
     dataPublicacao AS data,
     localPub AS local,
-    tipoPublicacao as tipoPub,
     tbpublicacao.idUsuario AS idUsuario,
     nomeUsuario AS nome,
     loginUsuario AS login,

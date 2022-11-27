@@ -707,3 +707,28 @@
   gap: 0.8rem;
   width: 100%;
 }
+
+#modal-servico-produto h2{
+  margin-left: 0.7rem;
+}
+
+#modal-servico-produto form{
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.7rem;
+}
+
+#modal-servico-produto form input[type = "text"], #modal-servico-produto form input[type = "number"]{
+  width: 300px;
+  height: 30px;
+}
+
+#modal-servico-produto form select {
+  width: 100px;
+  height: 30px;
+}
+
+#modal-servico-produto form input[type = "submit"]{
+  width: 80px;
+  height: 30px;
+}
