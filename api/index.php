@@ -739,6 +739,67 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     header('location: /petiti/foto-pet');
 });
 
+$app->post('add-pet-config', function (Request $request, Response $response, array $args) {
+    $usuario = new Usuario();
+    $pet = new Pet();
+    $categoria = new categoria();
+    $cookie = new Cookies();
+    $arrayEspecies = array(
+        1 => "Cachorro",
+        2 => "Gato",
+        3 => "Roedor",
+        4 => "Ave",
+        5 => "Exótico"
+    );
+
+    $idade = $_POST['txtIdadePet'];
+    $slDiaMesAno = $_POST['slIdade'];
+    if ($idade > 1) {
+        $arrayData = array(
+            "d" => "dias",
+            "m" => "meses",
+            "y" => "anos",
+        );
+        $idadeCompleta = $idade . " " . $arrayData[$slDiaMesAno];
+    } else {
+        $arrayData = array(
+            "d" => "dia",
+            "m" => "mês",
+            "y" => "ano",
+        );
+        $idadeCompleta = $idade . " " . $arrayData[$slDiaMesAno];
+    }
+
+
+    @session_start();
+
+
+    if ($_POST['slEspecie'] == 0) {
+        $cookie->criarCookie('retorno-erro-especie', "Selecione uma espécie", 1);
+        header('location: /petiti/opcoes');
+    }
+    $especie = $arrayEspecies[$_POST['slEspecie']];
+    $raca = $_POST['txtRacaPet'];
+    $boolCategoria = $categoria->verificarCategoria($raca);
+    if ($boolCategoria == true) {
+        $categoria->setCategoria($raca);
+        $categoria->cadastrar($categoria);
+    }
+    $pet->setUsuarioPet($_POST['txtUserPet']);
+    $pet->setNomePet($_POST['txtNomePet']);
+    $pet->setRacaPet($_POST['txtRacaPet']);
+    $pet->setEspeciePet($especie);
+    $pet->setIdadePet($idadeCompleta);
+    $usuario->setIdUsuario($_SESSION['id']);
+    $pet->setUsuario($usuario);
+
+    $pet->cadastrar($pet);
+    
+
+    header('location: /petiti/opcoes');
+});
+
+
 $app->get('/ativar-pet/{id}', function (Request $request, Response $response, array $args) {
     $pet = new Pet();
     $cookie = new Cookies();
@@ -1973,7 +2034,7 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
                                   </div>
                                     
                                   <span class='text-muted' style='font-size: 0.8rem;'>@$resultadoBuscaAtual</span>
-                                  <span class='text-muted' style='font-size: 0.8rem; width: 28rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>biografia biografia biografia biografia biografia biografia biografia biografiabiografiabiografia</span>
+                                  <span class='text-muted' style='font-size: 0.8rem; width: 26rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>biografia biografia biografia biografia biografia biografia biografia biografiabiografiabiografia</span>
 
                                 </div>
 

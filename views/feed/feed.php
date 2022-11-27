@@ -80,7 +80,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         <div class="fotoDePerfil">
                             <img src="<?php echo $_SESSION['foto']; ?>" alt="">
                         </div>
-                        <h3><a href="tutor-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
+                        <h3><a href="/petiti/decidir-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
                     </div>
 
                     <?php for ($p = 0; $p < $contagemPets; $p++) { ?>
@@ -451,7 +451,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <?php }
                                     ?>
 
-                                    <a href="#modal-post" rel="modal:open"><button class="abrirComentarios" value="<?php echo $id?>"></button></a>
+                                    <a href="#modal-post" rel="modal:open"><button class="abrirComentarios " value="<?php echo $id?>"></button></a>
 
                                     <button class="mensagem"></button>
 
@@ -552,7 +552,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 } ?>
                             </div>
 
-                            <a href="#modal-post" rel="modal:open" style="color: black; width: fit-content;"><button class="abrirComentarios" value="<?php echo $id?>"> Ver mais...</button></a>
+                            <a href="#modal-post" rel="modal:open"><button class="abrirComentarios ahrefVermais" value="<?php echo $id?>"> Ver mais...</button></a>
 
                             <div class="commentArea" id="<?php echo $id; ?>">
                                 <i class="uil uil-heart"></i>
