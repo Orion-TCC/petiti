@@ -377,39 +377,47 @@ if (isset($_COOKIE['denuncia'])) {
                                     <div class="menuPost" id="menuPost">
                                         <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
                                             <?php if ($login != $_SESSION['login']) { ?>
-                                                <?php
-                                                $verificadorSeguindo = $usuarioSeguidor->verificarSeguidor($idUsuario, $_SESSION['id']);
-                                                if ($verificadorSeguindo['boolean'] == "false") { ?>
-                                                    <li class="seguir-na-postagem" id="<?php echo $idUsuario ?>"><i id="icon-seguir-post" class="fa-sharp fa-solid fa-user-plus"></i><span class="deixSeguir">Seguir</span></li>
-                                                <?php
-                                                } else {
-                                                ?><li class="seguir-na-postagem" id="<?php echo $idUsuario ?>"><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixSeguir">Deixar de seguir</span></li>
-                                                <?php
-                                                }
-                                                ?>
-
+                                                <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixaSeguir">Deixar de seguir</span></li>
                                                 <a href="#modal-denuncia" rel="modal:open">
                                                     <div id="<?php echo $id; ?>" class="postDenunciado">
                                                         <div id="<?php echo $idUsuarioPub; ?>" class="denunciaPost">
-                                                            <li id="denunciarcor">
+                                                            <li id="denunciarCor">
 
-                                                                <i class="fa-solid fa-circle-exclamation">
-                                                                </i>
+                                                                <i class="fa-solid fa-circle-exclamation"></i>
                                                                 <span>Denunciar</span>
-
 
                                                             </li>
                                                         </div>
                                                     </div>
                                                 </a>
                                             <?php } else { ?>
-                                                <a id="linkDeletePub" href="/petiti/api/publicacao/delete/<?php echo $id; ?>">
-                                                    <li>
-                                                        <div style="display: flex; align-items: center;">
-                                                            <i class="uil uil-minus-circle"></i>
-                                                            <span class="excluirPost" id="<?php echo $id; ?>">Excluir Post</span>
+                                                <li class="li-EditarPost">
+                                                    <div style="display: flex; align-items: center;">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                        <span class="editarPost"> Editar Post </span>
+                                                    </div>
+                                                </li>
+                                                <li class="li-ExcluirPost">
+                                                    <div style="display: flex; align-items: center;">
+
+                                                        <i style="color: #DB310C;" class="uil uil-minus-circle"></i>
+                                                        <span class="excluirPost">Excluir Post</span>
+
+                                                        <div id="modal-exclui-post" class="modal certeza-excluir">
+                                                            <div class="innerCerteza-excluir">
+
+                                                                <h2 style="font-family: 'Raleway Extra Bold';">Excluir post?</h2>
+                                                                <h5>Após excluir, essa ação não poderá ser desfeita, e o post será removido do seu perfil, da timeline de outras contas e dos resultados de busca.</h5>
+
+                                                                <div class="opcoes-certeza-excluir">
+                                                                    <a href="/petiti/api/publicacao/delete/<?php echo $id; ?>"><button class="btn btn-primary excluir">Excluir</button></a>
+                                                                    <button class="btn btn-primary cancelar"> <a rel="modal:close">Cancelar</a></button>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </li>
+
+                                                    </div>
+                                                </li>
                                                 </a>
                                             <?php } ?>
                                         </ul>
@@ -424,6 +432,7 @@ if (isset($_COOKIE['denuncia'])) {
                             <div class="imagemPost">
                                 <img src="<?php echo $foto ?>" alt="">
                             </div>
+
 
                             <div class="botoes">
                                 <div class="botoesDeInteracao">
@@ -441,7 +450,7 @@ if (isset($_COOKIE['denuncia'])) {
                                     <?php }
                                     ?>
 
-                                    <a href="#modal-post" rel="modal:open"><button class="comentar"></button></a>
+                                    <a href="#modal-post" rel="modal:open"><button class="abrirComentarios" value="<?php echo $id?>"></button></a>
 
                                     <button class="mensagem"></button>
 
@@ -463,7 +472,8 @@ if (isset($_COOKIE['denuncia'])) {
                             </div>
 
                             <div class="caption">
-                                <span class="text-bold"> <?php echo $login; ?></span> <span class="text-muted"><?php echo $texto ?></span>
+                                <h4> <?php echo $login; ?></h4>
+                                <h5 class="text-muted"><?php echo $texto ?></h5>
                             </div>
 
 
@@ -489,26 +499,30 @@ if (isset($_COOKIE['denuncia'])) {
                                         $idComentarioAtual = $dadosComentarios['comentarios'][$c]['idComentario']
                                         ?>
 
-                                        <div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem; position: relative;'>
+                                        <div style='display: flex; flex-direction: row; align-items: center; position: relative; justify-content: space-between;'>
 
+                                        <div class="flex-row" style="align-items: center; gap: 0.6rem;">
                                             <h2 style='font-weight: 900 !important; align-self: start;'>
                                                 <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
                                             </h2>
 
-                                            <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap;overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
+                                            <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
                                                 <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
                                             </h3>
+                                        </div>
 
-                                            <div class="optionsDenunciaComent" id="<?php echo "$c"; ?>">
+                                            <div class="optionsDenunciaComent" id="<?php echo "$idComentarioAtual"; ?>">
                                                 <i class="uil uil-ellipsis-h commentEllipsis"></i>
                                             </div>
 
-                                            <div class="menuComent" id="menuComent<?php echo "$c"; ?>" style="display: none;">
+                                            <div class="menuComent" id="menuComent<?php echo "$idComentarioAtual"; ?>" style="display: none;">
 
-                                                <div id="denunciarCor" class="menuComentElement">
-                                                    <i class="fa-solid fa-circle-exclamation"></i>
-                                                    <span>Denunciar</span>
-                                                </div>
+                                                <a href="#modal-denuncia-comentario" rel="modal:open">
+                                                    <div style="color: #DB310C;" id="denunciarCor<?php echo "$idComentarioAtual"; ?>" name="<?php echo $dadosComentarios['comentarios'][$c]['idComentador']; ?>" class="menuComentElement">
+                                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                                        <span>Denunciar</span>
+                                                    </div>
+                                                </a>
 
                                                 <?php
                                                 if (($_SESSION['login'] == $login) || ($dadosComentarios['comentarios'][$c]['loginUsuario'] == $_SESSION['login'])) { ?>
@@ -536,6 +550,9 @@ if (isset($_COOKIE['denuncia'])) {
                                 } ?>
                             </div>
 
+
+                            <a href="#modal-post" rel="modal:open"><button class="abrirComentarios ahrefVermais" value="<?php echo $id?>"> Ver mais...</button></a>
+
                             <div class="commentArea" id="<?php echo $id; ?>">
                                 <i class="uil uil-heart"></i>
                                 <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>" class="TAComentario<?php echo $id; ?>"></textarea>
@@ -543,15 +560,15 @@ if (isset($_COOKIE['denuncia'])) {
                                 <button value="<?php echo $id ?>" class="comentar" value="">
                                     <i class="uil uil-message"></i>
                                 </button>
-
-                                <div class="letraCont">
-                                    <div class="contagemChar">
-                                        <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
-                                        <span>/200</span>
-                                    </div>
-                                </div>
                             </div>
 
+                            <div class="contagemChar">
+
+                                <div class="flex-row" style="width: 100%; justify-content: end;">
+                                    <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
+                                    <span>/200</span>
+                                </div>
+                            </div>
                         </div>
                     <?php $contadorPostagem++;
                     }
@@ -770,6 +787,7 @@ if (isset($_COOKIE['denuncia'])) {
             </div>
         </section>
 
+
         <section>
             <div id="criar-post" class="modal">
                 <form id="form-aid" method="post" action="./api/publicar">
@@ -793,7 +811,7 @@ if (isset($_COOKIE['denuncia'])) {
                                 <div class="userElementos">
 
                                     <div class="fotoDePerfil">
-                                        <img class="imagemUser" src="<?php echo $_SESSION['foto']; ?>" alt="">
+                                        <img class="imagemUser hvr-icon-up" src="<?php echo $_SESSION['foto']; ?>" alt="">
                                     </div>
 
                                     <span class="textNomeUsuario"><?php echo $_SESSION['nome']; ?></span>
@@ -802,25 +820,24 @@ if (isset($_COOKIE['denuncia'])) {
 
                                 <textarea name="txtLegendaPub" id="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!" maxlength="200"></textarea>
 
-                                <?php if ($_SESSION['tipo'] != "Tutor") {
-                                ?>
 
-                                    <label for="checkImp">Impulsionar</label>
-                                    <input type="checkbox" name="checkImp" id="checkImp">
-
-                                <?php } ?>
-
-                                <input type="hidden" name="categoriasValue" id="categoriasValue" value="">
+                                <input type="hidden" name="categoriasValue" id="categoriasValue">
 
                                 <input type="hidden" name="baseFoto" id="baseFoto">
 
 
-                                <div class="letraCont">
-                                    <div class="contagemChar">
-                                        <input type="text" value="0" id="contagemCharInput" disabled>
-                                        <span>/200</span>
-                                    </div>
+                                <div class="contagemChar">
+                                                                <?php if ($_SESSION['tipo'] != "Tutor") {
+                                ?>
+                                    <input type="checkbox" name="checkImp" id="checkImp">
+                                    <label for="checkImp" class="hvr-bob "></label>
+                                    <?php } ?>
+                                <div>
+                                    <input type="text" value="0" id="contagemCharInput" disabled>
+                                    <span>/200</span>
                                 </div>
+                                </div>
+
 
                             </div>
 
@@ -868,114 +885,71 @@ if (isset($_COOKIE['denuncia'])) {
                             </div>
                         </div>
 
-
-
                     </div>
+
             </div>
             </form>
             </div>
         </section>
 
+
         <section>
+
             <a href="#modal-denuncia" rel="modal:open">
-                <div id="modal-denuncia" class="modal">
+
+                <div id="modal-denuncia" class="modal denuncia">
+
                     <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+
                         <input type="hidden" id="idPost" name="idPost" value="">
+
                         <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
-                        <span class="spanDenuncia">Denuniar</span>
-                        <input type="text" name="txtDenuncia" id="txtDenuncia" placeholder="Ex: Maus tratos ao animal presente na publicação">
-                        <input class="submitDenuncia" type="submit" value="Denunciar">
+
+                        <h1>Denunciar</h1>
+
+                        <h5 class="text-muted">Você está denunciando o post de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
+
+                        <div style="width: 99%;">
+                            <h4>Causa:</h4>
+                            <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200"></textarea>
+                        </div>
+
+                        <input class="btn btn-primary" type="submit" value="Denunciar">
+
                     </form>
+
                 </div>
+
+        </section>
+
+        <section>
+            <div id="modal-post" class="modal post">
+
+            </div>
+        </section>
+
+        
+        <section>
+            <div class="modal" id="modal-denuncia-comentario">
+                <div class="modal-denuncia-comentario-elements">
+                    <div class="titulo-denuncia-comentario">
+                        <h2>Denunciar Comentário</h2>
+                    </div>
+                    <div class="form-denuncia-comentario">
+                        <form action="/petiti/api/denunciaComentario" method="post">
+                            <input type="hidden" id="txtDenunciado" name="txtDenunciado" value="">
+                            <input type="hidden" name="txtidComentario" id="txtidComentario" value="">
+                            <input type="text" required placeholder="Motivo da denuncia: " name="txtMotivoDenunciaComentario" id="txtMotivoDenunciaComentario">
+                            <input type="submit" value="Denunciar">
+                        </form>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- fim Modals -->
 
-        <section>
-            <div id="modal-post" class="modal post">
-                <div style="display: flex; width: 100%; height: 100%;">
 
-                    <div id="preview-crop-image">
-                        <img src="#" alt="">
-                    </div>
-
-
-                    <div class="rightSidePost">
-
-                        <div class="userElementosHolder">
-                            <div class="userElementos">
-                                <img src="#" alt="" class="fotoDePerfil">
-                                <div>
-                                    <span class="textNomeUsuario">nome</span>
-                                    <h5 class="text-muted">data</h5>
-                                </div>
-                            </div>
-
-                            <div class="editButton">
-                                <div class="menuPostHover"></div>
-                                <i class="uil uil-ellipsis-v"></i>
-                            </div>
-                        </div>
-
-                        <div class="comentariosHolder">
-
-                            <div class="comentarioHolder">
-
-                                <div class="fotoDePerfil">
-                                    <img src="#" alt="">
-                                </div>
-
-                                <div class="comentarioInfos">
-
-                                    <div class="info">
-                                        <div style="  word-break: break-all;">
-                                            <h4 class="text-muted"><span style="color: black;">Nome</span> comentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentariocomentario</h4>
-                                        </div>
-                                    </div>
-
-                                    <div class="info">
-                                        <h5 class="text-muted">tempo</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="botoesInteracao">
-
-                            <input class="curtir" value="<?php echo $id ?>" type="checkbox">
-
-                            <button class="comentar"></button>
-
-                            <button class="mensagem"></button>
-
-                        </div>
-
-                        <div class="curtidas">
-                            <h4>0 itimalias</h4>
-
-                        </div>
-
-                        <div class="commentArea">
-
-                            <i class="uil uil-heart"></i>
-
-                            <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>"></textarea>
-
-                            <button value="<?php echo $id ?>" class="comentar" value="">
-                                <i class="uil uil-message"></i>
-                            </button>
-
-
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-            </div>
-        </section>
 
 
     </main>

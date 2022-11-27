@@ -335,16 +335,20 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <div class="infoArea">
                                     <h3>Senha nova</h3>
-                                    <input name="txtSenhaNova1" type="text" placeholder="senha nova">
+                                    <input id="txtPw"  name="txtSenhaNova1" type="text" placeholder="senha nova">
+                                     <p id="senhaAvisoTamanho"></p>
                                 </div>
+                                
 
                                 <div class="infoArea">
                                     <h3>Confirmar senha nova</h3>
-                                    <input name="txtSenhaNova2" type="text" placeholder="Confirmar senha nova">
+                                    <input  id="txtPwConfirm" name="txtSenhaNova2" type="text" placeholder="Confirmar senha nova">
+                                    <p id="senhaAvisoVerificacao"></p>
                                 </div>
+                                
 
                                 <div class="botoesInfoArea">
-                                    <button class="btn btn-primary">Alterar senha</button>
+                                    <button id="btnSenhaConfirmar" class="btn btn-primary">Alterar senha</button>
                                     <label class="hover-2 ">Esqueceu a senha?</label>
                                 </div>
 
@@ -355,7 +359,7 @@ $contagemPets = count($dadosPets['pets']);
 
 
                     <div class="tabs-conteudo tabHolder adicionarPet" id="3">
-                        <form action="">
+                        <form action="/petiti/api/update-senha" method="POST">
 
                             <div class="imageHandler">
 
@@ -366,7 +370,7 @@ $contagemPets = count($dadosPets['pets']);
 
 
                                     <label class="flFotoPerfil">
-                                        <input id="flFotoPerfilPet" type="file" accept=".jpg, .png">
+                                        <input name="" id="flFotoPerfilPet" type="file" accept=".jpg, .png">
                                     </label>
                                 </div>
 
@@ -387,24 +391,23 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <div class="infoArea">
                                     <h3>Nome de Usuario</h3>
-                                    <input id="txtLoginPet" type="text" placeholder="Nome de usuario">
+                                    <input name="txtUserPet" id="txtLoginPet" type="text" placeholder="Nome de usuario">
                                     <p class="avisoNomeUsuarioValidacao"></p>
                                     <p class="avisoNomeUsuarioQtd"></p>
                                 </div>
-
+                                <div class="infoArea">
                                 <select name="slEspecie" id="slEspecie" required class="SelectEspecie">
                                     <option selected disabled style="color: #000000; font-family: 'Raleway Bold';" value="0">Escolha</option>
-
                                     <option style="color: #000000; font-family: 'Raleway Bold';" value="1">Cachorro</option>
                                     <option style="color: #000000; font-family: 'Raleway Bold';" value="2">Gato</option>
                                     <option style="color: #000000; font-family: 'Raleway Bold';" value="3">Roedor</option>
                                     <option style="color: #000000; font-family: 'Raleway Bold';" value="4">Ave</option>
                                     <option style="color: #000000; font-family: 'Raleway Bold';" value="5">Exótico</option>
                                 </select>
-
+                                </div>
                                 <div class="infoArea">
                                     <h3>Raça</h3>
-                                    <input type="text" placeholder="Insira a raça">
+                                    <input name="txtRacaPet" type="text" placeholder="Insira a raça">
                                 </div>
 
                                 <div class="infoArea idadePet">
@@ -423,7 +426,6 @@ $contagemPets = count($dadosPets['pets']);
                                 <div class="botoesInfoArea">
                                     <button class="btn btn-primary">Salvar</button>
                                 </div>
-
                             </div>
 
                         </form>

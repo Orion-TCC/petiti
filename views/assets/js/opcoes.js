@@ -151,4 +151,63 @@ $(document).ready(function () {
   $("#txtIdadePet").on("input", function () {
     this.value = this.value.replace(/[^0-9]/g, "");
   });
+  $("#txtPw").keyup(function () {
+    var senha = $("#txtPwConfirm").val();
+    var tamanhoSenha = $("#txtPw").val().length;
+
+    if (tamanhoSenha > 0) {
+      if (senha == $(this).val()) {
+        $("#senhaAvisoVerificacao").text("Senhas correspondem.");
+        $("#senhaAvisoVerificacao").addClass("textoCerto");
+        $("#senhaAvisoVerificacao").removeClass("textoErrado");
+        $("#btnSenhaConfirmar").prop("disabled", false);
+
+      } else {
+        $("#senhaAvisoVerificacao").text("Senhas não correspondem.");
+        $("#senhaAvisoVerificacao").addClass("textoErrado");
+        $("#senhaAvisoVerificacao").removeClass("textoCerto");
+        $("#btnSenhaConfirmar").prop("disabled", true);
+
+      }
+    } else {
+      $("#senhaAvisoVerificacao").text("");
+    }
+  });
+
+  $("#txtPwConfirm").keyup(function () {
+    var senha = $("#txtPw").val();
+    var tamanhoSenha = $("#txtPwConfirm").val().length;
+
+    if (tamanhoSenha > 0) {
+      if (senha == $(this).val()) {
+        $("#senhaAvisoVerificacao").text("Senhas correspondem.");
+        $("#senhaAvisoVerificacao").addClass("textoCerto");
+        $("#senhaAvisoVerificacao").removeClass("textoErrado");
+        $("#btnSenhaConfirmar").prop("disabled", false);
+      } else {
+        $("#senhaAvisoVerificacao").text("Senhas não correspondem.");
+        $("#senhaAvisoVerificacao").addClass("textoErrado");
+        $("#senhaAvisoVerificacao").removeClass("textoCerto");
+         $("#btnSenhaConfirmar").prop("disabled", true);
+      }
+    } else {
+      $("#senhaAvisoVerificacao").text("");
+    }
+  });
+
+  $("#txtPw").keyup(function () {
+    var tamanhoSenha = $("#txtPw").val().length;
+
+    if (tamanhoSenha < 6) {
+      $("#senhaAvisoTamanho").text(
+        "Utilize uma senha com 6 ou mais caracteres."
+      );
+      $("#senhaAvisoTamanho").addClass("textoErrado");
+      $("#senhaAvisoTamanho").removeClass("textoCerto");
+    } else {
+      $("#senhaAvisoTamanho").text("Senha válida");
+      $("#senhaAvisoTamanho").addClass("textoCerto");
+      $("#senhaAvisoTamanho").removeClass("textoErrado");
+    }
+  });
 });
