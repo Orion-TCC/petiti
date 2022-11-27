@@ -35,9 +35,56 @@ foreach ($lista as $linha) {
   $qtdEmpresas = $linha[0];
 }
 //
-$query = "SELECT COUNT(idPublicacao) as qtd, MONTHNAME(dataPublicacao) as mes FROM `tbpublicacao` GROUP BY MONTH(dataPublicacao)";
+$query = "SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-01-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 1
+UNION 
+SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-02-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 2
+UNION 
+SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-03-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 3
+UNION 
+SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-04-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 4
+UNION 
+SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-05-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 5
+UNION 
+SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-06-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 6
+UNION 
+SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-07-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 7
+UNION 
+SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-08-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 8
+UNION 
+SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-09-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 9
+UNION 
+SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-10-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 10
+UNION 
+SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-11-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 11
+UNION 
+SELECT COUNT(idPublicacao) as qtd, IFNULL(MONTHNAME(dataPublicacao), MONTHNAME('2022-12-01')) as mes FROM `tbpublicacao` WHERE MONTH(dataPublicacao) = 12
+";
 $resultado = $con->query($query);
-$listaPostsMes = $resultado->fetchAll();
+$listaPostsMes = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+$query = "SELECT COUNT(idUsuario) AS qtd,
+ CASE 
+ WHEN 
+ EXTRACT(DAY from dataCriacaoConta) < 8 THEN 'Semana 1'
+ WHEN EXTRACT(DAY from dataCriacaoConta) < 15 THEN 'Semana 2'
+ WHEN EXTRACT(DAY from dataCriacaoConta) < 22 THEN 'Semana 3'
+ ELSE 'Semana 4'
+ END AS semana
+ FROM tbusuario WHERE MONTH(dataCriacaoConta) = MONTH(CURRENT_DATE) 
+ group BY semana
+ ORDER BY EXTRACT(DAY from dataCriacaoConta)
+";
+$resultado = $con->query($query);
+$listaUsuarioSemana = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+
+$query = "SELECT COUNT(CASE WHEN pubImpulso = 1 then 1 else null end) as 'Com Impulso', 
+COUNT(CASE  WHEN pubImpulso = 0 then 1 else null end) as 'Sem Impulso'  FROM tbpublicacao;
+";
+$resultado = $con->query($query);
+$listaQtdImpulso = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 $denunciaPublicacao = new DenunciaPublicacao();
 $denunciaUsuario = new DenunciaUsuario();
@@ -63,34 +110,119 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
   <!--style-->
   <link rel="stylesheet" href="/petiti/private-adm/dashboard/pages/dashboard/dashboard.css" />
   <script>
-    const labels = [
-      '<?php foreach ($listaPostsMes as $linha) {
-          echo $linha['mes'];
-        } ?>',
-    ];
+    //Gráfico postgens ao mes
+    const labels = [<?php foreach ($listaPostsMes as $linha) {
+                      echo "'" . $linha['mes'] . "',";
+                    } ?>];
+
     const data = {
       labels: labels,
       datasets: [{
         label: 'Qtd. de publicações ao mês',
-        backgroundColor: '#BAD5DB',
-
-        barPercentage: 1.5,
-        barThickness: 6,
-        maxBarThickness: 8,
-        minBarLength: 2,
+        backgroundColor: '#9998D3',
         data: [<?php foreach ($listaPostsMes as $linha) {
-                  echo $linha['qtd'];
-                } ?>, ],
+                  echo "" . $linha['qtd'] . ",";
+                } ?>]
       }]
     };
 
     const config = {
-      type: 'bar',
+      type: 'line',
       data: data,
-      options: {}
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 20
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            suggestedMax: 30,
+            ticks: {
+              precision: 0
+            }
+          }
+        }
+      }
+    };
+
+    const labelsSemana = [<?php foreach ($listaUsuarioSemana as $linha) {
+                            echo "'" . $linha['semana'] . "',";
+                          } ?>];
+
+    const dataSemana = {
+      labels: labelsSemana,
+      datasets: [{
+        label: 'Novos usuários por semana',
+        backgroundColor: '#9998D3',
+        data: [<?php foreach ($listaUsuarioSemana as $linha) {
+                  echo "" . $linha['qtd'] . ",";
+                } ?>]
+      }]
+    };
+
+    const configSemana = {
+      type: 'bar',
+      data: dataSemana,
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 20
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            suggestedMax: 30,
+            ticks: {
+              precision: 0
+            }
+          }
+        }
+      }
+    };
+
+    const labelsImpulso = ["Impulsionadas", "Comuns"];
+
+    const dataImpulso = {
+      labels: labelsImpulso,
+      datasets: [{
+        label: 'Qtd. de posts comuns e impulsionados',
+        backgroundColor: ['#9998D3', '#FBD3A4'],
+        data: [<?php foreach ($listaQtdImpulso as $linha) {
+                  echo "" . $linha['Com Impulso'] . "," . $linha['Sem Impulso'];
+                } ?>]
+      }]
+    };
+
+    const configImpulso = {
+      type: 'pie',
+      data: dataImpulso,
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 20
+              }
+            }
+          }
+        }
+      }
     };
   </script>
 </head>
+
+
+
+
 
 <body>
   <div class="container">
@@ -194,11 +326,9 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
       <div class="informacoes">
         <h2>Informações da Pet Iti</h2>
         <div class="graficos">
-          <canvas id="myChart" width="700" height="300"></canvas>
-
-          <div>
-          </div>
-
+          <canvas id="myChart" width="350" height="150"></canvas>
+          <canvas id="myChartSemana" width="350" height="150"></canvas>
+          <canvas id="myChartImpulso" width="350" height="150"></canvas>
         </div>
       </div>
     </main>
@@ -334,6 +464,14 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
     const myChart = new Chart(
       document.getElementById('myChart'),
       config
+    );
+    const myChartSemana = new Chart(
+      document.getElementById('myChartSemana'),
+      configSemana
+    );
+    const myChartImpulso = new Chart(
+      document.getElementById('myChartImpulso'),
+      configImpulso
     );
   </script>
 </body>
