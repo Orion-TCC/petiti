@@ -81,5 +81,16 @@ class PetSeguidor
             return $array;
         }
     }
+
+    public function pesquisaSeguidores($idPet){
+        $con = Conexao::conexao();
+        $query = "SELECT tbpetseguidor.idSeguidor, idPetSeguido, innerUsuario.loginUsuario, innerUsuario.nomeUsuario, innerTipoUsuario.tipousuario as tipoUsuario FROM tbpetseguidor
+        INNER JOIN tbUsuario innerUsuario ON innerUsuario.idusuario = tbpetseguidor.idSeguidor
+        INNER JOIN tbTipoUsuario innertipousuario ON innertipousuario.idTipoUsuario = innerUsuario.idTipoUsuario
+        WHERE idPetSeguido = $idPet";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll();
+        return $lista;
+    }
 }
 ?>

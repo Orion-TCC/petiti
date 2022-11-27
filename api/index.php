@@ -1813,6 +1813,14 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
         $loginUsuario = $arraySeguindo[$r]['loginUsuario'];
         $nomeUsuario = $arraySeguindo[$r]['nomeUsuario'];
         $seSegue = $usuarioSeguidor->verificarSeguidor($idSession, $idUsuario);
+        $tipoUsuario = $arraySeguindo[$r]['tipoUsuario'];
+
+            if($tipoUsuario == "Tutor"){
+                $iconTipoUsuario = "user";
+            }else{
+                $iconTipoUsuario = "building";
+            }
+
         if ($idUsuario == $idSession) {
             $resultSeSegue = "";
             $seguirOuSeguindo = "";
@@ -1843,7 +1851,7 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
 
                                 <div style='display: flex; gap: 0.5rem'>
                                     <h3>$nomeUsuario</h3> 
-                                    <i class='fa-solid fa-building'></i>
+                                    <i class='fa-solid fa-$iconTipoUsuario'></i>
                                 </div>
 
                                 <h4 class='text-muted'>@$loginUsuario</h4>
@@ -1866,6 +1874,68 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
     echo ("</div>");
 });
 
+$app->post('/pesquisa-seguidores-pet', function (Request $request, Response $response, array $args){
+    error_reporting(0);
+    $fotoUsuario = new FotoUsuario();
+    $petSeguidor = new PetSeguidor();
+    $idSession = $_SESSION['id'];
+
+    @session_start();
+
+    $arraySeguidores = $petSeguidor->pesquisaSeguidores($_POST['idPet']);
+    $countSeguidores = count($arraySeguidores);
+
+    echo ("<div class='segueTitulo'>
+            <h2>Seguidores</h2>
+         </div>
+         
+         <div class='segueHolder'>");
+
+         for ($t = 0; $t < $countSeguidores; $t++) {
+            $idSeguidor = $arraySeguidores[$t]['idSeguidor'];
+            $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idSeguidor);
+            $loginUsuario = $arraySeguidores[$t]['loginUsuario'];
+            $nomeUsuario = $arraySeguidores[$t]['nomeUsuario'];
+            $tipoUsuario = $arraySeguidores[$t]['tipoUsuario'];
+
+            if($tipoUsuario == "Tutor"){
+                $iconTipoUsuario = "user";
+            }else{
+                $iconTipoUsuario = "building";
+            }
+    
+            echo ("
+            
+                <a href='/petiti/$loginUsuario' target='_blank' '>
+                    <div class='seguidores-row usuarioSegue'>
+                        <div class='seguidor'>
+    
+                            <div class='fotoDePerfil'>
+                               <img src='$caminhoFoto' id='fotoSeguidor' >
+                            </div>
+    
+                            <div style='display: flex; flex-direction: column; gap: 0.8rem; width: 100%'>
+    
+                                <div style='display: flex; justify-content: space-between'>
+    
+                                    <div class='loginEUser'>
+    
+                                    <div style='display: flex; gap: 0.5rem'>
+                                        <h3>$nomeUsuario <i class='fa-solid fa-$iconTipoUsuario'></i></h3>
+                                    </div>
+                                    <h4 class='text-muted'>@$loginUsuario</h4>
+                                    </div>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </a>
+            
+            ");
+        } // botão seguir pra quem for mexer nisso >>> <button class='btn btn-primary'>Seguir</button>
+        echo ("</div>");
+});
+
 $app->post('/pesquisa-seguidores', function (Request $request, Response $response, array $args) {
     error_reporting(0);
     $fotoUsuario = new FotoUsuario();
@@ -1876,6 +1946,7 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
     $arraySeguidores = $usuarioSeguidor->pesquisaSeguidores($_POST['idUsuario']);
     $countSeguidores = count($arraySeguidores);
 
+    
     echo ("<div class='segueTitulo'>
             <h2>Seguidores</h2>
          </div>
@@ -1888,6 +1959,14 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
         $loginUsuario = $arraySeguidores[$t]['loginUsuario'];
         $nomeUsuario = $arraySeguidores[$t]['nomeUsuario'];
         $seSegue = $usuarioSeguidor->verificarSeguidor($idSeguidor, $idSession);
+        $tipoUsuario = $arraySeguidores[$t]['tipoUsuario'];
+
+            if($tipoUsuario == "Tutor"){
+                $iconTipoUsuario = "user";
+            }else{
+                $iconTipoUsuario = "building";
+            }
+            
         if ($idSeguidor == $idSession) {
             $resultSeSegue = "";
             $seguirOuSeguindo = "";
@@ -1918,7 +1997,7 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
                                 <div class='loginEUser'>
 
                                 <div style='display: flex; gap: 0.5rem'>
-                                    <h3>$nomeUsuario <i class='fa-solid fa-building'></i></h3> 
+                                    <h3>$nomeUsuario <i class='fa-solid fa-$iconTipoUsuario'></i></h3> 
 
                                 </div>
 

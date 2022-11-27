@@ -96,8 +96,9 @@ class UsuarioSeguidor
 
     public function pesquisaSeguidores($idUsuario){
         $con = Conexao::conexao();
-        $query = "SELECT tbusuarioseguidor.idUsuario, idSeguidor, innerseguidor.loginUsuario, innerseguidor.nomeUsuario FROM tbusuarioseguidor
+        $query = "SELECT tbusuarioseguidor.idUsuario, idSeguidor, innerseguidor.loginUsuario, innerseguidor.nomeUsuario, innertipousuario.tipousuario as tipoUsuario FROM tbusuarioseguidor
         INNER JOIN tbUsuario innerseguidor ON innerseguidor.idusuario = tbusuarioseguidor.idseguidor
+        INNER JOIN tbTipoUsuario innertipousuario ON innertipousuario.idTipoUsuario = innerseguidor.idTipoUsuario
         WHERE tbusuarioseguidor.idUsuario = $idUsuario";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll();
@@ -106,8 +107,9 @@ class UsuarioSeguidor
 
     public function pesquisaSeguindo($idSeguindo){
         $con = Conexao::conexao();
-        $query = "SELECT tbusuarioseguidor.idUsuario, idSeguidor, innerseguidor.loginUsuario, innerseguidor.nomeUsuario FROM tbusuarioseguidor
+        $query = "SELECT tbusuarioseguidor.idUsuario, idSeguidor, innerseguidor.loginUsuario, innerseguidor.nomeUsuario, innertipousuario.tipousuario as tipoUsuario FROM tbusuarioseguidor
         INNER JOIN tbUsuario innerseguidor ON innerseguidor.idusuario = tbusuarioseguidor.idusuario
+        INNER JOIN tbTipoUsuario innertipousuario ON innertipousuario.idTipoUsuario = innerseguidor.idTipoUsuario
         WHERE tbusuarioseguidor.idSeguidor = $idSeguindo";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll();

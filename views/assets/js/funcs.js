@@ -262,6 +262,20 @@ $(document).ready(function () {
     });
   });
 
+  $(".hSeguidoresPet").click(function () {
+    var idPet = $(this).attr("id");
+    console.log(idPet);
+    $.ajax({
+      url: "/petiti/api/pesquisa-seguidores-pet",
+      method: "POST",
+      data: { idPet: idPet },
+      success: function (data) {
+        console.log(idPet);
+        $("#modal-seguidores").html(data);
+      },
+    });
+  });
+
   $(".hSeguindo").click(function () {
     var idUsuario = $(this).attr("id");
     console.log(idUsuario);
