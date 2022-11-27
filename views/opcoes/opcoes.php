@@ -176,26 +176,26 @@ $contagemPets = count($dadosPets['pets']);
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="feed" class="menu-item ">
+                    <a href="#" class="menu-item ativo">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
 
                     <a href="animaisPerdidos" class="menu-item">
                         <span><i class="uil uil-heart-break"></i></span>
-                        <h3>Animais perdidos</h3>
+                        <h3>Animais Perdidos</h3>
                     </a>
 
                     <a href="animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
-                        <h3>Animais para adoção</h3>
+                        <h3>Animais para Adoção</h3>
                     </a>
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span style="position: relative;">
+                        <span class="mostrarNotificacoes" style="position: relative;">
                             <i class="uil uil-bell notificacao"></i>
-                            <div class="notificacaoContador"><span>1</span></div>
+
                         </span>
                         <h3>Notificações</h3>
                     </a>
@@ -215,6 +215,10 @@ $contagemPets = count($dadosPets['pets']);
                         <h3>Para Você</h3>
                     </a>
                 </div>
+
+
+
+
 
                 <!-- Botao de criar post -->
                 <button class="btn btn-primary">
@@ -253,15 +257,28 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <div class="flex-row">
                                     <div class="fotoDePerfil">
-                                        <img src="<?php echo $_SESSION['foto'] ?>" alt="">
+                                        <img id="preview-image" src="<?php echo $_SESSION['foto'] ?>" alt="">
                                     </div>
 
 
                                     <label class="flFotoPerfil">
-                                        <input id="flFotoPerfil" type="file" accept=".jpg, .png">
+                                        <input id="flFotoPerfilUsuario" type="file" accept=".jpg, .png">
+                                        <input name="baseFoto" value="padrao" id="baseFotoUsuario" type="hidden">
+
                                     </label>
                                 </div>
 
+                                <div id="modal-recortar-foto-perfil" class="modal">
+                                    <div class="flex-col">
+                                        <span>Redimensione sua imagem!</span>
+
+                                        <div class="upload" id="upload-demo-usuario"></div>
+
+                                        <a href="#close-modal" rel="modal:close" class="btn btn-primary">
+                                            <span id="continuar-crop-foto-perfil-config" style="padding-block: 10px; padding-inline: 87px;">Confirmar</span>
+                                        </a>
+                                    </div>
+                                </div>
 
                                 <div class="flex-col">
                                     <h2>@<?php echo $_SESSION['login'] ?></h2>
@@ -335,17 +352,17 @@ $contagemPets = count($dadosPets['pets']);
 
                                 <div class="infoArea">
                                     <h3>Senha nova</h3>
-                                    <input id="txtPw"  name="txtSenhaNova1" type="text" placeholder="senha nova">
-                                     <p id="senhaAvisoTamanho"></p>
+                                    <input id="txtPw" name="txtSenhaNova1" type="text" placeholder="senha nova">
+                                    <p id="senhaAvisoTamanho"></p>
                                 </div>
-                                
+
 
                                 <div class="infoArea">
                                     <h3>Confirmar senha nova</h3>
-                                    <input  id="txtPwConfirm" name="txtSenhaNova2" type="text" placeholder="Confirmar senha nova">
+                                    <input id="txtPwConfirm" name="txtSenhaNova2" type="text" placeholder="Confirmar senha nova">
                                     <p id="senhaAvisoVerificacao"></p>
                                 </div>
-                                
+
 
                                 <div class="botoesInfoArea">
                                     <button id="btnSenhaConfirmar" class="btn btn-primary">Alterar senha</button>
@@ -359,20 +376,34 @@ $contagemPets = count($dadosPets['pets']);
 
 
                     <div class="tabs-conteudo tabHolder adicionarPet" id="3">
-                        <form action="/petiti/api/update-senha" method="POST">
+                        <form action="/petiti/api/add-pet-config" method="POST" enc>
 
                             <div class="imageHandler">
 
                                 <div class="flex-row">
                                     <div class="fotoDePerfil">
-                                        <img src="/petiti/private-user/fotos-pet/padrao.png" alt="">
+                                        <img id="preview-image-pet" src="/petiti/private-user/fotos-pet/padrao.png" alt="">
                                     </div>
 
 
                                     <label class="flFotoPerfil">
-                                        <input name="" id="flFotoPerfilPet" type="file" accept=".jpg, .png">
+                                        <input id="flFotoPerfilPet" type="file" accept=".jpg, .png">
+                                        <input name="baseFoto" value="padrao" id="baseFotoPet" type="hidden">
                                     </label>
                                 </div>
+
+                                <div id="modal-recortar-foto-perfil-pet" class="modal">
+                                    <div class="flex-col">
+                                        <span>Redimensione sua imagem!</span>
+
+                                        <div class="upload" id="upload-demo-pet"></div>
+
+                                        <a href="#close-modal" rel="modal:close" class="btn btn-primary">
+                                            <span id="continuar-crop-foto-perfil-pet" style="padding-block: 10px; padding-inline: 87px;">Confirmar</span>
+                                        </a>
+                                    </div>
+                                </div>
+
 
 
                                 <div class="flex-col">
@@ -396,15 +427,16 @@ $contagemPets = count($dadosPets['pets']);
                                     <p class="avisoNomeUsuarioQtd"></p>
                                 </div>
                                 <div class="infoArea">
-                                <select name="slEspecie" id="slEspecie" required class="SelectEspecie">
-                                    <option selected disabled style="color: #000000; font-family: 'Raleway Bold';" value="0">Escolha</option>
-                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="1">Cachorro</option>
-                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="2">Gato</option>
-                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="3">Roedor</option>
-                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="4">Ave</option>
-                                    <option style="color: #000000; font-family: 'Raleway Bold';" value="5">Exótico</option>
-                                </select>
+                                    <select name="slEspecie" id="slEspecie" required class="SelectEspecie">
+                                        <option selected disabled style="color: #000000; font-family: 'Raleway Bold';" value="0">Escolha</option>
+                                        <option style="color: #000000; font-family: 'Raleway Bold';" value="1">Cachorro</option>
+                                        <option style="color: #000000; font-family: 'Raleway Bold';" value="2">Gato</option>
+                                        <option style="color: #000000; font-family: 'Raleway Bold';" value="3">Roedor</option>
+                                        <option style="color: #000000; font-family: 'Raleway Bold';" value="4">Ave</option>
+                                        <option style="color: #000000; font-family: 'Raleway Bold';" value="5">Exótico</option>
+                                    </select>
                                 </div>
+
                                 <div class="infoArea">
                                     <h3>Raça</h3>
                                     <input name="txtRacaPet" type="text" placeholder="Insira a raça">
@@ -497,9 +529,7 @@ $contagemPets = count($dadosPets['pets']);
                     <div style="width: 42.5%; display: flex; justify-content: end; padding-right: 15px;"> <a id="continuar-post" href="#criar-post" rel="modal:open">Continuar</a> </div>
 
                 </div>
-
                 <div id="upload-demo"></div>
-
             </div>
         </section>
 
@@ -621,6 +651,7 @@ $contagemPets = count($dadosPets['pets']);
 </body>
 <script>
     console.log(<?php echo @$_COOKIE["abrir-senha"] ?>)
+    console.log(<?php echo @$_COOKIE["add-pet"] ?>)
 </script>
 
 </html>

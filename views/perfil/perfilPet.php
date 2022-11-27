@@ -442,7 +442,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
             <div id="modal-post" class="modal post">
                 <div style="display: flex; width: 100%; height: 100%;">
 
-                    <div id="preview-crop-image">
+                    <div id="preview-crop-">
                         <img src="#" alt="">
                     </div>
 

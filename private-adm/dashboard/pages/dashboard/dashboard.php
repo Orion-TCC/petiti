@@ -27,7 +27,7 @@ foreach ($lista as $linha) {
 //
 
 //
-$query = "SELECT COUNT(idUsuario) FROM tbusuario WHERE idTipoUsuario > 1 AND dataCriacaoConta >= DATE_SUB(CURDATE(),INTERVAL 24 HOUR)";
+$query = "SELECT COUNT(idUsuario) FROM tbusuario WHERE idTipoUsuario != 1 AND idTipoUsuario != 3 AND dataCriacaoConta >= DATE_SUB(CURDATE(),INTERVAL 24 HOUR)";
 
 $resultado = $con->query($query);
 $lista = $resultado->fetchAll();
@@ -72,8 +72,12 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
       labels: labels,
       datasets: [{
         label: 'Qtd. de publicações ao mês',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: '#BAD5DB',
+
+        barPercentage: 1.5,
+        barThickness: 6,
+        maxBarThickness: 8,
+        minBarLength: 2,
         data: [<?php foreach ($listaPostsMes as $linha) {
                   echo $linha['qtd'];
                 } ?>, ],
@@ -237,11 +241,11 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
             </div>
           </div>
         <?php
-            }else{
+            } else {
               echo ("Sem denúncia de publicação recente");
             }
         ?>
-        
+
         <?php
         if ($denunciaUsuario->buscaQtdDenunciaUsuarioAtiva() != 0) {
           $resultadoUltimaDenuncia = $denunciaUsuario->ultimaDenuncia();
@@ -262,7 +266,7 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
             </div>
           </div>
         <?php
-        }else{
+        } else {
           echo ("Sem denúncia de usuario recente");
         }
         ?>

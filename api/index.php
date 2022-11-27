@@ -738,11 +738,14 @@ $app->post('/pet/add', function (Request $request, Response $response, array $ar
     header('location: /petiti/foto-pet');
 });
 
-$app->post('add-pet-config', function (Request $request, Response $response, array $args) {
+$app->post('/add-pet-config', function (Request $request, Response $response, array $args) {
     $usuario = new Usuario();
     $pet = new Pet();
     $categoria = new categoria();
     $cookie = new Cookies();
+    $fotoPet = new FotoPet();
+
+    
     $arrayEspecies = array(
         1 => "Cachorro",
         2 => "Gato",
@@ -759,6 +762,18 @@ $app->post('add-pet-config', function (Request $request, Response $response, arr
             "m" => "meses",
             "y" => "anos",
         );
+        if ($arrayData[$slDiaMesAno] == "dias" && $idade >= 31) {
+            if ($idade >= 365) {
+                $idade = intdiv($idade, 365);
+                $arrayData[$slDiaMesAno] = "anos";
+            } else {
+                $idade = intdiv($idade, 30);
+                $arrayData[$slDiaMesAno] = "meses";
+            }
+        } else if ($arrayData[$slDiaMesAno] == "meses" && $idade >= 12) {
+            $idade = intdiv($idade, 12);
+            $arrayData[$slDiaMesAno] = "anos";
+        }
         $idadeCompleta = $idade . " " . $arrayData[$slDiaMesAno];
     } else {
         $arrayData = array(
@@ -791,11 +806,29 @@ $app->post('add-pet-config', function (Request $request, Response $response, arr
     $pet->setIdadePet($idadeCompleta);
     $usuario->setIdUsuario($_SESSION['id']);
     $pet->setUsuario($usuario);
+    $return = $pet->cadastrar($pet);
+    $id = $return['id'];
+    $pet->setIdPet($id);
+    $fotoPet->setPet($pet);
 
-    $pet->cadastrar($pet);
+    if($_POST['baseFoto'] == "padrao"){
+        $fotoPet->setNomeFotoPet("padrao.png");
+        $fotoPet->setCaminhoFotoPet("private-user/fotos-pet/padrao.png");
+        $fotoPet->cadastrar($fotoPet);
+    }else{
+        $image = $_POST['baseFoto'];
+        $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-pet/";
+        $nomeArquivo = time() . ".png";
+        $arquivoCompleto = $caminhoSalvar . $nomeArquivo;
+        $fotoPet->setNomeFotoPet($nomeArquivo);
+        $caminhoBanco = "private-user/fotos-pet/" . $nomeArquivo;
+        $fotoPet->setCaminhoFotoPet($caminhoBanco);
+        $fotoPet->cadastrar($fotoPet);
+        file_put_contents($arquivoCompleto, file_get_contents($image));
+    }
+    $cookie->criarCookie("add-pet", "openTab(event, '3')", 5);
 
-
-    header('location: /petiti/opcoes');
+    header("location: /petiti/opcoes");
 });
 
 
@@ -1609,19 +1642,22 @@ $app->post('/config-conta', function (Request $request, Response $response, arra
         $usuario->setLoginUsuario($_POST['txtLogin']);
         $usuario->updateLogin($usuario);
     }
+
     if (isset($_POST['txtEmail'])) {
-        $usuario->setEmailUsuario($_POST['txtEmail']);
-        $emailVerificacao = $usuario->verificarEmail($_POST['txtEmail']);
-        if ($emailVerificacao == true) {
-            $usuario->updateEmail($usuario);
-        } else {
-            $cookie = new Cookies();
-            $cookie->criarCookie("erro-email", "Email inválido", 5);
+        if($_POST['txtEmail']!=$_SESSION['email']){
+            $usuario->setEmailUsuario($_POST['txtEmail']);
+            $emailVerificacao = $usuario->verificarEmail($_POST['txtEmail']);
+            if ($emailVerificacao == true) {
+                $usuario->updateEmail($usuario);
+            } else {
+                $cookie = new Cookies();
+                $cookie->criarCookie("erro-email", "Email inválido", 5);
+            }
         }
     }
 
 
-    if ($_POST['baseFoto'] != 0) {
+    if ($_POST['baseFoto'] != "padrao") {
         $fotoUsuario = new FotoUsuario();
         $image = $_POST['baseFoto'];
         $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-perfil/";

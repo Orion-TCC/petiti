@@ -161,13 +161,11 @@ $(document).ready(function () {
         $("#senhaAvisoVerificacao").addClass("textoCerto");
         $("#senhaAvisoVerificacao").removeClass("textoErrado");
         $("#btnSenhaConfirmar").prop("disabled", false);
-
       } else {
         $("#senhaAvisoVerificacao").text("Senhas não correspondem.");
         $("#senhaAvisoVerificacao").addClass("textoErrado");
         $("#senhaAvisoVerificacao").removeClass("textoCerto");
         $("#btnSenhaConfirmar").prop("disabled", true);
-
       }
     } else {
       $("#senhaAvisoVerificacao").text("");
@@ -188,7 +186,7 @@ $(document).ready(function () {
         $("#senhaAvisoVerificacao").text("Senhas não correspondem.");
         $("#senhaAvisoVerificacao").addClass("textoErrado");
         $("#senhaAvisoVerificacao").removeClass("textoCerto");
-         $("#btnSenhaConfirmar").prop("disabled", true);
+        $("#btnSenhaConfirmar").prop("disabled", true);
       }
     } else {
       $("#senhaAvisoVerificacao").text("");
@@ -209,5 +207,120 @@ $(document).ready(function () {
       $("#senhaAvisoTamanho").addClass("textoCerto");
       $("#senhaAvisoTamanho").removeClass("textoErrado");
     }
+  });
+
+
+
+  var resize = $(".upload").croppie({
+    enableExif: true,
+    enableOrientation: true,
+    viewport: {
+      // Default { width: 100, height: 100, type: 'square' }
+      width: 300,
+      height: 300,
+      type: "circle", //square
+    },
+    boundary: {
+      width: 400,
+      height: 400,
+    },
+  });
+
+  $("#flFotoPerfilPet").on("change", function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      resize
+        .croppie("bind", {
+          url: e.target.result,
+        })
+        .then(function () {
+          console.log("jQuery bind complete");
+        });
+    };
+    reader.readAsDataURL(this.files[0]);
+    $("#modal-recortar-foto-perfil-pet").modal("show");
+    $("#flFotoPerfilPet").val("");
+  });
+
+  $("#continuar-crop-foto-perfil-pet").on("click", function (ev) {
+    ev.preventDefault();
+   
+    var blob;
+    resize
+      .croppie("result", {
+        type: "blob",
+      })
+      .then(function (resp) {
+        blob = resp;
+      });
+
+    resize
+      .croppie("result", {
+        type: "canvas",
+        size: "viewport",
+      })
+      .then(function (img) {
+        $.ajax({
+          type: "POST",
+          enctype: "multipart/form-data",
+          data: { image: img },
+          url: "/petiti/assets/libs/croppie/envio.php",
+          success: function (data) {
+            html = img;
+            $("#preview-image-pet").attr("src", "");
+            $("#preview-image-pet").attr("src", html);
+            $("#baseFotoPet").val(html);
+          },
+        });
+      });
+  });
+
+  $("#flFotoPerfilUsuario").on("change", function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      resize
+        .croppie("bind", {
+          url: e.target.result,
+        })
+        .then(function () {
+          console.log("jQuery bind complete");
+        });
+    };
+    reader.readAsDataURL(this.files[0]);
+    $("#modal-recortar-foto-perfil").modal("show");
+    $("#flFotoPerfilUsuario").val("");
+  });
+
+  $("#continuar-crop-foto-perfil-config").on("click", function (ev) {
+    ev.preventDefault();
+   
+    var blob;
+    resize
+      .croppie("result", {
+        type: "blob",
+      })
+      .then(function (resp) {
+        blob = resp;
+      });
+
+    resize
+      .croppie("result", {
+        type: "canvas",
+        size: "viewport",
+      })
+      .then(function (img) {
+        $.ajax({
+          type: "POST",
+          enctype: "multipart/form-data",
+          data: { image: img },
+          url: "/petiti/assets/libs/croppie/envio.php",
+          success: function (data) {
+            html = img;
+            $("#preview-image").attr("src", "");
+            $("#preview-image").attr("src", html);
+            $("#baseFotoUsuario").val(html);
+          },
+        });
+      });
   });
 });
