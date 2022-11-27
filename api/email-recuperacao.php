@@ -27,7 +27,7 @@ if ($usuario->procuraEmail($_POST['txtEmail']) == true) {
         $mail->Host       = 'smtp.gmail.com';
         $mail->SMTPAuth   = true;
         $mail->Username   = 'orion.etec@gmail.com';
-        $mail->Password   = 'lkmrvehesalnmidm';
+        $mail->Password   = 'orionEtec';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = 465;
 
