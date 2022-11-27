@@ -8,32 +8,27 @@ class Publicacao
     private $Usuario;
     private $localPub;
     private $impulsoPub;
-
-
+    private $tipoPublicacao;
 
     public function getUsuario()
     {
         return $this->Usuario;
     }
 
-
     public function setUsuario($Usuario)
     {
         $this->Usuario = $Usuario;
     }
-
 
     public function getDataPublicacao()
     {
         return $this->dataPublicacao;
     }
 
-
     public function setDataPublicacao($dataPublicacao)
     {
         $this->dataPublicacao = $dataPublicacao;
     }
-
 
     public function getTextoPublicacao()
     {
@@ -41,18 +36,15 @@ class Publicacao
     }
 
 
-
     public function setTextoPublicacao($textoPublicacao)
     {
         $this->textoPublicacao = $textoPublicacao;
     }
 
-
     public function getIdPublicacao()
     {
         return $this->idPublicacao;
     }
-
 
     public function setIdPublicacao($idPublicacao)
     {
@@ -64,7 +56,6 @@ class Publicacao
         return $this->impulsoPub;
     }
 
-
     public function setImpulsoPub($impulsoPub)
     {
         $this->impulsoPub = $impulsoPub;
@@ -75,10 +66,21 @@ class Publicacao
         return $this->localPub;
     }
 
-
     public function setLocalPub($localPub)
     {
         $this->localPub = $localPub;
+    }
+
+    public function getTipoPublicacao()
+    {
+        return $this->tipoPublicacao;
+    }
+
+    public function setTipoPublicacao($tipoPublicacao)
+    {
+        $this->tipoPublicacao = $tipoPublicacao;
+
+        return $this;
     }
 
     public function delete($delete)
@@ -93,13 +95,14 @@ class Publicacao
     public function cadastrar($publicacao)
     {
         $con = Conexao::conexao();
-        $stmt = $con->prepare('INSERT INTO tbpublicacao(idPublicacao, textoPublicacao, dataPublicacao, idUsuario, localPub, pubImpulso)
-        VALUES (default, ?, ?, ?, ?, ?)');
+        $stmt = $con->prepare('INSERT INTO tbpublicacao(idPublicacao, textoPublicacao, dataPublicacao, idUsuario, localPub, pubImpulso, tipoPublicacao)
+        VALUES (default, ?, ?, ?, ?, ?, ?)');
         $stmt->bindValue(1, $publicacao->getTextoPublicacao());
         $stmt->bindValue(2, $publicacao->getDataPublicacao());
         $stmt->bindValue(3, $publicacao->getUsuario()->getIdUsuario());
         $stmt->bindValue(4, $publicacao->getLocalPub());
         $stmt->bindValue(5, $publicacao->getImpulsoPub());
+        $stmt->bindValue(6, $publicacao->getTipoPublicacao());
 
         $stmt->execute();
         $resultado = $con->query("SELECT MAX(idPublicacao) FROM tbpublicacao");
@@ -122,6 +125,7 @@ class Publicacao
     textoPublicacao AS texto,
     dataPublicacao AS data,
     localPub AS local,
+    tipoPublicacao as tipoPub,
     tbpublicacao.idUsuario AS idUsuario,
     nomeUsuario AS nome,
     loginUsuario AS login,

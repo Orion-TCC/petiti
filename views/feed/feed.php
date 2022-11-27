@@ -318,6 +318,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         $data = $dados['publicacoes'][$i]['data'];
                         $texto = $dados['publicacoes'][$i]['texto'];
                         $itimalias = $dados['publicacoes'][$i]['itimalias'];
+                        $tipoPub = $dados['publicacoes'][$i]['tipoPub'];
                         $fotoUsuario = $fotousuario->exibirFotoUsuario($idUsuario);
                         $local =  $dados['publicacoes'][$i]['local'];
                         $hoje = new DateTime();
@@ -367,7 +368,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     </div>
                                 </div>
 
-
+                                <div class="tipoPub">
+                                    <span id="spanTipoPub"><?php echo $tipoPub; ?></span>
+                                </div>
 
                                 <span class="edit" id="<?php echo $id; ?>">
 
@@ -451,7 +454,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <?php }
                                     ?>
 
-                                    <a href="#modal-post" rel="modal:open"><button class="abrirComentarios " value="<?php echo $id?>"></button></a>
+                                    <a href="#modal-post" rel="modal:open"><button class="abrirComentarios " value="<?php echo $id ?>"></button></a>
 
                                     <button class="mensagem"></button>
 
@@ -503,15 +506,15 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                         <div style='display: flex; flex-direction: row; align-items: center; position: relative; justify-content: space-between;'>
 
-                                        <div class="flex-row" style="align-items: center; gap: 0.6rem;">
-                                            <h2 style='font-weight: 900 !important; align-self: start;'>
-                                                <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
-                                            </h2>
+                                            <div class="flex-row" style="align-items: center; gap: 0.6rem;">
+                                                <h2 style='font-weight: 900 !important; align-self: start;'>
+                                                    <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
+                                                </h2>
 
-                                            <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
-                                                <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
-                                            </h3>
-                                        </div>
+                                                <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
+                                                    <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
+                                                </h3>
+                                            </div>
 
                                             <div class="optionsDenunciaComent" id="<?php echo "$idComentarioAtual"; ?>">
                                                 <i class="uil uil-ellipsis-h commentEllipsis"></i>
@@ -552,7 +555,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 } ?>
                             </div>
 
-                            <a href="#modal-post" rel="modal:open"><button class="abrirComentarios ahrefVermais" value="<?php echo $id?>"> Ver mais...</button></a>
+                            <a href="#modal-post" rel="modal:open"><button class="abrirComentarios ahrefVermais" value="<?php echo $id ?>"> Ver mais...</button></a>
 
                             <div class="commentArea" id="<?php echo $id; ?>">
                                 <i class="uil uil-heart"></i>
@@ -789,6 +792,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
         </section>
 
         <section>
+
             <div id="criar-post" class="modal">
                 <form id="form-aid" method="post" action="./api/publicar">
                     <div class="tituloModalPost">
@@ -817,9 +821,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <span class="textNomeUsuario"><?php echo $_SESSION['nome']; ?></span>
                                 </div>
 
-
                                 <textarea name="txtLegendaPub" id="txtLegendaPub" placeholder="Escreva uma legenda para sua foto!" maxlength="200"></textarea>
-
 
                                 <input type="hidden" name="categoriasValue" id="categoriasValue">
 
@@ -827,17 +829,23 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
                                 <div class="contagemChar">
-                                                                <?php if ($_SESSION['tipo'] != "Tutor") {
-                                ?>
-                                    <input type="checkbox" name="checkImp" id="checkImp">
-                                    <label for="checkImp" class="hvr-bob "></label>
+                                    <?php if ($_SESSION['tipo'] != "Tutor") {
+                                    ?>
+                                        <input type="checkbox" name="checkImp" id="checkImp">
+                                        <label for="checkImp" class="hvr-bob "></label>
                                     <?php } ?>
-                                <div>
-                                    <input type="text" value="0" id="contagemCharInput" disabled>
-                                    <span>/200</span>
-                                </div>
+                                    <div>
+                                        <input type="text" value="0" id="contagemCharInput" disabled>
+                                        <span>/200</span>
+                                    </div>
                                 </div>
 
+                                <?php if ($_SESSION['tipo'] != "Tutor") { ?>
+                                    <select name="selProdOuServ" id="selProdOuServ">
+                                        <option value="produto">Produto</option>
+                                        <option value="servico">Serviço</option>
+                                    </select>
+                                <?php } ?>
 
                             </div>
 
@@ -923,7 +931,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
         <section>
             <div id="modal-post" class="modal post">
-               
+
             </div>
         </section>
 

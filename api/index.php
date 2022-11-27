@@ -1277,6 +1277,13 @@ $app->post(
         } else {
             $publicacao->setImpulsoPub(0);
         }
+
+        if(isset($_POST['selProdOuServ'])){
+            $publicacao->setTipoPublicacao($_POST['selProdOuServ']);
+        }else{
+            $publicacao->setTipoPublicacao(null);
+        }
+        
         $id = $publicacao->cadastrar($publicacao);
 
         $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-publicacao/";
