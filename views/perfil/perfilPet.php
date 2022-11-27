@@ -92,7 +92,6 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
     <script src="/petiti/views/assets/js/script-jquery-foto.js"></script>
     <script src="/petiti/assets/js/script.js"></script>
-    <script src="/petiti/assets/js/jquery-scripts.js"></script>
     <script src="/petiti/views/assets/js/funcs.js"></script>
 </head>
 
@@ -143,11 +142,13 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
             </div>
 
             <h2 class="logo">
-                <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
+                <img src="./assets/images/logo_principal.svg">
             </h2>
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
-                <input type="search" placeholder="Pesquisar">
+                <input class="inputSearch" autocomplete="off" id="inputSearch" type="search" placeholder="Pesquisar">
+                <div id="resultadoPesquisa" class="resultadoPesquisa">
+                </div>
             </div>
 
             <?php
@@ -166,15 +167,9 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
                 <div id="labelAO"><i id="settings-icon" class="uil uil-setting"></i></div>
 
-<h2 class="logo">
-    <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
-</h2>
-<div class="caixa-de-busca">
-                <i class="uil uil-search"></i>
-                <input class="inputSearch" autocomplete="off" id="inputSearch" type="search" placeholder="Pesquisar">
-                <div id="resultadoPesquisa" class="resultadoPesquisa">
+                <div class="fotoDePerfil" id="fotoDePerfil">
+                    <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
                 </div>
-            </div>
 
             </div>
 
@@ -357,7 +352,7 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
-                                    <h3> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></h3>
+                                    <h3 class="hSeguidoresPet" id="<?php echo $idPetEscolhido; ?>"><a href="#modal-seguidores" rel="modal:open" style="color: black;"> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></a></h3>
                                 </div>
 
                                 <div class="infoHolder baixo">
@@ -524,6 +519,11 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
             </div>
         </section>
 
+        <section>
+            <div id="modal-seguidores" class="modal">
+
+            </div>
+        </section>
 
     </main>
 

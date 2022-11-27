@@ -12,7 +12,7 @@ $pet = new Pet();
 $loginPet = $_GET['pet'];
 $idPetEscolhido = $pet->buscaPets($loginPet);
 
-
+$_SESSION['idPetPagina'] = $idPetEscolhido;
 
 $url = "http://localhost/petiti/api/publicacoes/usuario/" . $_SESSION['id'];
 
@@ -101,7 +101,6 @@ if ($verificarSeguidor['boolean'] == true) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script src="/petiti/assets/libs/croppie/croppie.js"></script>
-    <script src="/petiti/assets/js/jquery-scripts.js"></script>
     <script src="/petiti/views/assets/js/script-jquery-foto.js"></script>
     <script src="/petiti/assets/js/script.js"></script>
     <script src="/petiti/views/assets/js/funcs.js"></script>
@@ -111,14 +110,13 @@ if ($verificarSeguidor['boolean'] == true) {
 
     <nav class="feed">
         <div class="container">
-
             <div class="popupOptions" id="popup">
 
                 <div class="flex-col">
 
                     <div class="flex-row">
                         <div class="fotoDePerfil">
-                            <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                            <img src="../<?php echo $_SESSION['foto']; ?>" alt="">
                         </div>
                         <h3><a href="tutor-perfil"><?php echo $_SESSION['nome']; ?></a></h3>
                     </div>
@@ -128,7 +126,7 @@ if ($verificarSeguidor['boolean'] == true) {
 
                             <a class="hrefNomePet" href="/petiti/api/escolher-pet/<?php echo $dadosPets['pets'][$p]['idPet'] ?>">
                                 <div class="fotoDePerfil">
-                                    <img src="<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
+                                    <img src="../<?php echo $dadosPets['pets'][$p]['caminhoFotoPet'] ?>" alt="">
                                     <!--Foto do pet  -->
                                 </div>
 
@@ -145,50 +143,35 @@ if ($verificarSeguidor['boolean'] == true) {
 
                     <h3>Gerenciar contas</h3>
 
-                    <h3> <a href="opcoes">Configurações</a></h3>
+                    <h3> <a href="/petiti/opcoes">Configurações</a></h3>
 
-                    <h3><a href="sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i> Sair</a></h3>
+                    <h3><a href="/petiti/sair" class="botaoLogout"> <i class="uil uil-sign-out-alt"></i>Sair</a></h3>
 
                 </div>
 
             </div>
 
             <h2 class="logo">
-                <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
+                <img src="../assets/images/logo_principal.svg">
             </h2>
             <div class="caixa-de-busca">
-                <i class="uil uil-search"></i>
-                <input type="search" placeholder="Pesquisar">
-            </div>
-
-            <?php
-
-            if (isset($_COOKIE['denuncia'])) {
-                echo $_COOKIE['denuncia'];
-            }
-
-            ?>
-
-            <script>
-
-            </script>
-
-            <div class="opcoes" id="opcoes">
-
-                <div id="labelAO"><i id="settings-icon" class="uil uil-setting"></i></div>
-
-<h2 class="logo">
-    <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
-</h2>
-<div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
                 <input class="inputSearch" autocomplete="off" id="inputSearch" type="search" placeholder="Pesquisar">
                 <div id="resultadoPesquisa" class="resultadoPesquisa">
                 </div>
             </div>
 
-            </div>
 
+
+            <div class="opcoes" id="opcoes">
+
+                <div id="labelAO"><i id="settings-icon" class="uil uil-setting"></i></div>
+
+                <div class="fotoDePerfil" id="fotoDePerfil">
+                    <img src="../<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
+                </div>
+
+            </div>
         </div>
     </nav>
 
@@ -200,7 +183,7 @@ if ($verificarSeguidor['boolean'] == true) {
 
                 <a href="/petiti/decidir-perfil" class="perfil">
                     <div class="fotoDePerfil">
-                        <img src="<?php echo $_SESSION['foto']; ?>" alt="">
+                        <img src="../<?php echo $_SESSION['foto']; ?>" alt="">
                     </div>
                     <div class="handle">
                         <h4><?php echo $_SESSION['nome']; ?></h4>
@@ -212,23 +195,23 @@ if ($verificarSeguidor['boolean'] == true) {
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="#" class="menu-item ativo">
+                    <a href="/petiti/feed" class="menu-item ativo">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
 
-                    <a href="animaisPerdidos" class="menu-item">
+                    <a href="/petiti/animaisPerdidos" class="menu-item">
                         <span><i class="uil uil-heart-break"></i></span>
                         <h3>Animais Perdidos</h3>
                     </a>
 
-                    <a href="animaisEmAdocao" class="menu-item">
+                    <a href="/petiti/animaisEmAdocao" class="menu-item">
                         <span><i class="uil uil-archive"></i> </span>
                         <h3>Animais para Adoção</h3>
                     </a>
 
 
-                    <a href="notificacoes" class="menu-item">
+                    <a href="/petiti/notificacoes" class="menu-item">
                         <span class="mostrarNotificacoes" style="position: relative;">
                             <i class="uil uil-bell notificacao"></i>
 
@@ -246,7 +229,7 @@ if ($verificarSeguidor['boolean'] == true) {
                         <h3>Produtos e Serviços</h3>
                     </a>
 
-                    <a href="paraVoce" class="menu-item">
+                    <a href="/petiti/paraVoce" class="menu-item">
                         <span><i class="uil uil-coffee"></i> </span>
                         <h3>Para Você</h3>
                     </a>
@@ -460,10 +443,10 @@ if ($verificarSeguidor['boolean'] == true) {
         </section>
 
         <section>
-        <div id="modal-seguidores" class="modal">
+            <div id="modal-seguidores" class="modal">
 
-        </div>
-    </section>
+            </div>
+        </section>
 
 
     </main>

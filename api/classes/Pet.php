@@ -292,7 +292,8 @@ class Pet
         }
     }
 
-    public function updateStatus($update){
+    public function updateStatus($update)
+    {
         $con = Conexao::conexao();
         $stmt = $con->prepare("UPDATE tbpet SET statusPet = ? WHERE idPet = ?");
         $stmt->bindValue(1, $update->getStatusPet());
@@ -344,4 +345,13 @@ class Pet
         $stmt->execute();
     }
 
+    public function buscaIdTutorPet($idPet)
+    {
+        $con = Conexao::conexao();
+        $query = "SELECT idUsuario as id FROM tbPet
+        WHERE idPet = $idPet";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetch();
+        return $lista['id'];
+    }
 }

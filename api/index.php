@@ -1912,11 +1912,16 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
 
 $app->post('/pesquisa-seguidores-pet', function (Request $request, Response $response, array $args){
     error_reporting(0);
+
+    @session_start();
+
     $fotoUsuario = new FotoUsuario();
     $petSeguidor = new PetSeguidor();
     $idSession = $_SESSION['id'];
+    $idPet = $_SESSION['pet-escolhido'];
+    $pet = new Pet();
 
-    @session_start();
+    $idTutorPet = $pet->buscaIdTutorPet($_POST['idPet']);
 
     $arraySeguidores = $petSeguidor->pesquisaSeguidores($_POST['idPet']);
     $countSeguidores = count($arraySeguidores);
@@ -1934,6 +1939,12 @@ $app->post('/pesquisa-seguidores-pet', function (Request $request, Response $res
             $nomeUsuario = $arraySeguidores[$t]['nomeUsuario'];
             $tipoUsuario = $arraySeguidores[$t]['tipoUsuario'];
 
+            if($idTutorPet == $idSession){
+                $srcFotoSeguidor = "./";
+            }else{
+                $srcFotoSeguidor = "../";
+            }
+
             if($tipoUsuario == "Tutor"){
                 $iconTipoUsuario = "user";
             }else{
@@ -1947,7 +1958,7 @@ $app->post('/pesquisa-seguidores-pet', function (Request $request, Response $res
                         <div class='seguidor'>
     
                             <div class='fotoDePerfil'>
-                               <img src='$caminhoFoto' id='fotoSeguidor' >
+                               <img src='$srcFotoSeguidor$caminhoFoto' id='fotoSeguidor' >
                             </div>
     
                             <div style='display: flex; flex-direction: column; gap: 0.8rem; width: 100%'>
@@ -1957,7 +1968,7 @@ $app->post('/pesquisa-seguidores-pet', function (Request $request, Response $res
                                     <div class='loginEUser'>
     
                                     <div style='display: flex; gap: 0.5rem'>
-                                        <h3>$nomeUsuario <i class='fa-solid fa-$iconTipoUsuario'></i></h3>
+                                        <h3>$nomeUsuario<i class='fa-solid fa-$iconTipoUsuario'></i></h3>
                                     </div>
                                     <h4 class='text-muted'>@$loginUsuario</h4>
                                     </div>
@@ -2156,13 +2167,14 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
                 </div>");
 
                 for ($r = 0; $r < $countResultadoPets; $r++) {
-                    $caminhoFotoPet = $fotoPet->exibirFotopet($listaPets[$r]['idPet']);
+                    $idPet = $listaPets[$r]['idPet'];
+                    $caminhoFotoPet = $fotoPet->exibirFotopet($idPet);
                     $resultadoBuscaAtual = $listaPets[$r]['usuarioPet'];
                     $nomePet = $listaPets[$r]['nomePet'];
 
                     echo ("
                         <div class='cardResultadoPesquisa'>
-                            <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/$resultadoBuscaAtual'>
+                            <a id='resultadoBuscaAtual' class='resultBusca$resultadoBuscaAtual' href='/petiti/pet/$nomePet'>
                                 <img id='fotoUsuarioPesquisado' src='$caminhoFotoPet'>     
                                 
                                 <div id='infoResultadoUsuarios'>
