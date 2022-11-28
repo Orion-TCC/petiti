@@ -823,17 +823,25 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 <input type="hidden" name="baseFoto" id="baseFoto">
 
 
-                                <div class="contagemChar">
-                                    <?php if ($_SESSION['tipo'] != "Tutor") {
-                                    ?>
+
+                                <?php if ($_SESSION['tipo'] != "Tutor") {
+                                ?>
+                                    <div class="contagemChar emp">
                                         <input type="checkbox" name="checkImp" id="checkImp">
                                         <label for="checkImp" class="hvr-bob "></label>
-                                    <?php } ?>
-                                    <div>
-                                        <input type="text" value="0" id="contagemCharInput" disabled>
-                                        <span>/200</span>
+                                        <div>
+                                            <input type="text" value="0" id="contagemCharInput" disabled>
+                                            <span>/200</span>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php } else { ?>
+                                    <div class="contagemChar tut">
+                                        <div>
+                                            <input type="text" value="0" id="contagemCharInput" disabled>
+                                            <span>/200</span>
+                                        </div>
+                                    </div>
+                                <?php } ?>
 
                             </div>
 

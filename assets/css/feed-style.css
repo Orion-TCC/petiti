@@ -1995,7 +1995,18 @@ border: none;
   width: 300px;
 }
 
-.contagemChar {
+.tut{
+  display: flex;
+    width: 95%;
+    cursor: default;
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.emp{
   display: flex;
   width: 95%;
   justify-content: space-between;
@@ -2011,6 +2022,7 @@ border: none;
   background: none;
   font-family: 'Raleway Bold', sans-serif;
   font-size: 1rem;
+  text-align: end;
 }
 
 
@@ -2027,6 +2039,7 @@ border: none;
   font-weight: 700;
   font-family: "Raleway Medium";
   background: none;
+  text-align: end;
 }
 
 #contagemCharComentInput {
