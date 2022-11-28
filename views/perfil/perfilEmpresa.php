@@ -104,6 +104,10 @@ $qtdProduto = $lista[0]['qtdProdutos'];
 
 <body class="feed perfilUsuario">
 
+    <?php if (isset($_COOKIE["produtoCadastrado"])) {
+        echo $_COOKIE["produtoCadastrado"];;
+    } ?>
+
     <nav class="feed">
         <div class="container">
             <div class="popupOptions" id="popup">
@@ -252,9 +256,6 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                     </div>
                                 </div>
 
-
-
-
                                 <div class="modal" id="modal-editar-perfil">
 
                                     <form class="flex-col" action="/petiti/api/editar-perfil" method="post">
@@ -321,8 +322,6 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                     </form>
                                 </div>
 
-
-
                                 <div id="modal-recortar-foto-perfil" class="modal">
                                     <div class="flex-col">
                                         <span>Redimensione sua imagem!</span>
@@ -334,10 +333,6 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                         </a>
                                     </div>
                                 </div>
-
-
-
-
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
@@ -417,27 +412,49 @@ $qtdProduto = $lista[0]['qtdProdutos'];
 
                         <div class="tabs_content produtos" data-tab="2">
 
-                            <div class="adicionarProduto">
-                                <i class="uil uil-plus-circle"></i>
-                            </div>
                             <?php if ($contagemProdutos < 1) { ?>
+                                <a href="#modal-servico-produto" rel="modal:open">
+                                    <div class="adicionarProduto">
+                                        <i class="uil uil-plus-circle"></i>
+                                    </div>
+                                </a>
                                 <div class="aviso">
                                     <h3>Você não possui nenhum produto ainda... Clique no quadrado acima para começar a vender seus produtos!</h3>
                                 </div>
                             <?php } else {
                                 for ($p = 0; $p < $contagemProdutos; $p++) {
-                                }
-                            }
-
-                            ?>
+                                    $foto = $dadosProdutos['produtos'][$p]['caminhoFotoProduto'];
+                                } ?>
+                                <div class="previewPostImage">
+                                    <img src="<?php echo $foto; ?>">
+                                </div>
+                            <?php
+                            } ?>
                         </div>
 
 
                         <div class="tabs_content serviços" data-tab="3">
 
-                            <div class="aviso">
-                                <h3>Ainda nenhum serviço... eu imagino oque o dono desse perfil esta fazendo...</h3>
-                            </div>
+                            <?php if ($contagemServicos < 1) { ?>
+                                <a href="#modal-servico-produto" rel="modal:open">
+                                    <div class="adicionarProduto">
+                                        <i class="uil uil-plus-circle"></i>
+                                    </div>
+                                </a>
+                                <div class="aviso">
+                                    <h3>Você não possui nenhum serviço ainda... Clique no quadrado acima para começar a vender seus serviços!</h3>
+                                </div>
+                                <?php } else {
+                                for ($b = 0; $b < $contagemServicos; $b++) {
+                                    $fotoServico = $dadosServicos['servicos'][$b]['caminhoFotoServico'];
+                                ?>
+                                    <div class="previewPostImage">
+                                        <img src="<?php echo $fotoServico; ?>">
+                                        <span><?php echo $fotoServico; ?></span>
+                                    </div>
+                            <?php
+                                }
+                            } ?>
 
                         </div>
                     </div>
@@ -526,8 +543,6 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                 <i class="uil uil-message"></i>
                             </button>
 
-
-
                         </div>
 
                     </div>
@@ -559,7 +574,7 @@ $qtdProduto = $lista[0]['qtdProdutos'];
 
                     <input type="hidden" name="baseFotoEmpresa" id="baseFotoEmpresa">
 
-                            <span id="divisaoPartes"></span>
+                    <span id="divisaoPartes"></span>
 
                     <div class="parteInputInfos">
 
