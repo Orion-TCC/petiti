@@ -141,7 +141,7 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
         },
         scales: {
           y: {
-            suggestedMax: 30,
+            suggestedMax: 5,
             ticks: {
               precision: 0
             }
@@ -180,7 +180,7 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
         },
         scales: {
           y: {
-            suggestedMax: 30,
+            suggestedMax: 5,
             ticks: {
               precision: 0
             }
@@ -189,7 +189,7 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
       }
     };
 
-    const labelsImpulso = ["Impulsionadas", "Comuns"];
+    const labelsImpulso = ["Qtd. Posts Impulsionados", "Qtd. Posts Comuns"];
 
     const dataImpulso = {
       labels: labelsImpulso,
@@ -210,7 +210,7 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
           legend: {
             labels: {
               font: {
-                size: 20
+                size: 10
               }
             }
           }
@@ -326,9 +326,13 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
       <div class="informacoes">
         <h2>Informações da Pet Iti</h2>
         <div class="graficos">
-          <canvas id="myChart" width="350" height="150"></canvas>
-          <canvas id="myChartSemana" width="350" height="150"></canvas>
-          <canvas id="myChartImpulso" width="350" height="150"></canvas>
+          <div class="linhaGraficos">
+            <canvas id="myChartSemana" class="graficoCima"></canvas>
+            <canvas id="myChartImpulso" class="graficoCima"></canvas>
+          </div>
+          <div class="linhaGraficos">
+            <canvas id="myChart" class="graficoBaixo"></canvas>
+          </div>
         </div>
       </div>
     </main>

@@ -17,13 +17,14 @@ $json = file_get_contents($url);
 $dados = (array)json_decode($json, true);
 $contagem = count($dados['publicacoes']);
 
-$urlProdutos = "http://localhost/petiti/api/produtos/". $_SESSION['id'];
+
+$urlProdutos = "http://localhost/petiti/api/produtos/" . $_SESSION['id'];
 
 $jsonProdutos = file_get_contents($urlProdutos);
 $dadosProdutos = (array)json_decode($jsonProdutos, true);
 $contagemProdutos = count($dadosProdutos['produtos']);
 
-$urlServicos = "http://localhost/petiti/api/servicos/". $_SESSION['id'];
+$urlServicos = "http://localhost/petiti/api/servicos/" . $_SESSION['id'];
 
 $jsonServicos = file_get_contents($urlServicos);
 $dadosServicos = (array)json_decode($jsonServicos, true);
@@ -419,16 +420,15 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                             <div class="adicionarProduto">
                                 <i class="uil uil-plus-circle"></i>
                             </div>
-                            <?php if($contagemProdutos <1){ ?>
-                            <div class="aviso">
-                                <h3>Você não possui nenhum produto ainda... Clique no quadrado acima para começar a vender seus produtos!</h3>
-                            </div>
-                            <?php } else{
-                                for($p=0; $p < $contagemProdutos; $p++){
-
+                            <?php if ($contagemProdutos < 1) { ?>
+                                <div class="aviso">
+                                    <h3>Você não possui nenhum produto ainda... Clique no quadrado acima para começar a vender seus produtos!</h3>
+                                </div>
+                            <?php } else {
+                                for ($p = 0; $p < $contagemProdutos; $p++) {
                                 }
                             }
-                            
+
                             ?>
                         </div>
 
@@ -541,15 +541,18 @@ $qtdProduto = $lista[0]['qtdProdutos'];
         <section>
             <div class="modal" id="modal-servico-produto">
                 <h2>Cadastro de serviço ou produto</h2>
-                <form action="/petiti/api/cadastrar-produto-servico" method="post">
-                            <input type="text" name="titulo" id="titulo" placeholder="Insira o título">
-                            <input type="text" name="descricao" id="descricao" placeholder="Insira a descrição">
-                            <input type="number" name="valor" id="valor" placeholder="Insira o valor">
-                            <select name="tipoCad" id="tipoCad">
-                                <option value="produto">produto</option>
-                                <option value="servico">servico</option>
-                            </select>
-                            <input type="submit" value="cadastrar">
+                <form action="/petiti/api/cadastrar-produto-servico" method="post" enctype="multipart/form-data">
+                    <img style="width: 200px;" id="previewEmpresa" src="" alt="">
+                    <input onchange="previewFile()" type="file" id="flFotoEmpresa">
+                    <input type="hidden" name="baseFotoEmpresa" id="baseFotoEmpresa">
+                    <input type="text" name="titulo" id="titulo" placeholder="Insira o título">
+                    <input type="text" name="descricao" id="descricao" placeholder="Insira a descrição">
+                    <input type="number" name="valor" id="valor" placeholder="Insira o valor">
+                    <select name="tipoCad" id="tipoCad">
+                        <option value="produto">produto</option>
+                        <option value="servico">servico</option>
+                    </select>
+                    <input type="submit" value="cadastrar">
                 </form>
             </div>
         </section>

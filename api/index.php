@@ -2264,6 +2264,11 @@ $app->post('/cadastrar-produto-servico', function (Request $request, Response $r
     $produto = new Produto();
     $servico = new Servico();
     $usuario = new Usuario();
+    $fotoServico = new FotoServico();
+    $fotoProduto = new FotoProduto();
+
+   
+
     @session_start();
 
     if($_POST['tipoCad'] == "produto"){
@@ -2277,7 +2282,25 @@ $app->post('/cadastrar-produto-servico', function (Request $request, Response $r
         $produto->setStatusProduto(0);
         $usuario->setIdUsuario($_SESSION['id']);
         $produto->setUsuario($usuario);
-        $produto->cadastrar($produto);
+        $id = $produto->cadastrar($produto);
+        $produto->setIdProduto($id);
+        $fotoProduto->setProduto($produto);
+
+        $image = $_POST['baseFotoEmpresa'];
+        $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-produtos/";
+        $nomeArquivo = time() . ".png";
+        $caminhoBanco = "private-user/fotos-produtos/" . $nomeArquivo;
+
+
+        $arquivoCompleto = $caminhoSalvar . $nomeArquivo;
+
+        $fotoProduto->setCaminhoFotoProduto($caminhoBanco);
+        $fotoProduto->setNomeFotoProduto($nomeArquivo);
+        $fotoProduto->cadastrar($fotoProduto);
+
+       
+        file_put_contents($arquivoCompleto, file_get_contents($image));
+
         header('location: /petiti/decidir-perfil');
     }else{
         $textoServico = $_POST['titulo'];
@@ -2290,7 +2313,27 @@ $app->post('/cadastrar-produto-servico', function (Request $request, Response $r
         $servico->setStatusServico(0);
         $usuario->setIdUsuario($_SESSION['id']);
         $servico->setUsuario($usuario);
-        $servico->cadastrar($servico);
+        $id = $servico->cadastrar($servico);
+        
+        $servico->setIdServico($id);
+        $fotoServico->setServico($servico);
+
+        $image = $_POST['baseFotoEmpresa'];
+        $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-servicos/";
+        $nomeArquivo = time() . ".png";
+        $caminhoBanco = "private-user/fotos-servicos/" . $nomeArquivo;
+
+
+        $arquivoCompleto = $caminhoSalvar . $nomeArquivo;
+
+        $fotoServico->setCaminhoFotoServico($caminhoBanco);
+        $fotoServico->setNomeFotoServico($nomeArquivo);
+        $fotoServico->cadastrar($fotoServico);
+
+
+        file_put_contents($arquivoCompleto, file_get_contents($image));
+
+
         header('location: /petiti/decidir-perfil');
     }
 });

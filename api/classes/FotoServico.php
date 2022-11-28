@@ -5,11 +5,11 @@ class FotoServico
     private $idFotoServico;
     private $caminhoFotoServico;
     private $nomeFotoServico;
-    private $Servico;
+    private $servico;
 
     public function getServico()
     {
-        return $this->Servico;
+        return $this->servico;
     }
 
     public function setServico($servico)

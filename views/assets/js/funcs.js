@@ -496,3 +496,21 @@ window.onload = function () {
 function closePopup() {
   document.querySelector(".toast-denuncia").classList.add("close");
 }
+
+function previewFile() {
+  var preview = document.getElementById("previewEmpresa");
+  var file = document.getElementById("flFotoEmpresa").files[0];
+  var reader = new FileReader();
+  var baseFoto = document.getElementById("baseFotoEmpresa");
+  reader.onloadend = function () {
+    preview.src = reader.result;
+    baseFoto.value = reader.result;
+    file.value = "";
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+  }
+}
