@@ -130,6 +130,8 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
       type: 'line',
       data: data,
       options: {
+          responsive: true,
+
         plugins: {
           legend: {
             labels: {
@@ -169,6 +171,8 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
       type: 'bar',
       data: dataSemana,
       options: {
+          responsive: true,
+
         plugins: {
           legend: {
             labels: {
@@ -206,6 +210,8 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
       type: 'pie',
       data: dataImpulso,
       options: {
+          responsive: true,
+
         plugins: {
           legend: {
             labels: {
@@ -326,9 +332,15 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
       <div class="informacoes">
         <h2>Informações da Pet Iti</h2>
         <div class="graficos">
-            <canvas id="myChartSemana" class="graficoCima"></canvas>
-            <canvas id="myChartImpulso" class="graficoCima"></canvas>
-            <canvas id="myChart" class="graficoBaixo"></canvas>
+          <div class="d-graficos">
+            <div class="graficoCima">
+            <canvas id="myChartSemana"></canvas>
+            <canvas id="myChartImpulso"></canvas>
+            </div>
+            <div class="graficoBaixo">
+            <canvas id="myChart"></canvas>
+            </div>
+          </div>
         </div>
       </div>
     </main>

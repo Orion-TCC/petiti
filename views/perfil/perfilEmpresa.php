@@ -230,6 +230,7 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                     </p>
                 </button>
 
+
             </div>
             <!-- FIM DO LADO ESQUERDO -->
 
@@ -393,7 +394,15 @@ $qtdProduto = $lista[0]['qtdProdutos'];
 
                         </div>
 
-                        <a href="#modal-servico-produto" rel="modal:open">Cadastrar serviço ou Produto</a>
+                        <a href="#modal-servico-produto" rel="modal:open">
+                            <div class="addSerPro">
+                                    <div class="addSerProImg">
+                                      <img src="/petiti/assets/images/iconeAddServProd.svg">
+                                    </div>
+                                <h4>Anunciar produtos/serviços</h4>
+                            </div>
+                        </a>
+
                     </div>
                     <!-- fim da parte de informacao do usuario -->
 

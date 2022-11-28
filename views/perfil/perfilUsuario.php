@@ -251,6 +251,8 @@ $usuarioSeguidor  = new UsuarioSeguidor();
                     </p>
                 </button>
 
+                
+
             </div>
             <!-- FIM DO LADO ESQUERDO -->
 

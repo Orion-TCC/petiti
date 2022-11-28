@@ -309,6 +309,22 @@ main .informacoes .graficos {
   box-shadow: var(--box-shadow);
 }
 
+.d-graficos{
+  display: flex!important;
+  flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.graficoCima{
+  display: flex;
+  height: 250px!important;
+}
+.graficoBaixo{
+  display: flex;
+  flex-direction: row!important;
+
+  height: 250px!important;
+}
 
 
 /* RIGHT SIDE - MENSAGENS */

@@ -133,6 +133,7 @@ $app->post('/usuario/info', function (Request $request, Response $response, arra
 
     $nome = $_POST['txNome'];
     $bio = $_POST['txBio'];
+
     $local = $_POST['txLocal'];
     $site = $_POST['txSite'];
 
@@ -595,7 +596,8 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
     $complemento = $_POST['txtComplementoEmpresa'];
     $cidade = $dados->localidade;
     $estado = $_POST['txtUfEmpresa'];
-
+    $bio = $_POST['txBioEmpresa'];
+     $site = $_POST['txSiteEmpresa'];
     @session_start();
 
     $usuarioEndereco->setLogradouroUsuario($logradouro);
@@ -608,7 +610,13 @@ $app->post('/usuario/endereco/add', function (Request $request, Response $respon
     $usuario->setIdUsuario($_SESSION['id-cadastro']);
 
     $usuario->setNomeUsuario($_POST['txtNomeEmpresa']);
+    $usuario->setBioUsuario($bio);
+    $usuario->setSiteUsuario($site);
+
     $usuario->updateNome($usuario);
+    $usuario->updateBio($usuario);
+    $usuario->updateSite($usuario);
+
 
     $usuarioEndereco->setUsuario($usuario);
 
