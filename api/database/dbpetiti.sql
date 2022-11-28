@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28-Nov-2022 às 00:06
+-- Tempo de geração: 28-Nov-2022 às 22:51
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -45,9 +45,7 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 (5, 'Adoção', 1),
 (6, 'Adote um amigo', 1),
 (7, 'Animal em adoção', 1),
-(8, 'Adotar', 1),
-(66, 'branca', 1),
-(67, 'pastor alemao', 1);
+(8, 'Adotar', 1);
 
 -- --------------------------------------------------------
 
@@ -302,6 +300,7 @@ CREATE TABLE `tbproduto` (
   `descProduto` varchar(150) NOT NULL,
   `valorProduto` double NOT NULL,
   `statusProduto` int(1) NOT NULL,
+  `dataProduto` datetime NOT NULL DEFAULT current_timestamp(),
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -333,15 +332,9 @@ CREATE TABLE `tbservico` (
   `descServico` varchar(150) NOT NULL,
   `valorServico` double NOT NULL,
   `statusServico` int(1) NOT NULL,
+  `dataServico` datetime NOT NULL DEFAULT current_timestamp(),
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `tbservico`
---
-
-INSERT INTO `tbservico` (`idServico`, `textoServico`, `descServico`, `valorServico`, `statusServico`, `idUsuario`) VALUES
-(1, 'melissa', 'melissa', 132132131, 0, 14);
 
 -- --------------------------------------------------------
 
@@ -605,13 +598,13 @@ ALTER TABLE `tbusuarioseguidor`
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriapublicacao`
 --
 ALTER TABLE `tbcategoriapublicacao`
-  MODIFY `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriaseguida`
@@ -629,7 +622,7 @@ ALTER TABLE `tbcomentario`
 -- AUTO_INCREMENT de tabela `tbcurtidapublicacao`
 --
 ALTER TABLE `tbcurtidapublicacao`
-  MODIFY `idCurtidaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idCurtidaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `tbdenunciacomentario`
@@ -653,31 +646,31 @@ ALTER TABLE `tbdenunciausuario`
 -- AUTO_INCREMENT de tabela `tbfotopet`
 --
 ALTER TABLE `tbfotopet`
-  MODIFY `idFotoPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idFotoPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `tbfotoproduto`
 --
 ALTER TABLE `tbfotoproduto`
-  MODIFY `idFotoProduto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idFotoProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `tbfotopublicacao`
 --
 ALTER TABLE `tbfotopublicacao`
-  MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT de tabela `tbfotoservico`
 --
 ALTER TABLE `tbfotoservico`
-  MODIFY `idFotoServico` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idFotoServico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `tbfotousuario`
 --
 ALTER TABLE `tbfotousuario`
-  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `tbmensagem`
@@ -689,13 +682,13 @@ ALTER TABLE `tbmensagem`
 -- AUTO_INCREMENT de tabela `tbnotificacao`
 --
 ALTER TABLE `tbnotificacao`
-  MODIFY `idNotificacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idNotificacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de tabela `tbpet`
 --
 ALTER TABLE `tbpet`
-  MODIFY `idPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idPet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de tabela `tbpetseguidor`
@@ -707,19 +700,19 @@ ALTER TABLE `tbpetseguidor`
 -- AUTO_INCREMENT de tabela `tbproduto`
 --
 ALTER TABLE `tbproduto`
-  MODIFY `idProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `tbpublicacao`
 --
 ALTER TABLE `tbpublicacao`
-  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT de tabela `tbservico`
 --
 ALTER TABLE `tbservico`
-  MODIFY `idServico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idServico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `tbtipousuario`
@@ -731,19 +724,19 @@ ALTER TABLE `tbtipousuario`
 -- AUTO_INCREMENT de tabela `tbusuario`
 --
 ALTER TABLE `tbusuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuarioendereco`
 --
 ALTER TABLE `tbusuarioendereco`
-  MODIFY `idUsuarioEndereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUsuarioEndereco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tbusuarioseguidor`
 --
 ALTER TABLE `tbusuarioseguidor`
-  MODIFY `idUsuarioSeguidor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `idUsuarioSeguidor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Restrições para despejos de tabelas

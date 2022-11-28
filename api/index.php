@@ -753,7 +753,7 @@ $app->post('/add-pet-config', function (Request $request, Response $response, ar
     $cookie = new Cookies();
     $fotoPet = new FotoPet();
 
-    
+
     $arrayEspecies = array(
         1 => "Cachorro",
         2 => "Gato",
@@ -819,11 +819,11 @@ $app->post('/add-pet-config', function (Request $request, Response $response, ar
     $pet->setIdPet($id);
     $fotoPet->setPet($pet);
 
-    if($_POST['baseFoto'] == "padrao"){
+    if ($_POST['baseFoto'] == "padrao") {
         $fotoPet->setNomeFotoPet("padrao.png");
         $fotoPet->setCaminhoFotoPet("private-user/fotos-pet/padrao.png");
         $fotoPet->cadastrar($fotoPet);
-    }else{
+    } else {
         $image = $_POST['baseFoto'];
         $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-pet/";
         $nomeArquivo = time() . ".png";
@@ -968,7 +968,7 @@ $app->get('/publicacoes/personalizadas/{id}', function (Request $request, Respon
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
-$app->get('/produtos/{id}', function (Request $request, Response $response, array $args){
+$app->get('/produtos/{id}', function (Request $request, Response $response, array $args) {
     $produto = new Produto();
     $id = $args['id'];
 
@@ -977,7 +977,7 @@ $app->get('/produtos/{id}', function (Request $request, Response $response, arra
     return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
 });
 
-$app->get('/servicos/{id}', function (Request $request, Response $response, array $args){
+$app->get('/servicos/{id}', function (Request $request, Response $response, array $args) {
     $servico = new Servico();
     $id = $args['id'];
 
@@ -1110,29 +1110,29 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
         $textoComentario = $comentario['textoComentario'];
         $dataComentario = $comentario['dataComentario'];
         $dataComentarioFeito = new DateTime($dataComentario);
-    $intervalo = $hoje->diff($dataComentarioFeito);
-    $diferencaAnos = $intervalo->format('%y');
-    $diferencaMeses = $intervalo->format('%m');
-    $diferencaDias = $intervalo->format('%a');
-    $diferencaHoras = $intervalo->format('%h');
-    $diferencaMinutos = $intervalo->format('%i');
-    if ($diferencaAnos == 0) {
-        if ($diferencaMeses == 0) {
-            if ($diferencaDias == 0) {
-                if ($diferencaHoras == 0) {
-                    $diferencaFinal = $diferencaMinutos . " minutos";
+        $intervalo = $hoje->diff($dataComentarioFeito);
+        $diferencaAnos = $intervalo->format('%y');
+        $diferencaMeses = $intervalo->format('%m');
+        $diferencaDias = $intervalo->format('%a');
+        $diferencaHoras = $intervalo->format('%h');
+        $diferencaMinutos = $intervalo->format('%i');
+        if ($diferencaAnos == 0) {
+            if ($diferencaMeses == 0) {
+                if ($diferencaDias == 0) {
+                    if ($diferencaHoras == 0) {
+                        $diferencaFinal = $diferencaMinutos . " minutos";
+                    } else {
+                        $diferencaFinal = $diferencaHoras . " horas";
+                    }
                 } else {
-                    $diferencaFinal = $diferencaHoras . " horas";
+                    $diferencaFinal = $diferencaDias . " dias";
                 }
             } else {
-                $diferencaFinal = $diferencaDias . " dias";
+                $diferencaFinal = $diferencaMeses . " meses";
             }
         } else {
-            $diferencaFinal = $diferencaMeses . " meses";
+            $diferencaFinal = $diferencaAnos . " anos";
         }
-    } else {
-        $diferencaFinal = $diferencaAnos . " anos";
-    }
 
         echo "<div class='comentarioHolder'>
                                 <div class='fotoDePerfil'>
@@ -1329,7 +1329,7 @@ $app->post(
         } else {
             $publicacao->setImpulsoPub(0);
         }
-        
+
         $id = $publicacao->cadastrar($publicacao);
 
         $caminhoSalvar = "/xampp/htdocs/petiti/private-user/fotos-publicacao/";
@@ -1697,7 +1697,7 @@ $app->post('/config-conta', function (Request $request, Response $response, arra
     }
 
     if (isset($_POST['txtEmail'])) {
-        if($_POST['txtEmail']!=$_SESSION['email']){
+        if ($_POST['txtEmail'] != $_SESSION['email']) {
             $usuario->setEmailUsuario($_POST['txtEmail']);
             $emailVerificacao = $usuario->verificarEmail($_POST['txtEmail']);
             if ($emailVerificacao == true) {
@@ -1904,11 +1904,11 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
         $seSegue = $usuarioSeguidor->verificarSeguidor($idSession, $idUsuario);
         $tipoUsuario = $arraySeguindo[$r]['tipoUsuario'];
 
-            if($tipoUsuario == "Tutor"){
-                $iconTipoUsuario = "user";
-            }else{
-                $iconTipoUsuario = "building";
-            }
+        if ($tipoUsuario == "Tutor") {
+            $iconTipoUsuario = "user";
+        } else {
+            $iconTipoUsuario = "building";
+        }
 
         if ($idUsuario == $idSession) {
             $resultSeSegue = "";
@@ -1963,7 +1963,7 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
     echo ("</div>");
 });
 
-$app->post('/pesquisa-seguidores-pet', function (Request $request, Response $response, array $args){
+$app->post('/pesquisa-seguidores-pet', function (Request $request, Response $response, array $args) {
     error_reporting(0);
 
     @session_start();
@@ -1985,26 +1985,26 @@ $app->post('/pesquisa-seguidores-pet', function (Request $request, Response $res
          
          <div class='segueHolder'>");
 
-         for ($t = 0; $t < $countSeguidores; $t++) {
-            $idSeguidor = $arraySeguidores[$t]['idSeguidor'];
-            $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idSeguidor);
-            $loginUsuario = $arraySeguidores[$t]['loginUsuario'];
-            $nomeUsuario = $arraySeguidores[$t]['nomeUsuario'];
-            $tipoUsuario = $arraySeguidores[$t]['tipoUsuario'];
+    for ($t = 0; $t < $countSeguidores; $t++) {
+        $idSeguidor = $arraySeguidores[$t]['idSeguidor'];
+        $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idSeguidor);
+        $loginUsuario = $arraySeguidores[$t]['loginUsuario'];
+        $nomeUsuario = $arraySeguidores[$t]['nomeUsuario'];
+        $tipoUsuario = $arraySeguidores[$t]['tipoUsuario'];
 
-            if($idTutorPet == $idSession){
-                $srcFotoSeguidor = "./";
-            }else{
-                $srcFotoSeguidor = "../";
-            }
+        if ($idTutorPet == $idSession) {
+            $srcFotoSeguidor = "./";
+        } else {
+            $srcFotoSeguidor = "../";
+        }
 
-            if($tipoUsuario == "Tutor"){
-                $iconTipoUsuario = "user";
-            }else{
-                $iconTipoUsuario = "building";
-            }
-    
-            echo ("
+        if ($tipoUsuario == "Tutor") {
+            $iconTipoUsuario = "user";
+        } else {
+            $iconTipoUsuario = "building";
+        }
+
+        echo ("
             
                 <a href='/petiti/$loginUsuario' target='_blank' '>
                     <div class='seguidores-row usuarioSegue'>
@@ -2032,8 +2032,8 @@ $app->post('/pesquisa-seguidores-pet', function (Request $request, Response $res
                 </a>
             
             ");
-        } // botão seguir pra quem for mexer nisso >>> <button class='btn btn-primary'>Seguir</button>
-        echo ("</div>");
+    } // botão seguir pra quem for mexer nisso >>> <button class='btn btn-primary'>Seguir</button>
+    echo ("</div>");
 });
 
 $app->post('/pesquisa-seguidores', function (Request $request, Response $response, array $args) {
@@ -2046,7 +2046,7 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
     $arraySeguidores = $usuarioSeguidor->pesquisaSeguidores($_POST['idUsuario']);
     $countSeguidores = count($arraySeguidores);
 
-    
+
     echo ("<div class='segueTitulo'>
             <h2>Seguidores</h2>
          </div>
@@ -2061,12 +2061,12 @@ $app->post('/pesquisa-seguidores', function (Request $request, Response $respons
         $seSegue = $usuarioSeguidor->verificarSeguidor($idSeguidor, $idSession);
         $tipoUsuario = $arraySeguidores[$t]['tipoUsuario'];
 
-            if($tipoUsuario == "Tutor"){
-                $iconTipoUsuario = "user";
-            }else{
-                $iconTipoUsuario = "building";
-            }
-            
+        if ($tipoUsuario == "Tutor") {
+            $iconTipoUsuario = "user";
+        } else {
+            $iconTipoUsuario = "building";
+        }
+
         if ($idSeguidor == $idSession) {
             $resultSeSegue = "";
             $seguirOuSeguindo = "";
@@ -2294,18 +2294,17 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
     }
 });
 
-$app->post('/cadastrar-produto-servico', function (Request $request, Response $response, array $args){
+$app->post('/cadastrar-produto-servico', function (Request $request, Response $response, array $args) {
     $produto = new Produto();
     $servico = new Servico();
     $usuario = new Usuario();
     $fotoServico = new FotoServico();
     $fotoProduto = new FotoProduto();
-
-   
+    $cookie = new Cookies();
 
     @session_start();
 
-    if($_POST['tipoCad'] == "produto"){
+    if ($_POST['tipoCad'] == "produto") {
         $textoProduto = $_POST['titulo'];
         $descProduto = $_POST['descricao'];
         $valorProduto = $_POST['valor'];
@@ -2332,11 +2331,22 @@ $app->post('/cadastrar-produto-servico', function (Request $request, Response $r
         $fotoProduto->setNomeFotoProduto($nomeArquivo);
         $fotoProduto->cadastrar($fotoProduto);
 
-       
         file_put_contents($arquivoCompleto, file_get_contents($image));
 
+        $cookie->criarCookie("produtoCadastrado", "
+    <div id='toast-denuncia' class='toast-denuncia'>
+        <div class='toast-denuncia-content'>
+            <div class='message-denuncia'>
+                <span class='texto-1'> Produto cadastrado com sucesso! </span>
+            </div>
+        </div>
+        <i class='fa-sharp fa-solid fa-xmark' id='close' onclick='closePopup()'></i>
+        <div class='progressbardenuncia'></div>
+    </div>
+    ", 1);
+
         header('location: /petiti/decidir-perfil');
-    }else{
+    } else {
         $textoServico = $_POST['titulo'];
         $descServico = $_POST['descricao'];
         $valorServico = $_POST['valor'];
@@ -2348,7 +2358,7 @@ $app->post('/cadastrar-produto-servico', function (Request $request, Response $r
         $usuario->setIdUsuario($_SESSION['id']);
         $servico->setUsuario($usuario);
         $id = $servico->cadastrar($servico);
-        
+
         $servico->setIdServico($id);
         $fotoServico->setServico($servico);
 
@@ -2364,9 +2374,7 @@ $app->post('/cadastrar-produto-servico', function (Request $request, Response $r
         $fotoServico->setNomeFotoServico($nomeArquivo);
         $fotoServico->cadastrar($fotoServico);
 
-
         file_put_contents($arquivoCompleto, file_get_contents($image));
-
 
         header('location: /petiti/decidir-perfil');
     }

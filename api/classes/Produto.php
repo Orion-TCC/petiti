@@ -107,7 +107,7 @@ class Produto
     public function listar($id)
     {
         $con = Conexao::conexao();
-        $query = "SELECT idProduto, textoProduto, descProduto, valorProduto, statusProduto, idUsuario, dataProduto FROM tbProduto WHERE idUsuario = $id ORDER BY dataProduto desc";
+        $query = "SELECT tbProduto.idProduto, textoProduto, descProduto, valorProduto, statusProduto, idUsuario, dataProduto, innerfotoProduto.caminhoFotoProduto FROM tbProduto INNER JOIN tbFotoProduto innerfotoProduto on innerfotoProduto.idProduto = tbproduto.idProduto WHERE idUsuario = $id ORDER BY dataProduto desc";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
 

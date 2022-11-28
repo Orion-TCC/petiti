@@ -104,6 +104,10 @@ $qtdProduto = $lista[0]['qtdProdutos'];
 
 <body class="feed perfilUsuario">
 
+    <?php if (isset($_COOKIE["produtoCadastrado"])) {
+        echo $_COOKIE["produtoCadastrado"];;
+    } ?>
+
     <nav class="feed">
         <div class="container">
             <div class="popupOptions" id="popup">
@@ -253,9 +257,6 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                     </div>
                                 </div>
 
-
-
-
                                 <div class="modal" id="modal-editar-perfil">
 
                                     <form class="flex-col" action="/petiti/api/editar-perfil" method="post">
@@ -309,33 +310,31 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                             <div class="flex-col biografia">
                                                 <label class="text-bold" for="">Biografia</label>
                                                 <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." autocomplete="off" type="text" name="txtBio" id="txtBio" maxlength="200"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
-                                                
-                                                
-                                                    <div class="contagemChar">
-                                                        <div class="flex-row" style="width: 100%; justify-content: end;">
-                                                          <input type="text" class="contagemCharBioInput" value="0" id="contagemCharBioInput" disabled>
-                                                          <span>/200</span>
-                                                       </div>
-                                                    </div>
-                                                
 
-                                                    
-                            <!-- <div class="contagemChar">
+
+                                                <div class="contagemChar">
+                                                    <div class="flex-row" style="width: 100%; justify-content: end;">
+                                                        <input type="text" class="contagemCharBioInput" value="0" id="contagemCharBioInput" disabled>
+                                                        <span>/200</span>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <!-- <div class="contagemChar">
 
                                 <div class="flex-row" style="width: 100%; justify-content: end;">
                                     <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
                                     <span>/200</span>
                                 </div>
                             </div> -->
-                                                
+
                                             </div>
 
                                         </div>
 
                                     </form>
                                 </div>
-
-
 
                                 <div id="modal-recortar-foto-perfil" class="modal">
                                     <div class="flex-col">
@@ -349,14 +348,10 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                     </div>
                                 </div>
 
-
-
-
-
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
-                                    <h3> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></h3>
-                                    <h3> <?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></h3>
+                                    <h3 class="hSeguidores" id="<?php echo $id; ?>"><a href="#modal-seguidores" rel="modal:open" style="color: black;"> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></a></h3>
+                                    <h3 class="hSeguindo" id="<?php echo $id ?>"><a href="#modal-seguindo" rel="modal:open" style="color: black;"><?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></a></h3>
                                 </div>
 
                                 <div class="infoHolder baixo">
@@ -439,27 +434,49 @@ $qtdProduto = $lista[0]['qtdProdutos'];
 
                         <div class="tabs_content produtos" data-tab="2">
 
-                            <div class="adicionarProduto">
-                                <i class="uil uil-plus-circle"></i>
-                            </div>
                             <?php if ($contagemProdutos < 1) { ?>
+                                <a href="#modal-servico-produto" rel="modal:open">
+                                    <div class="adicionarProduto">
+                                        <i class="uil uil-plus-circle"></i>
+                                    </div>
+                                </a>
                                 <div class="aviso">
                                     <h3>Você não possui nenhum produto ainda... Clique no quadrado acima para começar a vender seus produtos!</h3>
                                 </div>
-                            <?php } else {
+                                <?php } else {
                                 for ($p = 0; $p < $contagemProdutos; $p++) {
+                                    $foto = $dadosProdutos['produtos'][$p]['caminhoFotoProduto'];
+                                ?>
+                                    <div class="previewPostImage">
+                                        <img src="<?php echo $foto; ?>">
+                                    </div>
+                            <?php
                                 }
-                            }
-
-                            ?>
+                            } ?>
                         </div>
 
 
                         <div class="tabs_content serviços" data-tab="3">
 
-                            <div class="aviso">
-                                <h3>Ainda nenhum serviço... eu imagino oque o dono desse perfil esta fazendo...</h3>
-                            </div>
+                            <?php if ($contagemServicos < 1) { ?>
+                                <a href="#modal-servico-produto" rel="modal:open">
+                                    <div class="adicionarProduto">
+                                        <i class="uil uil-plus-circle"></i>
+                                    </div>
+                                </a>
+                                <div class="aviso">
+                                    <h3>Você não possui nenhum serviço ainda... Clique no quadrado acima para começar a vender seus serviços!</h3>
+                                </div>
+                                <?php } else {
+                                for ($b = 0; $b < $contagemServicos; $b++) {
+                                    $fotoServico = $dadosServicos['servicos'][$b]['caminhoFotoServico'];
+                                ?>
+                                    <div class="previewPostImage">
+                                        <img style="" src="<?php echo $fotoServico; ?>">
+                                    </div>
+                            <?php
+                                }
+                            } ?>
 
                         </div>
                     </div>
@@ -548,8 +565,6 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                 <i class="uil uil-message"></i>
                             </button>
 
-
-
                         </div>
 
                     </div>
@@ -562,20 +577,66 @@ $qtdProduto = $lista[0]['qtdProdutos'];
 
         <section>
             <div class="modal" id="modal-servico-produto">
-                <h2>Cadastro de serviço ou produto</h2>
+                <h1 id="TituloModalServicoProduto">Adicionar produto/serviço</h1>
                 <form action="/petiti/api/cadastrar-produto-servico" method="post" enctype="multipart/form-data">
-                    <img style="width: 200px;" id="previewEmpresa" src="" alt="">
-                    <input onchange="previewFile()" type="file" id="flFotoEmpresa">
+
+                    <div class="parteInputFoto">
+
+                        <div class="fotoSelecionarImagem">
+                            <img style="width: 250px" id="selectFotoIlustracao" src="./assets/images/selectFotoIlustracao.png">
+                        </div>
+
+                        <span class="textArrasteFoto">Arraste uma foto do seu produto/serviço</span>
+
+                        <label class="btn inputButtonEstilo">
+                            <input style="display: none;" onchange="previewFile()" type="file" id="flFotoEmpresa">
+                            <span>Escolha no computador</span>
+                        </label>
+                    </div>
+
                     <input type="hidden" name="baseFotoEmpresa" id="baseFotoEmpresa">
-                    <input type="text" name="titulo" id="titulo" placeholder="Insira o título">
-                    <input type="text" name="descricao" id="descricao" placeholder="Insira a descrição">
-                    <input type="number" name="valor" id="valor" placeholder="Insira o valor">
-                    <select name="tipoCad" id="tipoCad">
-                        <option value="produto">produto</option>
-                        <option value="servico">servico</option>
-                    </select>
-                    <input type="submit" value="cadastrar">
+
+                    <span id="divisaoPartes"></span>
+
+                    <div class="parteInputInfos">
+
+                        <span style="font-size: 24;">Escolha o tipo</span>
+                        <select name="tipoCad" id="tipoCad">
+                            <option value="produto" id="optionTipoCad">Produto</option>
+                            <option value="servico" id="optionTipoCad">Servico</option>
+                        </select>
+
+                        <span style="font-size: 24;padding-top: 0.7rem">Nome</span>
+                        <input required autocomplete="off" type="text" name="titulo" id="titulo" placeholder="Ex: bolinha de borracha ou tosa">
+
+                        <span style="font-size: 24;padding-top: 0.7rem">Valor</span>
+                        <input required autocomplete="off" type="number" name="valor" id="valor" placeholder="R$">
+
+                        <span style="font-size: 24;padding-top: 0.7rem">Descrição</span>
+                        <textarea required autocomplete="off" name="descricao" id="descricao" placeholder="Ex: É possível escolher na cor rosa, verde e azul e seu tamanho é de 5cm"></textarea>
+
+                    </div>
+
+                    <div class="parteInputSubmit">
+                        <label class="btn inputButtonEstilo">
+                            <input type="submit" value="">
+                            <span>Cadastrar</span>
+                        </label>
+                    </div>
+
                 </form>
+            </div>
+        </section>
+
+        <section>
+            <div id="modal-seguidores" class="modal">
+
+            </div>
+        </section>
+
+        <section>
+            <div id="modal-seguindo" class="modal">
+
             </div>
         </section>
 

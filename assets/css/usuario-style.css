@@ -1,3 +1,4 @@
+/* perfil do usuario */
 
   :root {
     --color-white: #FFFFFF;
@@ -30,504 +31,469 @@
 
   .perfilUsuario main .container{
 
-
-    grid-template-columns: 18vw auto 10vw;
+  grid-template-columns: 18vw auto 10vw;
 
 }
 
-  .meio .userArea {
-    background: var(--color-white);
-    border-radius: var(--card-border-radius);
-    padding: var(--card-padding);
-    height: 100%;
-  }
-
-  .meio .userHandle {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    padding-bottom: 1rem;
-  }
-
-  .meio .userHandle::after{
-    content: "";
-    width: 100%;
-    height: 1px;
-    background: gray;
-    position: absolute;
-    bottom: 0;
-
-  }
-  .userCima {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .meio .userCima .fotoDePerfil{
-    width: 9rem;
-  }
-
-  .meio .userInfo{
-    margin: 0 1.5rem;
-    display: flex;
-    width: 40rem;
-    flex-direction: column;
-    justify-content: space-around;
-  }
-
-  .meio .infoHolder {
-    display: flex;
-    width: 100%;
-    gap: 2rem;
-  }
-
-
-
-  .meio .infoHolder a{
-
-    font-family: 'Raleway Bold', sans-serif;
-    color: var(--color-purple);
-    font-weight: 900;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .meio .infoHolder h4{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .meio .topo{
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-  }
-
-  .meio .topo .btn{
-    color: var(--color-dark);
-    padding-inline: 1.2rem;
-    font-family: 'Raleway Bold', sans-serif;
-    font-weight: 900;
-    box-shadow: 0px 5px 15px rgb(0 0 0 / 14%);
-  }
-
-
-
-
-
-  .meio .infoHolder  .edit .menuPostHover{
-    transition: opacity .25s ease-in-out;
-    -moz-transition: opacity .25s ease-in-out;
-    -webkit-transition: opacity .25s ease-in-out;
-  
-    background: #464bc9;
-    border-radius: 80px;
-    height: 100%;
-    width: 100%;
-  
-    position: absolute;
-  
-    opacity: 0; 
-    -moz-opacity: 0;
-  }
-
-
-
-  .meio .infoHolder .edit .menupost li a{
-    display: flex;
-    gap: 0.5rem;
-    color: #DB310C;
-    align-items: center;
-  }
-
-  .meio .infoHolder .edit .menupost li i{
-    font-size: 1.5rem;
-  }
-
-  .meio .infoHolder .edit .menuPostHover:hover{
-    opacity: 0.4;
-  }
-
-
-  .meio .infoHolder  .edit {
-    align-self: center;
-  }
-  
-
-  .meio .infoHolder .edit .editButton{
-    position: relative; 
-    height: 2rem;  
-    width: 2rem; 
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .meio .infoHolder .edit  .editButton:hover{
-    color: #464bc9;
-  }
-  
-  .meio .infoHolder .edit .menuPostHover:hover{
-    opacity: 0.4;
-  }
-  
-  .meio .infoHolder  .edit i{
-    font-size: 1.2rem;
-  }
-  
-
-
-  /* modal editar perfil */
-
-  .perfilUsuario #modal-editar-perfil{
-    width: 650px !important;
-    height: fit-content !important;
-    padding: var(--card-padding) !important;
-    border-radius: var(--card-border-radius) !important;
-  }
-
-
-  .perfilUsuario #modal-editar-perfil .editPerfilHeader{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    height: 3rem;
-    align-items: center;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editPerfilHeader a{
-    font-size: 2.5rem;
-    color: var(--color-dark);
-  }
-
-  .perfilUsuario #modal-editar-perfil .editPerfilHeader .flex-row{
-    width: 15rem;
-    height: 100%;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editPerfilHeader .btn{
-    color: var(--color-dark);
-    font-weight: 600;
-    width: 10rem;
-    height: 40px;
-    font-size: 1.2rem;
-    box-shadow: 0px 6px 12px 0px #00000057;
-    border-radius: 15px;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm{
-    padding: 1rem 2rem;
-  }
-  
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-col {
-    width: 100%;
-    height: 5.5rem;
-    margin: 1.5rem 0;
-    gap: 0.5rem;
-  }
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .biografia{
-    height: 12rem;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .biografia textarea{
-    height: 10rem;
-    border-radius: 20px;
-    border: 1px solid gray;
-    padding-inline: 1rem;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: var(--card-padding);
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .biografia textarea:focus{
-    outline: 1px solid gray;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .biografia h4{
-    align-self: flex-end;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row{
-    margin: 2rem 0;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .text-bold{
-    font-weight: 700;
-    font-size: 1.4rem;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm  input[type="text"]{
-
-    font-family: 'Raleway Bold', sans-serif;
-    font-weight: 600;
-    font-size: 1.1rem;
-
-    height: 100%;
-    border-radius: 20px;
-    border: 1px solid gray;
-    padding-inline: 1rem;
-
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .contagemChar input[type="text"]{
-    border: none;
-    background: none;
-    width: 2rem;
-    padding: 0;
-    margin: 0;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .contagemChar .flex-row{
-    margin: 0;
-  }
-
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm  input[type="text"]::placeholder{
-    font-family: 'Raleway Bold', sans-serif;
-    font-weight: 600;
-    font-size: 1.1rem;
-  }
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm  input[type="text"]:focus{
-    outline: 1px solid gray;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row .fotoDePerfil{
-    width: 8rem;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row{
-    position: relative;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row input[type="file"]{
-    display: none;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row label.flFotoPerfil{
-    position: absolute;
-    width: 8rem;
-    aspect-ratio: 1/1;
-    border-radius: 80px;
-    cursor: pointer;
-
-    transition: all 300ms ease;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row label.flFotoPerfil:hover{
-    background: rgb(0 0 0 / 25%);
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row h2 label.flFotoPerfil2{
-    cursor: pointer;
-    align-self: center;
-  }
-
-  .perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row h2 {
-    height: fit-content;
-    align-self: center;
-    margin: 0 2rem;
-  }
-
-
-  /* modal crop imagem perfil usuario */
-
-  .perfilUsuario #modal-recortar-foto-perfil{
-    width: 31rem !important;
-    height: 39.5rem !important;
-    padding: var(--card-padding) !important;
-    border-radius: var(--card-border-radius) !important;  
-  }
-
-  .perfilUsuario #modal-recortar-foto-perfil .flex-col{
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-
-  }
-
-  .perfilUsuario #modal-recortar-foto-perfil .flex-col:first-child{
-    font-size: 1.8rem;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-    margin: 0.4rem 0;
-  }
-
-  .perfilUsuario #modal-recortar-foto-perfil .flex-col #upload-demo{
-    width: 390px !important;
-
-    overflow: hidden;
-    margin: 1rem 0;
-    border-radius: var(--card-border-radius);
-  }
-
-  .perfilUsuario #modal-recortar-foto-perfil .croppie-container .cr-boundary{
-    height: 395px !important;
-    width: 380px !important;
-
-    border-radius: var(--card-border-radius);
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 165px !important;
-
-    border: 1px solid var(--color-gray);
-  }
-
-  .perfilUsuario #modal-recortar-foto-perfil .croppie-container .cr-image{
+.meio .userArea {
+  background: var(--color-white);
   border-radius: var(--card-border-radius);
-  }
+  padding: var(--card-padding);
+  height: 100%;
+}
 
-  .perfilUsuario #modal-recortar-foto-perfil .croppie-container .cr-boundary .cr-viewport {
-    left: unset;
-    right: unset;
-    top: unset;
-    bottom: unset;
-
-    border: 2px solid var(--color-gray) !important;
-
-  }
-
-  .perfilUsuario #modal-recortar-foto-perfil .croppie-container .cr-slider{
-    display: unset !important;
-    width: 100% !important;
-  }
-
-  .perfilUsuario #modal-recortar-foto-perfil .croppie-container input[type=range]::-webkit-slider-runnable-track {
-    background: var(--color-pastelDark);
-
-  }
-
-  .perfilUsuario #modal-recortar-foto-perfil .croppie-container .cr-slider-wrap {
-    display: flex;
-    width: 380px !important;
-    height: 40px;
-    
-    
-    border-radius: var(--card-border-radius);
-    padding-inline: 15px;
-    
-    border: rgb(146 139 139) solid 2px;
-    background: rgb(35 35 40 / 24%);
-    
-  }
-
-  .perfilUsuario #modal-recortar-foto-perfil .flex-col .btn-primary{
-    color: var(--color-dark);
-    font-size: 1.2rem;
-    font-weight: 700;
-
-    box-shadow: 1px 4px 19px 0px #696969;
-  }
-
-  .perfilUsuario #modal-recortar-foto-perfil .flex-col .btn{
-    width: 380px;
-    height: 50px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-
-
-
-  .meio .meio {
-    gap: 2.2rem;
-  }
-
-  .meio .baixo{
-    align-items: center;
-    margin-left: -0.8rem;
-    gap: 0.5rem;
-  }
-
-  .meio .baixo i{
-    font-size: 2rem;
-  }
-
-  .meio .userBaixo{
-    margin: 1.5rem 1rem;
-    gap: 1rem;
-    width: 100%;
-  }
-
-  .meio .subUserBaixo{
-    display: flex;
-    margin-bottom: 1rem;
-
-    align-items: center;
-  }
-
-  .meio .userBaixo .subUserBaixo h2{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .meio .subUserBaixo h4{
-    padding-top: 0.3rem;
-    margin-left: 1rem;
-  }
-  .meio .userBaixo .subUserBaixo a{
-    color: var(--color-purple);
-  }
-
-  .meio .bio{
-    height: fit-content;
-    max-height: 57px;
-    width: 40rem;
-    
-  }
-
-  .meio .bio h4{
-    overflow-wrap: break-word;
-  }
-
-  .meio .addSerPro{
-  height: 60px;
-  width: 100%;
-  border: 1px solid var(--color-lightPastelGray);
-  border-radius: var(--card-border-radius);
+.meio .userHandle {
   display: flex;
-  gap: 1rem;
-  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.meio .userHandle::after {
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: #C1C1C1;
+  position: absolute;
+  bottom: 0;
+
+}
+
+.userCima {
+  display: flex;
+  flex-direction: row;
+}
+
+.meio .userCima .fotoDePerfil {
+  width: 9rem;
+}
+
+.meio .userInfo {
+  margin: 0 1.5rem;
+  display: flex;
+  width: 40rem;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.meio .infoHolder {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+}
+
+
+
+.meio .infoHolder a {
+
+  font-family: 'Raleway Bold', sans-serif;
+  color: var(--color-purple);
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meio .infoHolder h4 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meio .topo {
   align-items: center;
-  color: black;
-  transition: all 300ms ease;
+  justify-content: space-between;
+  position: relative;
 }
 
-.meio .addSerPro:hover{
-  background:rgb(244, 244, 244);
+.meio .topo .btn {
+  color: var(--color-dark);
+  padding-inline: 1.2rem;
+  font-family: 'Raleway Bold', sans-serif;
+  font-weight: 900;
+  box-shadow: 0px 5px 15px rgb(0 0 0 / 14%);
 }
 
 
-.meio .addSerPro h4{
+
+
+
+.meio .infoHolder .edit .menuPostHover {
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+
+  background: #464bc9;
+  border-radius: 80px;
+  height: 100%;
+  width: 100%;
+
+  position: absolute;
+
+  opacity: 0;
+  -moz-opacity: 0;
+}
+
+
+
+.meio .infoHolder .edit .menupost li a {
+  display: flex;
+  gap: 0.5rem;
+  color: #DB310C;
+  align-items: center;
+}
+
+.meio .infoHolder .edit .menupost li i {
+  font-size: 1.5rem;
+}
+
+.meio .infoHolder .edit .menuPostHover:hover {
+  opacity: 0.4;
+}
+
+
+.meio .infoHolder .edit {
+  align-self: center;
+}
+
+
+.meio .infoHolder .edit .editButton {
+  position: relative;
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.meio .infoHolder .edit .editButton:hover {
+  color: #464bc9;
+}
+
+.meio .infoHolder .edit .menuPostHover:hover {
+  opacity: 0.4;
+}
+
+.meio .infoHolder .edit i {
   font-size: 1.2rem;
 }
 
-.meio .addSerPro .addSerProImg{
-  width: 2.4rem;
+
+
+/* modal editar perfil */
+
+.perfilUsuario #modal-editar-perfil {
+  width: 650px !important;
+  height: fit-content !important;
+  padding: var(--card-padding) !important;
+  border-radius: var(--card-border-radius) !important;
 }
 
-  .meio .userTabs{
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 2rem;
-    margin: 0.5rem 0;
-  }
+
+.perfilUsuario #modal-editar-perfil .editPerfilHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 3rem;
+  align-items: center;
+}
+
+.perfilUsuario #modal-editar-perfil .editPerfilHeader a {
+  font-size: 2.5rem;
+  color: var(--color-dark);
+}
+
+.perfilUsuario #modal-editar-perfil .editPerfilHeader .flex-row {
+  width: 15rem;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.perfilUsuario #modal-editar-perfil .editPerfilHeader .btn {
+  color: var(--color-dark);
+  font-weight: 600;
+  width: 10rem;
+  height: 40px;
+  font-size: 1.2rem;
+  box-shadow: 0px 6px 12px 0px #00000057;
+  border-radius: 15px;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm {
+  padding: 1rem 2rem;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-col {
+  width: 100%;
+  height: 5.5rem;
+  margin: 1.5rem 0;
+  gap: 0.5rem;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .biografia {
+  height: 12rem;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .biografia textarea {
+  height: 10rem;
+  border-radius: 20px;
+  border: 1px solid gray;
+  padding-inline: 1rem;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: var(--card-padding);
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .biografia textarea:focus {
+  outline: 1px solid gray;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .biografia h4 {
+  align-self: flex-end;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row {
+  margin: 2rem 0;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .text-bold {
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm input[type="text"] {
+
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+
+  height: 100%;
+  border-radius: 20px;
+  border: 1px solid gray;
+  padding-inline: 1rem;
+
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm input[type="text"]::placeholder {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm input[type="text"]:focus {
+  outline: 1px solid gray;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row .fotoDePerfil {
+  width: 8rem;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row {
+  position: relative;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row input[type="file"] {
+  display: none;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row label.flFotoPerfil {
+  position: absolute;
+  width: 8rem;
+  aspect-ratio: 1/1;
+  border-radius: 80px;
+  cursor: pointer;
+
+  transition: all 300ms ease;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row label.flFotoPerfil:hover {
+  background: rgb(0 0 0 / 25%);
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row h2 label.flFotoPerfil2 {
+  cursor: pointer;
+  align-self: center;
+}
+
+.perfilUsuario #modal-editar-perfil .editarPerfilForm .flex-row h2 {
+  height: fit-content;
+  align-self: center;
+  margin: 0 2rem;
+}
+
+
+/* modal crop imagem perfil usuario */
+
+.perfilUsuario #modal-recortar-foto-perfil {
+  width: 31rem !important;
+  height: 39.5rem !important;
+  padding: var(--card-padding) !important;
+  border-radius: var(--card-border-radius) !important;
+}
+
+.perfilUsuario #modal-recortar-foto-perfil .flex-col {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.perfilUsuario #modal-recortar-foto-perfil .flex-col:first-child {
+  font-size: 1.8rem;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  margin: 0.4rem 0;
+}
+
+.perfilUsuario #modal-recortar-foto-perfil .flex-col #upload-demo {
+  width: 390px !important;
+
+  overflow: hidden;
+  margin: 1rem 0;
+  border-radius: var(--card-border-radius);
+}
+
+.perfilUsuario #modal-recortar-foto-perfil .croppie-container .cr-boundary {
+  height: 395px !important;
+  width: 380px !important;
+
+  border-radius: var(--card-border-radius);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 165px !important;
+
+  border: 1px solid var(--color-gray);
+}
+
+.perfilUsuario #modal-recortar-foto-perfil .croppie-container .cr-image {
+  border-radius: var(--card-border-radius);
+}
+
+.perfilUsuario #modal-recortar-foto-perfil .croppie-container .cr-boundary .cr-viewport {
+  left: unset;
+  right: unset;
+  top: unset;
+  bottom: unset;
+
+  border: 2px solid var(--color-gray) !important;
+
+}
+
+.perfilUsuario #modal-recortar-foto-perfil .croppie-container .cr-slider {
+  display: unset !important;
+  width: 100% !important;
+}
+
+.perfilUsuario #modal-recortar-foto-perfil .croppie-container input[type=range]::-webkit-slider-runnable-track {
+  background: var(--color-pastelDark);
+
+}
+
+.perfilUsuario #modal-recortar-foto-perfil .croppie-container .cr-slider-wrap {
+  display: flex;
+  width: 380px !important;
+  height: 40px;
+
+
+  border-radius: var(--card-border-radius);
+  padding-inline: 15px;
+
+  border: rgb(146 139 139) solid 2px;
+  background: rgb(35 35 40 / 24%);
+
+}
+
+.perfilUsuario #modal-recortar-foto-perfil .flex-col .btn-primary {
+  color: var(--color-dark);
+  font-size: 1.2rem;
+  font-weight: 700;
+
+  box-shadow: 1px 4px 19px 0px #696969;
+}
+
+.perfilUsuario #modal-recortar-foto-perfil .flex-col .btn {
+  width: 380px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
 
 
 
-.userTabOption{
+.meio .meio {
+  gap: 2.2rem;
+}
+
+.meio .baixo {
+  align-items: center;
+  margin-left: -0.8rem;
+  gap: 0.5rem;
+}
+
+.meio .baixo i {
+  font-size: 2rem;
+}
+
+.meio .userBaixo {
+  margin: 1.5rem 1rem;
+  gap: 1rem;
+  width: 100%;
+}
+
+.meio .subUserBaixo {
+  display: flex;
+  margin-bottom: 1rem;
+
+  align-items: center;
+}
+
+.meio .userBaixo .subUserBaixo h2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meio .subUserBaixo h4 {
+  padding-top: 0.3rem;
+  margin-left: 1rem;
+}
+
+.meio .userBaixo .subUserBaixo a {
+  color: var(--color-purple);
+}
+
+.meio .bio {
+  height: fit-content;
+  max-height: 57px;
+  width: 30rem;
+
+}
+
+.meio .bio h4 {
+  overflow-wrap: break-word;
+}
+
+
+.meio .userTabs {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 2rem;
+  margin: 0.5rem 0;
+}
+
+
+
+.userTabOption {
   background: none;
   font-size: 1.5rem;
   font-weight: 700;
@@ -535,47 +501,47 @@
   position: relative;
 }
 
-  .userTabOption--ativo::before{
-    content: "";
-    height: 0.5rem;
-    background: var(--color-purple);
-    width: 75%;
-    position: absolute;
-    margin-left: 0.9rem;
-    margin-top: 1.9rem;
-    border-radius: 80px;
+.userTabOption--ativo::before {
+  content: "";
+  height: 0.5rem;
+  background: var(--color-purple);
+  width: 75%;
+  position: absolute;
+  margin-left: 0.9rem;
+  margin-top: 1.9rem;
+  border-radius: 80px;
 }
 
 
-.tabAtiva{
+.tabAtiva {
   display: grid !important;
 }
 
 
 
-.postagens{
-    position: relative;
-    padding: 2rem 0;
-    margin-left: 1.4rem;
-    display: none;    
-    grid-template-columns: 33% 33% 33%;
-    row-gap: 2rem;
-    height: fit-content;
-    min-height: 27.9rem;
+.postagens {
+  position: relative;
+  padding: 2rem 0;
+  margin-left: 1.4rem;
+  display: none;
+  grid-template-columns: 33% 33% 33%;
+  row-gap: 2rem;
+  height: fit-content;
+  min-height: 27.9rem;
 }
 
- .previewPostImage {
-    width: 14.5rem;
-    height: 13.5rem;
-    border: 1px solid gray;
-    position: relative;
-    border-radius: var(--card-border-radius);
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 300ms ease;
+.previewPostImage {
+  width: 14.5rem;
+  height: 13.5rem;
+  border: 1px solid gray;
+  position: relative;
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 300ms ease;
 }
 
-.previewPostImage:hover::before{
+.previewPostImage:hover::before {
   transition: all 300ms ease;
   content: "";
   display: block;
@@ -589,21 +555,21 @@
   border-top-right-radius: var(--card-border-radius);
 }
 
- .aviso{
-    display: block;
-    position: absolute;
-    width: 24rem;
-    align-self: center;
-    justify-self: center;
+.aviso {
+  display: block;
+  position: absolute;
+  width: 24rem;
+  align-self: center;
+  justify-self: center;
 
-    text-align: center;
+  text-align: center;
 }
 
-.marcacoes{
+.marcacoes {
   position: relative;
   padding: 2rem 0;
   margin-left: 1.4rem;
-  display: none;    
+  display: none;
   grid-template-columns: 33% 33% 33%;
   row-gap: 2rem;
   height: fit-content;
@@ -611,40 +577,40 @@
 }
 
 
-.curtidas{
+.curtidas {
   position: relative;
   padding: 2rem 0;
   margin-left: 1.4rem;
-  display: none;    
+  display: none;
   grid-template-columns: 33% 33% 33%;
   row-gap: 2rem;
   height: fit-content;
   min-height: 27.9rem;
 }
 
-.serviços{
+.serviços {
   position: relative;
   padding: 2rem 0;
   margin-left: 1.4rem;
-  display: none;    
+  display: none;
   grid-template-columns: 33% 33% 33%;
   row-gap: 2rem;
   height: fit-content;
   min-height: 40rem;
 }
 
-.produtos{
+.produtos {
   position: relative;
   padding: 2rem 0;
   margin-left: 1.4rem;
-  display: none;    
+  display: none;
   grid-template-columns: 33% 33% 33%;
   row-gap: 2rem;
   height: fit-content;
   min-height: 40rem;
 }
 
-.adicionarProduto{
+.adicionarProduto {
   width: 14.5rem;
   height: 13.5rem;
   display: flex;
@@ -659,24 +625,24 @@
   transition: all 300ms ease;
 }
 
-.adicionarProduto:hover{
+.adicionarProduto:hover {
   background: rgba(7, 7, 7, 0.035);
 }
 
-.adicionarProduto i{
+.adicionarProduto i {
   font-size: 5rem;
   color: gray;
 }
 
 
 
-.curtidas .aviso a{
+.curtidas .aviso a {
   color: var(--color-purple);
 }
 
 /* SEGUIDORES */
 
-.segueTitulo{
+.segueTitulo {
   width: 100%;
   display: flex;
   height: 5rem;
@@ -686,7 +652,7 @@
 
 }
 
-.segueHolder{
+.segueHolder {
   width: 100%;
   height: 725px;
   overflow-y: auto;
@@ -703,7 +669,7 @@
 
 
 
-.usuarioSegue{
+.usuarioSegue {
   width: 100%;
   height: fit-content;
   display: flex;
@@ -713,39 +679,40 @@
 
 }
 
-.usuarioSegue:hover{
+.usuarioSegue:hover {
   background: rgba(0, 0, 0, 0.068);
 }
 
-.usuarioSegue .fotoDePerfil{
+.usuarioSegue .fotoDePerfil {
   width: 6rem;
   border: none;
 }
 
-.usuarioSegue .biografia{
+.usuarioSegue .biografia {
   width: 29rem;
   font-family: 'Raleway Medium', sans-serif;
 }
 
-.usuarioSegue .btn{
+.usuarioSegue .btn {
   width: 6rem;
   font-family: 'Raleway Bold';
 }
 
-.usuarioSegue .loginEUser{
-  display: flex; 
-  flex-direction: column; 
+.usuarioSegue .loginEUser {
+  display: flex;
+  flex-direction: column;
   color: black;
 }
 
-.usuarioSegue .loginEUser h4, .usuarioSegue .loginEUser h3{
+.usuarioSegue .loginEUser h4,
+.usuarioSegue .loginEUser h3 {
   width: 21rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.usuarioSegue .seguidor h5{
+.usuarioSegue .seguidor h5 {
   font-family: 'Raleway Medium';
   background: rgba(7, 7, 7, 0.050);
   border-radius: 11px;
@@ -759,12 +726,13 @@
 }
 
 
-#modal-seguindo, #modal-seguidores{
+#modal-seguindo,
+#modal-seguidores {
   width: 630px !important;
 }
 
 
-.seguidor{
+.seguidor {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -772,34 +740,90 @@
   width: 100%;
 }
 
-#modal-servico-produto h2{
-  margin-left: 0.7rem;
+#modal-servico-produto h1 {
+  border-bottom: 0.2px solid gray;
+  padding: 0.4rem 0 0.4rem 0;
+  text-align: center;
 }
 
-#modal-servico-produto form{
+#modal-servico-produto form {
   display: flex;
   flex-direction: column;
-  margin-left: 0.7rem;
 }
 
-#modal-servico-produto form input[type = "text"], #modal-servico-produto form input[type = "number"]{
-  width: 300px;
-  height: 30px;
+#modal-servico-produto form input[type="text"],
+#modal-servico-produto form input[type="number"] {
+  border: 1px solid gray;
+  height: 50px;
+  border-radius: 20px;
+  padding: 20;
+  width: 90%;
+  font-size: 20px;
+}
+
+#modal-servico-produto form textarea{
+  border: 1px solid gray;
+  height: 120px;
+  border-radius: 20px;
+  padding: 20;
+  width: 90%;
+  font-size: 20px;
+  resize: none;
+  font-family: "Raleway Bold", Sans serif;
 }
 
 #modal-servico-produto form select {
-  width: 100px;
-  height: 30px;
+  height: 50px;
+  font-size: 20px;
+  width: 90%;
+  border-radius: 20px;
+  border: 1px solid gray;
+  padding-left: 20;
 }
 
-#modal-servico-produto form input[type = "submit"]{
-  width: 80px;
-  height: 30px;
+#modal-servico-produto form input[type="file"] {
+  margin: 1rem 0 0 0;
 }
 
-.previewPostImage{
+#previewEmpresa {
+  place-self: center !important;
+}
+
+.parteInputFoto {
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.textArrasteFoto {
+  font-size: 24;
+  padding: 1.4rem;
+  width: 330px;
+  text-align: center;
+}
+
+.parteInputInfos {
+  display: flex;
+  flex-direction: column;
+  padding: 0.85rem 0 0 2.5rem;
+}
+
+.parteInputSubmit{
+  display: flex;
   justify-content: center;
+  padding: 1.5rem;
+  margin-bottom: 10px;
+}
+
+#divisaoPartes{
+  width: 100%;
+  border-top: 1px solid gray;
+}
+
+#modal-servico-produto{
+  max-height: 945px !important;
+  height: 945px !important;
+  padding: 0px !important;
+  width: 750px !important;
 }

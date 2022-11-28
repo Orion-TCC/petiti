@@ -106,7 +106,7 @@ class Servico{
 
     public function listar($id){
         $con = Conexao::conexao();
-        $query = "SELECT idServico, textoServico, descServico, valorServico, statusServico, idUsuario, dataServico FROM tbServico WHERE idUsuario = $id ORDER BY dataServico desc";
+        $query = "SELECT tbServico.idServico, textoServico, descServico, valorServico, statusServico, idUsuario, dataServico, innerFotoServico.caminhoFotoServico FROM tbServico INNER JOIN tbFotoServico innerFotoServico ON innerFotoServico.idServico = tbServico.idServico WHERE idUsuario = $id ORDER BY dataServico desc";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
