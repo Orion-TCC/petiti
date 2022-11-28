@@ -176,7 +176,7 @@ $contagemPets = count($dadosPets['pets']);
                 <!-- SIDEBAR LADO ESQUERDO -->
 
                 <div class="sidebar">
-                    <a href="#" class="menu-item ativo">
+                    <a href="feed" class="menu-item ativo">
                         <span><i class="uil uil-house-user"></i> </span>
                         <h3>Home</h3>
                     </a>
@@ -220,12 +220,7 @@ $contagemPets = count($dadosPets['pets']);
 
 
 
-                <!-- Botao de criar post -->
-                <button class="btn btn-primary">
-                    <p>
-                        <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
-                    </p>
-                </button>
+
 
             </div>
             <!-- FIM DO LADO ESQUERDO -->

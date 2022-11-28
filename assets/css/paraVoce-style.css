@@ -1,0 +1,99 @@
+:root {
+    --color-white: #FFFFFF;
+    --color-dark: rgba(0, 0, 0, 1);
+    --color-pastelDark: #202225;
+    --color-lightGray: #f5f5f5;
+    --color-extraLightGray: rgba(245, 245, 245, 1);
+    --color-gray: rgba(86, 86, 86, 1);
+    --color-lightPastelGray: #C1C1C1;
+    --color-light: rgba(224, 224, 224, 1);
+  
+    --color-purple: rgba(56, 55, 161, 1);
+    --color-lightPurple: #9998D3;
+    --color-lightBlue: rgba(186, 213, 219, 1);
+    --color-pastelYellow: rgba(255, 251, 159, 1);
+    --color-pastelOrange: rgba(251, 211, 164, 1);
+  
+  
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 1rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+  
+    --sticky-top-left: 6.4rem;
+    --sticky-top-right: -18rem;
+  }
+  
+
+
+  /*  MEIO */
+
+  .meio .paraVoceDisc{
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    background: var(--color-white);
+    display: flex;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+
+
+  .meio .paraVoceDisc img{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 16rem;
+  }
+
+  .meio .paraVoceDisc .h4Holder{
+    width: 509px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .meio .paraVoceDisc .h4Holder :nth-child(2){
+    width: 500px;
+  }
+
+
+  .meio .paraVoceDisc2{
+    overflow: hidden;
+    position: unset;
+    margin-top: 1rem;
+  }
+
+  .meio .paraVoceDisc2 .h4Holder{
+    width: 357px;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .meio .paraVoceDisc2 .h4Holder img{
+    width: 16rem !important;
+    position: unset;
+  }
+
+  .meio .paraVoceDisc2 .badges{
+    width: 44%;
+    margin: 0;
+    height: fit-content;
+    max-height: 11rem;
+  }
+
+  .meio .paraVoceDisc2 .badges::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .meio .paraVoceDisc2 .badges::-webkit-scrollbar-track {
+    background-color: #14526945;
+    border-radius: 20px;
+  }
+  
+  .meio .paraVoceDisc2 .badges::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(56, 55, 161, 0.90);
+  }
