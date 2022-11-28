@@ -498,7 +498,7 @@ function closePopup() {
 }
 
 function previewFile() {
-  var preview = document.getElementById("previewEmpresa");
+  var preview = document.getElementById("selectFotoIlustracao");
   var file = document.getElementById("flFotoEmpresa").files[0];
   var reader = new FileReader();
   var baseFoto = document.getElementById("baseFotoEmpresa");

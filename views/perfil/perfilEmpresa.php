@@ -341,8 +341,8 @@ $qtdProduto = $lista[0]['qtdProdutos'];
 
                                 <div class="infoHolder meio">
                                     <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
-                                    <h3> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></h3>
-                                    <h3> <?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></h3>
+                                    <h3 class="hSeguidores" id="<?php echo $id; ?>"><a href="#modal-seguidores" rel="modal:open" style="color: black;"> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></a></h3>
+                                    <h3 class="hSeguindo" id="<?php echo $id ?>"><a href="#modal-seguindo" rel="modal:open" style="color: black;"><?php echo $qtdSeguindo ?> <span class="text-muted">Seguindo</span></a></h3>
                                 </div>
 
                                 <div class="infoHolder baixo">
@@ -540,20 +540,66 @@ $qtdProduto = $lista[0]['qtdProdutos'];
 
         <section>
             <div class="modal" id="modal-servico-produto">
-                <h2>Cadastro de serviço ou produto</h2>
+                <h1 id="TituloModalServicoProduto">Adicionar produto/serviço</h1>
                 <form action="/petiti/api/cadastrar-produto-servico" method="post" enctype="multipart/form-data">
-                    <img style="width: 200px;" id="previewEmpresa" src="" alt="">
-                    <input onchange="previewFile()" type="file" id="flFotoEmpresa">
+
+                    <div class="parteInputFoto">
+
+                        <div class="fotoSelecionarImagem">
+                            <img style="width: 250px" id="selectFotoIlustracao" src="./assets/images/selectFotoIlustracao.png">
+                        </div>
+
+                        <span class="textArrasteFoto">Arraste uma foto do seu produto/serviço</span>
+
+                        <label class="btn inputButtonEstilo">
+                            <input style="display: none;" onchange="previewFile()" type="file" id="flFotoEmpresa">
+                            <span>Escolha no computador</span>
+                        </label>
+                    </div>
+
                     <input type="hidden" name="baseFotoEmpresa" id="baseFotoEmpresa">
-                    <input type="text" name="titulo" id="titulo" placeholder="Insira o título">
-                    <input type="text" name="descricao" id="descricao" placeholder="Insira a descrição">
-                    <input type="number" name="valor" id="valor" placeholder="Insira o valor">
-                    <select name="tipoCad" id="tipoCad">
-                        <option value="produto">produto</option>
-                        <option value="servico">servico</option>
-                    </select>
-                    <input type="submit" value="cadastrar">
+
+                            <span id="divisaoPartes"></span>
+
+                    <div class="parteInputInfos">
+
+                        <span style="font-size: 24;">Escolha o tipo</span>
+                        <select name="tipoCad" id="tipoCad">
+                            <option value="produto" id="optionTipoCad">Produto</option>
+                            <option value="servico" id="optionTipoCad">Servico</option>
+                        </select>
+
+                        <span style="font-size: 24;padding-top: 0.7rem">Nome</span>
+                        <input required autocomplete="off" type="text" name="titulo" id="titulo" placeholder="Ex: bolinha de borracha ou tosa">
+
+                        <span style="font-size: 24;padding-top: 0.7rem">Valor</span>
+                        <input required autocomplete="off" type="number" name="valor" id="valor" placeholder="R$">
+
+                        <span style="font-size: 24;padding-top: 0.7rem">Descrição</span>
+                        <textarea required autocomplete="off" name="descricao" id="descricao" placeholder="Ex: É possível escolher na cor rosa, verde e azul e seu tamanho é de 5cm"></textarea>
+
+                    </div>
+
+                    <div class="parteInputSubmit">
+                        <label class="btn inputButtonEstilo">
+                            <input type="submit" value="">
+                            <span>Cadastrar</span>
+                        </label>
+                    </div>
+
                 </form>
+            </div>
+        </section>
+
+        <section>
+            <div id="modal-seguidores" class="modal">
+
+            </div>
+        </section>
+
+        <section>
+            <div id="modal-seguindo" class="modal">
+
             </div>
         </section>
 
