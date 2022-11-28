@@ -326,13 +326,9 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
       <div class="informacoes">
         <h2>Informações da Pet Iti</h2>
         <div class="graficos">
-          <div class="linhaGraficos">
             <canvas id="myChartSemana" class="graficoCima"></canvas>
             <canvas id="myChartImpulso" class="graficoCima"></canvas>
-          </div>
-          <div class="linhaGraficos">
             <canvas id="myChart" class="graficoBaixo"></canvas>
-          </div>
         </div>
       </div>
     </main>

@@ -309,22 +309,7 @@ main .informacoes .graficos {
   box-shadow: var(--box-shadow);
 }
 
-.graficos {
-  flex-direction: column;
-}
-.linhaGraficos {
-  display: flex;
-  flex-direction: row;
-  padding: 30px;
-}
-.graficoCima{
-    width: 300px!important;
-    height: 300px!important;
-}
-.graficoBaixo{
-    width: 500px!important;
-    height: 700px!important;
-}
+
 
 /* RIGHT SIDE - MENSAGENS */
 .right-side {
