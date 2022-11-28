@@ -778,7 +778,7 @@
 .parteInputInfos {
   display: flex;
   flex-direction: column;
-  padding: 0.85rem 0 0 2.5rem;
+  padding: 0.85rem 0 0 2.6rem;
 }
 
 .parteInputSubmit{
@@ -798,5 +798,4 @@
   height: 945px !important;
   padding: 0px !important;
   width: 750px !important;
-
 }
