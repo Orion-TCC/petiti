@@ -2025,6 +2025,9 @@ border: none;
   text-align: end;
 }
 
+.contagemChar{
+  color: gray;
+}
 
 .contagemCharComent {
   display: flex;

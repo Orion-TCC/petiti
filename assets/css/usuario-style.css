@@ -237,7 +237,7 @@
 
   .perfilUsuario #modal-editar-perfil .editarPerfilForm  input[type="text"]{
 
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway Bold', sans-serif;
     font-weight: 600;
     font-size: 1.1rem;
 
@@ -248,8 +248,21 @@
 
   }
 
+  .perfilUsuario #modal-editar-perfil .editarPerfilForm .contagemChar input[type="text"]{
+    border: none;
+    background: none;
+    width: 2rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .perfilUsuario #modal-editar-perfil .editarPerfilForm .contagemChar .flex-row{
+    margin: 0;
+  }
+
+
   .perfilUsuario #modal-editar-perfil .editarPerfilForm  input[type="text"]::placeholder{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway Bold', sans-serif;
     font-weight: 600;
     font-size: 1.1rem;
   }
