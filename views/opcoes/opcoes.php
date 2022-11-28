@@ -565,12 +565,13 @@ $contagemPets = count($dadosPets['pets']);
                                 <input type="hidden" name="baseFoto" id="baseFoto">
 
 
-                                <div class="letraCont">
-                                    <div class="contagemChar">
-                                        <input type="text" value="0" id="contagemCharInput" disabled>
-                                        <span>/200</span>
-                                    </div>
+                            <div class="contagemChar">
+
+                                <div class="flex-row" style="width: 100%; justify-content: end;">
+                                    <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
+                                    <span>/200</span>
                                 </div>
+                            </div>
 
                             </div>
 
