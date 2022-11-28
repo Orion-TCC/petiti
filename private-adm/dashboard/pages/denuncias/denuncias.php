@@ -409,7 +409,7 @@ if ($_SESSION['tipo'] != "Adm") {
                 $idDenunciaComentario = $linha['idDenunciaComentario'];
                 $idDenunciado = $linha['idUsuarioDenunciado'];
                 $idDenunciador = $linha['idUsuarioDenunciador'];
-                $textoDenunciaComentairo = $linha['textoDenunciaComentario'];
+                $textoDenunciaComentario = $linha['textoDenunciaComentario'];
                 $foto = $linha['caminhoFoto'];
                 $usuarioDenunciado = $linha['usuarioDenunciado'];
                 $usuarioDenunciador = $linha['usuarioDenunciador'];
@@ -425,7 +425,7 @@ if ($_SESSION['tipo'] != "Adm") {
                   <div class="info-card">
                     <img class="foto-info" src="<?php echo $foto ?>">
                     <div class="denuncia-info">
-                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $usuarioDenunciado ?>">@<?php echo $usuarioDenunciado ?></a></span></p>
                     </div>
                   </div>
                   <p><span style="font-weight: 900; font-size: 15px;">Comentário: </span><span style="font-weight: 600; font-size: 15px;"> <?php echo $textoComentario; ?> </span></p>
@@ -437,8 +437,8 @@ if ($_SESSION['tipo'] != "Adm") {
                       <p> Denuncia feita em: <?php echo $data; ?></p>
                     </div>
                   </div>
-                  <p><span style="font-weight: 900;font-size: 15px;">Denunciado por: </span><span style="font-weight: 600;font-size: 15px;"><a target="_blank" href="/petiti/<?php echo $denunciador ?>">@<?php echo $denunciador ?></a></span></p>
-                  <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
+                  <p><span style="font-weight: 900;font-size: 15px;">Denunciado por: </span><span style="font-weight: 600;font-size: 15px;"><a target="_blank" href="/petiti/<?php echo $usuarioDenunciador ?>">@<?php echo $usuarioDenunciador ?></a></span></p>
+                  <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenunciaComentario ?></span></p>
 
                   <a id="<?php echo $idDenunciaComentario; ?>" href="#modal-analisar-denuncia-comentario<?php echo $idDenunciaComentario; ?>" rel="modal:open" class="botao analisar-agora">Analisar agora</a>
 
@@ -457,15 +457,15 @@ if ($_SESSION['tipo'] != "Adm") {
                         <span style="font-size: 15px; font-weight:600;">Motivo apontado: </span><span style="font-size: 15px; font-weight:400;"> <?php echo $textoDenunciaComentario; ?></span>
                       </div>
                       <div class="denunciador-modal">
-                        <span style="font-size: 15px; font-weight:600;">Denunciado por: </span> <a target="_blank" href="/petiti/<?php echo $denunciador; ?>"><span style="font-size: 15px; font-weight:400;">@<?php echo $denunciador; ?></span></a>
+                        <span style="font-size: 15px; font-weight:600;">Denunciado por: </span> <a target="_blank" href="/petiti/<?php echo $usuarioDenunciador; ?>"><span style="font-size: 15px; font-weight:400;">@<?php echo $usuarioDenunciador; ?></span></a>
                       </div>
                       <div class="botoesDecisaoDenuncia">
                         <div class="linhaBotoesDenuncia">
                           <a class="botao decisao-conta" href="/petiti/api/bloquear-tutor-denunciado/comentario/<?php echo $idDenunciado; ?>/<?php echo $idDenunciaComentario; ?>"><span id="span-bloquear-conta">Bloquear conta</span></a>
-                          <a href="/petiti/api/comentario-denunciado/delete/<?php echo $idComentario; ?>/<?php echo $idDenunciaComentario; ?>"></a>
+                          <a class="botao decisao-conta" href="/petiti/api/comentario-denunciado/delete/<?php echo $idComentario; ?>/<?php echo $idDenunciaComentario; ?>"> <span id="span-excluir-comentario"> Excluir comentário </span></a>
                         </div>
                         <div class="linhaBotoesDenuncia">
-                          <a class="botao decisao-conta" href="/petiti/api/excluir-denuncia/comentario/<?php echo $idDenunciaComentario; ?>">Excluir denúncia</a>
+                          <a class="botao decisao-conta" href="/petiti/api/excluir-denuncia/comentario/<?php echo $idDenunciaComentario; ?>"> <span id="span-decisao-conta">Excluir denúncia</span></a>
                         </div>
                       </div>
                     </div>
@@ -553,7 +553,7 @@ if ($_SESSION['tipo'] != "Adm") {
               ?>
             </div>
 
-            <h3> Denúncias de usuários:</h3>
+            <h3> Denúncias de usuários: </h3>
             <h3 id="total-qtd-usuarios">Total(<?php echo $denunciaUsuario->buscaQtdDenunciaUsuarioResolvida(); ?>)</h3>
             <div class="denunciasUsuarios">
               <?php foreach ($listaDenunciasUsuarioResolvidas as $linha) {
@@ -589,6 +589,42 @@ if ($_SESSION['tipo'] != "Adm") {
               <?php
               } ?>
             </div>
+
+              <h3> Denúncias de comentários: </h3>
+              <h3 id="total-qtd-comentarios">Total(<?php echo $denunciaComentario->buscaQtdDenunciaComentarioResolvida(); ?>)</h3>
+              <div class="denunciasComentarios">
+                <?php foreach($listaDenunciasComentarioResolvidas as $linha){
+                  $idDenunciaComentario = $linha['idDenunciaComentario'];
+                  $idDenunciado = $linha['idUsuarioDenunciado'];
+                  $idDenunciador = $linha['idUsuarioDenunciador'];
+                  $textoDenuncia = $linha['textoDenunciaComentario'];
+                  $foto = $linha['caminhoFoto'];
+                  $denunciado = $linha['usuarioDenunciado'];
+                  $denunciador = $linha['usuarioDenunciador'];
+                  $data = $linha['dia'] . " de " . $linha['mes'] . " de " . $linha['ano'];
+                }
+                ?>
+                <div class="card">
+                  <div class="badges">
+                    <p class="badge ativo">Resolvido</p>
+                  </div>
+                  <div class="infos-card">
+                    <img class="foto-info" src="<?php echo $foto; ?>">
+                    <div class="denuncia-info">
+                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                    </div>
+                  </div>
+                  <div class="card-data">
+                    <span class="material-symbols-outlined">date_range</span>
+                    <div class="data-denunciador">
+                      <p> Denuncia feita em: <?php echo $data; ?></p>
+                    </div>
+                  </div>
+                  <p><span style="font-weight: 900;font-size: 15px;">Denunciado por: </span><span style="font-weight: 600;font-size: 15px;"><a target="_blank" href="/petiti/<?php echo $denunciador ?>">@<?php echo $denunciador ?></a></span></p>
+                  <p><span style="font-weight: 900;">Decisão da administração: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
+                  <a href="/petiti/api/passar-denuncia-analise/comentario/<?php echo $idDenunciaComentario; ?>" class="botao analisar">Passar para análise novamente</a>
+                </div>
+              </div>
           </div>
         </div>
       </div>
