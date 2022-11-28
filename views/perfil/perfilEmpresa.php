@@ -309,25 +309,25 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                             <div class="flex-col biografia">
                                                 <label class="text-bold" for="">Biografia</label>
                                                 <textarea style="resize: none;" placeholder="Escreva alguns fatos sobre você..." autocomplete="off" type="text" name="txtBio" id="txtBio" maxlength="200"><?php if ($_SESSION['bio'] != null) { ?><?php echo $_SESSION['bio'] ?><?php } ?></textarea>
-                                                
-                                                
-                                                    <div class="contagemChar">
-                                                        <div class="flex-row" style="width: 100%; justify-content: end;">
-                                                          <input type="text" class="contagemCharBioInput" value="0" id="contagemCharBioInput" disabled>
-                                                          <span>/200</span>
-                                                       </div>
-                                                    </div>
-                                                
 
-                                                    
-                            <!-- <div class="contagemChar">
+
+                                                <div class="contagemChar">
+                                                    <div class="flex-row" style="width: 100%; justify-content: end;">
+                                                        <input type="text" class="contagemCharBioInput" value="0" id="contagemCharBioInput" disabled>
+                                                        <span>/200</span>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <!-- <div class="contagemChar">
 
                                 <div class="flex-row" style="width: 100%; justify-content: end;">
                                     <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
                                     <span>/200</span>
                                 </div>
                             </div> -->
-                                                
+
                                             </div>
 
                                         </div>
@@ -434,14 +434,15 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                 <div class="aviso">
                                     <h3>Você não possui nenhum produto ainda... Clique no quadrado acima para começar a vender seus produtos!</h3>
                                 </div>
-                            <?php } else {
+                                <?php } else {
                                 for ($p = 0; $p < $contagemProdutos; $p++) {
                                     $foto = $dadosProdutos['produtos'][$p]['caminhoFotoProduto'];
-                                } ?>
-                                <div class="previewPostImage">
-                                    <img src="<?php echo $foto; ?>">
-                                </div>
+                                ?>
+                                    <div class="previewPostImage">
+                                        <img src="<?php echo $foto; ?>">
+                                    </div>
                             <?php
+                                }
                             } ?>
                         </div>
 
@@ -462,8 +463,7 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                     $fotoServico = $dadosServicos['servicos'][$b]['caminhoFotoServico'];
                                 ?>
                                     <div class="previewPostImage">
-                                        <img src="<?php echo $fotoServico; ?>">
-                                        <span><?php echo $fotoServico; ?></span>
+                                        <img style="" src="<?php echo $fotoServico; ?>">
                                     </div>
                             <?php
                                 }
