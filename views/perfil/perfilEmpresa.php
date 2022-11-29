@@ -267,7 +267,7 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                                 <h2>Editar perfil</h2>
                                             </div>
 
-                                            <button type="submit" class="btn btn-primary">Salvar</button>
+                                            
 
                                         </div>
 
@@ -298,9 +298,41 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                             </div>
 
                                             <div class="flex-col">
-                                                <label class="text-bold" for="">Local</label>
-                                                <input <?php if ($_SESSION['local'] != null) { ?> value="<?php echo $_SESSION['local'] ?>" <?php } ?> placeholder="Localização" type="text" name="txtLocal" id="txtLocal" autocomplete="off" maxlength="40">
+                                                <label class="text-bold" for="">Ramo</label>
+                                                <input placeholder="Ramo da empresa" value="ramo" type="text" name="txtRamo" id="txtRamo" autocomplete="off" maxlength="40">
                                             </div>
+
+
+                                            <div class="flex-col" style="height: 7rem;">
+                                                <label class="text-bold" for="">CEP</label>
+                                                <input placeholder="Insira seu CEP" value="CEP" type="text" name="txtCep" id="txtCep" autocomplete="off" maxlength="40">
+                                                <h5 class="text-muted">*Ao inserir o CEP, o outro campo será preenchido automaticamente</h5>
+                                            </div>
+
+                                            <div class="flex-col">
+                                                <label class="text-bold" for="">Endereço</label>
+                                                <input placeholder="Endereço" value="Endereço" type="text" name="txtEndereco" id="txtEndereco" autocomplete="off" maxlength="40">
+                                            </div>
+
+                                            <div class="flex-col">
+                                                <label class="text-bold" for="">Número e complemento (se tiver)</label>
+                                                <input placeholder="Ex: 940, esquina da casa do norte" value="numero complemento" type="text" name="txtNum" id="txtNum" autocomplete="off" maxlength="40">
+                                            </div>
+
+                                            <div class="flex-row" style="gap: 1rem; margin: 0 0;">
+                                                <div class="flex-col" style="margin: 0;">
+                                                    <label class="text-bold" for="">Cidade</label>
+                                                    <input style="width: 20rem;" value="" type="text" name="txtCidade" id="txtCidade" autocomplete="off" maxlength="40">
+                                                </div>
+                                                
+                                                <div class="flex-col" style="margin: 0;">
+                                                    <label class="text-bold" for="">UF</label>
+                                                    <input style="width: 12.5rem;"  value="" type="text" name="txtUF" id="txtUF" autocomplete="off" maxlength="40">
+                                                </div>
+                                            </div>
+
+
+
 
                                             <div class="flex-col">
                                                 <label class="text-bold" for="">Site</label>
@@ -320,14 +352,7 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                                 </div>
 
 
-
-                                                <!-- <div class="contagemChar">
-
-                                <div class="flex-row" style="width: 100%; justify-content: end;">
-                                    <input type="text" class="contagemCharInput" value="0" id="contagemCharInput<?php echo $id; ?>" disabled>
-                                    <span>/200</span>
-                                </div>
-                            </div> -->
+                                                <button type="submit" class="btn btn-primary">Salvar</button>
 
                                             </div>
 
@@ -423,9 +448,11 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                 for ($i = 0; $i < $contagem; $i++) {
                                     $foto = $dados['publicacoes'][$i]['caminhoFoto'];
                                 ?>
+                                <div style="padding: 1rem;">
                                     <div class="previewPostImage">
-                                        <img src="<?php echo $foto ?>" alt="">
+                                        <img src="<?php echo $foto; ?>">
                                     </div>
+                                </div>
 
                             <?php }
                             } ?>
@@ -447,9 +474,15 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                 for ($p = 0; $p < $contagemProdutos; $p++) {
                                     $foto = $dadosProdutos['produtos'][$p]['caminhoFotoProduto'];
                                 ?>
+                                <div class="produtoServ">
                                     <div class="previewPostImage">
                                         <img src="<?php echo $foto; ?>">
                                     </div>
+
+                                    <h3>Nome do produto</h3>
+
+                                    <h4 class="text-muted">R$52</h4>
+                                </div>
                             <?php
                                 }
                             } ?>
@@ -471,9 +504,15 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                 for ($b = 0; $b < $contagemServicos; $b++) {
                                     $fotoServico = $dadosServicos['servicos'][$b]['caminhoFotoServico'];
                                 ?>
+                                <div class="produtoServ">
                                     <div class="previewPostImage">
-                                        <img style="" src="<?php echo $fotoServico; ?>">
+                                        <img src="<?php echo $fotoServico; ?>">
                                     </div>
+
+                                    <h3>Nome do Servico</h3>
+
+                                    <h4 class="text-muted">R$52</h4>
+                                </div>
                             <?php
                                 }
                             } ?>
@@ -576,52 +615,85 @@ $qtdProduto = $lista[0]['qtdProdutos'];
         </section>
 
         <section>
+
             <div class="modal" id="modal-servico-produto">
                 <h1 id="TituloModalServicoProduto">Adicionar produto/serviço</h1>
+
                 <form action="/petiti/api/cadastrar-produto-servico" method="post" enctype="multipart/form-data">
 
                     <div class="parteInputFoto">
 
                         <div class="fotoSelecionarImagem">
-                            <img style="width: 250px" id="selectFotoIlustracao" src="./assets/images/selectFotoIlustracao.png">
+                            <img id="selectFotoIlustracao" src="./assets/images/selectFotoIlustracaoAlt.svg">
+
+                            <div id="modal-recorte-empresa" class="modal">
+                                   
+                               <div class="modal-recorte-empresaInner">
+
+                                    <h1>Recortar imagem!</h1>
+
+                                    <div id="recortar-empresa">
+
+                                    </div>
+
+                                    <a href="#modal-servico-produto" rel="modal:open" id="cortarEmpresa" class="btn btn-primary">Confirmar</a>
+                                    
+                               </div>
+
+                            </div>
                         </div>
 
-                        <span class="textArrasteFoto">Arraste uma foto do seu produto/serviço</span>
-
-                        <label class="btn inputButtonEstilo">
-                            <input style="display: none;" onchange="previewFile()" type="file" id="flFotoEmpresa">
-                            <span>Escolha no computador</span>
+                        <span class="textArrasteFoto">Arraste ou selecione uma foto do seu produto/serviço</span>
+                       
+                        <label class="btn inputButtonEstilo"> 
+                            <input style="display: none;" type="file" id="flFotoEmpresa">
+                            <span>Selecionar no computador</span>
                         </label>
+                        
                     </div>
+
 
                     <input type="hidden" name="baseFotoEmpresa" id="baseFotoEmpresa">
 
-                    <span id="divisaoPartes"></span>
+                  
 
                     <div class="parteInputInfos">
 
-                        <span style="font-size: 24;">Escolha o tipo</span>
+                    <div style="margin-top: 1rem;" class="formElement">
+                        <span>Escolha o tipo</span>
                         <select name="tipoCad" id="tipoCad">
+                            <option disabled selected></option>
                             <option value="produto" id="optionTipoCad">Produto</option>
-                            <option value="servico" id="optionTipoCad">Servico</option>
+                            <option value="servico" id="optionTipoCad">Serviço</option>
                         </select>
+                    </div>
 
-                        <span style="font-size: 24;padding-top: 0.7rem">Nome</span>
+                    <div class="formElement">
+                        <span>Nome</span>
+                   
                         <input required autocomplete="off" type="text" name="titulo" id="titulo" placeholder="Ex: bolinha de borracha ou tosa">
+                    </div>
 
-                        <span style="font-size: 24;padding-top: 0.7rem">Valor</span>
-                        <input required autocomplete="off" type="number" name="valor" id="valor" placeholder="R$">
+                    <div class="formElement">
+                        <span>Valor</span>
 
-                        <span style="font-size: 24;padding-top: 0.7rem">Descrição</span>
-                        <textarea required autocomplete="off" name="descricao" id="descricao" placeholder="Ex: É possível escolher na cor rosa, verde e azul e seu tamanho é de 5cm"></textarea>
+                        <div class="precoInput">
+                            <h4>R$</h4>
+                            <input required autocomplete="off" type="number" name="valor" id="valor" placeholder="25,00">
+                        </div>
+                    </div>
+
+                    <div class="formElement">
+                        <span>Descrição</span>
+                        <textarea required autocomplete="off" name="descricao" id="descricao" maxlength="150" placeholder="Ex: É possível escolher na cor rosa, verde e azul e seu tamanho é de 5cm"></textarea>
+                    </div>
 
                     </div>
 
                     <div class="parteInputSubmit">
-                        <label class="btn inputButtonEstilo">
-                            <input type="submit" value="">
-                            <span>Cadastrar</span>
-                        </label>
+                        
+                            <input class="btn inputButtonEstilo" type="submit" value="Cadastrar">
+                        
                     </div>
 
                 </form>

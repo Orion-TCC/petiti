@@ -1355,6 +1355,8 @@ border: none;
   line-height: 28px;
   color: black;
   cursor: pointer;
+
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
 }
 
 .inputButtonEstilo:hover {

@@ -3,6 +3,8 @@
 <?php
 require_once("../objetos.php");
 require_once("../../../../api/database/conexao.php");
+
+$listaCategorias  = $categorias->listarCategoriasPopulares();
 @session_start();
 if ($_SESSION['tipo'] != "Adm") {
   header("Location: /petiti/feed");
@@ -216,7 +218,7 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
           legend: {
             labels: {
               font: {
-                size: 10
+                size: 15
               }
             }
           }
@@ -335,10 +337,10 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
           <div class="d-graficos">
             <div class="graficoCima">
             <canvas id="myChartSemana"></canvas>
-            <canvas id="myChartImpulso"></canvas>
+             <canvas id="myChartImpulso"></canvas>
             </div>
-            <div class="graficoBaixo">
-            <canvas id="myChart"></canvas>
+            <div class="graficoBaixo">      
+             <canvas id="myChart"></canvas>
             </div>
           </div>
         </div>
@@ -419,45 +421,21 @@ $qtdDenunciasUsuarioesAtivas = $denunciaUsuario->buscaQtdDenunciaUsuarioAtiva();
 
       <div class="categorias-alta">
         <h2>Categorias em alta</h2>
-        <div class="categoria">
+<?php for ($i=0; $i < 3; $i++) { ?>
+ <div class="categoria">
           <div class="icon">
             <span class="material-icons-round">category</span>
           </div>
           <div class="right">
             <div class="info-cat">
-              <h3 style="font-size: 1.3rem">Cachorros</h3>
+               <h3 style="font-size: 1.3rem"> <?php echo $listaCategorias[$i]['categoria']; ?> </h3>
               <p id="p-small">Últimas 24 horas</p>
             </div>
             <h5 class="sucesso">+71%</h5>
-            <h3 style="font-size: 1.2rem">5070</h3>
+            <h3 style="font-size: 1.2rem"><?php echo $listaCategorias[$i]['qtd']; ?></h3>
           </div>
         </div>
-        <div class="categoria">
-          <div class="icon">
-            <span class="material-icons-round">category</span>
-          </div>
-          <div class="right">
-            <div class="info-cat">
-              <h3 style="font-size: 1.3rem">Lontrinhas</h3>
-              <p id="p-small">Últimas 24 horas</p>
-            </div>
-            <h5 class="perigo">-10%</h5>
-            <h3 style="font-size: 1.2rem">2015</h3>
-          </div>
-        </div>
-        <div class="categoria">
-          <div class="icon">
-            <span class="material-icons-round">category</span>
-          </div>
-          <div class="right">
-            <div class="info-cat">
-              <h3 style="font-size: 1.3rem">Axolote</h3>
-              <p id="p-small">Últimas 24 horas</p>
-            </div>
-            <h5 class="sucesso">+15%</h5>
-            <h3 style="font-size: 1.2rem">500</h3>
-          </div>
-        </div>
+<?php } ?>
       </div>
 
       <div class="contato">

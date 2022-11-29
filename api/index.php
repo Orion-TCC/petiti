@@ -2239,7 +2239,7 @@ $app->post('/pesquisar', function (Request $request, Response $response, array $
                                   </div>
                                     
                                   <span class='text-muted' style='font-size: 0.8rem;'>@$resultadoBuscaAtual</span>
-                                  <span class='text-muted' style='font-size: 0.8rem; width: 26rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'>biografia biografia biografia biografia biografia biografia biografia biografiabiografiabiografia</span>
+                            
 
                                 </div>
 

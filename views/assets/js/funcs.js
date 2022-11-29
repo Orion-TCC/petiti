@@ -319,6 +319,77 @@ $(document).ready(function () {
       $("#txtidComentario").val(id);
     });
   });
+
+
+
+//croppie imagem serviço/produto
+  var resizeEmpresa = $("#recortar-empresa").croppie({
+    enableExif: true,
+    enableOrientation: true,
+    viewport: {
+      // Default { width: 100, height: 100, type: 'square' }
+      width: 400,
+      height: 400,
+      type: "square", //square
+    },
+    boundary: {
+      width: 500,
+      height: 500,
+    },
+  });
+
+    $("#flFotoEmpresa").on("change", function () {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      resizeEmpresa
+        .croppie("bind", {
+          url: e.target.result,
+        })
+        .then(function () {
+          console.log("jQuery bind complete");
+        });
+    };
+    reader.readAsDataURL(this.files[0]);
+      $("#modal-recorte-empresa").modal("show");
+      $("#flFotoEmpresa").val("");
+  });
+
+
+    $("#cortarEmpresa").on("click", function (ev) {
+    ev.preventDefault();
+    var blob;
+    resizeEmpresa
+      .croppie("result", {
+        type: "blob",
+      })
+      .then(function (resp) {
+        blob = resp;
+      });
+
+    resizeEmpresa
+      .croppie("result", {
+        type: "canvas",
+        size: "viewport",
+      })
+      .then(function (img) {
+        $.ajax({
+          type: "POST",
+          enctype: "multipart/form-data",
+          data: { image: img },
+          url: "/petiti/assets/libs/croppie/envio.php",
+          success: function (data) {
+            html = img;
+            $("#baseFotoEmpresa").val(img);
+            $("#selectFotoIlustracao").attr('src', '');
+            $("#selectFotoIlustracao").attr('src', img);
+            console.log(data);
+          },
+        });
+      });
+
+  });
+
+
 });
 
 function showHideElement() {
@@ -497,20 +568,5 @@ function closePopup() {
   document.querySelector(".toast-denuncia").classList.add("close");
 }
 
-function previewFile() {
-  var preview = document.getElementById("selectFotoIlustracao");
-  var file = document.getElementById("flFotoEmpresa").files[0];
-  var reader = new FileReader();
-  var baseFoto = document.getElementById("baseFotoEmpresa");
-  reader.onloadend = function () {
-    preview.src = reader.result;
-    baseFoto.value = reader.result;
-    file.value = "";
-  };
 
-  if (file) {
-    reader.readAsDataURL(file);
-  } else {
-    preview.src = "";
-  }
-}
+

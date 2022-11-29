@@ -313,17 +313,20 @@ main .informacoes .graficos {
   display: flex!important;
   flex-direction: column;
 justify-content: center;
-align-items: center;
+gap: 20px;
 }
 .graficoCima{
   display: flex;
-  height: 250px!important;
+  height: 200px!important;
+  gap: 300px;
 }
 .graficoBaixo{
   display: flex;
-  flex-direction: row!important;
-
-  height: 250px!important;
+  flex-direction: column!important;
+align-content: center!important;
+    flex-wrap: wrap!important;
+  height: 310px!important;
+  width: 100%;
 }
 
 
