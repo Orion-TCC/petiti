@@ -115,7 +115,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
             <h2 class="logo">
                 <img src="/petiti/assets/images/logo_principal.svg">
             </h2>
-            
+
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
                 <input class="inputSearch" autocomplete="off" id="inputSearch" type="search" placeholder="Pesquisar">
@@ -209,7 +209,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         <h3>Mensagens</h3>
                     </a>
 
-                    <a href="#" class="menu-item">
+                    <a href="prodServ" class="menu-item">
                         <span><i class="uil uil-shopping-bag"></i> </span>
                         <h3>Produtos e Serviços</h3>
                     </a>
@@ -236,16 +236,16 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
             <div class="Meio">
 
-            <span>Explore a pet iti!</span>
+                <span>Explore a pet iti!</span>
 
                 <div class="paraVoceDisc">
                     <div class="h4Holder">
                         <h4>
-                        A <span class="hrefCor">“ Para Você “</span> é praticamente um feed porém com todos os posts da nossa rede social. Assim, você será capaz de explorar e encontrar novos perfis, posts inéditos e muito mais!
+                            A <span class="hrefCor">“ Para Você “</span> é praticamente um feed porém com todos os posts da nossa rede social. Assim, você será capaz de explorar e encontrar novos perfis, posts inéditos e muito mais!
                         </h4>
 
                         <h4>
-                        Outra funcionalidade é a de <span class="hrefCor">seguir categorias</span>, para que a sua “Para Você” mostre mais posts de acordo com o seu gosto, logo, exibindo de forma aleatória postagens alheias e com categorias que você segue.
+                            Outra funcionalidade é a de <span class="hrefCor">seguir categorias</span>, para que a sua “Para Você” mostre mais posts de acordo com o seu gosto, logo, exibindo de forma aleatória postagens alheias e com categorias que você segue.
                         </h4>
                     </div>
 
@@ -257,23 +257,25 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                     <div class="h4Holder">
                         <h4>
-                        É possível seguir uma categoria apenas clicando nela, na qual irá aparecer um pequeno detalhe roxo. E caso você não queira mais seguir uma categoria específica, é só clicar de novo nela.
+                            É possível seguir uma categoria apenas clicando nela, na qual irá aparecer um pequeno detalhe roxo. E caso você não queira mais seguir uma categoria específica, é só clicar de novo nela.
                         </h4>
 
                         <img src="assets/images/previewCategorias.svg" alt="">
                     </div>
 
                     <div class="badges">
-                    <p class='badge-categoria' id=''> Cachorro</p>
-                         <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                         <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                         <p class='badge-categoria' id=''> Cachorro</p>                         <p class='badge-categoria' id=''> Cachorro</p>
-                         <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                         <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                         <p class='badge-categoria' id=''> Cachorro</p>                         <p class='badge-categoria' id=''> Cachorro</p>
-                         <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                         <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                         <p class='badge-categoria' id=''> Cachorro</p>
+                        <p class='badge-categoria' id=''> Cachorro</p>
+                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
+                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
+                        <p class='badge-categoria' id=''> Cachorro</p>
+                        <p class='badge-categoria' id=''> Cachorro</p>
+                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
+                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
+                        <p class='badge-categoria' id=''> Cachorro</p>
+                        <p class='badge-categoria' id=''> Cachorro</p>
+                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
+                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
+                        <p class='badge-categoria' id=''> Cachorro</p>
                     </div>
 
                 </div>
@@ -313,7 +315,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         $jsonComentarios = file_get_contents($urlComentarios);
 
                         $dadosComentarios = (array)json_decode($jsonComentarios, true);
-
+                        $contagemComentarios = count($dadosComentarios['comentarios']);
                         $nome = $dados['publicacoes'][$i]['nomeUsuario'];
                         $login = $dados['publicacoes'][$i]['loginUsuario'];
                         $foto = $dados['publicacoes'][$i]['caminhoFotoPublicacao'];
@@ -405,18 +407,18 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                                 <li class="li-ExcluirPost">
                                                     <div style="display: flex; align-items: center;">
 
-                                                        <i style="color: #DB310C;" class="uil uil-minus-circle"></i>
+                                                        <i style="color: #DB310C;" class="fa-solid fa-trash"></i>
                                                         <span class="excluirPost">Excluir Post</span>
 
                                                         <div id="modal-exclui-post" class="modal certeza-excluir">
                                                             <div class="innerCerteza-excluir">
 
                                                                 <h2 style="font-family: 'Raleway Extra Bold';">Excluir post?</h2>
-                                                                <h5>Após excluir, essa ação não poderá ser desfeita, e o post será removido do seu perfil, da timeline de outras contas e dos resultados de busca.</h5>
+                                                                <h4>Após excluir, essa ação não poderá ser desfeita, e o post será removido do seu perfil, da timeline de outras contas e dos resultados de busca.</h4>
 
                                                                 <div class="opcoes-certeza-excluir">
                                                                     <a href="/petiti/api/publicacao/delete/<?php echo $id; ?>"><button class="btn btn-primary excluir">Excluir</button></a>
-                                                                    <button class="btn btn-primary cancelar"> <a rel="modal:close">Cancelar</a></button>
+                                                                    <a rel="modal:close"><button class="btn btn-primary cancelar">Cancelar</button></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -531,7 +533,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                                 if (($_SESSION['login'] == $login) || ($dadosComentarios['comentarios'][$c]['loginUsuario'] == $_SESSION['login'])) { ?>
                                                     <a style="color:black;" href="/petiti/api/comentario/delete/<?php echo $idComentarioAtual; ?>">
                                                         <div class="menuComentElement">
-                                                            <i class="fa-solid fa-trash"></i>
+                                                            <i style="color: #DB310C;" class="fa-solid fa-trash"></i>
                                                             <span>Excluir</span>
                                                         </div>
                                                     </a>
@@ -563,7 +565,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <i class="uil uil-message"></i>
                                 </button>
                             </div>
-                            
+
                             <div class="contagemChar">
 
                                 <div class="flex-row" style="width: 100%; justify-content: end;">
@@ -658,21 +660,22 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                             <?php
                             $contategmCategoriasPopulares = count($listaCategorias);
                             for ($a = 0; $a < $contategmCategoriasPopulares; $a++) { ?>
-
-                                <div class="categorias">
-                                    <div class="Lugar">
-                                        <div class="fotoDePerfil">
-                                            <img src="/petiti/views/assets/img/position<?php echo ($a + 1); ?>.svg" alt="">
-                                        </div>
-                                        <div class="infoCategoria">
-                                            <h4>
-                                                <?php echo $listaCategorias[$a]['categoria']; ?>
-                                            </h4>
+                                <?php if ($listaCategorias[$a]['categoria'] != "") { ?>
+                                    <div class="categorias">
+                                        <div class="Lugar">
+                                            <div class="fotoDePerfil">
+                                                <img src="/petiti/views/assets/img/position<?php echo ($a + 1); ?>.svg" alt="">
+                                            </div>
+                                            <div class="infoCategoria">
+                                                <h4>
+                                                    <?php echo $listaCategorias[$a]['categoria']; ?>
+                                                </h4>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            <?php } ?>
+                            <?php }
+                            } ?>
 
                         </div>
                     </div>
@@ -894,7 +897,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
         <section>
 
-            <a href="#modal-denuncia" rel="modal:open">
+            <div href="#modal-denuncia" rel="modal:open">
 
                 <div id="modal-denuncia" class="modal denuncia">
 
@@ -904,20 +907,22 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                         <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
 
-                        <h1>Denunciar</h1>
+                        <h1 style="color:black;">Denunciar post</h1>
 
-                        <h5 class="text-muted">Você está denunciando o post de @username. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h5>
+                        <h4 style="color:black;" class="text-muted">Você está denunciando o post desse usuário. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h4>
 
                         <div style="width: 99%;">
                             <h4>Causa:</h4>
                             <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200"></textarea>
                         </div>
-
-                        <input class="btn btn-primary" type="submit" value="Denunciar">
-
+                        <div class="botoesDenuncia">
+                            <input class="btn btn-primary" type="submit" value="Denunciar">
+                            <a rel="modal:close"><button class="btn btn-primary cancelar">Cancelar</button></a>
+                        </div>
                     </form>
 
                 </div>
+            </div>
 
         </section>
 
@@ -930,7 +935,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
         <section>
-            <div class="modal" id="modal-denuncia-comentario">
+            <div class="modal denuncia" id="modal-denuncia-comentario">
                 <div class="modal-denuncia-comentario-elements">
                     <div class="titulo-denuncia-comentario">
                         <h2>Denunciar Comentário</h2>
