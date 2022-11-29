@@ -14,12 +14,6 @@ $idPetEscolhido = $pet->buscaPets($loginPet);
 
 $_SESSION['idPetPagina'] = $idPetEscolhido;
 
-$url = "http://localhost/petiti/api/publicacoes/usuario/" . $_SESSION['id'];
-
-$json = file_get_contents($url);
-$dados = (array)json_decode($json, true);
-$contagem = count($dados['publicacoes']);
-
 
 $urlPerfil = "http://localhost/petiti/api/pet/$idPetEscolhido";
 $jsonPerfil = file_get_contents($urlPerfil);
@@ -37,6 +31,13 @@ $id = $_SESSION['id'];
 if ($idUsuarioTutor == $id) {
     header("location: /petiti/api/escolher-pet/$idPetEscolhido");
 }
+
+$url = "http://localhost/petiti/api/publicacoes/usuario/" . $idUsuarioTutor;
+
+$json = file_get_contents($url);
+$dados = (array)json_decode($json, true);
+$contagem = count($dados['publicacoes']);
+
 $urlPets = "http://localhost/petiti/api/usuario/$id/pets";
 
 $jsonPets = file_get_contents($urlPets);
