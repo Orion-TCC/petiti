@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30-Nov-2022 às 00:41
+-- Tempo de geração: 30-Nov-2022 às 18:41
 -- Versão do servidor: 10.4.22-MariaDB
--- versão do PHP: 8.1.1
+-- versão do PHP: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -302,7 +302,8 @@ CREATE TABLE `tbproduto` (
   `descProduto` varchar(150) NOT NULL,
   `valorProduto` double NOT NULL,
   `statusProduto` int(1) NOT NULL,
-  `idUsuario` int(11) NOT NULL
+  `idUsuario` int(11) NOT NULL,
+  `dataProduto` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -333,7 +334,8 @@ CREATE TABLE `tbservico` (
   `descServico` varchar(150) NOT NULL,
   `valorServico` double NOT NULL,
   `statusServico` int(1) NOT NULL,
-  `idUsuario` int(11) NOT NULL
+  `idUsuario` int(11) NOT NULL,
+  `dataServico` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
