@@ -429,7 +429,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <h2>Produtos</h2>
                                     
                                     <div class="flex-row">
-                                    <div class="produtoServ">
+
+                                        <div class="produtoServ">
                                             <div class="previewPostImage">
                                                 <img src="<?php echo $fotoServico; ?>">
                                             </div>
@@ -437,7 +438,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                             <h3>Nome do Servico</h3>
 
                                             <h4 class="text-muted">R$52</h4>
-                                        </div>                                         <div class="produtoServ">
+                                        </div>
+
+                                        <div class="produtoServ">
                                             <div class="previewPostImage">
                                                 <img src="<?php echo $fotoServico; ?>">
                                             </div>
@@ -445,7 +448,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                             <h3>Nome do Servico</h3>
 
                                             <h4 class="text-muted">R$52</h4>
-                                        </div>                                         <div class="produtoServ">
+                                        </div>
+                                        
+                                        <div class="produtoServ">
                                             <div class="previewPostImage">
                                                 <img src="<?php echo $fotoServico; ?>">
                                             </div>
@@ -453,7 +458,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                             <h3>Nome do Servico</h3>
 
                                             <h4 class="text-muted">R$52</h4>
-                                        </div>                                         <div class="produtoServ">
+                                        </div>
+
+                                        <div class="produtoServ">
                                             <div class="previewPostImage">
                                                 <img src="<?php echo $fotoServico; ?>">
                                             </div>
@@ -461,7 +468,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                             <h3>Nome do Servico</h3>
 
                                             <h4 class="text-muted">R$52</h4>
-                                        </div> 
+                                        </div>
                                     </div>                                      
                             </div>
                         </div>

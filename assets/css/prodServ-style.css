@@ -1,0 +1,50 @@
+
+:root {
+    --color-white: #FFFFFF;
+    --color-dark: rgba(0, 0, 0, 1);
+    --color-pastelDark: #202225;
+    --color-lightGray: #f5f5f5;
+    --color-extraLightGray: rgba(245, 245, 245, 1);
+    --color-gray: rgba(86, 86, 86, 1);
+    --color-lightPastelGray: #C1C1C1;
+    --color-light: rgba(224, 224, 224, 1);
+  
+    --color-purple: rgba(56, 55, 161, 1);
+    --color-lightPurple: #9998D3;
+    --color-lightBlue: rgba(186, 213, 219, 1);
+    --color-pastelYellow: rgba(255, 251, 159, 1);
+    --color-pastelOrange: rgba(251, 211, 164, 1);
+  
+  
+    --border-radius: 2rem;
+    --card-border-radius: 1rem;
+    --btn-padding: 0.6rem 1rem;
+    --search-padding: 0.6rem 1rem;
+    --card-padding: 1rem;
+  
+    --sticky-top-left: 6.4rem;
+    --sticky-top-right: -18rem;
+  }
+
+  .meio .prodServDesc{
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    display: flex;
+    position: relative;
+  }
+
+  .meio .prodServDesc img{
+    height: 500px;
+    position: absolute;
+  }
+
+
+  .meio .feed .prodServFeed{
+    width: 43rem;
+    overflow: auto;
+  }
+
+  .meio .feed .prodServFeed .flex-row{
+    gap: 1rem;
+  }

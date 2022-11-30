@@ -10,6 +10,7 @@ RewriteRule ^animaisPerdidos views/feed/animaisPerdidos.php [NC,L]
 RewriteRule ^animaisEmAdocao views/feed/animaisEmAdocao.php [NC,L]
 RewriteRule ^paraVoce views/feed/paraVoce.php [NC,L]
 RewriteRule ^notificacoes views/feed/notificacoes.php [NC,L]
+RewriteRule ^prodServ views/feed/produtoServico.php [NC,L]
 
 RewriteRule ^opcoes views/opcoes/opcoes.php [NC,L]
 

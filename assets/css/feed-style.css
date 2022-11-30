@@ -697,9 +697,9 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 
 .meio .ads {
   display: flex;
-  height: 20rem;
+  height: 13rem;
   width: 100%;
-  max-width: 44rem;
+  max-width: 45.5rem;
 
   gap: 0.8rem;
   overflow-x: auto;
@@ -708,7 +708,7 @@ main .container .ladoEsquerdo .perfilAtivo h4 {
 }
 
 .meio .ads::-webkit-scrollbar {
-  height: 10px;
+  height: 5px;
 
 }
 
@@ -2241,7 +2241,7 @@ border: none;
   flex-direction: row;
   justify-content: space-evenly;
   width: 100%;
-}
+} 
 
 .opcoes-certeza-excluir .cancelar {
   transition: all 300ms ease;
@@ -2252,6 +2252,18 @@ border: none;
 }
 
 .opcoes-certeza-excluir .cancelar:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#modal-denuncia .botoesDenuncia .cancelar {
+  transition: all 300ms ease;
+  border: 1px var(--color-pastelDark) solid;
+  color: black;
+  background: var(--color-white);
+  box-shadow: 4px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+#modal-denuncia .botoesDenuncia .cancelar:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
@@ -2277,12 +2289,16 @@ border: none;
 }
 
 .denuncia {
-  width: 380px !important;
-  height: 405px;
+  width: 400px !important;
+  height: 380px;
   margin-top: 14rem;
 
 }
 
+.botoesDenuncia{
+  display: flex;
+  gap: 1rem;
+}
 
 .h2DenunciaUsuario {
   margin-top: 10px;
@@ -2642,3 +2658,4 @@ border: none;
   justify-content: center;
   align-items: center;
 }
+

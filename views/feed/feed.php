@@ -266,8 +266,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                 <?php } ?>
 
 
-
-                <div class="Post">
+                <div class="criarPost">
                     <img src="assets/images/Lontrinhas.svg" alt="">
                     <div class="faixaPost">
                         <h3>Crie um post anexando uma foto, gif ou video!</h3>
@@ -279,6 +278,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         </button>
                     </div>
                 </div>
+
                 <!-- fim da parte de ad -->
 
                 <div class="feeds">

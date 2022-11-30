@@ -216,7 +216,7 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                         <h3>Mensagens</h3>
                     </a>
 
-                    <a href="#" class="menu-item">
+                    <a href="prodServ" class="menu-item">
                         <span><i class="uil uil-shopping-bag"></i> </span>
                         <h3>Produtos e Serviços</h3>
                     </a>
