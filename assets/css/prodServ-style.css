@@ -32,11 +32,18 @@
     padding: var(--card-padding);
     display: flex;
     position: relative;
+    overflow: hidden;
+  }
+
+  .meio .prodServDesc h4{
+    width: 510px;
   }
 
   .meio .prodServDesc img{
-    height: 500px;
+    width: 200px;
     position: absolute;
+    right: 0;
+    top: -14px;
   }
 
 
