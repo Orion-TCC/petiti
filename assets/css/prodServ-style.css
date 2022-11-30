@@ -50,7 +50,28 @@
   .meio .feed .prodServFeed{
     width: 43rem;
     overflow: auto;
+    padding-bottom: 1rem;
   }
+
+  .meio .feed .prodServFeed h3{
+    width: 14rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .meio .feed .prodServFeed::-webkit-scrollbar {
+    height: 7px;
+}
+  
+.meio .feed .prodServFeed::-webkit-scrollbar-track {
+    border-radius: 20px;
+}
+  
+  .meio .feed .prodServFeed::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgb(157 157 161 / 41%);
+}
 
   .meio .feed .prodServFeed .flex-row{
     gap: 1rem;

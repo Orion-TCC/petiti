@@ -425,8 +425,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
                             <!-- carrosel produtos e servicoes -->
+                            <h2>Produtos</h2>
+
                             <div class="prodServFeed">
-                                    <h2>Produtos</h2>
                                     
                                     <div class="flex-row">
 
@@ -440,25 +441,14 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                             <h4 class="text-muted">R$52</h4>
                                         </div>
 
-                                        <div class="produtoServ">
-                                            <div class="previewPostImage">
-                                                <img src="<?php echo $fotoServico; ?>">
-                                            </div>
+                                    </div>                                      
+                            </div>
 
-                                            <h3>Nome do Servico</h3>
-
-                                            <h4 class="text-muted">R$52</h4>
-                                        </div>
-                                        
-                                        <div class="produtoServ">
-                                            <div class="previewPostImage">
-                                                <img src="<?php echo $fotoServico; ?>">
-                                            </div>
-
-                                            <h3>Nome do Servico</h3>
-
-                                            <h4 class="text-muted">R$52</h4>
-                                        </div>
+                            <h2>Serviços</h2>
+                            
+                            <div class="prodServFeed">
+                                    
+                                    <div class="flex-row">
 
                                         <div class="produtoServ">
                                             <div class="previewPostImage">
@@ -469,6 +459,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                             <h4 class="text-muted">R$52</h4>
                                         </div>
+
+
                                     </div>                                      
                             </div>
                         </div>

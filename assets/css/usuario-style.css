@@ -969,6 +969,7 @@
 .produtoServ{
   display: flex;
   flex-direction: column;
+  height: fit-content;
   gap: 0.5rem;
   cursor: pointer;
   padding: var(--card-padding);
@@ -995,7 +996,7 @@
 
 .previewPostImage {
   width: 15.3rem;
-  height: 16.3rem;
+  height: 15.3rem;
   border: 1px solid gray;
   position: relative;
   border-radius: var(--card-border-radius);
