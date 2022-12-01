@@ -3,6 +3,15 @@
 require('../../api/classes/curtidaPublicacao.php');
 require('../../api/classes/Usuario.php');
 
+
+if($_SESSION['tipo'] == "Tutor"){
+    header('location: /petiti/tutor-perfil');
+}else if($_SESSION['tipo'] == "Pet"){
+    header('location: /petiti/pet-perfil');
+}else{
+   
+}
+
 $curtidaPub = new curtidaPublicacao();
 date_default_timezone_set('America/Sao_Paulo');
 

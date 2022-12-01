@@ -559,7 +559,11 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                             </div>
 
 
+                            <?php 
+                                if($contagemComentarios > 3){ ?>
                             <a href="#modal-post" rel="modal:open"><button class="abrirComentarios ahrefVermais" value="<?php echo $id ?>"> Ver mais...</button></a>
+                            <?php    }
+                            ?>
 
                             <div class="commentArea" id="<?php echo $id; ?>">
                                 <i class="uil uil-heart"></i>

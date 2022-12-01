@@ -1186,7 +1186,7 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
                         </div>
 
                         <div class='legendaPub' style= 'word-break: break-all';> 
-                           <h4 class='text-muted'>Legenda</h4>
+                           <h4 class='text-muted'>".$texto."</h4>
                         </div>
 
 

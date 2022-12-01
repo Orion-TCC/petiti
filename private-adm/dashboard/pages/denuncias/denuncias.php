@@ -156,7 +156,8 @@ if ($_SESSION['tipo'] != "Adm") {
                   <div class="infos-card">
                     <img class="foto-info" src="<?php echo $foto; ?>">
                     <div class="denuncia-info">
-                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900; font-size: 1.2rem;">Perfil </span><br>
+                      <span style="font-weight: 600; font-size: 1.2rem"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
                     </div>
                   </div>
                   <div class="card-data">
@@ -197,7 +198,8 @@ if ($_SESSION['tipo'] != "Adm") {
                   <div class="infos-card">
                     <img class="foto-info" src="<?php echo $foto; ?>">
                     <div class="denuncia-info">
-                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900; font-size: 1.2rem;">Perfil </span><br>
+                      <span style="font-weight: 600; font-size: 1.2rem"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
                     </div>
                   </div>
                   <div class="card-data">
@@ -235,7 +237,8 @@ if ($_SESSION['tipo'] != "Adm") {
                   <div class="infos-card">
                     <img class="foto-info" src="<?php echo $foto; ?>">
                     <div class="denuncia-info">
-                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900; font-size: 1.2rem;">Perfil </span><br>
+                      <span style="font-weight: 600; font-size: 1.2rem;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
                     </div>
                   </div>
                   <p><span style="font-weight: 900; font-size: 15px;">Comentário: </span><span style="font-weight: 600; font-size: 15px;"> <?php echo $textoComentario; ?> </span></p>
@@ -256,7 +259,7 @@ if ($_SESSION['tipo'] != "Adm") {
           </div>
 
           <div id="analise" class="tabcontent">
-            <h3> Denúncias de publicações:</h3>
+            <h3 style="margin-bottom: 0.5rem;"> Denúncias de Postagens</h3>
             <h3 id="total-qtd-publicacoes">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoEmAnalise(); ?>)</h3>
             <div class="denunciasPublicacao">
               <?php foreach ($listaDenunciasPublicacaoEmAnalise as $linha) {
@@ -279,7 +282,8 @@ if ($_SESSION['tipo'] != "Adm") {
                   <div class="infos-card">
                     <img class="foto-info" src="<?php echo $foto ?>">
                     <div class="denuncia-info">
-                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900; font-size: 1.2rem;">Perfil </span><br>
+                      <span style="font-weight: 600; font-size: 1.2rem;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
                     </div>
                   </div>
                   <div class="card-data">
@@ -291,7 +295,7 @@ if ($_SESSION['tipo'] != "Adm") {
                     </div>
                   </div>
                   <p><span style="font-weight: 900;font-size: 15px;">Denunciado por: </span><span style="font-weight: 600;font-size: 15px;"><a target="_blank" href="/petiti/<?php echo $denunciador ?>">@<?php echo $denunciador ?></a></span></p>
-                  <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
+                  <p><span style="font-weight: 900; color: #d30c1d">Causa: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
 
                   <a id="<?php echo $idDenunciaPublicacao; ?>" href="#modal-analisar-denuncia-publicacao<?php echo $idDenunciaPublicacao; ?>" rel="modal:open" class="botao analisar-agora">Analisar agora</a>
                 </div>
@@ -309,7 +313,7 @@ if ($_SESSION['tipo'] != "Adm") {
                         <img class="foto-analise-denuncia" src="<?php echo $foto; ?>">
                       </div>
                       <div class="motivo-denuncia-modal">
-                        <span style="font-size: 15px; font-weight:600;">Motivo apontado: </span><span style="font-size: 15px; font-weight:400;"> <?php echo $textoDenuncia; ?></span>
+                        <span style="font-size: 15px; font-weight:600;">Causa apontada: </span><span style="font-size: 15px; font-weight:400;"> <?php echo $textoDenuncia; ?></span>
                       </div>
                       <div class="denunciador-modal">
                         <span style="font-size: 15px; font-weight:600;">Denunciado por: </span> <a target="_blank" href="/petiti/<?php echo $denunciador; ?>"><span style="font-size: 15px; font-weight:400;">@<?php echo $denunciador; ?></span></a>
@@ -334,7 +338,7 @@ if ($_SESSION['tipo'] != "Adm") {
 
             <div style="margin-top: 1rem; border-bottom: 1px solid #c1c1c1"></div>
 
-            <h3> Denúncias de usuários:</h3>
+            <h3 style="margin-top: 1rem; margin-bottom: 0.5rem;"> Denúncias de Usuários:</h3>
             <h3 id="total-qtd-usuarios">Total(<?php echo $denunciaUsuario->buscaQtdDenunciaUsuarioEmAnalise(); ?>)</h3>
             <div class="denunciasUsuarios">
               <?php foreach ($listaDenunciasUsuarioEmAnalise as $linha) {
@@ -354,7 +358,8 @@ if ($_SESSION['tipo'] != "Adm") {
                   <div class="infos-card">
                     <img class="foto-info" src="<?php echo $foto; ?>">
                     <div class="denuncia-info">
-                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900; font-size: 1.2rem;">Perfil </span><br>
+                      <span style="font-weight: 600; font-size: 1.2rem;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
                     </div>
                   </div>
                   <div class="card-data">
@@ -364,7 +369,7 @@ if ($_SESSION['tipo'] != "Adm") {
                     </div>
                   </div>
                   <p><span style="font-weight: 900;font-size: 15px;">Denunciado por: </span><span style="font-weight: 600;font-size: 15px;"><a target="_blank" href="/petiti/<?php echo $denunciador ?>">@<?php echo $denunciador ?></a></span></p>
-                  <p><span style="font-weight: 900;">Motivo: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
+                  <p><span style="font-weight: 900; color: #d30c1d">Causa: </span><span style="font-weight: 600;"> <?php echo $textoDenuncia ?></span></p>
                   <a href="#modal-analisar-denuncia-usuario<?php echo $idDenunciaUsuario; ?>" rel="modal:open" class="botao analisar-agora">Passar para análise</a>
                 </div>
 
@@ -378,7 +383,7 @@ if ($_SESSION['tipo'] != "Adm") {
                         <a target="_blank" href="/petiti/<?php echo $denunciado; ?>"><img class="foto-analise-denuncia" src="<?php echo $foto; ?>"></a>
                       </div>
                       <div class="motivo-denuncia-modal">
-                        <span style="font-size: 20px; font-weight:600;">Motivo apontado: </span><span style="font-size: 20px; font-weight:400;"> <?php echo $textoDenuncia; ?></span>
+                        <span style="font-size: 20px; font-weight:600;">Causa apontada: </span><span style="font-size: 20px; font-weight:400;"> <?php echo $textoDenuncia; ?></span>
                       </div>
                       <div class="denunciador-modal">
                         <span style="font-size: 15px; font-weight:600;">Denunciado por: </span> <a target="_blank" href="/petiti/<?php echo $denunciador; ?>"><span style="font-size: 15px; font-weight:400;">@<?php echo $denunciador; ?></span></a>
@@ -402,7 +407,7 @@ if ($_SESSION['tipo'] != "Adm") {
 
             <div style="margin-top: 1rem; border-bottom: 1px solid #c1c1c1"></div>
 
-            <h3> Denúncias de Comentários:</h3>
+            <h3 style="margin-top: 1rem; margin-bottom: 0.5rem;"> Denúncias de Comentários</h3>
             <h3 id="total-qtd-Comentarios">Total(<?php echo $denunciaComentario->buscaQtdDenunciaComentarioEmAnalise(); ?>)</h3>
             <div class="denunciasComentarios">
               <?php foreach ($listaDenunciasComentarioEmAnalise as $linha) {
@@ -425,7 +430,8 @@ if ($_SESSION['tipo'] != "Adm") {
                   <div class="info-card">
                     <img class="foto-info" src="<?php echo $foto ?>">
                     <div class="denuncia-info">
-                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $usuarioDenunciado ?>">@<?php echo $usuarioDenunciado ?></a></span></p>
+                      <p><span style="font-weight: 900; font-size: 1.2rem;">Perfil </span><br>
+                      <span style="font-weight: 600; font-size: 1.2rem"><a target="_blank" href="/petiti/<?php echo $usuarioDenunciado ?>">@<?php echo $usuarioDenunciado ?></a></span></p>
                     </div>
                   </div>
                   <p><span style="font-weight: 900; font-size: 15px;">Comentário: </span><span style="font-weight: 600; font-size: 15px;"> <?php echo $textoComentario; ?> </span></p>
@@ -454,7 +460,7 @@ if ($_SESSION['tipo'] != "Adm") {
                         <span style="font-weight: 600; font-size: 15px;">Comentário: </span><span id="texto-pub" style="font-size: 15px;"><?php echo $textoComentario; ?></span>
                       </div>
                       <div class="motivo-denuncia-modal">
-                        <span style="font-size: 15px; font-weight:600;">Motivo apontado: </span><span style="font-size: 15px; font-weight:400;"> <?php echo $textoDenunciaComentario; ?></span>
+                        <span style="font-size: 15px; font-weight:600;">Causa apontada: </span><span style="font-size: 15px; font-weight:400;"> <?php echo $textoDenunciaComentario; ?></span>
                       </div>
                       <div class="denunciador-modal">
                         <span style="font-size: 15px; font-weight:600;">Denunciado por: </span> <a target="_blank" href="/petiti/<?php echo $usuarioDenunciador; ?>"><span style="font-size: 15px; font-weight:400;">@<?php echo $usuarioDenunciador; ?></span></a>
@@ -478,7 +484,7 @@ if ($_SESSION['tipo'] != "Adm") {
           </div>
 
           <div id="resolvida" class="tabcontent">
-            <h3> Denúncias de publicações:</h3>
+            <h3 style="margin-bottom: 0.5rem;"> Denúncias de Postagens</h3>
             <h3 id="total-qtd-publicacoes">Total(<?php echo $denunciaPublicacao->buscaQtdDenunciaPublicacaoResolvida(); ?>)</h3>
             <div class="denunciasPublicacao">
               <?php foreach ($listaDenunciasPublicacaoResolvidas as $linha) {
@@ -497,7 +503,8 @@ if ($_SESSION['tipo'] != "Adm") {
                   <div class="infos-card">
                     <img class="foto-info" src="<?php echo $foto ?>">
                     <div class="denuncia-info">
-                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900; font-size: 1.2rem;">Perfil </span><br>
+                      <span style="font-weight: 600; font-size: 1.2rem;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
                     </div>
                   </div>
                   <div class="card-data">
@@ -531,7 +538,8 @@ if ($_SESSION['tipo'] != "Adm") {
                   </div>
                   <div class="infos-card">
                     <div class="denuncia-info">
-                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900; font-size: 1.2rem;">Perfil: </span><br>
+                      <span style="font-weight: 600; font-size: 1.2rem;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
                     </div>
                   </div>
                   <div class="card-data">
@@ -553,7 +561,9 @@ if ($_SESSION['tipo'] != "Adm") {
               ?>
             </div>
 
-            <h3> Denúncias de usuários: </h3>
+            <div style="margin-top: 1rem; border-bottom: 1px solid #c1c1c1"></div>
+
+            <h3 style="margin-top: 1rem; margin-bottom: 0.5rem;"> Denúncias de Usuários</h3>
             <h3 id="total-qtd-usuarios">Total(<?php echo $denunciaUsuario->buscaQtdDenunciaUsuarioResolvida(); ?>)</h3>
             <div class="denunciasUsuarios">
               <?php foreach ($listaDenunciasUsuarioResolvidas as $linha) {
@@ -573,7 +583,8 @@ if ($_SESSION['tipo'] != "Adm") {
                   <div class="infos-card">
                     <img class="foto-info" src="<?php echo $foto; ?>">
                     <div class="denuncia-info">
-                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900; font-size: 1.2rem;">Perfil: </span><br>
+                      <span style="font-weight: 600; font-size: 1.2rem;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
                     </div>
                   </div>
                   <div class="card-data">
@@ -590,7 +601,9 @@ if ($_SESSION['tipo'] != "Adm") {
               } ?>
             </div>
 
-              <h3> Denúncias de comentários: </h3>
+            <div style="margin-top: 1rem; border-bottom: 1px solid #c1c1c1"></div>
+
+              <h3 style="margin-top: 1rem; margin-bottom: 0.5rem;"> Denúncias de Comentários</h3>
               <h3 id="total-qtd-comentarios">Total(<?php echo $denunciaComentario->buscaQtdDenunciaComentarioResolvida(); ?>)</h3>
               <div class="denunciasComentarios">
                 <?php foreach($listaDenunciasComentarioResolvidas as $linha){
@@ -611,7 +624,8 @@ if ($_SESSION['tipo'] != "Adm") {
                   <div class="infos-card">
                     <img class="foto-info" src="<?php echo $foto; ?>">
                     <div class="denuncia-info">
-                      <p><span style="font-weight: 900; font-size: 20px;">Perfil: </span><span style="font-weight: 600; font-size: 20px;"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
+                      <p><span style="font-weight: 900; font-size: 1.2rem">Perfil: </span><br>
+                      <span style="font-weight: 600; font-size: 1.2rem"><a target="_blank" href="/petiti/<?php echo $denunciado ?>">@<?php echo $denunciado ?></a></span></p>
                     </div>
                   </div>
                   <div class="card-data">

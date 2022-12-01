@@ -558,8 +558,12 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 <?php
                                 } ?>
                             </div>
-
+                            
+                            <?php 
+                                if($contagemComentarios > 3){ ?>
                             <a href="#modal-post" rel="modal:open"><button class="abrirComentarios ahrefVermais" value="<?php echo $id ?>"> Ver mais...</button></a>
+                            <?php    }
+                            ?>
 
                             <div class="commentArea" id="<?php echo $id; ?>">
                                 <i class="uil uil-heart"></i>
@@ -684,7 +688,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                 <div class="sugestoes">
                     <h4>Sugestões para você</h4>
-                    <?php
+                   <?php
 
                     $sugestoes = $usuario->sugestoesSeguidores($_SESSION['id']);
                     $contagemSugestoes = count($sugestoes);
@@ -692,8 +696,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                         foreach ($sugestoes as $sugestao) {
                             $idUsuarioSugerido = $sugestao['idUsuario'];
-
-                            $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
+                            
+                            $fotoUsuarioSugestao = $fotoUsuario->exibirFotoUsuario($idUsuarioSugerido);
                             $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
                             if ($verificarSeguidor['boolean'] == true) { ?>
                                 <div class="whiteBoxHolder">
@@ -715,23 +719,21 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                                 $jsSeguidor = "false";
                                             } ?>
 
-                                            <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                                <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+                                                        <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                                            <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
 
-                                                <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
-                                            <?php } else { ?>
-                                                <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
-                                            <?php } ?>
-                                        </div>
-                                </div>
-                        <?php
-                            }
-                        }
-                    } else { ?>
-                        <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
-                    <?php } ?>
-                    </a>
-
+                                                            <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
+                                                        <?php } else { ?>
+                                                            <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
+                                                        <?php } ?>
+                                                    </div>
+                                                        </div>
+                                            <?php 
+                                            }
+                                            }
+                                        } else { ?>
+                                            <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
+                                        <?php } ?>
                 </div>
             </div>
         </div>

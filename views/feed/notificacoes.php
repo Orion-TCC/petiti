@@ -476,6 +476,7 @@ $notificacao->limparNotificacoesNaoVistas($id);
 
                         foreach ($sugestoes as $sugestao) {
                             $idUsuarioSugerido = $sugestao['idUsuario'];
+                            
                             $fotoUsuarioSugestao = $fotoUsuario->exibirFotoUsuario($idUsuarioSugerido);
                             $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
                             if ($verificarSeguidor['boolean'] == true) { ?>
@@ -513,7 +514,7 @@ $notificacao->limparNotificacoesNaoVistas($id);
                                         } else { ?>
                                             <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
                                         <?php } ?>
-                                    </a>
+                                    
 
                 </div>
             </div>

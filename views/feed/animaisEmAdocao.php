@@ -556,8 +556,11 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 } ?>
                             </div>
 
+                            <?php 
+                                if($contagemComentarios > 3){ ?>
                             <a href="#modal-post" rel="modal:open"><button class="abrirComentarios ahrefVermais" value="<?php echo $id ?>"> Ver mais...</button></a>
-
+                            <?php    }
+                            ?>
                             <div class="commentArea" id="<?php echo $id; ?>">
                                 <i class="uil uil-heart"></i>
                                 <textarea oninput="auto_grow(this)" cols="30" rows="10" placeholder="Adicione um comentário!" maxlength="200" name="txtComentar<?php echo $id ?>" id="txtComentar<?php echo $id ?>" class="TAComentario<?php echo $id; ?>"></textarea>
