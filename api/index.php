@@ -1141,8 +1141,8 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
 
                                 <div class='comentarioInfos'>
                                     <div class=info>
-                                       <div style=word-break: break-all;>
-                                            <h4><span style=color: black;></span> $nome   
+                                       <div style='word-break: break-all;'>
+                                            <h4><span style=color: black;></span> $nomeUsuarioComentario   
                                             </h4>
                                         </div>
                                     </div>
@@ -1175,15 +1175,21 @@ $app->get('/publicacao/{id}/modal', function (Request $request, Response $respon
     }
 
     echo "
-                            <button class='comentar'></button>
+                            <button class='comentar' style='background-color: white'></button>
 
-                            <button class='mensagem'></button>
+                            <button class='mensagem' style='background-color: white'></button>
 
                         </div>
 
                         <div class='curtidas'>
                             <h4><b class='itimalias$idPub'>" . $itimalias . "</b> itimalias</h4>
                         </div>
+
+                        <div class='legendaPub' style= 'word-break: break-all';> 
+                           <h4 class='text-muted'>Legenda</h4>
+                        </div>
+
+
 
                         <div class='commentArea'>
 
@@ -1900,7 +1906,7 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
         $idUsuario = $arraySeguindo[$r]['idUsuario'];
         $caminhoFoto = $fotoUsuario->exibirFotoUsuario($idUsuario);
         $loginUsuario = $arraySeguindo[$r]['loginUsuario'];
-        $nomeUsuario = $arraySeguindo[$r]['nomeUsuario'];
+        $nomeUsuarioSeguindo = $arraySeguindo[$r]['nomeUsuario'];
         $seSegue = $usuarioSeguidor->verificarSeguidor($idSession, $idUsuario);
         $tipoUsuario = $arraySeguindo[$r]['tipoUsuario'];
 
@@ -1939,8 +1945,8 @@ $app->post('/pesquisa-seguindo', function (Request $request, Response $response,
                                 <div class='loginEUser'>
 
                                 <div style='display: flex; gap: 0.5rem'>
-                                    <h3>$nomeUsuario</h3> 
-                                    <i class='fa-solid fa-$iconTipoUsuario'></i>
+                                    <h3>$nomeUsuarioSeguindo <i class='fa-solid fa-$iconTipoUsuario'></i></h3> 
+                                    
                                 </div>
 
                                 <h4 class='text-muted'>@$loginUsuario</h4>

@@ -395,10 +395,11 @@ if ($verificarSeguidor['boolean'] == true) {
                             for ($i = 0; $i < $contagem; $i++) {
                                 $foto = $dados['publicacoes'][$i]['caminhoFoto'];
                             ?>
+                            <button>
                                 <div class="previewPostImage">
                                     <img src="<?php echo $foto ?>" alt="">
                                 </div>
-
+                            </button>
                             <?php } ?>
 
                         </div>
@@ -420,9 +421,11 @@ if ($verificarSeguidor['boolean'] == true) {
                             for ($i = 0; $i < $contagemCurtidas; $i++) {
                                 $fotoCurtidas = $dadosCurtidas['publicacoes'][$i]['caminhoFoto'];
                             ?>
+                            <button>
                                 <div class="previewPostImage">
                                     <img src="<?php echo $fotoCurtidas ?>" alt="">
                                 </div>
+                            </button>    
                             <?php } ?>
 
                         </div>

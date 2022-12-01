@@ -2292,7 +2292,7 @@ border: none;
 
 .denuncia {
   width: 400px !important;
-  height: 380px;
+  height: 405px;
   margin-top: 14rem;
 
 }
@@ -2349,7 +2349,9 @@ border: none;
 
 .rightSidePost {
   display: flex;
-  width: 40%;
+  width: 21rem;
+  min-width: 21rem;
+  max-width: 21rem;
   flex-direction: column;
   border: 1px #c0c0c0 solid;
 }
@@ -2503,6 +2505,14 @@ border: none;
   gap: 0.5rem;
 }
 
+.rightSidePost .legendaPub{
+  display: flex;
+  flex-direction: column;
+  padding: var(--card-padding);
+  padding-top: 0;
+  gap: 0.5rem;
+}
+
 .rightSidePost .commentArea {
   width: 100%;
   height: fit-content;
@@ -2624,7 +2634,7 @@ border: none;
 .cardResultadoPesquisa {
   display: flex;
   flex-direction: column;
-  height: 21rem;
+  height: 10rem;
   width: 100%;
 }
 

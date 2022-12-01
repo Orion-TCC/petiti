@@ -14,8 +14,8 @@ $(document).ready(function () {
           if (myArray > 0) {
             $(".mostrarNotificacoes").append(
               "<div class='notificacaoContador'><span id='notificacaoContadorSpan'>" +
-                myArray +
-                "</span></div>"
+              myArray +
+              "</span></div>"
             );
           }
         });
@@ -99,6 +99,27 @@ $(document).ready(function () {
         $(".itimalias" + id).text(data);
       },
     });
+  });
+
+  $(".menuPostSeguir").on("click", function () {
+    id = $(this).attr("id");
+    idpost = $(this).attr("idpost");
+    $.ajax({
+      type: "POST",
+      url: "/petiti/api/seguir",
+      data: { id: id },
+      success: function (data) {
+        if (data[2] == false) {
+          $(".iconSeguir" + idpost).removeClass("fa-user-minus");
+          $(".iconSeguir" + idpost).addClass("fa-user-plus");
+          $(".deixaSeguir" + idpost).text('Seguir');
+        } else {
+          $(".iconSeguir" + idpost).removeClass("fa-user-plus");
+          $(".iconSeguir" + idpost).addClass("fa-user-minus");
+          $(".deixaSeguir" + idpost).text('Deixar de seguir');
+        }
+      }
+    })
   });
 
   $(".seguir").on("click", function () {
@@ -201,11 +222,11 @@ $(document).ready(function () {
         console.log();
         $(
           "<div style='display: flex; flex-direction: row; align-items: center; gap: 0.6rem;'> <h2 style='font-weight: 900 !important; align-self: start;'>" +
-            data[0].loginUsuario +
-            "</h2> " +
-            "<h3 style='color: rgba(86, 86, 86, 1);'>" +
-            data[0].textoComentario +
-            "</h3> </div>"
+          data[0].loginUsuario +
+          "</h2> " +
+          "<h3 style='color: rgba(86, 86, 86, 1);'>" +
+          data[0].textoComentario +
+          "</h3> </div>"
         ).appendTo(".comentarios");
         $("#txtComentar" + id).val("");
       },
@@ -322,7 +343,7 @@ $(document).ready(function () {
 
 
 
-//croppie imagem serviço/produto
+  //croppie imagem serviço/produto
   var resizeEmpresa = $("#recortar-empresa").croppie({
     enableExif: true,
     enableOrientation: true,
@@ -338,7 +359,7 @@ $(document).ready(function () {
     },
   });
 
-    $("#flFotoEmpresa").on("change", function () {
+  $("#flFotoEmpresa").on("change", function () {
     var reader = new FileReader();
     reader.onload = function (e) {
       resizeEmpresa
@@ -350,12 +371,12 @@ $(document).ready(function () {
         });
     };
     reader.readAsDataURL(this.files[0]);
-      $("#modal-recorte-empresa").modal("show");
-      $("#flFotoEmpresa").val("");
+    $("#modal-recorte-empresa").modal("show");
+    $("#flFotoEmpresa").val("");
   });
 
 
-    $("#cortarEmpresa").on("click", function (ev) {
+  $("#cortarEmpresa").on("click", function (ev) {
     ev.preventDefault();
     var blob;
     resizeEmpresa

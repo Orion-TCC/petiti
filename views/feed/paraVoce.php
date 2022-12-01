@@ -118,7 +118,7 @@ $contagemCategoriasSeguidas = count($categoriaSeguida->buscarCategoriasUsuario($
             </div>
 
             <h2 class="logo">
-                <img src="/petiti/assets/images/logo_principal.svg">
+                <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
             </h2>
 
             <div class="caixa-de-busca">
@@ -382,8 +382,15 @@ $contagemCategoriasSeguidas = count($categoriaSeguida->buscarCategoriasUsuario($
 
                                     <div class="menuPost" id="menuPost">
                                         <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
-                                            <?php if ($login != $_SESSION['login']) { ?>
-                                                <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixaSeguir">Deixar de seguir</span></li>
+                                            <?php if ($login != $_SESSION['login']) {
+                                                $verificaSeguindo = $usuarioSeguidor->verificarSeguidor($idUsuarioPub, $_SESSION['id']);
+                                                if ($verificaSeguindo['boolean'] != true) { ?>
+                                                    <li class="menuPostSeguir" idpost="<?php echo ($id); ?>" id="<?php echo $idUsuarioPub; ?>"><i id="iconSeguir<?php echo ($id); ?>" class="iconSeguir<?php echo ($id); ?> fa-sharp fa-solid fa-user-minus"></i><span id="deixaSeguir<?php echo $id ?>" class="deixaSeguir<?php echo $id ?>">Deixar de seguir<span></li>
+                                                <?php } else {
+                                                ?>
+                                                    <li class="menuPostSeguir" idpost="<?php echo ($id); ?>" id="<?php echo $idUsuarioPub; ?>"><i id="iconSeguir<?php echo ($id); ?>" class="iconSeguir<?php echo ($id); ?> fa-sharp fa-solid fa-user-plus"></i><span id="deixaSeguir<?php echo $id ?>" class="deixaSeguir<?php echo $id ?>">Seguir<span></li>
+                                                <?php
+                                                } ?>
                                                 <a href="#modal-denuncia" rel="modal:open">
                                                     <div id="<?php echo $id; ?>" class="postDenunciado">
                                                         <div id="<?php echo $idUsuarioPub; ?>" class="denunciaPost">
@@ -396,7 +403,8 @@ $contagemCategoriasSeguidas = count($categoriaSeguida->buscarCategoriasUsuario($
                                                         </div>
                                                     </div>
                                                 </a>
-                                            <?php } else { ?>
+                                            <?php
+                                            } else { ?>
                                                 <li class="li-EditarPost">
                                                     <div style="display: flex; align-items: center;">
                                                         <i class="fa-solid fa-pen-to-square"></i>
@@ -417,7 +425,7 @@ $contagemCategoriasSeguidas = count($categoriaSeguida->buscarCategoriasUsuario($
 
                                                                 <div class="opcoes-certeza-excluir">
                                                                     <a href="/petiti/api/publicacao/delete/<?php echo $id; ?>"><button class="btn btn-primary excluir">Excluir</button></a>
-                                                                    <a rel="modal:close"><button class="btn btn-primary cancelar">Cancelar</button></a>
+                                                                    <button class="btn btn-primary cancelar"> <a rel="modal:close">Cancelar</a></button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -690,46 +698,47 @@ $contagemCategoriasSeguidas = count($categoriaSeguida->buscarCategoriasUsuario($
                     $contagemSugestoes = count($sugestoes);
                     if ($contagemSugestoes > 0) {
 
-
                         foreach ($sugestoes as $sugestao) {
                             $idUsuarioSugerido = $sugestao['idUsuario'];
+
                             $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
                             $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
                             if ($verificarSeguidor['boolean'] == true) { ?>
                                 <div class="whiteBoxHolder">
                                     <a href="/petiti/<?php echo $sugestao['loginUsuario'] ?>">
-                                        <div class="flex-row">
+                                        <div class="flex-row" style="justify-content: space-between;">
                                             <div class="fotoDePerfil">
                                                 <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
                                             </div>
 
                                             <div class="infoSugestoes">
-                                                <h4 style="color: black; margin-bottom: 0.2rem"><?php echo $sugestao['nomeUsuario'] ?></h4>
+                                                <h4 style="color: black; margin-bottom: 0.2rem; width: 9rem;"><?php echo $sugestao['nomeUsuario'] ?></h4>
                                                 <h5 class="text-muted">@<?php echo $sugestao['loginUsuario'] ?></h5>
                                             </div>
+                                            <?php
+                                            $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
+                                            if ($verificarSeguidor['boolean'] == true) {
+                                                $jsSeguidor = "true";
+                                            } else {
+                                                $jsSeguidor = "false";
+                                            } ?>
+
+                                            <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                                <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+
+                                                <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
+                                            <?php } else { ?>
+                                                <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
+                                            <?php } ?>
                                         </div>
-                                    </a>
-                                    <?php
-                                    $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
-                                    if ($verificarSeguidor['boolean'] == true) {
-                                        $jsSeguidor = "true";
-                                    } else {
-                                        $jsSeguidor = "false";
-                                    } ?>
-
-                                    <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                        <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
-
-                                        <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
-                                    <?php } else { ?>
-                                        <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
-                                    <?php } ?>
                                 </div>
-                        <?php }
+                        <?php
+                            }
                         }
                     } else { ?>
                         <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
                     <?php } ?>
+                    </a>
 
                 </div>
             </div>

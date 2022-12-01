@@ -119,7 +119,7 @@ $notificacao->limparNotificacoesNaoVistas($id);
             </div>
 
             <h2 class="logo">
-                <img src="/petiti/assets/images/logo_principal.svg">
+                <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
 
             </h2>
             <div class="caixa-de-busca">
@@ -214,7 +214,7 @@ $notificacao->limparNotificacoesNaoVistas($id);
                         <h3>Mensagens</h3>
                     </a>
 
-                    <a href="#" class="menu-item">
+                    <a href="prodServ" class="menu-item">
                         <span><i class="uil uil-shopping-bag"></i> </span>
                         <h3>Produtos e Serviços</h3>
                     </a>
@@ -467,52 +467,53 @@ $notificacao->limparNotificacoesNaoVistas($id);
 
 
                 <div class="sugestoes">
-                    <h4>Sugestões para você</h4>
+                <h4>Sugestões para você</h4>
                     <?php
 
                     $sugestoes = $usuario->sugestoesSeguidores($_SESSION['id']);
                     $contagemSugestoes = count($sugestoes);
-                    if($contagemSugestoes>0){
-                        
-                    
-                    foreach ($sugestoes as $sugestao) {
-                        $idUsuarioSugerido = $sugestao['idUsuario'];
-                        $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
-                        $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
-                        if ($verificarSeguidor['boolean'] == true) { ?>
-                            <div class="whiteBoxHolder">
-                                <a href="/petiti/<?php echo $sugestao['loginUsuario'] ?>">
-                                    <div class="flex-row">
-                                        <div class="fotoDePerfil">
-                                            <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
-                                        </div>
+                    if ($contagemSugestoes > 0) {
 
-                                        <div class="infoSugestoes">
-                                            <h4 style="color: black; margin-bottom: 0.2rem"><?php echo $sugestao['nomeUsuario'] ?></h4>
-                                            <h5 class="text-muted">@<?php echo $sugestao['loginUsuario'] ?></h5>
-                                        </div>
-                                    </div>
-                                </a>
-                                <?php
-                                $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
-                                if ($verificarSeguidor['boolean'] == true) {
-                                    $jsSeguidor = "true";
-                                } else {
-                                    $jsSeguidor = "false";
-                                } ?>
+                        foreach ($sugestoes as $sugestao) {
+                            $idUsuarioSugerido = $sugestao['idUsuario'];
+                            $fotoUsuarioSugestao = $fotoUsuario->exibirFotoUsuario($idUsuarioSugerido);
+                            $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
+                            if ($verificarSeguidor['boolean'] == true) { ?>
+                                <div class="whiteBoxHolder">
+                                    <a href="/petiti/<?php echo $sugestao['loginUsuario'] ?>">
+                                        <div class="flex-row" style="justify-content: space-between;">
+                                            <div class="fotoDePerfil">
+                                                <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
+                                            </div>
 
-                                <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+                                            <div class="infoSugestoes">
+                                                <h4 style="color: black; margin-bottom: 0.2rem; width: 9rem;"><?php echo $sugestao['nomeUsuario'] ?></h4>
+                                                <h5 class="text-muted">@<?php echo $sugestao['loginUsuario'] ?></h5>
+                                            </div>
+                                            <?php
+                                            $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
+                                            if ($verificarSeguidor['boolean'] == true) {
+                                                $jsSeguidor = "true";
+                                            } else {
+                                                $jsSeguidor = "false";
+                                            } ?>
 
-                                    <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
-                                <?php } else { ?>
-                                    <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
-                                <?php } ?>
-                            </div>
-                    <?php }
-                    } }else{ ?>
-                        <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
-                   <?php } ?>
+                                                        <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                                            <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+
+                                                            <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
+                                                        <?php } else { ?>
+                                                            <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
+                                                        <?php } ?>
+                                                    </div>
+                                                        </div>
+                                            <?php 
+                                            }
+                                            }
+                                        } else { ?>
+                                            <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
+                                        <?php } ?>
+                                    </a>
 
                 </div>
             </div>

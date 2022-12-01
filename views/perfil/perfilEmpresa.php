@@ -454,12 +454,13 @@ $numero = $lista[0]['numeroEnderecoUsuario'];
                                 for ($i = 0; $i < $contagem; $i++) {
                                     $foto = $dados['publicacoes'][$i]['caminhoFoto'];
                                 ?>
-                                <div style="padding: 1rem;">
-                                    <div class="previewPostImage">
-                                        <img src="<?php echo $foto; ?>">
+                                <button>
+                                    <div style="padding: 1rem;">
+                                        <div class="previewPostImage">
+                                            <img src="<?php echo $foto; ?>">
+                                        </div>
                                     </div>
-                                </div>
-
+                                </button>
                             <?php }
                             } ?>
 
@@ -479,15 +480,17 @@ $numero = $lista[0]['numeroEnderecoUsuario'];
                                 <?php } else {
                                 for ($p = 0; $p < $contagemProdutos; $p++) {
                                     $foto = $dadosProdutos['produtos'][$p]['caminhoFotoProduto'];
+                                    $textoProduto = $dadosProdutos['produtos'][$p]['textoProduto'];
+                                    $valorProduto = $dadosProdutos['produtos'][$p]['valorProduto'];
                                 ?>
                                 <div class="produtoServ">
                                     <div class="previewPostImage">
                                         <img src="<?php echo $foto; ?>">
                                     </div>
 
-                                    <h3>Nome do produto</h3>
+                                    <h3><?php echo $textoProduto; ?></h3>
 
-                                    <h4 class="text-muted">R$52</h4>
+                                    <h4 class="text-muted">R$<?php echo $valorProduto; ?></h4>
                                 </div>
                             <?php
                                 }
@@ -509,15 +512,17 @@ $numero = $lista[0]['numeroEnderecoUsuario'];
                                 <?php } else {
                                 for ($b = 0; $b < $contagemServicos; $b++) {
                                     $fotoServico = $dadosServicos['servicos'][$b]['caminhoFotoServico'];
+                                    $textoServico = $dadosServicos['servicos'][$b]['textoServico'];
+                                    $valorServico = $dadosServicos['servicos'][$b]['valorServico'];
                                 ?>
                                 <div class="produtoServ">
                                     <div class="previewPostImage">
                                         <img src="<?php echo $fotoServico; ?>">
                                     </div>
 
-                                    <h3>Nome do Servico</h3>
+                                    <h3><?php echo $textoServico; ?></h3>
 
-                                    <h4 class="text-muted">R$52</h4>
+                                    <h4 class="text-muted">R$<?php echo $valorServico; ?></h4>
                                 </div>
                             <?php
                                 }

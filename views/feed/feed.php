@@ -241,7 +241,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                 } else {
                 ?>
 
-                
+
                     <div class="ads">
                         <?php
                         for ($i = 0; $i < $contagemAds; $i++) {
@@ -375,11 +375,17 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                         <div class="menuPostHover"></div>
                                         <i class="uil uil-ellipsis-v"></i>
                                     </div>
-
                                     <div class="menuPost" id="menuPost">
                                         <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
-                                            <?php if ($login != $_SESSION['login']) { ?>
-                                                <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixaSeguir">Deixar de seguir</span></li>
+                                            <?php if ($login != $_SESSION['login']) {
+                                                $verificaSeguindo = $usuarioSeguidor->verificarSeguidor($idUsuarioPub, $_SESSION['id']);
+                                                if ($verificaSeguindo['boolean'] != true) { ?>
+                                                    <li class="menuPostSeguir" idpost="<?php echo ($id); ?>" id="<?php echo $idUsuarioPub; ?>"><i id="iconSeguir<?php echo ($id); ?>" class="iconSeguir<?php echo ($id); ?> fa-sharp fa-solid fa-user-minus"></i><span id="deixaSeguir<?php echo $id ?>" class="deixaSeguir<?php echo $id ?>">Deixar de seguir<span></li>
+                                                <?php } else {
+                                                ?>
+                                                    <li class="menuPostSeguir" idpost="<?php echo ($id); ?>" id="<?php echo $idUsuarioPub; ?>"><i id="iconSeguir<?php echo ($id); ?>" class="iconSeguir<?php echo ($id); ?> fa-sharp fa-solid fa-user-plus"></i><span id="deixaSeguir<?php echo $id ?>" class="deixaSeguir<?php echo $id ?>">Seguir<span></li>
+                                                <?php
+                                                } ?>
                                                 <a href="#modal-denuncia" rel="modal:open">
                                                     <div id="<?php echo $id; ?>" class="postDenunciado">
                                                         <div id="<?php echo $idUsuarioPub; ?>" class="denunciaPost">
@@ -392,7 +398,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                                         </div>
                                                     </div>
                                                 </a>
-                                            <?php } else { ?>
+                                            <?php
+                                            } else { ?>
                                                 <li class="li-EditarPost">
                                                     <div style="display: flex; align-items: center;">
                                                         <i class="fa-solid fa-pen-to-square"></i>
@@ -683,9 +690,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     $contagemSugestoes = count($sugestoes);
                     if ($contagemSugestoes > 0) {
 
-
                         foreach ($sugestoes as $sugestao) {
                             $idUsuarioSugerido = $sugestao['idUsuario'];
+
                             $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
                             $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
                             if ($verificarSeguidor['boolean'] == true) { ?>
@@ -708,22 +715,22 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                                 $jsSeguidor = "false";
                                             } ?>
 
-                                                        <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                                            <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+                                            <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                                <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
 
-                                                            <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
-                                                        <?php } else { ?>
-                                                            <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
-                                                        <?php } ?>
-                                                    </div>
-                                            <?php }
-                                            }
-                                        } else { ?>
-                                            <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
-                                        <?php } ?>
-                                            
+                                                <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
+                                            <?php } else { ?>
+                                                <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
+                                            <?php } ?>
                                         </div>
-                                    </a>
+                                </div>
+                        <?php
+                            }
+                        }
+                    } else { ?>
+                        <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
+                    <?php } ?>
+                    </a>
 
                 </div>
             </div>
@@ -867,7 +874,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     </span>
 
                                     <div style="display: grid; grid-template-columns: repeat(10, 1fr); width: 100%;">
-                                        <input type="text" name="txtCategoria" autocomplete="off id="txtCategoria" placeholder="Ex: Lhama">
+                                        <input type="text" name="txtCategoria" autocomplete="off" id="txtCategoria" placeholder="Ex: Lhama">
                                         <p id="submitCategoria"><i class="uil uil-plus"></i></p>
                                     </div>
 
@@ -901,32 +908,32 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
         <section>
 
-        <div href="#modal-denuncia" rel="modal:open">
+            <div href="#modal-denuncia" rel="modal:open">
 
-            <div id="modal-denuncia" class="modal denuncia">
+                <div id="modal-denuncia" class="modal denuncia">
 
-                <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+                    <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
 
-                    <input type="hidden" id="idPost" name="idPost" value="">
+                        <input type="hidden" id="idPost" name="idPost" value="">
 
-                    <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
+                        <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
 
-                    <h1 style="color:black;">Denunciar post</h1>
+                        <h1 style="color:black;">Denunciar post</h1>
 
-                    <h4 style="color:black;" class="text-muted">Você está denunciando o post desse usuário. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h4>
+                        <h4 style="color:black;" class="text-muted">Você está denunciando o post desse usuário. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h4>
 
-                    <div style="width: 99%;">
-                        <h4>Causa:</h4>
-                        <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200"></textarea>
-                    </div>
-                    <div class="botoesDenuncia">
-                        <input class="btn btn-primary" type="submit" value="Denunciar">
-                        <a rel="modal:close"><button class="btn btn-primary cancelar">Cancelar</button></a>
-                    </div>
-                </form>
+                        <div style="width: 99%;">
+                            <h4>Causa:</h4>
+                            <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200"></textarea>
+                        </div>
+                        <div class="botoesDenuncia">
+                            <input class="btn btn-primary" type="submit" value="Denunciar">
+                            <a rel="modal:close"><button class="btn btn-primary cancelar">Cancelar</button></a>
+                        </div>
+                    </form>
 
+                </div>
             </div>
-        </div>
 
         </section>
 
@@ -939,25 +946,25 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
         <section>
             <div id="modal-denuncia-comentario" class="modal denuncia" rel="modal:open">
 
-                    <form class="formDenuncia" action="/petiti/api/denunciaComentario" method="post">
+                <form class="formDenuncia" action="/petiti/api/denunciaComentario" method="post">
 
-                        <input type="hidden" id="txtDenunciado" name="txtDenunciado" value="">
+                    <input type="hidden" id="txtDenunciado" name="txtDenunciado" value="">
 
-                        <input type="hidden" name="txtidComentario" id="txtidComentario" value="">
+                    <input type="hidden" name="txtidComentario" id="txtidComentario" value="">
 
-                        <h1 style="color:black;">Denunciar comentário</h1>
+                    <h1 style="color:black;">Denunciar comentário</h1>
 
-                        <h4 style="color:black;" class="text-muted">Você está denunciando o comentario desse usuário. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h4>
+                    <h4 style="color:black;" class="text-muted">Você está denunciando o comentario desse usuário. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h4>
 
-                        <div style="width: 99%;">
-                            <h4>Causa:</h4>
-                            <textarea name="txtMotivoDenunciaComentario" id="txtMotivoDenunciaComentario" maxlength="200"></textarea>
-                        </div>
-                        <div class="botoesDenuncia">
-                            <input class="btn btn-primary" type="submit" value="Denunciar">
-                            <a rel="modal:close"><button class="btn btn-primary cancelar">Cancelar</button></a>
-                        </div>
-                    </form>
+                    <div style="width: 99%;">
+                        <h4>Causa:</h4>
+                        <textarea name="txtMotivoDenunciaComentario" id="txtMotivoDenunciaComentario" maxlength="200"></textarea>
+                    </div>
+                    <div class="botoesDenuncia">
+                        <input class="btn btn-primary" type="submit" value="Denunciar">
+                        <a rel="modal:close"><button class="btn btn-primary cancelar">Cancelar</button></a>
+                    </div>
+                </form>
             </div>
 
         </section>

@@ -751,7 +751,10 @@ class Usuario
     public function sugestoesSeguidores($id){
         $con = Conexao::conexao();
         $query = "SELECT tbusuario.idUsuario, tbusuario.nomeUsuario, tbusuario.loginUsuario as loginUsuario FROM tbusuario  INNER JOIN tbusuarioseguidor on tbusuarioseguidor.idUsuario = tbusuario.idUsuario WHERE tbusuarioseguidor.idSeguidor IN (
-        SELECT tbusuario.idUsuario as usuarioSeguido FROM tbusuario INNER JOIN tbusuarioseguidor on tbusuarioseguidor.idUsuario = tbusuario.idUsuario WHERE tbusuarioseguidor.idSeguidor = ".$id.") AND tbusuarioseguidor.idUsuario != ".$id. " LIMIT 3";
+        SELECT tbusuario.idUsuario as usuarioSeguido FROM tbusuario INNER JOIN tbusuarioseguidor on tbusuarioseguidor.idUsuario = tbusuario.idUsuario WHERE tbusuarioseguidor.idSeguidor = ".$id.") AND tbusuarioseguidor.idUsuario != ".$id. "     GROUP BY tbusuario.idUsuario
+       ORDER BY RAND()
+       LIMIT 3
+       ";
 
         $resultado = $con->query($query);
         return $resultado->fetchAll(PDO::FETCH_ASSOC);

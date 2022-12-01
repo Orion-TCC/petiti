@@ -72,7 +72,7 @@ class categoria
     public function listarCategoriasPopulares()
     {
         $con = Conexao::conexao();
-        $query = "SELECT count(tbcategoriapublicacao.idCategoria) as qtd, categoria FROM tbcategoriapublicacao INNER JOIN tbcategoria ON tbcategoriapublicacao.idCategoria = tbcategoria.idCategoria INNER JOIN tbpublicacao ON tbcategoriapublicacao.idPublicacao = tbpublicacao.idPublicacao WHERE dataPublicacao >= DATE_SUB(CURDATE(),INTERVAL 24 HOUR) GROUP BY categoria LIMIT 8";
+        $query = "SELECT count(tbcategoriapublicacao.idCategoria) as qtd, categoria FROM tbcategoriapublicacao INNER JOIN tbcategoria ON tbcategoriapublicacao.idCategoria = tbcategoria.idCategoria INNER JOIN tbpublicacao ON tbcategoriapublicacao.idPublicacao = tbpublicacao.idPublicacao WHERE dataPublicacao >= DATE_SUB(CURDATE(),INTERVAL 24 HOUR) AND categoria NOT LIKE '' GROUP BY categoria ORDER BY qtd DESC LIMIT 8";
         $resultado = $con->query($query);
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;

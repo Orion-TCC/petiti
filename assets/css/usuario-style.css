@@ -1005,6 +1005,13 @@
   transition: all 300ms ease;
 }
 
+.tabs_content button{
+  appearance: none;
+  background: none;
+  height: 15.4rem;
+  width: 15.4rem;
+}
+
 .previewPostImage:hover::before {
   transition: all 300ms ease;
   content: "";

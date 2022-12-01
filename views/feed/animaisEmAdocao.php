@@ -114,7 +114,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
             </div>
 
             <h2 class="logo">
-            <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
+                <a href="feed"><img src="/petiti/assets/images/logo_principal.svg"></a>
             </h2>
             <div class="caixa-de-busca">
                 <i class="uil uil-search"></i>
@@ -142,19 +142,17 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     };
 
                 };
-
-
             </script>
-        <label onclick="showPopUp()">
-            <div class="opcoes" id="opcoes">
-                <div id="labelAO"><i class="uil uil-setting" ></i></div>
+            <label onclick="showPopUp()">
+                <div class="opcoes" id="opcoes">
+                    <div id="labelAO"><i class="uil uil-setting"></i></div>
 
-                <div class="fotoDePerfil" id="fotoDePerfil">
-                    <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
+                    <div class="fotoDePerfil" id="fotoDePerfil">
+                        <img src="<?php echo $_SESSION['foto']; ?>" alt="" id="fotoDePerfilOpcoes">
+                    </div>
+
                 </div>
-
-            </div>
-        </label>
+            </label>
         </div>
     </nav>
 
@@ -226,14 +224,14 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
 
-<!-- Botao de criar post -->
-<button class="btn btn-primary">
-    <p>
-        <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
-    </p>
-</button>
+                <!-- Botao de criar post -->
+                <button class="btn btn-primary">
+                    <p>
+                        <a href="#modal-foto-post" rel="modal:open">Criar um Post</a>
+                    </p>
+                </button>
 
-</div>
+            </div>
             <!-- FIM DO LADO ESQUERDO -->
 
             <div class="Meio">
@@ -250,14 +248,14 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
                     <div class="direitoCAP">
-                            <div class="categoriaBadge">Adoção</div>
-                            <div class="categoriaBadge">Adote um amigo</div>
-                            <div class="categoriaBadge">Animal em adoção</div>
-                            <div class="categoriaBadge">Adotar</div>
-                            
+                        <div class="categoriaBadge">Adoção</div>
+                        <div class="categoriaBadge">Adote um amigo</div>
+                        <div class="categoriaBadge">Animal em adoção</div>
+                        <div class="categoriaBadge">Adotar</div>
 
 
-                   </div>
+
+                    </div>
 
 
                 </div>
@@ -302,7 +300,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                         $idUsuarioPub = $dados['publicacoes'][$i]['idUsuario'];
 
-                        
+
                         $urlComentarios = "http://localhost/petiti/api/comentarios-post/" . $id;
 
                         $jsonComentarios = file_get_contents($urlComentarios);
@@ -361,8 +359,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                         <a href="/petiti/<?php echo $login ?>"><img src="<?php echo $fotoUsuario; ?>" alt=""></a>
                                     </div>
                                     <div class="info">
-                                        <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $nome ?></a></h3>
-                                        <small><?php echo $local ?>  há <?php echo $diferencaFinal ?></small>
+                                        <h3><a href="/petiti/<?php echo $login ?>"> <?php echo $login ?></a></h3>
+                                        <small><?php echo $local ?> há <?php echo $diferencaFinal ?></small>
                                     </div>
                                 </div>
 
@@ -377,8 +375,15 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                     <div class="menuPost" id="menuPost">
                                         <ul id="opcoesPost <?php echo $id; ?>" class="opcoesPost close">
-                                            <?php if ($login != $_SESSION['login']) { ?>
-                                                <li><i class="fa-sharp fa-solid fa-user-minus"></i><span class="deixaSeguir">Deixar de seguir</span></li>
+                                            <?php if ($login != $_SESSION['login']) {
+                                                $verificaSeguindo = $usuarioSeguidor->verificarSeguidor($idUsuarioPub, $_SESSION['id']);
+                                                if ($verificaSeguindo['boolean'] != true) { ?>
+                                                    <li class="menuPostSeguir" idpost="<?php echo ($id); ?>" id="<?php echo $idUsuarioPub; ?>"><i id="iconSeguir<?php echo ($id); ?>" class="iconSeguir<?php echo ($id); ?> fa-sharp fa-solid fa-user-minus"></i><span id="deixaSeguir<?php echo $id ?>" class="deixaSeguir<?php echo $id ?>">Deixar de seguir<span></li>
+                                                <?php } else {
+                                                ?>
+                                                    <li class="menuPostSeguir" idpost="<?php echo ($id); ?>" id="<?php echo $idUsuarioPub; ?>"><i id="iconSeguir<?php echo ($id); ?>" class="iconSeguir<?php echo ($id); ?> fa-sharp fa-solid fa-user-plus"></i><span id="deixaSeguir<?php echo $id ?>" class="deixaSeguir<?php echo $id ?>">Seguir<span></li>
+                                                <?php
+                                                } ?>
                                                 <a href="#modal-denuncia" rel="modal:open">
                                                     <div id="<?php echo $id; ?>" class="postDenunciado">
                                                         <div id="<?php echo $idUsuarioPub; ?>" class="denunciaPost">
@@ -391,7 +396,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                                         </div>
                                                     </div>
                                                 </a>
-                                            <?php } else { ?>
+                                            <?php
+                                            } else { ?>
                                                 <li class="li-EditarPost">
                                                     <div style="display: flex; align-items: center;">
                                                         <i class="fa-solid fa-pen-to-square"></i>
@@ -426,7 +432,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                 </span>
 
-                                
+
 
                             </div>
 
@@ -450,7 +456,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <?php }
                                     ?>
 
-                                    <a href="#modal-post" rel="modal:open"><button class="abrirComentarios" value="<?php echo $id?>"></button></a>
+                                    <a href="#modal-post" rel="modal:open"><button class="abrirComentarios" value="<?php echo $id ?>"></button></a>
 
                                     <button class="mensagem"></button>
 
@@ -482,9 +488,9 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 for ($j = 0; $j < $contagemCategorias; $j++) {
                                     $idCategoriaAtual = $categoria->pesquisarCategoria($dadosCategorias[$j]['categoria']);
                                     $verificaCategoriaSeguida = $categoriaSeguida->verificarSeguida($_SESSION['id'], $idCategoriaAtual);
-                                    if($verificaCategoriaSeguida['boolean'] == true){
+                                    if ($verificaCategoriaSeguida['boolean'] == true) {
                                         echo ("<p class='badge-categoria' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
-                                    }else{
+                                    } else {
                                         echo ("<p class='badge-categoria seguida' id='$idCategoriaAtual'> " . $dadosCategorias[$j]['categoria'] . "</p>");
                                     }
                                 }
@@ -501,15 +507,15 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                                         <div style='display: flex; flex-direction: row; align-items: center; position: relative; justify-content: space-between;'>
 
-                                        <div class="flex-row" style="align-items: center; gap: 0.6rem;">
-                                            <h2 style='font-weight: 900 !important; align-self: start;'>
-                                                <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
-                                            </h2>
+                                            <div class="flex-row" style="align-items: center; gap: 0.6rem;">
+                                                <h2 style='font-weight: 900 !important; align-self: start;'>
+                                                    <?php echo $dadosComentarios['comentarios'][$c]['loginUsuario'] ?>
+                                                </h2>
 
-                                            <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
-                                                <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
-                                            </h3>
-                                        </div>
+                                                <h3 style='color: rgba(86, 86, 86, 1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 30rem;'>
+                                                    <?php echo $dadosComentarios['comentarios'][$c]['textoComentario'] ?>
+                                                </h3>
+                                            </div>
 
                                             <div class="optionsDenunciaComent" id="<?php echo "$idComentarioAtual"; ?>">
                                                 <i class="uil uil-ellipsis-h commentEllipsis"></i>
@@ -550,7 +556,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                 } ?>
                             </div>
 
-                            <a href="#modal-post" rel="modal:open"><button class="abrirComentarios ahrefVermais" value="<?php echo $id?>"> Ver mais...</button></a>
+                            <a href="#modal-post" rel="modal:open"><button class="abrirComentarios ahrefVermais" value="<?php echo $id ?>"> Ver mais...</button></a>
 
                             <div class="commentArea" id="<?php echo $id; ?>">
                                 <i class="uil uil-heart"></i>
@@ -633,8 +639,8 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     <h5 class="text-Muted">Há <span><?php echo $diferencaFinal ?></span> - <span>Localização: <?php echo $localPerdido ?></span></h5>
                                 </div>
                             </div>
-                    <?php }
-                    }else{ ?>
+                        <?php }
+                    } else { ?>
                         <h4 style="margin-top: 5px;" class="text-muted">Não tem nenhuma postagem com as categorias do feed exclusivo de animais perdidos...</h4>
 
                     <?php }
@@ -649,22 +655,22 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         </div>
 
                         <div class="categoriasAltaGrid">
-                        <?php 
-                        $contategmCategoriasPopulares = count($listaCategorias);
-                        for($a = 0; $a < $contategmCategoriasPopulares; $a++) {?>
-                            
-                            <div class="categorias">
-                                <div class="Lugar">
-                                    <div class="fotoDePerfil">
-                                        <img src="/petiti/views/assets/img/position<?php echo ($a+1); ?>.svg" alt="">
-                                    </div>
-                                    <div class="infoCategoria">
-                                        <h4>
-                                            <?php echo $listaCategorias[$a]['categoria']; ?>
-                                        </h4>
+                            <?php
+                            $contategmCategoriasPopulares = count($listaCategorias);
+                            for ($a = 0; $a < $contategmCategoriasPopulares; $a++) { ?>
+
+                                <div class="categorias">
+                                    <div class="Lugar">
+                                        <div class="fotoDePerfil">
+                                            <img src="/petiti/views/assets/img/position<?php echo ($a + 1); ?>.svg" alt="">
+                                        </div>
+                                        <div class="infoCategoria">
+                                            <h4>
+                                                <?php echo $listaCategorias[$a]['categoria']; ?>
+                                            </h4>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
                             <?php } ?>
 
@@ -680,47 +686,49 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
                     $sugestoes = $usuario->sugestoesSeguidores($_SESSION['id']);
                     $contagemSugestoes = count($sugestoes);
-                    if($contagemSugestoes>0){
-                        
-                    
-                    foreach ($sugestoes as $sugestao) {
-                        $idUsuarioSugerido = $sugestao['idUsuario'];
-                        $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
-                        $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
-                        if ($verificarSeguidor['boolean'] == true) { ?>
-                            <div class="whiteBoxHolder">
-                                <a href="/petiti/<?php echo $sugestao['loginUsuario'] ?>">
-                                    <div class="flex-row">
-                                        <div class="fotoDePerfil">
-                                            <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
+                    if ($contagemSugestoes > 0) {
+
+                        foreach ($sugestoes as $sugestao) {
+                            $idUsuarioSugerido = $sugestao['idUsuario'];
+
+                            $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
+                            $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
+                            if ($verificarSeguidor['boolean'] == true) { ?>
+                                <div class="whiteBoxHolder">
+                                    <a href="/petiti/<?php echo $sugestao['loginUsuario'] ?>">
+                                        <div class="flex-row" style="justify-content: space-between;">
+                                            <div class="fotoDePerfil">
+                                                <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
+                                            </div>
+
+                                            <div class="infoSugestoes">
+                                                <h4 style="color: black; margin-bottom: 0.2rem; width: 9rem;"><?php echo $sugestao['nomeUsuario'] ?></h4>
+                                                <h5 class="text-muted">@<?php echo $sugestao['loginUsuario'] ?></h5>
+                                            </div>
+                                            <?php
+                                            $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
+                                            if ($verificarSeguidor['boolean'] == true) {
+                                                $jsSeguidor = "true";
+                                            } else {
+                                                $jsSeguidor = "false";
+                                            } ?>
+
+                                            <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                                <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+
+                                                <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
+                                            <?php } else { ?>
+                                                <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
+                                            <?php } ?>
                                         </div>
-
-                                        <div class="infoSugestoes">
-                                            <h4 style="color: black; margin-bottom: 0.2rem"><?php echo $sugestao['nomeUsuario'] ?></h4>
-                                            <h5 class="text-muted">@<?php echo $sugestao['loginUsuario'] ?></h5>
-                                        </div>
-                                    </div>
-                                </a>
-                                <?php
-                                $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
-                                if ($verificarSeguidor['boolean'] == true) {
-                                    $jsSeguidor = "true";
-                                } else {
-                                    $jsSeguidor = "false";
-                                } ?>
-
-                                <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                    <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
-
-                                    <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
-                                <?php } else { ?>
-                                    <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
-                                <?php } ?>
-                            </div>
-                    <?php }
-                    } }else{ ?>
+                                </div>
+                        <?php
+                            }
+                        }
+                    } else { ?>
                         <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
-                   <?php } ?>
+                    <?php } ?>
+                    </a>
 
                 </div>
             </div>
@@ -825,15 +833,15 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
 
                                 <div class="contagemChar">
-                                                                <?php if ($_SESSION['tipo'] != "Tutor") {
-                                ?>
-                                    <input type="checkbox" name="checkImp" id="checkImp">
-                                    <label for="checkImp" class="hvr-bob "></label>
+                                    <?php if ($_SESSION['tipo'] != "Tutor") {
+                                    ?>
+                                        <input type="checkbox" name="checkImp" id="checkImp">
+                                        <label for="checkImp" class="hvr-bob "></label>
                                     <?php } ?>
-                                <div>
-                                    <input type="text" value="0" id="contagemCharInput" disabled>
-                                    <span>/200</span>
-                                </div>
+                                    <div>
+                                        <input type="text" value="0" id="contagemCharInput" disabled>
+                                        <span>/200</span>
+                                    </div>
                                 </div>
 
 
@@ -858,7 +866,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     </span>
 
                                     <div style="display: grid; grid-template-columns: repeat(10, 1fr); width: 100%;">
-                                        <input type="text" name="txtCategoria" id="txtCategoria" autocomplete="off placeholder="Ex: Lhama">
+                                        <input type="text" name="txtCategoria" id="txtCategoria" autocomplete="off placeholder=" Ex: Lhama">
                                         <p id="submitCategoria"><i class="uil uil-plus"></i></p>
                                     </div>
 
@@ -892,39 +900,39 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
         <section>
 
-        <div href="#modal-denuncia" rel="modal:open">
+            <div href="#modal-denuncia" rel="modal:open">
 
-            <div id="modal-denuncia" class="modal denuncia">
+                <div id="modal-denuncia" class="modal denuncia">
 
-                <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
+                    <form class="formDenuncia" method="POST" action="/petiti/api/denunciaPublicacao">
 
-                    <input type="hidden" id="idPost" name="idPost" value="">
+                        <input type="hidden" id="idPost" name="idPost" value="">
 
-                    <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
+                        <input type="hidden" id="idUsuarioPub" name="idUsuarioPub" value="">
 
-                    <h1 style="color:black;">Denunciar post</h1>
+                        <h1 style="color:black;">Denunciar post</h1>
 
-                    <h4 style="color:black;" class="text-muted">Você está denunciando o post desse usuário. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h4>
+                        <h4 style="color:black;" class="text-muted">Você está denunciando o post desse usuário. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h4>
 
-                    <div style="width: 99%;">
-                        <h4>Causa:</h4>
-                        <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200"></textarea>
-                    </div>
-                    <div class="botoesDenuncia">
-                        <input class="btn btn-primary" type="submit" value="Denunciar">
-                        <a rel="modal:close"><button class="btn btn-primary cancelar">Cancelar</button></a>
-                    </div>
-                </form>
+                        <div style="width: 99%;">
+                            <h4>Causa:</h4>
+                            <textarea name="txtDenuncia" id="txtDenuncia" maxlength="200"></textarea>
+                        </div>
+                        <div class="botoesDenuncia">
+                            <input class="btn btn-primary" type="submit" value="Denunciar">
+                            <a rel="modal:close"><button class="btn btn-primary cancelar">Cancelar</button></a>
+                        </div>
+                    </form>
 
+                </div>
             </div>
-        </div>
 
         </section>
 
-        
+
         <section>
             <div id="modal-post" class="modal post">
-               
+
             </div>
         </section>
 

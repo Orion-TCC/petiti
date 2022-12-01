@@ -351,7 +351,6 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
 
 
                                 <div class="infoHolder meio">
-                                    <h3> <?php echo $contagem ?> <span class="text-muted"> postagens </span></h3>
                                     <h3 class="hSeguidoresPet" id="<?php echo $idPetEscolhido; ?>"><a href="#modal-seguidores" rel="modal:open" style="color: black;"> <span id="seguidores"> <?php echo $qtdSeguidores ?> </span> <span class="text-muted">seguidores</span></a></h3>
                                 </div>
 
@@ -393,24 +392,9 @@ $qtdSeguidores = $lista[0]['qtdSeguidores'];
                         <!-- fim das tabs de navegacao de usuario -->
 
                         <div class="tabs_content postagens tabAtiva" data-tab="1">
-                            <?php
-
-                            if ($contagem < 1) { ?>
                                 <div class="aviso">
                                     <h3>Não há postagens ainda. Faça uma clicando no botão “Criar um post”!</h3>
                                 </div>
-
-                                <?php } else {
-
-                                for ($i = 0; $i < $contagem; $i++) {
-                                    $foto = $dados['publicacoes'][$i]['caminhoFoto'];
-                                ?>
-                                    <div class="previewPostImage">
-                                        <img src="<?php echo $foto ?>" alt="">
-                                    </div>
-
-                            <?php }
-                            } ?>
 
                         </div>
 
