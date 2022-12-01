@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01-Dez-2022 às 04:49
+-- Tempo de geração: 01-Dez-2022 às 05:09
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -70,7 +70,10 @@ INSERT INTO `tbcategoria` (`idCategoria`, `categoria`, `statusCategoria`) VALUES
 (89, 'Husky', 1),
 (90, 'Engraçado', 1),
 (91, 'Pincher', 1),
-(92, 'Pelo curto brasileiro', 1);
+(92, 'Pelo curto brasileiro', 1),
+(93, 'Promoção', 1),
+(94, 'Descontos', 1),
+(95, 'Pet Shop', 1);
 
 -- --------------------------------------------------------
 
@@ -156,7 +159,10 @@ INSERT INTO `tbcategoriapublicacao` (`idCategoriaPublicacao`, `idCategoria`, `id
 (66, 79, 17),
 (67, 90, 17),
 (68, 79, 18),
-(69, 90, 18);
+(69, 90, 18),
+(70, 93, 19),
+(71, 94, 19),
+(72, 95, 19);
 
 -- --------------------------------------------------------
 
@@ -196,7 +202,10 @@ INSERT INTO `tbcategoriaseguida` (`idCategoriaSeguida`, `idUsuario`, `idCategori
 (58, 11, 78),
 (59, 11, 77),
 (60, 2, 80),
-(61, 2, 76);
+(61, 2, 76),
+(63, 15, 3),
+(65, 15, 74),
+(66, 15, 79);
 
 -- --------------------------------------------------------
 
@@ -326,7 +335,8 @@ INSERT INTO `tbcurtidapublicacao` (`idCurtidaPublicacao`, `idUsuarioCurtida`, `i
 (69, 17, 13),
 (70, 2, 16),
 (71, 2, 15),
-(72, 11, 13);
+(72, 11, 13),
+(73, 15, 19);
 
 --
 -- Acionadores `tbcurtidapublicacao`
@@ -506,7 +516,8 @@ INSERT INTO `tbfotopublicacao` (`idFotoPublicacao`, `caminhoFotoPublicacao`, `no
 (15, 'private-user/fotos-publicacao/1669860328.png', '1669860328.png', 15),
 (16, 'private-user/fotos-publicacao/1669860813.png', '1669860813.png', 16),
 (17, 'private-user/fotos-publicacao/1669863694.png', '1669863694.png', 17),
-(18, 'private-user/fotos-publicacao/1669863702.png', '1669863702.png', 18);
+(18, 'private-user/fotos-publicacao/1669863702.png', '1669863702.png', 18),
+(19, 'private-user/fotos-publicacao/1669867486.png', '1669867486.png', 19);
 
 -- --------------------------------------------------------
 
@@ -571,7 +582,8 @@ INSERT INTO `tbfotousuario` (`idFotoUsuario`, `nomeFoto`, `caminhoFoto`, `idUsua
 (25, '1669860514.png', 'private-user/fotos-perfil/1669860514.png', 27),
 (26, 'padrao.png', 'private-user/fotos-perfil/padrao.png', 28),
 (27, '1669865679.png', 'private-user/fotos-perfil/1669865679.png', 29),
-(28, '1669865946.png', 'private-user/fotos-perfil/1669865946.png', 30);
+(28, '1669865946.png', 'private-user/fotos-perfil/1669865946.png', 30),
+(29, '1669867391.png', 'private-user/fotos-perfil/1669867391.png', 9);
 
 -- --------------------------------------------------------
 
@@ -836,7 +848,8 @@ INSERT INTO `tbnotificacao` (`idNotificacao`, `idCurtidaPublicacao`, `idComentá
 (289, 72, NULL, NULL, '2022-11-30 23:57:42', 0, 20, 'Curtida'),
 (290, NULL, NULL, 225, '2022-11-30 23:58:16', 0, 17, 'Seguir'),
 (291, NULL, NULL, 226, '2022-11-30 23:58:16', 0, 20, 'Seguir'),
-(292, NULL, NULL, 227, '2022-12-01 00:42:44', 0, 11, 'Seguir');
+(292, NULL, NULL, 227, '2022-12-01 00:42:44', 0, 11, 'Seguir'),
+(293, 73, NULL, NULL, '2022-12-01 01:05:48', 0, 9, 'Curtida');
 
 -- --------------------------------------------------------
 
@@ -994,7 +1007,8 @@ INSERT INTO `tbpublicacao` (`idPublicacao`, `textoPublicacao`, `dataPublicacao`,
 (15, 'Fofinha bocejando kKKKK 💙💙', '2022-11-30 23:05:28', 'São Paulo - Guaianases', 1, 0, 8),
 (16, 'Alguém viu a gatinha do meu primo ? Ela é totalmente branca e responde pelo nome Morgana. Fugiu dia 29/11 e até agora nada. Se alguém tiver alguma informação, comenta! 💔', '2022-11-30 23:13:33', 'R. Pero Peres - Jardim Soares', 1, 0, 8),
 (17, 'Depois de um dia duro no trabalho.', '2022-12-01 00:01:34', '', 0, 0, 28),
-(18, 'Depois de um dia duro no trabalho.', '2022-12-01 00:01:42', 'São Paulo', 0, 0, 28);
+(18, 'Depois de um dia duro no trabalho.', '2022-12-01 00:01:42', 'São Paulo', 0, 0, 28),
+(19, 'Até o nosso cachorrinho Rodi tá de cara com a promoção, venha aproveitar!', '2022-12-01 01:04:46', 'São Paulo', 1, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -1490,19 +1504,19 @@ ALTER TABLE `tbusuarioseguidor`
 -- AUTO_INCREMENT de tabela `tbcategoria`
 --
 ALTER TABLE `tbcategoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriapublicacao`
 --
 ALTER TABLE `tbcategoriapublicacao`
-  MODIFY `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `idCategoriaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de tabela `tbcategoriaseguida`
 --
 ALTER TABLE `tbcategoriaseguida`
-  MODIFY `idCategoriaSeguida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `idCategoriaSeguida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de tabela `tbcomentario`
@@ -1514,7 +1528,7 @@ ALTER TABLE `tbcomentario`
 -- AUTO_INCREMENT de tabela `tbcurtidapublicacao`
 --
 ALTER TABLE `tbcurtidapublicacao`
-  MODIFY `idCurtidaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `idCurtidaPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de tabela `tbdenunciacomentario`
@@ -1550,7 +1564,7 @@ ALTER TABLE `tbfotoproduto`
 -- AUTO_INCREMENT de tabela `tbfotopublicacao`
 --
 ALTER TABLE `tbfotopublicacao`
-  MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idFotoPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `tbfotoservico`
@@ -1562,7 +1576,7 @@ ALTER TABLE `tbfotoservico`
 -- AUTO_INCREMENT de tabela `tbfotousuario`
 --
 ALTER TABLE `tbfotousuario`
-  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `idFotoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `tbmensagem`
@@ -1574,7 +1588,7 @@ ALTER TABLE `tbmensagem`
 -- AUTO_INCREMENT de tabela `tbnotificacao`
 --
 ALTER TABLE `tbnotificacao`
-  MODIFY `idNotificacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
+  MODIFY `idNotificacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=294;
 
 --
 -- AUTO_INCREMENT de tabela `tbpet`
@@ -1598,7 +1612,7 @@ ALTER TABLE `tbproduto`
 -- AUTO_INCREMENT de tabela `tbpublicacao`
 --
 ALTER TABLE `tbpublicacao`
-  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `tbservico`
