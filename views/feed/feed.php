@@ -9,6 +9,7 @@ require_once('../../api/classes/CategoriaSeguida.php');
 $fotousuario = new FotoUsuario();
 $curtidaPub = new curtidaPublicacao();
 $categoriaSeguida = new CategoriaSeguida();
+$usuarioSeguidor = new UsuarioSeguidor();
 date_default_timezone_set('America/Sao_Paulo');
 include_once("../../sentinela.php");
 $idUsuarioCurtida = $_SESSION['id'];
@@ -21,7 +22,7 @@ $dadosPets = (array) json_decode($jsonPets, true);
 
 $contagemPets = count($dadosPets['pets']);
 
-$usuarioSeguidor = new UsuarioSeguidor();
+
 
 $usuario = new Usuario();
 
@@ -697,7 +698,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         foreach ($sugestoes as $sugestao) {
                             $idUsuarioSugerido = $sugestao['idUsuario'];
                             
-                            $fotoUsuarioSugestao = $fotoUsuario->exibirFotoUsuario($idUsuarioSugerido);
+                            $fotoUsuarioSugestao = $fotousuario->exibirFotoUsuario($idUsuarioSugerido);
                             $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $_SESSION['id']);
                             if ($verificarSeguidor['boolean'] == true) { ?>
                                 <div class="whiteBoxHolder">
