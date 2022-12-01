@@ -937,21 +937,29 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
         </section>
 
         <section>
-            <div class="modal" id="modal-denuncia-comentario">
-                <div class="modal-denuncia-comentario-elements">
-                    <div class="titulo-denuncia-comentario">
-                        <h2>Denunciar Comentário</h2>
-                    </div>
-                    <div class="form-denuncia-comentario">
-                        <form action="/petiti/api/denunciaComentario" method="post">
-                            <input type="hidden" id="txtDenunciado" name="txtDenunciado" value="">
-                            <input type="hidden" name="txtidComentario" id="txtidComentario" value="">
-                            <input type="text" required placeholder="Motivo da denuncia: " name="txtMotivoDenunciaComentario" id="txtMotivoDenunciaComentario">
-                            <input type="submit" value="Denunciar">
-                        </form>
-                    </div>
-                </div>
+            <div id="modal-denuncia-comentario" class="modal denuncia" rel="modal:open">
+
+                    <form class="formDenuncia" action="/petiti/api/denunciaComentario" method="post">
+
+                        <input type="hidden" id="txtDenunciado" name="txtDenunciado" value="">
+
+                        <input type="hidden" name="txtidComentario" id="txtidComentario" value="">
+
+                        <h1 style="color:black;">Denunciar comentário</h1>
+
+                        <h4 style="color:black;" class="text-muted">Você está denunciando o comentario desse usuário. Conte a causa dessa denúncia e nossa equipe irá te responder o mais rápido possível. </h4>
+
+                        <div style="width: 99%;">
+                            <h4>Causa:</h4>
+                            <textarea name="txtMotivoDenunciaComentario" id="txtMotivoDenunciaComentario" maxlength="200"></textarea>
+                        </div>
+                        <div class="botoesDenuncia">
+                            <input class="btn btn-primary" type="submit" value="Denunciar">
+                            <a rel="modal:close"><button class="btn btn-primary cancelar">Cancelar</button></a>
+                        </div>
+                    </form>
             </div>
+
         </section>
 
         <!-- fim Modals -->

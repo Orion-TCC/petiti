@@ -443,8 +443,8 @@ $contagemPets = count($dadosPets['pets']);
                                         <input min="1" class="formInput" placeholder="Insira a idade" type="number" name="txtIdadePet" id="txtIdadePet" required>
                                         <select class="SelectDiaMesAno" name="slIdade" id="slIdade" required>
                                             <option value="n" selected disabled>Escolha</option>
-                                            <option value="d">Dia (Dias)</option>
-                                            <option value="m">Mês (Meses)</option>
+                                            <option value="d">Dia(s)</option>
+                                            <option value="m">Mês(es)</option>
                                             <option value="y">Ano(s)</option>
                                         </select>
                                     </div>
