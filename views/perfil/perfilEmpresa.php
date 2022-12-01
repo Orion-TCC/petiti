@@ -51,6 +51,12 @@ $query = "SELECT COUNT(idProduto) as qtdProdutos FROM tbProduto WHERE idUsuario 
 $resultado = $conexao->query($query);
 $lista = $resultado->fetchAll();
 $qtdProduto = $lista[0]['qtdProdutos'];
+
+$query = "SELECT * FROM tbusuarioendereco WHERE idUsuario = $id";
+$resultado = $conexao->query($query);
+$lista = $resultado->fetchAll();
+$rua = $lista[0]['logradouroUsuario'];
+$numero = $lista[0]['numeroEnderecoUsuario'];
 ?>
 
 <!DOCTYPE php>
@@ -204,9 +210,9 @@ $qtdProduto = $lista[0]['qtdProdutos'];
 
 
                     <a href="notificacoes" class="menu-item">
-                        <span style="position: relative;">
+                        <span class="mostrarNotificacoes" style="position: relative;">
                             <i class="uil uil-bell notificacao"></i>
-                            <div class="notificacaoContador"><span>1</span></div>
+
                         </span>
                         <h3>Notificações</h3>
                     </a>
@@ -380,9 +386,9 @@ $qtdProduto = $lista[0]['qtdProdutos'];
                                 </div>
 
                                 <div class="infoHolder baixo">
-                                    <div style="width: 15rem; display: flex; align-items: center;">
+                                    <div style="width: 25rem; display: flex; align-items: center;">
                                         <i class="uil uil-map-marker"></i>
-                                        <h4><?php echo $_SESSION['local'] ?></h4>
+                                        <h4><?php echo $rua ?>, <?php echo $numero ?></h4>
                                     </div>
 
                                     <div style="width: 15rem; display: flex; align-items: center;">

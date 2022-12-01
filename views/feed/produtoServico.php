@@ -613,7 +613,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         <?php }
                         }
                     } else { ?>
-                        <h4 style="margin-top: 5px;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
+                        <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
                     <?php } ?>
 
                 </div>
@@ -759,7 +759,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     </span>
 
                                     <div style="display: grid; grid-template-columns: repeat(10, 1fr); width: 100%;">
-                                        <input type="text" name="txtCategoria" id="txtCategoria" placeholder="Ex: Lhama">
+                                        <input type="text" name="txtCategoria" id="txtCategoria" autocomplete="off placeholder="Ex: Lhama">
                                         <p id="submitCategoria"><i class="uil uil-plus"></i></p>
                                     </div>
 

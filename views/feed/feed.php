@@ -691,38 +691,39 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                             if ($verificarSeguidor['boolean'] == true) { ?>
                                 <div class="whiteBoxHolder">
                                     <a href="/petiti/<?php echo $sugestao['loginUsuario'] ?>">
-                                        <div class="flex-row">
+                                        <div class="flex-row" style="justify-content: space-between;">
                                             <div class="fotoDePerfil">
                                                 <img src="<?php echo $fotoUsuarioSugestao ?>" alt="">
                                             </div>
 
                                             <div class="infoSugestoes">
-                                                <h4 style="color: black; margin-bottom: 0.2rem"><?php echo $sugestao['nomeUsuario'] ?></h4>
+                                                <h4 style="color: black; margin-bottom: 0.2rem; width: 9rem;"><?php echo $sugestao['nomeUsuario'] ?></h4>
                                                 <h5 class="text-muted">@<?php echo $sugestao['loginUsuario'] ?></h5>
                                             </div>
+                                            <?php
+                                            $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
+                                            if ($verificarSeguidor['boolean'] == true) {
+                                                $jsSeguidor = "true";
+                                            } else {
+                                                $jsSeguidor = "false";
+                                            } ?>
+
+                                                        <?php if ($verificarSeguidor['boolean'] == true) { ?>
+                                                            <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
+
+                                                            <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
+                                                        <?php } else { ?>
+                                                            <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
+                                                        <?php } ?>
+                                                    </div>
+                                            <?php }
+                                            }
+                                        } else { ?>
+                                            <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
+                                        <?php } ?>
+                                            
                                         </div>
                                     </a>
-                                    <?php
-                                    $verificarSeguidor = $usuarioSeguidor->verificarSeguidor($idUsuarioSugerido, $id);
-                                    if ($verificarSeguidor['boolean'] == true) {
-                                        $jsSeguidor = "true";
-                                    } else {
-                                        $jsSeguidor = "false";
-                                    } ?>
-
-                                    <?php if ($verificarSeguidor['boolean'] == true) { ?>
-                                        <input id="jsSeguidor" value="<?php echo $jsSeguidor ?>" type="hidden">
-
-                                        <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-primary">Seguir</button>
-                                    <?php } else { ?>
-                                        <button value="<?php echo  $idUsuarioSugerido ?>" class="seguirNotif botaoUsuario<?php echo  $idUsuarioSugerido ?> btn btn-secundary">Seguindo</button>
-                                    <?php } ?>
-                                </div>
-                        <?php }
-                        }
-                    } else { ?>
-                        <h4 style="margin-top: 5px;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
-                    <?php } ?>
 
                 </div>
             </div>
@@ -866,7 +867,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     </span>
 
                                     <div style="display: grid; grid-template-columns: repeat(10, 1fr); width: 100%;">
-                                        <input type="text" name="txtCategoria" id="txtCategoria" placeholder="Ex: Lhama">
+                                        <input type="text" name="txtCategoria" autocomplete="off id="txtCategoria" placeholder="Ex: Lhama">
                                         <p id="submitCategoria"><i class="uil uil-plus"></i></p>
                                     </div>
 

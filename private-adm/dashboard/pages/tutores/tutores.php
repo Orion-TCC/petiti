@@ -135,7 +135,6 @@ $denunciaUsuario = new DenunciaUsuario();
                     <div class="perfil-info">
                       <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
                       <p><span style="font-weight: 900;"><a href="/petiti/<?php echo $login ?>">@<?php echo $login ?></a></span></p>
-                      <p><span style="font-weight: 900;">Pets: </span><?php echo $bio ?></p>
                     </div>
                   </div>
 
@@ -186,7 +185,6 @@ $denunciaUsuario = new DenunciaUsuario();
                     <div class="perfil-info">
                       <p><span style="font-weight: 900;"><?php echo $nome ?></span></p>
                       <p><span style="font-weight: 900;"><a href="/petiti/<?php echo $login ?>">@<?php echo $login ?></a></span></p>
-                      <p><span style="font-weight: 900;">Pets: </span><?php echo $bio ?></p>
                     </div>
                   </div>
 
@@ -229,44 +227,54 @@ $denunciaUsuario = new DenunciaUsuario();
           </div>
           <p>
             <?php
-            $resultadoUltimaDenuncia = $denunciaPublicacao->ultimaDenuncia();
-            $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
-            $arrayDenunciaPublicacao = $denunciaPublicacao->buscaDenunciaPublicacao($ultimaDenuncia);
-            $denunciador = $arrayDenunciaPublicacao['usuarioDenunciador'];
-            $denunciado = $arrayDenunciaPublicacao['usuarioDenunciado'];
-            $foto = $arrayDenunciaPublicacao['fotoDenunciado'];
+            if ($denunciaPublicacao->buscaQtdDenunciaPublicacaoAtiva() != 0) {
+              $resultadoUltimaDenuncia = $denunciaPublicacao->ultimaDenuncia();
+              $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
+              $arrayDenunciaPublicacao = $denunciaPublicacao->buscaDenunciaPublicacao($ultimaDenuncia);
+              $denunciador = $arrayDenunciaPublicacao['usuarioDenunciador'];
+              $denunciado = $arrayDenunciaPublicacao['usuarioDenunciado'];
+              $foto = $arrayDenunciaPublicacao['fotoDenunciado'];
             ?>
-
           <div class="msg-denuncia">
             <div class="foto-perfil">
               <img src="<?php echo $foto; ?>" />
             </div>
             <div class="mensagem">
               O post de <span style="color: #DB310C; font-weight: 750;">@<?php echo $denunciado; ?> </span> foi denunciado por <span style="font-weight: 800">@<?php echo $denunciador; ?>
-              
-              </p>
-              <p id="p-small">10 minutos atrás</p>
+                </p>
+                <p id="p-small">10 minutos atrás</p>
             </div>
           </div>
+        <?php
+            } else {
+              echo ("Sem denúncia de publicação recente");
+            }
+        ?>
 
-          <?php
+        <?php
+        if ($denunciaUsuario->buscaQtdDenunciaUsuarioAtiva() != 0) {
           $resultadoUltimaDenuncia = $denunciaUsuario->ultimaDenuncia();
           $ultimaDenuncia = $resultadoUltimaDenuncia['ultimaDenuncia'];
           $arrayDenunciaUsuario = $denunciaUsuario->buscaDenunciaUsuario($ultimaDenuncia);
           $denunciador = $arrayDenunciaUsuario['usuarioDenunciador'];
           $denunciado = $arrayDenunciaUsuario['usuarioDenunciado'];
           $foto = $arrayDenunciaUsuario['fotoDenunciado'];
-          ?>
+        ?>
           <div class="msg-denuncia">
             <div class="foto-perfil">
               <img src="<?php echo $foto; ?>" />
             </div>
             <div class="mensagem">
-              O usuário <span style="color: #DB310C; font-weight: 750;">@<?php echo $denunciado; ?></span> foi denunciado por <span style="font-weight: 800">@<?php echo $denunciador; ?><?php  ?></span> 
+              O usuário <span style="color: #DB310C; font-weight: 750;">@<?php echo $denunciado; ?></span> foi denunciado por <span style="font-weight: 800">@<?php echo $denunciador; ?><?php  ?></span>
               </p>
               <p id="p-small">10 minutos atrás</p>
             </div>
           </div>
+        <?php
+        } else {
+          echo ("Sem denúncia de usuario recente");
+        }
+        ?>
 
         </div>
       </div>

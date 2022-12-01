@@ -10,6 +10,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
 $pet = new Pet();
 $loginPet = $_GET['pet'];
+
 $idPetEscolhido = $pet->buscaPets($loginPet);
 
 $_SESSION['idPetPagina'] = $idPetEscolhido;

@@ -45,7 +45,8 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 16rem;
+    top: 0.1;
+    width: 15rem;
   }
 
   .meio .paraVoceDisc .h4Holder{

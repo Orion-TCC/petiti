@@ -78,9 +78,7 @@ $(document).ready(function () {
   });
 
   $("#submitCategoria").click(function () {
-    if (input.value == "") {
-    }
-    else {
+    if (input.value != "") {
       if (document.getElementById(input.value) != null) {
         if ($('#' + input.value).is(":checked")) {
           $('#' + input.value).prop('checked', false);
@@ -113,9 +111,7 @@ $(document).ready(function () {
   $("#form-aid #txtCategoria").keypress(function (event) {
     var keycode = event.keyCode ? event.keyCode : event.which;
     if (keycode == "13") {
-      if (input.value == "") {
-      }
-      else {
+      if (input.value != "") {
         if (document.getElementById(input.value) != null) {
           if ($('#' + input.value).is(":checked")) {
             $('#' + input.value).prop('checked', false);

@@ -100,4 +100,13 @@ class categoriaSeguida
         $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
     }
+
+    public function buscarCategoriasUsuario($idUsuario){
+        $con = Conexao::conexao();
+        $query = "SELECT * FROM tbCategoriaSeguida INNER JOIN tbCategoria innerCategoria ON innerCategoria.idCategoria = tbcategoriaseguida.idCategoria
+        WHERE tbCategoriaSeguida.idUsuario = $idUsuario";
+        $resultado = $con->query($query);
+        $lista = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        return $lista;
+    }
 }

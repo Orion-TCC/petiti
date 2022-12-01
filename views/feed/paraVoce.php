@@ -28,6 +28,11 @@ $usuario = new Usuario();
 
 $categoria = new Categoria;
 $listaCategorias  = $categoria->listarCategoriasPopulares();
+
+$listaCategoriasSeguidas = $categoriaSeguida->buscarCategoriasUsuario($_SESSION['id']);
+
+$contagemCategoriasSeguidas = count($categoriaSeguida->buscarCategoriasUsuario($_SESSION['id']));
+
 ?>
 <!DOCTYPE php>
 <html lang="pt-br">
@@ -236,16 +241,17 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
 
             <div class="Meio">
 
-                <span>Explore a pet iti!</span>
+                <span style="font-family: 'Raleway Extra Bold', sans-serif;">Explore a pet iti!</span>
 
                 <div class="paraVoceDisc">
                     <div class="h4Holder">
                         <h4>
-                            A <span class="hrefCor">“ Para Você “</span> é praticamente um feed porém com todos os posts da nossa rede social. Assim, você será capaz de explorar e encontrar novos perfis, posts inéditos e muito mais!
-                        </h4>
-
-                        <h4>
-                            Outra funcionalidade é a de <span class="hrefCor">seguir categorias</span>, para que a sua “Para Você” mostre mais posts de acordo com o seu gosto, logo, exibindo de forma aleatória postagens alheias e com categorias que você segue.
+                            A <span class="hrefCor">“ Para Você “</span> é praticamente um feed para você
+                            explorar, assim encontrando novos perfis e muito mais! E possui uma
+                            funcionalidade de <span class="hrefCor">seguir categorias</span>,
+                            filtrando posts de acordo com o seu gosto,
+                            logo, exibindo de forma aleatória postagens alheias e com categorias que
+                            você segue.
                         </h4>
                     </div>
 
@@ -264,18 +270,11 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                     </div>
 
                     <div class="badges">
-                        <p class='badge-categoria' id=''> Cachorro</p>
-                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                        <p class='badge-categoria' id=''> Cachorro</p>
-                        <p class='badge-categoria' id=''> Cachorro</p>
-                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                        <p class='badge-categoria' id=''> Cachorro</p>
-                        <p class='badge-categoria' id=''> Cachorro</p>
-                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                        <p class='badge-categoria seguida' id=''>Esquizofrenico</p>
-                        <p class='badge-categoria' id=''> Cachorro</p>
+                        <?php for ($l = 0; $l < $contagemCategoriasSeguidas; $l++) {
+                            $categoriaSeguidaAtual = $listaCategoriasSeguidas[$l]['categoria'];
+                        ?>
+                            <p class='badge-categoria seguida' id=''> <?php echo $categoriaSeguidaAtual ?> </p>
+                        <?php } ?>
                     </div>
 
                 </div>
@@ -296,7 +295,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         <div class="contagemZero">
                             <div class="semPublicacaoes">
                                 <img src="/petiti/assets/images/semPost.svg" id="svgSemPost">
-                                <p class="textoSemPublicacoes">Parece que não tem nada por aqui... Faça um post ou siga alguém para ver o que eles estão postando!</p>
+                                <p class="textoSemPublicacoes">Parece que não tem nada por aqui... Veja o que estão postando e siga as categorias desses posts para aparecer aqui!</p>
                                 <?php
 
                                 ?>
@@ -729,7 +728,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                         <?php }
                         }
                     } else { ?>
-                        <h4 style="margin-top: 5px;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
+                        <h4 style="margin-top: 5px; font-family: 'Raleway Bold', sans-serif;" class="text-muted">As sugestões aparecem de acordo com os seguidores das contas que você segue, mas no momento você não segue ninguém...</h4>
                     <?php } ?>
 
                 </div>
@@ -861,7 +860,7 @@ $listaCategorias  = $categoria->listarCategoriasPopulares();
                                     </span>
 
                                     <div style="display: grid; grid-template-columns: repeat(10, 1fr); width: 100%;">
-                                        <input type="text" name="txtCategoria" id="txtCategoria" placeholder="Ex: Lhama">
+                                        <input type="text" name="txtCategoria" autocomplete="off id=" txtCategoria" placeholder="Ex: Lhama">
                                         <p id="submitCategoria"><i class="uil uil-plus"></i></p>
                                     </div>
 
